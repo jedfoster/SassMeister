@@ -1,0 +1,78 @@
+// Grid background for column view
+// @import "stipe/grid/debug";
+
+
+
+///////// global //////////
+
+@import "stipe/toadstool/ui_patterns/prettify";
+
+pre.prettyprint {
+  @extend .example_code;
+  padding: em(15);
+}
+
+%full-width {
+  @include grid(12);
+  margin-bottom: em(24);
+}
+
+h1, h2, h3 {
+  font-weight: bold;
+}
+
+hgroup{
+  @extend %full-width;
+}
+
+form {
+  @extend %full-width;
+}
+
+label {
+  margin-bottom: 0.5em;
+}
+
+label[for=sass] {
+  @extend %full-width;
+  @extend label;
+}
+
+input, select, textarea, button {
+  font-family: monospace, sans-serif;
+}
+
+textarea {
+  @extend %full-width;
+  border: 1px solid $delta_gray;  
+  @include border_radius(em(5));
+  padding:0.5em;
+  font-size:1em;
+  line-height: 1.5em;
+  font-family: monospace, sans-serif;
+}
+
+select[disabled],input[disabled] {
+  display: none;
+}
+
+
+.form_control {
+  @include grid(4);
+
+  &:last-child {
+   @extend .omega; 
+  }
+  
+  & button[type=submit] {
+    display:block;
+    margin: 1.2em auto;
+  }
+}
+
+
+.css-output {
+  @extend %full-width;
+  padding-top: em(24);
+  border-top: em(4) dotted $fox_gray;
+}

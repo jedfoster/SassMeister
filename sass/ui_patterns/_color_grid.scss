@@ -1,0 +1,286 @@
+//* Standard grayscale objects */
+//* -------------------------- */
+.white {
+	@extend %white;
+}
+
+.alpha_gray {
+	@extend %alpha_gray;
+}
+
+.bravo_gray {
+	@extend %bravo_gray;
+}
+	
+.charlie_gray {
+	@extend %charlie_gray;
+}
+
+.delta_gray {
+	@extend %delta_gray;
+}
+	
+.echo_gray {
+	@extend %echo_gray;
+}
+	
+.fox_gray {
+	@extend %fox_gray;
+}
+
+.golf_gray {
+	@extend %golf_gray;
+}
+
+.hotel_gray {
+	@extend %hotel_gray;
+}
+
+.india_gray {
+	@extend %india_gray;
+}
+
+
+
+//* Standard color objects */
+//* ---------------------- */
+.alpha_color {
+	@extend %alpha_color;
+}
+.alpha_color_bravo {
+	@extend %alpha_color_bravo;
+}
+.alpha_color_charlie {
+	@extend %alpha_color_charlie;
+}
+.alpha_color_delta {
+	@extend %alpha_color_delta;
+}
+.alpha_color_echo {
+	@extend %alpha_color_echo;
+}
+.alpha_color_fox {
+	@extend %alpha_color_fox;
+}
+.alpha_color_golf {
+	@extend %alpha_color_golf;
+}
+.alpha_color_hotel {
+	@extend %alpha_color_hotel;
+}
+.alpha_color_india {
+	@extend %alpha_color_india;
+}
+.alpha_color_juliet {
+	@extend %alpha_color_juliet;
+}
+
+
+
+
+
+.bravo_color {
+	@extend %bravo_color;
+}
+.bravo_color_bravo {
+	@extend %bravo_color_bravo;
+}
+.bravo_color_charlie {
+	@extend %bravo_color_charlie;
+}
+.bravo_color_delta {
+	@extend %bravo_color_delta;
+}
+.bravo_color_echo {
+	@extend %bravo_color_echo;
+}
+.bravo_color_fox {
+	@extend %bravo_color_fox;
+}
+.bravo_color_golf {
+	@extend %bravo_color_golf;
+}
+.bravo_color_hotel {
+	@extend %bravo_color_hotel;
+}
+.bravo_color_india {
+	@extend %bravo_color_india;
+}
+.bravo_color_juliet {
+	@extend %bravo_color_juliet;
+}
+
+
+
+
+
+	
+.charlie_color {
+	@extend %charlie_color;
+}
+.charlie_color_bravo {
+	@extend %charlie_color_bravo;
+}
+.charlie_color_charlie {
+	@extend %charlie_color_charlie;
+}
+.charlie_color_delta {
+	@extend %charlie_color_delta;
+}
+.charlie_color_echo {
+	@extend %charlie_color_echo;
+}
+.charlie_color_fox {
+	@extend %charlie_color_fox;
+}
+.charlie_color_golf {
+	@extend %charlie_color_golf;
+}
+.charlie_color_hotel {
+	@extend %charlie_color_hotel;
+}
+.charlie_color_india {
+	@extend %charlie_color_india;
+}
+.charlie_color_juliet {
+	@extend %charlie_color_juliet;
+}
+
+
+
+
+
+	
+.delta_color {
+	@extend %delta_color;
+}
+.delta_color_bravo {
+	@extend %delta_color_bravo;
+}
+.delta_color_charlie {
+	@extend %delta_color_charlie;
+}
+.delta_color_delta {
+	@extend %delta_color_delta;
+}
+.delta_color_echo {
+	@extend %delta_color_echo;
+}
+.delta_color_fox {
+	@extend %delta_color_fox;
+}
+.delta_color_golf {
+	@extend %delta_color_golf;
+}
+.delta_color_hotel {
+	@extend %delta_color_hotel;
+}
+.delta_color_india {
+	@extend %delta_color_india;
+}
+.delta_color_juliet {
+	@extend %delta_color_juliet;
+}
+
+
+
+
+
+	
+.echo_color {
+	@extend %echo_color;
+}
+.echo_color_bravo {
+	@extend %echo_color_bravo;
+}
+.echo_color_charlie {
+	@extend %echo_color_charlie;
+}
+.echo_color_delta {
+	@extend %echo_color_delta;
+}
+.echo_color_echo {
+	@extend %echo_color_echo;
+}
+.echo_color_fox {
+	@extend %echo_color_fox;
+}
+.echo_color_golf {
+	@extend %echo_color_golf;
+}
+.echo_color_hotel {
+	@extend %echo_color_hotel;
+}
+.echo_color_india {
+	@extend %echo_color_india;
+}
+.echo_color_juliet {
+	@extend %echo_color_juliet;
+}
+
+
+/////// semantic color blocks ////////
+// ----------------------------------------------
+.white {
+	background: $white;
+}
+
+.shadow_color {
+	background: $shadow_color;
+}
+
+.primary_header_color {
+	background: $primary_header_color;
+}
+
+.heading_font_weight {
+	background: $heading_font_weight;
+}
+
+.primary_text {
+	background: $primary_text;
+}
+
+.href_color {
+	background: $href_color;
+}
+
+.ins_color {
+	background: $ins_color;
+}
+
+.mark_color {
+	background: $mark_color;
+}
+
+.webkit_tap_hightlight {
+	background: $webkit_tap_hightlight;
+}
+
+.selection_color {
+	background: $selection_color;
+}
+
+.selection_text_color {
+	background: $selection_text_color;
+}
+
+.border_color {
+	background: $border_color;
+}
+
+.primary_button_border_color {
+	background: $primary_button_border_color;
+}
+
+.secondary_button_border_color {
+	background: $secondary_button_border_color;
+}
+
+.button_text {
+	background: $button_text;
+}
+
+.standard_hr_color {
+	background: $standard_hr_color;
+}

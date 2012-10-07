@@ -1,0 +1,20 @@
+input[type=text], input[type=password], input[type="date"], select {
+	@extend %input_fields;	
+}
+
+input[type=text], input[type=password], input[type="date"] {
+	@media #{$mobile} {
+		-webkit-appearance: none;  // this is to remove the default inner shadow
+		-moz-appearance: none; // if this ever works, Moz bug for over a year
+	}
+	
+}
+
+input[disabled], textarea[disabled], select[disabled], .disabled {
+	@extend %disabled_inputs;
+	
+}
+
+label {
+	@extend %form_labels;
+}

@@ -1,0 +1,85 @@
+<hgroup>
+  <h1>SassMeister</h1>
+</hgroup>
+
+
+
+<form action="/compile" method="post" accept-charset="utf-8" id="sass-form">
+  <h2>Sass Input</h2>
+  
+  
+  <select name="library" disabled>
+    <option value="bourbon">Bourbon</option>
+    <option value="...">...</option>
+  </select>
+
+
+  <label for="sass">Sass</label>
+  <textarea name="sass" rows="8" cols="40" id="sass">
+body {
+  foo:bar;
+}    
+  </textarea>
+
+  <div class="form_control">
+    <label for="syntax">Syntax</label>
+    <select name="syntax">
+      <option value="scss">SCSS</option>
+      <option value="sass">Sass</option>
+    </select>
+  </div>
+
+  <div class="form_control">
+    <label for="output">Output Style</label>
+    <select name="output">
+      <option value="expanded">expanded</option>
+      <option value="nested">nested</option>
+      <option value="compact">compact</option>
+      <option value="compressed">compressed</option>
+    </select>
+  </div>
+
+  <div class="form_control">
+    <button type="submit">Compile!</button>
+  </div>
+
+</form>
+
+
+<section class="css-output">
+  <h2>CSS Output</h2>
+
+  <pre class="prettyprint" id="css">
+    
+  </pre>
+</section>
+
+
+
+
+
+
+<script>
+  /* attach a submit handler to the form */
+  $("#sass-form").submit(function(event) {
+
+    /* stop form from submitting normally */
+    event.preventDefault(); 
+        
+    /* get some values from elements on the page: */
+    var $form = $( this ),
+        sass = $form.find( 'textarea[name="sass"]' ).val(),
+        syntax = $form.find( 'select[name="syntax"]' ).val(),
+        output = $form.find( 'select[name="output"]' ).val(),
+        url = $form.attr( 'action' );
+
+    /* Send the data using post and put the results in a div */
+    $.post( url, { sass: sass, syntax: syntax, output: output },
+      function( data ) {
+          // var content = $( data ).find( '#content' );
+          $( "#css" ).empty().append( data );
+          prettyPrint();
+      }
+    );
+  });
+</script>

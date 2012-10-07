@@ -1,0 +1,45 @@
+// App Config - this is where most of your magic will happen
+// ------------------------------------------------------------------------------
+@import "config";  // Editing defaults here will override any set in the Stipe gem
+
+
+
+// Choose the CSS reset by selectively commenting/uncommenting the import files
+// ------------------------------------------------------------------------------
+@import "stipe/resets/toadstool";           // Default toadstool reset
+// @import "stipe/resets/eric_meyer";       // http://meyerweb.com/eric/tools/css/reset/reset.css
+// @import "compass/reset";                 // Reset supported by the Compass gem
+
+// Don't want to use any of these? Kool, we can respect that
+// ------------------------------------------------------------------------------
+// @import "reset";
+
+
+
+// Want web fonts? We got those too.
+// ------------------------------------------------------------------------------
+@import "web_fonts";
+
+
+
+// Following sequence will load the necessary Stipe libraries
+// ------------------------------------------------------------------------------
+@import "stipe/media";
+@import "stipe/stipe";
+@import "stipe/typography";
+@import "stipe/grid";
+@import "stipe/color";
+@import "stipe/gradients";
+@import "stipe/forms";
+@import "stipe/buttons";
+@import "color/extends";
+
+
+
+// This where you start building your own styles. 
+// ------------------------------------------------------------------------------
+@import "typography";
+@import "forms";
+@import "buttons";
+@import "design";
+@import "modules";

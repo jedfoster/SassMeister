@@ -1,0 +1,291 @@
+@import "../config";
+
+/////// OOCSS color blocks ////////
+// ----------------------------------------------
+
+//* Standard grayscale objects */
+//* -------------------------- */
+%white {
+	background-color: $white;
+}
+
+%alpha_gray {
+	background-color: $alpha_gray;
+}
+
+%bravo_gray {
+	background-color: $bravo_gray;
+}
+	
+%charlie_gray {
+	background-color: $charlie_gray;
+}
+
+%delta_gray {
+	background-color: $delta_gray;
+}
+	
+%echo_gray {
+	background-color: $echo_gray;
+}
+	
+%fox_gray {
+	background-color: $fox_gray;
+}
+
+%golf_gray {
+	background-color: $golf_gray;
+}
+
+%hotel_gray {
+	background-color: $hotel_gray;
+}
+
+%india_gray {
+	background-color: $india_gray;
+}
+
+
+
+//* Standard color objects */
+//* ---------------------- */
+%alpha_color {
+	background-color: $alpha_color;
+}
+%alpha_color_bravo {
+	background-color: $alpha_color_bravo;
+}
+%alpha_color_charlie {
+	background-color: $alpha_color_charlie;
+}
+%alpha_color_delta {
+	background-color: $alpha_color_delta;
+}
+%alpha_color_echo {
+	background-color: $alpha_color_echo;
+}
+%alpha_color_fox {
+	background-color: $alpha_color_fox;
+}
+%alpha_color_golf {
+	background-color: $alpha_color_golf;
+}
+%alpha_color_hotel {
+	background-color: $alpha_color_hotel;
+}
+%alpha_color_india {
+	background-color: $alpha_color_india;
+}
+%alpha_color_juliet {
+	background-color: $alpha_color_juliet;
+}
+
+
+
+
+
+%bravo_color {
+	background-color: $bravo_color;
+}
+%bravo_color_bravo {
+	background-color: $bravo_color_bravo;
+}
+%bravo_color_charlie {
+	background-color: $bravo_color_charlie;
+}
+%bravo_color_delta {
+	background-color: $bravo_color_delta;
+}
+%bravo_color_echo {
+	background-color: $bravo_color_echo;
+}
+%bravo_color_fox {
+	background-color: $bravo_color_fox;
+}
+%bravo_color_golf {
+	background-color: $bravo_color_golf;
+}
+%bravo_color_hotel {
+	background-color: $bravo_color_hotel;
+}
+%bravo_color_india {
+	background-color: $bravo_color_india;
+}
+%bravo_color_juliet {
+	background-color: $bravo_color_juliet;
+}
+
+
+
+
+
+	
+%charlie_color {
+	background-color: $charlie_color;
+}
+%charlie_color_bravo {
+	background-color: $charlie_color_bravo;
+}
+%charlie_color_charlie {
+	background-color: $charlie_color_charlie;
+}
+%charlie_color_delta {
+	background-color: $charlie_color_delta;
+}
+%charlie_color_echo {
+	background-color: $charlie_color_echo;
+}
+%charlie_color_fox {
+	background-color: $charlie_color_fox;
+}
+%charlie_color_golf {
+	background-color: $charlie_color_golf;
+}
+%charlie_color_hotel {
+	background-color: $charlie_color_hotel;
+}
+%charlie_color_india {
+	background-color: $charlie_color_india;
+}
+%charlie_color_juliet {
+	background-color: $charlie_color_juliet;
+}
+
+
+
+
+
+	
+%delta_color {
+	background-color: $delta_color;
+}
+%delta_color_bravo {
+	background-color: $delta_color_bravo;
+}
+%delta_color_charlie {
+	background-color: $delta_color_charlie;
+}
+%delta_color_delta {
+	background-color: $delta_color_delta;
+}
+%delta_color_echo {
+	background-color: $delta_color_echo;
+}
+%delta_color_fox {
+	background-color: $delta_color_fox;
+}
+%delta_color_golf {
+	background-color: $delta_color_golf;
+}
+%delta_color_hotel {
+	background-color: $delta_color_hotel;
+}
+%delta_color_india {
+	background-color: $delta_color_india;
+}
+%delta_color_juliet {
+	background-color: $delta_color_juliet;
+}
+
+
+
+
+
+	
+%echo_color {
+	background-color: $echo_color;
+}
+%echo_color_bravo {
+	background-color: $echo_color_bravo;
+}
+%echo_color_charlie {
+	background-color: $echo_color_charlie;
+}
+%echo_color_delta {
+	background-color: $echo_color_delta;
+}
+%echo_color_echo {
+	background-color: $echo_color_echo;
+}
+%echo_color_fox {
+	background-color: $echo_color_fox;
+}
+%echo_color_golf {
+	background-color: $echo_color_golf;
+}
+%echo_color_hotel {
+	background-color: $echo_color_hotel;
+}
+%echo_color_india {
+	background-color: $echo_color_india;
+}
+%echo_color_juliet {
+	background-color: $echo_color_juliet;
+}
+
+
+/////// semantic color blocks ////////
+// ----------------------------------------------
+%white {
+	background: $white;
+}
+
+%shadow_color {
+	background: $shadow_color;
+}
+
+%primary_header_color {
+	background: $primary_header_color;
+}
+
+%heading_font_weight {
+	background: $heading_font_weight;
+}
+
+%primary_text {
+	background: $primary_text;
+}
+
+%href_color {
+	background: $href_color;
+}
+
+%ins_color {
+	background: $ins_color;
+}
+
+%mark_color {
+	background: $mark_color;
+}
+
+%webkit_tap_hightlight {
+	background: $webkit_tap_hightlight;
+}
+
+%selection_color {
+	background: $selection_color;
+}
+
+%selection_text_color {
+	background: $selection_text_color;
+}
+
+%border_color {
+	background: $border_color;
+}
+
+%primary_button_border_color {
+	background: $primary_button_border_color;
+}
+
+%secondary_button_border_color {
+	background: $secondary_button_border_color;
+}
+
+%button_text {
+	background: $button_text;
+}
+
+%standard_hr_color {
+	background: $standard_hr_color;
+}

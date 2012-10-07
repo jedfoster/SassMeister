@@ -1,0 +1,12 @@
+
+// Resource file that will import designated mixin and extend files
+// --------------------------------------------
+
+// List mixins to import here
+// --------------------------------------------
+@import "modules/example_module/mixins";
+
+
+// List extends to import here
+// --------------------------------------------
+@import "modules/example_module/extends";
