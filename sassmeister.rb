@@ -4,6 +4,7 @@ require 'rubygems'
 require 'compass'
 require 'sass'
 require 'stipe'
+require 'bourbon'
 
 # If you're using bundler, you will need to add this
 require 'bundler/setup'
@@ -36,8 +37,31 @@ end
 
 
 post '/compile' do
+  Compass.sass_engine_options[:load_paths].each do |path|
+    Sass.load_paths << path
+  end
+
+
+  if params[:plugin] == 'bourbon'
+    plugin = "@import \"bourbon/bourbon\""
+  elsif params[:plugin] == 'compass'
+    plugin = "@import \"compass\""
+  elsif params[:plugin] == 'stipe'
+    plugin = "@import \"./sass/stipe\""
+  else
+    plugin = ''
+  end
+
+
+  if ! plugin.empty? and params[:syntax] == 'scss'
+    sass = "#{plugin};\n\n#{params[:sass]}"
+  else
+    sass = "#{plugin}\n\n#{params[:sass]}"
+  end
+
+
   begin
-    send("#{params[:syntax]}".to_sym, params[:sass].chomp, {:style => :"#{params[:output]}"})
+    send("#{params[:syntax]}".to_sym, sass.chomp, {:style => :"#{params[:output]}"})
   rescue Sass::SyntaxError => e
     status 200
     e.to_s

@@ -6,15 +6,21 @@
 <form action="/compile" method="post" accept-charset="utf-8" id="sass-form">
   <h2>Sass Input</h2>
 
-  <select name="library" disabled>
-    <option value="bourbon">Bourbon</option>
-    <option value="...">...</option>
-  </select>
-
   <label for="sass">Sass</label>
   <textarea name="sass" rows="8" cols="40" id="sass">body {
   foo:bar;
-}</textarea>
+}</textarea>  
+  
+  <div class="form_control">
+    <label for="plugin">Extension (optional)</label>
+    <select name="plugin">
+      <option value="">straight up Sass</option>
+      <option value=""></option>
+      <option value="bourbon">Bourbon</option>
+      <option value="compass">Compass</option>
+      <option value="stipe">Stipe</option>
+    </select>
+  </div>
 
   <div class="form_control">
     <label for="syntax">Syntax</label>
@@ -109,10 +115,11 @@
           sass = $form.find( 'textarea[name="sass"]' ).val(),
           syntax = $form.find( 'select[name="syntax"]' ).val(),
           output = $form.find( 'select[name="output"]' ).val(),
+          plugin = $form.find( 'select[name="plugin"]' ).val(),
           url = $form.attr( 'action' );
 
       /* Send the data using post and put the results in a div */
-      $.post( url, { sass: sass, syntax: syntax, output: output },
+      $.post( url, { sass: sass, syntax: syntax, output: output, plugin: plugin },
         function( data ) {
           // var content = $( data ).find( '#content' );
           $( "#css" ).empty().append( data );
