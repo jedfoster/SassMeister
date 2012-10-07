@@ -15,7 +15,7 @@ Go to [127.0.0.1:3000](http://127.0.0.1:3000) and start playing with Sass!
 If you find anything else that doesn't work, please let me know.
 
 ## Author
-Axle is written by [Jed Foster][jedfoster].<br>
+SassMeister is written by [Jed Foster][jedfoster].<br>
 Jed is a UI Engineer with [Getty Images][gettyimages.com].
 
 ## License
