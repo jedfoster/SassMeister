@@ -3,14 +3,8 @@
 Become a Sass Master with SassMeister, the Sass playground.
 
     git clone https://github.com/jedfoster/SassMeister.git
-    cd SassMeister/
-    # the next 3 steps are necessary to install Bourbon
     bundle install
-    cd sass/
-    bourbon install
-    cd ../
-    # fire up SassMeister
-    ruby sassmeister.rb -p 3000
+    cd SassMeister/sassmeister.rb -p 3000
 
 Go to [127.0.0.1:3000](http://127.0.0.1:3000) and start playing with Sass!
 
