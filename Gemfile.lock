@@ -1,0 +1,36 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    bourbon (2.1.1)
+      sass (>= 3.1)
+    chunky_png (1.2.6)
+    compass (0.12.2)
+      chunky_png (~> 1.2)
+      fssm (>= 0.2.7)
+      sass (~> 3.1)
+    fssm (0.2.9)
+    rack (1.4.1)
+    rack-protection (1.2.0)
+      rack
+    sass (3.2.0.alpha.275)
+    sinatra (1.3.3)
+      rack (~> 1.3, >= 1.3.6)
+      rack-protection (~> 1.2)
+      tilt (~> 1.3, >= 1.3.3)
+    sinatra-partial (0.3.2)
+      sinatra
+    stipe (0.0.4.0)
+      compass (>= 0.11)
+      sass (>= 3.2.0.alpha.247)
+    tilt (1.3.3)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bourbon
+  compass
+  sass (= 3.2.0.alpha.275)
+  sinatra
+  sinatra-partial
+  stipe
