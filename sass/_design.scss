@@ -23,6 +23,13 @@ h1, h2, h3 {
 
 hgroup{
   @extend %full-width;
+  margin-top: em(10);
+  
+  img {
+    display: block;
+    width: 25%;
+    margin: 0 auto;
+  }
 }
 
 .description {
