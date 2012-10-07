@@ -56,7 +56,6 @@ select[disabled],input[disabled] {
   display: none;
 }
 
-
 .form_control {
   @include grid(3);
 
@@ -70,9 +69,15 @@ select[disabled],input[disabled] {
   }
 }
 
-
 .css-output {
   @extend %full-width;
   padding-top: em(24);
   border-top: em(4) dotted $fox_gray;
+}
+
+footer {
+  @extend %full-width;
+  margin-top: em(24);
+  border-top: 1px solid $fox_gray;
+  padding-top: em(24);
 }
