@@ -3,23 +3,18 @@
 </hgroup>
 
 
-
 <form action="/compile" method="post" accept-charset="utf-8" id="sass-form">
   <h2>Sass Input</h2>
-  
-  
+
   <select name="library" disabled>
     <option value="bourbon">Bourbon</option>
     <option value="...">...</option>
   </select>
 
-
   <label for="sass">Sass</label>
-  <textarea name="sass" rows="8" cols="40" id="sass">
-body {
+  <textarea name="sass" rows="8" cols="40" id="sass">body {
   foo:bar;
-}    
-  </textarea>
+}</textarea>
 
   <div class="form_control">
     <label for="syntax">Syntax</label>
@@ -42,21 +37,14 @@ body {
   <div class="form_control">
     <button type="submit">Compile!</button>
   </div>
-
 </form>
 
 
 <section class="css-output">
   <h2>CSS Output</h2>
 
-  <pre class="prettyprint" id="css">
-    
-  </pre>
+  <pre class="prettyprint" id="css"></pre>
 </section>
-
-
-
-
 
 
 <script>
