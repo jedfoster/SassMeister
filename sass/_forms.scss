@@ -62,10 +62,14 @@ pre {
   &.prettyprint {
     margin: 0px !important; 
     width: 100% !important;
+// <<<<<<< HEAD
     height: em(695);
+// =======
+    // height: em(480 + 65 + 60 + 44 + 50);
+// >>>>>>> cf88d7dbdbdd385e7fe47e65838dcf75cfbae6c7
     overflow-y: auto;
     @media #{$mobile} {
-      height: em(200);
+      height: em(480);
     }
   }
 }

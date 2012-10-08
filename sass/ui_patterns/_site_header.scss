@@ -24,6 +24,7 @@
       @include grid(4, $grid_context: 4);
       background-position: 50% 50%;
       background-size: 50%;
+      margin-bottom: em(30);
     }
   }
   .header_description {

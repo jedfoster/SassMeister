@@ -16,6 +16,14 @@ set :partial_template_engine, :erb
 helpers do
   include ERB::Util
   alias_method :code, :html_escape
+  
+  
+  # From: http://rubyquicktips.com/post/2625525454/random-array-item
+  class Array
+    def random
+      shuffle.first
+    end
+  end
 end
 
 
@@ -31,6 +39,8 @@ end
 
 
 get '/' do
+  @submit_text = ['Make some CSS brah!', 'Engage!', 'Show me the codez!', 'Machen Sie das CSS!', '&iexcl;Compilar!', 'Schnell!', 'Compile!', 'Go', 'Make me some CSS', '&#x421;&#x434;&#x435;&#x43B;&#x430;&#x442;&#x44C; CSS', 'Producent CSS', '&#x628;&#x646;&#x627;&#x626;&#x6CC;&#x6BA; CSS'].random
+
   erb :index
 end
 
