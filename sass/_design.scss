@@ -27,36 +27,6 @@ pre.prettyprint {
   }
 }
 
-// <<<<<<< HEAD
-// =======
-// label {
-//   margin-bottom: 0.5em;
-// }
-// 
-// label[for=sass] {
-//   width: 100%;
-//   @extend label;
-// }
-// 
-// input, select, textarea, button {
-//   font-family: monospace, sans-serif;
-// }
-// 
-// textarea {
-//   width: 100%;
-//   border: 1px solid $delta_gray;  
-//   @include border_radius(em(5));
-//   padding:0.5em;
-//   font-size:1em;
-//   line-height: 1.5em;
-//   font-family: monospace, sans-serif;
-// }
-// 
-// select[disabled],input[disabled] {
-//   display: none;
-// }
-// 
-// >>>>>>> cf88d7dbdbdd385e7fe47e65838dcf75cfbae6c7
 .select_container {
   margin: 0 0 em(30) 0;
   float: left;
