@@ -57,7 +57,11 @@
   (function($) {
     $('textarea[name="sass"]').bindWithDelay('keyup', function() {
       $("#sass-form").submit();
-    },500);
+    },750);
+    
+    $('select').on('change', function() {
+      $("#sass-form").submit();
+    });
 
 
     /* attach a submit handler to the form */
