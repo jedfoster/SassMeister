@@ -1,5 +1,5 @@
 .site_header {
-  margin-top: em(30);
+  margin: em(30) 0;
   width: 100%;
   @extend %clearfix;
   @media #{$mobile} {
@@ -15,9 +15,9 @@
   .logo {
     @include grid(4);
     margin-left: 0;
-    height: em(275);
-    background: url(/images/sass-meister-serif-v.gif) 50% 0 no-repeat;
-    background-size: 75%;
+    height: em(200);
+    background: url(/images/sass-meister-serif-v.gif) 50% 50% no-repeat;
+    background-size: 60%;
     @extend %hide_text;
     display: block;
     @media #{$mobile} {
