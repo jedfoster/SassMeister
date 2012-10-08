@@ -32,7 +32,7 @@ label {
 }
 
 label[for=sass] {
-  @extend %full-width;
+  width: 100%;
   @extend label;
 }
 
@@ -41,7 +41,7 @@ input, select, textarea, button {
 }
 
 textarea {
-  @extend %full-width;
+  width: 100%;
   border: 1px solid $delta_gray;  
   @include border_radius(em(5));
   padding:0.5em;
