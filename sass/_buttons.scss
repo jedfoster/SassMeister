@@ -18,4 +18,7 @@
 button, a.button {
 	@extend %stipe_buttons; // pre-loaded silent class, I know you want to nuke this!
 	width: 100%;
+	@media #{$mobile} {
+  	font-size: em(16);
+	}
 }

@@ -27,34 +27,6 @@ pre.prettyprint {
   }
 }
 
-label {
-  margin-bottom: 0.5em;
-}
-
-label[for=sass] {
-  @extend %full-width;
-  @extend label;
-}
-
-input, select, textarea, button {
-  font-family: monospace, sans-serif;
-}
-
-textarea {
-  @extend %full-width;
-  border: 1px solid $delta_gray;  
-  @include border_radius(em(5));
-  padding:0.5em;
-  font-size:1em;
-  line-height: 1.5em;
-  font-family: monospace, sans-serif;
-  margin-bottom: em(30);
-}
-
-select[disabled],input[disabled] {
-  display: none;
-}
-
 .select_container {
   margin: 0 0 em(30) 0;
   float: left;

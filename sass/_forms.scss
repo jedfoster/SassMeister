@@ -20,9 +20,30 @@ select {
 
 label {
 	@extend %form_labels;
+	@media #{$mobile} {
+  	font-size: em(12);
+	}
+}
+
+label {
+  margin-bottom: 0.5em;
+  &[for=sass] {
+    @extend label;
+  }
+}
+
+input, select, textarea, button {
+  font-family: monospace, sans-serif;
 }
 
 textarea {
+  border: 1px solid $delta_gray;  
+  @include border_radius(em(5));
+  padding:0.5em;
+  font-size:1em;
+  line-height: 1.5em;
+  font-family: monospace, sans-serif;
+  margin-bottom: em(30);
   @include grid(6.25, alpha, $grid_context: 6);
   outline: none;
   &[name=sass] {
@@ -31,6 +52,10 @@ textarea {
       height: em(150);
     }
   }
+}
+
+select[disabled],input[disabled] {
+  display: none;
 }
 
 pre {
