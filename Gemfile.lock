@@ -1,7 +1,7 @@
 GEM
   remote: http://rubygems.org/
   specs:
-    bourbon-compass (2.1.1)
+    bourbon-compass (2.1.1.0)
       compass (>= 0.11)
       sass (>= 3.1)
     chunky_png (1.2.6)
@@ -20,7 +20,7 @@ GEM
       tilt (~> 1.3, >= 1.3.3)
     sinatra-partial (0.3.2)
       sinatra
-    stipe (0.0.4.0)
+    stipe (0.0.4.1)
       compass (>= 0.11)
       sass (>= 3.2.0.alpha.247)
     tilt (1.3.3)
