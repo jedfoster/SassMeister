@@ -37,10 +37,10 @@ pre {
   &.prettyprint {
     margin: 0px !important; 
     width: 100% !important;
-    height: em(480);
+    height: em(480 + 65 + 60 + 44 + 50);
     overflow-y: auto;
     @media #{$mobile} {
-      height: em(200);
+      height: em(480);
     }
   }
 }
