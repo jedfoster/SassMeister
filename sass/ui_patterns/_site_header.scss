@@ -1,0 +1,33 @@
+.site_header {
+  margin-top: em(30);
+  width: 100%;
+  @extend %clearfix;
+  @media #{$mobile} {
+    margin-top: 0;
+  }
+}
+
+.header_container {
+  @include grid(12, $grid_align: center, $grid_uom: em);
+  @media #{$mobile} {
+    @include grid(4, $grid_context: 4);
+  }
+  .logo {
+    @include grid(4);
+    margin-left: 0;
+    height: em(275);
+    background: url(/images/sass-meister-serif-v.gif) 50% 0 no-repeat;
+    background-size: 75%;
+    @extend %hide_text;
+    display: block;
+    @media #{$mobile} {
+      @include grid(4, $grid_context: 4);
+      background-position: 50% 50%;
+      background-size: 50%;
+    }
+  }
+  .header_description {
+    @extend %grid_8;
+    margin-right: 0;
+  }
+}

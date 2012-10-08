@@ -17,4 +17,5 @@
 //* toadstool buttons */
 button, a.button {
 	@extend %stipe_buttons; // pre-loaded silent class, I know you want to nuke this!
+	width: 100%;
 }

@@ -1,73 +1,12 @@
-<hgroup>
-  <!-- <h1>SassMeister</h1> -->
-  <!-- <img src="/images/sass-meister-serif.gif" alt="Sass Meister">   -->
-  <img src="/images/sass-meister-serif-v.gif" alt="Sass Meister">
-</hgroup>
+<%= partial :"shared/_header" %>
 
-
-<div class="description">
-  <p>SassMeister is a playground for <a href="http://sass-lang.com" target="_blank">Sass</a>. Type or paste some Sass into the text area below and SassMeister will show you the rendered CSS. You can even play with several popular Sass extensions/libraries, use either of Sass' <a href="http://thesassway.com/articles/sass-vs-scss-which-syntax-is-better" target="_blank">two syntaxes</a>, and select the <a href="http://sass-lang.com/docs/yardoc/file.SASS_REFERENCE.html#output_style" target="_blank">output style</a> of the final CSS!</p>
-
-  <p><b>Available extensions/libraries:</b></p>
-
-  <ul>
-    <li><a href="http://thoughtbot.com/bourbon/" target="_blank">Bourbon</a></li>
-    <li><a href="http://compass-style.org" target="_blank">Compass</a></li>
-    <li><a href="https://github.com/Anotheruiguy/stipe" target="_blank">Stipe</a></li>
-    <li><i><a href="http://foundation.zurb.com" target="_blank">Foundation 3</a> - COMING SOON</i></li>
-    <li>... and of course, vanilla Sass</li>
-  </ul>
-</div>
-
-
-<form action="/compile" method="post" accept-charset="utf-8" id="sass-form">
-  <h2>Sass Input</h2>
-
-  <label for="sass">Sass</label>
-  <textarea name="sass" rows="8" cols="40" id="sass">body {
-  foo:bar;
-}</textarea>  
-  
-  <div class="form_control">
-    <label for="plugin">Extension (optional)</label>
-    <select name="plugin">
-      <option value="">straight-up Sass</option>
-      <option value=""></option>
-      <option value="bourbon">Bourbon</option>
-      <option value="compass">Compass</option>
-      <option value="stipe">Stipe</option>
-    </select>
-  </div>
-
-  <div class="form_control">
-    <label for="syntax">Syntax</label>
-    <select name="syntax">
-      <option value="scss">SCSS</option>
-      <option value="sass">Sass</option>
-    </select>
-  </div>
-
-  <div class="form_control">
-    <label for="output">Output Style</label>
-    <select name="output">
-      <option value="expanded">expanded</option>
-      <option value="nested">nested</option>
-      <option value="compact">compact</option>
-      <option value="compressed">compressed</option>
-    </select>
-  </div>
-
-  <div class="form_control">
-    <button type="submit">Compile!</button>
-  </div>
-</form>
-
-
-<section class="css-output">
-  <h2>CSS Output</h2>
-
-  <pre class="prettyprint" id="css"></pre>
+<section class="main_body">
+  <%= partial :"shared/_sass_input" %>  
+  <%= partial :"shared/_sass_output" %> 
 </section>
+
+
+
 
 
 <script>
@@ -118,7 +57,7 @@
   (function($) {
     $('textarea[name="sass"]').bindWithDelay('keyup', function() {
       $("#sass-form").submit();
-    }, 1000);
+    },500);
 
 
     /* attach a submit handler to the form */

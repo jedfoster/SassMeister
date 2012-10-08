@@ -4,43 +4,27 @@
 
 
 ///////// global //////////
-
-@import "stipe/toadstool/ui_patterns/prettify";
-
 pre.prettyprint {
   @extend .example_code;
   padding: em(15);
 }
 
-%full-width {
-  @include grid(12);
-  margin-bottom: em(24);
+.main_body {
+  @extend %grid_12;
 }
 
-h1, h2, h3 {
-  font-weight: bold;
-}
-
-hgroup{
-  @extend %full-width;
-  margin-top: em(10);
-  
-  img {
-    display: block;
-    width: 25%;
-    margin: 0 auto;
+.sass_input {
+  @include grid(6.125, alpha);
+  @media #{$mobile} {
+    @include grid(4, $grid_context: 4);
   }
 }
 
-.description {
-  @extend %full-width;
-}
-
-form {
-  @extend %full-width;
-  margin-top: em(24);
-  padding-top: em(24);
-  border-top: 1px solid $fox_gray;
+.css_output {
+  @include grid(6.125, omega);
+  @media #{$mobile} {
+    @include grid(4, $grid_context: 4);
+  }
 }
 
 label {
@@ -70,11 +54,20 @@ select[disabled],input[disabled] {
   display: none;
 }
 
+.select_container {
+  margin: em(30) 0;
+  float: left;
+  width: 100%;
+}
+
 .form_control {
-  @include grid(3);
+  @include grid(4);
 
   &:last-child {
-   @extend .omega; 
+   @include grid(4.125, omega); 
+  }
+  &:first-child {
+    @include grid(4.125, alpha);
   }
   
   & button[type=submit] {
@@ -83,14 +76,15 @@ select[disabled],input[disabled] {
   }
 }
 
-.css-output {
-  @extend %full-width;
-  padding-top: em(24);
-  border-top: em(4) dotted $fox_gray;
+ol {
+  &.linenums {
+    margin-left: em(15);
+  }
 }
 
+
 footer {
-  @extend %full-width;
+  @extend %grid_12;
   margin-top: em(24);
   border-top: 1px solid $fox_gray;
   padding-top: em(24);

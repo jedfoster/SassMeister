@@ -12,9 +12,35 @@ input[type=text], input[type=password], input[type="date"] {
 
 input[disabled], textarea[disabled], select[disabled], .disabled {
 	@extend %disabled_inputs;
-	
+}
+
+select {
+  font-size: em(12, $font-size);
 }
 
 label {
 	@extend %form_labels;
+}
+
+textarea {
+  @include grid(6.25, alpha, $grid_context: 6);
+  outline: none;
+  &[name=sass] {
+    height: em(375);
+    @media #{$mobile} {
+      height: em(150);
+    }
+  }
+}
+
+pre {
+  &.prettyprint {
+    margin: 0px !important; 
+    width: 100% !important;
+    height: em(480);
+    overflow-y: auto;
+    @media #{$mobile} {
+      height: em(200);
+    }
+  }
 }
