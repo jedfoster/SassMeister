@@ -1,6 +1,9 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    bourbon-compass (2.1.1)
+      compass (>= 0.11)
+      sass (>= 3.1)
     chunky_png (1.2.6)
     compass (0.12.2)
       chunky_png (~> 1.2)
@@ -26,6 +29,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bourbon-compass
   compass
   sass (= 3.2.0.alpha.275)
   sinatra

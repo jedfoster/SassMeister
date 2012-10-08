@@ -4,6 +4,8 @@ require 'rubygems'
 require 'compass'
 require 'sass'
 require 'stipe'
+# require 'bourbon-compass'
+require '../bourbon-compass/lib/bourbon-compass.rb'
 
 # If you're using bundler, you will need to add this
 require 'bundler/setup'
