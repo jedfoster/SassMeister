@@ -19,6 +19,8 @@ If you find anything else that doesn't work, please let me know.
 SassMeister is written by [Jed Foster][jedfoster].<br>
 Jed is a UI Engineer with [Getty Images][gettyimages.com].
 
+The name was inspired by a [Seattle Sass Meetup][meetup] presentation from [PeepCode Screencasts][peepcode]. (Check out the [Meet Sinatra][peep-sinatra] and [Haml &amp; Sass][peep-sass] screencasts.)
+
 ## License
 Copyright (c) 2012 Jed Foster<br>
 
@@ -30,3 +32,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 [jedfoster]: http://jedfoster.com
 [gettyimages.com]: http://www.gettyimages.com
+[meetup]: http://www.meetup.com/SASSlang/
+[peepcode]: [https://peepcode.com]
+[peep-sinatra]: https://peepcode.com/products/sinatra
+[peep-sass]: https://peepcode.com/products/haml-and-sass
