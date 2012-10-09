@@ -1,74 +1,80 @@
-var showEms = function(){
-  var em_value = $(window).width() / parseInt($('body').css('font-size'));
-  $('.screen-width').text(' ' + em_value + 'em');
-  return true;
-};
+/*
+bindWithDelay jQuery plugin
+Author: Brian Grinstead
+MIT license: http://www.opensource.org/licenses/mit-license.php
 
-// General UX interactions
-// need to make better
-$(document).ready(function() {
-	
-	$(".nav_toggle").click(function () {
-		$(".toadstool_nav").slideToggle("slow");
-	});
-	
+http://github.com/bgrins/bindWithDelay
+*/
+(function($) {
+  $.fn.bindWithDelay = function( type, data, fn, timeout, throttle ) {
+  	if ( $.isFunction( data ) ) {
+  		throttle = timeout;
+  		timeout = fn;
+  		fn = data;
+  		data = undefined;
+  	}
 
-	$(".click_more a").click(function () {
-		event.preventDefault();
-		$(this).parents("p").siblings(".read_more").slideToggle("slow");
-		//$(this).parents("p").children("a").text("Read less ...");
-	});
-	
-	$(".codeToggle a").click(function () {
-		event.preventDefault();
-		$(this).parents("p").siblings(".prettyprint").slideToggle("slow");
-	});
-	
-	$("a[href^='http://']").attr("target","_blank");
+  	// Allow delayed function to be removed with fn in unbind function
+  	fn.guid = fn.guid || ($.guid && $.guid++);
+
+  	// Bind each separately so that each element has its own delay
+  	return this.each(function() {
+      var wait = null;
+
+      function cb() {
+          var e = $.extend(true, { }, arguments[0]);
+          var ctx = this;
+          var throttler = function() {
+          	wait = null;
+          	fn.apply(ctx, [e]);
+          };
+
+          if (!throttle) { clearTimeout(wait); wait = null; }
+          if (!wait) { wait = setTimeout(throttler, timeout); }
+      }
+
+      cb.guid = fn.guid;
+
+      $(this).bind(type, data, cb);
+  	});
+  }
+})(jQuery);
+/* --- END bindWithDelay --- */
+
+
+(function($) {
+  $("a[href^='http://']").attr("target","_blank");
 	$("a[href^='https://']").attr("target","_blank");
-	
-	showEms();
-	
-});
-
-
-
-
-
-// will show em size of window on resize of view
-$(window).resize(function() {
-	showEms();
-});
-
-// forces mobile address bar to scroll up
-if (/mobile/i.test(navigator.userAgent) && !window.location.hash) { window.onload = function () {
-  window.scrollTo(0, 1);
-}; }
-
-
-
-
-
-//// function to get hex value to appear on color guide
-function rgb2hex(rgb) {
-    rgb = rgb.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d\.]+))?\)$/);
-    function hex(x) {
-        return ("0" + parseInt(x).toString(16)).slice(-2);
-    }
-    if (rgb[1]!=0||rgb[2]!=0||rgb[3]!=0){
-      return ("#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3])).toUpperCase();
-    }
-    // if (rgb[1]!=255||rgb[2]!=255||rgb[3]!=255){
-    //   $("div").addClass("myClass yourClass");
-    // }
-    else {
-      return 'Gradient - Please use your web inspector';
-    }
-}
-
-$(document).ready(function() {
-  $('article.colorcode').children('div').each(function(index, BlockColor){
-    var color = $(BlockColor).css("background-color"); 
-    $(BlockColor).children().append('<br>' + '<b>' + rgb2hex(color) + '</b>');
+    
+  $('textarea[name="sass"]').bindWithDelay('keyup', function() {
+    $("#sass-form").submit();
+  },750);
+  
+  $('select').on('change', function() {
+    $("#sass-form").submit();
   });
-});
+
+  /* attach a submit handler to the form */
+  $("#sass-form").submit(function(event) {
+
+    /* stop form from submitting normally */
+    event.preventDefault();
+
+    /* get some values from elements on the page: */
+    var $form = $( this ),
+        sass = $form.find( 'textarea[name="sass"]' ).val(),
+        syntax = $form.find( 'select[name="syntax"]' ).val(),
+        output = $form.find( 'select[name="output"]' ).val(),
+        plugin = $form.find( 'select[name="plugin"]' ).val(),
+        url = $form.attr( 'action' );
+
+    /* Send the data using post and put the results in a div */
+    $.post( url, { sass: sass, syntax: syntax, output: output, plugin: plugin },
+      function( data ) {
+        // var content = $( data ).find( '#content' );
+        $( "#css" ).empty().append( data );
+        prettyPrint();
+      }
+    );
+  });
+})(jQuery);
