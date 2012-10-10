@@ -7,6 +7,10 @@
 pre.prettyprint {
   @extend .example_code;
   padding: em(15);
+
+  & ::selection, & ::-moz-selection {
+  	background: $charlie_color;
+  }
 }
 
 .main_body {
@@ -37,12 +41,12 @@ pre.prettyprint {
   @include grid(4);
 
   &:last-child {
-   @include grid(4.125, omega); 
+   @include grid(4.125, omega);
   }
   &:first-child {
     @include grid(4.125, alpha);
   }
-  
+
   & button[type=submit] {
     display:block;
     margin: 1.2em auto;
@@ -61,6 +65,6 @@ footer {
   margin-top: em(24);
   border-top: 1px solid $fox_gray;
   padding-top: em(24);
-  
+
   p { font-size: em(12); }
 }
