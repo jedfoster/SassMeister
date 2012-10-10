@@ -1,5 +1,5 @@
 input[type=text], input[type=password], input[type="date"], select {
-	@extend %input_fields;	
+	@extend %input_fields;
 }
 
 input[type=text], input[type=password], input[type="date"] {
@@ -7,7 +7,7 @@ input[type=text], input[type=password], input[type="date"] {
 		-webkit-appearance: none;  // this is to remove the default inner shadow
 		-moz-appearance: none; // if this ever works, Moz bug for over a year
 	}
-	
+
 }
 
 input[disabled], textarea[disabled], select[disabled], .disabled {
@@ -37,19 +37,19 @@ input, select, textarea, button {
 }
 
 textarea {
-  border: 1px solid $delta_gray;  
+  border: 1px solid $delta_gray;
   @include border_radius(em(5));
   padding:0.5em;
-  font-size:1em;
+  font-size: em(14);
   line-height: 1.5em;
   font-family: monospace, sans-serif;
   margin-bottom: em(30);
   @include grid(6.25, alpha, $grid_context: 6);
   outline: none;
   &[name=sass] {
-    height: em(375);
+    height: em(492);
     @media #{$mobile} {
-      height: em(150);
+      height: em(260);
     }
   }
 }
@@ -58,14 +58,19 @@ select[disabled],input[disabled] {
   display: none;
 }
 
-pre {
-  &.prettyprint {
-    margin: 0px !important; 
-    width: 100% !important;
-    height: em(700);
-    overflow-y: auto;
-    @media #{$mobile} {
-      height: em(480);
-    }
+pre.prettyprint {
+  @extend .example_code;
+  padding: em(15);
+
+  & ::selection, & ::-moz-selection {
+  	background: $charlie_color;
+  }
+
+  margin: 0px !important;
+  width: 100% !important;
+  height: em(700);
+  overflow-y: auto;
+  @media #{$mobile} {
+    height: em(480);
   }
 }
