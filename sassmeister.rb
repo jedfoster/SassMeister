@@ -1,8 +1,8 @@
 # Those little ditties that Sinara needs to make the magic happen
 # -----------------------------------------------------------------------
 require 'rubygems'
-require 'compass'
 require 'sass'
+require 'compass'
 require 'stipe'
 require 'bourbon-compass'
 # require '../bourbon-compass/lib/bourbon-compass.rb'
