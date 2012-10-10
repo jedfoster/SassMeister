@@ -18,8 +18,8 @@ set :partial_template_engine, :erb
 helpers do
   include ERB::Util
   alias_method :code, :html_escape
-  
-  
+
+
   # From: http://rubyquicktips.com/post/2625525454/random-array-item
   class Array
     def random
@@ -28,6 +28,12 @@ helpers do
   end
 end
 
+
+plugins = {
+  "bourbon" => 'bourbon/bourbon',
+  "compass" => 'compass',
+  "stipe" => './sass/stipe',  # This is a local manifest file that @imports all the Stipe modules
+}
 
 # configure do
 #   Compass.add_project_configuration(File.join(Sinatra::Application.root, 'config.rb'))
@@ -41,6 +47,8 @@ end
 
 
 get '/' do
+  @plugins = plugins
+
   @submit_text = ['Make some CSS brah!', 'Engage!', 'Show me the codez!', 'Machen Sie das CSS!', '&iexcl;Compilar!', 'Schnell!', 'Compile!', 'Go', 'Make me some CSS', '&#x421;&#x434;&#x435;&#x43B;&#x430;&#x442;&#x44C; CSS', 'Producent CSS', '&#x628;&#x646;&#x627;&#x626;&#x6CC;&#x6BA; CSS'].random
 
   erb :index
@@ -53,23 +61,11 @@ post '/compile' do
   end
 
 
-  if params[:plugin] == 'bourbon'
-    plugin = "@import \"bourbon/bourbon\""
-  elsif params[:plugin] == 'compass'
-    plugin = "@import \"compass\""
-  elsif params[:plugin] == 'stipe'
-    plugin = "@import \"./sass/stipe\""
+  if plugins.has_key?(params[:plugin])
+    sass = "@import \"#{plugins[params[:plugin]]}\"#{";" if params[:syntax] == 'scss'}\n\n#{params[:sass]}"
   else
-    plugin = ''
+    sass = params[:sass]
   end
-
-
-  if ! plugin.empty? and params[:syntax] == 'scss'
-    sass = "#{plugin};\n\n#{params[:sass]}"
-  else
-    sass = "#{plugin}\n\n#{params[:sass]}"
-  end
-
 
   begin
     send("#{params[:syntax]}".to_sym, sass.chomp, {:style => :"#{params[:output]}"})
