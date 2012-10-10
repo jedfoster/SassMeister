@@ -43,8 +43,7 @@ http://github.com/bgrins/bindWithDelay
 
 
 (function($) {
-  $("a[href^='http://']").attr("target","_blank");
-	$("a[href^='https://']").attr("target","_blank");
+  $("a[href^='http://'], a[href^='https://']").attr("target","_blank");
     
   $('textarea[name="sass"]').bindWithDelay('keyup', function() {
     $("#sass-form").submit();
