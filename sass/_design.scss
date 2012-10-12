@@ -51,11 +51,95 @@ ol {
 }
 
 
-footer {
-  @extend %grid_12;
-  margin-top: em(24);
-  border-top: 1px solid $fox_gray;
-  padding-top: em(24);
+.site_header {
+  @extend .site_header;
+  
+  // @extend %grid_12;
+  // margin-top: em(24);
+  // border-top: 1px solid $fox_gray;
+  // padding-top: em(24);
 
+  
+}
+
+.footer_container {
+  @extend .header_container;
   p { font-size: em(12); }
+}
+
+
+.social_links {
+  list-style: none;
+  font-size:3em;
+  font-family: 'SassMeisterIcons';
+	font-style: normal;
+	line-height: 1.5;
+	
+	//@include grid(3);
+	
+	@include grid(4);
+
+	
+	@media #{$mobile} {
+    @include grid(4, $grid_context: 4);
+  }
+  
+  li {
+    display: block;
+    @include grid(2, $grid_context: 4);
+    
+    @media #{$mobile} {
+      @include grid(2, $grid_context: 4);
+    }
+    
+    &:last-child {
+      @extend .omega;
+    }
+  }
+
+  a {    
+    display: block;
+    width: 1em;
+    height: 1em;
+  	speak: none;
+    text-decoration: none;
+    
+    span {
+      display: none;
+    }
+
+    // &.refresh:after {
+    // 	content: "\26d7";
+    // }
+    // &.settings:after {
+    // 	content: "\26d3";
+    // }
+    &.twitter:after {
+    	content: "\e001";
+    }
+    &.github:after {
+    	content: "\26ca";
+    }
+    // &.twitter-2:after {
+    // 	content: "\26ba";
+    // }
+    // &.meetup:after {
+    // 	content: "\e003";
+    // }
+    // &.google-plus:after {
+    // 	content: "\26bd";
+    // }
+    // &.rocket:after {
+    // 	content: "\26e2";
+    // }
+    // &.download:after {
+    // 	content: "\e004";
+    // }
+    // &.github-2:after {
+    // 	content: "\e005";
+    // }
+    // &.email:after {
+    // 	content: "\e002";
+    // }
+  }
 }
