@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 
 gem 'sinatra'
 gem 'thin'
-gem 'sass', '=3.2.0.alpha.275'
+gem 'sass'
 gem 'compass'
 gem 'sinatra-partial'
 gem 'stipe'
