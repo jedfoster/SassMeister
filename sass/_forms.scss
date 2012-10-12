@@ -47,7 +47,7 @@ textarea {
   @include grid(6.25, alpha, $grid_context: 6);
   outline: none;
   &[name=sass] {
-    height: em(492);
+    height: em(578);
     @media #{$mobile} {
       height: em(260);
     }
