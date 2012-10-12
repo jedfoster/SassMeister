@@ -103,4 +103,61 @@ http://github.com/bgrins/bindWithDelay
       }
     );
   });
+  
+  
+  // From https://gist.github.com/2628879
+  HTMLTextAreaElement.prototype.getCaretPosition = function () { //return the caret position of the textarea
+      return this.selectionStart;
+  };
+  HTMLTextAreaElement.prototype.setCaretPosition = function (position) { //change the caret position of the textarea
+      this.selectionStart = position;
+      this.selectionEnd = position;
+      this.focus();
+  };
+  HTMLTextAreaElement.prototype.hasSelection = function () { //if the textarea has selection then return true
+      if (this.selectionStart == this.selectionEnd) {
+          return false;
+      } else {
+          return true;
+      }
+  };
+  HTMLTextAreaElement.prototype.getSelectedText = function () { //return the selection text
+      return this.value.substring(this.selectionStart, this.selectionEnd);
+  };
+  HTMLTextAreaElement.prototype.setSelection = function (start, end) { //change the selection area of the textarea
+      this.selectionStart = start;
+      this.selectionEnd = end;
+      this.focus();
+  };
+
+
+  // Modified version of http://jsfiddle.net/joaocolombo/TQYmB/6/
+  $('textarea[name="sass"]').on('keydown', function(event) {
+    var tabChar = "  ";
+
+    //support tab on textarea
+    if (event.keyCode == 9) { //tab was pressed
+      var newCaretPosition = this.getCaretPosition() + tabChar.length;
+      this.value = this.value.substring(0, this.getCaretPosition()) + "  " + this.value.substring(this.getCaretPosition(), this.value.length);
+      this.setCaretPosition(newCaretPosition);
+      return false;
+    }
+    if(event.keyCode == 8){ //backspace
+      if (this.value.substring(this.getCaretPosition() - tabChar.length , this.getCaretPosition()) == tabChar) { //it's a tab space
+        var newCaretPosition = this.getCaretPosition() - tabChar.length + 1;
+        this.value = this.value.substring(0, this.getCaretPosition() - tabChar.length + 1) + this.value.substring(this.getCaretPosition(), this.value.length);
+        this.setCaretPosition(newCaretPosition);
+      }
+    }
+    if(event.keyCode == 37){ //left arrow
+      if (this.value.substring(this.getCaretPosition() - tabChar.length, this.getCaretPosition()) == tabChar) { //it's a tab space
+        this.setCaretPosition(this.getCaretPosition() - tabChar.length + 1);
+      }
+    }
+    if(event.keyCode == 39){ //right arrow
+      if (this.value.substring(this.getCaretPosition() + tabChar.length, this.getCaretPosition()) == tabChar) { //it's a tab space
+        this.setCaretPosition(this.getCaretPosition() + tabChar.length - 1);
+      }
+    }      
+  });
 })(jQuery);
