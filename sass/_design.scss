@@ -11,14 +11,14 @@
 .sass_input {
   @include grid(6.125, alpha);
   @media #{$mobile} {
-    @include grid(4, $grid_context: 4);
+    @include grid(4.25, alphaomega, $grid_context: 4);
   }
 }
 
 .css_output {
   @include grid(6.125, omega);
   @media #{$mobile} {
-    @include grid(4, $grid_context: 4);
+    @include grid(4.25, alphaomega, $grid_context: 4);
   }
 }
 
@@ -51,20 +51,21 @@ ol {
 }
 
 
-.site_header {
-  @extend .site_header;
-  
-  // @extend %grid_12;
-  // margin-top: em(24);
-  // border-top: 1px solid $fox_gray;
-  // padding-top: em(24);
-
-  
+.site_footer {
+   width: 100%;
+   float: left;
+   margin-bottom: em(50);
+   @media #{$mobile} {
+     margin-top: em(25);
+     text-align: justify;
+   }
 }
 
 .footer_container {
   @extend .header_container;
-  p { font-size: em(12); }
+  p { 
+    font-size: em(12); 
+  }
 }
 
 
@@ -73,24 +74,18 @@ ol {
   font-size:3em;
   font-family: 'SassMeisterIcons';
 	font-style: normal;
-	line-height: 1.5;
-	
-	//@include grid(3);
-	
-	@include grid(4);
+	line-height: 1em;
+		
+	@include grid(2);
 
-	
 	@media #{$mobile} {
-    @include grid(4, $grid_context: 4);
+    @include grid(2, $grid_context: 4);
+    margin-top: em(5);
   }
   
   li {
     display: block;
     @include grid(2, $grid_context: 4);
-    
-    @media #{$mobile} {
-      @include grid(2, $grid_context: 4);
-    }
     
     &:last-child {
       @extend .omega;
@@ -114,10 +109,10 @@ ol {
     // &.settings:after {
     // 	content: "\26d3";
     // }
-    &.twitter:after {
+    &.twitter:before {
     	content: "\e001";
     }
-    &.github:after {
+    &.github:before {
     	content: "\26ca";
     }
     // &.twitter-2:after {
