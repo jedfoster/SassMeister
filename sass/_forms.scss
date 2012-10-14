@@ -7,7 +7,6 @@ input[type=text], input[type=password], input[type="date"] {
 		-webkit-appearance: none;  // this is to remove the default inner shadow
 		-moz-appearance: none; // if this ever works, Moz bug for over a year
 	}
-
 }
 
 input[disabled], textarea[disabled], select[disabled], .disabled {
@@ -33,47 +32,9 @@ label {
 }
 
 input, select, textarea, button {
-  font-family: monospace, sans-serif;
-}
-
-textarea {
-  border: 1px solid $delta_gray;
-  @include border_radius(em(5));
-  padding:0.5em 0.5em 0.5em 1em;
-  font-size: em(14);
-  line-height: 1.5em;
-  font-family: monospace, sans-serif;
-  margin-bottom: em(30);
-  @include grid(6.25, alpha, $grid_context: 6);
-  outline: none;
-  background: $bravo_gray;
-  color: #F1F2F3;
-  letter-spacing: 1px;
-  &[name=sass] {
-    height: em(678);
-    @media #{$mobile} {
-      height: em(260);
-    }
-  }
+  font-family: 'source_code_pro', monospace;
 }
 
 select[disabled],input[disabled] {
   display: none;
-}
-
-pre.prettyprint {
-  @extend .example_code;
-  padding: em(15);
-
-  & ::selection, & ::-moz-selection {
-  	background: $charlie_color;
-  }
-
-  margin: 0px !important;
-  width: 100% !important;
-  height: em(800);
-  overflow-y: auto;
-  @media #{$mobile} {
-    height: em(480);
-  }
 }
