@@ -46,6 +46,7 @@ http://github.com/bgrins/bindWithDelay
   var sass = ace.edit("sass");
   sass.setTheme("ace/theme/dawn");
   sass.getSession().setMode("ace/mode/scss");
+  sass.focus();
 
   var css = ace.edit("css");
   css.setTheme("ace/theme/dawn");
