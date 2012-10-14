@@ -1,15 +1,16 @@
 embed_assets: on
 javascript_compressor: closure
+package_path: "javascripts/"
 
 javascripts:
-  workspace:
-    - public/javascripts/jquery-1.8.2.js
-    - public/javascripts/ace.js
-    - public/javascripts/application.js  
-    
-    # - public/javascripts/lib/*.js
-    # - public/javascripts/views/**/*.js
-    # - app/views/workspace/*.jst
+  app:
+    - public/javascripts/vendor/jquery-1.8.2.js
+    - public/javascripts/vendor/ACE-noconflict/ace.js
+    - public/javascripts/vendor/ACE-noconflict/mode-css.js
+    - public/javascripts/vendor/ACE-noconflict/mode-scss.js
+    - public/javascripts/vendor/ACE-noconflict/theme-dawn.js
+    - public/javascripts/vendor/ACE-noconflict/worker-css.js
+    - public/javascripts/main.js
 
 # stylesheets:
 #   common:

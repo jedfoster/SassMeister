@@ -45,9 +45,14 @@
     </div>
   </footer>  
   
-
-	<script src="/javascripts/jquery-1.8.2.js"></script>
-  <script src="/javascripts/ace.js"></script>  
-  <script src="/javascripts/application.min.js"></script>
+  
+  
+  <% if settings.environment == :production %>
+	  <script src="/javascripts/app.js"></script>
+	<% else %>
+  	<script src="/javascripts/jquery-1.8.2.js"></script>
+    <script src="/javascripts/ace.js"></script>  
+    <script src="/javascripts/application.js"></script>
+  <% end %>
 </body>
 </html>

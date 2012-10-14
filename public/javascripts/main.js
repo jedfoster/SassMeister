@@ -51,7 +51,8 @@ http://github.com/bgrins/bindWithDelay
   var css = ace.edit("css");
   css.setTheme("ace/theme/dawn");
   css.setReadOnly(true);
-  css.getSession().setMode("ace/mode/scss");
+  css.getSession().$useWorker=false
+  css.getSession().setMode("ace/mode/css");
 
   $("a[href^='http://'], a[href^='https://']").attr("target","_blank");
 

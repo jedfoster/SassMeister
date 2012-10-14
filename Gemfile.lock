@@ -18,8 +18,6 @@ GEM
     fssm (0.2.9)
     jammit (0.6.5)
       yui-compressor (>= 0.9.3)
-    jammit-sinatra (0.6.0.2)
-      jammit (>= 0.6.0)
     open4 (1.3.0)
     rack (1.4.1)
     rack-protection (1.2.0)
@@ -49,7 +47,7 @@ PLATFORMS
 DEPENDENCIES
   bourbon-compass
   compass
-  jammit-sinatra
+  jammit
   rake
   sass
   sinatra
