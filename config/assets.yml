@@ -1,0 +1,21 @@
+embed_assets: on
+javascript_compressor: closure
+
+javascripts:
+  workspace:
+    - public/javascripts/jquery-1.8.2.js
+    - public/javascripts/ace.js
+    - public/javascripts/application.js  
+    
+    # - public/javascripts/lib/*.js
+    # - public/javascripts/views/**/*.js
+    # - app/views/workspace/*.jst
+
+# stylesheets:
+#   common:
+#     - public/stylesheets/reset.css
+#     - public/stylesheets/widgets/*.css
+#   workspace:
+#     - public/stylesheets/pages/workspace.css
+#   empty:
+#     - public/stylesheets/pages/empty.css
