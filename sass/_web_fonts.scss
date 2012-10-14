@@ -23,11 +23,11 @@ $webfont_directory: "/stylesheets/fonts/" !default; // edit this directory in th
 // -----------------------------------------------------------
 
 @font-face {
-	@include font-face ($font_family: 'source_code_pro', $font-file:  'sourcecodepro-bold-webfont', $font_weight: bold, $font_style: bold);
+	@include font-face ($font_family: 'SourceCodePro', $font-file:  'sourcecodepro-bold-webfont', $font_weight: bold, $font_style: bold);
 }
 
 @font-face {
-	@include font-face ($font_family: 'source_code_pro', $font-file:  'sourcecodepro-regular-webfont', $font_weight: normal, $font_style: normal);
+	@include font-face ($font_family: 'SourceCodePro', $font-file:  'sourcecodepro-regular-webfont', $font_weight: normal, $font_style: normal);
 }
 
 @font-face {
