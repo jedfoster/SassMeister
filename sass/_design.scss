@@ -11,14 +11,14 @@
 .sass_input {
   @include grid(6.125, alpha);
   @media #{$mobile} {
-    @include grid(4, $grid_context: 4);
+    @include grid(4.25, alphaomega, $grid_context: 4);
   }
 }
 
 .css_output {
   @include grid(6.125, omega);
   @media #{$mobile} {
-    @include grid(4, $grid_context: 4);
+    @include grid(4.25, alphaomega, $grid_context: 4);
   }
 }
 
@@ -51,11 +51,90 @@ ol {
 }
 
 
-footer {
-  @extend %grid_12;
-  margin-top: em(24);
-  border-top: 1px solid $fox_gray;
-  padding-top: em(24);
+.site_footer {
+   width: 100%;
+   float: left;
+   margin-bottom: em(50);
+   @media #{$mobile} {
+     margin-top: em(25);
+     text-align: justify;
+   }
+}
 
-  p { font-size: em(12); }
+.footer_container {
+  @extend .header_container;
+  p { 
+    font-size: em(12); 
+  }
+}
+
+
+.social_links {
+  list-style: none;
+  font-size:3em;
+  font-family: 'SassMeisterIcons';
+	font-style: normal;
+	line-height: 1em;
+		
+	@include grid(2);
+
+	@media #{$mobile} {
+    @include grid(2, $grid_context: 4);
+    margin-top: em(5);
+  }
+  
+  li {
+    display: block;
+    @include grid(2, $grid_context: 4);
+    
+    &:last-child {
+      @extend .omega;
+    }
+  }
+
+  a {    
+    display: block;
+    width: 1em;
+    height: 1em;
+  	speak: none;
+    text-decoration: none;
+    
+    span {
+      display: none;
+    }
+
+    // &.refresh:after {
+    // 	content: "\26d7";
+    // }
+    // &.settings:after {
+    // 	content: "\26d3";
+    // }
+    &.twitter:before {
+    	content: "\e001";
+    }
+    &.github:before {
+    	content: "\26ca";
+    }
+    // &.twitter-2:after {
+    // 	content: "\26ba";
+    // }
+    // &.meetup:after {
+    // 	content: "\e003";
+    // }
+    // &.google-plus:after {
+    // 	content: "\26bd";
+    // }
+    // &.rocket:after {
+    // 	content: "\26e2";
+    // }
+    // &.download:after {
+    // 	content: "\e004";
+    // }
+    // &.github-2:after {
+    // 	content: "\e005";
+    // }
+    // &.email:after {
+    // 	content: "\e002";
+    // }
+  }
 }

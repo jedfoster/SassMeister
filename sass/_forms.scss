@@ -39,15 +39,18 @@ input, select, textarea, button {
 textarea {
   border: 1px solid $delta_gray;
   @include border_radius(em(5));
-  padding:0.5em;
+  padding:0.5em 0.5em 0.5em 1em;
   font-size: em(14);
   line-height: 1.5em;
   font-family: monospace, sans-serif;
   margin-bottom: em(30);
   @include grid(6.25, alpha, $grid_context: 6);
   outline: none;
+  background: $bravo_gray;
+  color: #F1F2F3;
+  letter-spacing: 1px;
   &[name=sass] {
-    height: em(492);
+    height: em(678);
     @media #{$mobile} {
       height: em(260);
     }
@@ -68,7 +71,7 @@ pre.prettyprint {
 
   margin: 0px !important;
   width: 100% !important;
-  height: em(700);
+  height: em(800);
   overflow-y: auto;
   @media #{$mobile} {
     height: em(480);

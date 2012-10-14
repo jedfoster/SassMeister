@@ -83,7 +83,7 @@ http://github.com/bgrins/bindWithDelay
 
   $('textarea[name="sass"]').bindWithDelay('keyup', function() {
     $("#sass-form").submit();
-  },750);
+  },500);
 
   $('select').on('change', function() {
     $("#sass-form").submit();
