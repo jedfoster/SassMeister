@@ -1,6 +1,6 @@
-embed_assets: on
 javascript_compressor: closure
 package_path: "javascripts/"
+gzip_assets: off
 
 javascripts:
   app:
