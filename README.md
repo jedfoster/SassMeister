@@ -1,6 +1,6 @@
 # SassMeister #
 
-Become a Sass Master with SassMeister, the Sass playground.
+Become a Sass master with SassMeister, the Sass playground.
 
     git clone https://github.com/jedfoster/SassMeister.git
     cd SassMeister
@@ -8,6 +8,24 @@ Become a Sass Master with SassMeister, the Sass playground.
     rake server
 
 Go to [127.0.0.1:3000](http://127.0.0.1:3000) and start playing with Sass!
+
+## Contents Enclosed ##
+
+SassMeister includes these fine Sass libraries: 
+
+- [Bourbon](http://thoughtbot.com/bourbon/)
+- [Breakpoint](https://github.com/canarymason/breakpoint)
+- [Compass](http://compass-style.org)
+- [Sassy Buttons](http://jaredhardy.com/sassy-buttons/)
+- [Singularity.gs](https://github.com/scottkellum/singularity)
+- [Stipe](https://github.com/Anotheruiguy/stipe)
+- [Susy](http://susy.oddbird.net)
+
+Try your own Sass against one of these libraries and see what the compiled CSS would look like.
+
+## Tests ##
+
+Test code for each of the included Sass libraries can be found [here](https://github.com/jedfoster/SassMeister/blob/master/TESTS.md).
 
 ## Caveats ##
 
