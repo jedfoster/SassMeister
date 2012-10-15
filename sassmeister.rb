@@ -8,6 +8,7 @@ require 'bourbon-compass'
 require 'susy'
 require 'sassy-buttons'
 require 'breakpoint'
+require 'singularitygs'
 
 # If you're using bundler, you will need to add this
 require 'bundler/setup'
@@ -36,6 +37,7 @@ plugins = {
   "breakpoint" => 'breakpoint',
   "compass" => 'compass',
   "sassy-buttons" => 'sassy-buttons',
+  "singularity.gs" => 'singularitygs',
   "stipe" => './sass/stipe',  # This is a local manifest file that @imports all the Stipe modules
   "susy" => 'susy',
 }
