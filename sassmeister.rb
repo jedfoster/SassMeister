@@ -7,6 +7,7 @@ require 'stipe'
 require 'bourbon-compass'
 require 'susy'
 require 'sassy-buttons'
+require 'breakpoint'
 
 # If you're using bundler, you will need to add this
 require 'bundler/setup'
@@ -32,6 +33,7 @@ end
 
 plugins = {
   "bourbon" => 'bourbon/bourbon',
+  "breakpoint" => 'breakpoint',
   "compass" => 'compass',
   "sassy-buttons" => 'sassy-buttons',
   "stipe" => './sass/stipe',  # This is a local manifest file that @imports all the Stipe modules
