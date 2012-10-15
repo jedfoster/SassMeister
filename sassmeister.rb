@@ -5,6 +5,7 @@ require 'sass'
 require 'compass'
 require 'stipe'
 require 'bourbon-compass'
+require 'susy'
 
 # If you're using bundler, you will need to add this
 require 'bundler/setup'
@@ -32,6 +33,7 @@ plugins = {
   "bourbon" => 'bourbon/bourbon',
   "compass" => 'compass',
   "stipe" => './sass/stipe',  # This is a local manifest file that @imports all the Stipe modules
+  "susy" => 'susy',
 }
 
 # configure do

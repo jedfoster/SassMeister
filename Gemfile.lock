@@ -33,6 +33,9 @@ GEM
     stipe (0.0.4.5)
       compass (>= 0.11)
       sass (>= 3.2.1)
+    susy (1.0.1)
+      compass (>= 0.12.2)
+      sass (>= 3.2.0)
     thin (1.5.0)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
@@ -53,4 +56,5 @@ DEPENDENCIES
   sinatra
   sinatra-partial
   stipe
+  susy
   thin
