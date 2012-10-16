@@ -83,3 +83,7 @@ post '/compile' do
     e.to_s
   end
 end
+
+get '/thankyou' do
+  erb :thankyou
+end

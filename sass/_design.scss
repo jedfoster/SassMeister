@@ -63,78 +63,114 @@ ol {
 
 .footer_container {
   @extend .header_container;
-  p { 
-    font-size: em(12); 
+  p {
+    @include grid(6);
+    font-size: em(12);
+    margin-right: 0;
+
+    @media #{$mobile} {
+      @include grid(4, $grid_context: 4);
+    }
+  }
+}
+
+%icon-font {
+  display: block;
+  min-width: 1em;
+  height: 1em;
+
+  &:before {
+    font-size:3em;
+    font-family: 'SassMeisterIcons';
+  	font-style: normal;
+  	line-height: 1;
+	vertical-align:middle;
+
+  	speak: none;
+  }
+  &:hover {
+    text-decoration: none;
+  }
+  span {
+    display: none;
+  }
+}
+
+// &.refresh:after {
+// 	content: "\26d7";
+// }
+// &.settings:after {
+// 	content: "\26d3";
+// }
+.twitter-icon {
+  @extend %icon-font;
+
+  &:before {
+  	content: "\26ba";
+  }
+}
+.github-icon {
+  @extend %icon-font;
+
+  &:before {
+  	content: "\e005";
+  }
+}
+// &.twitter-2:after {
+// 	content: "\e001";
+// }
+// &.meetup:after {
+// 	content: "\e003";
+// }
+// &.google-plus:after {
+// 	content: "\26bd";
+// }
+// &.rocket:after {
+// 	content: "\26e2";
+// }
+// &.download:after {
+// 	content: "\e004";
+// }
+// &.github-2:after {
+// 	content: "\26ca";
+// }
+// &.email:after {
+// 	content: "\e002";
+// }
+.heart-icon {
+  @extend %icon-font;
+
+  &:before {
+  	content: "\21";
+  }
+}
+
+.paypal-icon {
+  @extend %icon-font;
+
+  &:before {
+	  content: "\22";
   }
 }
 
 
 .social_links {
   list-style: none;
-  font-size:3em;
-  font-family: 'SassMeisterIcons';
-	font-style: normal;
-	line-height: 1em;
-		
-	@include grid(2);
+
+  @include grid(6);
 
 	@media #{$mobile} {
-    @include grid(2, $grid_context: 4);
+    @include grid(4, $grid_context: 4);
     margin-top: em(5);
   }
-  
+
   li {
     display: block;
-    @include grid(2, $grid_context: 4);
-    
+    float:left;
+    margin-right: 1.5em;
+
     &:last-child {
       @extend %omega;
     }
-  }
-
-  a {    
-    display: block;
-    width: 1em;
-    height: 1em;
-  	speak: none;
-    text-decoration: none;
-    
-    span {
-      display: none;
-    }
-
-    // &.refresh:after {
-    // 	content: "\26d7";
-    // }
-    // &.settings:after {
-    // 	content: "\26d3";
-    // }
-    &.twitter:before {
-    	content: "\26ba";
-    }
-    &.github:before {
-    	content: "\e005";
-    }
-    // &.twitter-2:after {
-    // 	content: "\e001";
-    // }
-    // &.meetup:after {
-    // 	content: "\e003";
-    // }
-    // &.google-plus:after {
-    // 	content: "\26bd";
-    // }
-    // &.rocket:after {
-    // 	content: "\26e2";
-    // }
-    // &.download:after {
-    // 	content: "\e004";
-    // }
-    // &.github-2:after {
-    // 	content: "\26ca";
-    // }
-    // &.email:after {
-    // 	content: "\e002";
-    // }
   }
 }
