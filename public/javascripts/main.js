@@ -61,6 +61,7 @@ http://github.com/bgrins/bindWithDelay
   });
 
   $('select').on('change', function() {
+    _gaq.push(['_trackEvent', 'Form', 'Control', this.value]);
     $("#sass-form").submit();
   });
 
@@ -70,6 +71,8 @@ http://github.com/bgrins/bindWithDelay
 
     /* stop form from submitting normally */
     event.preventDefault();
+    
+    _gaq.push(['_trackEvent', 'Form', 'Submit']);
 
     var inputs = {
       sass: sass.getValue(),
