@@ -56,7 +56,6 @@ ol {
    float: left;
    margin-bottom: em(50);
    @media #{$mobile} {
-     margin-top: em(25);
      text-align: justify;
    }
 }
@@ -77,21 +76,21 @@ ol {
 %icon-font {
   display: block;
   min-width: 1em;
-  height: 1em;
+  height: 3em;
 
   &:before {
     font-size:3em;
     font-family: 'SassMeisterIcons';
   	font-style: normal;
   	line-height: 1;
-	vertical-align:middle;
+  	vertical-align:middle;
 
   	speak: none;
   }
   &:hover {
     text-decoration: none;
   }
-  span {
+  .alt {
     display: none;
   }
 }
@@ -151,6 +150,12 @@ ol {
   &:before {
 	  content: "\22";
   }
+  
+  @media #{$mobile} {
+    span {
+      display:none;
+    }
+  }
 }
 
 
@@ -161,7 +166,7 @@ ol {
 
 	@media #{$mobile} {
     @include grid(4, $grid_context: 4);
-    margin-top: em(5);
+    margin-bottom: 1.5em;
   }
 
   li {
