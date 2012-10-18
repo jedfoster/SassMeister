@@ -56,8 +56,11 @@ http://github.com/bgrins/bindWithDelay
 
   $("a[href^='http://'], a[href^='https://']").attr("target","_blank");
 
+
+  var timer;
   sass.getSession().on('change', function(e) {
-    window.setTimeout(function() {$("#sass-form").submit();}, 500);
+    clearTimeout(timer);
+    timer = setTimeout(function() {$("#sass-form").submit();}, 750);
   });
 
   $('select').on('change', function() {
@@ -68,6 +71,9 @@ http://github.com/bgrins/bindWithDelay
 
   /* attach a submit handler to the form */
   $("#sass-form").submit(function(event) {
+
+    // var d = new Date();
+    // console.log(d.getTime());
 
     /* stop form from submitting normally */
     event.preventDefault();
