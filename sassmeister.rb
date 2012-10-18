@@ -69,7 +69,6 @@ post '/compile' do
     Sass.load_paths << path
   end
 
-
   if plugins.has_key?(params[:plugin])
     sass = "@import \"#{plugins[params[:plugin]]}\"#{";" if params[:syntax] == 'scss'}\n\n#{params[:sass]}"
   else
@@ -77,7 +76,8 @@ post '/compile' do
   end
 
   begin
-    send("#{params[:syntax]}".to_sym, sass.chomp, {:style => :"#{params[:output]}"})
+    send("#{params[:syntax]}".to_sym, sass.chomp, {:style => :"#{params[:output]}", :quiet => true})
+      
   rescue Sass::SyntaxError => e
     status 200
     e.to_s
