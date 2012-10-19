@@ -1,9 +1,9 @@
 .DS_Store
 .bundle
 .sass-cache/*
-public/stylesheets/*
 public/javascripts/app.js
 public/javascripts/app.js.gz
+public/stylesheets/*
 sass/.sass-cache/
 #Gemfile.local
 #Gemfile.local.lock
