@@ -1,14 +1,6 @@
 # Those little ditties that Sinara needs to make the magic happen
 # -----------------------------------------------------------------------
 require 'rubygems'
-require 'sass'
-require 'compass'
-require 'stipe'
-require 'bourbon-compass'
-require 'susy'
-require 'sassy-buttons'
-require 'breakpoint'
-require 'singularitygs'
 
 # If you're using bundler, you will need to add this
 require 'bundler/setup'
@@ -16,12 +8,23 @@ require 'bundler/setup'
 require 'sinatra'
 require 'sinatra/partial'
 
+require 'sass'
+require 'compass'
+
+require 'bourbon-compass'
+require 'breakpoint'
+require 'sassy-buttons'
+require 'singularitygs'
+require 'stipe'
+require 'susy'
+
+
 set :partial_template_engine, :erb
+
 
 helpers do
   include ERB::Util
   alias_method :code, :html_escape
-
 
   # From: http://rubyquicktips.com/post/2625525454/random-array-item
   class Array
@@ -41,16 +44,6 @@ plugins = {
   "stipe" => './sass/stipe',  # This is a local manifest file that @imports all the Stipe modules
   "susy" => 'susy',
 }
-
-# configure do
-#   Compass.add_project_configuration(File.join(Sinatra::Application.root, 'config.rb'))
-# end
-
-# # at a minimum, the main sass file must reside within the ./views directory. here, we create a ./views/stylesheets directory where all of the sass files can safely reside.
-# get '/stylesheets/:name.css' do
-#   content_type 'text/css', :charset => 'utf-8'
-#   scss(:"../sass/#{params[:name]}", Compass.sass_engine_options )
-# end
 
 
 get '/' do
@@ -83,6 +76,7 @@ post '/compile' do
     e.to_s
   end
 end
+
 
 get '/thankyou' do
   erb :thankyou

@@ -1,15 +1,16 @@
 source 'http://rubygems.org'
 
 gem 'sinatra'
+gem 'sinatra-partial'
 gem 'thin'
+gem 'jammit'
+
 gem 'sass'
 gem 'compass'
-gem 'sinatra-partial'
-gem 'stipe'
+
 gem 'bourbon-compass'
-gem 'rake'
-gem 'jammit'
-gem 'susy'
-gem 'sassy-buttons'
 gem 'breakpoint'
+gem 'sassy-buttons'
 gem 'singularitygs'
+gem 'stipe'
+gem 'susy'
