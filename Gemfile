@@ -4,6 +4,7 @@ gem 'sinatra'
 gem 'sinatra-partial'
 gem 'thin'
 gem 'jammit'
+gem 'github_api'
 
 gem 'sass'
 gem 'compass'
