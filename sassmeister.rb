@@ -51,14 +51,14 @@ helpers do
     Compass.sass_engine_options[:load_paths].each do |path|
       Sass.load_paths << path
     end
-    
+
     if plugins.has_key?(params[:plugin])
       sass = "@import \"#{plugins[params[:plugin]]}\"#{";" if params[:syntax] == 'scss'}\n\n#{params[:sass]}"
     else
       sass = params[:sass]
     end
   end
-  
+
   def compile_sass(params, sass)
     begin
       send("#{params[:syntax]}".to_sym, sass.chomp, {:style => :"#{params[:output]}", :quiet => true})
@@ -66,8 +66,19 @@ helpers do
     rescue Sass::SyntaxError => e
       status 200
       e.to_s
-    end    
+    end
   end
+end
+
+
+enable :sessions
+
+get '/foo' do
+  "value = " << session[:value].inspect
+end
+
+get '/foo/:value' do
+  session[:value] = params[:value]
 end
 
 
@@ -90,46 +101,39 @@ get '/thankyou' do
 end
 
 
-post '/gist' do
+post '/gist/?:edit?' do
   sass = import_plugin(params)
   css = compile_sass(params, sass)
-  
-  gist = {
-    sass: sass, 
-    css: css
-  }
-  
-  sass_file = "sass.scss"
-  css_file = "css.css"
-  
-  # gist = {
-  #   description: "Gist off",
-  #   public: true,
-  #   files: {
-  #     :sass_file => {
-  #       content: "#{sass}"
-  #     },
-  #     :css_file => {
-  #       content: "#{css}"
-  #     }
-  #   }
-  # }
-  
 
-  
-  
-  # gist.to_json
-  
+  # Downloaded from SassMeister.com
+
+
+  sass_file = "SassMeister.#{params[:syntax]}"
+  css_file = "SassMeister.css"
+
   github = Github::Gists.new
 
-  data = github.create(description: "Gist off", public: true, files: {
-    :css_file => {
-      content: "#{css}"
-    },
-    :sass_file => {
-      content: "#{sass}"
-    }    
-  })
-    
-  data.html_url.to_s
+  # if params[:edit]
+  #   data = github.fork(session[:gist], files: {
+  #     css_file => {
+  #       content: "#{css}"
+  #     },
+  #     sass_file => {
+  #       content: "#{sass}"
+  #     }
+  #   })
+  # else
+    data = github.create(description: "Gist off", public: true, files: {
+      css_file => {
+        content: "#{css}"
+      },
+      sass_file => {
+        content: "#{sass}"
+      }
+    })
+  # end
+
+  session[:gist] = data.id
+
+  "https://gist.github.com/#{data.id}"
 end

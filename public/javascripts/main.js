@@ -115,4 +115,25 @@ http://github.com/bgrins/bindWithDelay
       }
     );
   });
+  
+  $('#gist-edit').on('click', function() {
+    /* stop form from submitting normally */
+    event.preventDefault();
+    
+    _gaq.push(['_trackEvent', 'Gist']);
+
+    var inputs = {
+      sass: sass.getValue(),
+      syntax: $('select[name="syntax"]').val(),
+      plugin: $('select[name="plugin"]').val(),
+      output: $('select[name="output"]').val()
+    }
+
+    ///* Send the data using post and put the results in a div */
+    $.post('/gist/edit', inputs,
+      function( data ) {
+        console.log(data)
+      }
+    );
+  });
 })(jQuery);
