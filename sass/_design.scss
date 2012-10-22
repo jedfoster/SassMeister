@@ -115,9 +115,6 @@ ol {
   	content: "\e005";
   }
 }
-// &.twitter-2:after {
-// 	content: "\e001";
-// }
 // &.meetup:after {
 // 	content: "\e003";
 // }
@@ -130,20 +127,16 @@ ol {
 // &.download:after {
 // 	content: "\e004";
 // }
-// &.github-2:after {
-// 	content: "\26ca";
-// }
 // &.email:after {
 // 	content: "\e002";
 // }
-.heart-icon {
-  @extend %icon-font;
-
-  &:before {
-  	content: "\21";
-  }
-}
-
+//.heart-icon {
+//  @extend %icon-font;
+//
+//  &:before {
+//  	content: "\21";
+//  }
+//}
 .paypal-icon {
   @extend %icon-font;
 
@@ -157,7 +150,27 @@ ol {
     }
   }
 }
+.gist-icon {
+  @extend %icon-font;
 
+  &:before {
+	  content: "\23";
+  }
+}
+.info-icon {
+  @extend %icon-font;
+
+  &:before {
+	  content: "\24";
+  }
+}
+.help-icon {
+  @extend %icon-font;
+
+  &:before {
+	  content: "\25";
+  }
+}
 
 .social_links {
   list-style: none;
