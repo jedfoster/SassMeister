@@ -181,6 +181,17 @@ ol {
 	  content: "\25";
   }
 }
+.close-icon {
+  @extend %icon-font;
+  
+  float:right;
+  
+
+  &:before {
+	  content: "\d7";
+	  font-size: 1em;
+  }
+}
 
 .social_links {
   list-style: none;

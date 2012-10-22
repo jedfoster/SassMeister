@@ -1,19 +1,12 @@
 .edit_container {
   position: relative;
   @include grid(6.25, alpha, $grid_context: 6);
-  height: em(527);
+  height: em(640);
   margin-bottom: em(30);
   @media #{$mobile} {
-    height: em(260);
+    height: em(480);
   }
-
-  .css_output & {
-    height: em(622);
-    overflow-y: auto;
-    @media #{$mobile} {
-      height: em(480);
-    }
-  }
+  overflow-y: auto;
 
   pre {
     border: 1px solid $delta_gray;

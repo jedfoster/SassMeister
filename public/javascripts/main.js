@@ -28,7 +28,7 @@ http://github.com/bgrins/bindWithDelay
         	wait = null;
         	fn.apply(ctx, [e]);
         };
-        
+
         if (!throttle) { clearTimeout(wait); wait = null; }
         if (!wait) { wait = setTimeout(throttler, timeout); }
       }
@@ -77,7 +77,7 @@ http://github.com/bgrins/bindWithDelay
 
     /* stop form from submitting normally */
     event.preventDefault();
-    
+
     _gaq.push(['_trackEvent', 'Form', 'Submit']);
 
     var inputs = {
@@ -94,16 +94,34 @@ http://github.com/bgrins/bindWithDelay
       }
     );
   });
-  
+
   $('#settings-toggle').on('click', function() {
     event.preventDefault();
-    $('#settings').toggle();
+    $('#settings').reveal({
+      animation: 'fade', //fade, fadeAndPop, none
+      animationSpeed: 100, //how fast animations are
+      closeOnBackgroundClick: true, //if you click background will modal close?
+      dismissModalClass: 'close-icon' //the class of a button or element that will close an open modal
+    });
   });
-  
+
+  var buildModal = function(content) {
+    var modal = '<div class="controls_container reveal-modal large" id="modal"><a href="#" class="close-icon"><span class="alt">&#215;</span></a>' + content + '</div>';
+
+    $('body').append($(modal));
+
+    $('#modal').reveal({
+      animation: 'fade', //fade, fadeAndPop, none
+      animationSpeed: 100, //how fast animations are
+      closeOnBackgroundClick: true, //if you click background will modal close?
+      dismissModalClass: 'close-icon' //the class of a button or element that will close an open modal
+    });
+  }
+
   $('#gist-it').on('click', function() {
     /* stop form from submitting normally */
     event.preventDefault();
-    
+
     _gaq.push(['_trackEvent', 'Gist']);
 
     var inputs = {
@@ -116,15 +134,15 @@ http://github.com/bgrins/bindWithDelay
     ///* Send the data using post and put the results in a div */
     $.post('/gist', inputs,
       function( data ) {
-        console.log(data)
+        buildModal('Your Gist is ready. <a href="' + data + '" target="_blank">See it here.<a>');
       }
     );
   });
-  
+
   $('#gist-edit').on('click', function() {
     /* stop form from submitting normally */
     event.preventDefault();
-    
+
     _gaq.push(['_trackEvent', 'Gist']);
 
     var inputs = {
@@ -137,7 +155,7 @@ http://github.com/bgrins/bindWithDelay
     ///* Send the data using post and put the results in a div */
     $.post('/gist/edit', inputs,
       function( data ) {
-        console.log(data)
+        buildModal('Your Gist is ready. <a href="' + data + '" target="_blank">See it here.<a>');
       }
     );
   });
