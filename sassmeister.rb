@@ -82,7 +82,7 @@ helpers do
   end
 end
 
-before '/*' do
+before do
   @github = github(session[:github])
 end
 
@@ -107,12 +107,12 @@ end
 
 
 get '/authorize' do
-  redirect to github.authorize_url :scope => 'gist'
+  redirect to @github.authorize_url :scope => 'gist'
 end
 
 
 get '/authorize/return' do
-  token = github.get_token(params[:code])
+  token = @github.get_token(params[:code])
 
   session[:github] = token.token
 
@@ -124,15 +124,13 @@ post '/gist/?:edit?' do
   sass = import_plugin(params)
   css = compile_sass(params, sass)
 
-  github = github(session[:github])
-
   # Downloaded from SassMeister.com
 
   sass_file = "SassMeister.#{params[:syntax]}"
   css_file = "SassMeister.css"
 
   if params[:edit]
-    data = github.gists.edit(session[:gist], files: {
+    data = @github.gists.edit(session[:gist], files: {
       css_file => {
         content: "#{css}"
       },
@@ -141,7 +139,7 @@ post '/gist/?:edit?' do
       }
     })
   else
-    data = github.gists.create(description: "Gist off", public: true, files: {
+    data = @github.gists.create(description: "Gist off", public: true, files: {
       css_file => {
         content: "#{css}"
       },
