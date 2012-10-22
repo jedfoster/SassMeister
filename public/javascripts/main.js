@@ -95,6 +95,11 @@ http://github.com/bgrins/bindWithDelay
     );
   });
   
+  $('#settings-toggle').on('click', function() {
+    event.preventDefault();
+    $('#settings').toggle();
+  });
+  
   $('#gist-it').on('click', function() {
     /* stop form from submitting normally */
     event.preventDefault();

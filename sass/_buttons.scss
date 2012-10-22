@@ -15,9 +15,19 @@
 // buttons
 // --------------------------------------------------------------------
 //* toadstool buttons */
+%sassmeister_buttons {
+	@extend %minimal;
+	margin-right: em(10);
+	padding: 0.5em;
+	&:last-child {
+		margin: 0;
+	}
+}
+
+
 button, a.button {
-	@extend %stipe_buttons; // pre-loaded silent class, I know you want to nuke this!
-	width: 100%;
+	@extend %sassmeister_buttons; // pre-loaded silent class, I know you want to nuke this!
+	width: auto;
 	@media #{$mobile} {
   	font-size: em(16);
 	}

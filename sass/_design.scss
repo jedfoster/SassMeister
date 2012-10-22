@@ -8,6 +8,10 @@
   @extend %grid_12;
 }
 
+.controls {
+  @extend .header_container;
+}
+
 .sass_input {
   @include grid(6.125, alpha);
   @media #{$mobile} {
@@ -74,7 +78,7 @@ ol {
 }
 
 %icon-font {
-  display: block;
+  display: inline-block;
   min-width: 1em;
   height: 3em;
 
@@ -84,7 +88,6 @@ ol {
   	font-style: normal;
   	line-height: 1;
   	vertical-align:middle;
-
   	speak: none;
   }
   &:hover {
@@ -98,9 +101,16 @@ ol {
 // &.refresh:after {
 // 	content: "\26d7";
 // }
-// &.settings:after {
-// 	content: "\26d3";
-// }
+.settings-icon {
+  @extend %icon-font;
+  
+  float:right;
+  padding-bottom:1.5em;
+
+  &:before {
+  	content: "\26d3";
+  }
+}
 .twitter-icon {
   @extend %icon-font;
 

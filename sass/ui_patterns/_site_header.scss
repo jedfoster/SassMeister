@@ -4,14 +4,8 @@
   @extend %clearfix;
   @media #{$mobile} {
     margin-top: 0;
-  }
-}
-
-.header_container {
-  @include grid(12, $grid_align: center, $grid_uom: em);
-  @media #{$mobile} {
-    @include grid(4, $grid_context: 4);
-  }
+  }  
+  
   .logo {
     @include grid(4);
     margin-left: 0;
@@ -30,5 +24,12 @@
   .header_description {
     @extend %grid_8;
     margin-right: 0;
+  }
+}
+
+.header_container {
+  @include grid(12, $grid_align: center, $grid_uom: em);
+  @media #{$mobile} {
+    @include grid(4, $grid_context: 4);
   }
 }
