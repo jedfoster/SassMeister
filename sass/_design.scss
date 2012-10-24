@@ -48,12 +48,28 @@
   }
 }
 
-ol {
-  &.linenums {
-    margin-left: em(15);
+h2.labels {
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  line-height:1.5;
+  font-weight:bold;
+  font-size: em($heading_3);
+
+  .sass_input & {
+    @extend .forward-icon;
+
+    &:after {
+  	  font-size: 1.5em;
+  	  float:right;
+  	  margin-right: -#{em($heading_3/2)};
+
+  	  @media #{$mobile} {
+         display:none;
+       }
+  	}
   }
 }
-
 
 .site_footer {
    width: 100%;
@@ -80,9 +96,8 @@ ol {
 %icon-font {
   display: inline-block;
   min-width: 1em;
-  height: 3em;
 
-  &:before {
+  &:before, &:after {
     font-size:3em;
     font-family: 'SassMeisterIcons';
   	font-style: normal;
@@ -103,7 +118,7 @@ ol {
 // }
 .settings-icon {
   @extend %icon-font;
-  
+
   float:right;
   padding-bottom:1.5em;
 
@@ -153,7 +168,7 @@ ol {
   &:before {
 	  content: "\22";
   }
-  
+
   @media #{$mobile} {
     span {
       display:none;
@@ -183,13 +198,22 @@ ol {
 }
 .close-icon {
   @extend %icon-font;
-  
+
   float:right;
-  
+
 
   &:before {
 	  content: "\d7";
 	  font-size: 1em;
+  }
+}
+
+.forward-icon {
+  @extend %icon-font;
+
+  &:after {
+	  content: "\64";
+	  font-size: 1.5em;
   }
 }
 
