@@ -116,16 +116,7 @@ h2.labels {
 // &.refresh:after {
 // 	content: "\26d7";
 // }
-.settings-icon {
-  @extend %icon-font;
 
-  float:right;
-  padding-bottom:1.5em;
-
-  &:before {
-  	content: "\26d3";
-  }
-}
 .twitter-icon {
   @extend %icon-font;
 
