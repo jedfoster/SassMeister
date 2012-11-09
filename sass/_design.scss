@@ -27,24 +27,19 @@
 }
 
 .select_container {
-  margin: 0 0 em(30) 0;
+  margin: 0 auto em(30);
   float: left;
   width: 100%;
 }
 
 .form_control {
-  @include grid(4);
+  @include grid(4, $grid_padding_l: 8, $grid_padding_r: 8);
 
-  &:last-child {
-   @include grid(4.125, omega);
-  }
   &:first-child {
-    @include grid(4.125, alpha);
+    @include grid(4.125, alpha, $grid_padding_l: 16, $grid_padding_r: 8);
   }
-
-  & button[type=submit] {
-    display:block;
-    margin: 1.2em auto;
+  &:last-child {
+   @include grid(4.125, omega, $grid_padding_l: 8, $grid_padding_r: 16);
   }
 }
 
