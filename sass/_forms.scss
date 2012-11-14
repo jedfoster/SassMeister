@@ -1,5 +1,6 @@
 input[type=text], input[type=password], input[type="date"], select {
 	@extend %input_fields;
+	height:2.5em;
 }
 
 input[type=text], input[type=password], input[type="date"] {
@@ -9,32 +10,21 @@ input[type=text], input[type=password], input[type="date"] {
 	}
 }
 
-input[disabled], textarea[disabled], select[disabled], .disabled {
-	@extend %disabled_inputs;
-}
-
 select {
   font-size: em(12, $font-size);
 }
 
 label {
-	@extend %form_labels;
-	@media #{$mobile} {
-  	font-size: em(12);
-	}
-}
-
-label {
-  margin-bottom: 0.5em;
-  &[for=sass] {
-    @extend label;
-  }
+/*  @extend %form_labels;*/
+	
+	display: block;
+  font-weight: bold;
+  line-height: 1;
+	margin-bottom: 0.5em;
+	font-size: em(12, $font-size);
+	
 }
 
 input, select, textarea, button {
   font-family: 'SourceCodePro', monospace;
-}
-
-select[disabled],input[disabled] {
-  display: none;
 }

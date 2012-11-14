@@ -2,9 +2,29 @@
   <div class="edit_container">
     <div class="edit-header">
       <h2 class="label-bravo">CSS</h2>
-      <a href="" class="settings-icon" id="settings-toggle"><span class="alt">Settings</span></a>
+      <a href="#" class="settings-icon" id="output-settings-toggle"><span class="alt">Settings</span></a>
     </div>
-    
+
+    <div id="output-options" class="select_container" style="display:block;">
+      <p>
+        <%# if @github.authenticated? %>
+        <% if 1==1 %>
+          <a href="#" class=" button" id="gist-it"> <span>Save as New Gist</span></a>
+
+          <%# if session[:gist] %>
+          <% if 1==1 %>
+            <a href="#" class=" button" id="gist-edit"> <span>Update Previous Gist</span></a>
+          <% end %>
+
+        <% else %>
+          <a href="/authorize" class="" id="github-auth"> <span>Login with GitHub</span></a>  to save a Gist to your account or 
+        
+          <a href="#" class="" id="gist-it"> <span>save an anonymous Gist</span></a>
+        
+        <% end %>
+      </p>
+    </div>
+
     <div class="pre_container">
       <pre id="css"></pre>
     </div>

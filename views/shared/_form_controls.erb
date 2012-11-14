@@ -6,17 +6,7 @@
   <div class="controls_container reveal-modal large" id="settings">
     <a href="#" class="close-icon"><span class="alt">&#215;</span></a>
     
-    <% if @github.authenticated? %>
-      <a href="#" class="gist-icon button" id="gist-it"> <span>Save as New Gist</span></a>
-      
-      <% if session[:gist] %>
-        <a href="#" class="gist-icon button" id="gist-edit"> <span>Update Previous Gist</span></a>
-      <% end %>
     
-    <% else %>
-      <a href="#" class="gist-icon button" id="gist-it"> <span>Save as Anonymous Gist</span></a>
-      <a href="/authorize" class="github-icon button" id="github-auth"> <span>Login with GitHub</span></a>
-    <% end %>
 
     <div class="select_container">
       <div class="form_control">

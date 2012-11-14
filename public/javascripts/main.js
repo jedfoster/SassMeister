@@ -95,16 +95,16 @@ http://github.com/bgrins/bindWithDelay
     );
   });
 
-  $('#settings-toggle').on('click', function() {
+  $('#input-settings-toggle').on('click', function() {
     event.preventDefault();
-    // $('#settings').reveal({
-    //   animation: 'fade', //fade, fadeAndPop, none
-    //   animationSpeed: 100, //how fast animations are
-    //   closeOnBackgroundClick: true, //if you click background will modal close?
-    //   dismissModalClass: 'close-icon' //the class of a button or element that will close an open modal
-    // });
     
-    $('#edit_controls2323').toggle();
+    $('#input-options').toggle();
+  });
+  
+  $('#output-settings-toggle').on('click', function() {
+    event.preventDefault();
+  
+    $('#output-options').toggle();
   });
 
   var buildModal = function(content) {
