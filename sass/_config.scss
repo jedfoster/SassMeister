@@ -214,3 +214,13 @@ $selection_color:                      $alpha_color_hotel;
 // $mobile:                    "screen and (max-width: 30em)";
 // $mobile_portrait:	          "screen and (max-width: 30em) and (orientation : portrait)";
 // $mobile_landscape:	        "screen and (max-width: 30em) and (orientation : landscape)";
+
+
+$minimal_border_radius: 9px !default;
+
+$minimal_background: scale-color($alpha_gray, $lightness: 92%) !default;
+$minimal_border_color: $charlie_gray !default;
+$minimal_inset_shadow_color: scale-color($alpha_gray, $lightness: 95%) !default;
+$minimal_font_color: #333 !default;
+$minimal_font_weight: bold !default;
+$minimal_text_shadow: 0 1px 0 #fff !default;

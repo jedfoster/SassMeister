@@ -5,21 +5,21 @@
       <a href="#" class="settings-icon" id="output-settings-toggle"><span class="alt">Settings</span></a>
     </div>
 
-    <div id="output-options" class="select_container" style="display:block;">
+    <div id="output-options" class="select_container" style="display:none;">
       <p>
-        <%# if @github.authenticated? %>
-        <% if 1==1 %>
-          <a href="#" class=" button" id="gist-it"> <span>Save as New Gist</span></a>
+        <% if @github.authenticated? %>
+          <a href="#" class="github-icon-2 button" id="gist-it"> <span>Save as New Gist</span></a>
 
-          <%# if session[:gist] %>
-          <% if 1==1 %>
-            <a href="#" class=" button" id="gist-edit"> <span>Update Previous Gist</span></a>
-          <% end %>
+          <a href="#" class="github-icon-4 button" id="gist-edit"<%= 
+          if ! session[:gist] 
+            ' style="display:none"' 
+          end%>> <span>Update Previous Gist</span></a>
+
 
         <% else %>
-          <a href="/authorize" class="" id="github-auth"> <span>Login with GitHub</span></a>  to save a Gist to your account or 
+          <a href="/authorize" class="github-icon-2 button" id="github-auth"> <span>Login with GitHub</span></a>
         
-          <a href="#" class="" id="gist-it"> <span>save an anonymous Gist</span></a>
+          <a href="#" class="star-icon button" id="gist-it"> <span>Save an anonymous Gist</span></a>
         
         <% end %>
       </p>

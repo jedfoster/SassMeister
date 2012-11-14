@@ -203,6 +203,82 @@ h2.labels {
   }
 }
 
+//.back-icon {
+//  @extend %icon-font;
+//
+//  &:before {
+//  	content: "\63";
+//  }
+//}
+.export-icon {
+  @extend %icon-font;
+
+  &:before {
+  	content: "\27";
+  }
+}
+.upload-icon {
+  @extend %icon-font;
+
+  &:before {
+  	content: "\28";
+  }
+}
+.github-icon-2 {
+	@extend %icon-font;
+
+  &:before {
+    content: "\26";
+    font-size: 1.2em;
+  }
+}
+//.github-icon-3:before {
+//	@extend %icon-font;
+//
+//  &:before {
+//    content: "\29";
+//  }
+//}
+.github-icon-4 {
+	@extend %icon-font;
+
+  &:before {
+    content: "\2a";
+    font-size: 1.2em;
+  }
+}
+.gist-icon-2 {
+	@extend %icon-font;
+
+  &:before {
+    content: "\2b";
+    font-size: 1.1em;
+  }
+}
+.star-icon {
+	@extend %icon-font;
+
+  &:before {
+    content: "\68";
+    font-size: 1.2em;
+  }
+}
+//.heart-icon-2 {
+//	@extend %icon-font;
+//
+//  &:before {
+//    content: "\67";
+//  }
+//}
+//.checkmark-icon {
+//	@extend %icon-font;
+//
+//  &:before {
+//    content: "\6a";
+//  }
+//}
+
+
 .social_links {
   list-style: none;
 

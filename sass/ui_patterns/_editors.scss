@@ -38,7 +38,7 @@
     border-bottom: 1px solid transparentize($delta_gray, 0.1);
     
     
-    label,a {
+    label {
       color: #fff;
       @extend %primary_text_shadow;
     }
@@ -50,6 +50,8 @@
     .button {
       font-size: em(18);
       color: $alpha_primary;
+      
+      
     }
   }
 

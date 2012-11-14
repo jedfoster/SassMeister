@@ -108,15 +108,19 @@ http://github.com/bgrins/bindWithDelay
   });
 
   var buildModal = function(content) {
-    var modal = '<div class="controls_container reveal-modal large" id="modal"><a href="#" class="close-icon"><span class="alt">&#215;</span></a>' + content + '</div>';
-
-    $('body').append($(modal));
+    if ($('#modal').length == 0) {
+      $('body').append('<div class="controls_container reveal-modal large" id="modal"><a href="#" class="close-icon"><span class="alt">&#215;</span></a><span class="content">' + content + '</span></div>');
+    }
+    else {
+      $('#modal .content').empty();
+      $('#modal .content').append(content);
+    }
 
     $('#modal').reveal({
       animation: 'fade', //fade, fadeAndPop, none
       animationSpeed: 100, //how fast animations are
       closeOnBackgroundClick: true, //if you click background will modal close?
-      dismissModalClass: 'close-icon' //the class of a button or element that will close an open modal
+      dismissModalClass: 'close-icon', //the class of a button or element that will close an open modal
     });
   }
 
@@ -137,6 +141,7 @@ http://github.com/bgrins/bindWithDelay
     $.post('/gist', inputs,
       function( data ) {
         buildModal('Your Gist is ready. <a href="' + data + '" target="_blank">See it here.<a>');
+        $('#gist-edit').show();
       }
     );
   });
@@ -157,7 +162,7 @@ http://github.com/bgrins/bindWithDelay
     ///* Send the data using post and put the results in a div */
     $.post('/gist/edit', inputs,
       function( data ) {
-        buildModal('Your Gist is ready. <a href="' + data + '" target="_blank">See it here.<a>');
+        buildModal('Your Gist has been updated. <a href="' + data + '" target="_blank">See it here.<a>');
       }
     );
   });
