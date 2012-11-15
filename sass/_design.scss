@@ -1,7 +1,9 @@
 // Grid background for column view
 // @import "stipe/grid/debug";
 
-
+html {
+  height: 100%;
+}
 
 ///////// global //////////
 .main_body {
@@ -43,14 +45,14 @@
 
 .controls {
 
-  height: em(72);
+  min-height: em(72);
 
 /*  margin-bottom: em(16);*/
   float: left;
   width: 100%;
   
   @media #{$mobile} {
-    height: auto;
+/*    height: auto;*/
   }
 }
 
@@ -86,10 +88,10 @@
 .css_output .controls {
 
   padding-top:em(20);
-  height: em(52);
+  min-height: em(52);
   
   @media #{$mobile} {
-    height: auto;
+/*    height: auto;*/
   }
 }
 
@@ -125,7 +127,7 @@ h2.labels {
 .site_footer {
    width: 100%;
    float: left;
-   margin-bottom: em(50);
+
    @media #{$mobile} {
      text-align: justify;
    }

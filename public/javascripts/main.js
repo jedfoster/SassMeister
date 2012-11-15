@@ -100,6 +100,35 @@ http://github.com/bgrins/bindWithDelay
     $("#sass-form").submit();
   }
 
+//  $("html").height() - $("#header").height() - $("#footer").height() + "px";
+      // $("#content").css("height", newHeight);
+
+  function setHeight() {
+    console.log( $("html").width());
+    
+    if ($("html").width() > 50 * 18) {
+    
+      console.log( $("html").width());
+  
+      var html = $("html").height();
+  
+      var header = $(".site_header").height();
+      var footer = $(".site_footer").height() * 2;
+      var controls = $('.sass_input .controls').height() * 2;
+  
+      $('.sass_input .pre_container, .css_output .pre_container').css('height', html - header - footer - controls);
+    }
+    
+    else {
+      $('.sass_input .pre_container, .css_output .pre_container').css('height', 480);
+    }
+  }
+  
+  setHeight();
+  
+  $(window).resize(setHeight);
+  
+  
   //$('html').click(function() {
   //  $('#input-options, #output-options').hide();
   //});

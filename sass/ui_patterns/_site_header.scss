@@ -4,6 +4,7 @@
   @extend %clearfix;
   @media #{$mobile} {
     margin-top: 0;
+    margin-bottom: em(10);
   }  
   position:relative;
   
@@ -16,10 +17,12 @@
     @extend %hide_text;
     display: block;
     @media #{$mobile} {
+      
+      height: 8em;
       @include grid(4, $grid_context: 4);
       background-position: 50% 50%;
-      background-size: 50%;
-      margin-bottom: em(30);
+      background-size: 38%;
+      margin-bottom: em(10);
     }
   }
   .header_description {
