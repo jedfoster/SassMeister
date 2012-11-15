@@ -136,7 +136,7 @@ h2.labels {
 .footer_container {
   @extend .header_container;
   p {
-    @include grid(6);
+    @include grid(6, $grid_padding_l: 10);
     font-size: em(12);
     margin-right: 0;
 
