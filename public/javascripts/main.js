@@ -108,7 +108,7 @@ http://github.com/bgrins/bindWithDelay
     $('#input-options, #output-options').hide();
   });
 
-  $('#input-settings-toggle').on('click', function() {
+  $('#input-settings-toggle, .sass_input .edit-header').on('click', function() {
     event.stopPropagation();
     event.preventDefault();
     $('#output-options').hide();
@@ -116,7 +116,7 @@ http://github.com/bgrins/bindWithDelay
     $('#input-options').toggle();
   });
 
-  $('#output-settings-toggle').on('click', function() {
+  $('#output-settings-toggle, .css_output .edit-header').on('click', function() {
     event.stopPropagation();
     event.preventDefault();
     $('#input-options').hide();
