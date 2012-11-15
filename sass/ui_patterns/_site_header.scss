@@ -10,9 +10,9 @@
   .logo {
     @include grid(4);
     margin-left: 0;
-    height: em(200);
+    height: 8.75em;
     background: url(/images/sass-meister-serif-v.gif) 50% 50% no-repeat;
-    background-size: 60%;
+    background-size: 50%;
     @extend %hide_text;
     display: block;
     @media #{$mobile} {

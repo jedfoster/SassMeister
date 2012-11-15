@@ -1,31 +1,19 @@
 <div class="css_output">
-  
-  
   <div class="controls">
     <% if @github.authenticated? %>
-      <a href="#" class="github-icon-4 button" id="gist-edit"<%= 
-      if ! session[:gist] 
-        ' style="display:none"' 
+      <a href="#" class="github-icon-4 button" id="gist-edit"<%=
+      if ! session[:gist]
+        ' style="display:none"'
       end%>> <span>Update Previous Gist</span></a>
-      
-      
+
       <a href="#" class="github-icon-2 button" id="gist-it"> <span>Save as New Gist</span></a>
-
-      
-
     <% else %>
-      <a href="/authorize" class="github-icon-2 button" id="github-auth"> <span>Login with GitHub</span></a>    
+      <a href="/authorize" class="github-icon-2 button" id="github-auth"> <span>Login with GitHub</span></a>
     <% end %>
-    
-    
   </div>
-  
-  
-  
+
   <div class="edit_container">
-    <div class="edit-header">
-      <h2 class="label-bravo">CSS</h2>
-    </div>
+    <h2 class="edit-header">CSS</h2>
 
     <div class="pre_container">
       <pre id="css"></pre>

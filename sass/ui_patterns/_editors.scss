@@ -3,6 +3,10 @@
   @include grid(6.25, alpha, $grid_context: 6);
   margin-bottom: em(30);
   
+  @media #{$mobile} {
+    margin-bottom: 0;
+  }
+  
   height: auto;
   .pre_container {
     display:block;
@@ -27,68 +31,67 @@
   -webkit-background-clip: padding-box;
           background-clip: padding-box;
   
-  #input-options, #output-options {
-    position:absolute;
-    top: em(26);
-    z-index: 50;
-
-    padding: 0.25em 0;
-    background: transparentize($delta_gray, 0.25);
-    
-    border-bottom: 1px solid transparentize($delta_gray, 0.1);
-    
-    
-    label {
-      color: #fff;
-      @extend %primary_text_shadow;
-    }
-    p {
-      padding:0 0.5em;
-      margin:0;
-      font-size: em(14);
-    }
-    .button {
-      font-size: em(18);
-      color: $alpha_primary;
-      
-      
-    }
-  }
+//  #input-options, #output-options {
+//    position:absolute;
+//    top: em(26);
+//    z-index: 50;
+//
+//    padding: 0.25em 0;
+//    background: transparentize($delta_gray, 0.25);
+//    
+//    border-bottom: 1px solid transparentize($delta_gray, 0.1);
+//    
+//    
+//    label {
+//      color: #fff;
+//      @extend %primary_text_shadow;
+//    }
+//    p {
+//      padding:0 0.5em;
+//      margin:0;
+//      font-size: em(14);
+//    }
+//    .button {
+//      font-size: em(18);
+//      color: $alpha_primary;
+//      
+//      
+//    }
+//  }
 
 
   .edit-header {
     display: block;
     height: em(28);
-    
     font-size: em(16);
-    line-height: 1;
+
     
-    .label-bravo {
+
       width: 100%;
       text-align: center;
       margin: 0;
       line-height:1.5;
       font-weight:bold;
-      font-size: 1em;
-    }
 
-    .settings-icon {
-      @extend %icon-font;
 
-      float:right;
-      font-size: em(16);
-      display: block;
-      line-height:1;
-      position: absolute;
-      z-index:999;
-      top: em(4);
-      right: em(4);
 
-      &:before {
-      	content: "\26d3";
-      	font-size: em(16);
-      }
-    }
+//    .settings-icon {
+//      @extend %icon-font;
+//
+//      float:right;
+//      font-size: em(16);
+//      display: block;
+//      line-height:1;
+//      position: absolute;
+//      z-index:999;
+//      top: em(4);
+//      right: em(4);
+//
+//      &:before {
+//      	content: "\26d3";
+//      	font-size: em(16);
+//      }
+//    }
   }
 
 
@@ -103,8 +106,6 @@
     color: #F1F2F3;
     letter-spacing: 1px;
     height:100%;
-    
-
   }
 }
 

@@ -19,10 +19,7 @@
 	@extend %minimal;
 	margin-right: em(10);
 	padding: 0.5em 0.75em;
-	&:last-child {
-//		margin: 0;
-	}
-  
+
   @include linear_gradient_w3c(scale-color($alpha_gray, $lightness: 92%), #{scale-color($alpha_gray, $lightness: 95%) 0%, $india_gray 100%});
 }
 
