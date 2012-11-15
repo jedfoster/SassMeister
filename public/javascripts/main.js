@@ -54,8 +54,7 @@ http://github.com/bgrins/bindWithDelay
   css.getSession().$useWorker=false
   css.getSession().setMode("ace/mode/css");
 
-  $("a[href^='http://'], a[href^='https://']").attr("target","_blank");
-
+  $("a[href^='http://'], a[href^='https://']").attr("target", "_blank");
 
   var timer;
   sass.getSession().on('change', function(e) {
@@ -64,7 +63,6 @@ http://github.com/bgrins/bindWithDelay
   });
 
   $('select').on('change', function() {
-    console.log('select changed');
     _gaq.push(['_trackEvent', 'Form', 'Control', this.value]);
     $("#sass-form").submit();
   });
@@ -77,32 +75,30 @@ http://github.com/bgrins/bindWithDelay
 
     var inputs = {
       sass: sass.getValue(),
-      syntax: $('#syntax').val(),
-      plugin: $('#plugin').val(),
-      output: $('#output').val()
+      syntax: $('select[name="syntax"]').val(),
+      plugin: $('select[name="plugin"]').val(),
+      output: $('select[name="output"]').val()
     }
     localStorage.setItem('inputs', JSON.stringify(inputs));
 
-    /* Send the data using post and put the results in a div */
+    /* Post the form and handle the returned data */
     $.post($(this).attr('action'), inputs,
       function( data ) {
         css.setValue(data,-1);
       }
     );
   });
-
   
   var storedInputs = JSON.parse(localStorage.getItem('inputs'));
 
   if( storedInputs.length != 0 ) {
     sass.setValue(storedInputs.sass);
     sass.clearSelection();
-    $('#syntax').val(storedInputs.syntax);
-    $('#plugin').val(storedInputs.plugin);
-    $('#output').val(storedInputs.output);
+    $('select[name="syntax"]').val(storedInputs.syntax);
+    $('select[name="plugin"]').val(storedInputs.plugin);
+    $('select[name="output"]').val(storedInputs.output);
     $("#sass-form").submit();
   }
-
 
   $('html').click(function() {
     $('#input-options, #output-options').hide();
@@ -149,9 +145,9 @@ http://github.com/bgrins/bindWithDelay
 
     var inputs = {
       sass: sass.getValue(),
-      syntax: $('#syntax').val(),
-      plugin: $('#plugin').val(),
-      output: $('#output').val()
+      syntax: $('select[name="syntax"]').val(),
+      plugin: $('select[name="plugin"]').val(),
+      output: $('select[name="output"]').val()
     }
 
     ///* Send the data using post and put the results in a div */
@@ -171,9 +167,9 @@ http://github.com/bgrins/bindWithDelay
 
     var inputs = {
       sass: sass.getValue(),
-      syntax: $('#syntax').val(),
-      plugin: $('#plugin').val(),
-      output: $('#output').val()
+      syntax: $('select[name="syntax"]').val(),
+      plugin: $('select[name="plugin"]').val(),
+      output: $('select[name="output"]').val()
     }
 
     ///* Send the data using post and put the results in a div */
