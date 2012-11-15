@@ -9,7 +9,7 @@
       <div id="input-options" class="select_container" style="display:none;">
         <div class="form_control">
           <label for="syntax">Syntax</label>
-          <select name="syntax">
+          <select name="syntax" id="syntax">
             <option value="scss">SCSS</option>
             <option value="sass">Sass</option>
           </select>
@@ -17,7 +17,7 @@
 
         <div class="form_control">
           <label for="plugin">Extension</label>
-          <select name="plugin">
+          <select name="plugin" id="plugin">
             <option value="">vanilla Sass</option>
             <option value=""></option>
             <% @plugins.each do |plugin| %>
@@ -28,7 +28,7 @@
 
         <div class="form_control">
           <label for="output">Output Style</label>
-          <select name="output">
+          <select name="output" id="output">
             <option value="expanded">expanded</option>
             <option value="nested">nested</option>
             <option value="compact">compact</option>
