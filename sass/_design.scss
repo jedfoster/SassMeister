@@ -8,9 +8,9 @@
   @extend %grid_12;
 }
 
-.controls {
-  @extend .header_container;
-}
+//.controls {
+//  @extend .header_container;
+//}
 
 .sass_input {
   @include grid(6.125, alpha);
@@ -26,28 +26,78 @@
   }
 }
 
-#github-auth {
-  position: absolute;
-  top: em(18);
-  right: em(18);
-}
+//#github-auth {
+//  display: block;
+//  float: right;
+//  //position: absolute;
+//  //bottom: 0;
+//  //right: em(18);
+//  
+//  @media #{$mobile} {
+//    //position: relative;
+//    //right: auto;
+//    float: none;
+//    margin: 0 auto;
+//  }
+//}
 
-.select_container {
-  margin: 0 auto em(30);
+.controls {
+
+  height: em(72);
+
+/*  margin-bottom: em(16);*/
   float: left;
   width: 100%;
+  
+  @media #{$mobile} {
+    height: auto;
+  }
 }
 
 .form_control {
-  @include grid(4, $grid_padding_l: 8, $grid_padding_r: 8);
-
-  &:first-child {
-    @include grid(4.125, alpha, $grid_padding_l: 16, $grid_padding_r: 8);
+  
+  
+  
+  @include grid(4, $grid_context: 4);
+/*  @include pull(12, 4);*/
+  
+  
+  //&:nth-child(3n+3) {
+  //  @extend %omega;
+  //}
+  
+  @media #{$desktop} {
+    @include grid(4);
+    
+    &:first-child {
+      @include grid(4.125, alpha);
+    }
+    &:last-child {
+      @include grid(4.125, omega);
+    }
+    
   }
-  &:last-child {
-   @include grid(4.125, omega, $grid_padding_l: 8, $grid_padding_r: 16);
+
+  margin-bottom: em(16);
+}
+
+
+
+.css_output .controls {
+
+  padding-top:em(20);
+  height: em(52);
+  
+  @media #{$mobile} {
+    height: auto;
   }
 }
+
+.css_output .button {
+  @extend .form_control;
+
+}
+
 
 h2.labels {
   width: 100%;

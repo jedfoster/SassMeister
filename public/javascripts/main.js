@@ -100,25 +100,25 @@ http://github.com/bgrins/bindWithDelay
     $("#sass-form").submit();
   }
 
-  $('html').click(function() {
-    $('#input-options, #output-options').hide();
-  });
-
-  $('#input-settings-toggle, .sass_input .edit-header').on('click', function() {
-    event.stopPropagation();
-    event.preventDefault();
-    $('#output-options').hide();
-
-    $('#input-options').toggle();
-  });
-
-  $('#output-settings-toggle, .css_output .edit-header').on('click', function() {
-    event.stopPropagation();
-    event.preventDefault();
-    $('#input-options').hide();
-
-    $('#output-options').toggle();
-  });
+  //$('html').click(function() {
+  //  $('#input-options, #output-options').hide();
+  //});
+  //
+  //$('#input-settings-toggle, .sass_input .edit-header').on('click', function() {
+  //  event.stopPropagation();
+  //  event.preventDefault();
+  //  $('#output-options').hide();
+  //
+  //  $('#input-options').toggle();
+  //});
+  //
+  //$('#output-settings-toggle, .css_output .edit-header').on('click', function() {
+  //  event.stopPropagation();
+  //  event.preventDefault();
+  //  $('#input-options').hide();
+  //
+  //  $('#output-options').toggle();
+  //});
 
   var buildModal = function(content) {
     if ($('#modal').length == 0) {

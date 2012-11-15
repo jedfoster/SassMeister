@@ -1,39 +1,41 @@
 <div class="sass_input">
   <form action="/compile" method="post" accept-charset="utf-8" id="sass-form">
+    
+    <div class="controls">
+    
+      <div class="form_control">
+        <label for="syntax">Syntax</label>
+        <select name="syntax">
+          <option value="scss">SCSS</option>
+          <option value="sass">Sass</option>
+        </select>
+      </div>
+
+      <div class="form_control">
+        <label for="plugin">Extension</label>
+        <select name="plugin">
+          <option value="">vanilla Sass</option>
+          <% @plugins.each do |plugin| %>
+            <option value="<%=plugin.first%>"><%=plugin.first.capitalize%></option>
+          <% end %>
+        </select>
+      </div>
+
+      <div class="form_control">
+        <label for="output">Output Style</label>
+        <select name="output">
+          <option value="expanded">expanded</option>
+          <option value="nested">nested</option>
+          <option value="compact">compact</option>
+          <option value="compressed">compressed</option>
+        </select>
+      </div>
+    </div>
+    
+    
     <div class="edit_container">
       <div class="edit-header">
         <h2 class="label-bravo">Sass</h2>
-        <a href="#" class="settings-icon" id="input-settings-toggle"><span class="alt">Settings</span></a>
-      </div>
-
-      <div id="input-options" class="select_container" style="display:none;">
-        <div class="form_control">
-          <label for="syntax">Syntax</label>
-          <select name="syntax">
-            <option value="scss">SCSS</option>
-            <option value="sass">Sass</option>
-          </select>
-        </div>
-
-        <div class="form_control">
-          <label for="plugin">Extension</label>
-          <select name="plugin">
-            <option value="">vanilla Sass</option>
-            <% @plugins.each do |plugin| %>
-              <option value="<%=plugin.first%>"><%=plugin.first.capitalize%></option>
-            <% end %>
-          </select>
-        </div>
-
-        <div class="form_control">
-          <label for="output">Output Style</label>
-          <select name="output">
-            <option value="expanded">expanded</option>
-            <option value="nested">nested</option>
-            <option value="compact">compact</option>
-            <option value="compressed">compressed</option>
-          </select>
-        </div>
       </div>
 
       <div class="pre_container">

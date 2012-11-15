@@ -5,6 +5,7 @@
   @media #{$mobile} {
     margin-top: 0;
   }  
+  position:relative;
   
   .logo {
     @include grid(4);

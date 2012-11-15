@@ -3,40 +3,52 @@
     <a href="" class="settings-icon" id="settings-toggle"><span class="alt">Settings</span></a>
   </div> -->
   
-  <div class="controls_container reveal-modal large" id="settings">
-    <a href="#" class="close-icon"><span class="alt">&#215;</span></a>
     
     
-
-    <div class="select_container">
-      <div class="form_control">
-        <label for="syntax">Syntax</label>
-        <select name="syntax">
-          <option value="scss">SCSS</option>
-          <option value="sass">Sass</option>
-        </select>
-      </div>
-
-      <div class="form_control">
-        <label for="plugin">Extension</label>
-        <select name="plugin">
-          <option value="">straight-up Sass</option>
-          <option value=""></option>
-          <% @plugins.each do |plugin| %>
-            <option value="<%=plugin.first%>"><%=plugin.first.capitalize%></option>
-          <% end %>
-        </select>
-      </div>
-
-      <div class="form_control">
-        <label for="output">Output Style</label>
-        <select name="output">
-          <option value="expanded">expanded</option>
-          <option value="nested">nested</option>
-          <option value="compact">compact</option>
-          <option value="compressed">compressed</option>
-        </select>
-      </div>
+    <div class="form_control gh-btn">
+      <a href="/authorize" class="github-icon-2 button" id="github-auth2"> <span>Login with GitHub</span></a>
     </div>
-  </div>
+
+    <div class="form_control gh-btn">
+      <a href="/authorize" class="github-icon-2 button" id="github-auth2"> <span>save a gist</span></a>
+    </div>
+    
+    
+    
+
+  
+
+
+    <div class="form_control">
+      <label for="syntax">Syntax</label>
+      <select name="syntax">
+        <option value="scss">SCSS</option>
+        <option value="sass">Sass</option>
+      </select>
+    </div>
+
+    <div class="form_control">
+      <label for="plugin">Extension</label>
+      <select name="plugin">
+        <option value="">straight-up Sass</option>
+
+        <% @plugins.each do |plugin| %>
+          <option value="<%=plugin.first%>"><%=plugin.first.capitalize%></option>
+        <% end %>
+      </select>
+    </div>
+
+    <div class="form_control">
+      <label for="output">Output Style</label>
+      <select name="output">
+        <option value="expanded">expanded</option>
+        <option value="nested">nested</option>
+        <option value="compact">compact</option>
+        <option value="compressed">compressed</option>
+      </select>
+    </div>
+    
+    
+
+
 </div>
