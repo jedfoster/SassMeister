@@ -9,7 +9,6 @@ require 'sinatra'
 require 'sinatra/partial'
 require 'json'
 require 'github_api'
-require 'yaml'
 
 require 'sass'
 require 'compass'
@@ -25,6 +24,37 @@ require 'susy'
 set :partial_template_engine, :erb
 
 enable :sessions
+
+configure :production do
+  helpers do
+    def github(auth_token = '')
+      github = Github.new do |config|
+        config.client_id = ENV['GITHUB_ID']
+        config.client_secret = ENV['GITHUB_SECRET']
+        config.oauth_token = auth_token
+      end
+    end
+  end
+end
+
+configure :development do
+  require 'yaml'
+  
+  helpers do
+    def github(auth_token = '')
+      gh_config = YAML.load_file("github.yml")
+
+      github = Github.new do |config|
+        config.client_id = gh_config['client_id']
+        config.client_secret = gh_config['client_secret']
+        config.oauth_token = auth_token
+      end
+    end
+  end
+end
+
+
+
 
 helpers do
   include ERB::Util
@@ -71,15 +101,15 @@ helpers do
     end
   end
 
-  def github(auth_token = '')
-    gh_config = YAML.load_file("github.yml")
-
-    github = Github.new do |config|
-      config.client_id = gh_config['client_id']
-      config.client_secret = gh_config['client_secret']
-      config.oauth_token = auth_token
-    end
-  end
+  # def github(auth_token = '')
+  #   gh_config = YAML.load_file("github.yml")
+  # 
+  #   github = Github.new do |config|
+  #     config.client_id = gh_config['client_id']
+  #     config.client_secret = gh_config['client_secret']
+  #     config.oauth_token = auth_token
+  #   end
+  # end
 end
 
 before do
@@ -87,7 +117,7 @@ before do
 end
 
 
-get '/' do
+get '/' do  
   @plugins = plugins
 
   erb :index
