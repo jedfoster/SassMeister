@@ -92,7 +92,7 @@ http://github.com/bgrins/bindWithDelay
   
   var storedInputs = JSON.parse(localStorage.getItem('inputs'));
 
-  if( storedInputs.length != 0 ) {
+  if( storedInputs !== null) {
     sass.setValue(storedInputs.sass);
     sass.clearSelection();
     $('select[name="syntax"]').val(storedInputs.syntax);
@@ -110,11 +110,11 @@ http://github.com/bgrins/bindWithDelay
     if ($("html").width() > 50 * 18) {
       var html = $("html").height(), header = $(".site_header").height(), footer = $(".site_footer").height() * 2, controls = $('.sass_input .controls').height() * 2;
   
-      $('.sass_input .pre_container, .css_output .pre_container').css('height', html - header - footer - controls);
+      $('.pre_container, .ace_scroller').css('height', html - header - footer - controls);
     }
     
     else {
-      $('.sass_input .pre_container, .css_output .pre_container').css('height', 480);
+      $('.pre_container, .ace_scroller').css('height', 480);
     }
   }
   
@@ -156,7 +156,7 @@ http://github.com/bgrins/bindWithDelay
       animation: 'fade', //fade, fadeAndPop, none
       animationSpeed: 100, //how fast animations are
       closeOnBackgroundClick: true, //if you click background will modal close?
-      dismissModalClass: 'close-icon', //the class of a button or element that will close an open modal
+      dismissModalClass: 'close-icon' //the class of a button or element that will close an open modal
     });
   }
 
