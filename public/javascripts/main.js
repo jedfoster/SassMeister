@@ -79,7 +79,6 @@ http://github.com/bgrins/bindWithDelay
       plugin: $('select[name="plugin"]').val(),
       output: $('select[name="output"]').val()
     }
-    localStorage.setItem('inputs', JSON.stringify(inputs));
 
     /* Post the form and handle the returned data */
     $.post($(this).attr('action'), inputs,
@@ -87,6 +86,8 @@ http://github.com/bgrins/bindWithDelay
         css.setValue(data,-1);
       }
     );
+    
+   localStorage.setItem('inputs', JSON.stringify(inputs));
   });
   
   var storedInputs = JSON.parse(localStorage.getItem('inputs'));
@@ -104,17 +105,10 @@ http://github.com/bgrins/bindWithDelay
       // $("#content").css("height", newHeight);
 
   function setHeight() {
-    console.log( $("html").width());
+    // console.log( $("html").width());
     
     if ($("html").width() > 50 * 18) {
-    
-      console.log( $("html").width());
-  
-      var html = $("html").height();
-  
-      var header = $(".site_header").height();
-      var footer = $(".site_footer").height() * 2;
-      var controls = $('.sass_input .controls').height() * 2;
+      var html = $("html").height(), header = $(".site_header").height(), footer = $(".site_footer").height() * 2, controls = $('.sass_input .controls').height() * 2;
   
       $('.sass_input .pre_container, .css_output .pre_container').css('height', html - header - footer - controls);
     }
