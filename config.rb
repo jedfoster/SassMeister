@@ -1,17 +1,8 @@
 # Require any additional compass plugins here.
-# require '../stipe/lib/stipe.rb' # locally as a Compass extension
 require 'stipe'
 
 # Set this to the root of your project when deployed:
 http_path = "/"
-
-#if ENV['PWD'].end_with?('sass')
-#  css_dir = "../public/stylesheets"
-#  sass_dir = "."
-#else
-#  css_dir = "public/stylesheets"
-#  sass_dir = "sass"
-#end
 
 css_dir = "public/stylesheets"
 sass_dir = "sass"

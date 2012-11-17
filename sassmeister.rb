@@ -100,16 +100,6 @@ helpers do
       e.to_s
     end
   end
-
-  # def github(auth_token = '')
-  #   gh_config = YAML.load_file("github.yml")
-  # 
-  #   github = Github.new do |config|
-  #     config.client_id = gh_config['client_id']
-  #     config.client_secret = gh_config['client_secret']
-  #     config.oauth_token = auth_token
-  #   end
-  # end
 end
 
 before do
