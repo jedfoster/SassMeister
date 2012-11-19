@@ -58,6 +58,37 @@ Each block of SCSS should return valid CSS with no warnings or errors when teste
     }
 
 
+## Harsh ##
+
+    .random {
+      @include harsh();
+    }
+
+    .background-color {
+      @include harsh(white, rgb(200,50,50), .95);
+    }
+
+    .bright {
+      @include harsh(random, white, .05);
+    }
+
+    .dull {
+      @include harsh($transparency: .95);
+    }
+
+    .specify-colors {
+      @include harsh(#FF0000 blue rgb(50,200,50));
+    }
+
+    .horizontal {
+      @include harsh($angle: top);
+    }
+
+    .angled {
+      @include harsh($angle: -32deg);
+    }
+
+
 ## Sassy Buttons ##
 
     .red { @include sassy-button-gradient("matte", #e86a43); }
