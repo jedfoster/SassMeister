@@ -5,24 +5,26 @@
   @media #{$mobile} {
     margin-top: 0;
     margin-bottom: em(10);
-  }  
+  }
   position:relative;
-  
+
   .logo {
     @include grid(4);
     margin-left: 0;
     height: 8.75em;
-    background: url(/images/sass-meister-serif-v.gif) 50% 50% no-repeat;
-    background-size: 50%;
-    @extend %hide_text;
-    display: block;
+    text-align:center;
+    margin-bottom: em(10);
     @media #{$mobile} {
-      
-      height: 8em;
       @include grid(4, $grid_context: 4);
-      background-position: 50% 50%;
-      background-size: 38%;
-      margin-bottom: em(10);
+      margin-bottom: em(18);
+    }
+
+    @extend %icon-font;
+
+    &:before {
+      content: "\2d";
+      font-size: 8.75em;
+      color: $href_color;
     }
   }
   .header_description {

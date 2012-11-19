@@ -157,9 +157,14 @@ h2.labels {
   	line-height: 1;
   	vertical-align:middle;
   	speak: none;
+    -webkit-font-smoothing: antialiased;  
   }
   &:hover {
     text-decoration: none;
+    
+    span {
+      text-decoration: underline;
+    }
   }
   .alt {
     display: none;
@@ -335,7 +340,6 @@ h2.labels {
 //    content: "\6a";
 //  }
 //}
-
 
 .social_links {
   list-style: none;
