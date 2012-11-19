@@ -161,10 +161,6 @@ h2.labels {
   }
   &:hover {
     text-decoration: none;
-    
-    span {
-      text-decoration: underline;
-    }
   }
   .alt {
     display: none;
@@ -293,6 +289,7 @@ h2.labels {
   &:before {
     content: "\26";
     font-size: 1.2em;
+    line-height: 1.2;
   }
 }
 //.github-icon-3:before {
@@ -316,6 +313,7 @@ h2.labels {
   &:before {
     content: "\2b";
     font-size: 1.1em;
+    line-height: 1.2;
   }
 }
 .star-icon {
