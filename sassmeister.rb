@@ -13,13 +13,6 @@ require 'github_api'
 require 'sass'
 require 'compass'
 
-require 'bourbon-compass'
-require 'breakpoint'
-require 'sassy-buttons'
-require 'singularitygs'
-require 'stipe'
-require 'susy'
-
 
 set :partial_template_engine, :erb
 
@@ -39,7 +32,7 @@ end
 
 configure :development do
   require 'yaml'
-  
+
   helpers do
     def github(auth_token = '')
       gh_config = YAML.load_file("github.yml")
@@ -69,14 +62,16 @@ helpers do
 
   def plugins
     {
-      "bourbon" => 'bourbon/bourbon',
-      "breakpoint" => 'breakpoint',
-      "compass" => 'compass',
-      "sassy-buttons" => 'sassy-buttons',
-      "singularity.gs" => 'singularitygs',
-      "stipe" => './sass/stipe',  # This is a local manifest file that @imports all the Stipe modules
-      "susy" => 'susy',
-    }
+      "bourbon" => {gem: 'bourbon-compass', import: 'bourbon/bourbon'},
+      "breakpoint" => {gem: 'breakpoint', import: 'breakpoint'},
+      "compass" => {gem: 'compass', import: 'compass'},
+      "sassy-buttons" => {gem: 'sassy-buttons', import: 'sassy-buttons'},
+      "singularity.gs" => {gem: 'singularitygs', import: 'singularitygs'},
+      "stipe" => {gem: 'stipe', import: './sass/stipe'},
+      "susy" => {gem: 'susy', import: 'susy'},
+    }.each do |plugin|
+      plugin.last[:version] = Gem.loaded_specs[plugin.last[:gem]].version.to_s
+    end
   end
 
   def import_plugin(params)
@@ -85,7 +80,9 @@ helpers do
     end
 
     if plugins.has_key?(params[:plugin])
-      sass = "@import \"#{plugins[params[:plugin]]}\"#{";" if params[:syntax] == 'scss'}\n\n#{params[:sass]}"
+      require plugins[params[:plugin]][:gem]
+
+      sass = "@import \"#{plugins[params[:plugin]][:import]}\"#{";" if params[:syntax] == 'scss'}\n\n#{params[:sass]}"
     else
       sass = params[:sass]
     end
@@ -107,7 +104,7 @@ before do
 end
 
 
-get '/' do  
+get '/' do
   @plugins = plugins
 
   erb :index
