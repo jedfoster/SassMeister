@@ -1,4 +1,4 @@
-desc "Run the development server"
+desc "Run the app's server in either development or production mode"
 task :server do
   environment = 'development'
 
