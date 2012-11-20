@@ -1,42 +1,42 @@
 .site_header {
-  margin: em(30) 0;
-  width: 100%;
-  @extend %clearfix;
-  @media #{$mobile} {
-    margin-top: 0;
-    margin-bottom: em(10);
-  }
-  position:relative;
+  //margin: em(30) 0;
+  //width: 100%;
+  //@extend %clearfix;
+  //@media #{$mobile} {
+  //  margin-top: 0;
+  //  margin-bottom: em(10);
+  //}
+  //position:relative;
 
+  .logoBox {
+    box-shadow: 0 0 20px 5px gray;
+    background: black;
+    height: 60px;
+    margin-bottom: 20px;
+  }
   .logo {
-    @include grid(4);
-    margin-left: 0;
-    height: 8.75em;
-    text-align:center;
-    margin-bottom: em(10);
-    @media #{$mobile} {
-      @include grid(4, $grid_context: 4);
-      margin-bottom: em(18);
-    }
+    color: white;
+    position: relative;
+    top: -30px;
+    left: 15px;
+    height: 96px;
 
     @extend %icon-font;
 
     &:before {
-      //content: "\2c"; // horizontal
-      content: "\2d"; // vertical
-      font-size: 8.75em;
-      color: $href_color;
+      content: "\2c"; // horizontal
+      //content: "\2d"; // vertical
+      font-size: 6em;
     }
   }
   .header_description {
-    @extend %grid_8;
-    margin-right: 0;
+    display: none;
   }
 }
 
 .header_container {
-  @include grid(12, $grid_align: center, $grid_uom: em);
-  @media #{$mobile} {
-    @include grid(4, $grid_context: 4);
-  }
+  //@include grid(12, $grid_align: center, $grid_uom: em);
+  //@media #{$mobile} {
+  //  @include grid(4, $grid_context: 4);
+  //}
 }
