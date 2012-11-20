@@ -22,7 +22,8 @@
     @extend %icon-font;
 
     &:before {
-      content: "\2d";
+      //content: "\2c"; // horizontal
+      content: "\2d"; // vertical
       font-size: 8.75em;
       color: $href_color;
     }
