@@ -157,7 +157,13 @@ http://github.com/bgrins/bindWithDelay
     $.post('/gist', inputs,
       function( data ) {
         buildModal('Your Gist is ready. <a href="' + data + '" target="_blank">See it here.<a>');
-        $('#gist-edit').show();
+        
+        if ($('#gist-edit').length == 0) {
+          $('#gist-it').before('<a href="#" class="github-icon-4 button" id="gist-edit"> <span>Update Previous Gist</span></a>');
+        }
+        else {
+          $('#gist-edit').show();
+        }
       }
     );
   });

@@ -75,7 +75,10 @@ html {
 
 .css_output .button {
   @extend .form_control;
+}
 
+#github-auth {
+  margin-left:0;
 }
 
 
