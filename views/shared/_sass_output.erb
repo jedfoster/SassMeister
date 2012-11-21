@@ -1,10 +1,9 @@
 <div class="css_output">
   <div class="controls">
     <% if @github.authenticated? %>
-      <a href="#" class="github-icon-4 button" id="gist-edit"<%=
-      if ! session[:gist]
-        ' style="display:none"'
-      end%>> <span>Update Previous Gist</span></a>
+      <% if session[:gist] %>
+        <a href="#" class="github-icon-4 button" id="gist-edit"> <span>Update Previous Gist</span></a>
+      <% end %>
 
       <a href="#" class="github-icon-2 button" id="gist-it"> <span>Save as New Gist</span></a>
     <% else %>
