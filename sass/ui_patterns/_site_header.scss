@@ -1,13 +1,4 @@
 .site_header {
-  //margin: em(30) 0;
-  //width: 100%;
-  //@extend %clearfix;
-  //@media #{$mobile} {
-  //  margin-top: 0;
-  //  margin-bottom: em(10);
-  //}
-  //position:relative;
-
   .logoBox {
     box-shadow: inset 0px -10px 18px -5px darken($alpha_color, 10%);
     border-bottom: 1px solid scale-color($alpha_color, $lightness: -50%);
@@ -17,6 +8,7 @@
     margin-bottom: 20px;
     a {
       color: white;
+      height: em(45);
       &:hover {
         color: darken($alpha_color, 30%);
         text-shadow: 0 0 5px $white;
@@ -36,12 +28,7 @@
 
     &:before {
       content: "\2c"; // horizontal
-      //content: "\2d"; // vertical
       font-size: 6em;
-      // text-shadow: 0 0 5px darken($alpha_color, 10%);
-      // &:hover {
-      //   text-shadow: 0 0 5px $white;
-      // }
     }
   }
   .header_description {
@@ -49,9 +36,11 @@
   }
 }
 
-.header_container {
-  //@include grid(12, $grid_align: center, $grid_uom: em);
-  //@media #{$mobile} {
-  //  @include grid(4, $grid_context: 4);
-  //}
+.social_links {
+  .paypal-icon {
+    border-right: 1px solid darken($alpha_color, 5%);
+    box-shadow: inset -1px 0px 0px 0px transparentize(white, 0.8);
+    padding-right: em(20);
+    margin-right: em(5);
+  }
 }

@@ -1,6 +1,3 @@
-// Grid background for column view
-// @import "stipe/grid/debug";
-
 html {
   height: 100%;
 }
@@ -10,9 +7,9 @@ html {
   @extend %grid_12;
 }
 
-//.controls {
-//  @extend .header_container;
-//}
+.site_header {
+  box-shadow: 0 0 10px gray;
+}
 
 .sass_input {
   @include grid(6.125, alpha);
@@ -28,80 +25,40 @@ html {
   }
 }
 
-//#github-auth {
-//  display: block;
-//  float: right;
-//  //position: absolute;
-//  //bottom: 0;
-//  //right: em(18);
-//  
-//  @media #{$mobile} {
-//    //position: relative;
-//    //right: auto;
-//    float: none;
-//    margin: 0 auto;
-//  }
-//}
-
 .controls {
-
   min-height: em(72);
-
-/*  margin-bottom: em(16);*/
   float: left;
   width: 100%;
-  
   @media #{$mobile} {
-/*    height: auto;*/
   }
 }
 
 .form_control {
-  
-  
-  
   @include grid(4, $grid_context: 4);
-/*  @include pull(12, 4);*/
-  
-  
-  //&:nth-child(3n+3) {
-  //  @extend %omega;
-  //}
-  
   @media #{$desktop} {
-    @include grid(4);
-    
+    @include grid(4);    
     &:first-child {
       @include grid(4.125, alpha);
     }
     &:last-child {
       @include grid(4.125, omega);
     }
-    
   }
-
   margin-bottom: em(16);
 }
 
-
-
 .css_output .controls {
-
   padding-top:em(20);
   min-height: em(52);
-  
   @media #{$mobile} {
-/*    height: auto;*/
   }
 }
 
 .css_output .button {
   @extend .form_control;
-
 }
 
-
-h2.labels {
+.labels {
   width: 100%;
   text-align: center;
   margin: 0;
@@ -134,19 +91,11 @@ h2.labels {
 }
 
 .footer_container {
-  //@extend .header_container;
   font-size: em(12);
   margin: 0 em(30);
   p {
     margin-bottom: 0.5em;
     line-height: 1.5em;
-    //@include grid(6, $grid_padding_l: 10);
-    //font-size: em(12);
-    //margin-right: 0;
-
-    //@media #{$mobile} {
-    //  @include grid(4, $grid_context: 4);
-    //}
   }
 }
 
@@ -171,10 +120,6 @@ h2.labels {
   }
 }
 
-// &.refresh:after {
-// 	content: "\26d7";
-// }
-
 .twitter-icon {
   @extend %icon-font;
 
@@ -182,35 +127,24 @@ h2.labels {
   	content: "\26ba";
   }
 }
+
+// Github fork
 .github-icon {
+  @extend %icon-font;
+
+  &:before {
+  	content: "\2a";
+  }
+}
+
+// Github login
+.github-login {
   @extend %icon-font;
 
   &:before {
   	content: "\e005";
   }
 }
-// &.meetup:after {
-// 	content: "\e003";
-// }
-// &.google-plus:after {
-// 	content: "\26bd";
-// }
-// &.rocket:after {
-// 	content: "\26e2";
-// }
-// &.download:after {
-// 	content: "\e004";
-// }
-// &.email:after {
-// 	content: "\e002";
-// }
-//.heart-icon {
-//  @extend %icon-font;
-//
-//  &:before {
-//  	content: "\21";
-//  }
-//}
 .paypal-icon {
   @extend %icon-font;
 
@@ -266,13 +200,6 @@ h2.labels {
   }
 }
 
-//.back-icon {
-//  @extend %icon-font;
-//
-//  &:before {
-//  	content: "\63";
-//  }
-//}
 .export-icon {
   @extend %icon-font;
 
@@ -296,13 +223,6 @@ h2.labels {
     line-height: 1.2;
   }
 }
-//.github-icon-3:before {
-//	@extend %icon-font;
-//
-//  &:before {
-//    content: "\29";
-//  }
-//}
 .github-icon-4 {
 	@extend %icon-font;
 
@@ -324,39 +244,17 @@ h2.labels {
     content: "\68";
   }
 }
-//.heart-icon-2 {
-//	@extend %icon-font;
-//
-//  &:before {
-//    content: "\67";
-//  }
-//}
-//.checkmark-icon {
-//	@extend %icon-font;
-//
-//  &:before {
-//    content: "\6a";
-//  }
-//}
 
 .social_links {
   list-style: none;
-  margin-top: 6px;
+  margin-top: em(6);
+  margin-right: em(20);
   text-align: right;
   text-shadow: 0 0 5px darken($alpha_color, 10%);
-
   a {
     margin: 0 em(5);
-  } 
-  
-  //@include grid(4);
+  }   
   float: right;
-
-	// @media #{$mobile} {
-  //   @include grid(4, $grid_context: 4);
-  //   margin-bottom: 1.5em;
-  // }
-
   li {
     display: block;
     float:left;
