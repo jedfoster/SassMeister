@@ -47,4 +47,9 @@
       margin-right: 0;
     }
   }
+  .github-login {
+    &:before, &:after {
+      font-size:2.5em;
+    }
+  }
 }

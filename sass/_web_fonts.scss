@@ -39,7 +39,7 @@ $webfont_directory: "/stylesheets/fonts/" !default; // edit this directory in th
   min-width: 1em;
 
   &:before, &:after {
-    font-size:2em;
+    font-size:1.5em;
     font-family: 'SassMeisterIcons';
   	font-style: normal;
   	line-height: 1;
@@ -63,43 +63,35 @@ $webfont_directory: "/stylesheets/fonts/" !default; // edit this directory in th
   @extend %icon-font;
 
   &:before {
-  	content: "\26ba";
+  	//content: "\26ba";
+  	content: '\29';
   }
 }
+
+// Github fork
 .github-icon {
   @extend %icon-font;
 
   &:before {
-  	content: "\e005";
+  	content: "\2a";
   }
 }
-// &.meetup:after {
-// 	content: "\e003";
-// }
-// &.google-plus:after {
-// 	content: "\26bd";
-// }
-// &.rocket:after {
-// 	content: "\26e2";
-// }
-// &.download:after {
-// 	content: "\e004";
-// }
-// &.email:after {
-// 	content: "\e002";
-// }
-//.heart-icon {
-//  @extend %icon-font;
-//
-//  &:before {
-//  	content: "\21";
-//  }
-//}
+
+// Github login
+.github-login {
+  @extend %icon-font;
+
+  &:before {
+  	//content: "\e005";
+  	content: '\28';
+  }
+}
 .paypal-icon {
   @extend %icon-font;
 
   &:before {
-	  content: "\22";
+	  //content: "\22";
+	  content: '\27';
   }
 
   @media #{$mobile} {
@@ -115,25 +107,23 @@ $webfont_directory: "/stylesheets/fonts/" !default; // edit this directory in th
 	  content: "\23";
   }
 }
-.info-icon {
-  @extend %icon-font;
-
-  &:before {
-	  content: "\24";
-  }
-}
-.help-icon {
-  @extend %icon-font;
-
-  &:before {
-	  content: "\25";
-  }
-}
+//.info-icon {
+//  @extend %icon-font;
+//
+//  &:before {
+//	  content: "\24";
+//  }
+//}
+//.help-icon {
+//  @extend %icon-font;
+//
+//  &:before {
+//	  content: "\25";
+//  }
+//}
 .close-icon {
   @extend %icon-font;
-
   float:right;
-
 
   &:before {
 	  content: "\d7";
@@ -141,14 +131,14 @@ $webfont_directory: "/stylesheets/fonts/" !default; // edit this directory in th
   }
 }
 
-.forward-icon {
-  @extend %icon-font;
-
-  &:after {
-	  content: "\64";
-	  font-size: 1.5em;
-  }
-}
+//.forward-icon {
+//  @extend %icon-font;
+//
+//  &:after {
+//	  content: "\64";
+//	  font-size: 1.5em;
+//  }
+//}
 
 //.back-icon {
 //  @extend %icon-font;
@@ -157,20 +147,20 @@ $webfont_directory: "/stylesheets/fonts/" !default; // edit this directory in th
 //  	content: "\63";
 //  }
 //}
-.export-icon {
-  @extend %icon-font;
-
-  &:before {
-  	content: "\27";
-  }
-}
-.upload-icon {
-  @extend %icon-font;
-
-  &:before {
-  	content: "\28";
-  }
-}
+//.export-icon {
+//  @extend %icon-font;
+//
+//  &:before {
+//  	content: "\27";
+//  }
+//}
+//.upload-icon {
+//  @extend %icon-font;
+//
+//  &:before {
+//  	content: "\28";
+//  }
+//}
 .github-icon-2 {
 	@extend %icon-font;
 
@@ -180,20 +170,13 @@ $webfont_directory: "/stylesheets/fonts/" !default; // edit this directory in th
     line-height: 1.2;
   }
 }
-//.github-icon-3:before {
-//	@extend %icon-font;
-//
-//  &:before {
-//    content: "\29";
-//  }
-//}
 .github-icon-4 {
 	@extend %icon-font;
 
   &:before {
     content: "\2a";
-    font-size: 1.2em;
-    line-height: 1.2;
+    //font-size: 1.2em;
+    //line-height: 1.2;
   }
 }
 .gist-icon-2 {
@@ -203,24 +186,10 @@ $webfont_directory: "/stylesheets/fonts/" !default; // edit this directory in th
     content: "\2b";
   }
 }
-.star-icon {
-	@extend %icon-font;
-
-  &:before {
-    content: "\68";
-  }
-}
-//.heart-icon-2 {
+//.star-icon {
 //	@extend %icon-font;
 //
 //  &:before {
-//    content: "\67";
-//  }
-//}
-//.checkmark-icon {
-//	@extend %icon-font;
-//
-//  &:before {
-//    content: "\6a";
+//    content: "\68";
 //  }
 //}

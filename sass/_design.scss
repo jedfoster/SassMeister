@@ -99,168 +99,20 @@ html {
   }
 }
 
-%icon-font {
-  display: inline-block;
-  min-width: 1em;
-
-  &:before, &:after {
-    font-size:1.5em;
-    font-family: 'SassMeisterIcons';
-  	font-style: normal;
-  	line-height: 1;
-  	vertical-align:middle;
-  	speak: none;
-    -webkit-font-smoothing: antialiased; 
-    //@media #{$mobile} {
-    //  font-size: 1.5em;
-    //} 
-  }
-  &:hover {
-    text-decoration: none;
-  }
-  .alt {
-    display: none;
-  }
-}
-
-.twitter-icon {
-  @extend %icon-font;
-
-  &:before {
-  	//content: "\26ba";
-  	content: '\29';
-  }
-}
-
-// Github fork
-.github-icon {
-  @extend %icon-font;
-
-  &:before {
-  	content: "\2a";
-  }
-}
-
-// Github login
-.github-login {
-  @extend %icon-font;
-
-  &:before {
-  	//content: "\e005";
-  	content: '\28';
-  }
-}
-.paypal-icon {
-  @extend %icon-font;
-
-  &:before {
-	  //content: "\22";
-	  content: '\27';
-  }
-
-  @media #{$mobile} {
-    span {
-      display:none;
-    }
-  }
-}
-.gist-icon {
-  @extend %icon-font;
-
-  &:before {
-	  content: "\23";
-  }
-}
-.info-icon {
-  @extend %icon-font;
-
-  &:before {
-	  content: "\24";
-  }
-}
-.help-icon {
-  @extend %icon-font;
-
-  &:before {
-	  content: "\25";
-  }
-}
-.close-icon {
-  @extend %icon-font;
-
-  float:right;
-
-
-  &:before {
-	  content: "\d7";
-	  font-size: 1em;
-  }
-}
-
-.forward-icon {
-  @extend %icon-font;
-
-  &:after {
-	  content: "\64";
-	  font-size: 1.5em;
-  }
-}
-
-.export-icon {
-  @extend %icon-font;
-
-  &:before {
-  	content: "\27";
-  }
-}
-.upload-icon {
-  @extend %icon-font;
-
-  &:before {
-  	content: "\28";
-  }
-}
-.github-icon-2 {
-	@extend %icon-font;
-
-  &:before {
-    content: "\26";
-    font-size: 1.2em;
-    line-height: 1.2;
-  }
-}
-.github-icon-4 {
-	@extend %icon-font;
-
-  &:before {
-    content: "\2a";
-  }
-}
-.gist-icon-2 {
-	@extend %icon-font;
-
-  &:before {
-    content: "\2b";
-  }
-}
-.star-icon {
-	@extend %icon-font;
-
-  &:before {
-    content: "\68";
-  }
-}
-
 .social_links {
   list-style: none;
-  margin-top: em(10);
-  margin-right: em(20);
+  margin-top: em(6);
+//  margin-right: em(20);
   text-align: right;
   text-shadow: 0 0 5px darken($alpha_color, 10%);
+  float: right;
+  position: relative;
+  right: 15px;
+
   a {
     margin: 0 em(5);
   }   
-  float: right;
+
   li {
     display: block;
     float:left;
