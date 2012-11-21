@@ -131,6 +131,9 @@ h2.labels {
   margin-top: 6px;
   text-align: right;
   text-shadow: 0 0 5px darken($alpha_color, 10%);
+  float: right;
+  position: relative;
+  right: 15px;
 
   a {
     margin: 0 em(5);
