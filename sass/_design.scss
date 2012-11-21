@@ -349,13 +349,13 @@ h2.labels {
     margin: 0 em(5);
   } 
   
-  @include grid(4);
+  //@include grid(4);
   float: right;
 
-	@media #{$mobile} {
-    @include grid(4, $grid_context: 4);
-    margin-bottom: 1.5em;
-  }
+	// @media #{$mobile} {
+  //   @include grid(4, $grid_context: 4);
+  //   margin-bottom: 1.5em;
+  // }
 
   li {
     display: block;
