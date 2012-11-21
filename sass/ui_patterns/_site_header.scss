@@ -9,17 +9,28 @@
   //position:relative;
 
   .logoBox {
-    box-shadow: 0 0 20px 5px gray;
-    background: black;
+    box-shadow: inset 0px -10px 18px -5px darken($alpha_color, 10%);
+    border-bottom: 1px solid scale-color($alpha_color, $lightness: -50%);
+    
+    background: $alpha_color_charlie;
     height: 60px;
     margin-bottom: 20px;
+    a {
+      color: white;
+      &:hover {
+        color: darken($alpha_color, 30%);
+        text-shadow: 0 0 5px $white;
+      }
+    }
   }
   .logo {
     color: white;
     position: relative;
     top: -30px;
     left: 15px;
-    height: 96px;
+    height: 91px;
+    float: left;
+    text-shadow: 0 0 5px darken($alpha_color, 10%);
 
     @extend %icon-font;
 
@@ -27,6 +38,10 @@
       content: "\2c"; // horizontal
       //content: "\2d"; // vertical
       font-size: 6em;
+      // text-shadow: 0 0 5px darken($alpha_color, 10%);
+      // &:hover {
+      //   text-shadow: 0 0 5px $white;
+      // }
     }
   }
   .header_description {

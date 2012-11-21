@@ -134,15 +134,19 @@ h2.labels {
 }
 
 .footer_container {
-  @extend .header_container;
+  //@extend .header_container;
+  font-size: em(12);
+  margin: 0 em(30);
   p {
-    @include grid(6, $grid_padding_l: 10);
-    font-size: em(12);
-    margin-right: 0;
+    margin-bottom: 0.5em;
+    line-height: 1.5em;
+    //@include grid(6, $grid_padding_l: 10);
+    //font-size: em(12);
+    //margin-right: 0;
 
-    @media #{$mobile} {
-      @include grid(4, $grid_context: 4);
-    }
+    //@media #{$mobile} {
+    //  @include grid(4, $grid_context: 4);
+    //}
   }
 }
 
@@ -151,7 +155,7 @@ h2.labels {
   min-width: 1em;
 
   &:before, &:after {
-    font-size:3em;
+    font-size:2em;
     font-family: 'SassMeisterIcons';
   	font-style: normal;
   	line-height: 1;
@@ -304,7 +308,6 @@ h2.labels {
 
   &:before {
     content: "\2a";
-    font-size: 1.2em;
   }
 }
 .gist-icon-2 {
@@ -312,8 +315,6 @@ h2.labels {
 
   &:before {
     content: "\2b";
-    font-size: 1.1em;
-    line-height: 1.2;
   }
 }
 .star-icon {
@@ -321,7 +322,6 @@ h2.labels {
 
   &:before {
     content: "\68";
-    font-size: 1.2em;
   }
 }
 //.heart-icon-2 {
@@ -341,8 +341,16 @@ h2.labels {
 
 .social_links {
   list-style: none;
+  margin-top: 6px;
+  text-align: right;
+  text-shadow: 0 0 5px darken($alpha_color, 10%);
 
-  @include grid(6);
+  a {
+    margin: 0 em(5);
+  } 
+  
+  @include grid(4);
+  float: right;
 
 	@media #{$mobile} {
     @include grid(4, $grid_context: 4);
