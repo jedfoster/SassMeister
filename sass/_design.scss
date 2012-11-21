@@ -104,13 +104,16 @@ html {
   min-width: 1em;
 
   &:before, &:after {
-    font-size:2em;
+    font-size:1.5em;
     font-family: 'SassMeisterIcons';
   	font-style: normal;
   	line-height: 1;
   	vertical-align:middle;
   	speak: none;
-    -webkit-font-smoothing: antialiased;  
+    -webkit-font-smoothing: antialiased; 
+    //@media #{$mobile} {
+    //  font-size: 1.5em;
+    //} 
   }
   &:hover {
     text-decoration: none;
@@ -124,7 +127,8 @@ html {
   @extend %icon-font;
 
   &:before {
-  	content: "\26ba";
+  	//content: "\26ba";
+  	content: '\29';
   }
 }
 
@@ -142,14 +146,16 @@ html {
   @extend %icon-font;
 
   &:before {
-  	content: "\e005";
+  	//content: "\e005";
+  	content: '\28';
   }
 }
 .paypal-icon {
   @extend %icon-font;
 
   &:before {
-	  content: "\22";
+	  //content: "\22";
+	  content: '\27';
   }
 
   @media #{$mobile} {
@@ -247,7 +253,7 @@ html {
 
 .social_links {
   list-style: none;
-  margin-top: em(6);
+  margin-top: em(10);
   margin-right: em(20);
   text-align: right;
   text-shadow: 0 0 5px darken($alpha_color, 10%);
@@ -264,4 +270,15 @@ html {
       @extend %omega;
     }
   }
+  @media #{$mobile} {
+    margin-right: em(10);
+  }
 }
+
+
+
+
+
+
+
+

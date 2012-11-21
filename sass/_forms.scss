@@ -20,6 +20,9 @@ label {
   line-height: 1;
 	margin-bottom: 0.5em;
 	font-size: em(12, $font-size);
+	@media #{$mobile} {
+  	display: none;
+	}
 }
 
 input, select, textarea, button {

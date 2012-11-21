@@ -8,7 +8,7 @@
     margin-bottom: 20px;
     a {
       color: white;
-      height: em(45);
+      height: em(35);
       &:hover {
         color: darken($alpha_color, 30%);
         text-shadow: 0 0 5px $white;
@@ -42,5 +42,9 @@
     box-shadow: inset -1px 0px 0px 0px transparentize(white, 0.8);
     padding-right: em(20);
     margin-right: em(5);
+    @media #{$mobile} {
+      padding-right: em(10);
+      margin-right: 0;
+    }
   }
 }
