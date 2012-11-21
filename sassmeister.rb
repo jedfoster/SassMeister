@@ -75,12 +75,12 @@ helpers do
   end
 
   def import_plugin(params)
-    Compass.sass_engine_options[:load_paths].each do |path|
-      Sass.load_paths << path
-    end
-
     if plugins.has_key?(params[:plugin])
       require plugins[params[:plugin]][:gem]
+
+      Compass.sass_engine_options[:load_paths].each do |path|
+        Sass.load_paths << path
+      end
 
       sass = "@import \"#{plugins[params[:plugin]][:import]}\"#{";" if params[:syntax] == 'scss'}\n\n#{params[:sass]}"
     else
