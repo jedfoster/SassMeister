@@ -34,7 +34,7 @@ html {
 //  //position: absolute;
 //  //bottom: 0;
 //  //right: em(18);
-//  
+//
 //  @media #{$mobile} {
 //    //position: relative;
 //    //right: auto;
@@ -44,40 +44,23 @@ html {
 //}
 
 .controls {
-
   min-height: em(72);
-
-/*  margin-bottom: em(16);*/
   float: left;
   width: 100%;
-  
-  @media #{$mobile} {
-/*    height: auto;*/
-  }
 }
 
 .form_control {
-  
-  
-  
   @include grid(4, $grid_context: 4);
-/*  @include pull(12, 4);*/
-  
-  
-  //&:nth-child(3n+3) {
-  //  @extend %omega;
-  //}
-  
+
   @media #{$desktop} {
     @include grid(4);
-    
+
     &:first-child {
       @include grid(4.125, alpha);
     }
     &:last-child {
       @include grid(4.125, omega);
     }
-    
   }
 
   margin-bottom: em(16);
@@ -86,19 +69,15 @@ html {
 
 
 .css_output .controls {
-
   padding-top:em(20);
   min-height: em(52);
-  
-  @media #{$mobile} {
-/*    height: auto;*/
-  }
 }
 
 .css_output .button {
   @extend .form_control;
 
 }
+
 
 
 h2.labels {
@@ -134,19 +113,11 @@ h2.labels {
 }
 
 .footer_container {
-  //@extend .header_container;
   font-size: em(12);
   margin: 0 em(30);
   p {
     margin-bottom: 0.5em;
     line-height: 1.5em;
-    //@include grid(6, $grid_padding_l: 10);
-    //font-size: em(12);
-    //margin-right: 0;
-
-    //@media #{$mobile} {
-    //  @include grid(4, $grid_context: 4);
-    //}
   }
 }
 
@@ -347,15 +318,7 @@ h2.labels {
 
   a {
     margin: 0 em(5);
-  } 
-  
-  //@include grid(4);
-  float: right;
-
-	// @media #{$mobile} {
-  //   @include grid(4, $grid_context: 4);
-  //   margin-bottom: 1.5em;
-  // }
+  }
 
   li {
     display: block;

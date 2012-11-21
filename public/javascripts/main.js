@@ -107,12 +107,7 @@ http://github.com/bgrins/bindWithDelay
     $("#sass-form").submit();
   }
 
-//  $("html").height() - $("#header").height() - $("#footer").height() + "px";
-      // $("#content").css("height", newHeight);
-
-  function setHeight() {
-    // console.log( $("html").width());
-    
+  function setHeight() {    
     if ($("html").width() > 50 * 18) {
       var html = $("html").height(), header = $(".site_header").height(), footer = $(".site_footer").height() * 2, controls = $('.sass_input .controls').height() * -1;
   
@@ -127,27 +122,6 @@ http://github.com/bgrins/bindWithDelay
   setHeight();
   
   $(window).resize(setHeight);
-  
-  
-  //$('html').click(function() {
-  //  $('#input-options, #output-options').hide();
-  //});
-  //
-  //$('#input-settings-toggle, .sass_input .edit-header').on('click', function() {
-  //  event.stopPropagation();
-  //  event.preventDefault();
-  //  $('#output-options').hide();
-  //
-  //  $('#input-options').toggle();
-  //});
-  //
-  //$('#output-settings-toggle, .css_output .edit-header').on('click', function() {
-  //  event.stopPropagation();
-  //  event.preventDefault();
-  //  $('#input-options').hide();
-  //
-  //  $('#output-options').toggle();
-  //});
 
   var buildModal = function(content) {
     if ($('#modal').length == 0) {
