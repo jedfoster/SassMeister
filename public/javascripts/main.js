@@ -109,7 +109,7 @@ http://github.com/bgrins/bindWithDelay
 
   function setHeight() {    
     if ($("html").width() > 50 * 18) {
-      var html = $("html").height(), header = $(".site_header").height(), footer = $(".site_footer").height() * 2, controls = $('.sass_input .controls').height() * -1;
+      var html = $("html").height(), header = $(".site_header").height(), footer = $(".site_footer").height() * 1.5, controls = $('.sass_input .controls').height() * -1;
   
       $('.pre_container, .ace_scroller').css('height', html - header - footer - controls);
     }
