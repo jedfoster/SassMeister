@@ -207,13 +207,18 @@ $selection_color:                      $alpha_color_hotel;
 
 /////////////// UI @media breakpoint defaults ////////////////
 // -----------------------------------------------------------------------------
-// $tablet:                    "screen and (max-width: 64em)";
-// $tablet_portrait:           "screen and (max-width: 50em) and (orientation: portrait)";
-// $tablet_landscape:          "screen and (max-width: 50em) and (orientation: landscape)";
-// 
-// $mobile:                    "screen and (max-width: 30em)";
-// $mobile_portrait:	          "screen and (max-width: 30em) and (orientation : portrait)";
-// $mobile_landscape:	        "screen and (max-width: 30em) and (orientation : landscape)";
+$mobile:                    "screen and (max-width: 40em)" !default;
+$mobile_portrait:	          "screen and (max-width: 40em) and (orientation : portrait)" !default;
+$mobile_landscape:	        "screen and (max-width: 40em) and (orientation : landscape)" !default; 
+
+$tablet:                    "screen and (max-width: 64em)" !default;
+$tablet_portrait:           "screen and (max-width: 64em) and (orientation: portrait)" !default;
+$tablet_landscape:          "screen and (max-width: 64em) and (orientation: landscape)" !default;
+
+$desktop:                   "screen and (max-width: 120em) and (min-width: 50em)" !default;
+
+
+
 
 
 $minimal_border_radius: 9px !default;

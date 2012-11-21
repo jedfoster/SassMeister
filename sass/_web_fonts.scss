@@ -33,3 +33,194 @@ $webfont_directory: "/stylesheets/fonts/" !default; // edit this directory in th
 @font-face {
 	@include font-face ($font_family: 'SassMeisterIcons', $font-file:  'sassmeistericons-webfont', $font_weight: normal, $font_style: normal);
 }
+
+%icon-font {
+  display: inline-block;
+  min-width: 1em;
+
+  &:before, &:after {
+    font-size:2em;
+    font-family: 'SassMeisterIcons';
+  	font-style: normal;
+  	line-height: 1;
+  	vertical-align:middle;
+  	speak: none;
+    -webkit-font-smoothing: antialiased;
+  }
+  &:hover {
+    text-decoration: none;
+  }
+  .alt {
+    display: none;
+  }
+}
+
+// &.refresh:after {
+// 	content: "\26d7";
+// }
+
+.twitter-icon {
+  @extend %icon-font;
+
+  &:before {
+  	content: "\26ba";
+  }
+}
+.github-icon {
+  @extend %icon-font;
+
+  &:before {
+  	content: "\e005";
+  }
+}
+// &.meetup:after {
+// 	content: "\e003";
+// }
+// &.google-plus:after {
+// 	content: "\26bd";
+// }
+// &.rocket:after {
+// 	content: "\26e2";
+// }
+// &.download:after {
+// 	content: "\e004";
+// }
+// &.email:after {
+// 	content: "\e002";
+// }
+//.heart-icon {
+//  @extend %icon-font;
+//
+//  &:before {
+//  	content: "\21";
+//  }
+//}
+.paypal-icon {
+  @extend %icon-font;
+
+  &:before {
+	  content: "\22";
+  }
+
+  @media #{$mobile} {
+    span {
+      display:none;
+    }
+  }
+}
+.gist-icon {
+  @extend %icon-font;
+
+  &:before {
+	  content: "\23";
+  }
+}
+.info-icon {
+  @extend %icon-font;
+
+  &:before {
+	  content: "\24";
+  }
+}
+.help-icon {
+  @extend %icon-font;
+
+  &:before {
+	  content: "\25";
+  }
+}
+.close-icon {
+  @extend %icon-font;
+
+  float:right;
+
+
+  &:before {
+	  content: "\d7";
+	  font-size: 1em;
+  }
+}
+
+.forward-icon {
+  @extend %icon-font;
+
+  &:after {
+	  content: "\64";
+	  font-size: 1.5em;
+  }
+}
+
+//.back-icon {
+//  @extend %icon-font;
+//
+//  &:before {
+//  	content: "\63";
+//  }
+//}
+.export-icon {
+  @extend %icon-font;
+
+  &:before {
+  	content: "\27";
+  }
+}
+.upload-icon {
+  @extend %icon-font;
+
+  &:before {
+  	content: "\28";
+  }
+}
+.github-icon-2 {
+	@extend %icon-font;
+
+  &:before {
+    content: "\26";
+    font-size: 1.2em;
+    line-height: 1.2;
+  }
+}
+//.github-icon-3:before {
+//	@extend %icon-font;
+//
+//  &:before {
+//    content: "\29";
+//  }
+//}
+.github-icon-4 {
+	@extend %icon-font;
+
+  &:before {
+    content: "\2a";
+    font-size: 1.2em;
+    line-height: 1.2;
+  }
+}
+.gist-icon-2 {
+	@extend %icon-font;
+
+  &:before {
+    content: "\2b";
+  }
+}
+.star-icon {
+	@extend %icon-font;
+
+  &:before {
+    content: "\68";
+  }
+}
+//.heart-icon-2 {
+//	@extend %icon-font;
+//
+//  &:before {
+//    content: "\67";
+//  }
+//}
+//.checkmark-icon {
+//	@extend %icon-font;
+//
+//  &:before {
+//    content: "\6a";
+//  }
+//}
