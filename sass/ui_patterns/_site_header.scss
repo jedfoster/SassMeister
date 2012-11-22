@@ -22,7 +22,7 @@
   .logoBox {
     box-shadow: inset 0px -10px 18px -5px darken($alpha_color, 10%);
     border-bottom: 1px solid scale-color($alpha_color, $lightness: -50%);
-    
+
     background: $alpha_color_charlie;
     height: 60px;
     margin-bottom: 20px;
@@ -94,7 +94,7 @@
 
     a {
       margin: 0 em(5);
-    }   
+    }
 
     li {
       display: block;
@@ -108,8 +108,8 @@
     @media #{$mobile} {
       margin-right: em(10);
     }
-  
-  
+
+
   .paypal-icon {
     border-right: 1px solid darken($alpha_color, 5%);
     box-shadow: inset -1px 0px 0px 0px transparentize(white, 0.8);
@@ -124,11 +124,10 @@
     &:before, &:after {
       font-size:2em;
     }
-    
+
     .gh-authorized &:before {
       font-size:1.5em;
-      color: $charlie_gray;
-      
+      color: $bravo_gray;
       text-shadow: 0 0 5px lighten($alpha_color, 20%);
     }
   }
