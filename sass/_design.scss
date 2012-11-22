@@ -98,31 +98,3 @@ html {
     line-height: 1.5em;
   }
 }
-
-.social_links {
-  list-style: none;
-  margin-top: em(6);
-//  margin-right: em(20);
-  text-align: right;
-  text-shadow: 0 0 5px darken($alpha_color, 10%);
-  float: right;
-  position: relative;
-  right: 15px;
-
-  a {
-    margin: 0 em(5);
-  }   
-
-  li {
-    display: block;
-    float:left;
-    margin-right: 1.5em;
-
-    &:last-child {
-      @extend %omega;
-    }
-  }
-  @media #{$mobile} {
-    margin-right: em(10);
-  }
-}

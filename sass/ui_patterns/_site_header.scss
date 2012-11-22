@@ -37,6 +37,33 @@
 }
 
 .social_links {
+    list-style: none;
+    margin-top: em(10);
+  //  margin-right: em(20);
+    text-align: right;
+    text-shadow: 0 0 5px darken($alpha_color, 10%);
+    float: right;
+    position: relative;
+    right: 15px;
+
+    a {
+      margin: 0 em(5);
+    }   
+
+    li {
+      display: block;
+      float:left;
+      margin-right: 1.5em;
+
+      &:last-child {
+        @extend %omega;
+      }
+    }
+    @media #{$mobile} {
+      margin-right: em(10);
+    }
+  
+  
   .paypal-icon {
     border-right: 1px solid darken($alpha_color, 5%);
     box-shadow: inset -1px 0px 0px 0px transparentize(white, 0.8);
@@ -49,7 +76,14 @@
   }
   .github-login {
     &:before, &:after {
-      font-size:2.5em;
+      font-size:2em;
+    }
+    
+    .gh-authorized &:before {
+      font-size:1.5em;
+      color: $charlie_gray;
+      
+      text-shadow: 0 0 5px lighten($alpha_color, 20%);
     }
   }
 }
