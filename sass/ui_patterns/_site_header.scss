@@ -1,3 +1,23 @@
+%tooltip {
+  position: absolute;
+  border-radius: 10px;
+  content: attr(title);
+  font-family: verdana;
+  color: white;
+  font-size: em(14);
+  padding: em(15) em(5);
+  background: transparentize(black, 0.2);
+  text-shadow: 0 0 0 transparent;
+  width: 125px;
+  margin-left: -125px;
+  top: 40px;
+  text-align: center;
+  line-height: 1.5em;
+  box-shadow: 0 0 10px 1px $shadow_color;
+  z-index: 1000;
+}
+
+
 .site_header {
   .logoBox {
     box-shadow: inset 0px -10px 18px -5px darken($alpha_color, 10%);
@@ -12,13 +32,39 @@
       &:hover {
         color: darken($alpha_color, 30%);
         text-shadow: 0 0 5px $white;
+        &:after {
+          @extend %tooltip;
+          // position: absolute;
+          // border-radius: 10px;
+          // content: attr(title);
+          // font-family: verdana;
+          // color: white;
+          // font-size: em(14);
+          // padding: em(15) em(5);
+          // background: transparentize(black, 0.2);
+          // text-shadow: 0 0 0 transparent;
+          // width: 125px;
+          // margin-left: -125px;
+          // top: 40px;
+          // text-align: center;
+          // line-height: 1.5em;
+          // box-shadow: 0 0 10px 1px $shadow_color;
+          // z-index: 1000;
+        }
+      }
+    }
+    .logo {
+      &:hover {
+        &:after {
+          display: none;
+        }
       }
     }
   }
   .logo {
     color: white;
     position: relative;
-    top: -30px;
+    top: -35px;
     left: 15px;
     height: 91px;
     float: left;

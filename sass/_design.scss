@@ -67,7 +67,7 @@ html {
   font-size: em($heading_3);
 
   .sass_input & {
-    @extend .forward-icon;
+    //@extend .forward-icon;
 
     &:after {
   	  font-size: 1.5em;
