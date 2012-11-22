@@ -186,6 +186,21 @@ $webfont_directory: "/stylesheets/fonts/" !default; // edit this directory in th
     content: "\2b";
   }
 }
+.cloud-up-icon {
+	@extend %icon-font;
+
+  &:before {
+    content: "\3a";
+  }
+}
+.cloud-down-icon {
+	@extend %icon-font;
+
+  &:before {
+    content: "\3b";
+  }
+}
+
 //.star-icon {
 //	@extend %icon-font;
 //
