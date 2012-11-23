@@ -104,7 +104,11 @@ before do
   @user = false
   
   if session[:github]
-    @user = @github.users.get
+    begin
+      @user = @github.users.get
+    rescue Faraday::Error::ConnectionFailed => err
+      puts err # TODO better error handling, this is just a patch for dev'ing sans network
+    end
   end
 end
 
