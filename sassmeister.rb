@@ -101,6 +101,11 @@ end
 
 before do
   @github = github(session[:github])
+  @user = false
+  
+  if session[:github]
+    @user = @github.users.get
+  end
 end
 
 
@@ -124,7 +129,7 @@ end
 
 
 get '/authorize' do
-  redirect to @github.authorize_url :scope => 'gist'
+  redirect to @github.authorize_url :scope => ['gist', 'user']
 end
 
 

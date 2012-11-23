@@ -4,10 +4,17 @@
     <div class="logoBox">
       <a href="https://github.com/jedfoster/SassMeister" class="logo" title="SassMeister is the most kick ass way to play with Sass!"><span class="alt">SassMeister is the most kick ass way to play with Sass!</span></a>
       <div class="social_links">
-        <a href="https://github.com/jedfoster/SassMeister" class="github-icon" title="Fork me at Github"><span class="alt">GitHub</span></a>
-        <a href="https://twitter.com/sassmeisterapp" title="Follow me at Twitter" class="twitter-icon"><span class="alt">Twitter</span></a>
-        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ELKSDTCSVYM3Y" title="You like SassMeister? Thinking of donating?" class="paypal-icon"><span class="alt">PayPal</span> <!-- span>Support SassMeister</span --></a>
-        <a href="/authorize" class="github-login" title="Login with Github" id="github-auth"></a>
+        <a href="https://github.com/jedfoster/SassMeister" class="github-icon" title="Fork me on Github"><span class="alt">Fork me on Github</span></a>
+        <a href="https://twitter.com/sassmeisterapp" title="Follow @sassmeisterapp on Twitter" class="twitter-icon"><span class="alt">Follow @sassmeisterapp on Twitter</span></a>
+        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ELKSDTCSVYM3Y" title="Like SassMeister? Help keep the lights on." class="paypal-icon"><span class="alt">Like SassMeister? Help keep the lights on.</span></a>
+        
+        <% if @github.authenticated? && @user %>
+          <a href="/authorize" class="github-login" title="Logged in as <%=@user.login%>" id="github-auth"><span class="alt">Logged in as <%=@user.login%></a>
+                    
+        <% else %>
+          <a href="/authorize" class="github-login" title="Login with Github" id="github-auth"><span class="alt">Login with Github</a>
+            
+        <% end %>
       </div>
     </div>
   </div>
