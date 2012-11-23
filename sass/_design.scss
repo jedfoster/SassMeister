@@ -58,6 +58,15 @@ html {
   @extend .form_control;
 }
 
+.css_output a {
+  float: left;
+  display: block;
+}
+
+#gist-it {
+  float: right;
+}
+
 .labels {
   width: 100%;
   text-align: center;

@@ -175,8 +175,6 @@ $webfont_directory: "/stylesheets/fonts/" !default; // edit this directory in th
 
   &:before {
     content: "\2a";
-    //font-size: 1.2em;
-    //line-height: 1.2;
   }
 }
 .gist-icon-2 {
@@ -190,14 +188,23 @@ $webfont_directory: "/stylesheets/fonts/" !default; // edit this directory in th
 	@extend %icon-font;
 
   &:before {
-    content: "\3a";
+    content: "\24";
   }
 }
 .cloud-down-icon {
 	@extend %icon-font;
 
   &:before {
-    content: "\3b";
+    content: "\25";
+  }
+}
+
+
+.reset-icon {
+	@extend %icon-font;
+
+  &:before {
+    content: "\26d7";
   }
 }
 

@@ -92,10 +92,10 @@ http://github.com/bgrins/bindWithDelay
         css.setValue(data,-1);
       }
     );
-    
+
    localStorage.setItem('inputs', JSON.stringify(inputs));
   });
-  
+
   var storedInputs = JSON.parse(localStorage.getItem('inputs'));
 
   if( storedInputs !== null) {
@@ -107,20 +107,20 @@ http://github.com/bgrins/bindWithDelay
     $("#sass-form").submit();
   }
 
-  function setHeight() {    
+  function setHeight() {
     if ($("html").width() > 50 * 18) {
       var html = $("html").height(), header = $(".site_header").height(), footer = $(".site_footer").height() * 1.5, controls = $('.sass_input .controls').height() * -1;
-  
+
       $('.pre_container, .ace_scroller').css('height', html - header - footer - controls);
     }
-    
+
     else {
       $('.pre_container, .ace_scroller').css('height', 480);
     }
   }
-  
+
   setHeight();
-  
+
   $(window).resize(setHeight);
 
   var buildModal = function(content) {
@@ -153,39 +153,37 @@ http://github.com/bgrins/bindWithDelay
       output: $('select[name="output"]').val()
     }
 
+    var action = '', confirmationText = 'Your Gist is ready.';
+
+    if($('#gist-it').data('gist-save') == 'edit') {
+      action = '/' + $('#gist-it').data('gist-save');
+      confirmationText = 'Your Gist has been updated.';
+    }
+console.log('/gist' + action);
     ///* Send the data using post and put the results in a div */
-    $.post('/gist', inputs,
+    $.post('/gist' + action, inputs,
       function( data ) {
-        buildModal('Your Gist is ready. <a href="' + data + '" target="_blank">See it here.<a>');
-        
-        if ($('#gist-edit').length == 0) {
-          $('#gist-it').before('<a href="#" class="github-icon-4 button" id="gist-edit"> <span>Update Previous Gist</span></a>');
-        }
-        else {
-          $('#gist-edit').show();
-        }
+        buildModal(confirmationText + ' <a href="' + data + '" target="_blank">See it here.<a>');
+
+        $('#gist-it').data('gist-save', 'edit');
       }
     );
   });
-
-  $('#gist-edit').on('click', function() {
-    /* stop form from submitting normally */
+  
+  $('#reset').on('click', function() {
     event.preventDefault();
-
-    _gaq.push(['_trackEvent', 'Gist']);
-
-    var inputs = {
-      sass: sass.getValue(),
-      syntax: $('select[name="syntax"]').val(),
-      plugin: $('select[name="plugin"]').val(),
-      output: $('select[name="output"]').val()
-    }
-
-    ///* Send the data using post and put the results in a div */
-    $.post('/gist/edit', inputs,
-      function( data ) {
-        buildModal('Your Gist has been updated. <a href="' + data + '" target="_blank">See it here.<a>');
-      }
-    );
+    
+    // console.log($("#sass-form select")); 
+    $("#sass-form").get(0).reset();
+    
+    console.log($('#gist-it').data('gist-save'));
+    
+    $('#gist-it').data('gist-save', '');
+    // console.log(sass);
+    
+    console.log($('#gist-it').data('gist-save'));
+    sass.setValue('');
+    css.setValue('');
+    
   });
 })(jQuery);
