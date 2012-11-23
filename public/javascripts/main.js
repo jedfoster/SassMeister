@@ -68,9 +68,9 @@ http://github.com/bgrins/bindWithDelay
   });
 
   $("#sass-form").on('click', function() {
-    $('html, body').animate({
-      scrollTop: $("#sass-form").offset().top - 10
-    }, 250);
+    //$('html, body').animate({
+    //  scrollTop: $("#sass-form").offset().top - 10
+    //}, 250);
   });
 
   /* attach a submit handler to the form */
@@ -108,8 +108,10 @@ http://github.com/bgrins/bindWithDelay
   }
 
   function setHeight() {
+    console.log($("html").height());
+    
     if ($("html").width() > 50 * 18) {
-      var html = $("html").height(), header = $(".site_header").height(), footer = $(".site_footer").height() * 1.5, controls = $('.sass_input .controls').height() * -1;
+      var html = $("html").height(), header = $(".site_header").height() * 3, footer = $(".site_footer").height() * 3, controls = $('.sass_input .controls').height() * -1.5;
 
       $('.pre_container, .ace_scroller').css('height', html - header - footer - controls);
     }
