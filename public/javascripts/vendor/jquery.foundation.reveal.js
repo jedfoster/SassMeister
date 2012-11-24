@@ -525,7 +525,7 @@
               // Oh, the modal(s) are mid animating.
               // Let's delay the animation queue.
               //
-              modalBg.delay( options.animationSpeed )
+              modalBg.delay( options.animationSpeed / 6 )
               //
               // Fade out the modal background.
               //

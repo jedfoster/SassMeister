@@ -131,8 +131,8 @@ http://github.com/bgrins/bindWithDelay
     }
 
     $('#modal').reveal({
-      animation: 'fade', //fade, fadeAndPop, none
-      animationSpeed: 100, //how fast animations are
+      animation: 'fadeAndPop', //fade, fadeAndPop, none
+      animationSpeed: 250, //how fast animations are
       closeOnBackgroundClick: true, //if you click background will modal close?
       dismissModalClass: 'close-icon' //the class of a button or element that will close an open modal
     });
@@ -141,9 +141,11 @@ http://github.com/bgrins/bindWithDelay
   $('#footer').addClass('reveal-modal large').prepend('<a href="#" class="close-icon"><span class="alt">&#215;</span></a>').hide();
 
   $('#info').on('click', function() {
+    event.preventDefault();
+
     $('#footer').reveal({
       animation: 'fadeAndPop', //fade, fadeAndPop, none
-//      animationSpeed: 200, //how fast animations are
+      animationSpeed: 250, //how fast animations are
       closeOnBackgroundClick: true, //if you click background will modal close?
       dismissModalClass: 'close-icon' //the class of a button or element that will close an open modal
     });
