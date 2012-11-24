@@ -12,7 +12,6 @@
 
 	<!--  Mobile Viewport Fix, use at own risk -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5 maximum-scale=1.0">
-	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
 	<link rel="stylesheet" href="/stylesheets/style.css" />
@@ -31,9 +30,11 @@
 </head>
 
 <body>
-	<%= yield %>
+  <%= partial :"shared/_header" %>
+	<section class="main_body">
+  	<%= yield %>
+	</section>
 	<%= partial :"shared/_footer" %>
-  
 
   <% if settings.environment == :production %>
 	  <script src="/javascripts/app.js"></script>
