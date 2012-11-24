@@ -121,7 +121,6 @@ http://github.com/bgrins/bindWithDelay
     }
   }
 
-  setHeight();
 
   $(window).resize(setHeight);
 
@@ -141,6 +140,21 @@ http://github.com/bgrins/bindWithDelay
       dismissModalClass: 'close-icon' //the class of a button or element that will close an open modal
     });
   }
+
+  $('#footer').addClass('reveal-modal large').prepend('<a href="#" class="close-icon"><span class="alt">&#215;</span></a>').hide();
+
+  $('#info').on('click', function() {
+    $('#footer').reveal({
+      animation: 'fadeAndPop', //fade, fadeAndPop, none
+//      animationSpeed: 200, //how fast animations are
+      closeOnBackgroundClick: true, //if you click background will modal close?
+      dismissModalClass: 'close-icon' //the class of a button or element that will close an open modal
+    });
+  });
+
+
+  setHeight();
+
 
   $('#gist-it').on('click', function() {
     /* stop form from submitting normally */
@@ -171,19 +185,13 @@ console.log('/gist' + action);
       }
     );
   });
-  
+
   $('#reset').on('click', function() {
     event.preventDefault();
-    
-    // console.log($("#sass-form select")); 
+
     $("#sass-form").get(0).reset();
-    
-    console.log($('#gist-it').data('gist-save'));
-    
     $('#gist-it').data('gist-save', '');
-    // console.log(sass);
-    
-    console.log($('#gist-it').data('gist-save'));
+
     sass.setValue('');
     css.setValue('');
     
