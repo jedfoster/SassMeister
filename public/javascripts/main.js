@@ -107,11 +107,9 @@ http://github.com/bgrins/bindWithDelay
     $("#sass-form").submit();
   }
 
-  function setHeight() {
-    console.log($("html").height());
-    
+  function setHeight() {    
     if ($("html").width() > 50 * 18) {
-      var html = $("html").height(), header = $(".site_header").height() * 3, footer = $(".site_footer").height() * 3, controls = $('.sass_input .controls').height() * -1.5;
+      var html = $("html").height(), header = $(".site_header").height(), footer = $(".site_footer").height(), controls = $('.sass_input .controls').height() + $('.sass_input .edit-header').height() + 42;
 
       $('.pre_container, .ace_scroller').css('height', html - header - footer - controls);
     }
@@ -121,12 +119,11 @@ http://github.com/bgrins/bindWithDelay
     }
   }
 
-
   $(window).resize(setHeight);
 
   var buildModal = function(content) {
     if ($('#modal').length == 0) {
-      $('body').append('<div class="controls_container reveal-modal large" id="modal"><a href="#" class="close-icon"><span class="alt">&#215;</span></a><span class="content">' + content + '</span></div>');
+      $('body').append('<div class="reveal-modal large" id="modal"><a href="#" class="close-icon"><span class="alt">&#215;</span></a><span class="content">' + content + '</span></div>');
     }
     else {
       $('#modal .content').empty();
@@ -152,9 +149,7 @@ http://github.com/bgrins/bindWithDelay
     });
   });
 
-
   setHeight();
-
 
   $('#gist-it').on('click', function() {
     /* stop form from submitting normally */

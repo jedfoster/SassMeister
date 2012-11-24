@@ -123,11 +123,15 @@ $webfont_directory: "/stylesheets/fonts/" !default; // edit this directory in th
 //}
 .close-icon {
   @extend %icon-font;
-  float:right;
+  position: absolute;
+  top: 0.25em;
+  left: 0.5em;
+  
 
   &:before {
 	  content: "\d7";
-	  font-size: 1em;
+	  font-size: 1.25em;
+	  line-height: 1;
   }
 }
 

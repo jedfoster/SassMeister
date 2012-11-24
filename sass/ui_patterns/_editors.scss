@@ -1,7 +1,7 @@
 .edit_container {
   position: relative;
   @include grid(6.25, alpha, $grid_context: 6);
-  margin-bottom: em(30);
+  margin-bottom: 1em;
   
   @media #{$mobile} {
     margin-bottom: em(16);
