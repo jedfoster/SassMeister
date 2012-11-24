@@ -185,3 +185,8 @@ post '/gist/?:edit?' do
   
   "https://gist.github.com/#{data.id}"
 end
+
+
+post '/reset' do
+  session[:gist] = ''
+end

@@ -175,7 +175,7 @@ http://github.com/bgrins/bindWithDelay
       action = '/' + $('#gist-it').data('gist-save');
       confirmationText = 'Your Gist has been updated.';
     }
-console.log('/gist' + action);
+
     ///* Send the data using post and put the results in a div */
     $.post('/gist' + action, inputs,
       function( data ) {
@@ -194,6 +194,7 @@ console.log('/gist' + action);
 
     sass.setValue('');
     css.setValue('');
-    
+
+    $.post('/reset');
   });
 })(jQuery);
