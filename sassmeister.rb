@@ -100,16 +100,7 @@ helpers do
 end
 
 before do
-  @github = github(session[:github])
-  @user = false
-  
-  if session[:github]
-    begin
-      @user = @github.users.get
-    rescue Faraday::Error::ConnectionFailed => err
-      puts err # TODO better error handling, this is just a patch for dev'ing sans network
-    end
-  end
+  @github = github(session[:github_token])
 end
 
 
@@ -138,9 +129,13 @@ end
 
 
 get '/authorize/return' do
-  token = @github.get_token(params[:code])
+  token = Github.get_token(params[:code])
 
-  session[:github] = token.token
+  user = github(token.token).users.get
+
+  session[:github_token] = token.token
+  session[:github_id] = user.login
+  session[:gravatar_id] = user.gravatar_id
 
   redirect to('/')
 end
@@ -182,7 +177,7 @@ post '/gist/?:edit?' do
   end
 
   session[:gist] = data.id.to_s
-  
+
   "https://gist.github.com/#{data.id}"
 end
 

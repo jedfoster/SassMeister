@@ -81,7 +81,7 @@ html {
   	  float:right;
   	  margin-right: -#{em($heading_3/2)};
 
-  	  @media #{$mobile} {
+  	  @media #{$tablet} {
          display:none;
        }
   	}
