@@ -138,9 +138,11 @@ http://github.com/bgrins/bindWithDelay
     });
   }
 
-  $('#footer').addClass('reveal-modal large').prepend('<a href="#" class="close-icon"><span class="alt">&#215;</span></a>').hide();
+  if ($("html").width() > 50 * 18) {
+    $('#footer').addClass('reveal-modal large').prepend('<a href="#" class="close-icon"><span class="alt">&#215;</span></a>').hide();
+  }
 
-  $('#info').on('click', function() {
+  $('#info, .logo').on('click', function() {
     event.preventDefault();
 
     $('#footer').reveal({
