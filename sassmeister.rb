@@ -65,6 +65,7 @@ helpers do
       "bourbon" => {gem: 'bourbon-compass', import: 'bourbon/bourbon'},
       "breakpoint" => {gem: 'breakpoint', import: 'breakpoint'},
       "compass" => {gem: 'compass', import: 'compass'},
+      "neat" => {gem: 'neat-compass', import: "bourbon/bourbon\";\n@import \"neat/neat"},
       "sassy-buttons" => {gem: 'sassy-buttons', import: 'sassy-buttons'},
       "singularity.gs" => {gem: 'singularitygs', import: 'singularitygs'},
       "stipe" => {gem: 'stipe', import: './sass/stipe'},
@@ -76,6 +77,8 @@ helpers do
 
   def import_plugin(params)
     if plugins.has_key?(params[:plugin])
+      require 'bourbon-compass' if params[:plugin] == 'neat'
+
       require plugins[params[:plugin]][:gem]
 
       Compass.sass_engine_options[:load_paths].each do |path|

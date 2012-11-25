@@ -49,6 +49,15 @@ Each block of SCSS should return valid CSS with no warnings or errors when teste
     }
 
 
+## Neat ##
+
+    section {
+      @include outer-container;
+      aside { @include span-columns(3); }
+      article { @include span-columns(9); }
+    }
+
+
 ## Sassy Buttons ##
 
     .red { @include sassy-button-gradient("matte", #e86a43); }
