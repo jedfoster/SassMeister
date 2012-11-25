@@ -1,8 +1,8 @@
 %tooltip {
   position: absolute;
-  border-radius: 10px;
+  @include border_radius(em(8));
   content: attr(title);
-  font-family: verdana;
+  font-family: $secondary_font_family;
   color: white;
   font-size: em(14);
   padding: em(15) em(5);
@@ -10,7 +10,7 @@
   text-shadow: 0 0 0 transparent;
   width: 125px;
   margin-left: -125px;
-  top: 40px;
+  top: 50px;
   text-align: center;
   line-height: 1.5em;
   box-shadow: 0 0 10px 1px $shadow_color;
@@ -22,7 +22,6 @@
   .logoBox {
     box-shadow: inset 0px -10px 18px -5px darken($alpha_color, 10%);
     border-bottom: 1px solid scale-color($alpha_color, $lightness: -50%);
-
     background: $alpha_color_charlie;
     height: 60px;
     margin-bottom: 20px;
@@ -34,22 +33,12 @@
         text-shadow: 0 0 5px $white;
         &:after {
           @extend %tooltip;
-          // position: absolute;
-          // border-radius: 10px;
-          // content: attr(title);
-          // font-family: verdana;
-          // color: white;
-          // font-size: em(14);
-          // padding: em(15) em(5);
-          // background: transparentize(black, 0.2);
-          // text-shadow: 0 0 0 transparent;
-          // width: 125px;
-          // margin-left: -125px;
-          // top: 40px;
-          // text-align: center;
-          // line-height: 1.5em;
-          // box-shadow: 0 0 10px 1px $shadow_color;
-          // z-index: 1000;
+        }
+        
+        @media #{$mobile} {
+          &:after {
+            display: none;
+          }
         }
       }
     }
@@ -75,6 +64,10 @@
     &:before {
       content: "\2c"; // horizontal
       font-size: 6em;
+    }
+    
+    @media #{$mobile} {
+      left: 5px;
     }
   }
   .header_description {

@@ -38,7 +38,7 @@ $webfont_directory: "/stylesheets/fonts/" !default; // edit this directory in th
   display: inline-block;
   min-width: 1em;
 
-  &:before, &:after {
+  &:before {
     font-size:1.5em;
     font-family: 'SassMeisterIcons';
   	font-style: normal;
