@@ -1,6 +1,5 @@
 %tooltip {
   position: absolute;
-/*  @include border_radius(em(8));*/
   content: attr(title);
   font-family: $secondary_font_family;
   color: white;
@@ -15,13 +14,12 @@
   line-height: 1.5em;
   box-shadow: 0 0 10px 1px $shadow_color;
   z-index: 1000;
-  
+
   @each $prefix in $prefix_defaults {
     #{$prefix}border-bottom-left-radius: em(8);
     #{$prefix}border-bottom-right-radius: em(8);
   }
 }
-
 
 .site_header {
   .logoBox {
@@ -39,7 +37,7 @@
         &:after {
           @extend %tooltip;
         }
-        
+
         @media #{$mobile} {
           &:after {
             display: none;
@@ -50,7 +48,6 @@
     .logo {
       &:hover {
         &:after {
-//          display: none;
           top: 88px;
           width: 200px;
           margin-left: -120px;
@@ -59,6 +56,8 @@
     }
   }
   .logo {
+    @extend %icon-font;
+
     color: white;
     position: relative;
     top: -28px;
@@ -67,13 +66,11 @@
     float: left;
     text-shadow: 0 0 5px darken($alpha_color, 10%);
 
-    @extend %icon-font;
-
     &:before {
-      content: "\2c"; // horizontal
+      content: "\2c";
       font-size: 6em;
     }
-    
+
     @media #{$mobile} {
       left: 5px;
     }
@@ -89,15 +86,10 @@
   text-shadow: 0 0 5px darken($alpha_color, 10%);
   float: right;
   position: relative;
-  //top: 10px;
-  //right: 15px;
 
   > li {
     padding-top:10px;
     padding-bottom:10px;
-    
-
-    
     display: block;
     float:left;
     padding-right: em(15);
@@ -106,12 +98,12 @@
     &:last-child {
       @extend %omega;
     }
-    
+
     @media #{$mobile} {
       padding-right: em(8);
     }
   }
-  
+
   img {
     @include border_radius(em(6));
     display: block;
@@ -127,23 +119,12 @@
   }
   > li:last-child {
     padding-left:em(16);
-    
+
     @media #{$mobile} {
       padding-left:em(8);
     }
   }
-  //.github-login {
-  //  &:before, &:after {
-  //    font-size:1.75em;
-  //  }
-  //
-  //  .gh-authorized &:before {
-  //    font-size:1.5em;
-  //    color: $bravo_gray;
-  //    text-shadow: 0 0 5px lighten($alpha_color, 20%);
-  //  }
-  //}
-  
+
   @media #{$mobile} {
     #info {
       display:none;
@@ -154,54 +135,48 @@
 .github {
   ul {
     display:none;
-//    padding: em(8) em(8);
   }
-  
+
   &:hover {
     background: transparentize(black, 0.4);
-    
+
     ul {
       display: block;
     }
   }
 }
 
-
 #account_actions {
   @extend %tooltip;
-  
+
   right: 0;
   padding: em(8) em(8);
   text-align: left;
   width: auto;
   min-width: 200px;
   max-width: 320px;
-  
-//  font-size: em(16);
-  //font-family: 'SourceCodePro', monospace;
-    
   background: transparentize(black, 0.2);
-  
+
   @each $prefix in $prefix_defaults {
     #{$prefix}border-top-left-radius: 0;
     #{$prefix}border-top-right-radius: 0;
   }
-  
+
   li {
     width: 100%;
     display: block;
   }
-  
+
   li:before {
     font-size: 0.75em;
     margin-right: 0.5em;
   }
-  
-  
+
   a {
     &:hover {
       color: white;
       text-shadow: none;
+
       &:after {
         display: none;
       }
