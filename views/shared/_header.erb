@@ -6,14 +6,16 @@
 
       <ul class="social_links">
         <li><a href="#" title="About SassMeister" class="info-icon" id="info"><span class="alt">About SassMeister</span></a></li>
-        <li><a href="https://github.com/jedfoster/SassMeister" class="github-icon" title="Fork this project on Github"><span class="alt">Fork this project on Github</span></a></li>
-        <li><a href="https://twitter.com/sassmeisterapp" title="Follow @sassmeisterapp on Twitter" class="twitter-icon"><span class="alt">Follow @sassmeisterapp on Twitter</span></a></li>
-        <li><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ELKSDTCSVYM3Y" title="Like SassMeister? Help keep the lights on." class="paypal-icon"><span class="alt">Like SassMeister? Help keep the lights on.</span></a></li>
-        
-        
-        
+        <li><a href="https://github.com/jedfoster/SassMeister" class="github-icon" title="Fork us on Github"><span class="alt">Fork us on Github</span></a></li>
+        <li><a href="https://twitter.com/sassmeisterapp" title="Follow @sassmeisterapp" class="twitter-icon"><span class="alt">Follow @sassmeisterapp</span></a></li>
+        <li><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ELKSDTCSVYM3Y" title="Help keep the lights on." class="paypal-icon"><span class="alt">Help keep the lights on.</span></a></li>
         <% if @github.authenticated? && session[:github_id] %>
-          <li><a title="Logged in as <%=session[:github_id]%>"><img src="http://www.gravatar.com/avatar/<%=session[:gravatar_id]%>?s=80" alt="" height="40"></a></li>
+          <li class="github"><span><img src="http://www.gravatar.com/avatar/<%=session[:gravatar_id]%>?s=80" alt="" height="40"></span>
+            <ul id="account_actions">
+              <li class="checkmark-icon">Logged in as <%=session[:github_id]%></li>
+              <li class="off-icon"><a href="/logout">Logout</a></li>
+            </ul>
+          </li>
                     
         <% else %>
           <li><a href="/authorize" class="github-login" title="Login with Github" id="github-auth"><span class="alt">Login with Github</a></li>

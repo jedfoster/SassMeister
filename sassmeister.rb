@@ -144,6 +144,15 @@ get '/authorize/return' do
 end
 
 
+get '/logout' do
+  session[:github_token] = nil
+  session[:github_id] = nil
+  session[:gravatar_id] = nil
+
+  redirect to('/')
+end
+
+
 post '/gist/?:edit?' do
   text = "// Sass v#{Gem.loaded_specs["sass"].version.to_s}"
 
