@@ -1,4 +1,4 @@
-@import "stipe/color/default_color_pallet";  // do not edit, necessary dependency for cascading defaults
+@import "stipe/color/default_color_palette";  // do not edit, necessary dependency for cascading defaults
 
 $alpha_color:$alpha_primary;
 $alpha_color_bravo:scale-color($alpha_color,$lightness:10%);
