@@ -7,6 +7,9 @@ breakpoint:
 compass:
   :gem: compass
   :import: compass
+harsh:
+  :gem: harsh
+  :import: harsh
 neat:
   :gem: neat-compass
   :import: ! 'bourbon/bourbon";
