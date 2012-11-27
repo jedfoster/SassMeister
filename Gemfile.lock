@@ -73,7 +73,7 @@ GEM
       compass (>= 0.12.2)
       modular-scale (>= 1.0.2)
       sass (>= 3.2.1)
-    stipe (0.0.4.8)
+    stipe (0.0.4.9)
       compass (>= 0.11)
       sass (>= 3.2.1)
     susy (1.0.4)

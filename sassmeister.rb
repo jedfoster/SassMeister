@@ -12,6 +12,7 @@ require 'github_api'
 
 require 'sass'
 require 'compass'
+require 'yaml'
 
 
 set :partial_template_engine, :erb
@@ -31,8 +32,6 @@ configure :production do
 end
 
 configure :development do
-  require 'yaml'
-
   helpers do
     def github(auth_token = '')
       gh_config = YAML.load_file("github.yml")
@@ -61,16 +60,7 @@ helpers do
   end
 
   def plugins
-    {
-      "bourbon" => {gem: 'bourbon-compass', import: 'bourbon/bourbon'},
-      "breakpoint" => {gem: 'breakpoint', import: 'breakpoint'},
-      "compass" => {gem: 'compass', import: 'compass'},
-      "neat" => {gem: 'neat-compass', import: "bourbon/bourbon\";\n@import \"neat/neat"},
-      "sassy-buttons" => {gem: 'sassy-buttons', import: 'sassy-buttons'},
-      "singularity.gs" => {gem: 'singularitygs', import: 'singularitygs'},
-      "stipe" => {gem: 'stipe', import: './sass/stipe'},
-      "susy" => {gem: 'susy', import: 'susy'},
-    }.each do |plugin|
+    YAML.load_file("plugins.yml").each do |plugin|
       plugin.last[:version] = Gem.loaded_specs[plugin.last[:gem]].version.to_s
     end
   end
