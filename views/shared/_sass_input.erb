@@ -11,9 +11,9 @@
     <div class="form_control">
       <label for="plugin">Extension</label>
       <select name="plugin">
-        <option value="">vanilla Sass &nbsp; (v<%=Gem.loaded_specs["sass"].version%>)</option>
+        <option value="">vanilla Sass&nbsp;&nbsp;(v<%=Gem.loaded_specs["sass"].version%>)</option>
         <% @plugins.each do |plugin| %>
-          <option value="<%=plugin.first%>"><%=plugin.first.capitalize %> &nbsp; (v<%=plugin.last[:version]%>)</option>
+          <option value="<%=plugin.first%>"><%=plugin.first %>&nbsp;&nbsp;(v<%=plugin.last[:version]%>)</option>
         <% end %>
       </select>
     </div>

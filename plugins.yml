@@ -1,29 +1,32 @@
-bourbon:
+Bourbon:
   :gem: bourbon-compass
   :import: bourbon/bourbon
-breakpoint:
+Breakpoint:
   :gem: breakpoint
   :import: breakpoint
-compass:
+"Children of IE":
+  :gem: children-of-ie
+  :import: children-of-ie
+Compass:
   :gem: compass
   :import: compass
-harsh:
+Harsh:
   :gem: harsh
   :import: harsh
-neat:
+Neat:
   :gem: neat-compass
   :import: ! 'bourbon/bourbon";
 
     @import "neat/neat'
-sassy-buttons:
+"Sassy Buttons":
   :gem: sassy-buttons
   :import: sassy-buttons
-singularity.gs:
+Singularity:
   :gem: singularitygs
   :import: singularitygs
-stipe:
+Stipe:
   :gem: stipe
   :import: ./sass/stipe
-susy:
+Susy:
   :gem: susy
   :import: susy
