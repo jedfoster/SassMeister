@@ -147,7 +147,7 @@ end
 get %r{/gist/([\d]+)} do
   @plugins = plugins
 
-  files = Github::gists.get(params[:captures].first).files
+  files = @github.gists.get(params[:captures].first).files
 
   if( ! files["#{files.keys.grep(/.+\.(scss|sass)/)[0]}"])
     syntax = plugin = ''
@@ -162,7 +162,7 @@ get %r{/gist/([\d]+)} do
       syntax = 'sass'
     end
 
-    comments = sass.scan(/^\/\/.+/).each {|x| x.sub!(/\/\/\s*/, '').sub!(/\s{1,}v[\d\.]*/, '')}
+    comments = sass.scan(/^\/\/.+/).each {|x| x.sub!(/\/\/\s*/, '').sub!(/\s{1,}v[\d\.]+.*$/, '')}
     comments.delete_if { |x| ! @plugins.key?(x)}
     plugin = comments[0]
 
