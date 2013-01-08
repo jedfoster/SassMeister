@@ -159,6 +159,8 @@ get %r{/gist/([\d]+)} do
   comments = sass.scan(/^\/\/.+/).each {|x| x.sub!(/\/\/\s*/, '').sub!(/\s{1,}v[\d\.]*/, '')}
   comments.delete_if { |x| ! @plugins.key?(x)}
 
+  sass.gsub!(/^\s*@import.*\s*/, "\n")
+
   @gist_input = {
     :sass => sass,
     :syntax => syntax,
