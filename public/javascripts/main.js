@@ -67,12 +67,6 @@ http://github.com/bgrins/bindWithDelay
     $("#sass-form").submit();
   });
 
-  $("#sass-form").on('click', function() {
-    //$('html, body').animate({
-    //  scrollTop: $("#sass-form").offset().top - 10
-    //}, 250);
-  });
-
   /* attach a submit handler to the form */
   $("#sass-form").submit(function(event) {
     event.preventDefault();
@@ -96,7 +90,12 @@ http://github.com/bgrins/bindWithDelay
    localStorage.setItem('inputs', JSON.stringify(inputs));
   });
 
-  var storedInputs = JSON.parse(localStorage.getItem('inputs'));
+  if($('#gist-input').text().length > 0) {
+    var storedInputs = JSON.parse($('#gist-input').text());
+  }
+  else {
+    var storedInputs = JSON.parse(localStorage.getItem('inputs'));
+  }
 
   if( storedInputs !== null) {
     sass.setValue(storedInputs.sass);
@@ -107,7 +106,7 @@ http://github.com/bgrins/bindWithDelay
     $("#sass-form").submit();
   }
 
-  function setHeight() {    
+  function setHeight() {
     if ($("html").width() > 50 * 18) {
       var html = $("html").height(), header = $(".site_header").height(), footer = $(".site_footer").height(), controls = $('.sass_input .controls').height() + $('.sass_input .edit-header').height() + 42;
 

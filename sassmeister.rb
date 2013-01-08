@@ -94,6 +94,7 @@ end
 
 before do
   @github = github(session[:github_token])
+  @gist_input = ''
 end
 
 
@@ -140,6 +141,31 @@ get '/logout' do
   session[:gravatar_id] = nil
 
   redirect to('/')
+end
+
+
+get %r{/gist/([\d]+)} do
+  @plugins = plugins
+
+  files = Github::gists.get(params[:captures].first).files
+  sass = files["#{files.keys.grep(/.+\.(scss|sass)/)[0]}"].content
+
+  if files["#{files.keys.grep(/.+\.(scss|sass)/)[0]}"].filename.end_with?("scss")
+    syntax = 'scss'
+  else
+    syntax = 'sass'
+  end
+
+  comments = sass.scan(/^\/\/.+/).each {|x| x.sub!(/\/\/\s*/, '').sub!(/\s{1,}v[\d\.]*/, '')}
+  comments.delete_if { |x| ! @plugins.key?(x)}
+
+  @gist_input = {
+    :sass => sass,
+    :syntax => syntax,
+    :plugin => comments[0]
+  }.to_json
+
+  erb :index
 end
 
 
