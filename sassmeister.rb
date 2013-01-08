@@ -148,23 +148,32 @@ get %r{/gist/([\d]+)} do
   @plugins = plugins
 
   files = Github::gists.get(params[:captures].first).files
-  sass = files["#{files.keys.grep(/.+\.(scss|sass)/)[0]}"].content
 
-  if files["#{files.keys.grep(/.+\.(scss|sass)/)[0]}"].filename.end_with?("scss")
-    syntax = 'scss'
+  if( ! files["#{files.keys.grep(/.+\.(scss|sass)/)[0]}"])
+    syntax = plugin = ''
+    sass = "// Sorry, I couldn't find any valid Sass in that Gist."
+
   else
-    syntax = 'sass'
+    sass = files["#{files.keys.grep(/.+\.(scss|sass)/)[0]}"].content
+
+    if files["#{files.keys.grep(/.+\.(scss|sass)/)[0]}"].filename.end_with?("scss")
+      syntax = 'scss'
+    else
+      syntax = 'sass'
+    end
+
+    comments = sass.scan(/^\/\/.+/).each {|x| x.sub!(/\/\/\s*/, '').sub!(/\s{1,}v[\d\.]*/, '')}
+    comments.delete_if { |x| ! @plugins.key?(x)}
+    plugin = comments[0]
+
+    sass.gsub!(/^\s*(@import.*)\s*/, "\n// #{'\1'}\n\n")
   end
 
-  comments = sass.scan(/^\/\/.+/).each {|x| x.sub!(/\/\/\s*/, '').sub!(/\s{1,}v[\d\.]*/, '')}
-  comments.delete_if { |x| ! @plugins.key?(x)}
-
-  sass.gsub!(/^\s*(@import.*)\s*/, "\n// #{'\1'}\n\n")
 
   @gist_input = {
-    :sass => sass,
     :syntax => syntax,
-    :plugin => comments[0]
+    :plugin => plugin,
+    :sass => sass
   }.to_json
 
   erb :index
