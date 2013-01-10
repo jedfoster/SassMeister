@@ -66,18 +66,28 @@ helpers do
   end
 
   def import_plugin(params)
-    if plugins.has_key?(params[:plugin])
-      require 'bourbon-compass' if params[:plugin] == 'neat'
+    puts plugins
+    
+    params[:plugin].each do |plugin|
+      
+      
+      puts plugin
+      
+      
+      
+      if plugins.has_key?(plugin)
+        require 'bourbon-compass' if plugin == 'neat'
 
-      require plugins[params[:plugin]][:gem]
+        require plugins[plugin][:gem]
 
-      Compass.sass_engine_options[:load_paths].each do |path|
-        Sass.load_paths << path
+        Compass.sass_engine_options[:load_paths].each do |path|
+          Sass.load_paths << path
+        end
+
+        sass = "@import \"#{plugins[plugin][:import]}\"#{";" if params[:syntax] == 'scss'}\n\n"
+      else
+        sass = ''
       end
-
-      sass = "@import \"#{plugins[params[:plugin]][:import]}\"#{";" if params[:syntax] == 'scss'}\n\n#{params[:sass]}"
-    else
-      sass = params[:sass]
     end
   end
 
@@ -106,7 +116,9 @@ end
 
 
 post '/compile' do
-  sass = import_plugin(params)
+  # puts params[:plugin].inspect
+  
+  sass = "#{import_plugin(params)}#{params[:sass]}"  
 
   compile_sass(params, sass)
 end
