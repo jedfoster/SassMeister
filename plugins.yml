@@ -4,9 +4,9 @@ Bourbon:
 Breakpoint:
   :gem: breakpoint
   :import: breakpoint
-"Children of IE":
-  :gem: children-of-ie
-  :import: children-of-ie
+Toolkit:
+  :gem: toolkit
+  :import: toolkit
 Compass:
   :gem: compass
   :import: compass
