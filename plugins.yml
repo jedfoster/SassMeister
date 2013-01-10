@@ -4,9 +4,6 @@ Bourbon:
 Breakpoint:
   :gem: breakpoint
   :import: breakpoint
-Toolkit:
-  :gem: toolkit
-  :import: toolkit
 Compass:
   :gem: compass
   :import: compass
@@ -30,3 +27,6 @@ Stipe:
 Susy:
   :gem: susy
   :import: susy
+Toolkit:
+  :gem: toolkit
+  :import: toolkit
