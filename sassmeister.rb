@@ -77,6 +77,8 @@ helpers do
   end
 
   def import_plugin(params)
+    sass = ''
+
     if plugins.has_key?(params[:plugin])
       require 'bourbon-compass' if params[:plugin] == 'Neat'
 
@@ -86,10 +88,14 @@ helpers do
         Sass.load_paths << path
       end
 
-      sass = "@import \"#{plugins[params[:plugin]][:import]}\"#{";" if params[:syntax] == 'scss'}\n\n#{params[:sass]}"
-    else
-      sass = params[:sass]
+      imports = "#{plugins[params[:plugin]][:import]}"
+
+      sass << "@import \"#{imports}\"#{";" if params[:syntax] == 'scss'}\n\n" if ! imports.empty?
+
     end
+
+    sass << params[:sass]
+
   end
 
   def compile_sass(params, sass)
