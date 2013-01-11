@@ -17,7 +17,7 @@ require 'yaml'
 
 set :partial_template_engine, :erb
 
-enable :sessions
+# enable :sessions
 
 configure :production do
   helpers do
@@ -28,6 +28,12 @@ configure :production do
         config.oauth_token = auth_token
       end
     end
+
+    use Rack::Session::Cookie, :key => 'sassmeister.com',
+                               :domain => 'sassmeister.com',
+                               :path => '/',
+                               :expire_after => 7776000, # 90 days, in seconds
+                               :secret => ENV['COOKIE_SECRET']
   end
 end
 
@@ -42,6 +48,11 @@ configure :development do
         config.oauth_token = auth_token
       end
     end
+
+    use Rack::Session::Cookie, :key => 'sassmeister.dev',
+                               :path => '/',
+                               :expire_after => 7776000, # 90 days, in seconds
+                               :secret => 'local'
   end
 end
 
