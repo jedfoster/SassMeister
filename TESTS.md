@@ -49,15 +49,6 @@ Each block of SCSS should return valid CSS with no warnings or errors when teste
     }
 
 
-## Neat ##
-
-    section {
-      @include outer-container;
-      aside { @include span-columns(3); }
-      article { @include span-columns(9); }
-    }
-
-
 ## Harsh ##
 
     .random {
@@ -86,6 +77,15 @@ Each block of SCSS should return valid CSS with no warnings or errors when teste
 
     .angled {
       @include harsh($angle: -32deg);
+    }
+
+
+## Neat ##
+
+    section {
+      @include outer-container;
+      aside { @include span-columns(3); }
+      article { @include span-columns(9); }
     }
 
 
@@ -149,3 +149,18 @@ Each block of SCSS should return valid CSS with no warnings or errors when teste
     .ag8 { @include span-columns(2,4); }
     .ag9 { @include span-columns(2 omega,4); }
     .ag10 { clear: both; }
+
+
+## Toolkit ##
+
+    .ratio-16-9 {
+      @include intrinsic-ratio;
+    }
+
+    .ratio-4-3-75 {
+      @include intrinsic-ratio(4/3, 75%);
+    }
+
+    .ratio-7-8-75-iframe-no-extend {
+      @include intrinsic-ratio(7/8, 75%, 'iframe', false);
+    }
