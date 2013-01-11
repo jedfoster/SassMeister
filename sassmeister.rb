@@ -78,7 +78,7 @@ helpers do
 
   def import_plugin(params)
     if plugins.has_key?(params[:plugin])
-      require 'bourbon-compass' if params[:plugin] == 'neat'
+      require 'bourbon-compass' if params[:plugin] == 'Neat'
 
       require plugins[params[:plugin]][:gem]
 
