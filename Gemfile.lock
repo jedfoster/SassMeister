@@ -29,6 +29,8 @@ GEM
       compass (>= 0.11)
     faraday (0.8.4)
       multipart-post (~> 1.1)
+    fittext (0.0.5)
+      compass (>= 0.10.0.rc3)
     fssm (0.2.9)
     github_api (0.8.6)
       faraday (~> 0.8.1)
@@ -118,6 +120,7 @@ DEPENDENCIES
   compass
   css-slideshow
   fancy-buttons
+  fittext
   github_api
   harsh
   jammit

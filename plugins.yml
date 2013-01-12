@@ -18,6 +18,9 @@ Compass:
 "Fancy Buttons":
   :gem: fancy-buttons
   :import: fancy-buttons
+Fittext:
+  :gem: fittext
+  :import: fittext
 Harsh:
   :gem: harsh
   :import: harsh
