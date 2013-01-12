@@ -63,6 +63,14 @@ $webfont_directory: "/stylesheets/fonts/" !default; // edit this directory in th
   }
 }
 
+.bookmark-icon {
+  @extend %icon-font;
+
+  &:before {
+    content: '\e000';
+  }
+}
+
 // Github fork
 .github-icon {
   @extend %icon-font;
