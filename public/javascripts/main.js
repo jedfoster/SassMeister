@@ -153,6 +153,11 @@ http://github.com/bgrins/bindWithDelay
   });
 
   setHeight();
+  
+  $(".chzn-select").chosen().change(function() {
+    console.log($(this));
+  }); 
+  $(".chzn-select-deselect").chosen({allow_single_deselect:true});
 
   $('#gist-it').on('click', function() {
     /* stop form from submitting normally */
