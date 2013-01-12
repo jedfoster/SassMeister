@@ -42,10 +42,49 @@ Each block of SCSS should return valid CSS with no warnings or errors when teste
     }
 
 
+## Color Schemer ##
+
+    $primary: cs-primary();
+    $secondary: darken(cs-secondary(), 10%); // too light, darkening this up a bit.
+    $tertiary: cs-tertiary();
+    $quadrary: cs-quadrary();
+
+    .primary {
+      color: $primary
+    }
+
+    .secondary {
+      color: $secondary
+    }
+
+    .tertiary {
+      color: $tertiary
+    }
+
+    .quadrary {
+      color: $quadrary
+    }
+
+
 ## Compass ##
 
     #wrapper {
       @include columns(20em 2);
+    }
+
+
+## Compass Slideshow ##
+
+    .slideshow {
+      @include slideshow;
+    }
+
+
+## Fancy Buttons ##
+
+    button {
+      @include fancy-button-structure(26px, 1em, 4px);
+      @include fancy-button-colors(#124c89, adjust-hue(#124c89, -120), darken(adjust-hue(#124c89, -120), 6));
     }
 
 
@@ -80,12 +119,26 @@ Each block of SCSS should return valid CSS with no warnings or errors when teste
     }
 
 
+## Modular Scale ##
+
+    .lace {
+      width: ms(7, 16px, golden() fourth() );
+    }
+
+
 ## Neat ##
 
     section {
       @include outer-container;
       aside { @include span-columns(3); }
       article { @include span-columns(9); }
+    }
+
+
+## Responsive Sass ##
+
+    .block {
+      @include mobile-landscape(960, 240, "/images/high-res.png");
     }
 
 
@@ -96,6 +149,32 @@ Each block of SCSS should return valid CSS with no warnings or errors when teste
     .blue { @include sassy-button-gradient("simple", #4d8ccd); }
 
     .green { @include sassy-button-gradient("glass", #8cbe5f); }
+
+
+## Sassy Math ##
+
+    $fraction: 2.5;
+
+    $fraction-2: to-fraction(2.5);
+
+    #tester {
+      numerator: numerator($fraction);
+      denominator: denominator($fraction);
+      to-fraction: to-fraction($fraction);
+      to-decimal: to-decimal(3/2);
+      exponent: exponent(8, 2, 3);
+      power: power(20, pi());
+      sqrt: sqrt(16129);
+      nth-root: nth-root(27, 3);
+      factorial: factorial(9);
+      pi: pi();
+      e: e();
+      ln: ln(e());
+      log10: log10(10);
+      golden: golden-ratio();
+      is-int: is-int(4);
+      is-float: is-float(2);
+    }
 
 
 ## Singularity.gs ##
