@@ -34,10 +34,6 @@ $webfont_directory: "/stylesheets/fonts/" !default; // edit this directory in th
 	@include font-face ($font_family: 'SassMeisterIcons', $font-file:  'sassmeistericons-webfont', $font_weight: normal, $font_style: normal);
 }
 
-@font-face {
-  @include font-face ($font_family: 'bookmark', $font-file:  'bookmark', $font_weight: normal, $font_style: normal);
-}
-
 %icon-font {
   display: inline-block;
   min-width: 1em;
@@ -71,7 +67,6 @@ $webfont_directory: "/stylesheets/fonts/" !default; // edit this directory in th
   @extend %icon-font;
 
   &:before {
-    font-family: 'bookmark';
     content: '\e000';
   }
 }
