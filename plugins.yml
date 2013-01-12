@@ -4,26 +4,52 @@ Bourbon:
 Breakpoint:
   :gem: breakpoint
   :import: breakpoint
+"Color Schemer":
+  :gem: color-schemer
+  :import: color-schemer
 Compass:
   :gem: compass
   :import: compass
+"Compass Slideshow":
+  :gem: css-slideshow
+  :import: ! 'compass";
+
+    @import "css-slideshow'
+"Fancy Buttons":
+  :gem: fancy-buttons
+  :import: fancy-buttons
+Fittext:
+  :gem: fittext
+  :import: fittext
 Harsh:
   :gem: harsh
   :import: harsh
+"Modular Scale":
+  :gem: modular-scale
+  :import: modular-scale
 Neat:
   :gem: neat-compass
   :import: ! 'bourbon/bourbon";
 
     @import "neat/neat'
+"Responsive Sass":
+  :gem: responsive-sass
+  :import: responsive-sass
+Salsa:
+  :gem: salsa
+  :import: salsa
 "Sassy Buttons":
   :gem: sassy-buttons
   :import: sassy-buttons
+"Sassy Math":
+  :gem: sassy-math
+  :import: 
 Singularity:
   :gem: singularitygs
   :import: singularitygs
 Stipe:
   :gem: stipe
-  :import: ./sass/stipe
+  :import: stipe/manifest
 Susy:
   :gem: susy
   :import: susy

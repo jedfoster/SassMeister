@@ -17,7 +17,7 @@ require 'yaml'
 
 set :partial_template_engine, :erb
 
-enable :sessions
+# enable :sessions
 
 configure :production do
   helpers do
@@ -28,6 +28,12 @@ configure :production do
         config.oauth_token = auth_token
       end
     end
+
+    use Rack::Session::Cookie, :key => 'sassmeister.com',
+                               :domain => 'sassmeister.com',
+                               :path => '/',
+                               :expire_after => 7776000, # 90 days, in seconds
+                               :secret => ENV['COOKIE_SECRET']
   end
 end
 
@@ -42,6 +48,11 @@ configure :development do
         config.oauth_token = auth_token
       end
     end
+
+    use Rack::Session::Cookie, :key => 'sassmeister.dev',
+                               :path => '/',
+                               :expire_after => 7776000, # 90 days, in seconds
+                               :secret => 'local'
   end
 end
 
@@ -66,17 +77,19 @@ helpers do
   end
 
   def import_plugin(params)
+    sass = ''
+
     puts plugins
-    
+
     params[:plugin].each do |plugin|
-      
-      
+
+
       puts plugin
-      
-      
-      
+
+
+
       if plugins.has_key?(plugin)
-        require 'bourbon-compass' if plugin == 'neat'
+        require 'bourbon-compass' if plugin == 'Neat'
 
         require plugins[plugin][:gem]
 
@@ -84,11 +97,14 @@ helpers do
           Sass.load_paths << path
         end
 
-        sass = "@import \"#{plugins[plugin][:import]}\"#{";" if params[:syntax] == 'scss'}\n\n"
-      else
-        sass = ''
+        imports = "#{plugins[params[:plugin]][:import]}"
+
+        sass << "@import \"#{imports}\"#{";" if params[:syntax] == 'scss'}\n\n" if ! imports.empty?
       end
     end
+
+    sass << params[:sass]
+
   end
 
   def compile_sass(params, sass)
@@ -117,8 +133,8 @@ end
 
 post '/compile' do
   # puts params[:plugin].inspect
-  
-  sass = "#{import_plugin(params)}#{params[:sass]}"  
+
+  sass = "#{import_plugin(params)}#{params[:sass]}"
 
   compile_sass(params, sass)
 end
