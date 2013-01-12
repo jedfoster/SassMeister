@@ -32,6 +32,9 @@ Neat:
 "Responsive Sass":
   :gem: responsive-sass
   :import: responsive-sass
+Salsa:
+  :gem: salsa
+  :import: salsa
 "Sassy Buttons":
   :gem: sassy-buttons
   :import: sassy-buttons

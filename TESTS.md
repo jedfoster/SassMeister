@@ -142,6 +142,22 @@ Each block of SCSS should return valid CSS with no warnings or errors when teste
     }
 
 
+## Salsa ##
+
+    // Nested grids AG test
+    .e1 { @include grid(2); }
+    .e2 { @include grid(6 container); }
+    .e3 { @include grid(2); }
+    .e4 { @include grid(3/6); }
+    .e5 { @include grid(3/6); }
+    .e6 { @include grid(2/6); }
+    .e7 { @include grid(4/6 container); }
+    .e8 { @include grid(2/4); }
+    .e9 { @include grid(2/4); }
+    .e10 { @include grid(100%); }
+
+
+
 ## Sassy Buttons ##
 
     .red { @include sassy-button-gradient("matte", #e86a43); }
