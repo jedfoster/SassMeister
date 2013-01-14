@@ -1,6 +1,7 @@
 input[type=text], input[type=password], input[type="date"], select {
 	@extend %input_fields;
 	height:2.5em;
+  border: 1px solid $golf_gray;
 }
 
 input[type=text], input[type=password], input[type="date"] {

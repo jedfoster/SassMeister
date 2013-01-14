@@ -1,21 +1,17 @@
 <form action="/compile" method="post" accept-charset="utf-8" class="sass_input" id="sass-form">
   <div class="controls">
     <div class="form_control">
-      <label for="syntax">Syntax</label>
-      
-      <label><input type="radio" name="syntax" value="scss"> SCSS</label>
-      <label><input type="radio" name="syntax" value="sass"> Sass</label>
-      
-      <!-- <select name="syntax">
+      <label for="syntax">Syntax</label>      
+      <select name="syntax">
         <option value="scss">SCSS</option>
         <option value="sass">Sass</option>
-      </select> -->
+      </select>
     </div>
 
     <div class="form_control">
       <label for="plugin">Extension</label>
       <select name="plugin" data-placeholder="vanilla Sass&nbsp;&nbsp;(v<%=Gem.loaded_specs["sass"].version%>)" multiple class="chzn-select">
-        <option value="">vanilla Sass&nbsp;&nbsp;(v<%=Gem.loaded_specs["sass"].version%>)</option>
+        <!-- <option value="">vanilla Sass&nbsp;&nbsp;(v<%=Gem.loaded_specs["sass"].version%>)</option> -->
         <% @plugins.each do |plugin| %>
           <option value="<%=plugin.first%>"><%=plugin.first %>&nbsp;&nbsp;(v<%=plugin.last[:version]%>)</option>
         <% end %>

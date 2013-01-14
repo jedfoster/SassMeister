@@ -45,6 +45,16 @@ html {
     }
   }
   margin-bottom: em(16);
+
+  &:nth-child(1) {
+    @include grid(2.125, alpha);
+  }
+  &:nth-child(2) {
+    @include grid(8);
+  }
+  &:nth-child(3) {
+    @include grid(2.125, omega);
+  }
 }
 
 .css_output .controls {
