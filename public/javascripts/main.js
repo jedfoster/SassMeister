@@ -41,6 +41,32 @@ http://github.com/bgrins/bindWithDelay
 })(jQuery);
 /* --- END bindWithDelay --- */
 
+(function($) {
+  // Overload Chosen's selected choice builder to rewrite the displayed value
+  Chosen.prototype.choice_build = function(item) {
+    var choice_id, html, link,
+      _this = this;
+    if (this.is_multiple && this.max_selected_options <= this.choices) {
+      this.form_field_jq.trigger("liszt:maxselected", {
+        chosen: this
+      });
+      return false;
+    }
+    choice_id = this.container_id + "_c_" + item.array_index;
+    this.choices += 1;
+    if (item.disabled) {
+      html = '<li class="search-choice search-choice-disabled" id="' + choice_id + '"><span>' + item.html + '</span></li>';
+    } else {
+      html = '<li class="search-choice" id="' + choice_id + '"><span>' + item.html.replace(/(&nbsp;)+\(v.+$/, '') + '</span><a href="javascript:void(0)" class="search-choice-close" rel="' + item.array_index + '"></a></li>';
+    }
+    this.search_container.before(html);
+    link = $('#' + choice_id).find("a").first();
+    return link.click(function(evt) {
+      return _this.choice_destroy_link_click(evt);
+    });
+  };
+})(jQuery);
+
 
 (function($) {
   var sass = ace.edit("sass");
@@ -157,7 +183,7 @@ http://github.com/bgrins/bindWithDelay
   $(".chzn-select").chosen().change(function() {
     console.log($(this));
   }); 
-  $(".chzn-select-deselect").chosen({allow_single_deselect:true});
+  $(".chzn-select-deselect").chosen({allow_single_deselect:true, max_selected_options:3});
 
   $('#gist-it').on('click', function() {
     /* stop form from submitting normally */
