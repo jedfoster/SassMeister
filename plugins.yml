@@ -1,58 +1,76 @@
 Bourbon:
   :gem: bourbon-compass
   :import: bourbon/bourbon
+  :url: http://bourbon.io/
 Breakpoint:
   :gem: breakpoint
   :import: breakpoint
+  :url: https://github.com/canarymason/breakpoint
 "Color Schemer":
   :gem: color-schemer
   :import: color-schemer
+  :url: https://github.com/scottkellum/color-schemer
 Compass:
   :gem: compass
   :import: compass
+  :url: http://compass-style.org
 "Compass Slideshow":
   :gem: css-slideshow
   :import: ! 'compass";
 
     @import "css-slideshow'
+  :url: https://github.com/ericam/compass-css-slideshow
 "Fancy Buttons":
   :gem: fancy-buttons
   :import: fancy-buttons
+  :url: http://brandonmathis.com/projects/fancy-buttons/
 Fittext:
   :gem: fittext
   :import: fittext
+  :url: http://www.bookcasey.com/fittext/
 Harsh:
   :gem: harsh
   :import: harsh
+  :url: http://www.bookcasey.com/harsh/
 "Modular Scale":
   :gem: modular-scale
   :import: modular-scale
+  :url: https://github.com/scottkellum/modular-scale
 Neat:
   :gem: neat-compass
   :import: ! 'bourbon/bourbon";
 
     @import "neat/neat'
+  :url: http://neat.bourbon.io
 "Responsive Sass":
   :gem: responsive-sass
   :import: responsive-sass
+  :url: http://ntreadway.github.com/responsive-sass/welcome
 Salsa:
   :gem: salsa
   :import: salsa
+  :url: http://tsi.github.com/Salsa/
 "Sassy Buttons":
   :gem: sassy-buttons
   :import: sassy-buttons
+  :url: http://jaredhardy.com/sassy-buttons/
 "Sassy Math":
   :gem: sassy-math
-  :import: 
-Singularity:
+  :import: # This space intentionally left blank 
+  :url: https://github.com/scottkellum/Sassy-math
+Singularity.gs:
   :gem: singularitygs
   :import: singularitygs
+  :url: https://github.com/scottkellum/singularity
 Stipe:
   :gem: stipe
   :import: stipe/manifest
+  :url: https://github.com/Anotheruiguy/stipe
 Susy:
   :gem: susy
   :import: susy
+  :url: http://susy.oddbird.net
 Toolkit:
   :gem: toolkit
   :import: toolkit
+  :url: https://github.com/Snugug/toolkit

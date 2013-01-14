@@ -68,6 +68,13 @@ helpers do
     def random
       shuffle.first
     end
+    
+
+    def to_sentence
+      length < 2 ? first.to_s : "#{self[0..-2] * ', '}, and #{last}"
+    end
+
+    
   end
 
   def plugins
