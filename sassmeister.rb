@@ -225,7 +225,7 @@ post '/gist/?:edit?' do
         content: "#{css}"
       },
       sass_file => {
-        content: "#{text}/n/n#{sass}"
+        content: "#{text}\n\n#{sass}"
       }
     })
   else
