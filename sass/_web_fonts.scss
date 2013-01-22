@@ -51,7 +51,11 @@ $webfont_directory: "/stylesheets/fonts/" !default; // edit this directory in th
     text-decoration: none;
   }
   .alt {
-    display: none;
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    display: block;
+    width: 1em;
   }
 }
 

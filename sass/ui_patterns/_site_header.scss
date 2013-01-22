@@ -50,7 +50,7 @@
         &:after {
           top: 88px;
           width: 200px;
-          margin-left: -120px;
+          margin-left: em(-15);
         }
       }
     }
@@ -89,7 +89,7 @@
 
   > li {
     padding-top:10px;
-    padding-bottom:10px;
+    padding-bottom:3px;
     display: block;
     float:left;
     padding-right: em(15);
@@ -119,6 +119,7 @@
   }
   > li:last-child {
     padding-left:em(16);
+    padding-bottom: 10px;
 
     @media #{$mobile} {
       padding-left:em(8);
