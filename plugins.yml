@@ -42,6 +42,10 @@ Neat:
 
     @import "neat/neat'
   :url: http://neat.bourbon.io
+"Responsive Calculator":
+  :gem: rwdcalc
+  :import: rwdcalc
+  :url: https://github.com/sturobson/Responsive-Calculator/tree/rwdcalcSass/SCSSMixin
 "Responsive Sass":
   :gem: responsive-sass
   :import: responsive-sass
