@@ -143,6 +143,13 @@ Each block of SCSS should return valid CSS with no warnings or errors when teste
     }
 
 
+## Responsive Calculator ##
+
+    .foo {
+      margin: rwdcalc(10 10px 13 1em, 960);
+    }
+
+
 ## Responsive Sass ##
 
     .block {
