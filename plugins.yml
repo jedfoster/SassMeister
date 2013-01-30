@@ -78,3 +78,7 @@ Toolkit:
   :gem: toolkit
   :import: toolkit
   :url: https://github.com/Snugug/toolkit
+"Zen Grids":
+  :gem: zen-grids
+  :import: zen
+  :url: http://zengrids.com/
