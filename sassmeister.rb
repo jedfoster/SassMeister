@@ -168,7 +168,7 @@ get '/logout' do
 end
 
 
-get %r{/gist/([\d]+)} do
+get %r{/gist(?:/[\w]*)*/([\d]+)} do
   @plugins = plugins
 
   files = @github.gists.get(params[:captures].first).files
