@@ -13,7 +13,7 @@ require 'github_api'
 require 'sass'
 require 'compass'
 require 'yaml'
-
+require 'sass/exec'
 
 set :partial_template_engine, :erb
 
@@ -165,6 +165,63 @@ get '/logout' do
   session[:gravatar_id] = nil
 
   redirect to('/')
+end
+
+
+post '/syntax' do 
+  # Sass::CSS.new(params[:sass]).render(params[:syntax])
+  
+  # Sass::Exec::SassConvert.new(params[:sass]).process_result
+  
+  # puts params[:syntax]
+  # puts params[:sass]
+  
+  sass_string = StringIO.new('$color: red
+
+.box
+    color: $color
+
+.foo
+    color: blue')
+  
+  scss_string = StringIO.new('$color: red;
+
+.box {
+    color: $color;
+}
+
+.foo {
+    color: blue;
+}')
+  
+  # stdout = IO.new(1)
+  
+  
+  
+  if params[:syntax] == 'scss'
+    # puts 'scss'
+    
+    # STDIN = scss_string
+    
+    # io = IO.new(0, )
+    # io << sass_string
+    
+    
+    
+    
+    
+     sassConvert = Sass::Exec::SassConvert.new(['-F','sass', '-T','scss', sass_string])
+puts sassConvert.parse!
+  else
+    # io = IO.new(0)
+    # io << scss_string
+    
+     sassConvert= Sass::Exec::SassConvert.new(["-F","scss", "-T","sass", scss_string])
+    puts sassConvert.parse!
+  end
+  
+  
+  "#{sassConvert.to_s} FOOOOO"
 end
 
 
