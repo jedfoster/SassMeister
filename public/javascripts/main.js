@@ -89,6 +89,18 @@ http://github.com/bgrins/bindWithDelay
         $.post('/syntax', inputs,
           function( data ) {
             console.log(data);
+            
+            sass.setValue(data);
+            
+            
+            var inputs = {
+              sass: data,
+              syntax: $('select[name="syntax"]').val(),
+              plugin: $('select[name="plugin"]').val(),
+              output: $('select[name="output"]').val()
+            }
+
+            localStorage.setItem('inputs', JSON.stringify(inputs));
           }
         );
 

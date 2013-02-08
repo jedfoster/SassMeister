@@ -13,7 +13,6 @@ require 'github_api'
 require 'sass'
 require 'compass'
 require 'yaml'
-require 'sass/exec'
 
 set :partial_template_engine, :erb
 
@@ -68,13 +67,13 @@ helpers do
     def random
       shuffle.first
     end
-    
+
 
     def to_sentence
       length < 2 ? first.to_s : "#{self[0..-2] * ', '}, and #{last}"
     end
 
-    
+
   end
 
   def plugins
@@ -168,60 +167,47 @@ get '/logout' do
 end
 
 
-post '/syntax' do 
-  # Sass::CSS.new(params[:sass]).render(params[:syntax])
-  
-  # Sass::Exec::SassConvert.new(params[:sass]).process_result
-  
-  # puts params[:syntax]
-  # puts params[:sass]
-  
-  sass_string = StringIO.new('$color: red
+post '/syntax' do
+  require 'sass/exec'
 
-.box
-    color: $color
-
-.foo
-    color: blue')
-  
-  scss_string = StringIO.new('$color: red;
-
-.box {
-    color: $color;
-}
-
-.foo {
-    color: blue;
-}')
-  
-  # stdout = IO.new(1)
-  
-  
+  old_syntax = 'scss'
+  new_syntax = 'sass'
   
   if params[:syntax] == 'scss'
-    # puts 'scss'
-    
-    # STDIN = scss_string
-    
-    # io = IO.new(0, )
-    # io << sass_string
-    
-    
-    
-    
-    
-     sassConvert = Sass::Exec::SassConvert.new(['-F','sass', '-T','scss', sass_string])
-puts sassConvert.parse!
-  else
-    # io = IO.new(0)
-    # io << scss_string
-    
-     sassConvert= Sass::Exec::SassConvert.new(["-F","scss", "-T","sass", scss_string])
-    puts sassConvert.parse!
+    old_syntax = 'sass'
+    new_syntax = 'scss'
   end
   
+  puts params[:syntax]
+  puts '-----'
   
-  "#{sassConvert.to_s} FOOOOO"
+  # old_syntax = old_syntax.to_sym
+  # new_syntax = new_syntax.to_sym
+  
+  # ::Sass::Engine.new(params[:sass], {:from => old_syntax, :to => new_syntax, :syntax => old_syntax}).to_tree.send("to_#{new_syntax}")
+  
+  puts params[:sass]
+  puts '-----'
+  
+  
+
+
+
+  # 
+  # if params[:syntax] == 'scss'
+  #   
+  # 
+  #   sassConvert = ::Sass::Engine.new(params[:sass], {:from => :sass, :to => :scss, :syntax => :sass}).to_tree.send("to_scss")
+  # else
+  # 
+  #   sassConvert = ::Sass::Engine.new(params[:sass], {:from => :scss, :to => :sass, :syntax => :scss}).to_tree.send("to_sass")
+  # end
+  # 
+
+  ::Sass::Engine.new(params[:sass], {:from => old_syntax.to_sym, :to => new_syntax.to_sym, :syntax => old_syntax.to_sym}).to_tree.send("to_#{new_syntax}").chomp
+
+  
+  
 end
 
 
