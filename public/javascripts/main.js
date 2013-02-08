@@ -65,53 +65,24 @@ http://github.com/bgrins/bindWithDelay
   $('select').on('change', function() {
     _gaq.push(['_trackEvent', 'Form', 'Control', this.value]);
 
-    console.log($(this).attr("name"));
-
     if($(this).attr("name").match(/syntax/)) {
+      var inputs = {
+        sass: sass.getValue(),
+        syntax: $('select[name="syntax"]').val(),
+        plugin: $('select[name="plugin"]').val(),
+        output: $('select[name="output"]').val()
+      }
 
-      // $("#sass-form").submit();
-      
-      
+      ///* Send the data using post and put the results in a div */
+      $.post('/sass-convert', inputs,
+        function( data ) {
+          sass.setValue(data);
 
-        /* stop form from submitting normally */
-        // event.preventDefault();
+          inputs.sass = data;
 
-        _gaq.push(['_trackEvent', 'SyntaxChange']);
-
-        var inputs = {
-          sass: sass.getValue(),
-          syntax: $('select[name="syntax"]').val(),
-          plugin: $('select[name="plugin"]').val(),
-          output: $('select[name="output"]').val()
+          localStorage.setItem('inputs', JSON.stringify(inputs));
         }
-
-        ///* Send the data using post and put the results in a div */
-        $.post('/syntax', inputs,
-          function( data ) {
-            console.log(data);
-            
-            sass.setValue(data);
-            
-            
-            var inputs = {
-              sass: data,
-              syntax: $('select[name="syntax"]').val(),
-              plugin: $('select[name="plugin"]').val(),
-              output: $('select[name="output"]').val()
-            }
-
-            localStorage.setItem('inputs', JSON.stringify(inputs));
-          }
-        );
-
-      
-      
-      
-      
-      
-      
-      
-      
+      );
     }
     else {
       $("#sass-form").submit();

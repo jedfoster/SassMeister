@@ -167,7 +167,7 @@ get '/logout' do
 end
 
 
-post '/syntax' do
+post '/sass-convert' do
   require 'sass/exec'
 
   old_syntax = 'scss'
@@ -177,37 +177,8 @@ post '/syntax' do
     old_syntax = 'sass'
     new_syntax = 'scss'
   end
-  
-  puts params[:syntax]
-  puts '-----'
-  
-  # old_syntax = old_syntax.to_sym
-  # new_syntax = new_syntax.to_sym
-  
-  # ::Sass::Engine.new(params[:sass], {:from => old_syntax, :to => new_syntax, :syntax => old_syntax}).to_tree.send("to_#{new_syntax}")
-  
-  puts params[:sass]
-  puts '-----'
-  
-  
-
-
-
-  # 
-  # if params[:syntax] == 'scss'
-  #   
-  # 
-  #   sassConvert = ::Sass::Engine.new(params[:sass], {:from => :sass, :to => :scss, :syntax => :sass}).to_tree.send("to_scss")
-  # else
-  # 
-  #   sassConvert = ::Sass::Engine.new(params[:sass], {:from => :scss, :to => :sass, :syntax => :scss}).to_tree.send("to_sass")
-  # end
-  # 
 
   ::Sass::Engine.new(params[:sass], {:from => old_syntax.to_sym, :to => new_syntax.to_sym, :syntax => old_syntax.to_sym}).to_tree.send("to_#{new_syntax}").chomp
-
-  
-  
 end
 
 
