@@ -76,6 +76,7 @@ http://github.com/bgrins/bindWithDelay
     var inputs = {
       sass: sass.getValue(),
       syntax: $('select[name="syntax"]').val(),
+      original_syntax: $('select[name="syntax"]').data('orignal'),
       plugin: $('select[name="plugin"]').val(),
       output: $('select[name="output"]').val()
     }
@@ -83,7 +84,15 @@ http://github.com/bgrins/bindWithDelay
     /* Post the form and handle the returned data */
     $.post($(this).attr('action'), inputs,
       function( data ) {
-        css.setValue(data,-1);
+        data = JSON.parse(data);
+
+        css.setValue(data.css,-1);
+
+        $('select[name="syntax"]').data('orignal', inputs.syntax);
+
+        if(data.sass.length > 0) {
+          sass.setValue(data.sass,-1);
+        }
       }
     );
 
@@ -100,7 +109,7 @@ http://github.com/bgrins/bindWithDelay
   if( storedInputs !== null) {
     sass.setValue(storedInputs.sass);
     sass.clearSelection();
-    $('select[name="syntax"]').val(storedInputs.syntax);
+    $('select[name="syntax"]').val(storedInputs.syntax).data('orignal', storedInputs.syntax);
     $('select[name="plugin"]').val(storedInputs.plugin);
     $('select[name="output"]').val(storedInputs.output);
     $("#sass-form").submit();
