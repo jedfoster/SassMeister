@@ -176,17 +176,27 @@ http://github.com/bgrins/bindWithDelay
       output: $('select[name="output"]').val()
     }
 
-    var action = '', confirmationText = 'Your Gist is ready.';
+    var action = '', confirmationText = 'is ready';
 
     if($('#gist-it').data('gist-save') == 'edit') {
       action = '/' + $('#gist-it').data('gist-save');
-      confirmationText = 'Your Gist has been updated.';
+      confirmationText = 'has been updated';
     }
 
     ///* Send the data using post and put the results in a div */
     $.post('/gist' + action, inputs,
       function( data ) {
-        buildModal(confirmationText + ' <a href="' + data + '" target="_blank">See it here.<a>');
+        buildModal('<a href="https://gist.github.com/' + data + '" target="_blank">Your Gist</a> ' + confirmationText + ', and here\'s the <a href="/gist/' + data + '">SassMeister live view.</a> ');
+
+        var myNewState = {
+        	data: { },
+        	title: 'SassMeister | The Sass Playground!',
+        	url: '/gist/' + data
+        };
+        history.pushState(myNewState.data, myNewState.title, myNewState.url);
+        window.onpopstate = function(event){
+        	console.log(event.state); // will be our state data, so myNewState.data
+        }
 
         $('#gist-it').data('gist-save', 'edit');
       }
@@ -203,5 +213,15 @@ http://github.com/bgrins/bindWithDelay
     css.setValue('');
 
     $.post('/reset');
+
+    var myNewState = {
+    	data: { },
+    	title: 'SassMeister | The Sass Playground!',
+    	url: '/'
+    };
+    history.pushState(myNewState.data, myNewState.title, myNewState.url);
+    window.onpopstate = function(event){
+    	console.log(event.state); // will be our state data, so myNewState.data
+    }
   });
 })(jQuery);

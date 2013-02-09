@@ -250,7 +250,7 @@ post '/gist/?:edit?' do
 
   session[:gist] = data.id.to_s
 
-  "https://gist.github.com/#{data.id}"
+  data.id
 end
 
 
