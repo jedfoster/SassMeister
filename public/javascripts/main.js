@@ -64,29 +64,7 @@ http://github.com/bgrins/bindWithDelay
 
   $('select').on('change', function() {
     _gaq.push(['_trackEvent', 'Form', 'Control', this.value]);
-
-    if($(this).attr("name").match(/syntax/)) {
-      var inputs = {
-        sass: sass.getValue(),
-        syntax: $('select[name="syntax"]').val(),
-        plugin: $('select[name="plugin"]').val(),
-        output: $('select[name="output"]').val()
-      }
-
-      ///* Send the data using post and put the results in a div */
-      $.post('/sass-convert', inputs,
-        function( data ) {
-          sass.setValue(data);
-
-          inputs.sass = data;
-
-          localStorage.setItem('inputs', JSON.stringify(inputs));
-        }
-      );
-    }
-    else {
-      $("#sass-form").submit();
-    }
+    $("#sass-form").submit();
   });
 
   /* attach a submit handler to the form */
@@ -98,6 +76,7 @@ http://github.com/bgrins/bindWithDelay
     var inputs = {
       sass: sass.getValue(),
       syntax: $('select[name="syntax"]').val(),
+      original_syntax: $('select[name="syntax"]').data('orignal'),
       plugin: $('select[name="plugin"]').val(),
       output: $('select[name="output"]').val()
     }
@@ -105,7 +84,15 @@ http://github.com/bgrins/bindWithDelay
     /* Post the form and handle the returned data */
     $.post($(this).attr('action'), inputs,
       function( data ) {
-        css.setValue(data,-1);
+        data = JSON.parse(data);
+
+        css.setValue(data.css,-1);
+
+        $('select[name="syntax"]').data('orignal', inputs.syntax);
+
+        if(data.sass.length > 0) {
+          sass.setValue(data.sass,-1);
+        }
       }
     );
 
@@ -122,7 +109,7 @@ http://github.com/bgrins/bindWithDelay
   if( storedInputs !== null) {
     sass.setValue(storedInputs.sass);
     sass.clearSelection();
-    $('select[name="syntax"]').val(storedInputs.syntax);
+    $('select[name="syntax"]').val(storedInputs.syntax).data('orignal', storedInputs.syntax);
     $('select[name="plugin"]').val(storedInputs.plugin);
     $('select[name="output"]').val(storedInputs.output);
     $("#sass-form").submit();

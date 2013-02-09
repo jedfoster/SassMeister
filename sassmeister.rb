@@ -16,8 +16,6 @@ require 'yaml'
 
 set :partial_template_engine, :erb
 
-# enable :sessions
-
 configure :production do
   helpers do
     def github(auth_token = '')
@@ -56,8 +54,6 @@ configure :development do
 end
 
 
-
-
 helpers do
   include ERB::Util
   alias_method :code, :html_escape
@@ -68,12 +64,9 @@ helpers do
       shuffle.first
     end
 
-
     def to_sentence
       length < 2 ? first.to_s : "#{self[0..-2] * ', '}, and #{last}"
     end
-
-
   end
 
   def plugins
@@ -97,11 +90,9 @@ helpers do
       imports = "#{plugins[params[:plugin]][:import]}"
 
       sass << "@import \"#{imports}\"#{";" if params[:syntax] == 'scss'}\n\n" if ! imports.empty?
-
     end
 
     sass << params[:sass]
-
   end
 
   def compile_sass(params, sass)
@@ -111,6 +102,14 @@ helpers do
     rescue Sass::SyntaxError => e
       status 200
       e.to_s
+    end
+  end
+  
+  def sass_convert(from_syntax, to_syntax, sass)
+    begin
+      ::Sass::Engine.new(sass, {:from => from_syntax.to_sym, :to => to_syntax.to_sym, :syntax => from_syntax.to_sym}).to_tree.send("to_#{to_syntax}").chomp
+    rescue Sass::SyntaxError => e
+      sass
     end
   end
 end
@@ -129,9 +128,20 @@ end
 
 
 post '/compile' do
+  out = {
+    :sass => '',
+    :css => ''
+  }
+  
+  if params[:syntax] != params[:original_syntax]
+    out[:sass] = params[:sass] = sass_convert(params[:original_syntax], params[:syntax], params[:sass])
+  end
+  
   sass = import_plugin(params)
 
-  compile_sass(params, sass)
+  out[:css] = compile_sass(params, sass)
+  
+  out.to_json
 end
 
 
@@ -164,21 +174,6 @@ get '/logout' do
   session[:gravatar_id] = nil
 
   redirect to('/')
-end
-
-
-post '/sass-convert' do
-  require 'sass/exec'
-
-  old_syntax = 'scss'
-  new_syntax = 'sass'
-  
-  if params[:syntax] == 'scss'
-    old_syntax = 'sass'
-    new_syntax = 'scss'
-  end
-
-  ::Sass::Engine.new(params[:sass], {:from => old_syntax.to_sym, :to => new_syntax.to_sym, :syntax => old_syntax.to_sym}).to_tree.send("to_#{new_syntax}").chomp
 end
 
 
