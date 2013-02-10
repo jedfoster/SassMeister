@@ -128,20 +128,9 @@ end
 
 
 post '/compile' do
-  out = {
-    :sass => '',
-    :css => ''
-  }
-  
-  if params[:syntax] != params[:original_syntax]
-    out[:sass] = params[:sass] = sass_convert(params[:original_syntax], params[:syntax], params[:sass])
-  end
-  
   sass = import_plugin(params)
 
-  out[:css] = compile_sass(params, sass)
-  
-  out.to_json
+  compile_sass(params, sass)
 end
 
 
@@ -174,6 +163,11 @@ get '/logout' do
   session[:gravatar_id] = nil
 
   redirect to('/')
+end
+
+
+post '/sass-convert' do
+  sass_convert(params[:original_syntax], params[:syntax], params[:sass])
 end
 
 
