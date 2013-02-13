@@ -13,7 +13,7 @@ gem 'bourbon-compass'
 gem 'breakpoint'
 gem 'sassy-buttons'
 gem 'singularitygs'
-gem 'stipe', "=0.0.5.5"
+gem 'stipe'
 gem 'susy'
 gem 'neat-compass'
 gem 'harsh'
