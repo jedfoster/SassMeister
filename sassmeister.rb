@@ -104,7 +104,7 @@ helpers do
       e.to_s
     end
   end
-  
+
   def sass_convert(from_syntax, to_syntax, sass)
     begin
       ::Sass::Engine.new(sass, {:from => from_syntax.to_sym, :to => to_syntax.to_sym, :syntax => from_syntax.to_sym}).to_tree.send("to_#{to_syntax}").chomp
@@ -170,29 +170,38 @@ get '/logout' do
   redirect to('/')
 end
 
+
 get %r{/gist(?:/[\w]*)*/([\d]+)} do
   @plugins = plugins
 
-  files = @github.gists.get(params[:captures].first).files
+  begin
+    files = @github.gists.get(params[:captures].first).files
 
-  if( ! files["#{files.keys.grep(/.+\.(scss|sass)/)[0]}"])
-    syntax = plugin = ''
-    sass = "// Sorry, I couldn't find any valid Sass in that Gist."
+    if( ! files["#{files.keys.grep(/.+\.(scss|sass)/)[0]}"])
+      syntax = plugin = ''
+      sass = "// Sorry, I couldn't find any valid Sass in that Gist."
 
-  else
-    sass = files["#{files.keys.grep(/.+\.(scss|sass)/)[0]}"].content
-
-    if files["#{files.keys.grep(/.+\.(scss|sass)/)[0]}"].filename.end_with?("scss")
-      syntax = 'scss'
     else
-      syntax = 'sass'
+      sass = files["#{files.keys.grep(/.+\.(scss|sass)/)[0]}"].content
+
+      if files["#{files.keys.grep(/.+\.(scss|sass)/)[0]}"].filename.end_with?("scss")
+        syntax = 'scss'
+      else
+        syntax = 'sass'
+      end
+
+      comments = sass.scan(/^\/\/.+/).each {|x| x.sub!(/\/\/\s*/, '').sub!(/\s{1,}v[\d\.]+.*$/, '')}
+      comments.delete_if { |x| ! @plugins.key?(x)}
+      plugin = comments[0]
+
+      sass.gsub!(/^\s*(@import.*)\s*/, "\n// #{'\1'}\n\n")
     end
 
-    comments = sass.scan(/^\/\/.+/).each {|x| x.sub!(/\/\/\s*/, '').sub!(/\s{1,}v[\d\.]+.*$/, '')}
-    comments.delete_if { |x| ! @plugins.key?(x)}
-    plugin = comments[0]
+  rescue Github::Error::NotFound => e
+    status 200
 
-    sass.gsub!(/^\s*(@import.*)\s*/, "\n// #{'\1'}\n\n")
+    syntax = plugin = ''
+    sass = "// Sorry, that Gist doesn't exist.\n//#{e.to_s.gsub(/(GET|api.|https:\/\/)/, '')}"
   end
 
   @gist_input = {
