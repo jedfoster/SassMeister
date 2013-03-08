@@ -87,9 +87,9 @@ helpers do
         Sass.load_paths << path
       end
 
-      imports = "#{plugins[params[:plugin]][:import]}"
-
-      sass << "@import \"#{imports}\"#{";" if params[:syntax] == 'scss'}\n\n" if ! imports.empty?
+      plugins[params[:plugin]][:import].each do |import|
+        sass << "@import \"#{import}\"#{";" if params[:syntax] == 'scss'}\n\n" if ! import.empty?
+      end
     end
 
     sass << params[:sass]
