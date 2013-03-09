@@ -79,8 +79,6 @@ helpers do
     sass = ''
 
     if plugins.has_key?(params[:plugin])
-      require 'bourbon-compass' if params[:plugin] == 'Neat'
-
       require plugins[params[:plugin]][:gem]
 
       Compass.sass_engine_options[:load_paths].each do |path|
