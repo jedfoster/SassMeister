@@ -6,6 +6,7 @@ gem 'thin'
 gem 'jammit'
 gem 'github_api'
 gem 'tilt', '1.3.4' # Remove this when 1.3.5+ is good on Heroku.
+gem 'thor'
 
 gem 'sass'
 gem 'compass'
