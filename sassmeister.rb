@@ -148,7 +148,7 @@ end
 
 
 get '/authorize/return' do
-  token = Github.get_token(params[:code])
+  token = @github.get_token(params[:code])
 
   user = github(token.token).users.get
 
