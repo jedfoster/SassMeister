@@ -77,10 +77,6 @@ http://github.com/bgrins/bindWithDelay
       $.post('/sass-convert', inputs,
         function( data ) {
           sass.setValue(data, -1);
-          // 
-          // inputs.sass = data;
-          // 
-          // localStorage.setItem('inputs', JSON.stringify(inputs));
         }
       );
     }
