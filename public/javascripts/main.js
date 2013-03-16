@@ -44,12 +44,12 @@ http://github.com/bgrins/bindWithDelay
 
 (function($) {
   var sass = ace.edit("sass");
-  sass.setTheme("ace/theme/dawn");
+  sass.setTheme("ace/theme/tomorrow");
   sass.getSession().setMode("ace/mode/scss");
   sass.focus();
 
   var css = ace.edit("css");
-  css.setTheme("ace/theme/dawn");
+  css.setTheme("ace/theme/tomorrow");
   css.setReadOnly(true);
   css.getSession().$useWorker=false
   css.getSession().setMode("ace/mode/css");
