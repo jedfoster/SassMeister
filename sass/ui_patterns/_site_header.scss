@@ -23,17 +23,19 @@
 
 .site_header {
   .logoBox {
-    box-shadow: inset 0px -10px 18px -5px darken($alpha_color, 10%);
     border-bottom: 1px solid scale-color($alpha_color, $lightness: -50%);
     background: $alpha_color_charlie;
     height: 60px;
     margin-bottom: 20px;
+
     a {
       color: white;
       height: em(35);
+
       &:hover {
         color: darken($alpha_color, 30%);
         text-shadow: 0 0 5px $white;
+
         &:after {
           @extend %tooltip;
         }
@@ -45,6 +47,7 @@
         }
       }
     }
+
     .logo {
       &:hover {
         &:after {
@@ -55,6 +58,7 @@
       }
     }
   }
+
   .logo {
     @extend %icon-font;
 

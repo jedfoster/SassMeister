@@ -7,10 +7,6 @@ html {
   @extend %grid_12;
 }
 
-.site_header {
-  box-shadow: 0 0 10px gray;
-}
-
 .sass_input {
   @include grid(6.125, alpha);
   @media #{$mobile} {
