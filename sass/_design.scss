@@ -9,14 +9,14 @@ html {
 
 .sass_input {
   @include grid(6.125, alpha);
-  @media #{$mobile} {
+  @media #{$tablet} {
     @include grid(4.25, alphaomega, $grid_context: 4);
   }
 }
 
 .css_output {
   @include grid(6.125, omega);
-  @media #{$mobile} {
+  @media #{$tablet} {
     @include grid(4.25, alphaomega, $grid_context: 4);
   }
 }
