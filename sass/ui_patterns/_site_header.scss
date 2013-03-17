@@ -1,17 +1,17 @@
 %tooltip {
   position: absolute;
   content: attr(title);
-  font-family: $secondary_font_family;
+  font-family: $primary_font_family;
   color: white;
-  font-size: em(14);
+  font-size: em(18);
   padding: em(8);
-  background: transparentize(black, 0.2);
+  background: transparentize(scale-color($alpha_color, $lightness: -80%), 0.2);
   text-shadow: 0 0 0 transparent;
-  width: 180px;
+  width: 200px;
   top: 60px;
   text-align: center;
   line-height: 1.5em;
-  box-shadow: 0 0 10px 1px $shadow_color;
+  //box-shadow: 0 0 10px 1px $shadow_color;
   z-index: 1000;
   right: 0.83333em;
 
@@ -26,6 +26,7 @@
   background: $alpha_color_charlie;
   height: 60px;
   margin-bottom: 20px;
+  position: relative;
 
   a {
     color: #fff;
@@ -70,8 +71,8 @@
     &:hover {
       &:after {
         top: 88px;
-        width: 200px;
-        margin-left: em(-15);
+        width: 240px;
+        margin-left: em(-10);
         left: 0;
       }
     }
@@ -126,7 +127,7 @@
   }
 
   @media #{$mobile} {
-    #info {
+    li:nth-child(2) {
       display:none;
     }
   }
@@ -138,7 +139,8 @@
   }
 
   &:hover {
-    background: transparentize(black, 0.4);
+//    background: transparentize(black, 0.4);
+      background: scale-color($alpha_color, $lightness: -70%);
 
     ul {
       display: block;
@@ -153,9 +155,11 @@
   padding: em(8) em(8);
   text-align: left;
   width: auto;
-  min-width: 200px;
-  max-width: 320px;
-  background: transparentize(black, 0.2);
+  min-width: 220px;
+  max-width: 340px;
+//  background: transparentize(black, 0.2);
+//  background: transparentize(scale-color($alpha_color, $lightness: -50%), 0.5);
+  background: transparentize(scale-color($alpha_color, $lightness: -80%), 0.2);
 
   @each $prefix in $prefix_defaults {
     #{$prefix}border-top-left-radius: 0;
