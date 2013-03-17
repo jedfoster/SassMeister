@@ -16,10 +16,11 @@ select {
 
 label {
 	display: block;
-  font-weight: bold;
   line-height: 1;
 	margin-bottom: 0.5em;
 	font-size: em(12, $font-size);
+  color: $delta_gray;
+
 	@media #{$mobile} {
   	display: none;
 	}
