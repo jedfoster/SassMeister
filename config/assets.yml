@@ -8,7 +8,7 @@ javascripts:
     - public/javascripts/vendor/ACE-noconflict/ace.js
     - public/javascripts/vendor/ACE-noconflict/mode-css.js
     - public/javascripts/vendor/ACE-noconflict/mode-scss.js
-    - public/javascripts/vendor/ACE-noconflict/theme-dawn.js
+    - public/javascripts/vendor/ACE-noconflict/theme-tomorrow.js
     - public/javascripts/vendor/ACE-noconflict/worker-css.js
     - public/javascripts/vendor/jquery.foundation.reveal.js
     - public/javascripts/main.js
