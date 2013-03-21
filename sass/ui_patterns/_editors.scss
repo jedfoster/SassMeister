@@ -47,7 +47,7 @@
 }
 
 .edit_container .ace_editor {
-  font-family: 'SourceCodePro', monospace;
+  font-family: $monospace-font-family;
 }
 
 .ace_gutter {
