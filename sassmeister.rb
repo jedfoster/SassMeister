@@ -113,6 +113,8 @@ helpers do
 
   def unpack_dependencies(sass)
     frontmatter = sass.slice(/^\/\/ ---\n(?:\/\/ .+\n)*\/\/ ---\n/)
+    
+    return '' if frontmatter.nil?
 
     frontmatter = frontmatter.to_s.gsub(/(\/\/ |---|\(.+$)/, '').strip.split(/\n/)
 
