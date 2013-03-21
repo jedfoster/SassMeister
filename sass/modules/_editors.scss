@@ -44,16 +44,16 @@
     line-height: 1.5;
     outline: none;
   }
-}
-
-.edit_container .ace_editor {
-  font-family: $monospace-font-family;
+  
+  .ace_editor {
+    font-family: $monospace-font-family;
+  }
 }
 
 .ace_gutter {
-  -webkit-border-bottom-left-radius: em(8); /* Saf3-4, iOS 1-3.2, Android ≤1.6 */
-     -moz-border-bottom-left-radius: em(8); /* FF1-3.6 */
-          border-bottom-left-radius: em(8); /* Opera 10.5, IE9, Saf5, Chrome, FF4, iOS 4, Android 2.1+ */
+  -webkit-border-bottom-left-radius: $border-radius + 0.25em;
+     -moz-border-bottom-left-radius: $border-radius + 0.25em;
+          border-bottom-left-radius: $border-radius + 0.25em;
 
   /* useful if you don't want a bg color from leaking outside the border: */
      -moz-background-clip: padding;
@@ -64,9 +64,9 @@
 }
 
 .ace_scroller {
-  -webkit-border-bottom-right-radius: em(8); /* Saf3-4, iOS 1-3.2, Android ≤1.6 */
-     -moz-border-bottom-right-radius: em(8); /* FF1-3.6 */
-          border-bottom-right-radius: em(8); /* Opera 10.5, IE9, Saf5, Chrome, FF4, iOS 4, Android 2.1+ */
+  -webkit-border-bottom-right-radius: $border-radius + 0.25em;
+     -moz-border-bottom-right-radius: $border-radius + 0.25em;
+          border-bottom-right-radius: $border-radius + 0.25em;
 
   /* useful if you don't want a bg color from leaking outside the border: */
      -moz-background-clip: padding;
