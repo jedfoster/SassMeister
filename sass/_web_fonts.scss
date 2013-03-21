@@ -55,7 +55,8 @@ $webfont_directory: "/stylesheets/fonts/" !default; // edit this directory in th
     white-space: nowrap;
     overflow: hidden;
     display: block;
-    width: 1em;
+    width: 1px;
+    height: 1px;
   }
 }
 
