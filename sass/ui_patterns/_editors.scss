@@ -1,10 +1,11 @@
 .edit_container {
-  position: relative;
   @include grid(6.25, alpha, $grid_context: 6);
+  @include border_radius(em(5));
+
+
   margin-bottom: 1em;
   height: auto;
   border: 1px solid $delta_gray;
-  @include border_radius(em(5));
   background: $india_gray;
 
   /* useful if you don't want a bg color from leaking outside the border: */
@@ -40,9 +41,9 @@
   }
 
   pre {
-    display:block;
-    float:left;
-    width:100%;
+    display: block;
+    float: left;
+    width: 100%;
     font-size: em(14);
     line-height: 1.5em;
     outline: none;
