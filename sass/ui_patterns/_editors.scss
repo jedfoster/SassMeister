@@ -1,6 +1,6 @@
 .edit_container {
   @include grid(6.25, alpha, $grid_context: 6);
-  @include border_radius(0.25em);
+  @include border_radius($border-radius);
 
   margin-bottom: 1em;
   height: auto;

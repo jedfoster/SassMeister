@@ -28,9 +28,9 @@
     position: absolute; 
     z-index: 41; 
     padding: 30px; 
-    @include border_radius(em(7));
     @include box_shadow(0 0 10px rgba(#000,.4));
     
+    @include border_radius($border-radius);
     *:first-child { margin-top: 0; }
     *:last-child { margin-bottom: 0; }
   

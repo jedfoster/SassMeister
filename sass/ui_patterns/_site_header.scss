@@ -105,7 +105,7 @@
   }
 
   img {
-    @include border_radius(em(6));
+    @include border_radius($border-radius);
     display: block;
   }
 
