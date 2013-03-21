@@ -17,12 +17,11 @@
   }
 
   .pre_container {
-    display:block;
-    float:left;
-    width:100%;
+    display: block;
+    float: left;
+    width: 99.99999%; // Yes, that's right, 7 nines. Fixes a rounding issue I saw in Chrome.
     position: relative;
     height: em(340);
-    overflow-y: scroll;
 
     @media #{$mobile} {
       height: em(380);
@@ -37,7 +36,6 @@
     text-align: center;
     margin: 0;
     line-height:1.5;
-    //font-weight:bold;
     color: $delta_gray;
   }
 
