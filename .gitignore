@@ -8,3 +8,4 @@ sass/.sass-cache/
 #Gemfile.local
 #Gemfile.local.lock
 /github.yml
+/tmp
