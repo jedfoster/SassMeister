@@ -1,19 +1,18 @@
 %tooltip {
   position: absolute;
+  z-index: 1000;
+  top: 60px;
+  right: 0.83333em;
+  width: 200px;
+  padding: 0.5em;
+  line-height: 1.5em;
   content: attr(title);
   font-family: $primary_font_family;
-  color: white;
-  font-size: em(18);
-  padding: em(8);
-  background: transparentize(scale-color($alpha_color, $lightness: -80%), 0.2);
+  font-size: 1em;
   text-shadow: 0 0 0 transparent;
-  width: 200px;
-  top: 60px;
   text-align: center;
-  line-height: 1.5em;
-  //box-shadow: 0 0 10px 1px $shadow_color;
-  z-index: 1000;
-  right: 0.83333em;
+  color: $white;
+  background: transparentize(scale-color($alpha_color, $lightness: -80%), 0.2);
 
   @each $prefix in $prefix_defaults {
     #{$prefix}border-bottom-left-radius: em(8);
@@ -22,26 +21,24 @@
 }
 
 .site_header {
-  border-bottom: 1px solid scale-color($alpha_color, $lightness: -50%);
-  background: $alpha_color_charlie;
+  position: relative;
   height: 60px;
   margin-bottom: 20px;
-  position: relative;
+  border-bottom: 1px solid scale-color($alpha_color, $lightness: -50%);
+  background: $alpha_color_charlie;
 
   a {
-    color: #fff;
+    color: $white;
     height: em(35);
 
     &:hover {
-      color: darken($alpha_color, 30%);
+      color: darken($alpha_color, 40%);
       text-shadow: 0 0 5px $white;
 
       &:after {
         @extend %tooltip;
-      }
-
-      @media #{$mobile} {
-        &:after {
+        
+        @media #{$mobile} {
           display: none;
         }
       }
@@ -51,12 +48,12 @@
   .logo {
     @extend %icon-font;
 
-    color: white;
     position: relative;
     top: -28px;
     left: 15px;
     height: 91px;
     float: left;
+    color: $white;
     text-shadow: 0 0 5px darken($alpha_color, 10%);
 
     &:before {
@@ -64,10 +61,6 @@
       font-size: 6em;
     }
 
-    @media #{$mobile} {
-      left: 5px;
-    }
-    
     &:hover {
       &:after {
         top: 88px;
@@ -75,6 +68,10 @@
         margin-left: em(-10);
         left: 0;
       }
+    }
+
+    @media #{$mobile} {
+      left: 5px;
     }
   }
 }
@@ -118,11 +115,11 @@
     }
   }
   > li:last-child {
-    padding-left:em(16);
+    padding-left: em(16);
     padding-bottom: 10px;
 
     @media #{$mobile} {
-      padding-left:em(8);
+      padding-left: em(8);
     }
   }
 
