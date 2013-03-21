@@ -1,3 +1,219 @@
+// Toadstool core v0.0.0.1
+// This document is not to be edited as it will be versioned
+// -----------------------------------------------------------------
+
+
+@import "stipe/color/default_color_palette";
+
+
+// *-------------------------------------------------------------------------------
+// *
+// *	HTML5 Reset :: style.css
+// *	----------------------------------------------------------
+// *	We have learned much from/been inspired by/taken code where offered from:
+// *	
+// *	Eric Meyer					:: http://ericmeyer.com
+// *	HTML5 Doctor				:: http://html5doctor.com
+// *	and the HTML5 Boilerplate	:: http://html5boilerplate.com
+// *	
+// *	Mods by Dale Sande			:: toadstool awesome
+// *	
+// *-------------------------------------------------------------------------------
+
+
+// * Let's default this puppy out
+// *-------------------------------------------------------------------------------
+
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, figure, footer, header, hgroup, menu, nav, section, menu, time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	//outline: 0;
+	vertical-align: baseline;
+	background: transparent;
+}
+
 html {
   height: 100%;
 }
+
+body {
+	//line-height: 1;
+	font-size: 100%;
+	-webkit-font-smoothing: antialiased;
+}
+
+article, aside, figure, footer, header, hgroup, nav, section {
+	display: block;
+}
+
+// * Responsive images and other embedded objects
+// * Note: keeping IMG here will cause problems if you're using foreground images as sprites, like, say for Google Maps custom placemarkers. 
+// * There has been a report of problems with standard Google maps as well, but we haven't been able to duplicate or diagnose the issue.
+
+img, object, embed {
+	max-width: 100%;
+}
+
+img {
+	border-style: none;
+	border-color: transparent;
+	border-width: 0;
+}
+
+// * we use a lot of ULs that aren't bulleted. 
+// * don't forget to restore the bullets within content.
+
+ol,ul {
+	list-style: none;
+}
+
+//blockquote, q {
+//	quotes: none;
+//}
+//
+//blockquote {
+//	&:before, &:after {
+//		content: '';
+//		content: none;
+//	}
+//}
+//
+//q {
+//	&:before, &:after {
+//		content: '';
+//		content: none;
+//	}
+//}
+
+a {
+	margin: 0;
+	padding: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+	&:focus {
+		text-decoration: underline ;
+		outline: none;
+	}
+}
+
+//del {
+//	text-decoration: line-through;
+//}
+
+
+pre {
+	//white-space: pre
+	// * CSS2
+	white-space: pre-wrap;
+	// * CSS 2.1
+	//white-space: pre-line
+	// * CSS 3 (and 2.1 as well, actually)
+	word-wrap: break-word;
+	// * IE
+}
+
+input {
+	&[type="radio"] {
+		vertical-align: text-bottom;
+	}
+}
+
+input, textarea, select, button {
+	font-family: inherit;
+	font-weight: inherit;
+	background-color: #fff;
+	border: 0;
+	padding: 0;
+	margin: 0;
+}
+
+table {
+	font-size: inherit;
+	font: 100%;
+}
+
+//sub {
+//	font-size: 75%;
+//	line-height: 0;
+//	position: relative;
+//}
+//
+//sup {
+//	font-size: 75%;
+//	line-height: 0;
+//	position: relative;
+//	top: -0.5em;
+//}
+//
+//sub {
+//	bottom: -0.25em;
+//}
+
+// * standardize any monospaced elements
+
+pre, code, kbd, samp {
+	font-family: monospace, sans-serif;
+}
+
+// * hand cursor on clickable elements
+
+.clickable, label {
+	cursor: pointer;
+}
+
+input {
+	&[type=button], &[type=submit] {
+		cursor: pointer;
+	}
+}
+
+button {
+	cursor: pointer;
+	margin: 0;
+	width: auto;
+	overflow: visible;
+}
+
+a.button {
+	display: inline-block;
+}
+
+// * scale images in IE7 more attractively
+
+//.ie7 img {
+//	-ms-interpolation-mode: bicubic;
+//}
+
+// * Ok, this is where the fun starts.
+// *-------------------------------------------------------------------------------
+
+a:link {
+	-webkit-tap-highlight-color: $webkit_tap_hightlight;
+}
+
+//ins {
+//	background-color: $ins_color;
+//	color: black;
+//	text-decoration: none;
+//}
+//
+//mark {
+//	background-color: $mark_color;
+//	color: $primary_text;
+//	font-style: italic;
+//	font-weight: bold;
+//}
+	
+::selection {
+	background: $selection_color;
+	color: $selection_text_color;
+}
+
+::-moz-selection {
+	background: $selection_color;
+	color: $selection_text_color;
+}
+
+
