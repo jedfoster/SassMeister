@@ -1,7 +1,6 @@
 .edit_container {
   @include grid(6.25, alpha, $grid_context: 6);
-  @include border_radius(em(5));
-
+  @include border_radius(0.25em);
 
   margin-bottom: 1em;
   height: auto;
@@ -14,7 +13,7 @@
           background-clip: padding-box;
 
   @media #{$mobile} {
-    margin-bottom: em(16);
+    margin-bottom: 1em;
   }
 
   .pre_container {
@@ -31,25 +30,19 @@
 
   .edit-header {
     display: block;
-    height: em(28);
-    font-size: em(16);
-    width: 100%;
-    text-align: center;
     margin: 0;
-    line-height:1.5;
+    height: em($heading_3);
+    font-size: 1em;
+    text-align: center;
     color: $delta_gray;
   }
 
   pre {
-    display: block;
-    float: left;
     width: 100%;
-    font-size: em(14);
-    line-height: 1.5em;
+    height: 100%;
+    font-size: em($small_point_size);
+    line-height: 1.5;
     outline: none;
-    color: #F1F2F3;
-    letter-spacing: 1px;
-    height:100%;
   }
 }
 
