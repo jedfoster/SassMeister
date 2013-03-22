@@ -113,16 +113,18 @@ helpers do
 
   def unpack_dependencies(sass)
     frontmatter = sass.slice(/^\/\/ ---\n(?:\/\/ .+\n)*\/\/ ---\n/)
-    
-    return '' if frontmatter.nil?
 
-    frontmatter = frontmatter.to_s.gsub(/(\/\/ |---|\(.+$)/, '').strip.split(/\n/)
+    if frontmatter.nil?
+      frontmatter = sass.split(/(^\/\/ | v\d)/)
+    else
+      frontmatter = frontmatter.to_s.gsub(/(\/\/ |---|\(.+$)/, '').strip.split(/\n/)
+    end
 
     frontmatter.delete_if do |x|
       ! @plugins.key?(x.to_s.strip)
     end
 
-    frontmatter[0].strip
+    frontmatter[0].strip unless frontmatter.empty?
   end
 
   def pack_dependencies(params)
