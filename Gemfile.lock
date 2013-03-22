@@ -10,6 +10,7 @@ GEM
       compass (>= 0.12.1)
       sass (>= 3.2.0)
     chunky_png (1.2.7)
+    closure-compiler (1.1.8)
     color-schemer (0.2.3)
       blend-mode (~> 0.0.1)
       compass (~> 0.12)
@@ -124,6 +125,7 @@ DEPENDENCIES
   blend-mode
   bourbon-compass
   breakpoint
+  closure-compiler
   color-schemer
   compass
   css-slideshow
