@@ -1,3 +1,8 @@
+"Blend Modes":
+  :gem: blend-mode
+  :import: 
+    - blend-mode
+  :url: https://github.com/heygrady/scss-blend-modes
 Bourbon:
   :gem: bourbon-compass
   :import: 
