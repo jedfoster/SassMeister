@@ -3,6 +3,13 @@
 Each block of SCSS should return valid CSS with no warnings or errors when tested against it's respective extension.
 
 
+## Blend Modes ##
+
+    .multiply {
+        background-color: blend-multiply(#7FFFD4, #DEB887);
+    }
+
+
 ## Bourbon ##
 
     box:hover {
