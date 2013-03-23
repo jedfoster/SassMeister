@@ -6,13 +6,13 @@
 
 // Choose the CSS reset by selectively commenting/uncommenting the import files
 // ------------------------------------------------------------------------------
-@import "stipe/resets/toadstool";           // Default toadstool reset
+// @import "stipe/resets/toadstool";           // Default toadstool reset
 // @import "stipe/resets/eric_meyer";       // http://meyerweb.com/eric/tools/css/reset/reset.css
 // @import "compass/reset";                 // Reset supported by the Compass gem
 
 // Don't want to use any of these? Kool, we can respect that
 // ------------------------------------------------------------------------------
-// @import "reset";
+@import "reset";
 
 
 
@@ -42,7 +42,6 @@
 // ------------------------------------------------------------------------------
 @import "typography";
 @import "forms";
-@import "buttons";
 @import "design";
 @import "ui_patterns";
-//@import "modules";
+@import "modules";

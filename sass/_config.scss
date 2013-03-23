@@ -16,11 +16,12 @@ $heading_6: $font_size * 1;
 
 $line: $font_size * 1.5;
 
-$small_point_size: $font_size * .83333;
+$small_point_size: $font_size * .75;
 $large_point_size: $font_size * 1.25;
 
 $primary_font_family: #{"Helvetica Neue", Arial, sans-serif};
 $secondary_font_family: #{Verdana, Tahoma, Geneva, sans-serif};
+$monospace-font-family: #{'SourceCodePro', monospace};
 // $heading_font_family: #{"Helvetica Neue", Arial, sans-serif};
 
 // $icon_font_alpha: #{'FontAwesome'};
@@ -46,7 +47,7 @@ $secondary_font_family: #{Verdana, Tahoma, Geneva, sans-serif};
 // Red, green, yellow, blue, accent and black is not law, but a common theme in most designs.
 // Using Toadstool, all you need to do is edit these 6 hex values and everything else is created
 // by magic, unicorns and fairy dust!
-$alpha_primary:   #BE4E87;        // red
+$alpha_primary:   #E24A8D;   //EA3F8A E02A79     // red
 // $bravo_primary:   #3e4147;        // green
 // $charlie_primary: #fffedf;        // yellow
 // $delta_primary:   #2a2c31;        // blue
@@ -168,6 +169,7 @@ $form_field_border:             $charlie_gray;
 // $standard_corner_width:                1px;              // sets default border width
 // $standard_border_color:                $border_color;    // sets default border color
 
+$border-radius: 0.25em;
 
 
 // Config defaults for ``standard_block_spacing`` mixin

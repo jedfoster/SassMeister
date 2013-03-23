@@ -14,10 +14,7 @@ require 'sass'
 require 'compass'
 require 'yaml'
 
-
 set :partial_template_engine, :erb
-
-# enable :sessions
 
 configure :production do
   helpers do
@@ -57,8 +54,6 @@ configure :development do
 end
 
 
-
-
 helpers do
   include ERB::Util
   alias_method :code, :html_escape
@@ -67,6 +62,10 @@ helpers do
   class Array
     def random
       shuffle.first
+    end
+
+    def to_sentence
+      length < 2 ? first.to_s : "#{self[0..-2] * ', '}, and #{last}"
     end
   end
 
@@ -81,30 +80,66 @@ helpers do
 
     params[:plugin].each do |plugin|
       if plugins.has_key?(plugin)
-        require 'bourbon-compass' if plugin == 'Neat'
-
         require plugins[plugin][:gem]
+        Sass.load_paths << path
+      end
 
-        Compass.sass_engine_options[:load_paths].each do |path|
-          Sass.load_paths << path
-        end
-
-        imports = "#{plugins[plugin][:import]}"
-
-        sass << "@import \"#{imports}\"#{";" if params[:syntax] == 'scss'}\n\n" if ! imports.empty?
+      plugins[params[:plugin]][:import].each do |import|
+        sass << "@import \"#{import}\"#{";" if params[:syntax] == 'scss'}\n\n" if ! import.empty?
       end
     end
 
     sass
   end
 
-  def compile_sass(params, sass)
+
+  def sass_compile(params, sass)
     begin
       send("#{params[:syntax]}".to_sym, sass.chomp, {:style => :"#{params[:output]}", :quiet => true})
 
     rescue Sass::SyntaxError => e
       status 200
       e.to_s
+    end
+  end
+
+  def sass_convert(from_syntax, to_syntax, sass)
+    begin
+      ::Sass::Engine.new(sass, {:from => from_syntax.to_sym, :to => to_syntax.to_sym, :syntax => from_syntax.to_sym}).to_tree.send("to_#{to_syntax}").chomp
+    rescue Sass::SyntaxError => e
+      sass
+    end
+  end
+
+  def unpack_dependencies(sass)
+    frontmatter = sass.slice(/^\/\/ ---\n(?:\/\/ .+\n)*\/\/ ---\n/)
+
+    if frontmatter.nil?
+      frontmatter = sass.split(/(^\/\/ | v\d)/)
+    else
+      frontmatter = frontmatter.to_s.gsub(/(\/\/ |---|\(.+$)/, '').strip.split(/\n/)
+    end
+
+    frontmatter.delete_if do |x|
+      ! @plugins.key?(x.to_s.strip)
+    end
+
+    frontmatter[0].strip unless frontmatter.empty?
+  end
+
+  def pack_dependencies(params)
+    params[:sass].slice!(/(^\/\/ ---\n(?:\/\/ .+\n)*\/\/ ---\s*)*/)
+
+    frontmatter = <<-END.gsub(/^ {6}/, '')
+      // ---
+      // Sass (version)
+      // ---
+    END
+
+    frontmatter.gsub!(/version/, "v#{Gem.loaded_specs["sass"].version.to_s}")
+
+    if ! params[:plugin].empty?
+      frontmatter.gsub!(/^(\/\/ Sass)/, "// #{params[:plugin].capitalize} (v#{plugins[params[:plugin]][:version]})\n\\1")
     end
   end
 end
@@ -123,11 +158,14 @@ end
 
 
 post '/compile' do
-  # puts params[:plugin].inspect
+  sass = import_plugin(params)
 
-  sass = "#{import_plugin(params)}#{params[:sass]}"
+  sass_compile(params, sass)
+end
 
-  compile_sass(params, sass)
+
+post '/sass-convert' do
+  sass_convert(params[:original_syntax], params[:syntax], params[:sass])
 end
 
 
@@ -142,7 +180,7 @@ end
 
 
 get '/authorize/return' do
-  token = Github.get_token(params[:code])
+  token = @github.get_token(params[:code])
 
   user = github(token.token).users.get
 
@@ -163,31 +201,36 @@ get '/logout' do
 end
 
 
-get %r{/gist/([\d]+)} do
+get %r{/gist(?:/[\w]*)*/([\d]+)} do
   @plugins = plugins
 
-  files = @github.gists.get(params[:captures].first).files
+  begin
+    files = @github.gists.get(params[:captures].first).files
 
-  if( ! files["#{files.keys.grep(/.+\.(scss|sass)/)[0]}"])
-    syntax = plugin = ''
-    sass = "// Sorry, I couldn't find any valid Sass in that Gist."
+    if( ! files["#{files.keys.grep(/.+\.(scss|sass)/)[0]}"])
+      syntax = plugin = ''
+      sass = "// Sorry, I couldn't find any valid Sass in that Gist."
 
-  else
-    sass = files["#{files.keys.grep(/.+\.(scss|sass)/)[0]}"].content
-
-    if files["#{files.keys.grep(/.+\.(scss|sass)/)[0]}"].filename.end_with?("scss")
-      syntax = 'scss'
     else
-      syntax = 'sass'
+      sass = files["#{files.keys.grep(/.+\.(scss|sass)/)[0]}"].content
+
+      if files["#{files.keys.grep(/.+\.(scss|sass)/)[0]}"].filename.end_with?("scss")
+        syntax = 'scss'
+      else
+        syntax = 'sass'
+      end
+
+      plugin = unpack_dependencies(sass)
+
+      sass.gsub!(/^\s*(@import.*)\s*/, "\n// #{'\1'}\n\n")
     end
 
-    comments = sass.scan(/^\/\/.+/).each {|x| x.sub!(/\/\/\s*/, '').sub!(/\s{1,}v[\d\.]+.*$/, '')}
-    comments.delete_if { |x| ! @plugins.key?(x)}
-    plugin = comments[0]
+  rescue Github::Error::NotFound => e
+    status 200
 
-    sass.gsub!(/^\s*(@import.*)\s*/, "\n// #{'\1'}\n\n")
+    syntax = plugin = ''
+    sass = "// Sorry, that Gist doesn't exist.\n//#{e.to_s.gsub(/(GET|api.|https:\/\/)/, '')}"
   end
-
 
   @gist_input = {
     :syntax => syntax,
@@ -200,14 +243,10 @@ end
 
 
 post '/gist/?:edit?' do
-  text = "// Sass v#{Gem.loaded_specs["sass"].version.to_s}"
+  dependencies = pack_dependencies(params)
 
-  if ! params[:plugin].empty?
-    text << "\n// #{params[:plugin].capitalize} v#{plugins[params[:plugin]][:version]}"
-  end
-
-  sass = import_plugin(params)
-  css = compile_sass(params, sass)
+  sass = params[:sass]
+  css = sass_compile(params, import_plugin(params))
 
   description = "Generated by SassMeister.com, the Sass playground."
 
@@ -220,7 +259,7 @@ post '/gist/?:edit?' do
         content: "#{css}"
       },
       sass_file => {
-        content: "#{text}/n/n#{sass}"
+        content: "#{dependencies}\n\n#{sass}"
       }
     })
   else
@@ -229,14 +268,14 @@ post '/gist/?:edit?' do
         content: "#{css}"
       },
       sass_file => {
-        content: "#{text}\n\n#{sass}"
+        content: "#{dependencies}\n\n#{sass}"
       }
     })
   end
 
   session[:gist] = data.id.to_s
 
-  "https://gist.github.com/#{data.id}"
+  data.id
 end
 
 

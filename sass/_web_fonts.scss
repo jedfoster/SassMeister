@@ -23,11 +23,11 @@ $webfont_directory: "/stylesheets/fonts/" !default; // edit this directory in th
 // -----------------------------------------------------------
 
 @font-face {
-	@include font-face ($font_family: 'SourceCodePro', $font-file:  'sourcecodepro-bold-webfont', $font_weight: bold, $font_style: bold);
+	@include font-face ($font_family: 'SourceCodePro', $font-file:  'sourcecodepro-regular-webfont', $font_weight: normal, $font_style: normal);
 }
 
 @font-face {
-	@include font-face ($font_family: 'SourceCodePro', $font-file:  'sourcecodepro-regular-webfont', $font_weight: normal, $font_style: normal);
+	@include font-face ($font_family: 'SourceCodePro', $font-file:  'sourcecodepro-bold-webfont', $font_weight: bold, $font_style: normal);
 }
 
 @font-face {
@@ -51,7 +51,12 @@ $webfont_directory: "/stylesheets/fonts/" !default; // edit this directory in th
     text-decoration: none;
   }
   .alt {
-    display: none;
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    display: block;
+    width: 1px;
+    height: 1px;
   }
 }
 

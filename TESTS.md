@@ -3,6 +3,13 @@
 Each block of SCSS should return valid CSS with no warnings or errors when tested against it's respective extension.
 
 
+## Blend Modes ##
+
+    .multiply {
+        background-color: blend-multiply(#7FFFD4, #DEB887);
+    }
+
+
 ## Bourbon ##
 
     box:hover {
@@ -143,6 +150,13 @@ Each block of SCSS should return valid CSS with no warnings or errors when teste
     }
 
 
+## Responsive Calculator ##
+
+    .foo {
+      margin: rwdcalc(10 10px 13 1em, 960);
+    }
+
+
 ## Responsive Sass ##
 
     .block {
@@ -266,4 +280,22 @@ Each block of SCSS should return valid CSS with no warnings or errors when teste
 
     .ratio-7-8-75-iframe-no-extend {
       @include intrinsic-ratio(7/8, 75%, 'iframe', false);
+    }
+    
+## Zen Grids ##
+
+    .content {
+      @include zen-grid-item(4, 3); // Make this grid item span 4 columns. // Position this grid item in the 3rd column.
+    }
+
+    .aside2 {
+      @include zen-grid-item(1, 7);
+    }
+
+    .footer1 {
+      @include zen-clear(); // Apply this mixin to start a new row.
+      @include zen-grid-item(3, 5);
+    }
+    .footer2 {
+      @include zen-grid-item(4, 1);
     }

@@ -11,21 +11,21 @@ input[type=text], input[type=password], input[type="date"] {
 	}
 }
 
-select {
+select, label {
   font-size: em(12, $font-size);
 }
 
 label {
 	display: block;
-  font-weight: bold;
   line-height: 1;
 	margin-bottom: 0.5em;
-	font-size: em(12, $font-size);
+  color: $delta_gray;
+
 	@media #{$mobile} {
   	display: none;
 	}
 }
 
 input, select, textarea, button {
-  font-family: 'SourceCodePro', monospace;
+  font-family: $monospace-font-family;
 }

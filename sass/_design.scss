@@ -1,26 +1,18 @@
-html {
-  height: 100%;
-}
-
 ///////// global //////////
 .main_body {
   @extend %grid_12;
 }
 
-.site_header {
-  box-shadow: 0 0 10px gray;
-}
-
 .sass_input {
   @include grid(6.125, alpha);
-  @media #{$mobile} {
-    @include grid(4.25, alphaomega, $grid_context: 4);
-  }
 }
 
 .css_output {
   @include grid(6.125, omega);
-  @media #{$mobile} {
+}
+
+@media #{$tablet} {
+  .sass_input, .css_output {
     @include grid(4.25, alphaomega, $grid_context: 4);
   }
 }
@@ -29,17 +21,20 @@ html {
   min-height: em(72);
   float: left;
   width: 100%;
-  @media #{$mobile} {
-  }
 }
 
 .form_control {
   @include grid(4, $grid_context: 4);
+
+  margin-bottom: em(16);
+
   @media #{$desktop} {
-    @include grid(4);    
+    @include grid(4);
+
     &:first-child {
       @include grid(4.125, alpha);
     }
+
     &:last-child {
       @include grid(4.125, omega);
     }
@@ -60,8 +55,6 @@ html {
 .css_output .controls {
   padding-top:em(20);
   min-height: em(52);
-  @media #{$mobile} {
-  }
 }
 
 .css_output .button {
@@ -77,27 +70,6 @@ html {
   float: right;
 }
 
-.labels {
-  width: 100%;
-  text-align: center;
-  margin: 0;
-  line-height:1.5;
-  font-weight:bold;
-  font-size: em($heading_3);
-
-  .sass_input & {
-    &:after {
-      font-size: 1.5em;
-      float:right;
-      margin-right: -#{em($heading_3/2)};
-
-      @media #{$tablet} {
-        display:none;
-      }
-  	}
-  }
-}
-
 .site_footer {
   width: 100%;
   float: left;
@@ -106,8 +78,9 @@ html {
 
   @media #{$mobile} {
     @include grid(12);
+
     margin: 0 em(18);
-    text-align: left; 
+    text-align: left;
   }
 }
 
