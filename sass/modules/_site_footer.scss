@@ -1,0 +1,26 @@
+.site_footer {
+  width: 100%;
+  float: left;
+  font-size: em(12);
+  text-align: center;
+
+  @media #{$mobile} {
+    @include grid(12);
+
+    margin: 0 em(18);
+    text-align: left;
+  }
+}
+
+.footer_container {
+  font-size: em(18, 12);
+  text-align: left;
+
+  @media #{$tablet} {
+    font-size: em(12, 12);
+
+    p {
+      line-height: 1.5em;
+    }
+  }
+}
