@@ -9,50 +9,26 @@
 
 .css_output {
   @include grid(6.125, omega);
+  
+  .controls {
+    padding-top:em(20);
+    min-height: em(52);
+  }
+
+  .button {
+    @extend .form_control;
+  }
+
+  a {
+    float: left;
+    display: block;
+  }
 }
 
 @media #{$tablet} {
   .sass_input, .css_output {
     @include grid(4.25, alphaomega, $grid_context: 4);
   }
-}
-
-.controls {
-  min-height: em(72);
-  float: left;
-  width: 100%;
-}
-
-.form_control {
-  @include grid(4, $grid_context: 4);
-
-  margin-bottom: em(16);
-
-  @media #{$desktop} {
-    @include grid(4);
-
-    &:first-child {
-      @include grid(4.125, alpha);
-    }
-
-    &:last-child {
-      @include grid(4.125, omega);
-    }
-  }
-}
-
-.css_output .controls {
-  padding-top:em(20);
-  min-height: em(52);
-}
-
-.css_output .button {
-  @extend .form_control;
-}
-
-.css_output a {
-  float: left;
-  display: block;
 }
 
 #reset {
