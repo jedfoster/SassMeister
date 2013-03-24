@@ -3,13 +3,6 @@ input[type=text], input[type=password], input[type="date"], select {
 	height:2.5em;
 }
 
-input[type=text], input[type=password], input[type="date"] {
-	@media #{$mobile} {
-		-webkit-appearance: none;  // this is to remove the default inner shadow
-		-moz-appearance: none; // if this ever works, Moz bug for over a year
-	}
-}
-
 select, label {
   font-size: em(12, $font-size);
 }
