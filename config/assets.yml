@@ -12,6 +12,7 @@ javascripts:
     - public/javascripts/vendor/ACE-noconflict/worker-css.js
     - public/javascripts/vendor/jquery.foundation.reveal.js
     - public/javascripts/vendor/chosen.jquery.js
+    - public/javascripts/toggle.js
     - public/javascripts/main.js
 
 # stylesheets:
