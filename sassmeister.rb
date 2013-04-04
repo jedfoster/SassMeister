@@ -139,7 +139,7 @@ helpers do
     frontmatter.gsub!(/version/, "v#{Gem.loaded_specs["sass"].version.to_s}")
 
     if ! params[:plugin].empty?
-      frontmatter.gsub!(/^(\/\/ Sass)/, "// #{params[:plugin].capitalize} (v#{plugins[params[:plugin]][:version]})\n\\1")
+      frontmatter.gsub!(/^(\/\/ Sass)/, "// #{params[:plugin]} (v#{plugins[params[:plugin]][:version]})\n\\1")
     end
   end
 end
