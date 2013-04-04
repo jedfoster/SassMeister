@@ -1,7 +1,3 @@
-$base: #34495e !default;
-$inverse: white !default;
-$firm: #1abc9c !default;
-
 @mixin transition($properties) {
   -webkit-transition: $properties;
   -moz-transition: $properties;
@@ -12,14 +8,11 @@ $firm: #1abc9c !default;
 
 .toggle {
   @include transition(0.25s);
+  @include border_radius($border-radius);
 
-  border: 1px solid #aaa;
-  border-radius: 20px;
+  border: 1px solid #aaa;  
   color: $delta_gray;
   display: inline-block;
-    //box-shadow: inset 2px 3px 4px -1px transparentize(#838383, 0.7);
-  
-    //box-shadow: 0 4px 5px rgba(0,0,0,.15);
     background-color: #fff;
     background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(1%, #eeeeee), color-stop(15%, #ffffff));
     background-image: -webkit-linear-gradient(top, #eeeeee 1%, #ffffff 15%);
@@ -27,12 +20,21 @@ $firm: #1abc9c !default;
     background-image: -o-linear-gradient(top, #eeeeee 1%, #ffffff 15%);
     background-image: linear-gradient(#eeeeee 1%, #ffffff 15%);
    
+   //@include linear_gradient_w3c (#ffffff, #{top, #eeeeee 1%, #ffffff 15%});
+   
   position: relative;
   overflow: hidden;
   box-sizing: border-box;
   width: 100%;
   font-size: 0.875em;
 
+
+  //&:hover {
+  //  -webkit-box-shadow: 0 0 5px rgba(0,0,0,.3);
+  //  -moz-box-shadow   : 0 0 5px rgba(0,0,0,.3);
+  //  box-shadow        : 0 0 5px rgba(0,0,0,.3);
+  //  border: 1px solid $alpha_color_charlie;
+  //}
 
   input {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=1);
@@ -48,53 +50,22 @@ $firm: #1abc9c !default;
 
   .knob {
     @include transition(0.25s);
-
+    @include border_radius($border-radius);
+    @include linear_gradient_w3c (#e4e4e4, #{#f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eeeeee 100%});
+    @include dual_box_shadow($shadow_color: rgba(0,0,0,0.05), $shadow: 0 1px 0, $inset_shadow: 0 0 2px, $inset_color: #fff, $prefixes: -moz- -webkit- '');
+    
     display: block;
-    border-radius: 50%;
-    width: 1.5em;
-    height: 1.5em;
+    width: 22px;
+    height: 22px;
     position: relative;
-      //background: $alpha_primary;
-    
-      //box-shadow: inset -2px -6px 10px -2px transparentize(white, 0.5);
     float: left;
-    left: 1.5em;
+    left: 0;
     z-index: 1;
-    margin: 0.125em 0 0.125em -1.375em;
-    
-    
-    
-    
-    
+    margin: 3px;
     -webkit-background-clip: padding-box;
        -moz-background-clip: padding;
             background-clip: padding-box;
-    
-    
-    @include linear_gradient_w3c (#e4e4e4, #{#f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eeeeee 100%});
-    
-    //-webkit-box-shadow: 0 0 2px #ffffff inset, 0 1px 0 rgba(0,0,0,0.05);
-    //-moz-box-shadow   : 0 0 2px #ffffff inset, 0 1px 0 rgba(0,0,0,0.05);
-    //box-shadow        : 0 0 2px #ffffff inset, 0 1px 0 rgba(0,0,0,0.05);
-    @include dual_box_shadow($shadow_color: rgba(0,0,0,0.05), $shadow: 0 1px 0, $inset_shadow: 0 0 2px, $inset_color: #fff, $prefixes: -moz- -webkit- '');
-    
-    
-    
-    //@mixin dual_box_shadow ($shadow_color: $shadow_color, $shadow: $shadow, $inset_color: $inset_color, $inset_shadow: $inset_shadow, $prefixes: $prefix_defaults) {
-    //  @each $prefix in $prefixes {
-    //    #{$prefix}box-shadow: $shadow_color $shadow, inset $inset_color $inset_shadow;
-    //  }
-    //}
-    
-
-    
-    
-    //color: $bravo_gray;
     border: 1px solid $golf_gray;
-    //line-height: 1.25;
-    //padding: 3px 20px 3px 5px;
-    //margin: 3px 0 3px 5px;
-    //position: relative;
     cursor: default;
   }
 
@@ -115,33 +86,26 @@ $firm: #1abc9c !default;
     &:first-child {
       @include transition(0.23s);
 
-
       left: 0;
       margin: 0 0 0 1.5em;
-      //border-top-right-radius: 20px;
-      //border-bottom-right-radius: 20px;
     }
   }
 
   &.toggle-off {
     .knob {
-      left:99.9%;
+      left:100%;
       margin-left: -1.65em;
     }
 
     .toggle-radio {
       left: 0%;
       margin-right: 0%;
-      //border-top-left-radius: 60px;
-      //border-bottom-left-radius: 60px;
 
       &:first-child {
         @include transition(0.35s);
 
         left: 100%;
         margin-left:0;
-        //border-top-left-radius: 0;
-        //border-bottom-left-radius: 0;
       }
     }
   }

@@ -128,22 +128,50 @@
 //  left: -9000px;
 //}
 
+
+.chzn-container-multi {
+  
+
+
+
+}
+
+//.chzn-wrapper {
+//  position: relative;
+//  overflow-x: scroll;
+//  overflow-y:visible;
+//  white-space: nowrap;
+//
+//  width:inherit;
+//  
+//  height: 32px;
+//}
+
+
 /* @group Multi Chosen */
 .chzn-container-multi .chzn-choices {
+  border: 1px solid #aaa;
+  @include border_radius($border-radius);
+  
   background-color: #fff;
   background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(1%, #eeeeee), color-stop(15%, #ffffff));
   background-image: -webkit-linear-gradient(top, #eeeeee 1%, #ffffff 15%);
   background-image: -moz-linear-gradient(top, #eeeeee 1%, #ffffff 15%);
   background-image: -o-linear-gradient(top, #eeeeee 1%, #ffffff 15%);
   background-image: linear-gradient(#eeeeee 1%, #ffffff 15%);
-  border: 1px solid #aaa;
-  margin: 0;
+    margin: 0;
   padding: 0;
   cursor: text;
-  overflow: hidden;
-  height: auto !important;
-  height: 1%;
-  position: relative;
+  //overflow: hidden;
+  //height: auto !important;
+  
+  overflow-x: hidden;
+  overflow-y: scroll;
+  white-space: nowrap;
+
+  width:inherit;
+  
+  height: 32px;
 }
 .chzn-container-multi .chzn-choices li {
   float: left;
@@ -356,7 +384,6 @@ height: 1.5em;
   -webkit-box-shadow: 0 0 5px rgba(0,0,0,.3);
   -moz-box-shadow   : 0 0 5px rgba(0,0,0,.3);
   box-shadow        : 0 0 5px rgba(0,0,0,.3);
-//  border: 1px solid #5897fb;
   border: 1px solid $alpha_color_charlie;
 }
 .chzn-container-active .chzn-choices .search-field input {
