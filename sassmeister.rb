@@ -68,6 +68,12 @@ helpers do
       length < 2 ? first.to_s : "#{self[0..-2] * ', '}, and #{last}"
     end
   end
+  
+  class String
+    def titleize
+      split(/(\W)/).map(&:capitalize).join
+    end
+  end
 
   def plugins
     YAML.load_file("plugins.yml").each do |plugin|
@@ -121,10 +127,10 @@ helpers do
     end
 
     frontmatter.delete_if do |x|
-      ! @plugins.key?(x.to_s.strip)
+      ! @plugins.key?(x.to_s.titleize.strip)
     end
 
-    frontmatter[0].strip unless frontmatter.empty?
+    frontmatter[0].titleize.strip unless frontmatter.empty?
   end
 
   def pack_dependencies(params)
