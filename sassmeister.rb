@@ -17,6 +17,7 @@ require 'yaml'
 set :partial_template_engine, :erb
 
 configure :production do
+  require 'newrelic_rpm'
   helpers do
     def github(auth_token = '')
       github = Github.new do |config|
