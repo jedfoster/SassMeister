@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 
 gem 'sinatra'
 gem 'sinatra-partial'
-gem 'thin'
+gem 'unicorn'
 gem 'jammit'
 gem 'closure-compiler'
 gem 'github_api'
