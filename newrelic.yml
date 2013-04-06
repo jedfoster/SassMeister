@@ -130,7 +130,7 @@ common: &default_settings
     # Transaction tracer is enabled by default. Set this to false to
     # turn it off. This feature is only available at the Professional
     # and above product levels.
-    enabled: true
+    enabled: false
     
     # Threshold in seconds for when to collect a transaction
     # trace. When the response time of a controller action exceeds
@@ -173,7 +173,7 @@ common: &default_settings
     # Rails Only - tells error collector whether or not to capture a 
     # source snippet around the place of the error when errors are View 
     # related.
-    capture_source: true    
+    # capture_source: true    
     
     # To stop specific errors from reporting to New Relic, set this property
     # to comma separated values.  Default is to ignore routing errors
@@ -190,7 +190,7 @@ common: &default_settings
   # disable the instrumentation to reduce overhead.
   #
   # disable_view_instrumentation: true
-  # disable_activerecord_instrumentation: true
+  disable_activerecord_instrumentation: true
   # disable_memcache_instrumentation: true
   # disable_dj: true
 
