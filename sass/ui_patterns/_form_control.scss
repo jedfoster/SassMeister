@@ -1,3 +1,16 @@
+.controls {
+  display: block;
+  float: left;
+  width: 100%;
+  clear: both;
+  min-height: em(72);
+
+  .css_output & {
+    padding-top:em(20);
+    min-height: em(52);
+  }
+}
+
 .form_control {
   @include grid(4, $grid_context: 4);
 

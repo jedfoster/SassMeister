@@ -9,15 +9,6 @@
 
 .css_output {
   @include grid(6.125, omega);
-  
-  .controls {
-    padding-top:em(20);
-    min-height: em(52);
-  }
-
-  .button {
-    @extend .form_control;
-  }
 
   a {
     float: left;
