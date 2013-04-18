@@ -88,6 +88,7 @@ Stipe:
   :gem: stipe
   :import: 
     - stipe/manifest
+    - stipe/grid/extends
   :url: https://github.com/Anotheruiguy/stipe
 Susy:
   :gem: susy
