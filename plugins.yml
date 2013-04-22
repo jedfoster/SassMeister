@@ -13,6 +13,11 @@ Breakpoint:
   :import: 
     - breakpoint
   :url: https://github.com/canarymason/breakpoint
+"Breakpoint Slicer":
+  :gem: breakpoint-slicer
+  :import:
+    - breakpoint-slicer
+  :url: https://github.com/lolmaus/breakpoint-slicer
 "Color Schemer":
   :gem: color-schemer
   :import: 

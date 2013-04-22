@@ -9,6 +9,10 @@ GEM
     breakpoint (2.0.2)
       compass (>= 0.12.1)
       sass (>= 3.2.0)
+    breakpoint-slicer (1.1)
+      breakpoint (>= 2.0.1)
+      compass (>= 0.12.2)
+      sass (>= 3.2.1)
     chunky_png (1.2.8)
     closure-compiler (1.1.8)
     color-schemer (0.2.3)
@@ -68,7 +72,7 @@ GEM
     rack (1.5.2)
     rack-protection (1.5.0)
       rack
-    raindrops (0.10.0)
+    raindrops (0.11.0)
     responsive-sass (0.1.1)
       compass (>= 0.11)
     rwdcalc (0.0.2)
@@ -123,6 +127,7 @@ DEPENDENCIES
   blend-mode
   bourbon-compass
   breakpoint
+  breakpoint-slicer
   closure-compiler
   color-schemer
   compass

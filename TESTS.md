@@ -48,6 +48,20 @@ Each block of SCSS should return valid CSS with no warnings or errors when teste
       }
     }
 
+## Breakpoint Slicer ##
+
+    $slicer-breakpoints: 0 400px 600px 800px 1050px;
+
+    .element {
+      @include at(2) {
+        background-color: red;
+      }
+
+      @include at(4) {
+        background-color: blue;
+      }  
+    }
+
 
 ## Color Schemer ##
 
