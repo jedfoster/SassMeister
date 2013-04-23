@@ -209,6 +209,22 @@ http://github.com/bgrins/bindWithDelay
   }); 
   $(".chzn-select-deselect").chosen({allow_single_deselect:true, max_selected_options:3});
 
+  $('select.fancy_dropdown').each(function() {
+    $(this).dropdown({
+      gutter : 0,
+      speed : 50
+    });
+  });
+  
+  $('select.fancy_dropdown').each(function() {
+    $(this).dropdown({
+      gutter : 0,
+      speed : 50,
+      onOpen: function( opt ) { return false; }
+    });
+  });
+
+
   $('#gist-it').on('click', function() {
     /* stop form from submitting normally */
     event.preventDefault();

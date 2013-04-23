@@ -21,11 +21,11 @@
     @include grid(4);
 
     &:first-child {
-      @include grid(4.125, alpha);
+      @include grid(2.125, alpha);
     }
 
     &:last-child {
-      @include grid(4.125, omega);
+      @include grid(3.125, omega);
     }
   }
 }

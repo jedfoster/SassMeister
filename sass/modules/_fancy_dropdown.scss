@@ -1,0 +1,130 @@
+.fancy_dropdown {
+  border: 1px solid #aaa;
+  @include border_radius($border-radius);
+  
+  background-color: #fff;
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(1%, #eeeeee), color-stop(15%, #ffffff));
+  background-image: -webkit-linear-gradient(top, #eeeeee 1%, #ffffff 15%);
+  background-image: -moz-linear-gradient(top, #eeeeee 1%, #ffffff 15%);
+  background-image: -o-linear-gradient(top, #eeeeee 1%, #ffffff 15%);
+  background-image: linear-gradient(#eeeeee 1%, #ffffff 15%);
+  
+  
+  
+  //$height: 3em;
+ // $padding_lr: 2em;
+  
+  //@extend %minimal;
+
+  //@include grid(12.25, alphaomega);
+  width: 100%;
+  //@include border_radius($border-radius);
+  //border: 1px solid $delta_gray;
+  //background: $india_gray;
+  //height: 32px;
+
+	position: relative;
+	display: block;
+  margin-bottom: 1em;
+  padding:0;
+  text-align: left;
+
+  > span {
+    //@include grid(12.25, alphaomega);
+    width: 100%;
+
+  	display: block;
+  //  line-height: $height;
+    padding: 0 0 0 1em;
+    font-weight: bold;
+  	position: relative;
+  	cursor: pointer;
+  	height: 1.5em;
+  }
+
+  > span:after {
+    font-family: 'SassMeisterIcons';
+    font-style: normal;
+    
+    //@include grid(2.125, omega);
+    width: 3em;
+color: $delta_gray;
+    position: absolute;
+    right: 0;
+  	content: '\25BC'; // downward arrow
+    text-align: center;
+    border-left: 1px solid $golf_gray;
+
+    @include linear_gradient_w3c (#e4e4e4, #{#f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eeeeee 100%});
+    @include dual_box_shadow($shadow_color: rgba(0,0,0,0.05), $shadow: 0 1px 0, $inset_shadow: 0 0 2px, $inset_color: #fff, $prefixes: -moz- -webkit- '');
+    
+    line-height: 1.5;
+    -webkit-background-clip: padding-box;
+       -moz-background-clip: padding;
+            background-clip: padding-box;
+    @include border_radius($border-radius, $corner: top-right);
+    @include border_radius($border-radius, $corner: bottom-right);
+  }
+
+  ul {
+  	margin: 0;
+  	padding: 0;
+  	display: block;
+  	position: absolute;
+  	top: 0px;
+    width: 100%;
+
+  }
+
+  ul li {
+    display: block;
+  	position: absolute;
+    width: 100%;
+    line-height: 1.5em;
+  }
+
+  ul li span {
+    background: $india_gray;
+  	display: block;
+  	cursor: pointer;
+  	
+    //line-height: $height;
+    padding: 0 2em;
+/*    height: auto;*/
+  }
+
+
+  //> span span[class^="icon-"],
+  //> span span[class*=" icon-"]{
+  //	padding: 0 30px 0 45px;
+  //}
+
+
+
+
+  ul li:last-child > span {
+    @include border_radius($border-radius, $corner: bottom-left);
+    @include border_radius($border-radius, $corner: bottom-right);
+  }
+
+  &.active {
+    @include box_shadow(none, null);
+
+    > span:after {
+    	content: '\25B2'; // upward arrow
+    }
+
+    > span, ul li span {
+      box-shadow: 0 1px 1px $india_gray;
+    }
+
+    ul li span {
+      @include transition(all, 0.1s, linear, 0s);
+    }
+
+    ul li span:hover {
+    	background: darken($india_gray, 5);
+    }
+  }
+
+}
