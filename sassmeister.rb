@@ -17,6 +17,8 @@ require 'yaml'
 set :partial_template_engine, :erb
 
 configure :production do
+  require 'newrelic_rpm'
+
   helpers do
     def github(auth_token = '')
       github = Github.new do |config|
@@ -66,6 +68,12 @@ helpers do
 
     def to_sentence
       length < 2 ? first.to_s : "#{self[0..-2] * ', '}, and #{last}"
+    end
+  end
+  
+  class String
+    def titleize
+      split(/(\W)/).map(&:capitalize).join
     end
   end
 
@@ -121,10 +129,10 @@ helpers do
     end
 
     frontmatter.delete_if do |x|
-      ! @plugins.key?(x.to_s.strip)
+      ! @plugins.key?(x.to_s.titleize.strip)
     end
 
-    frontmatter[0].strip unless frontmatter.empty?
+    frontmatter[0].titleize.strip unless frontmatter.empty?
   end
 
   def pack_dependencies(params)
@@ -139,7 +147,7 @@ helpers do
     frontmatter.gsub!(/version/, "v#{Gem.loaded_specs["sass"].version.to_s}")
 
     if ! params[:plugin].empty?
-      frontmatter.gsub!(/^(\/\/ Sass)/, "// #{params[:plugin].capitalize} (v#{plugins[params[:plugin]][:version]})\n\\1")
+      frontmatter.gsub!(/^(\/\/ Sass)/, "// #{params[:plugin]} (v#{plugins[params[:plugin]][:version]})\n\\1")
     end
   end
 end

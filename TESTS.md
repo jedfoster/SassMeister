@@ -48,6 +48,20 @@ Each block of SCSS should return valid CSS with no warnings or errors when teste
       }
     }
 
+## Breakpoint Slicer ##
+
+    $slicer-breakpoints: 0 400px 600px 800px 1050px;
+
+    .element {
+      @include at(2) {
+        background-color: red;
+      }
+
+      @include at(4) {
+        background-color: blue;
+      }  
+    }
+
 
 ## Color Schemer ##
 
@@ -217,21 +231,30 @@ Each block of SCSS should return valid CSS with no warnings or errors when teste
 
 ## Singularity.gs ##
 
-    $grids: 3, (3, 5, 7, 5) 500px, ratio(1.75, 7) 900px;
-    $grids-mobile-first: true;
-    $gutters: .25, .3, .4;
-    $paddings: 0, .5em;
+    $grids: 1 3 5 7 9;
+    $gutters: 1/3;
 
+    // Simplifies use of $options for Isolation Output Style
+    #foo {
+      @include grid-span(2, 3, $output-style: 'isolation', $options: 'both');
+    }
+    #foo {
+      @include isolation-span(2, 3, 'both');
+    }
+
+    // You can also pass in $grid and $gutter
     #bar {
-      @include grid-span(2, 2);
+      @include grid-span(2, 3, (2 8 2 1), .25, 'isolation');
+    }
+    #bar {
+      @include isolation-span(2, 3, $grid: (2 8 2 1), $gutter: .25);
+    }
 
-      @include breakpoint(500px) {
-        @include grid-span(2, 3);
-      }
-
-      @include breakpoint(900px) {
-        @include grid-span(4, 1);
-      }
+    #baz {
+      @include grid-span(2, 3, (2 8 2 1), .25, 'right');
+    }
+    #baz {
+      @include isolation-span(2, 3, 'right', (2 8 2 1), .25);
     }
 
 

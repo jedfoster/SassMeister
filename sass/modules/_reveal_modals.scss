@@ -6,62 +6,66 @@
 //
 ///* Reveal Modals ---------------------- */
 
+.reveal-modal-bg {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background: $alpha_gray;
+  background: transparentize($alpha_gray, 0.4);
+  z-index: 40;
+  display: none;
+  top: 0;
+  left: 0; 
+}
+
+.reveal-modal {
+  @include border_radius($border-radius);
+
+  position: absolute;
+  z-index: 41;
+  top: 150px;
+  left: 50%;
+  padding: 30px;
+  display: none;
+  visibility: hidden;
+  background: $white;
+
+  *:first-child {
+    margin-top: 0;
+  }
+  *:last-child {
+    margin-bottom: 0;
+  }
+
+  &.large {
+    width: 60%;
+    margin-left: -30%;
+  }
+  .row {
+    min-width: 0;
+    margin-bottom: 10px;
+  }
+}
+
+/* Mobile */
+@media #{$mobile} {
   .reveal-modal-bg {
-    position: fixed;
-    height: 100%;
-    width: 100%;
-    background: $alpha_gray;
-    background: transparentize($alpha_gray, 0.4);
-    z-index: 40;
-    display: none;
-    top: 0;
-    left: 0; }
+    position: absolute;
+  }
 
   .reveal-modal {
-    @include border_radius($border-radius);
-
-    position: absolute;
-    z-index: 41;
-    top: 150px;
+    width: 80%;
+    top: 15px;
     left: 50%;
-    width: 520px;
-    margin-left: -260px;
-    padding: 30px;
-    display: none;
-    visibility: hidden;
-    background: $white;   
-
-    *:first-child { margin-top: 0; }
-    *:last-child { margin-bottom: 0; }
-
-    //.close-reveal-modal {
-    //  line-height: .5;
-    //  position: absolute;
-    //  top: 8px;
-    //  right: 11px;
-    //  color: #aaa;
-    //  text-shadow: 0 -1px 1px rgba(0,0,0,.6);
-    //  font-weight: bold;
-    //  cursor: pointer;
-    //}
-    //&.small   { width: 30%; margin-left: -15%; }
-    //&.medium  { width: 40%; margin-left: -20%; }
-    &.large   { width: 60%; margin-left: -30%; }
-    //&.xlarge  { width: 70%; margin-left: -35%; }
-    //&.expand  { width: 90%; margin-left: -45%; }
-    .row { min-width: 0; margin-bottom: 10px; }
+    margin-left: -40%;
+    padding: 20px;
+    height: auto;
   }
-
-  /* Mobile */
-  @media #{$mobile} {
-    .reveal-modal-bg { position: absolute; }
-
-    .reveal-modal { width: 80%; top: 15px; left: 50%; margin-left: -40%; padding: 20px; height: auto; }
-  }
+}
 
   //  /* NOTES
   //  Close button entity is &#215;
-  //  
+  //
   //  Example markup
   //  <div id="myModal" class="reveal-modal">
   //   <h2>Awesome. I have it.</h2>

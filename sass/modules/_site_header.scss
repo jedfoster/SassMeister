@@ -136,8 +136,7 @@
   }
 
   &:hover {
-//    background: transparentize(black, 0.4);
-      background: scale-color($alpha_color, $lightness: -70%);
+    background: scale-color($alpha_color, $lightness: -70%);
 
     ul {
       display: block;
@@ -154,8 +153,6 @@
   width: auto;
   min-width: 220px;
   max-width: 340px;
-//  background: transparentize(black, 0.2);
-//  background: transparentize(scale-color($alpha_color, $lightness: -50%), 0.5);
   background: transparentize(scale-color($alpha_color, $lightness: -80%), 0.2);
 
   @each $prefix in $prefix_defaults {

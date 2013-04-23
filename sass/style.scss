@@ -24,17 +24,19 @@
 
 // Following sequence will load the necessary Stipe libraries
 // ------------------------------------------------------------------------------
-@import "stipe/media";
-@import "stipe/stipe";
-@import "stipe/typography";
-@import "stipe/grid";
-@import "stipe/color";
-@import "stipe/gradients";
-@import "stipe/forms";
-@import "stipe/buttons";
-@import "color/extends";
+// @import "stipe/media";
+// @import "stipe/stipe";
+// @import "stipe/typography";
+// @import "stipe/grid";
+// @import "stipe/color";
+// @import "stipe/gradients";
+// @import "stipe/forms";
+// @import "stipe/buttons";
+// @import "color/extends";
 // @import "stipe/toadstool/ui_patterns/prettify";
 
+@import "stipe/manifest";
+@import "stipe/grid/extends";
 
 
 
