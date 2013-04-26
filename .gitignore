@@ -9,3 +9,4 @@ sass/.sass-cache/
 #Gemfile.local.lock
 /github.yml
 /tmp
+/log
