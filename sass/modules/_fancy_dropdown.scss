@@ -1,28 +1,14 @@
 .fancy_dropdown {
-  border: 1px solid #aaa;
   @include border_radius($border-radius);
-  
+
+  border: 1px solid #aaa;
   background-color: #fff;
   background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(1%, #eeeeee), color-stop(15%, #ffffff));
   background-image: -webkit-linear-gradient(top, #eeeeee 1%, #ffffff 15%);
   background-image: -moz-linear-gradient(top, #eeeeee 1%, #ffffff 15%);
   background-image: -o-linear-gradient(top, #eeeeee 1%, #ffffff 15%);
   background-image: linear-gradient(#eeeeee 1%, #ffffff 15%);
-  
-  
-  
-  //$height: 3em;
- // $padding_lr: 2em;
-  
-  //@extend %minimal;
-
-  //@include grid(12.25, alphaomega);
   width: 100%;
-  //@include border_radius($border-radius);
-  //border: 1px solid $delta_gray;
-  //background: $india_gray;
-  //height: 32px;
-
 	position: relative;
 	display: block;
   margin-bottom: 1em;
@@ -30,11 +16,8 @@
   text-align: left;
 
   > span {
-    //@include grid(12.25, alphaomega);
     width: 100%;
-
   	display: block;
-  //  line-height: $height;
     padding: 0 0 0 1em;
     font-weight: bold;
   	position: relative;
@@ -45,10 +28,8 @@
   > span:after {
     font-family: 'SassMeisterIcons';
     font-style: normal;
-    
-    //@include grid(2.125, omega);
     width: 3em;
-color: $delta_gray;
+    color: $delta_gray;
     position: absolute;
     right: 0;
   	content: '\25BC'; // downward arrow
@@ -73,7 +54,6 @@ color: $delta_gray;
   	position: absolute;
   	top: 0px;
     width: 100%;
-
   }
 
   ul li {
@@ -87,20 +67,8 @@ color: $delta_gray;
     background: $india_gray;
   	display: block;
   	cursor: pointer;
-  	
-    //line-height: $height;
     padding: 0 2em;
-/*    height: auto;*/
   }
-
-
-  //> span span[class^="icon-"],
-  //> span span[class*=" icon-"]{
-  //	padding: 0 30px 0 45px;
-  //}
-
-
-
 
   ul li:last-child > span {
     @include border_radius($border-radius, $corner: bottom-left);
@@ -126,5 +94,4 @@ color: $delta_gray;
     	background: darken($india_gray, 5);
     }
   }
-
 }
