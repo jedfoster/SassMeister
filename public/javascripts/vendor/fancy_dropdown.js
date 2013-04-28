@@ -44,7 +44,7 @@ var Modernizr = {
 			var self = this;
       this.minZIndex = 1000;
 			this._transformSelect();
-			this.opts = this.listopts.children( 'li' );
+			this.opts = this.listopts.find( 'li' );
 			this.optsCount = this.opts.length;
 			this.size = { width : this.dd.width(), height : this.dd.height() };
 			
@@ -83,7 +83,11 @@ var Modernizr = {
         	}
 			} );
 
-			this.listopts = $( '<ul/>' ).append( optshtml );
+			this.listopts = $('<ul/>').append( optshtml );
+      this.listopts = $('<div/>').append( this.listopts );
+      
+      // $(this.listopts).wrap();
+			
 			this.selectlabel = $( '<span/>' ).append( selectlabel );
 			this.dd = $( '<div class="fancy_dropdown"/>' ).append( this.selectlabel, this.listopts ).insertAfter( this.$el );
 			this.$el.remove();
@@ -92,8 +96,8 @@ var Modernizr = {
 		_positionOpts : function( anim ) {
       var self = this;
 
-      this.listopts.css( 'height', 'auto' );
-      this.opts
+      this.listopts.css( {'top': this.size.height + 1, 'left': -9000, 'width': this.size.width} );
+      $('li', this.opts)
 				.each( function( i ) {
 					$( this ).css( {
             zIndex : self.minZIndex + self.optsCount - 1 - i,
@@ -140,7 +144,7 @@ var Modernizr = {
 			  return false;
 			}
 			this.dd.toggleClass( 'active' );
-			this.listopts.css( 'height', ( this.optsCount + 1 ) * this.size.height );
+			this.listopts.css( {'left': 0 } );
 			this.opts.each( function( i ) {
 
 				$( this ).css( {
