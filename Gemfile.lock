@@ -3,7 +3,7 @@ GEM
   specs:
     blend-mode (0.0.1)
       compass (~> 0.12)
-    bourbon-compass (3.1.4)
+    bourbon-compass (3.1.5)
       compass (>= 0.11)
       sass (>= 3.2.0)
     breakpoint (2.0.5)
