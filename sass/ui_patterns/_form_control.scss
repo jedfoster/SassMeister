@@ -18,7 +18,7 @@
   min-height: em(52);
 
   @media #{$desktop} {
-    @include grid(4);
+    @include grid(7);
 
     &:first-child {
       @include grid(2.125, alpha);
@@ -258,7 +258,6 @@
     width: 100%;
   	display: block;
     padding: 0 0 0 1em;
-    font-weight: bold;
   	position: relative;
   	cursor: pointer;
   	height: 1.5em;
@@ -287,48 +286,19 @@
 
   div {
     @extend %chzn-drop;
-    
-  	// margin: 0;
-  	// padding: 0;
-  	// display: block;
-  	// position: absolute;
-  	// top: 0px;
-    // width: 100%;
-    
-    
   }
 
   ul {
-      @extend %chz-drop-ul;
+    @extend %chz-drop-ul;
   }
   
   li:hover {
-        @extend %chzn-hover-state;
+    @extend %chzn-hover-state;
   }
 
   &.active {
-      @include theme-active-container;
+    @include theme-active-container;
   }
-  
-  //&.active {
-  //  @include box_shadow(none, null);
-  //
-  //  > span:after {
-  //  	content: '\25B2'; // upward arrow
-  //  }
-  //
-  //  > span, ul li span {
-  //    box-shadow: 0 1px 1px $india_gray;
-  //  }
-  //
-  //  ul li span {
-  //    @include transition(all, 0.1s, linear, 0s);
-  //  }
-  //
-  //  ul li span:hover {
-  //  	background: darken($india_gray, 5);
-  //  }
-  //}
 }
 
 
@@ -389,7 +359,7 @@
 
   .toggle-radio {
 
-    @include transition(all, 0.25s, linear, 0s);
+    @include transition(all, 0.24s, linear, 0s);
 
 
     display: inline-block;
@@ -403,7 +373,7 @@
     padding-left: 0.5em;
 
     &:first-child {
-      @include transition(all, 0.23s, linear, 0s);
+      @include transition(all, 0.22s, linear, 0s);
 
       left: 0;
       margin: 0 0 0 1.5em;
