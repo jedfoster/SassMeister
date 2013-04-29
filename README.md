@@ -2,6 +2,9 @@
 
 Become a Sass master with SassMeister, the Sass playground.
 
+
+## Installation ##
+
 ```
 git clone https://github.com/jedfoster/SassMeister.git
 cd SassMeister
@@ -23,7 +26,6 @@ Once you have your `github.yml` file:
 rake server
 # Rock and Roll
 ```
-
 
 Go to [127.0.0.1:3000](http://127.0.0.1:3000) and start playing with Sass!
 
