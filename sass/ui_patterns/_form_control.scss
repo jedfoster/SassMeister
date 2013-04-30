@@ -165,7 +165,7 @@
         box-shadow        : none;
       }
     }
-    
+
     .search-choice {
       @include theme-inner-border;
       @include theme-gradient;
@@ -187,15 +187,13 @@
         font-size: 10px;
 
         &:before {
-          font-family: 'SassMeisterIcons';
-          font-style: normal;
-          line-height: 1;
-          vertical-align:middle;
-          speak: none;
-          -webkit-font-smoothing: antialiased;
+          @extend %icon-pseudo-content;
+          
+          font-size: 1em;
           color: $delta_gray;
           content: "\00d7";
         }
+
       }
     }
   }
@@ -230,10 +228,6 @@
 
 
 
-
-
-
-
 .fancy_dropdown {
   @include theme-container-border();
   @include theme-background;
@@ -255,24 +249,27 @@
   }
 
   > span:after {
-    font-family: 'SassMeisterIcons';
-    font-style: normal;
-    width: 2em;
+    @include theme-gradient;
+    @include border_radius($border-radius, $corner: top-right);
+    @include border_radius($border-radius, $corner: bottom-right);
+
+    @extend %icon-pseudo-content;
+    
+    font-size: 1em;
+
+    width: 1.5em;
     color: $delta_gray;
     position: absolute;
     right: 0;
-  	content: '\25BC'; // downward arrow
+  	content: '\f0d7'; // downward arrow
     text-align: center;
-    line-height: 1.5;
+    line-height: 30px;
+    
     border-left: 1px solid $golf_gray;
 
-      @include theme-gradient;
-
-      -webkit-background-clip: padding-box;
-         -moz-background-clip: padding;
-              background-clip: padding-box;
-      @include border_radius($border-radius, $corner: top-right);
-      @include border_radius($border-radius, $corner: bottom-right);
+    -webkit-background-clip: padding-box;
+       -moz-background-clip: padding;
+            background-clip: padding-box;
   }
 
   div {
@@ -289,6 +286,10 @@
 
   &.active {
     @include theme-active-container;
+
+    > span:after {
+    	content: '\f0d8';
+    }
   }
 }
 

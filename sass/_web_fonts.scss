@@ -39,13 +39,7 @@ $webfont_directory: "/stylesheets/fonts/" !default; // edit this directory in th
   min-width: 1em;
 
   &:before {
-    font-size:1.5em;
-    font-family: 'SassMeisterIcons';
-  	font-style: normal;
-  	line-height: 1;
-  	vertical-align:middle;
-  	speak: none;
-    -webkit-font-smoothing: antialiased;
+    @extend %icon-pseudo-content;
   }
   &:hover {
     text-decoration: none;
@@ -59,6 +53,25 @@ $webfont_directory: "/stylesheets/fonts/" !default; // edit this directory in th
     height: 1px;
   }
 }
+
+%icon-font-after {
+  @extend %icon-font;
+
+  &:before {
+    @extend %icon-pseudo-content;
+  }
+}
+
+%icon-pseudo-content {
+  font-size:1.5em;
+  font-family: 'SassMeisterIcons';
+	font-style: normal;
+	line-height: 1;
+	vertical-align:middle;
+	speak: none;
+  -webkit-font-smoothing: antialiased;
+}
+
 
 .twitter-icon {
   @extend %icon-font;
