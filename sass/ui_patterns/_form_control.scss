@@ -87,29 +87,29 @@
   float: left;
   width: 100%;
   clear: both;
-  min-height: em(72);
+  min-height: em(56);
 
   .css_output & {
     padding-top:em(20);
-    min-height: em(52);
+    min-height: em(62);
   }
 }
 
 .form_control {
   @include grid(4, $grid_context: 4);
 
-  margin-bottom: em(16);
-  min-height: em(52);
+  // margin-bottom: em(16);
+  min-height: em(62);
 
   @media #{$desktop} {
-    @include grid(7);
+    @include grid(7.375);
 
     &:first-child {
       @include grid(2.125, alpha);
     }
 
     &:last-child {
-      @include grid(3.125, omega);
+      @include grid(2.75, omega);
     }
   }
 }
@@ -238,14 +238,24 @@
   margin-bottom: 1em;
   padding:0;
   text-align: left;
+  
+      vertical-align: middle;
+  
+  font-size: 13px;
+  height: 32px;
+  font-family: $primary_font_family;
 
   > span {
     width: 100%;
   	display: block;
-    padding: 0 0 0 1em;
+    padding: 0 0 0 0.5em;
   	position: relative;
   	cursor: pointer;
-  	height: 1.5em;
+
+    vertical-align: middle;
+    
+
+
   }
 
   > span:after {

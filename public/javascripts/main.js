@@ -287,3 +287,23 @@ http://github.com/bgrins/bindWithDelay
     }
   });
 })(jQuery);
+
+
+
+
+// Chrome 26 needs this
+// Safari 6 needs this
+
+// Firefox 19 doesn't need it
+// IE 10 doesn't need it
+
+$(function() {
+
+	causeRepaintsOn = $(".chzn-container, .chzn-drop, .fancy_dropdown div");
+
+	$(window).resize(function() {
+		causeRepaintsOn.css("width", '100%');
+	});
+
+});
+
