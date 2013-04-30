@@ -1,3 +1,87 @@
+@mixin theme-background() {
+  background-color: #fff;
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(1%, #eeeeee), color-stop(15%, #ffffff));
+  background-image: -webkit-linear-gradient(top, #eeeeee 1%, #ffffff 15%);
+  background-image: -moz-linear-gradient(top, #eeeeee 1%, #ffffff 15%);
+  background-image: -o-linear-gradient(top, #eeeeee 1%, #ffffff 15%);
+  background-image: linear-gradient(#eeeeee 1%, #ffffff 15%);
+}
+
+@mixin theme-gradient() {
+  @include linear_gradient_w3c (#e4e4e4, #{#f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eeeeee 100%});
+  @include dual_box_shadow($shadow_color: rgba(0,0,0,0.05), $shadow: 0 1px 0, $inset_shadow: 0 0 2px, $inset_color: #fff, $prefixes: -moz- -webkit- '');
+}
+
+@mixin theme-container-border() {
+  @include border_radius($border-radius);
+
+  border: 1px solid #aaa;
+}
+
+@mixin theme-inner-border() {
+  @include border_radius(3px);
+
+  -moz-background-clip   : padding;
+  -webkit-background-clip: padding-box;
+  background-clip        : padding-box;
+  border: 1px solid $golf_gray;
+}
+
+@mixin theme-active-container() {
+  -webkit-box-shadow: 0 0 5px rgba(0,0,0,.3);
+  -moz-box-shadow   : 0 0 5px rgba(0,0,0,.3);
+  box-shadow        : 0 0 5px rgba(0,0,0,.3);
+  border: 1px solid $alpha_color_charlie;
+}
+
+
+
+%chzn-drop {
+  background: #fff;
+  border: 1px solid #aaa;
+  border-top: 0;
+  position: absolute;
+  -webkit-box-shadow: 0 4px 5px rgba(0,0,0,.15);
+  -moz-box-shadow   : 0 4px 5px rgba(0,0,0,.15);
+  box-shadow        : 0 4px 5px rgba(0,0,0,.15);
+  z-index: 1010;
+}
+
+%chz-drop-ul {
+  margin: 0 4px 4px 0;
+  max-height: 240px;
+  padding: 0 0 0 4px;
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+
+  li {
+    display: none;
+    line-height: 15px;
+    padding: 5px 6px;
+    margin: 0;
+    list-style: none;
+    cursor: pointer;
+    display: list-item;
+  }
+}
+
+%chzn-hover-state {
+  background-color: $alpha_color_delta;
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(20%, $alpha_color_delta), color-stop(90%, $alpha_color_bravo));
+  background-image: -webkit-linear-gradient(top, $alpha_color_delta 20%, $alpha_color_bravo 90%);
+  background-image: -moz-linear-gradient(top, $alpha_color_delta 20%, $alpha_color_bravo 90%);
+  background-image: -o-linear-gradient(top, $alpha_color_delta 20%, $alpha_color_bravo 90%);
+  background-image: linear-gradient($alpha_color_delta 20%, $alpha_color_bravo 90%);
+  color: #fff;
+}
+
+
+
+
+
+
 .controls {
   display: block;
   float: left;
@@ -36,98 +120,7 @@
 
 
 
-@mixin theme-background() {
-  background-color: #fff;
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(1%, #eeeeee), color-stop(15%, #ffffff));
-  background-image: -webkit-linear-gradient(top, #eeeeee 1%, #ffffff 15%);
-  background-image: -moz-linear-gradient(top, #eeeeee 1%, #ffffff 15%);
-  background-image: -o-linear-gradient(top, #eeeeee 1%, #ffffff 15%);
-  background-image: linear-gradient(#eeeeee 1%, #ffffff 15%);
-}
 
-@mixin theme-gradient() {
-  @include linear_gradient_w3c (#e4e4e4, #{#f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eeeeee 100%});
-  @include dual_box_shadow($shadow_color: rgba(0,0,0,0.05), $shadow: 0 1px 0, $inset_shadow: 0 0 2px, $inset_color: #fff, $prefixes: -moz- -webkit- '');
-}
-
-@mixin theme-container-border() {
-  border: 1px solid #aaa;
-  @include border_radius($border-radius);
-}
-
-@mixin theme-inner-border() {
-  //-webkit-border-radius: 3px;
-  //-moz-border-radius   : 3px;
-  //border-radius        : 3px;
-  
-  @include border_radius(3px);
-  -moz-background-clip   : padding;
-  -webkit-background-clip: padding-box;
-  background-clip        : padding-box;
-  
-  
-  border: 1px solid $golf_gray;
-}
-
-
-
-
-
-
-
-%chzn-drop {
-  background: #fff;
-  border: 1px solid #aaa;
-  border-top: 0;
-  position: absolute;
-  -webkit-box-shadow: 0 4px 5px rgba(0,0,0,.15);
-  -moz-box-shadow   : 0 4px 5px rgba(0,0,0,.15);
-  box-shadow        : 0 4px 5px rgba(0,0,0,.15);
-  z-index: 1010;
-}
-
-%chz-drop-ul {
-  margin: 0 4px 4px 0;
-  max-height: 240px;
-  padding: 0 0 0 4px;
-  position: relative;
-  overflow-x: hidden;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  
-//  width: 100%;
-
-  li {
-    display: none;
-    line-height: 15px;
-    padding: 5px 6px;
-    margin: 0;
-    list-style: none;
-    
-
-    cursor: pointer;
-    display: list-item;
-  }
-}
-
-
-@mixin theme-active-container() {
-  -webkit-box-shadow: 0 0 5px rgba(0,0,0,.3);
-  -moz-box-shadow   : 0 0 5px rgba(0,0,0,.3);
-  box-shadow        : 0 0 5px rgba(0,0,0,.3);
-  border: 1px solid $alpha_color_charlie;
-}
-
-
-%chzn-hover-state {
-  background-color: $alpha_color_delta;
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(20%, $alpha_color_delta), color-stop(90%, $alpha_color_bravo));
-  background-image: -webkit-linear-gradient(top, $alpha_color_delta 20%, $alpha_color_bravo 90%);
-  background-image: -moz-linear-gradient(top, $alpha_color_delta 20%, $alpha_color_bravo 90%);
-  background-image: -o-linear-gradient(top, $alpha_color_delta 20%, $alpha_color_bravo 90%);
-  background-image: linear-gradient($alpha_color_delta 20%, $alpha_color_bravo 90%);
-  color: #fff;
-}
 
 
 
@@ -151,20 +144,19 @@
     white-space: nowrap;
     width:inherit;
     height: 32px;
-    
+
     li {
       float: left;
       list-style: none;
     }
-    
-    .search-field {      
+
+    .search-field {
       input {
         color: $echo_gray;
         background: transparent !important;
         border: 0 !important;
         font-family: $primary_font_family;
         font-size: 1em;
-
         height: 1.5em;
         padding: 5px;
         outline: 0;
@@ -173,42 +165,41 @@
         box-shadow        : none;
       }
     }
-  }
-}
-
-.chzn-container-multi .chzn-choices .search-choice {
-    @include theme-inner-border;
-    @include theme-gradient;
     
-  color: $bravo_gray;
-  line-height: 1.25;
-  padding: 3px 20px 3px 5px;
-  margin: 3px 0 3px 5px;
-  position: relative;
-  cursor: default;
-  
-  .search-choice-close {
-    display: block;
-    position: absolute;
-    right: 3px;
-    top: 4px;
-    width: 12px;
-    height: 12px;
-    font-size: 10px;
+    .search-choice {
+      @include theme-inner-border;
+      @include theme-gradient;
 
-    &:before {
-      font-family: 'SassMeisterIcons';
-      font-style: normal;
-      line-height: 1;
-      vertical-align:middle;
-      speak: none;
-      -webkit-font-smoothing: antialiased;
-      color: $delta_gray;
-      content: "\00d7";
+      color: $bravo_gray;
+      line-height: 1.25;
+      padding: 3px 20px 3px 5px;
+      margin: 3px 0 3px 5px;
+      position: relative;
+      cursor: default;
+
+      .search-choice-close {
+        display: block;
+        position: absolute;
+        right: 3px;
+        top: 4px;
+        width: 12px;
+        height: 12px;
+        font-size: 10px;
+
+        &:before {
+          font-family: 'SassMeisterIcons';
+          font-style: normal;
+          line-height: 1;
+          vertical-align:middle;
+          speak: none;
+          -webkit-font-smoothing: antialiased;
+          color: $delta_gray;
+          content: "\00d7";
+        }
+      }
     }
   }
 }
-
 
 .chzn-container .chzn-drop {
   @extend %chzn-drop;
@@ -218,9 +209,9 @@
   @extend %chz-drop-ul;
 
   .active-result {
-    
+
   }
-  
+
   .highlighted {
     @extend %chzn-hover-state;
   }
@@ -244,9 +235,9 @@
 
 
 .fancy_dropdown {
-    @include theme-container-border();
-    @include theme-background;
-    
+  @include theme-container-border();
+  @include theme-background;
+
   width: 100%;
 	position: relative;
 	display: block;
@@ -266,7 +257,7 @@
   > span:after {
     font-family: 'SassMeisterIcons';
     font-style: normal;
-    width: 3em;
+    width: 2em;
     color: $delta_gray;
     position: absolute;
     right: 0;
@@ -274,9 +265,9 @@
     text-align: center;
     line-height: 1.5;
     border-left: 1px solid $golf_gray;
-    
-      @include theme-gradient;    
-      
+
+      @include theme-gradient;
+
       -webkit-background-clip: padding-box;
          -moz-background-clip: padding;
               background-clip: padding-box;
@@ -291,7 +282,7 @@
   ul {
     @extend %chz-drop-ul;
   }
-  
+
   li:hover {
     @extend %chzn-hover-state;
   }
@@ -304,25 +295,15 @@
 
 
 
-
-
-
-
-
-
 .toggle {
-
   @include transition(all, 0.25s, linear, 0s);
-   
+  @include theme-container-border();
+  @include theme-background;
+
   color: $delta_gray;
   display: inline-block;
-  
-    @include theme-container-border();
-    @include theme-background;
-   
   position: relative;
   overflow: hidden;
-
   width: 100%;
   font-size: 0.875em;
 
@@ -340,12 +321,9 @@
 
   .knob {
     @include transition(all, 0.25s, linear, 0s);
-
-    
     @include theme-gradient;
     @include theme-inner-border;
-    
-    
+
     display: block;
     width: 22px;
     height: 22px;
@@ -358,9 +336,7 @@
   }
 
   .toggle-radio {
-
     @include transition(all, 0.24s, linear, 0s);
-
 
     display: inline-block;
     left: -89%;
