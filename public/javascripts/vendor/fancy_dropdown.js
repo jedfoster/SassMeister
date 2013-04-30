@@ -42,7 +42,7 @@ var Modernizr = {
 
 		_layout : function() {
 			var self = this;
-      this.minZIndex = 1000;
+      this.minZIndex = 10;
 			this._transformSelect();
 			this.opts = this.listopts.find( 'li' );
 			this.optsCount = this.opts.length;
@@ -96,13 +96,13 @@ var Modernizr = {
 		_positionOpts : function( anim ) {
       var self = this;
 
-      this.listopts.css( {'top': this.size.height + 1, 'left': -9000, 'width': this.size.width} );
+      this.listopts.css( {'top': this.size.height + 1, 'left': -9000, 'width': '100%'} );
       $('li', this.opts)
 				.each( function( i ) {
 					$( this ).css( {
-            zIndex : self.minZIndex + self.optsCount - 1 - i,
-            top : 0,
-						left : 0,
+            //zIndex : self.minZIndex + self.optsCount - 1 - i,
+            //top : 0,
+						//left : 0,
 						opacity : 0,
 						transform : 'none'
 					} );
@@ -126,6 +126,33 @@ var Modernizr = {
 				self.opened ? self.close() : self.open();
 				return false;
 			} );
+			
+			//this.dd.on( 'mouseleave.dropdown', function( event ) {
+			//	self.opened ? self.close() : self.open();
+			//	return false;
+			//} );
+			
+			console.log(this);
+			
+
+      //function test_active_click(evt) {
+      //  
+      //};
+      
+      
+      $(document).on('click', function(evt) {
+        //return test_active_click(evt);
+        if ($(evt.target).parents(self.dd).length) {
+          return false;
+        } else {
+          self.opened ? self.close() : self.open();
+  				return true;
+        }
+      });
+			
+			
+			
+			
 
 			this.opts.on( 'click.dropdown', function() {
 				if( self.opened ) {
