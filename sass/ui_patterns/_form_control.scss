@@ -102,14 +102,14 @@
   min-height: em(62);
 
   @media #{$desktop} {
-    @include grid(7.375);
+    @include grid(8);
 
     &:first-child {
-      @include grid(2.125, alpha);
+      @include grid(1.75, alpha);
     }
 
     &:last-child {
-      @include grid(2.75, omega);
+      @include grid(2.5, omega);
     }
   }
 }
@@ -201,6 +201,10 @@
 
 .chzn-container .chzn-drop {
   @extend %chzn-drop;
+  
+  .result-selected {
+    display: none;
+  }
 }
 
 .chzn-container .chzn-results {

@@ -145,8 +145,8 @@ var Modernizr = {
         if ($(evt.target).parents(self.dd).length) {
           return false;
         } else {
-          self.opened ? self.close() : self.open();
-  				return true;
+          self.close();
+  				return false;
         }
       });
 			

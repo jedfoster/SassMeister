@@ -212,7 +212,7 @@ http://github.com/bgrins/bindWithDelay
 $('select.fancy_dropdown').each(function() {
     $(this).dropdown({
       gutter : 0,
-      speed : 50
+      speed : 25
     })
   });
 
