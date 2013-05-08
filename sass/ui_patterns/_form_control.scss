@@ -139,14 +139,15 @@
     margin: 0;
     padding: 0;
     cursor: text;
-    overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: hidden;
+    overflow-x: scroll;
     white-space: nowrap;
     width:inherit;
     height: 32px;
 
     li {
-      float: left;
+      display: inline;
+      //float: left;
       list-style: none;
     }
 
