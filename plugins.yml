@@ -84,6 +84,12 @@ Salsa:
   :import: 
     - '' # This space intentionally left blank 
   :url: https://github.com/scottkellum/Sassy-math
+"Sassy Text Shadows":
+  :gem: sassy-text-shadow
+  :import:
+    - compass
+    - sassy-text-shadow
+  :url: http://sassymothereffingtextshadow.com/
 Singularity.gs:
   :gem: singularitygs
   :import: 

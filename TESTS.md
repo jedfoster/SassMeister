@@ -229,6 +229,28 @@ Each block of SCSS should return valid CSS with no warnings or errors when teste
     }
 
 
+## Sassy Text Shadows ##
+
+    body {
+      text-align: center;
+    }
+
+    h1 {
+      @include text-shadow(sassy-text-shadow(#BADA55));
+      line-height: 8em;
+    }
+
+    h2 {
+      @include text-shadow(sassy-text-shadow(#BADA55, 100, 80, 120, 90, -45, 0.09));
+      line-height: 8em;
+    }
+
+    h3 {
+      @include text-shadow(long-shadow(30, #BADA55, 25, 0));
+      line-height: 8em;
+    }
+
+
 ## Singularity.gs ##
 
     $grids: 1 3 5 7 9;
