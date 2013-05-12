@@ -149,6 +149,8 @@ helpers do
     if ! params[:plugin].empty?
       frontmatter.gsub!(/^(\/\/ Sass)/, "// #{params[:plugin]} (v#{plugins[params[:plugin]][:version]})\n\\1")
     end
+
+    return frontmatter
   end
 end
 
