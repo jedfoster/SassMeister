@@ -28,7 +28,6 @@ html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pr
 	margin: 0;
 	padding: 0;
 	border: 0;
-	//outline: 0;
 	vertical-align: baseline;
 	background: transparent;
 }
@@ -38,7 +37,6 @@ html {
 }
 
 body {
-	//line-height: 1;
 	font-size: 100%;
 	-webkit-font-smoothing: antialiased;
 }
@@ -46,10 +44,6 @@ body {
 article, aside, figure, footer, header, hgroup, nav, section {
 	display: block;
 }
-
-// * Responsive images and other embedded objects
-// * Note: keeping IMG here will cause problems if you're using foreground images as sprites, like, say for Google Maps custom placemarkers. 
-// * There has been a report of problems with standard Google maps as well, but we haven't been able to duplicate or diagnose the issue.
 
 img, object, embed {
 	max-width: 100%;
@@ -61,30 +55,9 @@ img {
 	border-width: 0;
 }
 
-// * we use a lot of ULs that aren't bulleted. 
-// * don't forget to restore the bullets within content.
-
-ol,ul {
+ol, ul {
 	list-style: none;
 }
-
-//blockquote, q {
-//	quotes: none;
-//}
-//
-//blockquote {
-//	&:before, &:after {
-//		content: '';
-//		content: none;
-//	}
-//}
-//
-//q {
-//	&:before, &:after {
-//		content: '';
-//		content: none;
-//	}
-//}
 
 a {
 	margin: 0;
@@ -98,20 +71,9 @@ a {
 	}
 }
 
-//del {
-//	text-decoration: line-through;
-//}
-
-
 pre {
-	//white-space: pre
-	// * CSS2
 	white-space: pre-wrap;
-	// * CSS 2.1
-	//white-space: pre-line
-	// * CSS 3 (and 2.1 as well, actually)
 	word-wrap: break-word;
-	// * IE
 }
 
 input {
@@ -134,30 +96,9 @@ table {
 	font: 100%;
 }
 
-//sub {
-//	font-size: 75%;
-//	line-height: 0;
-//	position: relative;
-//}
-//
-//sup {
-//	font-size: 75%;
-//	line-height: 0;
-//	position: relative;
-//	top: -0.5em;
-//}
-//
-//sub {
-//	bottom: -0.25em;
-//}
-
-// * standardize any monospaced elements
-
 pre, code, kbd, samp {
 	font-family: monospace, sans-serif;
 }
-
-// * hand cursor on clickable elements
 
 .clickable, label {
 	cursor: pointer;
@@ -180,31 +121,9 @@ a.button {
 	display: inline-block;
 }
 
-// * scale images in IE7 more attractively
-
-//.ie7 img {
-//	-ms-interpolation-mode: bicubic;
-//}
-
-// * Ok, this is where the fun starts.
-// *-------------------------------------------------------------------------------
-
 a:link {
 	-webkit-tap-highlight-color: $webkit_tap_hightlight;
 }
-
-//ins {
-//	background-color: $ins_color;
-//	color: black;
-//	text-decoration: none;
-//}
-//
-//mark {
-//	background-color: $mark_color;
-//	color: $primary_text;
-//	font-style: italic;
-//	font-weight: bold;
-//}
 	
 ::selection {
 	background: $selection_color;
@@ -215,5 +134,3 @@ a:link {
 	background: $selection_color;
 	color: $selection_text_color;
 }
-
-
