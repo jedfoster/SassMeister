@@ -1,26 +1,7 @@
-
-// -----------------------------------------------------------
 @import "stipe/typography/mixins"; // Do not edit, needed to pull in necessary mixin
-$webfont_directory: "/stylesheets/fonts/" !default; // edit this directory in the '_config.scss' file if needed.
 
+// $webfont_directory: "/stylesheets/fonts/" !default;
 
-
-// Pre-loaded web fonts for your use, enjoy!
-// Fonts needed to be loaded in path specified above
-// in relation to the rendered CSS file
-// -----------------------------------------------------------
-// To activate 'zocial' uncomment both lines
-// @import "stipe/typography/web_fonts/zocial";
-// @import "stipe/typography/web_fonts/zocial_characters";
-
-// To activate 'font_awesome' uncomment both lines
-// @import "stipe/typography/web_fonts/font_awesome";
-// @import "stipe/typography/web_fonts/font_awesome_pua";
-
-
-
-// Install your own
-// -----------------------------------------------------------
 
 @font-face {
 	@include font-face ($font_family: 'SourceCodePro', $font-file:  'sourcecodepro-regular-webfont', $font_weight: normal, $font_style: normal);
