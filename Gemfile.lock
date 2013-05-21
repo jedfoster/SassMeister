@@ -1,6 +1,7 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    addressable (2.3.4)
     blend-mode (0.0.1)
       compass (~> 0.12)
     bourbon-compass (3.1.6)
@@ -31,7 +32,8 @@ GEM
       multipart-post (~> 1.1)
     fittext (0.0.5)
       compass (>= 0.10.0.rc3)
-    github_api (0.9.7)
+    github_api (0.10.0)
+      addressable
       faraday (~> 0.8.1)
       hashie (>= 1.2)
       multi_json (~> 1.4)
@@ -101,7 +103,7 @@ GEM
       breakpoint (>= 2.0.1)
       compass (>= 0.12.2)
       sass (>= 3.2.1)
-    stipe (0.0.5.9)
+    stipe (0.0.6.0)
       compass (>= 0.11)
       sass (>= 3.2.1)
     susy (2.0.0.alpha.2)
