@@ -137,6 +137,7 @@ DEPENDENCIES
   closure-compiler
   color-schemer
   compass
+  compass-blend-modes
   css-slideshow
   fancy-buttons
   fittext

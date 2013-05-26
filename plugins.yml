@@ -90,6 +90,11 @@ Salsa:
     - compass
     - sassy-text-shadow
   :url: http://sassymothereffingtextshadow.com/
+"SCSS Blend Modes":
+  :gem: compass-blend-modes
+  :import: 
+    - blend-modes
+  :url: https://github.com/heygrady/scss-blend-modes
 Singularity.gs:
   :gem: singularitygs
   :import: 
