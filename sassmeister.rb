@@ -78,7 +78,7 @@ helpers do
   end
 
   def plugins
-    YAML.load_file("plugins.yml").each do |plugin|
+    YAML.load_file("config/plugins.yml").each do |plugin|
       plugin.last[:version] = Gem.loaded_specs[plugin.last[:gem]].version.to_s
     end
   end
