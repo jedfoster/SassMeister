@@ -39,7 +39,7 @@ end
 configure :development do
   helpers do
     def github(auth_token = '')
-      gh_config = YAML.load_file("github.yml")
+      gh_config = YAML.load_file("config/github.yml")
 
       github = Github.new do |config|
         config.client_id = gh_config['client_id']

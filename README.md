@@ -11,7 +11,7 @@ cd SassMeister
 bundle install
 ```
 
-Certain features of the app depend on the GitHub API. In production the app's GitHub credentials are stored in environment variables, but in development I use a YAML file to store those. You'll need to [register your app with GitHub](https://github.com/settings/applications/new). Once you have your client ID and secret, rename `github.example.yml` to `github.yml` and paste in your app's credentials. Mine looks something like this:
+Certain features of the app depend on the GitHub API. In production the app's GitHub credentials are stored in environment variables, but in development I use a YAML file to store those. You'll need to [register your app with GitHub](https://github.com/settings/applications/new). Once you have your client ID and secret, rename `config/github.example.yml` to `config/github.yml` and paste in your app's credentials. Mine looks something like this:
 
 ```yaml
 client_id: 9ef1xxxx
@@ -20,7 +20,7 @@ client_secret: 5784xxxxxxxx
 
 **FAIR WARNING:** Your client ID and secret should _not_ be shared publicly. Do not commit github.yml to your repo, especially if you post your repo on GitHub. Read the instructions for configuring Heroku with your credentials, below.
 
-Once you have your `github.yml` file:
+Once you have your `config/github.yml` file:
 
 ```
 rake server
