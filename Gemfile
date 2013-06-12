@@ -13,6 +13,9 @@ gem 'newrelic_rpm'
 gem 'sass'
 gem 'compass'
 
+gem 'haml'
+gem 'slim'
+
 gem 'bourbon-compass'
 gem 'breakpoint'
 gem 'sassy-buttons'
