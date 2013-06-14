@@ -1,29 +1,29 @@
 (function($) {
-  var sass = ace.edit("sass");
-  sass.setTheme("ace/theme/tomorrow");
-  sass.getSession().setMode("ace/mode/scss");
-  sass.focus();
+  
+  var SassMeister = $.fn.SassMeister();
 
-  var css = ace.edit("css");
-  css.setTheme("ace/theme/tomorrow");
-  css.setReadOnly(true);
-  css.getSession().$useWorker=false
-  css.getSession().setMode("ace/mode/css");
+  // console.log(SassMeister.inputs);
 
   $("a[href^='http://'], a[href^='https://']").attr("target", "_blank");
 
-  var timer;
-  sass.getSession().on('change', function(e) {
-    clearTimeout(timer);
-    timer = setTimeout(function() {$("#sass-form").submit();}, 750);
+  // var sass_timer;
+  SassMeister.inputs.sass.getSession().on('change', function(e) {
+    clearTimeout(SassMeister.timers.sass);
+    SassMeister.timers.sass = setTimeout(function() {$("#sass-form").submit();}, 750);
+  });
+  
+  // var html_timer;
+  SassMeister.inputs.html.getSession().on('change', function(e) {
+    clearTimeout(SassMeister.timers.html);
+    SassMeister.timers.html = setTimeout(function() {$("#html-form").submit();}, 750);
   });
 
-  $('select').on('change', function() {
+  $('#sass-form select').on('change', function() {
     _gaq.push(['_trackEvent', 'Form', 'Control', this.value]);
 
     if($(this).attr("name").match(/syntax/)) {
       var inputs = {
-        sass: sass.getValue(),
+        sass: SassMeister.inputs.sass.getValue(),
         syntax: $('select[name="syntax"]').val(),
         original_syntax: $('select[name="syntax"]').data('orignal'),
         plugin: $('select[name="plugin"]').val(),
@@ -32,7 +32,7 @@
 
       $.post('/sass-convert', inputs,
         function( data ) {
-          sass.setValue(data, -1);
+          SassMeister.inputs.sass.setValue(data, -1);
         }
       );
     }
@@ -48,7 +48,7 @@
     _gaq.push(['_trackEvent', 'Form', 'Submit']);
 
     var inputs = {
-      sass: sass.getValue(),
+      sass: SassMeister.inputs.sass.getValue(),
       syntax: $('select[name="syntax"]').val(),
       plugin: $('select[name="plugin"]').val(),
       output: $('select[name="output"]').val()
@@ -57,12 +57,14 @@
     /* Post the form and handle the returned data */
     $.post($(this).attr('action'), inputs,
       function( data ) {
-        css.setValue(data,-1);
+        SassMeister.outputs.css.setValue(data,-1);
 
         $('select[name="syntax"]').data('orignal', inputs.syntax);
-
+        
+          // console.log(data.sass);
         if(data.sass.length > 0) {
-          sass.setValue(data.sass,-1);
+          
+          SassMeister.inputs.sass.setValue(data.sass,-1);
         }
       }
     );
@@ -78,8 +80,8 @@
   }
 
   if( storedInputs !== null) {
-    sass.setValue(storedInputs.sass);
-    sass.clearSelection();
+    SassMeister.inputs.sass.setValue(storedInputs.sass);
+    SassMeister.inputs.sass.clearSelection();
     $('select[name="syntax"]').val(storedInputs.syntax).data('orignal', storedInputs.syntax);
     $('select[name="plugin"]').val(storedInputs.plugin);
     $('select[name="output"]').val(storedInputs.output);
@@ -166,7 +168,7 @@
         };
         history.pushState(myNewState.data, myNewState.title, myNewState.url);
         window.onpopstate = function(event){
-        	console.log(event.state); // will be our state data, so myNewState.data
+          // console.log(event.state); // will be our state data, so myNewState.data
         }
 
         $('#gist-it').data('gist-save', 'edit');
@@ -192,7 +194,7 @@
     };
     history.pushState(myNewState.data, myNewState.title, myNewState.url);
     window.onpopstate = function(event){
-    	console.log(event.state); // will be our state data, so myNewState.data
+      // console.log(event.state); // will be our state data, so myNewState.data
     }
   });
 })(jQuery);
