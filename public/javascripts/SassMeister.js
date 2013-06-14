@@ -48,7 +48,7 @@ var SassMeister;
     },
     
     compile: {
-      sass: function() {        
+      sass: function() {
         var inputs = {
               sass: SassMeister.inputs.sass.getValue(),
               syntax: $('select[name="syntax"]').val(),
@@ -87,6 +87,48 @@ var SassMeister;
 
         localStorage.setItem('inputs', JSON.stringify(inputs));
       },
+    },
+    
+    convert: {
+      sass: function() {
+        if($('#sass-form select').attr("name").match(/syntax/)) {
+          var inputs = {
+            sass: SassMeister.inputs.sass.getValue(),
+            syntax: $('select[name="syntax"]').val(),
+            original_syntax: $('select[name="syntax"]').data('orignal'),
+            plugin: $('select[name="plugin"]').val(),
+            output: $('select[name="output"]').val()
+          }
+
+          $.post('/convert', inputs,
+            function( data ) {
+              SassMeister.inputs.sass.setValue(data, -1);
+            }
+          );
+        }
+        else {
+          SassMeister.compile.sass();
+        }
+      },
+      
+      html: function() {
+        if($('$html-form select').attr("name").match(/syntax/)) {
+          var inputs = {
+            html: SassMeister.inputs.html.getValue(),
+            syntax: $('select[name="html-syntax"]').val(),
+            original_syntax: $('select[name="html-syntax"]').data('orignal')
+          }
+
+          $.post('/convert', inputs,
+            function( data ) {
+              SassMeister.inputs.html.setValue(data, -1);
+            }
+          );
+        }
+        else {
+          SassMeister.compile.html();
+        }
+      }
     },
      
     modal: function(content) {
@@ -143,18 +185,6 @@ var SassMeister;
       }
     },
   };
-
-  // $.fn[sassmeister] = function() {
-  //   return SassMeister.init();
-  // }
-  
-  // $.fn[sassmeister] = function() {
-  //   return this.each(function () {
-  //     if (!$.data(this, 'plugin_' + sassmeister)) {
-  //       $.data(this, 'plugin_' + sassmeister, new SassMeister( this ));
-  //     }
-  //   });
-  // }
   
 })(jQuery);
 

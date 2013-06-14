@@ -178,8 +178,12 @@ post '/compile' do
 end
 
 
-post '/sass-convert' do
-  sass_convert(params[:original_syntax], params[:syntax], params[:sass])
+post '/convert' do
+  if params[:sass]
+    sass_convert(params[:original_syntax], params[:syntax], params[:sass])
+  else
+    # HTML
+  end
 end
 
 

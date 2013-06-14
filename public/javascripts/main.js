@@ -17,24 +17,7 @@
   $('#sass-form select').on('change', function() {
     _gaq.push(['_trackEvent', 'Form', 'Control', this.value]);
 
-    if($(this).attr("name").match(/syntax/)) {
-      var inputs = {
-        sass: SassMeister.inputs.sass.getValue(),
-        syntax: $('select[name="syntax"]').val(),
-        original_syntax: $('select[name="syntax"]').data('orignal'),
-        plugin: $('select[name="plugin"]').val(),
-        output: $('select[name="output"]').val()
-      }
-
-      $.post('/sass-convert', inputs,
-        function( data ) {
-          SassMeister.inputs.sass.setValue(data, -1);
-        }
-      );
-    }
-    else {
-      $("#sass-form").submit();
-    }
+    SassMeister.convert.sass();
   });
 
   /* attach a submit handler to the form */
@@ -47,21 +30,7 @@
   $('#html-form select').on('change', function() {
     _gaq.push(['_trackEvent', 'Form', 'Control', this.value]);
 
-    if($(this).attr("name").match(/syntax/)) {
-      var inputs = {
-        html: SassMeister.inputs.html.getValue(),
-        syntax: $('select[name="html-syntax"]').val()
-      }
-
-      $.post('/html-convert', inputs,
-        function( data ) {
-          SassMeister.inputs.html.setValue(data, -1);
-        }
-      );
-    }
-    else {
-      $("#html-form").submit();
-    }
+    SassMeister.convert.html();
   });
 
   /* attach a submit handler to the form */
