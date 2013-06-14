@@ -180,6 +180,11 @@ var SassMeister;
         // console.log(event.state); // will be our state data, so {}
       }
     },
+    
+    setTimer: function(timer, callback) {
+      clearTimeout(timer);
+      timer = setTimeout(function(){callback();}, 750);
+    },
 
     modal: function(content) {
       if ($('#modal').length == 0) {

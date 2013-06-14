@@ -5,13 +5,11 @@
   $("a[href^='http://'], a[href^='https://']").attr("target", "_blank");
 
   SassMeister.inputs.sass.getSession().on('change', function(e) {
-    clearTimeout(SassMeister.timers.sass);
-    SassMeister.timers.sass = setTimeout(function() {$("#sass-form").submit();}, 750);
+    SassMeister.setTimer(SassMeister.timers.sass, SassMeister.compile.sass);
   });
   
   SassMeister.inputs.html.getSession().on('change', function(e) {
-    clearTimeout(SassMeister.timers.html);
-    SassMeister.timers.html = setTimeout(function() {$("#html-form").submit();}, 750);
+    SassMeister.setTimer(SassMeister.timers.html, SassMeister.compile.html);
   });
 
   $('#sass-form select').on('change', function() {
