@@ -1,16 +1,14 @@
 (function($) {
   
-  var SassMeister = $.fn.SassMeister();
+  var SassMeister = window.SassMeister.init();
 
   $("a[href^='http://'], a[href^='https://']").attr("target", "_blank");
 
-  // var sass_timer;
   SassMeister.inputs.sass.getSession().on('change', function(e) {
     clearTimeout(SassMeister.timers.sass);
     SassMeister.timers.sass = setTimeout(function() {$("#sass-form").submit();}, 750);
   });
   
-  // var html_timer;
   SassMeister.inputs.html.getSession().on('change', function(e) {
     clearTimeout(SassMeister.timers.html);
     SassMeister.timers.html = setTimeout(function() {$("#html-form").submit();}, 750);
@@ -43,33 +41,8 @@
   $("#sass-form").submit(function(event) {
     event.preventDefault();
 
-    _gaq.push(['_trackEvent', 'Form', 'Submit']);
-
-    var inputs = {
-      sass: SassMeister.inputs.sass.getValue(),
-      syntax: $('select[name="syntax"]').val(),
-      plugin: $('select[name="plugin"]').val(),
-      output: $('select[name="output"]').val()
-    }
-
-    /* Post the form and handle the returned data */
-    $.post($(this).attr('action'), inputs,
-      function( data ) {
-        SassMeister.outputs.css.setValue(data,-1);
-
-        $('select[name="syntax"]').data('orignal', inputs.syntax);
-        
-          // console.log(data.sass);
-        if(data.sass.length > 0) {
-          
-          SassMeister.inputs.sass.setValue(data.sass,-1);
-        }
-      }
-    );
-
-   localStorage.setItem('inputs', JSON.stringify(inputs));
+    SassMeister.compile.sass();
   });
-
 
   $('#html-form select').on('change', function() {
     _gaq.push(['_trackEvent', 'Form', 'Control', this.value]);
@@ -95,57 +68,8 @@
   $("#html-form").submit(function(event) {
     event.preventDefault();
   
-    _gaq.push(['_trackEvent', 'Form', 'Submit']);
-  
-    var inputs = {
-      html: SassMeister.inputs.html.getValue(),
-      syntax: $('select[name="html-syntax"]').val()
-    }
-  
-    /* Post the form and handle the returned data */
-    $.post($(this).attr('action'), inputs,
-      function( data ) {
-        //console.log(data)
-      }
-    );
-  
-   // localStorage.setItem('inputs', JSON.stringify(inputs));
+    SassMeister.compile.html();
   });
-  
-
-  if($('#gist-input').text().length > 0) {
-    var storedInputs = JSON.parse($('#gist-input').text());
-  }
-  else {
-    var storedInputs = JSON.parse(localStorage.getItem('inputs'));
-  }
-
-  if( storedInputs !== null) {
-    SassMeister.inputs.sass.setValue(storedInputs.sass);
-    SassMeister.inputs.sass.clearSelection();
-    $('select[name="syntax"]').val(storedInputs.syntax).data('orignal', storedInputs.syntax);
-    $('select[name="plugin"]').val(storedInputs.plugin);
-    $('select[name="output"]').val(storedInputs.output);
-    $("#sass-form").submit();
-  }
-
-  function setHeight() {
-    if ($("html").width() > 50 * 18) {
-      var html = $("html").height(), header = $(".site_header").height(), footer = $(".site_footer").height(), controls = $('.sass_input .controls').height() + $('.sass_input .edit-header').height() + 52;
-
-      $('.pre_container, .ace_scroller').css('height', html - header - footer - controls);
-    }
-
-    else {
-      $('.pre_container, .ace_scroller').css('height', 480);
-    }
-  }
-
-  $(window).resize(setHeight);
-
-  if ($("html").width() > 50 * 18) {
-    $('#footer').addClass('reveal-modal large').prepend('<a href="#" class="close-icon"><span class="alt">&#215;</span></a>').hide();
-  }
 
   $('#info, .logo').on('click', function() {
     event.preventDefault();
@@ -158,8 +82,6 @@
     });
   });
 
-  setHeight();
-
   $('#gist-it').on('click', function() {
     /* stop form from submitting normally */
     event.preventDefault();
@@ -167,7 +89,7 @@
     _gaq.push(['_trackEvent', 'Gist']);
 
     var inputs = {
-      sass: sass.getValue(),
+      sass: SassMeister.inputs.sass.getValue(),
       syntax: $('select[name="syntax"]').val(),
       plugin: $('select[name="plugin"]').val(),
       output: $('select[name="output"]').val()

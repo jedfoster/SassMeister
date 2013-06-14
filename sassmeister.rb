@@ -167,10 +167,14 @@ get '/' do
 end
 
 
-post '/compile' do
-  sass = import_plugin(params)
+post '/compile' do  
+  if params[:sass]
+    sass = import_plugin(params)
 
-  sass_compile(params, sass)
+    sass_compile(params, sass)
+  else
+    # HTML
+  end
 end
 
 
@@ -291,9 +295,4 @@ end
 
 post '/reset' do
   session[:gist] = ''
-end
-
-
-post '/html-compile' do
-  
 end
