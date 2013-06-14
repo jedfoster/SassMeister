@@ -61,22 +61,6 @@
   $('#reset').on('click', function() {
     event.preventDefault();
 
-    $("#sass-form").get(0).reset();
-    $('#gist-it').data('gist-save', '');
-
-    sass.setValue('');
-    css.setValue('');
-
-    $.post('/reset');
-
-    var myNewState = {
-    	data: { },
-    	title: 'SassMeister | The Sass Playground!',
-    	url: '/'
-    };
-    history.pushState(myNewState.data, myNewState.title, myNewState.url);
-    window.onpopstate = function(event){
-      // console.log(event.state); // will be our state data, so myNewState.data
-    }
+    SassMeister.reset();
   });
 })(jQuery);

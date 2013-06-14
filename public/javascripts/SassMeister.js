@@ -154,22 +154,33 @@ var SassMeister;
           function( data ) {
             SassMeister.modal('<a href="https://gist.github.com/' + data + '" target="_blank">Your Gist</a> ' + confirmationText + ', and here\'s the <a href="/gist/' + data + '">SassMeister live view.</a> ');
 
-            var myNewState = {
-            	data: { },
-            	title: 'SassMeister | The Sass Playground!',
-            	url: '/gist/' + data
-            };
-            history.pushState(myNewState.data, myNewState.title, myNewState.url);
-            window.onpopstate = function(event){
-              // console.log(event.state); // will be our state data, so myNewState.data
-            }
+            SassMeister.setUrl('/gist/' + data);
 
             $('#gist-it').data('gist-save', 'edit');
           }
         );
       }
     },
-     
+
+    reset: function() {
+      $("#sass-form").get(0).reset();
+      $('#gist-it').data('gist-save', '');
+
+      SassMeister.inputs.sass.setValue('');
+      SassMeister.outputs.css.setValue('');
+
+      $.post('/reset');
+
+      SassMeister.setUrl('/');
+    },
+    
+    setUrl: function(url) {
+      history.pushState({}, 'SassMeister | The Sass Playground!', url);
+      window.onpopstate = function(event) {
+        // console.log(event.state); // will be our state data, so {}
+      }
+    },
+
     modal: function(content) {
       if ($('#modal').length == 0) {
         $('body').append('<div class="reveal-modal large" id="modal"><a href="#" class="close-icon"><span class="alt">&#215;</span></a><span class="content">' + content + '</span></div>');
