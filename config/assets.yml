@@ -11,6 +11,8 @@ javascripts:
     - public/javascripts/vendor/ACE-noconflict/theme-tomorrow.js
     - public/javascripts/vendor/ACE-noconflict/worker-css.js
     - public/javascripts/vendor/jquery.foundation.reveal.js
+    - public/javascripts/vendor/bindWithDelay.js
+    - public/javascripts/SassMeister.js
     - public/javascripts/main.js
 
 # stylesheets:
