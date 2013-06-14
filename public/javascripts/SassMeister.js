@@ -11,6 +11,10 @@
       this.inputs.sass.getSession().setMode("ace/mode/scss");
       this.inputs.sass.focus();
 
+      this.inputs.html = ace.edit("html");
+      this.inputs.html.setTheme("ace/theme/tomorrow");
+      this.inputs.html.getSession().setMode("ace/mode/html");
+
       this.outputs.css = ace.edit("css");
       this.outputs.css.setTheme("ace/theme/tomorrow");
       this.outputs.css.setReadOnly(true);
@@ -21,15 +25,18 @@
     },
 
     inputs: {
-      sass: ''
+      sass: '',
+      html: ''
     },
 
     outputs: {
-      css: ''
+      css: '',
+      html: ''
     },
 
     timers: {
-      sass: ''
+      sass: '',
+      html: ''
     },    
   };
 

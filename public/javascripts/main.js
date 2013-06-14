@@ -72,6 +72,49 @@
    localStorage.setItem('inputs', JSON.stringify(inputs));
   });
 
+
+  $('#html-form select').on('change', function() {
+    _gaq.push(['_trackEvent', 'Form', 'Control', this.value]);
+
+    if($(this).attr("name").match(/syntax/)) {
+      var inputs = {
+        html: SassMeister.inputs.html.getValue(),
+        syntax: $('select[name="html-syntax"]').val()
+      }
+
+      $.post('/html-convert', inputs,
+        function( data ) {
+          SassMeister.inputs.html.setValue(data, -1);
+        }
+      );
+    }
+    else {
+      $("#html-form").submit();
+    }
+  });
+
+  /* attach a submit handler to the form */
+  $("#html-form").submit(function(event) {
+    event.preventDefault();
+  
+    _gaq.push(['_trackEvent', 'Form', 'Submit']);
+  
+    var inputs = {
+      html: SassMeister.inputs.html.getValue(),
+      syntax: $('select[name="html-syntax"]').val()
+    }
+  
+    /* Post the form and handle the returned data */
+    $.post($(this).attr('action'), inputs,
+      function( data ) {
+        //console.log(data)
+      }
+    );
+  
+   // localStorage.setItem('inputs', JSON.stringify(inputs));
+  });
+  
+
   if($('#gist-input').text().length > 0) {
     var storedInputs = JSON.parse($('#gist-input').text());
   }
