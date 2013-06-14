@@ -2,6 +2,19 @@
 
   var sassmeister = 'SassMeister';
 
+  // function SassMeister(  ) {
+  //   this.bar = 'zzz';
+  //
+  //   this._name = sassmeister;
+  //
+  //   this.inputs = {
+  //     sass: 'foo',
+  //     html: 'bar'
+  //   };
+  //
+  //   this.init();
+  // }
+
   SassMeister = {
     init: function() {
       var $this = this;
@@ -37,7 +50,26 @@
     timers: {
       sass: '',
       html: ''
-    },    
+    },
+    
+    modal: function(content) {
+      if ($('#modal').length == 0) {
+        $('body').append('<div class="reveal-modal large" id="modal"><a href="#" class="close-icon"><span class="alt">&#215;</span></a><span class="content">' + content + '</span></div>');
+      }
+      else {
+        $('#modal .content').empty();
+        $('#modal .content').append(content);
+      }
+
+      $('#modal').reveal({
+        animation: 'fadeAndPop', //fade, fadeAndPop, none
+        animationSpeed: 250, //how fast animations are
+        closeOnBackgroundClick: true, //if you click background will modal close?
+        dismissModalClass: 'close-icon' //the class of a button or element that will close an open modal
+      });
+    },
+
+    
   };
 
   $.fn[sassmeister] = function() {

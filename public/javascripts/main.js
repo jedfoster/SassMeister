@@ -2,8 +2,6 @@
   
   var SassMeister = $.fn.SassMeister();
 
-  // console.log(SassMeister.inputs);
-
   $("a[href^='http://'], a[href^='https://']").attr("target", "_blank");
 
   // var sass_timer;
@@ -145,23 +143,6 @@
 
   $(window).resize(setHeight);
 
-  var buildModal = function(content) {
-    if ($('#modal').length == 0) {
-      $('body').append('<div class="reveal-modal large" id="modal"><a href="#" class="close-icon"><span class="alt">&#215;</span></a><span class="content">' + content + '</span></div>');
-    }
-    else {
-      $('#modal .content').empty();
-      $('#modal .content').append(content);
-    }
-
-    $('#modal').reveal({
-      animation: 'fadeAndPop', //fade, fadeAndPop, none
-      animationSpeed: 250, //how fast animations are
-      closeOnBackgroundClick: true, //if you click background will modal close?
-      dismissModalClass: 'close-icon' //the class of a button or element that will close an open modal
-    });
-  }
-
   if ($("html").width() > 50 * 18) {
     $('#footer').addClass('reveal-modal large').prepend('<a href="#" class="close-icon"><span class="alt">&#215;</span></a>').hide();
   }
@@ -202,7 +183,7 @@
     ///* Send the data using post and put the results in a div */
     $.post('/gist' + action, inputs,
       function( data ) {
-        buildModal('<a href="https://gist.github.com/' + data + '" target="_blank">Your Gist</a> ' + confirmationText + ', and here\'s the <a href="/gist/' + data + '">SassMeister live view.</a> ');
+        SassMeister.modal('<a href="https://gist.github.com/' + data + '" target="_blank">Your Gist</a> ' + confirmationText + ', and here\'s the <a href="/gist/' + data + '">SassMeister live view.</a> ');
 
         var myNewState = {
         	data: { },
