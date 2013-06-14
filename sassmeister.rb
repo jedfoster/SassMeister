@@ -292,3 +292,8 @@ end
 post '/reset' do
   session[:gist] = ''
 end
+
+
+post '/html-compile' do
+  
+end
