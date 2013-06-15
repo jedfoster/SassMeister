@@ -27,7 +27,7 @@ var SassMeister;
       
       this.setHeight();
 
-      this.retreiveStorage();
+      this.getStorage();
 
       return this;
     },
@@ -68,13 +68,15 @@ var SassMeister;
           }
         );
 
-        localStorage.setItem('inputs', JSON.stringify(inputs));
+        SassMeister.setStorage(inputs);
       },
 
       html: function() {
+        
+        
         var inputs = {
               html: SassMeister.inputs.html.getValue(),
-              syntax: $('select[name="html-syntax"]').val()
+              html_syntax: $('select[name="html-syntax"]').val()
             };
 
         _gaq.push(['_trackEvent', 'Form', 'Submit']);
@@ -90,7 +92,7 @@ var SassMeister;
           }
         );
 
-        localStorage.setItem('inputs', JSON.stringify(inputs));
+        SassMeister.setStorage(inputs);
       },
     },
     
@@ -222,7 +224,7 @@ var SassMeister;
 
     storedInputs: null,
   
-    retreiveStorage: function() {
+    getStorage: function() {
       if($('#gist-input').text().length > 0) {
         this.storedInputs = JSON.parse($('#gist-input').text());
       }
@@ -235,14 +237,26 @@ var SassMeister;
         this.inputs.sass.setValue(this.storedInputs.sass);
         this.inputs.sass.clearSelection();
         
+        this.inputs.html.setValue(this.storedInputs.html);
+        this.inputs.html.clearSelection();
+        
         // console.log(this.inputs.sass.getValue());
         
         $('select[name="syntax"]').val(this.storedInputs.syntax).data('orignal', this.storedInputs.syntax);
         $('select[name="plugin"]').val(this.storedInputs.plugin);
         $('select[name="output"]').val(this.storedInputs.output);
+        $('select[name="html-syntax"]').val(this.storedInputs.html_syntax);
         // $("#sass-form").submit();
         this.compile.sass();
+        this.compile.html();
       }
+    },
+  
+    setStorage: function(inputs) {
+      var storage = SassMeister.storedInputs;
+      $.extend(storage, inputs)
+
+      localStorage.setItem('inputs', JSON.stringify(storage));
     },
   };
   
