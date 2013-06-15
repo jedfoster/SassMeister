@@ -62,6 +62,7 @@ var SassMeister;
         $.post('/compile', inputs,
           function( data ) {
             SassMeister.outputs.css.setValue(data,-1);
+            $('#rendered-html').contents().find('head > style').text(data);
 
             $('select[name="syntax"]').data('orignal', inputs.syntax);
           }
@@ -80,8 +81,12 @@ var SassMeister;
 
         /* Post the form and handle the returned data */
         $.post('/compile', inputs,
-          function( data ) {
-            //console.log(data)
+          function( data) {
+            
+            $('#rendered-html').contents().find('head > style').text(SassMeister.outputs.css.getValue());
+            
+            $('#rendered-html').contents().find('body').html(data);
+
           }
         );
 

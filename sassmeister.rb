@@ -174,7 +174,13 @@ post '/compile' do
     sass_compile(params, sass)
   else
     # HTML
+    return params[:html]
   end
+end
+
+
+get '/compile' do
+  erb :compiled_html, :layout => false
 end
 
 
@@ -183,6 +189,7 @@ post '/convert' do
     sass_convert(params[:original_syntax], params[:syntax], params[:sass])
   else
     # HTML
+    erb :compiled_html, :layout => false
   end
 end
 
