@@ -18,24 +18,10 @@
     SassMeister.convert.sass();
   });
 
-  /* attach a submit handler to the form */
-  $("#sass-form").submit(function(event) {
-    event.preventDefault();
-
-    SassMeister.compile.sass();
-  });
-
   $('#html-form select').on('change', function() {
     _gaq.push(['_trackEvent', 'Form', 'Control', this.value]);
 
     SassMeister.convert.html();
-  });
-
-  /* attach a submit handler to the form */
-  $("#html-form").submit(function(event) {
-    event.preventDefault();
-  
-    SassMeister.compile.html();
   });
 
   $('#info, .logo').on('click', function() {
