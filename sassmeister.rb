@@ -14,6 +14,9 @@ require 'sass'
 require 'compass'
 require 'yaml'
 
+require 'haml'
+require 'slim'
+
 set :partial_template_engine, :erb
 
 configure :production do
@@ -174,7 +177,24 @@ post '/compile' do
     sass_compile(params, sass)
   else
     # HTML
-    return params[:html]
+    
+    case params[:html_syntax]
+    when 'haml'
+      return haml params[:html], :suppress_eval => true
+    when 'slim'
+      # ^(\s*?)((\S+ )?=|==|-)( .*$)
+      html = params[:html].gsub(/^(\s*?)((\S+ )?=|==|-)( .*$)/, "\1/ \2\4")
+
+      return html
+      return slim html, :pretty => true, :disable_engines => [:ruby, :javascript, :css, :erb, :haml, :sass, :scss, :less, :builder, :liquid, :markdown, :textile, :rdoc, :radius, :markaby, :nokogiri, :coffee]
+      
+    # when 'markdown'
+      
+    # when 'textile'      
+    
+    else
+      return params[:html]
+    end
   end
 end
 
