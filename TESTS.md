@@ -148,6 +148,29 @@ Each block of SCSS should return valid CSS with no warnings or errors when teste
     }
 
 
+## Jacket ##
+
+    $jacket: track, overcoat, mod ".triumph";
+
+    .cafe-race {
+      /* Universal */
+      font-size: 1rem;
+
+      /* jacket(track, tie, suit) */
+      @include jacket(track, tie, suit) {
+        position: absolute;
+      }
+      /* jacket(suit, mod, overcoat) */
+      @include jacket(suit, mod, overcoat) {
+        top: 3em;
+      }
+      /* jacket(leather) */
+      @include jacket(leather) {
+        position: fixed;
+      }
+    }
+
+
 ## Modular Scale ##
 
     .lace {

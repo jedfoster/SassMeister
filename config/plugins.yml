@@ -48,6 +48,11 @@ Harsh:
   :import: 
     - harsh
   :url: http://www.bookcasey.com/harsh/
+Jacket:
+  :gem: jacket
+  :import:
+    - jacket
+  :url: https://github.com/Team-Sass/jacket
 "Modular Scale":
   :gem: modular-scale
   :import: 
