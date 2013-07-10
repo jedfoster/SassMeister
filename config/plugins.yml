@@ -105,6 +105,12 @@ Singularity.gs:
   :import: 
     - singularitygs
   :url: https://github.com/scottkellum/singularity
+"Singularity Extras":
+  :gem: singularity-extras
+  :import:
+    - singularitygs
+    - singularity-extras
+  :url: https://github.com/Team-Sass/Singularity-extras
 Stipe:
   :gem: stipe
   :import: 
