@@ -48,6 +48,11 @@ Harsh:
   :import: 
     - harsh
   :url: http://www.bookcasey.com/harsh/
+Jacket:
+  :gem: jacket
+  :import:
+    - jacket
+  :url: https://github.com/Team-Sass/jacket
 "Modular Scale":
   :gem: modular-scale
   :import: 
@@ -84,11 +89,28 @@ Salsa:
   :import: 
     - '' # This space intentionally left blank 
   :url: https://github.com/scottkellum/Sassy-math
+"Sassy Text Shadows":
+  :gem: sassy-text-shadow
+  :import:
+    - compass
+    - sassy-text-shadow
+  :url: http://sassymothereffingtextshadow.com/
+"SCSS Blend Modes":
+  :gem: compass-blend-modes
+  :import: 
+    - blend-modes
+  :url: https://github.com/heygrady/scss-blend-modes
 Singularity.gs:
   :gem: singularitygs
   :import: 
     - singularitygs
   :url: https://github.com/scottkellum/singularity
+"Singularity Extras":
+  :gem: singularity-extras
+  :import:
+    - singularitygs
+    - singularity-extras
+  :url: https://github.com/Team-Sass/Singularity-extras
 Stipe:
   :gem: stipe
   :import: 

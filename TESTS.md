@@ -148,6 +148,29 @@ Each block of SCSS should return valid CSS with no warnings or errors when teste
     }
 
 
+## Jacket ##
+
+    $jacket: track, overcoat, mod ".triumph";
+
+    .cafe-race {
+      /* Universal */
+      font-size: 1rem;
+
+      /* jacket(track, tie, suit) */
+      @include jacket(track, tie, suit) {
+        position: absolute;
+      }
+      /* jacket(suit, mod, overcoat) */
+      @include jacket(suit, mod, overcoat) {
+        top: 3em;
+      }
+      /* jacket(leather) */
+      @include jacket(leather) {
+        position: fixed;
+      }
+    }
+
+
 ## Modular Scale ##
 
     .lace {
@@ -229,6 +252,40 @@ Each block of SCSS should return valid CSS with no warnings or errors when teste
     }
 
 
+## Sassy Text Shadows ##
+
+    body {
+      text-align: center;
+    }
+
+    h1 {
+      @include text-shadow(sassy-text-shadow(#BADA55));
+      line-height: 8em;
+    }
+
+    h2 {
+      @include text-shadow(sassy-text-shadow(#BADA55, 100, 80, 120, 90, -45, 0.09));
+      line-height: 8em;
+    }
+
+    h3 {
+      @include text-shadow(long-shadow(30, #BADA55, 25, 0));
+      line-height: 8em;
+    }
+
+## SCSS Blend Modes ##
+
+    // Solid background
+    .multiply {
+        background-color: blend-multiply(#7FFFD4, #DEB887);
+    }
+
+    // RGBa background
+    .multiply {
+        background-color: blend-multiply(rgba(#7FFFD4, 0.5), rgba(#DEB887, 0.5));
+    }
+
+
 ## Singularity.gs ##
 
     $grids: 1 3 5 7 9;
@@ -255,6 +312,40 @@ Each block of SCSS should return valid CSS with no warnings or errors when teste
     }
     #baz {
       @include isolation-span(2, 3, 'right', (2 8 2 1), .25);
+    }
+
+
+## Singularity Extras ##
+
+    $grids: 3;
+    $grids: add-grid(1 2 3 at 500px);
+    $grids: add-grid(ratio(golden(), 3) at 700px);
+    $grids: add-grid(ratio-spiral() at 900px);
+    $grids: add-grid(compound(2, 3, 4) at 1100px);
+
+    $gutters: .5;
+
+    #layouts {
+      content: 'Initial Layout';
+      @include grid-span(1, 2);
+
+      @include layout(6, .25, 'float') {
+          content: 'Inner Layout';
+          @include grid-span(1, 2);
+        }
+
+      @include breakpoint(500px) {
+        @include layout(6, .25, 'float') {
+          content: 'Inner Layout, Breakpoint';
+          @include grid-span(1, 2);
+
+          @include layout(2 4 6) {
+            @debug find-grid();
+            content: 'Nested Layout';
+            @include grid-span(1, 2);
+          }
+        }
+      }
     }
 
 

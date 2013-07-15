@@ -7,6 +7,7 @@ public/stylesheets/*
 sass/.sass-cache/
 #Gemfile.local
 #Gemfile.local.lock
-/github.yml
+github.yml
 /tmp
 /log
+.rvmrc

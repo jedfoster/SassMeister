@@ -39,7 +39,7 @@ end
 configure :development do
   helpers do
     def github(auth_token = '')
-      gh_config = YAML.load_file("github.yml")
+      gh_config = YAML.load_file("config/github.yml")
 
       github = Github.new do |config|
         config.client_id = gh_config['client_id']
@@ -78,7 +78,7 @@ helpers do
   end
 
   def plugins
-    YAML.load_file("plugins.yml").each do |plugin|
+    YAML.load_file("config/plugins.yml").each do |plugin|
       plugin.last[:version] = Gem.loaded_specs[plugin.last[:gem]].version.to_s
     end
   end
@@ -149,6 +149,8 @@ helpers do
     if ! params[:plugin].empty?
       frontmatter.gsub!(/^(\/\/ Sass)/, "// #{params[:plugin]} (v#{plugins[params[:plugin]][:version]})\n\\1")
     end
+
+    return frontmatter
   end
 end
 
