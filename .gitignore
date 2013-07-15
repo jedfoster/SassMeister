@@ -10,3 +10,4 @@ sass/.sass-cache/
 github.yml
 /tmp
 /log
+.rvmrc
