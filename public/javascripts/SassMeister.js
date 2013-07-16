@@ -36,6 +36,19 @@ var SassMeister;
           SassMeister.compile.sass();
         }
       }).value();
+      
+      $('select[name=plugin]').dropdown({
+          gutter : 0,
+          speed : 25,
+          onOptionSelect: function(opt) {
+            var plugins = opt.data( 'value' );
+
+            $.each(plugins.split(','), function(key, plugin) {
+              SassMeister.inputs.sass.insert( '@import "' + plugin + '"' + ( SassMeister.inputs.syntax == 'scss' ? ';' : '' ) + '\n\n');
+            });
+
+          }
+      });
 
       this.outputs.css = ace.edit("css");
       this.outputs.css.setTheme("ace/theme/tomorrow");
