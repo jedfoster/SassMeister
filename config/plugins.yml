@@ -22,7 +22,7 @@ Breakpoint:
   :gem: color-schemer
   :import: 
     - color-schemer
-  :url: https://github.com/scottkellum/color-schemer
+  :url: https://github.com/Team-Sass/color-schemer
 Compass:
   :gem: compass
   :import: 
@@ -57,7 +57,7 @@ Jacket:
   :gem: modular-scale
   :import: 
     - modular-scale
-  :url: https://github.com/scottkellum/modular-scale
+  :url: https://github.com/Team-Sass/modular-scale
 Neat:
   :gem: neat-compass
   :import:
@@ -88,7 +88,7 @@ Salsa:
   :gem: sassy-math
   :import: 
     - '' # This space intentionally left blank 
-  :url: https://github.com/scottkellum/Sassy-math
+  :url: https://github.com/Team-Sass/Sassy-math
 "Sassy Text Shadows":
   :gem: sassy-text-shadow
   :import:
@@ -104,7 +104,7 @@ Singularity.gs:
   :gem: singularitygs
   :import: 
     - singularitygs
-  :url: https://github.com/scottkellum/singularity
+  :url: https://github.com/Team-Sass/singularity
 "Singularity Extras":
   :gem: singularity-extras
   :import:
@@ -116,7 +116,7 @@ Stipe:
   :import: 
     - stipe/manifest
     - stipe/grid/extends
-  :url: https://github.com/Anotheruiguy/stipe
+  :url: https://github.com/Toadstool-Stipe/stipe
 Susy:
   :gem: susy
   :import: 
@@ -126,7 +126,7 @@ Toolkit:
   :gem: toolkit
   :import: 
     - toolkit
-  :url: https://github.com/Snugug/toolkit
+  :url: https://github.com/Team-Sass/toolkit
 "Zen Grids":
   :gem: zen-grids
   :import: 
