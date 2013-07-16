@@ -130,10 +130,11 @@ var Modernizr = {
 				return false;
 			} );
 			
-			//this.dd.on( 'mouseleave.dropdown', function( event ) {
-			//	self.opened ? self.close() : self.open();
-			//	return false;
-			//} );
+      this.dd.on( 'mouseleave.dropdown', function( event ) {
+        // self.opened ? self.close() : self.open();
+        self.close();
+        return false;
+      } );
 			
       // console.log(this);
 			
@@ -173,7 +174,7 @@ var Modernizr = {
 			if( ! this.options.onOpen( $( self ) ) ) {
 			  return false;
 			}
-			this.dd.toggleClass( 'active' );
+			this.dd.addClass( 'active' );
 			this.listopts.css( {'left': 0 } );
 			this.opts.each( function( i ) {
 
@@ -191,7 +192,7 @@ var Modernizr = {
       if( ! this.options.onClose( $( self ) ) ) {
 			  return false;
 			}
-			this.dd.toggleClass( 'active' );
+			this.dd.removeClass( 'active' );
 			if( this.options.delay && Modernizr.csstransitions ) {
 				this.opts.each( function( i ) {
 					$( this ).css( { 'transition-delay' : ( i * self.options.delay ) + 'ms' } );
