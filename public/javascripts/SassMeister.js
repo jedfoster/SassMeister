@@ -25,10 +25,6 @@ var SassMeister;
         }
       }).value();
 
-      // this.inputs.html = ace.edit("html");
-      // this.inputs.html.setTheme("ace/theme/tomorrow");
-      // this.inputs.html.getSession().setMode("ace/mode/html");
-
       this.outputs.css = ace.edit("css");
       this.outputs.css.setTheme("ace/theme/tomorrow");
       this.outputs.css.setReadOnly(true);
@@ -36,7 +32,7 @@ var SassMeister;
       this.outputs.css.getSession().setMode("ace/mode/css");
 
       $(window).resize(this.setHeight);
-      
+
       if ($("html").width() > 50 * 18) {
         $('#footer').addClass('reveal-modal large').prepend('<a href="#" class="close-icon"><span class="alt">&#215;</span></a>').hide();
       }
@@ -47,25 +43,22 @@ var SassMeister;
 
       return this;
     },
-    
+
     inputs: {
       sass: '',
       syntax: '',
       // original_syntax: '',
       output_style: '',
-      // html: ''
     },
 
     outputs: {
       css: '',
-      // html: ''
     },
 
     timers: {
       sass: '',
-      // html: ''
     },
-    
+
     compile: {
       sass: function() {
         var inputs = {
@@ -80,7 +73,6 @@ var SassMeister;
         $.post('/compile', inputs,
           function( data ) {
             SassMeister.outputs.css.setValue(data,-1);
-            // $('#rendered-html').contents().find('head > style').text(data);
 
             $('select[name="syntax"]').data('orignal', inputs.syntax);
           }
@@ -89,29 +81,6 @@ var SassMeister;
         SassMeister.setStorage(inputs);
       },
 
-      // html: function() {
-      //   var inputs = {
-      //         html: SassMeister.inputs.html.getValue(),
-      //         html_syntax: $('select[name="html-syntax"]').val()
-      //       };
-      // 
-      //   _gaq.push(['_trackEvent', 'Form', 'Submit']);
-      // 
-      //   /* Post the form and handle the returned data */
-      //   $.post('/compile', inputs,
-      //     function( data) {
-      //       
-      //       $('#rendered-html').contents().find('head > style').text(SassMeister.outputs.css.getValue());
-      //       
-      //       $('#rendered-html').contents().find('body').html(data);
-      // 
-      //     }
-      //   );
-      // 
-      //   SassMeister.setStorage(inputs);
-      // },
-    },
-    
     convert: {
       sass: function() {
         if($('#sass-form select').attr("name").match(/syntax/)) {
@@ -132,27 +101,8 @@ var SassMeister;
           SassMeister.compile.sass();
         }
       },
-      
-      // html: function() {
-      //   if($('$html-form select').attr("name").match(/syntax/)) {
-      //     var inputs = {
-      //       html: SassMeister.inputs.html.getValue(),
-      //       syntax: $('select[name="html-syntax"]').val(),
-      //       original_syntax: $('select[name="html-syntax"]').data('orignal')
-      //     }
-      // 
-      //     $.post('/convert', inputs,
-      //       function( data ) {
-      //         SassMeister.inputs.html.setValue(data, -1);
-      //       }
-      //     );
-      //   }
-      //   else {
-      //     SassMeister.compile.html();
-      //   }
-      // }
     },
-    
+
     gist: {
       save: function() {
         _gaq.push(['_trackEvent', 'Gist']);
@@ -194,14 +144,14 @@ var SassMeister;
 
       SassMeister.setUrl('/');
     },
-    
+
     setUrl: function(url) {
       history.pushState({}, 'SassMeister | The Sass Playground!', url);
       window.onpopstate = function(event) {
         // console.log(event.state); // will be our state data, so {}
       }
     },
-    
+
     setTimer: function(timer, callback) {
       clearTimeout(timer);
       timer = setTimeout(function(){callback();}, 750);
@@ -237,7 +187,7 @@ var SassMeister;
     },
 
     storedInputs: null,
-  
+
     getStorage: function() {
       if($('#gist-input').text().length > 0) {
         this.storedInputs = JSON.parse($('#gist-input').text());
@@ -250,22 +200,17 @@ var SassMeister;
         // console.log(this.storedInputs);
         this.inputs.sass.setValue(this.storedInputs.sass);
         this.inputs.sass.clearSelection();
-        
-        // this.inputs.html.setValue(this.storedInputs.html);
-        // this.inputs.html.clearSelection();
-        
+
         // console.log(this.inputs.sass.getValue());
-        
+
         $('select[name="syntax"]').val(this.storedInputs.syntax).data('orignal', this.storedInputs.syntax);
         $('select[name="plugin"]').val(this.storedInputs.plugin);
         $('select[name="output"]').val(this.storedInputs.output);
         // $('select[name="html-syntax"]').val(this.storedInputs.html_syntax);
-        // $("#sass-form").submit();
-        this.compile.sass();
-        // this.compile.html();
+        // this.compile.sass();
       }
     },
-  
+
     setStorage: function(inputs) {
       var storage = SassMeister.storedInputs;
       $.extend(storage, inputs)
@@ -273,6 +218,6 @@ var SassMeister;
       localStorage.setItem('inputs', JSON.stringify(storage));
     },
   };
-  
+
 })(jQuery);
 

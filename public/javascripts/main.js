@@ -7,20 +7,10 @@
     SassMeister.setTimer(SassMeister.timers.sass, SassMeister.compile.sass);
   });
 
-  // SassMeister.inputs.html.getSession().on('change', function(e) {
-  //   SassMeister.setTimer(SassMeister.timers.html, SassMeister.compile.html);
-  // });
-
-  $('#sass-form select').on('change', function() {
-    _gaq.push(['_trackEvent', 'Form', 'Control', this.value]);
-
-    SassMeister.convert.sass();
-  });
-
-  // $('#html-form select').on('change', function() {
+  // $('#sass-form select').on('change', function() {
   //   _gaq.push(['_trackEvent', 'Form', 'Control', this.value]);
-  //
-  //   SassMeister.convert.html();
+  // 
+  //   SassMeister.convert.sass();
   // });
 
   $('#info, .logo').on('click', function() {
