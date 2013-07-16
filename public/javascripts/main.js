@@ -1,5 +1,4 @@
 (function($) {
-  
   var SassMeister = window.SassMeister.init();
 
   $("a[href^='http://'], a[href^='https://']").attr("target", "_blank");
@@ -7,10 +6,10 @@
   SassMeister.inputs.sass.getSession().on('change', function(e) {
     SassMeister.setTimer(SassMeister.timers.sass, SassMeister.compile.sass);
   });
-  
-  SassMeister.inputs.html.getSession().on('change', function(e) {
-    SassMeister.setTimer(SassMeister.timers.html, SassMeister.compile.html);
-  });
+
+  // SassMeister.inputs.html.getSession().on('change', function(e) {
+  //   SassMeister.setTimer(SassMeister.timers.html, SassMeister.compile.html);
+  // });
 
   $('#sass-form select').on('change', function() {
     _gaq.push(['_trackEvent', 'Form', 'Control', this.value]);
@@ -18,11 +17,11 @@
     SassMeister.convert.sass();
   });
 
-  $('#html-form select').on('change', function() {
-    _gaq.push(['_trackEvent', 'Form', 'Control', this.value]);
-
-    SassMeister.convert.html();
-  });
+  // $('#html-form select').on('change', function() {
+  //   _gaq.push(['_trackEvent', 'Form', 'Control', this.value]);
+  //
+  //   SassMeister.convert.html();
+  // });
 
   $('#info, .logo').on('click', function() {
     event.preventDefault();
@@ -46,5 +45,21 @@
     event.preventDefault();
 
     SassMeister.reset();
+  });
+
+
+  $('select[name=plugin]').each(function() {
+    $(this).dropdown({
+      gutter : 0,
+      speed : 25,
+      onOptionSelect: function(opt) {
+        var plugins = opt.data( 'value' );
+        console.log(SassMeister.inputs.syntax);
+        $.each(plugins.split(','), function(key, plugin) {
+          SassMeister.inputs.sass.insert( '@import "' + plugin + '"' + ( SassMeister.inputs.syntax == 'scss' ? ';' : '' ) + '\n\n');
+        });
+
+      }
+    })
   });
 })(jQuery);

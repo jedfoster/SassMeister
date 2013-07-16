@@ -19,6 +19,9 @@ var Modernizr = {
 	$.DropDown = function( options, element ) {
 		this.$el = $( element );
 		this._init( options );
+		this.value = function() {
+		  return this.$el[0].value;
+		}
 	};
 
 	// the options
@@ -132,7 +135,7 @@ var Modernizr = {
 			//	return false;
 			//} );
 			
-			console.log(this);
+      // console.log(this);
 			
 
       //function test_active_click(evt) {
