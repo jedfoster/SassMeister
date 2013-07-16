@@ -14,8 +14,8 @@ require 'sass'
 require 'compass'
 require 'yaml'
 
-require 'haml'
-require 'slim'
+# require 'haml'
+# require 'slim'
 
 set :partial_template_engine, :erb
 
@@ -172,7 +172,7 @@ end
 
 post '/compile' do  
   if params[:sass]
-    sass = import_plugin(params)
+    # sass = import_plugin(params)
 
     sass_compile(params, sass)
   else
