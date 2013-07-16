@@ -3,9 +3,8 @@
 
   $("a[href^='http://'], a[href^='https://']").attr("target", "_blank");
 
-  SassMeister.inputs.sass.getSession().on('change', function(e) {
-    SassMeister.setTimer(SassMeister.timers.sass, SassMeister.compile.sass);
-  });
+
+
 
   // $('#sass-form select').on('change', function() {
   //   _gaq.push(['_trackEvent', 'Form', 'Control', this.value]);

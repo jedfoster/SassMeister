@@ -8,20 +8,32 @@ var SassMeister;
       this.inputs.sass.setTheme("ace/theme/tomorrow");
       this.inputs.sass.getSession().setMode("ace/mode/scss");
       this.inputs.sass.focus();
-      
+
+      this.getStorage();
+
       this.inputs.syntax = $('select[name=syntax]').dropdown({
         gutter : 0,
         speed : 25,
         onOptionSelect: function(opt) {
           SassMeister.inputs.syntax = opt.data( 'value' );
+          
+          // _gaq.push(['_trackEvent', 'Form', 'Control', this.value]);
+
+          SassMeister.convert.sass(true);
         }
       }).value();
+      
+      $('[name="syntax"]').data('orignal', SassMeister.inputs.syntax);
 
       this.inputs.output = $('select[name=output]').dropdown({
         gutter : 0,
         speed : 25,
         onOptionSelect: function(opt) {
           SassMeister.inputs.output_style = opt.data( 'value' );
+          
+          // _gaq.push(['_trackEvent', 'Form', 'Control', this.value]);
+
+          SassMeister.compile.sass();
         }
       }).value();
 
@@ -31,15 +43,27 @@ var SassMeister;
       this.outputs.css.getSession().$useWorker=false
       this.outputs.css.getSession().setMode("ace/mode/css");
 
+      // this.compile.sass();
+
       $(window).resize(this.setHeight);
 
       if ($("html").width() > 50 * 18) {
         $('#footer').addClass('reveal-modal large').prepend('<a href="#" class="close-icon"><span class="alt">&#215;</span></a>').hide();
       }
-      
-      this.setHeight();
 
-      this.getStorage();
+      this.setHeight();
+      
+      this.compile.sass();
+      
+      $(this.inputs.sass.getSession()).bindWithDelay('change', function(event) {
+        if(SassMeister.internalValueChange == true) {
+          console.log(SassMeister);
+          SassMeister.internalValueChange = false;
+        }
+        else {
+          SassMeister.compile.sass();
+        }
+      }, 750);
 
       return this;
     },
@@ -48,16 +72,14 @@ var SassMeister;
       sass: '',
       syntax: '',
       // original_syntax: '',
-      output_style: '',
+      output_style: ''
     },
 
     outputs: {
-      css: '',
+      css: ''
     },
 
-    timers: {
-      sass: '',
-    },
+    timer: null,
 
     compile: {
       sass: function() {
@@ -67,40 +89,56 @@ var SassMeister;
               output: SassMeister.inputs.output_style
             };
 
-        _gaq.push(['_trackEvent', 'Form', 'Submit']);
+        // _gaq.push(['_trackEvent', 'Form', 'Submit']);
 
         /* Post the form and handle the returned data */
         $.post('/compile', inputs,
           function( data ) {
             SassMeister.outputs.css.setValue(data,-1);
 
-            $('select[name="syntax"]').data('orignal', inputs.syntax);
+            $('[name="syntax"]').data('orignal', inputs.syntax);
           }
         );
 
         SassMeister.setStorage(inputs);
-      },
+      }
+    },
 
+    internalValueChange: false,
+    
+    toggleInternalValue: function(value) {
+      SassMeister.internalValueChange = value;
+    },
+    internalValue: function(value) {
+      return SassMeister.internalValueChange;
+    },
+    
     convert: {
-      sass: function() {
-        if($('#sass-form select').attr("name").match(/syntax/)) {
+      sass: function(convert_syntax) {
+        if(convert_syntax == true) {
           var inputs = {
             sass: SassMeister.inputs.sass.getValue(),
             syntax: SassMeister.inputs.syntax,
-            original_syntax: $('select[name="syntax"]').data('orignal'),
+            original_syntax: $('[name="syntax"]').data('orignal'),
             output: SassMeister.inputs.output_style
           }
 
           $.post('/convert', inputs,
             function( data ) {
+              SassMeister.internalValueChange = true;
+              
               SassMeister.inputs.sass.setValue(data, -1);
+              
+                $('[name="syntax"]').data('orignal', inputs.syntax);
+              // SassMeister.compile.sass();
+              // SassMeister.setTimer(SassMeister.timers.sass, SassMeister.compile.sass);
             }
           );
         }
         else {
           SassMeister.compile.sass();
         }
-      },
+      }
     },
 
     gist: {
@@ -152,10 +190,12 @@ var SassMeister;
       }
     },
 
-    setTimer: function(timer, callback) {
-      clearTimeout(timer);
-      timer = setTimeout(function(){callback();}, 750);
-    },
+    // setTimer: function(timer, callback) {
+    //   clearTimeout(timer);
+    //   if(callback !== null) {
+    //     timer = setTimeout(function(){callback();}, 750);
+    //   }
+    // },
 
     modal: function(content) {
       if ($('#modal').length == 0) {
@@ -213,10 +253,10 @@ var SassMeister;
 
     setStorage: function(inputs) {
       var storage = SassMeister.storedInputs;
-      $.extend(storage, inputs)
+      $.extend(storage, inputs);
 
       localStorage.setItem('inputs', JSON.stringify(storage));
-    },
+    }
   };
 
 })(jQuery);
