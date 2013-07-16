@@ -96,23 +96,26 @@ helpers do
     sass = ''
 
     params[:plugin].each do |plugin|
-      if plugins.has_key?(plugin)
-        require plugins[plugin][:gem]
-        Sass.load_paths << path
-      end
-
-      plugins[params[:plugin]][:import].each do |import|
+      # if plugins.has_key?(plugin)
+      #   require plugins[plugin][:gem]
+      #   Sass.load_paths << path
+      # end
+      # puts params[:plugin].first.inspect
+      # puts plugins["Responsive Sass"].inspect
+      
+      
+      plugins[params[:plugin].first][:import].each do |import|
         sass << "@import \"#{import}\"#{";" if params[:syntax] == 'scss'}\n\n" if ! import.empty?
       end
     end
 
-    sass
+    sass << params[:sass]
   end
 
 
-  def sass_compile(params)
+  def sass_compile(params, sass)
     begin
-      send("#{params[:syntax]}".to_sym, params[:sass].chomp, {:style => :"#{params[:output]}", :quiet => true})
+      send("#{params[:syntax]}".to_sym, sass.chomp, {:style => :"#{params[:output]}", :quiet => true})
 
     rescue Sass::SyntaxError => e
       status 200
@@ -178,9 +181,9 @@ end
 
 post '/compile' do  
   if params[:sass]
-    # sass = import_plugin(params)
-
-    sass_compile(params)
+    sass = import_plugin(params)
+puts sass
+    sass_compile(params, sass)
   else
     # HTML
     

@@ -9,11 +9,11 @@
     </div>
 
     <div class="form_control">
-      <label for="output">Extension (inserted at cursor)</label>
+      <label for="output">Extension</label>
       <select name="plugin" class="fancy_dropdown">
         <option value="">vanilla Sass&nbsp;&nbsp;(v<%=Gem.loaded_specs["sass"].version%>)</option>
         <% @plugins.each do |plugin| %>
-          <option value="<%= plugin.last[:import].to_s.gsub(/(\"|\[|\]|\s*)/, '') %>"><%=plugin.first %>&nbsp;&nbsp;(v<%=plugin.last[:version]%>)</option>
+          <option value="<%= plugin.first %>"><%=plugin.first %>&nbsp;&nbsp;(v<%=plugin.last[:version]%>)</option>
         <% end %>
       </select>
     </div>

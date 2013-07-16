@@ -37,18 +37,15 @@ var SassMeister;
         }
       }).value();
       
-      $('select[name=plugin]').dropdown({
+      this.inputs.plugin = $('select[name=plugin]').dropdown({
           gutter : 0,
           speed : 25,
           onOptionSelect: function(opt) {
-            var plugins = opt.data( 'value' );
+            SassMeister.inputs.plugin = opt.data( 'value' );
 
-            $.each(plugins.split(','), function(key, plugin) {
-              SassMeister.inputs.sass.insert( '@import "' + plugin + '"' + ( SassMeister.inputs.syntax == 'scss' ? ';' : '' ) + '\n\n');
-            });
-
+            SassMeister.compile.sass();
           }
-      });
+      }).value();
 
       this.outputs.css = ace.edit("css");
       this.outputs.css.setTheme("ace/theme/tomorrow");
@@ -84,8 +81,9 @@ var SassMeister;
     inputs: {
       sass: '',
       syntax: '',
+      plugin: '',
       // original_syntax: '',
-      output_style: ''
+      output: ''
     },
 
     outputs: {
@@ -99,7 +97,8 @@ var SassMeister;
         var inputs = {
               sass: SassMeister.inputs.sass.getValue(),
               syntax: SassMeister.inputs.syntax,
-              output: SassMeister.inputs.output_style
+              plugin: [SassMeister.inputs.plugin],
+              output: SassMeister.inputs.output
             };
 
         // _gaq.push(['_trackEvent', 'Form', 'Submit']);
@@ -132,8 +131,9 @@ var SassMeister;
           var inputs = {
             sass: SassMeister.inputs.sass.getValue(),
             syntax: SassMeister.inputs.syntax,
+            plugin: [SassMeister.inputs.plugin],
             original_syntax: $('[name="syntax"]').data('orignal'),
-            output: SassMeister.inputs.output_style
+            output: SassMeister.inputs.output
           }
 
           $.post('/convert', inputs,
@@ -161,7 +161,8 @@ var SassMeister;
         var inputs = {
           sass: SassMeister.inputs.sass.getValue(),
           syntax: SassMeister.inputs.syntax,
-          output: SassMeister.inputs.output_style
+          plugin: [SassMeister.inputs.plugin],
+          output: SassMeister.inputs.output
         }
 
         var action = '', confirmationText = 'is ready';
