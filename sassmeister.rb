@@ -14,6 +14,12 @@ require 'sass'
 require 'compass'
 require 'yaml'
 
+require './lib/plugins.rb'
+
+Compass.sass_engine_options[:load_paths].each do |path|
+  Sass.load_paths << path
+end
+
 # require 'haml'
 # require 'slim'
 
@@ -104,9 +110,9 @@ helpers do
   end
 
 
-  def sass_compile(params, sass)
+  def sass_compile(params)
     begin
-      send("#{params[:syntax]}".to_sym, sass.chomp, {:style => :"#{params[:output]}", :quiet => true})
+      send("#{params[:syntax]}".to_sym, params[:sass].chomp, {:style => :"#{params[:output]}", :quiet => true})
 
     rescue Sass::SyntaxError => e
       status 200
@@ -174,7 +180,7 @@ post '/compile' do
   if params[:sass]
     # sass = import_plugin(params)
 
-    sass_compile(params, sass)
+    sass_compile(params)
   else
     # HTML
     
