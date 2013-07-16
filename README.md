@@ -42,15 +42,20 @@ heroku open
 ```
 
 
-## Tests ##
+## Tests
 
 Test code for each of the included Sass libraries can be found [here](https://github.com/jedfoster/SassMeister/blob/master/TESTS.md).
 
-## Caveats ##
+## Caveats
 
 @imports will probably not work the way you'd expect. Spriting with Compass will definitely not work.
 
 If you find anything else that doesn't work, please let me know.
+
+## RVM
+SassMeister is includes a `.rvmrc` example file named `.rvmrc.example`. To use this file, simply run from the command line `$cp .rvmrc.example .rvmrc` and edit as needed. 
+
+`.rvmrc` is ignored from the `.gitignore` file, so it is suggested to copy it versus move the file and thus deleting `.rvmrc.example` from your forked project.
 
 ## Author
 SassMeister is written by [Jed Foster][jedfoster].

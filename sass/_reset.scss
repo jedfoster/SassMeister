@@ -36,6 +36,10 @@ html {
   height: 100%;
 }
 
+* {
+  @include box-sizing;
+}
+
 body {
 	font-size: 100%;
 	-webkit-font-smoothing: antialiased;

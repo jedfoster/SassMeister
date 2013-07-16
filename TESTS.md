@@ -148,6 +148,29 @@ Each block of SCSS should return valid CSS with no warnings or errors when teste
     }
 
 
+## Jacket ##
+
+    $jacket: track, overcoat, mod ".triumph";
+
+    .cafe-race {
+      /* Universal */
+      font-size: 1rem;
+
+      /* jacket(track, tie, suit) */
+      @include jacket(track, tie, suit) {
+        position: absolute;
+      }
+      /* jacket(suit, mod, overcoat) */
+      @include jacket(suit, mod, overcoat) {
+        top: 3em;
+      }
+      /* jacket(leather) */
+      @include jacket(leather) {
+        position: fixed;
+      }
+    }
+
+
 ## Modular Scale ##
 
     .lace {
@@ -289,6 +312,40 @@ Each block of SCSS should return valid CSS with no warnings or errors when teste
     }
     #baz {
       @include isolation-span(2, 3, 'right', (2 8 2 1), .25);
+    }
+
+
+## Singularity Extras ##
+
+    $grids: 3;
+    $grids: add-grid(1 2 3 at 500px);
+    $grids: add-grid(ratio(golden(), 3) at 700px);
+    $grids: add-grid(ratio-spiral() at 900px);
+    $grids: add-grid(compound(2, 3, 4) at 1100px);
+
+    $gutters: .5;
+
+    #layouts {
+      content: 'Initial Layout';
+      @include grid-span(1, 2);
+
+      @include layout(6, .25, 'float') {
+          content: 'Inner Layout';
+          @include grid-span(1, 2);
+        }
+
+      @include breakpoint(500px) {
+        @include layout(6, .25, 'float') {
+          content: 'Inner Layout, Breakpoint';
+          @include grid-span(1, 2);
+
+          @include layout(2 4 6) {
+            @debug find-grid();
+            content: 'Nested Layout';
+            @include grid-span(1, 2);
+          }
+        }
+      }
     }
 
 

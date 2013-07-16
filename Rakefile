@@ -29,7 +29,7 @@ end
 
 desc "Update bundled gems. Use this in place of bundle update"
 task "bundle:update" do
-  plugins = YAML.load_file("plugins.yml")
+  plugins = YAML.load_file("config/plugins.yml")
   gemfile = File.new('Gemfile').read
 
   plugins.each do |plugin|

@@ -89,10 +89,9 @@ helpers do
   def import_plugin(params)
     sass = ''
 
-    if plugins.has_key?(params[:plugin])
-      require plugins[params[:plugin]][:gem]
-
-      Compass.sass_engine_options[:load_paths].each do |path|
+    params[:plugin].each do |plugin|
+      if plugins.has_key?(plugin)
+        require plugins[plugin][:gem]
         Sass.load_paths << path
       end
 
@@ -101,8 +100,9 @@ helpers do
       end
     end
 
-    sass << params[:sass]
+    sass
   end
+
 
   def sass_compile(params, sass)
     begin

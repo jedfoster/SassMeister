@@ -1,4 +1,5 @@
 source 'http://rubygems.org'
+ruby '1.9.3'
 
 gem 'sinatra'
 gem 'sinatra-partial'
@@ -39,3 +40,5 @@ gem 'blend-mode'
 gem 'breakpoint-slicer'
 gem 'sassy-text-shadow'
 gem 'compass-blend-modes'
+gem 'jacket'
+gem 'singularity-extras'

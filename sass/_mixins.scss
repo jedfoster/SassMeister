@@ -1,0 +1,20 @@
+@mixin border_radius ($border_radius, $corner: null, $prefixes: $webkit_support) {
+  @if $corner != null {
+    $corner: -#{$corner};
+  }
+
+  @each $prefix in $prefixes {
+    #{$prefix}border#{$corner}-radius: $border_radius;
+  }
+}
+
+
+@mixin linear_gradient_w3c ($default_color, $color_values, $prefixes: $prefix_defaults) {
+  background: $default_color; // default fallback
+  @each $prefix in $prefixes {
+    @if $prefix != '' {
+      background: #{$prefix}#{'linear-gradient(top, ' + $color_values + ')'};
+    }
+  }
+  background: #{'linear-gradient(to bottom, ' + $color_values + ')'};
+}

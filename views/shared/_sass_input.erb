@@ -2,16 +2,28 @@
   <div class="controls">
     <div class="form_control">
       <label for="syntax">Syntax</label>
-      <select name="syntax" data-original="">
+      <select name="syntax" data-original=""  class="fancy_dropdown">
         <option value="scss">SCSS</option>
         <option value="sass">Sass</option>
       </select>
+      
+      <!-- <div class="toggle">
+        <label class="toggle-radio" for="toggleOption2">SCSS</label>
+        <input type="radio" name="syntax" id="toggleOption1" value="scss" checked="checked">
+        <span class="knob"> </span>
+        <label class="toggle-radio" for="toggleOption1">Sass</label>
+        <input type="radio" name="syntax" id="toggleOption2" value="sass">
+      </div> -->
+      
     </div>
+    
+    
+    
 
     <div class="form_control">
       <label for="plugin">Extension</label>
-      <select name="plugin">
-        <option value="">vanilla Sass&nbsp;&nbsp;(v<%=Gem.loaded_specs["sass"].version%>)</option>
+      <select name="plugin" data-placeholder="vanilla Sass&nbsp;&nbsp;(v<%=Gem.loaded_specs["sass"].version%>)" multiple class="chzn-select">
+        <!-- <option value="">vanilla Sass&nbsp;&nbsp;(v<%=Gem.loaded_specs["sass"].version%>)</option> -->
         <% @plugins.each do |plugin| %>
           <option value="<%=plugin.first%>"><%=plugin.first %>&nbsp;&nbsp;(v<%=plugin.last[:version]%>)</option>
         <% end %>
@@ -20,8 +32,8 @@
 
     <div class="form_control">
       <label for="output">Output Style</label>
-      <select name="output">
-        <option value="expanded">expanded</option>
+      <select name="output" class="fancy_dropdown">
+        <option value="expanded" selected>expanded</option>
         <option value="nested">nested</option>
         <option value="compact">compact</option>
         <option value="compressed">compressed</option>
