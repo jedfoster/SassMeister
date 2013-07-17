@@ -29,7 +29,7 @@ var SassMeister;
         gutter : 0,
         speed : 25,
         onOptionSelect: function(opt) {
-          SassMeister.inputs.output_style = opt.data( 'value' );
+          SassMeister.inputs.output = opt.data( 'value' );
           
           // _gaq.push(['_trackEvent', 'Form', 'Control', this.value]);
 
