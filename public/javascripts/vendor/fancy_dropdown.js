@@ -50,12 +50,12 @@ var Modernizr = {
 			this.opts = this.listopts.find( 'li' );
 			this.optsCount = this.opts.length;
 			this.size = { width : this.dd.width(), height : this.dd.height() };
-			
+
 			var elName = this.$el.attr( 'name' ), elId = this.$el.attr( 'id' ),
 				inputName = elName !== undefined ? elName : elId !== undefined ? elId : 'fancy_dropdown-' + ( new Date() ).getTime();
 
 			this.inputEl = $( '<input type="hidden" name="' + inputName + '"></input>' ).insertAfter( this.selectlabel );
-			
+
       this.selectlabel.css( 'z-index', this.minZIndex + this.optsCount );
 			this._positionOpts();
 			if( Modernizr.csstransitions ) {
@@ -74,8 +74,8 @@ var Modernizr = {
 					label = $this.text();
 
           if( val !== -1 ) {
-            optshtml += 
-        		  classes !== undefined ? 
+            optshtml +=
+        		  classes !== undefined ?
         			  '<li data-value="' + val + '"><span class="' + classes + '">' + label + '</span></li>' :
         				'<li data-value="' + val + '"><span>' + label + '</span></li>';
         	}
@@ -88,9 +88,7 @@ var Modernizr = {
 
 			this.listopts = $('<ul/>').append( optshtml );
       this.listopts = $('<div/>').append( this.listopts );
-      
-      // $(this.listopts).wrap();
-			
+
 			this.selectlabel = $( '<span/>' ).append( selectlabel );
 			this.dd = $( '<div class="fancy_dropdown"/>' ).append( this.selectlabel, this.listopts ).insertAfter( this.$el );
 			this.$el.remove();
@@ -102,14 +100,11 @@ var Modernizr = {
       this.listopts.css( {'top': this.size.height + 1, 'left': -9000, 'width': '100%'} );
       $('li', this.opts)
 				.each( function( i ) {
-					$( this ).css( {
-            //zIndex : self.minZIndex + self.optsCount - 1 - i,
-            //top : 0,
-						//left : 0,
+					$( this ).css({
 						opacity : 0,
 						transform : 'none'
-					} );
-				} );
+					});
+				});
 
       this.opts
     	  .eq( this.optsCount - 1 )
@@ -122,41 +117,19 @@ var Modernizr = {
       	.css( { transform : 'none' } );
 		},
 
-		_initEvents : function() {			
+		_initEvents : function() {
 			var self = this;
-			
+
 			this.selectlabel.on( 'mousedown.dropdown', function( event ) {
 				self.opened ? self.close() : self.open();
 				return false;
 			} );
-			
+
       this.dd.on( 'mouseleave.dropdown', function( event ) {
         // self.opened ? self.close() : self.open();
         self.close();
         return false;
       } );
-			
-      // console.log(this);
-			
-
-      //function test_active_click(evt) {
-      //  
-      //};
-      
-      
-      $(document).on('click', function(evt) {
-        //return test_active_click(evt);
-        if ($(evt.target).parents(self.dd).length) {
-          return false;
-        } else {
-          self.close();
-  				return false;
-        }
-      });
-			
-			
-			
-			
 
 			this.opts.on( 'click.dropdown', function() {
 				if( self.opened ) {
