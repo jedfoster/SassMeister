@@ -96,22 +96,15 @@ helpers do
     sass = ''
 
     params[:plugin].each do |plugin|
-      # if plugins.has_key?(plugin)
-      #   require plugins[plugin][:gem]
-      #   Sass.load_paths << path
-      # end
-      # puts params[:plugin].first.inspect
-      # puts plugins["Responsive Sass"].inspect
-      
-      
-      plugins[params[:plugin].first][:import].each do |import|
-        sass << "@import \"#{import}\"#{";" if params[:syntax] == 'scss'}\n\n" if ! import.empty?
+      if plugins.has_key?(plugin)
+        plugins[params[:plugin].first][:import].each do |import|
+          sass << "@import \"#{import}\"#{";" if params[:syntax] == 'scss'}\n\n" if ! import.empty?
+        end
       end
     end
 
     sass << params[:sass]
   end
-
 
   def sass_compile(params, sass)
     begin
@@ -159,7 +152,9 @@ helpers do
     frontmatter.gsub!(/version/, "v#{Gem.loaded_specs["sass"].version.to_s}")
 
     if ! params[:plugin].empty?
-      frontmatter.gsub!(/^(\/\/ Sass)/, "// #{params[:plugin]} (v#{plugins[params[:plugin]][:version]})\n\\1")
+      params[:plugin].each do |plugin|
+        frontmatter.gsub!(/^(\/\/ Sass)/, "// #{params[:plugin].first} (v#{plugins[params[:plugin].first][:version]})\n\\1") if plugins.has_key?(plugin)
+      end
     end
 
     return frontmatter
