@@ -29,11 +29,22 @@ var SassMeister;
         gutter : 0,
         speed : 25,
         onOptionSelect: function(opt) {
-          SassMeister.inputs.output_style = opt.data( 'value' );
+          SassMeister.inputs.output = opt.data( 'value' );
           
           // _gaq.push(['_trackEvent', 'Form', 'Control', this.value]);
 
           SassMeister.compile.sass();
+        }
+      }).value();
+      
+      this.inputs.plugin = $('select[name=plugin]').dropdown({
+          gutter : 0,
+          speed : 25,
+          onOptionSelect: function(opt) {
+            var plugins = opt.data( 'value' );
+            $.each(plugins.split(','), function(key, plugin) {
+              SassMeister.inputs.sass.insert( '@import "' + plugin + '"' + ( SassMeister.inputs.syntax == 'scss' ? ';' : '' ) + '\n\n');
+           });
         }
       }).value();
 
@@ -42,8 +53,6 @@ var SassMeister;
       this.outputs.css.setReadOnly(true);
       this.outputs.css.getSession().$useWorker=false
       this.outputs.css.getSession().setMode("ace/mode/css");
-
-      // this.compile.sass();
 
       $(window).resize(this.setHeight);
 
@@ -71,8 +80,9 @@ var SassMeister;
     inputs: {
       sass: '',
       syntax: '',
+      plugin: '',
       // original_syntax: '',
-      output_style: ''
+      output: ''
     },
 
     outputs: {
@@ -86,7 +96,7 @@ var SassMeister;
         var inputs = {
               sass: SassMeister.inputs.sass.getValue(),
               syntax: SassMeister.inputs.syntax,
-              output: SassMeister.inputs.output_style
+              output: SassMeister.inputs.output
             };
 
         // _gaq.push(['_trackEvent', 'Form', 'Submit']);
@@ -120,7 +130,7 @@ var SassMeister;
             sass: SassMeister.inputs.sass.getValue(),
             syntax: SassMeister.inputs.syntax,
             original_syntax: $('[name="syntax"]').data('orignal'),
-            output: SassMeister.inputs.output_style
+            output: SassMeister.inputs.output
           }
 
           $.post('/convert', inputs,
@@ -148,7 +158,8 @@ var SassMeister;
         var inputs = {
           sass: SassMeister.inputs.sass.getValue(),
           syntax: SassMeister.inputs.syntax,
-          output: SassMeister.inputs.output_style
+          plugin: [SassMeister.inputs.plugin],
+          output: SassMeister.inputs.output
         }
 
         var action = '', confirmationText = 'is ready';

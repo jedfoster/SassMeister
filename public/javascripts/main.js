@@ -37,18 +37,5 @@
   });
 
 
-  $('select[name=plugin]').each(function() {
-    $(this).dropdown({
-      gutter : 0,
-      speed : 25,
-      onOptionSelect: function(opt) {
-        var plugins = opt.data( 'value' );
-        console.log(SassMeister.inputs.syntax);
-        $.each(plugins.split(','), function(key, plugin) {
-          SassMeister.inputs.sass.insert( '@import "' + plugin + '"' + ( SassMeister.inputs.syntax == 'scss' ? ';' : '' ) + '\n\n');
-        });
-
-      }
-    })
-  });
+  
 })(jQuery);
