@@ -20,9 +20,6 @@ Compass.sass_engine_options[:load_paths].each do |path|
   Sass.load_paths << path
 end
 
-# require 'haml'
-# require 'slim'
-
 set :partial_template_engine, :erb
 
 configure :production do
@@ -79,7 +76,7 @@ helpers do
       length < 2 ? first.to_s : "#{self[0..-2] * ', '}, and #{last}"
     end
   end
-  
+
   class String
     def titleize
       split(/(\W)/).map(&:capitalize).join
@@ -168,14 +165,14 @@ get '/' do
 end
 
 
-post '/compile' do  
+post '/compile' do
   if params[:sass]
     # sass = import_plugin(params)
 
     sass_compile(params)
   else
     # HTML
-    
+
     case params[:html_syntax]
     when 'haml'
       return haml params[:html], :suppress_eval => true
@@ -185,11 +182,11 @@ post '/compile' do
 
       return html
       return slim html, :pretty => true, :disable_engines => [:ruby, :javascript, :css, :erb, :haml, :sass, :scss, :less, :builder, :liquid, :markdown, :textile, :rdoc, :radius, :markaby, :nokogiri, :coffee]
-      
+
     # when 'markdown'
-      
-    # when 'textile'      
-    
+
+    # when 'textile'
+
     else
       return params[:html]
     end
@@ -264,9 +261,6 @@ get %r{/gist(?:/[\w]*)*/([\d]+)} do
       end
 
       plugin = unpack_dependencies(sass)
-
-      # return plugin
-      # sass.gsub!(/^\s*(@import.*)\s*/, "\n// #{'\1'}\n\n")
     end
 
   rescue Github::Error::NotFound => e
@@ -306,6 +300,7 @@ post '/gist/?:edit?' do
         content: "#{dependencies}\n\n#{sass}"
       }
     })
+
   else
     data = @github.gists.create(description: description, public: true, files: {
       css_file => {
