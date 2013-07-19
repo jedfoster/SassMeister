@@ -19,7 +19,7 @@ gem 'breakpoint'
 gem 'sassy-buttons'
 gem 'singularitygs'
 gem 'stipe'
-gem 'susy', "~> 2.0.0.alpha"
+gem 'susy', "~> 1.0.9"
 gem 'neat-compass'
 gem 'harsh'
 gem 'toolkit'
