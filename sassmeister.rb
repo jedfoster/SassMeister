@@ -37,8 +37,8 @@ configure :production do
       end
     end
 
-    use Rack::Session::Cookie, :key => 'sassmeister.com',
-                               :domain => 'sassmeister.com',
+    use Rack::Session::Cookie, :key => 'sassmeister-dev.herokuapp.com',
+                               :domain => 'sassmeister-dev.herokuapp.com',
                                :path => '/',
                                :expire_after => 7776000, # 90 days, in seconds
                                :secret => ENV['COOKIE_SECRET']
