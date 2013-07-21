@@ -2,14 +2,16 @@
 // ------------------------------------------------------------------------------
 @import "config";  // Editing defaults here will override any set in the Stipe gem
 
-@import "reset";
-
-@import "web_fonts";
-
-// Load the Stipe library
-// ------------------------------------------------------------------------------
 @import "stipe/manifest";
 @import "stipe/grid/extends";
+
+@import "mixins"; // Need to override some Stipe mixins
+
+
+@import "reset";
+
+
+@import "web_fonts";
 
 
 // This where you start building your own styles. 

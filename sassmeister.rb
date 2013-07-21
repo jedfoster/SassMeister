@@ -14,6 +14,15 @@ require 'sass'
 require 'compass'
 require 'yaml'
 
+require './lib/plugins.rb'
+
+Compass.sass_engine_options[:load_paths].each do |path|
+  Sass.load_paths << path
+end
+
+# require 'haml'
+# require 'slim'
+
 set :partial_template_engine, :erb
 
 configure :production do
@@ -28,8 +37,8 @@ configure :production do
       end
     end
 
-    use Rack::Session::Cookie, :key => 'sassmeister.com',
-                               :domain => 'sassmeister.com',
+    use Rack::Session::Cookie, :key => 'sassmeister-dev.herokuapp.com',
+                               :domain => 'sassmeister-dev.herokuapp.com',
                                :path => '/',
                                :expire_after => 7776000, # 90 days, in seconds
                                :secret => ENV['COOKIE_SECRET']
@@ -86,15 +95,11 @@ helpers do
   def import_plugin(params)
     sass = ''
 
-    if plugins.has_key?(params[:plugin])
-      require plugins[params[:plugin]][:gem]
-
-      Compass.sass_engine_options[:load_paths].each do |path|
-        Sass.load_paths << path
-      end
-
-      plugins[params[:plugin]][:import].each do |import|
-        sass << "@import \"#{import}\"#{";" if params[:syntax] == 'scss'}\n\n" if ! import.empty?
+    params[:plugin].each do |plugin|
+      if plugins.has_key?(plugin)
+        plugins[params[:plugin].first][:import].each do |import|
+          sass << "@import \"#{import}\"#{";" if params[:syntax] == 'scss'}\n\n" if ! import.empty?
+        end
       end
     end
 
@@ -147,7 +152,9 @@ helpers do
     frontmatter.gsub!(/version/, "v#{Gem.loaded_specs["sass"].version.to_s}")
 
     if ! params[:plugin].empty?
-      frontmatter.gsub!(/^(\/\/ Sass)/, "// #{params[:plugin]} (v#{plugins[params[:plugin]][:version]})\n\\1")
+      params[:plugin].each do |plugin|
+        frontmatter.gsub!(/^(\/\/ Sass)/, "// #{params[:plugin].first} (v#{plugins[params[:plugin].first][:version]})\n\\1") if plugins.has_key?(plugin)
+      end
     end
 
     return frontmatter
@@ -167,15 +174,47 @@ get '/' do
 end
 
 
-post '/compile' do
-  sass = import_plugin(params)
+post '/compile' do  
+  if params[:sass]
+    sass = import_plugin(params)
+puts sass
+    sass_compile(params, sass)
+  else
+    # HTML
+    
+    case params[:html_syntax]
+    when 'haml'
+      return haml params[:html], :suppress_eval => true
+    when 'slim'
+      # ^(\s*?)((\S+ )?=|==|-)( .*$)
+      html = params[:html].gsub(/^(\s*?)((\S+ )?=|==|-)( .*$)/, "\1/ \2\4")
 
-  sass_compile(params, sass)
+      return html
+      return slim html, :pretty => true, :disable_engines => [:ruby, :javascript, :css, :erb, :haml, :sass, :scss, :less, :builder, :liquid, :markdown, :textile, :rdoc, :radius, :markaby, :nokogiri, :coffee]
+      
+    # when 'markdown'
+      
+    # when 'textile'      
+    
+    else
+      return params[:html]
+    end
+  end
 end
 
 
-post '/sass-convert' do
-  sass_convert(params[:original_syntax], params[:syntax], params[:sass])
+get '/compile' do
+  erb :compiled_html, :layout => false
+end
+
+
+post '/convert' do
+  if params[:sass]
+    sass_convert(params[:original_syntax], params[:syntax], params[:sass])
+  else
+    # HTML
+    erb :compiled_html, :layout => false
+  end
 end
 
 

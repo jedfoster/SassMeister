@@ -15,6 +15,12 @@
   }
 }
 
+.html_input, .html_output {
+  @extend %grid_full;
+
+  float: left;
+}
+
 @media #{$tablet} {
   .sass_input, .css_output {
     @include grid(4.25, alphaomega, $grid_context: 4);

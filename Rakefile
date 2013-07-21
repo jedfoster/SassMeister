@@ -36,6 +36,7 @@ task "bundle:update" do
     if ! gemfile.match(/^gem '#{plugin.last[:gem]}'/)
       puts "Adding #{plugin.last[:gem]} to Gemfile..."
       Utilities.new.append('Gemfile', "\ngem '#{plugin.last[:gem]}'")
+      Utilities.new.append('./lib/plugins.rb', "\nrequire '#{plugin.last[:gem]}'")
     end
   end
   
