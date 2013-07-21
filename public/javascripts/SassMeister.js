@@ -96,6 +96,7 @@ var SassMeister;
         var inputs = {
               sass: SassMeister.inputs.sass.getValue(),
               syntax: SassMeister.inputs.syntax,
+              plugin: [SassMeister.inputs.plugin],
               output: SassMeister.inputs.output
             };
 
@@ -129,6 +130,7 @@ var SassMeister;
           var inputs = {
             sass: SassMeister.inputs.sass.getValue(),
             syntax: SassMeister.inputs.syntax,
+            plugin: [SassMeister.inputs.plugin],
             original_syntax: $('[name="syntax"]').data('orignal'),
             output: SassMeister.inputs.output
           }
