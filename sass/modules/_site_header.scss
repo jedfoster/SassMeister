@@ -1,9 +1,9 @@
 %tooltip {
   position: absolute;
   z-index: 9999;
-  top: 60px;
+  top: em(60);
   right: 0.83333em;
-  width: 200px;
+  width: em(200);
   padding: 0.5em;
   line-height: 1.5em;
   content: attr(title);
@@ -22,14 +22,15 @@
 
 .site_header {
   position: relative;
-  height: 60px;
-  margin-bottom: 20px;
+  height: em(60);
+  margin-bottom: em(20);
   border-bottom: 1px solid scale-color($alpha_color, $lightness: -50%);
   background: $alpha_color_charlie;
 
   a {
     color: $white;
-    height: em(35);
+    line-height: em(60);
+    text-shadow: 0 0 5px darken($alpha_color, 10%);
 
     &:hover {
       color: darken($alpha_color, 40%);
@@ -49,22 +50,19 @@
     @extend %icon-font;
 
     position: relative;
-    top: -28px;
     left: 15px;
-    height: 91px;
     float: left;
-    color: $white;
-    text-shadow: 0 0 5px darken($alpha_color, 10%);
 
     &:before {
-      content: "\2c";
-      font-size: 6em;
+      content: "\e001";
+      font-size: 7.5em;
+      line-height: 0.01;      
     }
 
     &:hover {
       &:after {
-        top: 88px;
-        width: 240px;
+        top: em(60);
+        width: em(240);
         margin-left: em(-10);
         left: 0;
       }
@@ -79,17 +77,14 @@
 .social_links {
   list-style: none;
   text-align: right;
-  text-shadow: 0 0 5px darken($alpha_color, 10%);
   float: right;
   position: relative;
 
   > li {
-    padding-top:10px;
-    padding-bottom:3px;
     display: block;
     float:left;
     padding-right: em(15);
-    line-height: em(40);
+    line-height: em(1);
     position: relative;
 
     &:last-child {
@@ -104,6 +99,7 @@
   img {
     @include border_radius($border-radius);
     display: block;
+    margin-top: em(10);
   }
 
   > li:nth-last-child(2) {
@@ -116,7 +112,6 @@
   }
   > li:last-child {
     padding-left: em(16);
-    padding-bottom: 10px;
 
     @media #{$mobile} {
       padding-left: em(8);
@@ -151,8 +146,8 @@
   padding: em(8) em(8);
   text-align: left;
   width: auto;
-  min-width: 220px;
-  max-width: 340px;
+  min-width: em(220);
+  max-width: em(340);
   background: transparentize(scale-color($alpha_color, $lightness: -80%), 0.2);
 
   @each $prefix in $prefix_defaults {
