@@ -38,7 +38,7 @@
 
       &:after {
         @extend %tooltip;
-        
+
         @media #{$mobile} {
           display: none;
         }
@@ -56,7 +56,7 @@
     &:before {
       content: "\e001";
       font-size: 7.5em;
-      line-height: 0.01;      
+      line-height: 0.01;
     }
 
     &:hover {
@@ -99,7 +99,7 @@
   img {
     @include border_radius($border-radius);
     display: block;
-    margin-top: em(10);
+    margin: em(10) 0;
   }
 
   > li:nth-last-child(2) {
