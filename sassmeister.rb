@@ -14,12 +14,6 @@ require 'sass'
 require 'compass'
 require 'yaml'
 
-require './lib/plugins.rb'
-
-Compass.sass_engine_options[:load_paths].each do |path|
-  Sass.load_paths << path
-end
-
 set :partial_template_engine, :erb
 
 configure :production do
@@ -89,18 +83,12 @@ helpers do
     end
   end
 
-  def import_plugin(params)
-    sass = ''
+  def require_plugins(params)
+    get_imports_from_sass(params[:sass]) { |name, plugin| require plugin[:gem] }
 
-    params[:plugin].each do |plugin|
-      if plugins.has_key?(plugin)
-        plugins[params[:plugin].first][:import].each do |import|
-          sass << "@import \"#{import}\"#{";" if params[:syntax] == 'scss'}\n\n" if ! import.empty?
-        end
-      end
+    Compass.sass_engine_options[:load_paths].each do |path|
+      Sass.load_paths << path
     end
-
-    sass << params[:sass]
   end
 
   def sass_compile(params)
@@ -141,8 +129,10 @@ helpers do
     imports = sass.scan(/^@import[\s\"\']*(.+?)[\"\';]*$/)
     
     plugins.each do |key, plugin|
-      if imports.include? plugin[:import]
-        yield key, plugin[:gem] if block_given?
+      plugin[:import].each do |import|
+        if imports.include? [import]
+          yield key, plugin if block_given?
+        end
       end
     end
   end
@@ -156,7 +146,7 @@ helpers do
       // ---
     END
 
-    get_imports_from_sass(params[:sass]) {|name, gemname| frontmatter.gsub!(/\/\/ ---\n\Z/, "// #{name} (v#{Gem.loaded_specs[gemname].version.to_s})\n// ---\n") }
+    get_imports_from_sass(params[:sass]) {|name, plugin| frontmatter.gsub!(/\/\/ ---\n\Z/, "// #{name} (v#{plugin[:version]})\n// ---\n") }
     
     frontmatter.gsub!(/version/, "v#{Gem.loaded_specs["sass"].version.to_s}")
 
@@ -179,7 +169,7 @@ end
 
 post '/compile' do
   if params[:sass]
-    # sass = import_plugin(params)
+    require_plugins(params)
 
     sass_compile(params)
   else
