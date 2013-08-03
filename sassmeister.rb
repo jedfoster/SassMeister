@@ -89,6 +89,20 @@ helpers do
     end
   end
 
+  def import_plugin(params)
+    sass = ''
+
+    params[:plugin].each do |plugin|
+      if plugins.has_key?(plugin)
+        plugins[params[:plugin].first][:import].each do |import|
+          sass << "@import \"#{import}\"#{";" if params[:syntax] == 'scss'}\n\n" if ! import.empty?
+        end
+      end
+    end
+
+    sass << params[:sass]
+  end
+
   def sass_compile(params)
     begin
       send("#{params[:syntax]}".to_sym, params[:sass].chomp, {:style => :"#{params[:output]}", :quiet => true})
@@ -161,6 +175,8 @@ end
 
 post '/compile' do
   if params[:sass]
+    # sass = import_plugin(params)
+
     sass_compile(params)
   else
     # HTML
