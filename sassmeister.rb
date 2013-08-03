@@ -137,6 +137,16 @@ helpers do
     frontmatter[0].titleize.strip unless frontmatter.empty?
   end
 
+  def get_imports_from_sass(sass)
+    imports = sass.scan(/^@import[\s\"\']*(.+?)[\"\';]*$/)
+    
+    plugins.each do |key, plugin|
+      if imports.include? plugin[:import]
+        yield key, plugin[:gem] if block_given?
+      end
+    end
+  end
+
   def pack_dependencies(params)
     params[:sass].slice!(/(^\/\/ ---\n(?:\/\/ .+\n)*\/\/ ---\s*)*/)
 
@@ -146,14 +156,8 @@ helpers do
       // ---
     END
 
-    imports = params[:sass].scan(/^@import[\s\"\']*(.+?)[\"\';]*$/)
-
-    plugins.each do |key, plugin|
-      if imports.include? plugin[:import]
-        frontmatter.gsub!(/\/\/ ---\n\Z/, "// #{key} (v#{Gem.loaded_specs[plugin[:gem]].version.to_s})\n// ---\n")
-      end
-    end
-
+    get_imports_from_sass(params[:sass]) {|name, gemname| frontmatter.gsub!(/\/\/ ---\n\Z/, "// #{name} (v#{Gem.loaded_specs[gemname].version.to_s})\n// ---\n") }
+    
     frontmatter.gsub!(/version/, "v#{Gem.loaded_specs["sass"].version.to_s}")
 
     return frontmatter
