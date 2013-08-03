@@ -132,6 +132,14 @@ helpers do
       // ---
     END
 
+    imports = params[:sass].scan(/^@import[\s\"\']*(.+?)[\"\';]*$/)
+
+    plugins.each do |key, plugin|
+      if imports.include? plugin[:import]
+        frontmatter.gsub!(/\/\/ ---\n\Z/, "// #{key} (v#{Gem.loaded_specs[plugin[:gem]].version.to_s})\n// ---\n")
+      end
+    end
+
     frontmatter.gsub!(/version/, "v#{Gem.loaded_specs["sass"].version.to_s}")
 
     return frontmatter
