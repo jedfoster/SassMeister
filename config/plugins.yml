@@ -64,7 +64,7 @@ Neat:
     - bourbon/bourbon
     - neat/neat
   :url: http://neat.bourbon.io
-'Normalize SCSS':
+'Normalize':
   :gem: normalize-scss
   :import:
     - normalize

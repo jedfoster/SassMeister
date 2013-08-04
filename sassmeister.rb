@@ -92,9 +92,11 @@ helpers do
   end
 
   def sass_compile(params)
+    imports = ''
+
     if ! params[:sass].match(/^\/\/ ----\n/) && params[:sass].match(/^\/\/ ([\w\s]+?) [\(\)v\d\.]+?\s*$/)
-      imports = unpack_dependencies(params[:sass]).join("#{params[:syntax] == 'scss' ? ';' : ''}\n")
-      imports += "#{params[:syntax] == 'scss' ? ';' : ''}\n" if ! imports.nil?
+      imports = unpack_dependencies(params[:sass])
+      imports = imports.join("#{params[:syntax] == 'scss' ? ';' : ''}\n") + "#{params[:syntax] == 'scss' ? ';' : ''}\n" if ! imports.nil?
     end
 
     params[:sass].slice!(/(^\/\/ [\-]{3,4}\n(?:\/\/ .+\n)*\/\/ [\-]{3,4}\s*)*/)
