@@ -83,8 +83,8 @@ helpers do
     end
   end
 
-  def require_plugins(params)
-    get_imports_from_sass(params[:sass]) { |name, plugin| require plugin[:gem] }
+  def require_plugins(sass)
+    get_imports_from_sass(sass) { |name, plugin| require plugin[:gem] }
 
     Compass.sass_engine_options[:load_paths].each do |path|
       Sass.load_paths << path
