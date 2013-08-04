@@ -261,8 +261,6 @@ get %r{/gist(?:/[\w]*)*/([\d]+)} do
       else
         syntax = 'sass'
       end
-
-      plugin = unpack_dependencies(sass)
     end
 
   rescue Github::Error::NotFound => e
