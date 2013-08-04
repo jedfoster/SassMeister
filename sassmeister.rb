@@ -141,14 +141,16 @@ helpers do
     params[:sass].slice!(/(^\/\/ ---\n(?:\/\/ .+\n)*\/\/ ---\s*)*/)
 
     frontmatter = <<-END.gsub(/^ {6}/, '')
-      // ---
-      // Sass (version)
-      // ---
+      // ----
+      // Sass (sass-version)
+      // Compass (compass-version)
+      // ----
     END
 
     get_imports_from_sass(params[:sass]) {|name, plugin| frontmatter.gsub!(/\/\/ ---\n\Z/, "// #{name} (v#{plugin[:version]})\n// ---\n") }
     
-    frontmatter.gsub!(/version/, "v#{Gem.loaded_specs["sass"].version.to_s}")
+    frontmatter.gsub!(/sass-version/, "v#{Gem.loaded_specs["sass"].version.to_s}")
+    frontmatter.gsub!(/compass-version/, "v#{Gem.loaded_specs["compass"].version.to_s}")
 
     return frontmatter
   end
