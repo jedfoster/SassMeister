@@ -14,15 +14,6 @@ require 'sass'
 require 'compass'
 require 'yaml'
 
-require './lib/plugins.rb'
-
-Compass.sass_engine_options[:load_paths].each do |path|
-  Sass.load_paths << path
-end
-
-# require 'haml'
-# require 'slim'
-
 set :partial_template_engine, :erb
 
 configure :production do
@@ -79,7 +70,7 @@ helpers do
       length < 2 ? first.to_s : "#{self[0..-2] * ', '}, and #{last}"
     end
   end
-  
+
   class String
     def titleize
       split(/(\W)/).map(&:capitalize).join
@@ -92,23 +83,30 @@ helpers do
     end
   end
 
-  def import_plugin(params)
-    sass = ''
+  def require_plugins(sass)
+    get_imports_from_sass(sass) { |name, plugin| require plugin[:gem] }
 
-    params[:plugin].each do |plugin|
-      if plugins.has_key?(plugin)
-        plugins[params[:plugin].first][:import].each do |import|
-          sass << "@import \"#{import}\"#{";" if params[:syntax] == 'scss'}\n\n" if ! import.empty?
-        end
-      end
+    Compass.sass_engine_options[:load_paths].each do |path|
+      Sass.load_paths << path
     end
-
-    sass << params[:sass]
   end
 
-  def sass_compile(params, sass)
+  def sass_compile(params)
+    imports = ''
+
+    if ! params[:sass].match(/^\/\/ ----\n/) && params[:sass].match(/^\/\/ ([\w\s]+?) [\(\)v\d\.]+?\s*$/)
+      imports = unpack_dependencies(params[:sass])
+      imports = imports.join("#{params[:syntax] == 'scss' ? ';' : ''}\n") + "#{params[:syntax] == 'scss' ? ';' : ''}\n" if ! imports.nil?
+    end
+
+    params[:sass].slice!(/(^\/\/ [\-]{3,4}\n(?:\/\/ .+\n)*\/\/ [\-]{3,4}\s*)*/)
+
+    params[:sass] = imports + params[:sass] if ! imports.nil?
+
+    require_plugins(params[:sass])
+
     begin
-      send("#{params[:syntax]}".to_sym, sass.chomp, {:style => :"#{params[:output]}", :quiet => true})
+      send("#{params[:syntax]}".to_sym, params[:sass].chomp, {:style => :"#{params[:output]}", :quiet => true})
 
     rescue Sass::SyntaxError => e
       status 200
@@ -128,34 +126,54 @@ helpers do
     frontmatter = sass.slice(/^\/\/ ---\n(?:\/\/ .+\n)*\/\/ ---\n/)
 
     if frontmatter.nil?
-      frontmatter = sass.split(/(^\/\/ | v\d)/)
+      frontmatter = sass.scan(/^\/\/ ([\w\s]+?) [\(\)v\d\.]+?\s*$/).first
     else
       frontmatter = frontmatter.to_s.gsub(/(\/\/ |---|\(.+$)/, '').strip.split(/\n/)
     end
 
     frontmatter.delete_if do |x|
-      ! @plugins.key?(x.to_s.titleize.strip)
+      ! plugins.key?(x.to_s.titleize.strip)
     end
 
-    frontmatter[0].titleize.strip unless frontmatter.empty?
+    if frontmatter.empty?
+      return nil
+    else
+      imports = []
+    
+      plugins[frontmatter.first.strip][:import].each do |import|
+        imports << "@import \"#{import}\""
+      end
+      
+      return imports
+    end
   end
 
-  def pack_dependencies(params)
-    params[:sass].slice!(/(^\/\/ ---\n(?:\/\/ .+\n)*\/\/ ---\s*)*/)
-
-    frontmatter = <<-END.gsub(/^ {6}/, '')
-      // ---
-      // Sass (version)
-      // ---
-    END
-
-    frontmatter.gsub!(/version/, "v#{Gem.loaded_specs["sass"].version.to_s}")
-
-    if ! params[:plugin].empty?
-      params[:plugin].each do |plugin|
-        frontmatter.gsub!(/^(\/\/ Sass)/, "// #{params[:plugin].first} (v#{plugins[params[:plugin].first][:version]})\n\\1") if plugins.has_key?(plugin)
+  def get_imports_from_sass(sass)
+    imports = sass.scan(/^@import[\s\"\']*(.+?)[\"\';]*$/)
+    
+    plugins.each do |key, plugin|
+      plugin[:import].each do |import|
+        if imports.include? [import]
+          yield key, plugin if block_given?
+        end
       end
     end
+  end
+
+  def pack_dependencies(sass)
+    sass.slice!(/(^\/\/ [\-]{3,4}\n(?:\/\/ .+\n)*\/\/ [\-]{3,4}\s*)*/)
+
+    frontmatter = <<-END.gsub(/^ {6}/, '')
+      // ----
+      // Sass (sass-version)
+      // Compass (compass-version)
+      // ----
+    END
+
+    get_imports_from_sass(sass) {|name, plugin| frontmatter.gsub!(/\/\/ ----\n\Z/, "// #{name} (v#{plugin[:version]})\n// ----\n") }
+
+    frontmatter.gsub!(/sass-version/, "v#{Gem.loaded_specs["sass"].version.to_s}")
+    frontmatter.gsub!(/compass-version/, "v#{Gem.loaded_specs["compass"].version.to_s}")
 
     return frontmatter
   end
@@ -174,14 +192,12 @@ get '/' do
 end
 
 
-post '/compile' do  
+post '/compile' do
   if params[:sass]
-    sass = import_plugin(params)
-puts sass
-    sass_compile(params, sass)
+    sass_compile(params)
   else
     # HTML
-    
+
     case params[:html_syntax]
     when 'haml'
       return haml params[:html], :suppress_eval => true
@@ -191,11 +207,11 @@ puts sass
 
       return html
       return slim html, :pretty => true, :disable_engines => [:ruby, :javascript, :css, :erb, :haml, :sass, :scss, :less, :builder, :liquid, :markdown, :textile, :rdoc, :radius, :markaby, :nokogiri, :coffee]
-      
+
     # when 'markdown'
-      
-    # when 'textile'      
-    
+
+    # when 'textile'
+
     else
       return params[:html]
     end
@@ -268,10 +284,6 @@ get %r{/gist(?:/[\w]*)*/([\d]+)} do
       else
         syntax = 'sass'
       end
-
-      plugin = unpack_dependencies(sass)
-
-      sass.gsub!(/^\s*(@import.*)\s*/, "\n// #{'\1'}\n\n")
     end
 
   rescue Github::Error::NotFound => e
@@ -283,7 +295,7 @@ get %r{/gist(?:/[\w]*)*/([\d]+)} do
 
   @gist_input = {
     :syntax => syntax,
-    :plugin => plugin,
+    # :plugin => plugin,
     :sass => sass
   }.to_json
 
@@ -292,10 +304,11 @@ end
 
 
 post '/gist/?:edit?' do
-  dependencies = pack_dependencies(params)
-
   sass = params[:sass]
-  css = sass_compile(params, import_plugin(params))
+  
+  dependencies = pack_dependencies(sass)
+
+  css = sass_compile(params)
 
   description = "Generated by SassMeister.com, the Sass playground."
 
@@ -311,6 +324,7 @@ post '/gist/?:edit?' do
         content: "#{dependencies}\n\n#{sass}"
       }
     })
+
   else
     data = @github.gists.create(description: description, public: true, files: {
       css_file => {

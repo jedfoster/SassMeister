@@ -41,10 +41,11 @@ var SassMeister;
           gutter : 0,
           speed : 25,
           onOptionSelect: function(opt) {
-            SassMeister.inputs.plugin = opt.data( 'value' );
-
-            SassMeister.compile.sass();
-          }
+            var plugins = opt.data( 'value' );
+            $.each(plugins.split(','), function(key, plugin) {
+              SassMeister.inputs.sass.insert( '@import "' + plugin + '"' + ( SassMeister.inputs.syntax == 'scss' ? ';' : '' ) + '\n\n');
+           });
+        }
       }).value();
 
       this.outputs.css = ace.edit("css");
@@ -52,8 +53,6 @@ var SassMeister;
       this.outputs.css.setReadOnly(true);
       this.outputs.css.getSession().$useWorker=false
       this.outputs.css.getSession().setMode("ace/mode/css");
-
-      // this.compile.sass();
 
       $(window).resize(this.setHeight);
 

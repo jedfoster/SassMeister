@@ -71,6 +71,8 @@ GEM
     newrelic_rpm (3.6.6.147)
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
+    normalize-scss (2.1.2)
+      sass (>= 3.2)
     oauth2 (0.9.2)
       faraday (~> 0.8)
       httpauth (~> 0.2)
@@ -155,6 +157,7 @@ DEPENDENCIES
   modular-scale
   neat-compass
   newrelic_rpm
+  normalize-scss
   responsive-sass
   rwdcalc
   salsa

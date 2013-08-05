@@ -64,6 +64,11 @@ Neat:
     - bourbon/bourbon
     - neat/neat
   :url: http://neat.bourbon.io
+'Normalize':
+  :gem: normalize-scss
+  :import:
+    - normalize
+  :url: https://github.com/JohnAlbin/normalize.css-with-sass-or-compass
 "Responsive Calculator":
   :gem: rwdcalc
   :import: 
@@ -84,11 +89,11 @@ Salsa:
   :import: 
     - sassy-buttons
   :url: http://jaredhardy.com/sassy-buttons/
-"Sassy Math":
-  :gem: sassy-math
-  :import: 
-    - '' # This space intentionally left blank 
-  :url: https://github.com/Team-Sass/Sassy-math
+# "Sassy Math":
+#   :gem: sassy-math
+#   :import: 
+#     - '' # This space intentionally left blank 
+#   :url: https://github.com/Team-Sass/Sassy-math
 "Sassy Text Shadows":
   :gem: sassy-text-shadow
   :import:

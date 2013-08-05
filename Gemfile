@@ -42,3 +42,5 @@ gem 'sassy-text-shadow'
 gem 'compass-blend-modes'
 gem 'jacket'
 gem 'singularity-extras'
+
+gem 'normalize-scss'
