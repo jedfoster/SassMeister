@@ -89,11 +89,11 @@ Salsa:
   :import: 
     - sassy-buttons
   :url: http://jaredhardy.com/sassy-buttons/
-"Sassy Math":
-  :gem: sassy-math
-  :import: 
-    - '' # This space intentionally left blank 
-  :url: https://github.com/Team-Sass/Sassy-math
+# "Sassy Math":
+#   :gem: sassy-math
+#   :import: 
+#     - '' # This space intentionally left blank 
+#   :url: https://github.com/Team-Sass/Sassy-math
 "Sassy Text Shadows":
   :gem: sassy-text-shadow
   :import:
