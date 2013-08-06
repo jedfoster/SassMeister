@@ -95,6 +95,12 @@ Neat:
     - normalize
   :fingerprint: normalize
   :url: https://github.com/JohnAlbin/normalize.css-with-sass-or-compass
+"Photoshop Drop Shadow":
+  :gem: compass-photoshop-drop-shadow
+  :import: 
+    - photoshop-drop-shadow
+  :fingerprint: photoshop-drop-shadow
+  :url: https://github.com/heygrady/compass-photoshop-drop-shadow
 "Responsive Calculator":
   :gem: rwdcalc
   :import: 

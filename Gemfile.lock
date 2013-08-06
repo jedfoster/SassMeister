@@ -27,6 +27,8 @@ GEM
       compass
     compass-inuit (5.0.1)
       compass (>= 0.12.2)
+    compass-photoshop-drop-shadow (0.0.1)
+      compass
     css-slideshow (0.2.0)
       compass (>= 0.10.0.rc3)
     cssmin (1.0.3)
@@ -152,6 +154,7 @@ DEPENDENCIES
   compass
   compass-blend-modes
   compass-inuit
+  compass-photoshop-drop-shadow
   css-slideshow
   fancy-buttons
   fittext

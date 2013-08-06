@@ -251,6 +251,37 @@ Each block of SCSS should return valid CSS with no warnings or errors when teste
     @import "normalize";
 
 
+## Photoshop Drop Shadow ##
+
+    @import 'photoshop-drop-shadow';
+
+    // Simple shadow
+    div.box-shadow {
+      @include photoshop-drop-shadow(120, 5px, 0, 5px, rgba(#000, 0.75));
+    }
+
+    // Inner shadow
+    div.inner-box-shadow {
+      @include photoshop-inner-shadow(120, 5px, 0, 5px, rgba(#000, 0.75));
+    }
+
+    // Supporting multiple shadows
+    div.multiple-box-shadow {
+      @include box-shadow(
+        photoshop-shadow(120, 5px, 0, 5px, rgba(#000, 0.75)),
+        photoshop-shadow(120, 5px, 0, 5px, rgba(#000, 0.75), inset)
+      );
+    }
+
+    // Multiple Text Shadow
+    h2 {
+      @include text-shadow(
+        photoshop-text-shadow(120, 5px, 0, 5px, rgba(#000, 0.75)),
+        photoshop-text-shadow(-60, 5px, 0, 5px, rgba(#300, 0.75))
+      );
+    }
+
+
 ## Responsive Calculator ##
 
     @import "rwdcalc";
