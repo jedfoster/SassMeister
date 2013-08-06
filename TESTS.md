@@ -5,12 +5,16 @@ Each block of SCSS should return valid CSS with no warnings or errors when teste
 
 ## Blend Modes ##
 
+    @import "blend-mode";
+
     .multiply {
         background-color: blend-multiply(#7FFFD4, #DEB887);
     }
 
 
 ## Bourbon ##
+
+    @import "bourbon/bourbon";
 
     box:hover {
       @include animation-name(scale, slide);
@@ -24,6 +28,8 @@ Each block of SCSS should return valid CSS with no warnings or errors when teste
 
 
 ## Breakpoint ##
+
+    @import "breakpoint";
 
     // create $breakpoint variables like so
     // assume min-width (by default) if only a number
@@ -50,6 +56,8 @@ Each block of SCSS should return valid CSS with no warnings or errors when teste
 
 ## Breakpoint Slicer ##
 
+    @import "breakpoint-slicer";
+
     $slicer-breakpoints: 0 400px 600px 800px 1050px;
 
     .element {
@@ -59,11 +67,13 @@ Each block of SCSS should return valid CSS with no warnings or errors when teste
 
       @include at(4) {
         background-color: blue;
-      }  
+      }
     }
 
 
 ## Color Schemer ##
+
+    @import "color-schemer";
 
     $primary: cs-primary();
     $secondary: darken(cs-secondary(), 10%); // too light, darkening this up a bit.
@@ -89,6 +99,8 @@ Each block of SCSS should return valid CSS with no warnings or errors when teste
 
 ## Compass ##
 
+    @import "compass";
+
     #wrapper {
       @include columns(20em 2);
     }
@@ -96,12 +108,16 @@ Each block of SCSS should return valid CSS with no warnings or errors when teste
 
 ## Compass Slideshow ##
 
+    @import " css-slideshow";
+
     .slideshow {
       @include slideshow;
     }
 
 
 ## Fancy Buttons ##
+
+    @import "fancy-buttons";
 
     button {
       @include fancy-button-structure(26px, 1em, 4px);
@@ -111,6 +127,8 @@ Each block of SCSS should return valid CSS with no warnings or errors when teste
 
 ## Fittext ##
 
+    @import "fittext";
+
     h1 {
       font-size: 6em; // For browsers that don't support media queries.
       @include fittext($min-media: 200px, $max-media: 1400px, $min-font-size: 5em, $max-font-size: 50em, $media-increment: 100, $font-increment: 1.5, $ratio: 1, $round: false);
@@ -118,6 +136,8 @@ Each block of SCSS should return valid CSS with no warnings or errors when teste
     
 
 ## Harsh ##
+
+    @import "harsh";
 
     .random {
       @include harsh();
@@ -150,6 +170,8 @@ Each block of SCSS should return valid CSS with no warnings or errors when teste
 
 ## Jacket ##
 
+    @import "jacket";
+
     $jacket: track, overcoat, mod ".triumph";
 
     .cafe-race {
@@ -173,12 +195,17 @@ Each block of SCSS should return valid CSS with no warnings or errors when teste
 
 ## Modular Scale ##
 
+    @import "modular-scale";
+
     .lace {
       width: ms(7, 16px, golden() fourth() );
     }
 
 
 ## Neat ##
+
+    @import "bourbon/bourbon";
+    @import "neat/neat";
 
     section {
       @include outer-container;
@@ -187,7 +214,17 @@ Each block of SCSS should return valid CSS with no warnings or errors when teste
     }
 
 
+## Normalize ##
+
+    $legacy-support-for-ie6: false;
+    $legacy-support-for-ie7: true;
+
+    @import "normalize";
+
+
 ## Responsive Calculator ##
+
+    @import "rwdcalc";
 
     .foo {
       margin: rwdcalc(10 10px 13 1em, 960);
@@ -196,12 +233,16 @@ Each block of SCSS should return valid CSS with no warnings or errors when teste
 
 ## Responsive Sass ##
 
+    @import "responsive-sass";
+
     .block {
       @include mobile-landscape(960, 240, "/images/high-res.png");
     }
 
 
 ## Salsa ##
+
+    @import "salsa";
 
     // Nested grids AG test
     .e1 { @include grid(2); }
@@ -219,6 +260,8 @@ Each block of SCSS should return valid CSS with no warnings or errors when teste
 
 ## Sassy Buttons ##
 
+    @import "sassy-buttons";
+
     .red { @include sassy-button-gradient("matte", #e86a43); }
 
     .blue { @include sassy-button-gradient("simple", #4d8ccd); }
@@ -227,6 +270,8 @@ Each block of SCSS should return valid CSS with no warnings or errors when teste
 
 
 ## Sassy Math ##
+
+Sassy Math has been removed from SassMeister for technical reasons.
 
     $fraction: 2.5;
 
@@ -254,6 +299,9 @@ Each block of SCSS should return valid CSS with no warnings or errors when teste
 
 ## Sassy Text Shadows ##
 
+    @import "compass";
+    @import "sassy-text-shadow";
+
     body {
       text-align: center;
     }
@@ -274,6 +322,8 @@ Each block of SCSS should return valid CSS with no warnings or errors when teste
     }
 
 ## Singularity.gs ##
+
+    @import "singularity";
 
     $grids: 1 3 5 7 9;
     $gutters: 1/3;
@@ -303,6 +353,8 @@ Each block of SCSS should return valid CSS with no warnings or errors when teste
 
 
 ## Singularity Extras ##
+
+    @import "singularity-extras";
 
     $grids: 3;
     $grids: add-grid(1 2 3 at 500px);
@@ -338,6 +390,9 @@ Each block of SCSS should return valid CSS with no warnings or errors when teste
 
 ## Stipe ##
 
+    @import "stipe/manifest";
+    @import "stipe/grid/extends";
+
     .form_control {
       @include grid(4);
 
@@ -357,6 +412,8 @@ Each block of SCSS should return valid CSS with no warnings or errors when teste
 
 ## Susy ##
 
+    @import "susy";
+
     .ag1 { @include span-columns(2,10); }
     .ag2 { @include span-columns(6,10); }
     .ag3 { @include span-columns(2 omega, 10); }
@@ -371,6 +428,8 @@ Each block of SCSS should return valid CSS with no warnings or errors when teste
 
 ## Toolkit ##
 
+    @import "toolkit";
+
     .ratio-16-9 {
       @include intrinsic-ratio;
     }
@@ -382,8 +441,10 @@ Each block of SCSS should return valid CSS with no warnings or errors when teste
     .ratio-7-8-75-iframe-no-extend {
       @include intrinsic-ratio(7/8, 75%, 'iframe', false);
     }
-    
+
 ## Zen Grids ##
+
+    @import "zen";
 
     .content {
       @include zen-grid-item(4, 3); // Make this grid item span 4 columns. // Position this grid item in the 3rd column.
