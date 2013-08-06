@@ -45,3 +45,4 @@ gem 'singularity-extras'
 
 gem 'normalize-scss'
 gem 'zurb-foundation'
+gem 'compass-inuit'

@@ -181,6 +181,21 @@ Each block of SCSS should return valid CSS with no warnings or errors when teste
       @include harsh($angle: -32deg);
     }
 
+## Compass Inuit ##
+
+    @import "compass-inuit";
+
+    html{
+        font:1em/1.5 Georgia, serif;
+        padding:5%;
+        background-color:#fff;
+        color:#333;
+    }
+    body{
+        max-width:480px;
+        margin:0 auto;
+    }
+
 
 ## Jacket ##
 

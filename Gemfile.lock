@@ -25,6 +25,8 @@ GEM
       sass (~> 3.2.5)
     compass-blend-modes (0.0.2)
       compass
+    compass-inuit (5.0.1)
+      compass (>= 0.12.2)
     css-slideshow (0.2.0)
       compass (>= 0.10.0.rc3)
     cssmin (1.0.3)
@@ -61,8 +63,8 @@ GEM
       compass (>= 0.12.1)
       sass (>= 3.2.0)
       sassy-math (>= 1.5)
-    multi_json (1.7.7)
-    multi_xml (0.5.4)
+    multi_json (1.7.8)
+    multi_xml (0.5.5)
     multipart-post (1.2.0)
     neat-compass (1.3.0)
       bourbon-compass (>= 3.1.3)
@@ -149,6 +151,7 @@ DEPENDENCIES
   color-schemer
   compass
   compass-blend-modes
+  compass-inuit
   css-slideshow
   fancy-buttons
   fittext

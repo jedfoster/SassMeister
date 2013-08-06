@@ -64,6 +64,12 @@ Harsh:
     - harsh
   :fingerprint: harsh
   :url: http://www.bookcasey.com/harsh/
+Compass Inuit:
+  :gem: compass-inuit
+  :import: 
+    - compass-inuit
+  :fingerprint: compass-inuit*
+  :url: https://github.com/stephenway/compass-inuit
 Jacket:
   :gem: jacket
   :import:
