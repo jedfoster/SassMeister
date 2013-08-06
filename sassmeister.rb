@@ -26,8 +26,8 @@ configure :production do
     module Sassmeister
       def self.gh_config
         {
-          client_id: ENV['GITHUB_ID'],
-          client_secret: ENV['GITHUB_SECRET']
+          "client_id" => ENV['GITHUB_ID'],
+          "client_secret" => ENV['GITHUB_SECRET']
         }
       end
     end
@@ -250,7 +250,7 @@ end
 get '/authorize/return' do
   token = @github.get_token(params[:code])
 
-  user = github(token.token).users.get
+  user = Sassmeister.github(token.token).users.get
 
   session[:github_token] = token.token
   session[:github_id] = user.login
