@@ -14,17 +14,21 @@ require 'sass'
 require 'compass'
 require 'yaml'
 
+require './lib/sassmeister.rb'
+
 set :partial_template_engine, :erb
 
 configure :production do
   require 'newrelic_rpm'
 
   helpers do
-    def github(auth_token = '')
-      github = Github.new do |config|
-        config.client_id = ENV['GITHUB_ID']
-        config.client_secret = ENV['GITHUB_SECRET']
-        config.oauth_token = auth_token
+
+    module Sassmeister
+      def self.gh_config
+        {
+          client_id: ENV['GITHUB_ID'],
+          client_secret: ENV['GITHUB_SECRET']
+        }
       end
     end
 
@@ -38,13 +42,10 @@ end
 
 configure :development do
   helpers do
-    def github(auth_token = '')
-      gh_config = YAML.load_file("config/github.yml")
 
-      github = Github.new do |config|
-        config.client_id = gh_config['client_id']
-        config.client_secret = gh_config['client_secret']
-        config.oauth_token = auth_token
+    module Sassmeister
+      def self.gh_config
+        YAML.load_file("config/github.yml")
       end
     end
 
@@ -59,6 +60,8 @@ end
 helpers do
   include ERB::Util
   alias_method :code, :html_escape
+
+  include Sassmeister
 
   # From: http://rubyquicktips.com/post/2625525454/random-array-item
   class Array
@@ -180,7 +183,7 @@ helpers do
 end
 
 before do
-  @github = github(session[:github_token])
+  @github = Sassmeister.github(session[:github_token])
   @gist_input = ''
 end
 
@@ -270,7 +273,7 @@ get %r{/gist(?:/[\w]*)*/([\d]+)} do
   @plugins = plugins
 
   begin
-    files = @github.gists.get(params[:captures].first).files
+    files = Github::Gists.new.get(params[:captures].first, client_id: Sassmeister.gh_config['client_id'], client_secret: Sassmeister.gh_config['client_secret']).files
 
     if( ! files["#{files.keys.grep(/.+\.(scss|sass)/)[0]}"])
       syntax = plugin = ''
