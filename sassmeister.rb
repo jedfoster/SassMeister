@@ -153,12 +153,11 @@ helpers do
 
   def get_imports_from_sass(sass)
     imports = sass.scan(/^@import[\s\"\']*(.+?)[\"\';]*$/)
-    
+    imports.map! {|i| i.first}
+
     plugins.each do |key, plugin|
-      plugin[:import].each do |import|
-        if imports.include? [import]
-          yield key, plugin if block_given?
-        end
+      if ! imports.grep(/#{plugin[:fingerprint].gsub(/\/\*/, '/.*?')}/).empty?
+        yield key, plugin if block_given?
       end
     end
   end

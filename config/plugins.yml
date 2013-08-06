@@ -2,92 +2,110 @@
   :gem: blend-mode
   :import: 
     - blend-mode
+  :fingerprint: blend-mode
   :url: https://github.com/heygrady/scss-blend-modes
 Bourbon:
   :gem: bourbon-compass
   :import: 
     - bourbon/bourbon
+  :fingerprint: bourbon/bourbon
   :url: http://bourbon.io/
 Breakpoint:
   :gem: breakpoint
   :import: 
     - breakpoint
+  :fingerprint: breakpoint
   :url: https://github.com/canarymason/breakpoint
 "Breakpoint Slicer":
   :gem: breakpoint-slicer
   :import:
     - breakpoint-slicer
+  :fingerprint: breakpoint-slicer
   :url: https://github.com/lolmaus/breakpoint-slicer
 "Color Schemer":
   :gem: color-schemer
   :import: 
     - color-schemer
+  :fingerprint: color-schemer
   :url: https://github.com/Team-Sass/color-schemer
 Compass:
   :gem: compass
   :import: 
     - compass
+  :fingerprint: compass
   :url: http://compass-style.org
 "Compass Slideshow":
   :gem: css-slideshow
   :import: 
     - css-slideshow
+  :fingerprint: css-slideshow
   :url: https://github.com/ericam/compass-css-slideshow
 "Fancy Buttons":
   :gem: fancy-buttons
   :import: 
     - fancy-buttons
+  :fingerprint: fancy-buttons
   :url: http://brandonmathis.com/projects/fancy-buttons/
 Fittext:
   :gem: fittext
   :import: 
     - fittext
+  :fingerprint: fittext
   :url: http://www.bookcasey.com/fittext/
 Harsh:
   :gem: harsh
   :import: 
     - harsh
+  :fingerprint: harsh
   :url: http://www.bookcasey.com/harsh/
 Jacket:
   :gem: jacket
   :import:
     - jacket
+  :fingerprint: jacket
   :url: https://github.com/Team-Sass/jacket
 "Modular Scale":
   :gem: modular-scale
   :import: 
     - modular-scale
+  :fingerprint: modular-scale
   :url: https://github.com/Team-Sass/modular-scale
 Neat:
   :gem: neat-compass
   :import:
     - bourbon/bourbon
     - neat/neat
+  :fingerprint: neat/neat
   :url: http://neat.bourbon.io
 'Normalize':
   :gem: normalize-scss
   :import:
     - normalize
+  :fingerprint: normalize
   :url: https://github.com/JohnAlbin/normalize.css-with-sass-or-compass
 "Responsive Calculator":
   :gem: rwdcalc
   :import: 
     - rwdcalc
+  :fingerprint: rwdcalc
   :url: https://github.com/sturobson/Responsive-Calculator/tree/rwdcalcSass/SCSSMixin
 "Responsive Sass":
   :gem: responsive-sass
   :import: 
     - responsive-sass
+  :fingerprint: responsive-sass
   :url: http://ntreadway.github.com/responsive-sass/welcome
 Salsa:
   :gem: salsa
   :import: 
     - salsa
+  :fingerprint: salsa
   :url: http://tsi.github.com/Salsa/
 "Sassy Buttons":
   :gem: sassy-buttons
   :import: 
     - sassy-buttons
+  :fingerprint: sassy-buttons
   :url: http://jaredhardy.com/sassy-buttons/
 # "Sassy Math":
 #   :gem: sassy-math
@@ -99,41 +117,49 @@ Salsa:
   :import:
     - compass
     - sassy-text-shadow
+  :fingerprint: sassy-text-shadow
   :url: http://sassymothereffingtextshadow.com/
 "SCSS Blend Modes":
   :gem: compass-blend-modes
   :import: 
     - blend-modes
+  :fingerprint: blend-modes
   :url: https://github.com/heygrady/scss-blend-modes
 Singularity.gs:
   :gem: singularitygs
   :import: 
     - singularitygs
+  :fingerprint: singularitygs
   :url: https://github.com/Team-Sass/singularity
 "Singularity Extras":
   :gem: singularity-extras
   :import:
     - singularitygs
     - singularity-extras
+  :fingerprint: singularity-extras
   :url: https://github.com/Team-Sass/Singularity-extras
 Stipe:
   :gem: stipe
   :import: 
     - stipe/manifest
     - stipe/grid/extends
+  :fingerprint: stipe/*
   :url: https://github.com/Toadstool-Stipe/stipe
 Susy:
   :gem: susy
   :import: 
     - susy
+  :fingerprint: susy
   :url: http://susy.oddbird.net
 Toolkit:
   :gem: toolkit
   :import: 
     - toolkit
+  :fingerprint: toolkit
   :url: https://github.com/Team-Sass/toolkit
 "Zen Grids":
   :gem: zen-grids
   :import: 
     - zen
+  :fingerprint: zen
   :url: http://zengrids.com/
