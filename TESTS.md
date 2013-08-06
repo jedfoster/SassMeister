@@ -273,19 +273,6 @@ Each block of SCSS should return valid CSS with no warnings or errors when teste
       line-height: 8em;
     }
 
-## SCSS Blend Modes ##
-
-    // Solid background
-    .multiply {
-        background-color: blend-multiply(#7FFFD4, #DEB887);
-    }
-
-    // RGBa background
-    .multiply {
-        background-color: blend-multiply(rgba(#7FFFD4, 0.5), rgba(#DEB887, 0.5));
-    }
-
-
 ## Singularity.gs ##
 
     $grids: 1 3 5 7 9;

@@ -152,7 +152,7 @@ helpers do
   end
 
   def get_imports_from_sass(sass)
-    imports = sass.scan(/^@import[\s\"\']*(.+?)[\"\';]*$/)
+    imports = sass.scan(/^\s*@import[\s\"\']*(.+?)[\"\';]*$/)
     imports.map! {|i| i.first}
 
     plugins.each do |key, plugin|

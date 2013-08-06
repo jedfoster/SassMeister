@@ -1,8 +1,8 @@
 "Blend Modes":
   :gem: blend-mode
   :import: 
-    - blend-mode
-  :fingerprint: blend-mode
+    - blend-modes
+  :fingerprint: blend-modes
   :url: https://github.com/heygrady/scss-blend-modes
 Bourbon:
   :gem: bourbon-compass
@@ -32,7 +32,7 @@ Compass:
   :gem: compass
   :import: 
     - compass
-  :fingerprint: compass
+  :fingerprint: (compass|compass/*)
   :url: http://compass-style.org
 "Compass Slideshow":
   :gem: css-slideshow
@@ -119,12 +119,6 @@ Salsa:
     - sassy-text-shadow
   :fingerprint: sassy-text-shadow
   :url: http://sassymothereffingtextshadow.com/
-"SCSS Blend Modes":
-  :gem: compass-blend-modes
-  :import: 
-    - blend-modes
-  :fingerprint: blend-modes
-  :url: https://github.com/heygrady/scss-blend-modes
 Singularity.gs:
   :gem: singularitygs
   :import: 
