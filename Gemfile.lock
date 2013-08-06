@@ -134,6 +134,8 @@ GEM
       raindrops (~> 0.7)
     zen-grids (1.4)
       sass (>= 3.1)
+    zurb-foundation (4.3.1)
+      sass (>= 3.2.0)
 
 PLATFORMS
   ruby
@@ -176,3 +178,4 @@ DEPENDENCIES
   toolkit
   unicorn
   zen-grids
+  zurb-foundation

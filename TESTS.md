@@ -133,7 +133,21 @@ Each block of SCSS should return valid CSS with no warnings or errors when teste
       font-size: 6em; // For browsers that don't support media queries.
       @include fittext($min-media: 200px, $max-media: 1400px, $min-font-size: 5em, $max-font-size: 50em, $media-increment: 100, $font-increment: 1.5, $ratio: 1, $round: false);
     }
-    
+
+
+## Foundation ##
+
+    $include-html-classes: false;
+    $include-html-tooltip-classes: true;
+ 
+    $tooltip-bg: #000;
+    $default-float: left;
+    $primary-color: #444;
+    $global-radius: emCalc(20);
+ 
+    @import "foundation/components/global";
+    @import "foundation/components/tooltips";
+
 
 ## Harsh ##
 

@@ -52,6 +52,12 @@ Fittext:
     - fittext
   :fingerprint: fittext
   :url: http://www.bookcasey.com/fittext/
+Foundation:
+  :gem: zurb-foundation
+  :import:
+    - foundation
+  :fingerprint: foundation*
+  :url: http://foundation.zurb.com/docs/sass.html
 Harsh:
   :gem: harsh
   :import: 
