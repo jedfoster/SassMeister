@@ -156,7 +156,7 @@ helpers do
     imports.map! {|i| i.first}
 
     plugins.each do |key, plugin|
-      if ! imports.grep(/#{plugin[:fingerprint].gsub(/\/\*/, '/.*?')}/).empty?
+      if ! imports.grep(/#{plugin[:fingerprint].gsub(/\*/, '.*?')}/).empty?
         yield key, plugin if block_given?
       end
     end
