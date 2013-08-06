@@ -45,6 +45,8 @@ GEM
       multi_json (~> 1.4)
       nokogiri (~> 1.6.0)
       oauth2
+    grid-coordinates (1.2.0)
+      compass (>= 0.11.5)
     harsh (1.0.0)
       compass (>= 0.10.0.rc3)
     hashie (2.0.5)
@@ -159,6 +161,7 @@ DEPENDENCIES
   fancy-buttons
   fittext
   github_api
+  grid-coordinates
   harsh
   jacket
   jammit

@@ -149,6 +149,17 @@ Each block of SCSS should return valid CSS with no warnings or errors when teste
     @import "foundation/components/tooltips";
 
 
+## Grid Coordinates ##
+
+    $grid-columns: 12;
+    $grid-width: 60px;
+    $grid-gutter-width: 20px;
+
+    @import "grid-coordinates";
+
+    @include grid-coordinates;
+
+
 ## Harsh ##
 
     @import "harsh";

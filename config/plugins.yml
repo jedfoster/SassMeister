@@ -58,6 +58,12 @@ Foundation:
     - foundation
   :fingerprint: foundation*
   :url: http://foundation.zurb.com/docs/sass.html
+"Grid Coordinates":
+  :gem: grid-coordinates
+  :import: 
+    - grid-coordinates
+  :fingerprint: grid-coordinates
+  :url: https://github.com/adamstac/grid-coordinates
 Harsh:
   :gem: harsh
   :import: 
