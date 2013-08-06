@@ -163,6 +163,12 @@ Stipe:
     - stipe/grid/extends
   :fingerprint: stipe/*
   :url: https://github.com/Toadstool-Stipe/stipe
+Stitch:
+  :gem: stitch
+  :import: 
+    - stitch
+  :fingerprint: stitch
+  :url: http://anthonyshort.github.io/stitch-css/
 Susy:
   :gem: susy
   :import: 

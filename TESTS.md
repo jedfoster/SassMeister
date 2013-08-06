@@ -481,6 +481,19 @@ Sassy Math has been removed from SassMeister for technical reasons.
     }
 
 
+## Stitch ##
+
+    @import 'stitch';
+
+    body {
+        @include sans-serif('Avenir');
+    }
+
+    #logo {
+        @include enable-hardware-acceleration
+    }
+
+
 ## Susy ##
 
     @import "susy";
