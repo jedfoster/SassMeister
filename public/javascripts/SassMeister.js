@@ -232,8 +232,8 @@ var SassMeister;
     storedInputs: null,
 
     getStorage: function() {
-      if($('#gist-input').text().length > 0) {
-        SassMeister.storedInputs = JSON.parse($('#gist-input').text());
+      if(typeof(gist) !== "undefined" && gist.trim !== '') {
+        SassMeister.storedInputs = gist;
       }
       else {
         SassMeister.storedInputs = JSON.parse(localStorage.getItem('inputs'));

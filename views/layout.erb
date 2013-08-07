@@ -35,6 +35,13 @@
   	<%= yield %>
 	</section>
 	<%= partial :"shared/_footer" %>
+	
+	<% if ! @gist_input.nil? %>
+    <script>
+      var gist = <%= @gist_input %>;
+    </script>
+
+  <% end %>
 
   <% if settings.environment == :production %>
 	  <script src="/javascripts/app.js"></script>
