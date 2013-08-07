@@ -16,13 +16,13 @@ var SassMeister;
         speed : 25,
         onOptionSelect: function(opt) {
           SassMeister.inputs.syntax = opt.data( 'value' );
-          
+
           // _gaq.push(['_trackEvent', 'Form', 'Control', this.value]);
 
           SassMeister.convert.sass(true);
         }
       }).value();
-      
+
       $('[name="syntax"]').data('orignal', SassMeister.inputs.syntax);
 
       this.inputs.output = $('select[name=output]').dropdown({
@@ -30,13 +30,13 @@ var SassMeister;
         speed : 25,
         onOptionSelect: function(opt) {
           SassMeister.inputs.output = opt.data( 'value' );
-          
+
           // _gaq.push(['_trackEvent', 'Form', 'Control', this.value]);
 
           SassMeister.compile.sass();
         }
       }).value();
-      
+
       this.inputs.plugin = $('select[name=plugin]').dropdown({
           gutter : 0,
           speed : 25,
@@ -61,12 +61,11 @@ var SassMeister;
       }
 
       this.setHeight();
-      
+
       this.compile.sass();
-      
+
       $(this.inputs.sass.getSession()).bindWithDelay('change', function(event) {
         if(SassMeister.internalValueChange == true) {
-          console.log(SassMeister);
           SassMeister.internalValueChange = false;
         }
         else {
@@ -81,7 +80,6 @@ var SassMeister;
       sass: '',
       syntax: '',
       plugin: '',
-      // original_syntax: '',
       output: ''
     },
 
@@ -96,56 +94,54 @@ var SassMeister;
         var inputs = {
               sass: SassMeister.inputs.sass.getValue(),
               syntax: SassMeister.inputs.syntax,
-              plugin: [SassMeister.inputs.plugin],
               output: SassMeister.inputs.output
             };
 
         // _gaq.push(['_trackEvent', 'Form', 'Submit']);
 
         /* Post the form and handle the returned data */
-        $.post('/compile', inputs,
-          function( data ) {
-            SassMeister.outputs.css.setValue(data,-1);
+        $.post('/compile', inputs, function( data ) {
+          SassMeister.outputs.css.setValue(data,-1);
 
-            $('[name="syntax"]').data('orignal', inputs.syntax);
-          }
-        );
+          $('[name="syntax"]').data('orignal', inputs.syntax);
+        });
 
         SassMeister.setStorage(inputs);
       }
     },
 
     internalValueChange: false,
-    
+
     toggleInternalValue: function(value) {
       SassMeister.internalValueChange = value;
     },
     internalValue: function(value) {
       return SassMeister.internalValueChange;
     },
-    
+
     convert: {
       sass: function(convert_syntax) {
         if(convert_syntax == true) {
           var inputs = {
             sass: SassMeister.inputs.sass.getValue(),
             syntax: SassMeister.inputs.syntax,
-            plugin: [SassMeister.inputs.plugin],
             original_syntax: $('[name="syntax"]').data('orignal'),
             output: SassMeister.inputs.output
           }
 
-          $.post('/convert', inputs,
-            function( data ) {
-              SassMeister.internalValueChange = true;
-              
-              SassMeister.inputs.sass.setValue(data, -1);
-              
-                $('[name="syntax"]').data('orignal', inputs.syntax);
-              // SassMeister.compile.sass();
-              // SassMeister.setTimer(SassMeister.timers.sass, SassMeister.compile.sass);
-            }
-          );
+          $.post('/convert', inputs, function( data ) {
+            SassMeister.internalValueChange = true;
+
+            SassMeister.inputs.sass.setValue(data, -1);
+
+            $('[name="syntax"]').data('orignal', inputs.syntax);
+
+            SassMeister.setStorage({
+              sass: data,
+              syntax: SassMeister.inputs.syntax,
+              output: SassMeister.inputs.output
+            });
+          });
         }
         else {
           SassMeister.compile.sass();
@@ -186,10 +182,11 @@ var SassMeister;
 
     reset: function() {
       $("#sass-form").get(0).reset();
-      $('#gist-it').data('gist-save', '');
+      $('#gist-it').text('').data('gist-save', '');
 
       SassMeister.inputs.sass.setValue('');
       SassMeister.outputs.css.setValue('');
+      localStorage.clear();
 
       $.post('/reset');
 
@@ -202,13 +199,6 @@ var SassMeister;
         // console.log(event.state); // will be our state data, so {}
       }
     },
-
-    // setTimer: function(timer, callback) {
-    //   clearTimeout(timer);
-    //   if(callback !== null) {
-    //     timer = setTimeout(function(){callback();}, 750);
-    //   }
-    // },
 
     modal: function(content) {
       if ($('#modal').length == 0) {
@@ -243,30 +233,25 @@ var SassMeister;
 
     getStorage: function() {
       if($('#gist-input').text().length > 0) {
-        this.storedInputs = JSON.parse($('#gist-input').text());
+        SassMeister.storedInputs = JSON.parse($('#gist-input').text());
       }
       else {
-        this.storedInputs = JSON.parse(localStorage.getItem('inputs'));
+        SassMeister.storedInputs = JSON.parse(localStorage.getItem('inputs'));
       }
 
-      if( this.storedInputs !== null) {
-        // console.log(this.storedInputs);
-        this.inputs.sass.setValue(this.storedInputs.sass);
-        this.inputs.sass.clearSelection();
-
-        // console.log(this.inputs.sass.getValue());
-
-        $('select[name="syntax"]').val(this.storedInputs.syntax).data('orignal', this.storedInputs.syntax);
-        $('select[name="plugin"]').val(this.storedInputs.plugin);
-        $('select[name="output"]').val(this.storedInputs.output);
+      if( SassMeister.storedInputs !== null) {
+        SassMeister.inputs.sass.setValue(SassMeister.storedInputs.sass);
+        SassMeister.inputs.sass.clearSelection();
+        $('select[name="syntax"]').val(SassMeister.storedInputs.syntax).data('orignal', SassMeister.storedInputs.syntax);
+        $('select[name="output"]').val(SassMeister.storedInputs.output);
         // $('select[name="html-syntax"]').val(this.storedInputs.html_syntax);
-        // this.compile.sass();
       }
     },
 
     setStorage: function(inputs) {
       var storage = SassMeister.storedInputs;
-      $.extend(storage, inputs);
+
+      storage = $.extend(storage, inputs);
 
       localStorage.setItem('inputs', JSON.stringify(storage));
     }
