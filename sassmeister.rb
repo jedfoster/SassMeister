@@ -292,7 +292,7 @@ get %r{/gist(?:/[\w]*)*/([\d]+)} do
     end
 
   rescue Github::Error::NotFound => e
-    status 200
+    status 404
 
     syntax = plugin = ''
     sass = "// Sorry, that Gist doesn't exist.\n//#{e.to_s.gsub(/(GET|api.|https:\/\/)/, '')}"
