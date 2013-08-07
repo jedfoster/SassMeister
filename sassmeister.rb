@@ -274,18 +274,19 @@ get %r{/gist(?:/[\w]*)*/([\d]+)} do
   id = params[:captures].first
 
   begin
-    g = Github::Gists.new.get(id, client_id: Sassmeister.gh_config['client_id'], client_secret: Sassmeister.gh_config['client_secret'])
+    response = Github::Gists.new.get(id, client_id: Sassmeister.gh_config['client_id'], client_secret: Sassmeister.gh_config['client_secret'])
 
     # For now, we only return the first .sass or .scss file we find.
-    file = g.files["#{g.files.keys.grep(/.+\.(scss|sass)/)[0]}"]
+    file = response.files["#{response.files.keys.grep(/.+\.(scss|sass)/)[0]}"]
 
     if( ! file)
-      syntax = filename = ''
+      syntax = filename = owner = ''
       sass = "// Sorry, I couldn't find any valid Sass in that Gist."
 
     else      
       sass = file.content
       filename = file.filename
+      owner = response.owner.login
       
       syntax = file.filename.slice(-4, 4)
     end
@@ -300,6 +301,7 @@ get %r{/gist(?:/[\w]*)*/([\d]+)} do
   @gist_input = {
     :id => id,
     :filename => filename,
+    :owner => owner,
     :syntax => syntax,
     :sass => sass
   }.to_json
