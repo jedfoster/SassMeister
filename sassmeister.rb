@@ -184,11 +184,11 @@ end
 before do
   @github = Sassmeister.github(session[:github_token])
   @gist_input = ''
+  @plugins = plugins
 end
 
 
 get '/' do
-  @plugins = plugins
 
   erb :index
 end
@@ -269,8 +269,6 @@ end
 
 
 get %r{/gist(?:/[\w]*)*/([\d]+)} do
-  @plugins = plugins
-  
   id = params[:captures].first
 
   begin
