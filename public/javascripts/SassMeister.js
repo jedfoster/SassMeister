@@ -249,11 +249,7 @@ var SassMeister;
     },
 
     setStorage: function(inputs) {
-      var storage = SassMeister.storedInputs;
-
-      storage = $.extend(storage, inputs);
-
-      localStorage.setItem('inputs', JSON.stringify(storage));
+      localStorage.setItem('inputs', JSON.stringify( $.extend(SassMeister.storedInputs, inputs) ));
     }
   };
 
