@@ -71,7 +71,7 @@
 }
 
 // Github fork
-.github-icon {
+.fork-gist {
   @extend %icon-font;
 
   &:before {
@@ -109,7 +109,7 @@
   }
 }
 
-.cloud-up-icon {
+.cloud-up-icon, .edit-gist, .create-gist {
 	@extend %icon-font;
 
   &:before {

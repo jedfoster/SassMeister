@@ -14,15 +14,15 @@ var SassMeister;
       if($('#save-gist')) {
         if(this.storedInputs.gist_id) {
           if (this.storedInputs.can_update_gist) {
-            $('#save-gist').text('Update Gist').data('action', 'edit');
+            $('#save-gist').text('Update Gist').data('action', 'edit').attr('class', 'edit-gist');
           }
           else {
-            $('#save-gist').hide();
+            $('#save-gist').text('Fork Gist').data('action', 'fork').attr('class', 'fork-gist');
           }
         }
 
         else {
-          $('#save-gist').data('action', 'create');
+          $('#save-gist').data('action', 'create').attr('class', 'create-gist');
         }
       }     
 
@@ -186,6 +186,7 @@ var SassMeister;
           $('#save-gist').text('Update Gist').data('action', 'edit');
         });
       },
+
       edit: function() {
         _gaq.push(['_trackEvent', 'Gist']);
 
@@ -204,8 +205,21 @@ var SassMeister;
           SassMeister.setUrl('/gist/' + data);
         });
       },
+
       fork: function() {
-        
+        _gaq.push(['_trackEvent', 'Gist']);
+
+        var confirmationText = 'has been forked';
+
+        ///* Send the data using post and put the results in a div */
+        $.post('/gist/' + SassMeister.storedInputs.gist_id + '/fork', function( data ) {
+          SassMeister.modal('<a href="https://gist.github.com/' + data + '" target="_blank">This Gist</a> ' + confirmationText + ', and here\'s the <a href="/gist/' + data + '">SassMeister live view.</a> ');
+
+          SassMeister.setUrl('/gist/' + data);
+          SassMeister.storedInputs.gist_id = data;
+
+          $('#save-gist').text('Update Gist').data('action', 'edit').attr('class', 'edit-gist');
+        });
       },
     },
 

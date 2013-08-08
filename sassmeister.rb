@@ -309,12 +309,11 @@ get %r{/gist(?:/[\w]*)*/([\d]+)} do
 end
 
 
-post %r{/gist(?:/[\w]*)*/([\d]+)/(edit|fork)} do
+post %r{/gist(?:/[\w]*)*/([\d]+)/edit} do
   id = params[:captures].shift
-  action = params[:captures].shift
 
   sass = params[:sass]
-  
+
   dependencies = pack_dependencies(sass)
 
   css = sass_compile(params)
@@ -323,22 +322,25 @@ post %r{/gist(?:/[\w]*)*/([\d]+)/(edit|fork)} do
 
   sass_file = "SassMeister-input.#{params[:syntax]}"
   css_file = "SassMeister-output.css"
+  
+  data = @github.gists.edit(id, files: {
+    css_file => {
+      content: "#{css}"
+    },
+    sass_file => {
+      content: "#{dependencies}\n\n#{sass}"
+    }
+  })
 
-  case action
-  when 'edit'
-    data = @github.gists.edit(id, files: {
-      css_file => {
-        content: "#{css}"
-      },
-      sass_file => {
-        content: "#{dependencies}\n\n#{sass}"
-      }
-    })
+  session[:gist] = data.id.to_s
 
-  when 'fork' # Hardcore forking action
-    data = @github.gists.fork(id)
+  data.id
+end
 
-  end
+post %r{/gist(?:/[\w]*)*/([\d]+)/fork} do
+  id = params[:captures].shift
+
+  data = @github.gists.fork(id)
 
   session[:gist] = data.id.to_s
 
