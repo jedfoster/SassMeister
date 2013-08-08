@@ -191,8 +191,8 @@ end
 get '/' do
   if ! params.empty?
     extension = params[:extension].split(',') || []
-    syntax = params[:syntax].downcase || 'scss'
-    output = params[:output].downcase || 'expanded'
+    syntax = (params[:syntax].downcase rescue 'scss')
+    output = (params[:output].downcase rescue 'expanded')
     sass = ''
 
     plugins.each do |key, plugin|
