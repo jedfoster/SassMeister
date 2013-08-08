@@ -135,7 +135,7 @@ helpers do
     end
 
     frontmatter.delete_if do |x|
-      ! plugins.key?(x.to_s.titleize.strip)
+      ! plugins.key?(x.to_s.strip)
     end
 
     if frontmatter.empty?
