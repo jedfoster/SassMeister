@@ -183,7 +183,7 @@ end
 
 before do
   @github = Sassmeister.github(session[:github_token])
-  @gist = ''
+  @gist = nil
   @plugins = plugins
 end
 

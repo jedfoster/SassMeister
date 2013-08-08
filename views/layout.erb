@@ -38,7 +38,7 @@
 	
 	<% if ! @gist.nil? %>
     <script>
-      var gist = <%= @gist %>;
+      var gist = <%= @gist || '' %>;
     </script>
 
   <% end %>
