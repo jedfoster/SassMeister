@@ -1,14 +1,11 @@
 <div class="css_output">
   <div class="controls">
-   
-    
-    
+
     <% if @github.authenticated? %>
       <a href="#" class="cloud-up-icon" id="gist-it" data-gist-save="<%= if session[:gist] then 'edit' end %>"> <span>Save Gist</span></a>
     <% end %>
-    
-    
-     <a href="#" class="reset-icon" id="reset"> Reset</a>
+
+    <a href="#" class="reset-icon" id="reset">Reset</a>
   </div>
 
   <div class="edit_container">

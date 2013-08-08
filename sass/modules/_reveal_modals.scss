@@ -12,7 +12,7 @@
   width: 100%;
   background: $alpha_gray;
   background: transparentize($alpha_gray, 0.4);
-  z-index: 40;
+  z-index: 50;
   display: none;
   top: 0;
   left: 0; 
@@ -22,7 +22,7 @@
   @include border_radius($border-radius);
 
   position: absolute;
-  z-index: 41;
+  z-index: 51;
   top: 150px;
   left: 50%;
   padding: 30px;
