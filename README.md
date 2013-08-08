@@ -24,7 +24,7 @@ Once you have your `config/github.yml` file:
 
 ```
 rake server
-# Rock and Roll
+# Rock and roll
 ```
 
 Go to [127.0.0.1:3000](http://127.0.0.1:3000) and start playing with Sass!
@@ -38,7 +38,7 @@ Since the YAML file with your API credentials is not committed to your repo, it 
 heroku config:set GITHUB_ID=9ef1xxxx
 heroku config:set GITHUB_SECRET=5784xxxxxxxx
 heroku open
-# Rock and Roll, again.
+# Rock and roll, again.
 ```
 
 
