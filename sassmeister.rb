@@ -183,7 +183,7 @@ end
 
 before do
   @github = Sassmeister.github(session[:github_token])
-  @gist_input = ''
+  @gist = ''
   @plugins = plugins
 end
 
@@ -296,10 +296,11 @@ get %r{/gist(?:/[\w]*)*/([\d]+)} do
     sass = "// Sorry, that Gist doesn't exist.\n//#{e.to_s.gsub(/(GET|api.|https:\/\/)/, '')}"
   end
 
-  @gist_input = {
-    :id => id,
-    :filename => filename,
-    :owner => owner,
+  @gist = {
+    :gist_id => id,
+    :gist_filename => filename,
+    :gist_owner => owner,
+    :can_update_gist => (owner == session[:github_id]),
     :syntax => syntax,
     :sass => sass
   }.to_json

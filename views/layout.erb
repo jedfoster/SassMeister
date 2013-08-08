@@ -36,9 +36,9 @@
 	</section>
 	<%= partial :"shared/_footer" %>
 	
-	<% if ! @gist_input.nil? %>
+	<% if ! @gist.nil? %>
     <script>
-      var gist = <%= @gist_input %>;
+      var gist = <%= @gist %>;
     </script>
 
   <% end %>
