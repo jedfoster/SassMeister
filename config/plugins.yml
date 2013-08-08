@@ -2,13 +2,13 @@
   :gem: blend-mode
   :import: 
     - blend-modes
-  :fingerprint: blend-modes
+  :fingerprint: blend-mode*
   :url: https://github.com/heygrady/scss-blend-modes
 Bourbon:
   :gem: bourbon-compass
   :import: 
     - bourbon/bourbon
-  :fingerprint: bourbon/bourbon
+  :fingerprint: (bourbon|bourbon/*)
   :url: http://bourbon.io/
 Breakpoint:
   :gem: breakpoint
@@ -93,13 +93,13 @@ Neat:
   :import:
     - bourbon/bourbon
     - neat/neat
-  :fingerprint: neat/neat
+  :fingerprint: (neat|neat/*)
   :url: http://neat.bourbon.io
 'Normalize':
   :gem: normalize-scss
   :import:
     - normalize
-  :fingerprint: normalize
+  :fingerprint: (normalize|normalize-scss)
   :url: https://github.com/JohnAlbin/normalize.css-with-sass-or-compass
 "Photoshop Drop Shadow":
   :gem: compass-photoshop-drop-shadow
@@ -136,7 +136,7 @@ Salsa:
 #   :import: 
 #     - '' # This space intentionally left blank 
 #   :url: https://github.com/Team-Sass/Sassy-math
-"Sassy Text Shadows":
+"Sassy Text Shadow":
   :gem: sassy-text-shadow
   :import:
     - compass
@@ -161,7 +161,7 @@ Stipe:
   :import: 
     - stipe/manifest
     - stipe/grid/extends
-  :fingerprint: stipe/*
+  :fingerprint: (stipe|stipe/*)
   :url: https://github.com/Toadstool-Stipe/stipe
 Stitch:
   :gem: stitch
@@ -185,5 +185,5 @@ Toolkit:
   :gem: zen-grids
   :import: 
     - zen
-  :fingerprint: zen
+  :fingerprint: (zen|zen-grids)
   :url: http://zengrids.com/

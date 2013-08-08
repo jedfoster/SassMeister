@@ -189,6 +189,31 @@ end
 
 
 get '/' do
+  if ! params.empty?
+    extension = params[:extension].split(',') || []
+    syntax = params[:syntax] || 'scss'
+    output = params[:output] || 'expanded'
+    sass = ''
+
+    plugins.each do |key, plugin|
+      if ! extension.grep(/#{plugin[:fingerprint].gsub(/\*/, '.*?')}/).empty?
+        require plugin[:gem]
+
+        imports = []
+        plugin[:import].each do |import|
+          imports << "@import \"#{import}\""
+        end
+
+        sass += imports.join("#{syntax == 'scss' ? ';' : ''}\n") + "#{syntax == 'scss' ? ';' : ''}\n" unless imports.nil?
+      end
+    end
+
+    @gist = {
+      :sass => sass,
+      :syntax => syntax,
+      :output => output
+    }.to_json
+  end
 
   erb :index
 end
