@@ -191,12 +191,12 @@ end
 get '/' do
   if ! params.empty?
     extension = params[:extension].split(',') || []
-    syntax = params[:syntax] || 'scss'
-    output = params[:output] || 'expanded'
+    syntax = params[:syntax].downcase || 'scss'
+    output = params[:output].downcase || 'expanded'
     sass = ''
 
     plugins.each do |key, plugin|
-      if ! extension.grep(/#{plugin[:fingerprint].gsub(/\*/, '.*?')}/).empty?
+      if ! extension.grep(/#{plugin[:fingerprint].gsub(/\*/, '.*?')}/i).empty?
         require plugin[:gem]
 
         imports = []
