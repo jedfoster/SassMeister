@@ -23,11 +23,11 @@
     });
   });
 
-  $('#gist-it').on('click', function() {
+  $('#save-gist').on('click', function() {
     /* stop form from submitting normally */
     event.preventDefault();
 
-    SassMeister.gist.save();
+    SassMeister.gist[($(this).data('action'))]();
   });
 
   $('#reset').on('click', function() {

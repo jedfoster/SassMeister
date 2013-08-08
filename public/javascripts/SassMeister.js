@@ -11,6 +11,21 @@ var SassMeister;
 
       this.getStorage();
 
+      if($('#save-gist')) {
+        if(this.storedInputs.gist_id) {
+          if (this.storedInputs.can_update_gist) {
+            $('#save-gist').text('Update Gist').data('action', 'edit');
+          }
+          else {
+            $('#save-gist').hide();
+          }
+        }
+
+        else {
+          $('#save-gist').data('action', 'create');
+        }
+      }     
+
       this.inputs.syntax = $('select[name=syntax]').dropdown({
         gutter : 0,
         speed : 25,
@@ -23,7 +38,7 @@ var SassMeister;
         }
       }).value();
 
-      $('[name="syntax"]').data('orignal', SassMeister.inputs.syntax);
+      $('[name="syntax"]').data('original', SassMeister.inputs.syntax);
 
       this.inputs.output = $('select[name=output]').dropdown({
         gutter : 0,
@@ -38,13 +53,13 @@ var SassMeister;
       }).value();
 
       this.inputs.plugin = $('select[name=plugin]').dropdown({
-          gutter : 0,
-          speed : 25,
-          onOptionSelect: function(opt) {
-            var plugins = opt.data( 'value' );
-            $.each(plugins.split(','), function(key, plugin) {
-              SassMeister.inputs.sass.insert( '@import "' + plugin + '"' + ( SassMeister.inputs.syntax == 'scss' ? ';' : '' ) + '\n\n');
-           });
+        gutter : 0,
+        speed : 25,
+        onOptionSelect: function(opt) {
+          var plugins = opt.data( 'value' );
+          $.each(plugins.split(','), function(key, plugin) {
+            SassMeister.inputs.sass.insert( '@import "' + plugin + '"' + ( SassMeister.inputs.syntax == 'scss' ? ';' : '' ) + '\n\n');
+          });
         }
       }).value();
 
@@ -103,7 +118,7 @@ var SassMeister;
         $.post('/compile', inputs, function( data ) {
           SassMeister.outputs.css.setValue(data,-1);
 
-          $('[name="syntax"]').data('orignal', inputs.syntax);
+          $('[name="syntax"]').data('original', inputs.syntax);
         });
 
         SassMeister.setStorage(inputs);
@@ -125,7 +140,7 @@ var SassMeister;
           var inputs = {
             sass: SassMeister.inputs.sass.getValue(),
             syntax: SassMeister.inputs.syntax,
-            original_syntax: $('[name="syntax"]').data('orignal'),
+            original_syntax: $('[name="syntax"]').data('original'),
             output: SassMeister.inputs.output
           }
 
@@ -134,7 +149,7 @@ var SassMeister;
 
             SassMeister.inputs.sass.setValue(data, -1);
 
-            $('[name="syntax"]').data('orignal', inputs.syntax);
+            $('[name="syntax"]').data('original', inputs.syntax);
 
             SassMeister.setStorage({
               sass: data,
@@ -150,43 +165,58 @@ var SassMeister;
     },
 
     gist: {
-      save: function() {
+      create: function() {
         _gaq.push(['_trackEvent', 'Gist']);
 
         var inputs = {
           sass: SassMeister.inputs.sass.getValue(),
           syntax: SassMeister.inputs.syntax,
-          plugin: [SassMeister.inputs.plugin],
           output: SassMeister.inputs.output
         }
 
-        var action = '', confirmationText = 'is ready';
-
-        if($('#gist-it').data('gist-save') == 'edit') {
-          action = '/' + $('#gist-it').data('gist-save');
-          confirmationText = 'has been updated';
-        }
+        var confirmationText = 'is ready';
 
         ///* Send the data using post and put the results in a div */
-        $.post('/gist' + action, inputs,
-          function( data ) {
-            SassMeister.modal('<a href="https://gist.github.com/' + data + '" target="_blank">Your Gist</a> ' + confirmationText + ', and here\'s the <a href="/gist/' + data + '">SassMeister live view.</a> ');
+        $.post('/gist/create', inputs, function( data ) {
+          SassMeister.modal('<a href="https://gist.github.com/' + data + '" target="_blank">Your Gist</a> ' + confirmationText + ', and here\'s the <a href="/gist/' + data + '">SassMeister live view.</a> ');
 
-            SassMeister.setUrl('/gist/' + data);
+          SassMeister.setUrl('/gist/' + data);
+          SassMeister.storedInputs.gist_id = data;
 
-            $('#gist-it').data('gist-save', 'edit');
-          }
-        );
-      }
+          $('#save-gist').text('Update Gist').data('action', 'edit');
+        });
+      },
+      edit: function() {
+        _gaq.push(['_trackEvent', 'Gist']);
+
+        var inputs = {
+          sass: SassMeister.inputs.sass.getValue(),
+          syntax: SassMeister.inputs.syntax,
+          output: SassMeister.inputs.output
+        }
+
+        var confirmationText = 'has been updated';
+
+        ///* Send the data using post and put the results in a div */
+        $.post('/gist/' + SassMeister.storedInputs.gist_id + '/edit', inputs, function( data ) {
+          SassMeister.modal('<a href="https://gist.github.com/' + data + '" target="_blank">Your Gist</a> ' + confirmationText + ', and here\'s the <a href="/gist/' + data + '">SassMeister live view.</a> ');
+
+          SassMeister.setUrl('/gist/' + data);
+        });
+      },
+      fork: function() {
+        
+      },
     },
 
     reset: function() {
       $("#sass-form").get(0).reset();
-      $('#gist-it').text('').data('gist-save', '');
+      $('#save-gist').text('Save Gist').data('action', 'create');
 
       SassMeister.inputs.sass.setValue('');
       SassMeister.outputs.css.setValue('');
       localStorage.clear();
+      SassMeister.storedInputs = {},
 
       $.post('/reset');
 
@@ -242,7 +272,7 @@ var SassMeister;
       if( SassMeister.storedInputs !== null) {
         SassMeister.inputs.sass.setValue(SassMeister.storedInputs.sass);
         SassMeister.inputs.sass.clearSelection();
-        $('select[name="syntax"]').val(SassMeister.storedInputs.syntax).data('orignal', SassMeister.storedInputs.syntax);
+        $('select[name="syntax"]').val(SassMeister.storedInputs.syntax).data('original', SassMeister.storedInputs.syntax);
         $('select[name="output"]').val(SassMeister.storedInputs.output);
         // $('select[name="html-syntax"]').val(this.storedInputs.html_syntax);
       }
