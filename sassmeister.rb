@@ -358,8 +358,8 @@ post '/gist/create' do
   content_type 'application/json'
 
   {
-    :id => data.id,
-    :filename => sass_file
+    id: data.id,
+    filename: sass_file
   }.to_json.to_s
 end
 
@@ -385,13 +385,13 @@ post %r{/gist(?:/[\w]*)*/([\d]+)/edit} do
     sass_file => {
       content: "#{dependencies}\n\n#{sass}"
     }
-  })
+  }.merge(deleted_files))
 
   content_type 'application/json'
 
   {
-    :id => data.id,
-    :filename => sass_file
+    id: data.id,
+    filename: sass_file
   }.to_json.to_s
 end
 
@@ -403,6 +403,6 @@ post %r{/gist(?:/[\w]*)*/([\d]+)/fork} do
   content_type 'application/json'
 
   {
-    :id => data.id
+    id: data.id
   }.to_json.to_s
 end
