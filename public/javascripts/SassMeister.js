@@ -22,7 +22,7 @@ var SassMeister;
         }
 
         else {
-          $('#save-gist').data('action', 'create').attr('class', 'create-gist');
+          $('#save-gist').text('Save Gist').data('action', 'create').attr('class', 'create-gist');
         }
       }     
 
