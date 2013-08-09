@@ -232,8 +232,6 @@ var SassMeister;
       localStorage.clear();
       SassMeister.storedInputs = {},
 
-      $.post('/reset');
-
       SassMeister.setUrl('/');
     },
 

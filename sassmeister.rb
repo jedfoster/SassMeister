@@ -355,8 +355,6 @@ post '/gist/create' do
     }
   })  
 
-  session[:gist] = data.id.to_s
-
   data.id
 end
 
@@ -384,8 +382,6 @@ post %r{/gist(?:/[\w]*)*/([\d]+)/edit} do
     }
   })
 
-  session[:gist] = data.id.to_s
-
   data.id
 end
 
@@ -394,12 +390,5 @@ post %r{/gist(?:/[\w]*)*/([\d]+)/fork} do
 
   data = @github.gists.fork(id)
 
-  session[:gist] = data.id.to_s
-
   data.id
-end
-
-
-post '/reset' do
-  session[:gist] = ''
 end
