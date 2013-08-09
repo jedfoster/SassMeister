@@ -355,7 +355,12 @@ post '/gist/create' do
     }
   })  
 
-  data.id
+  content_type 'application/json'
+
+  {
+    :id => data.id,
+    :filename => sass_file
+  }.to_json.to_s
 end
 
 
@@ -382,7 +387,12 @@ post %r{/gist(?:/[\w]*)*/([\d]+)/edit} do
     }
   })
 
-  data.id
+  content_type 'application/json'
+
+  {
+    :id => data.id,
+    :filename => sass_file
+  }.to_json.to_s
 end
 
 post %r{/gist(?:/[\w]*)*/([\d]+)/fork} do
@@ -390,5 +400,9 @@ post %r{/gist(?:/[\w]*)*/([\d]+)/fork} do
 
   data = @github.gists.fork(id)
 
-  data.id
+  content_type 'application/json'
+
+  {
+    :id => data.id
+  }.to_json.to_s
 end
