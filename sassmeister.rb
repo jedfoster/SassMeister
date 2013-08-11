@@ -15,6 +15,7 @@ require 'compass'
 require 'yaml'
 
 require './lib/sassmeister.rb'
+require './lib/array.rb'
 
 set :partial_template_engine, :erb
 
@@ -63,22 +64,8 @@ helpers do
 
   include Sassmeister
 
-  # From: http://rubyquicktips.com/post/2625525454/random-array-item
-  class Array
-    def random
-      shuffle.first
-    end
 
-    def to_sentence
-      length < 2 ? first.to_s : "#{self[0..-2] * ', '}, and #{last}"
-    end
-  end
 
-  class String
-    def titleize
-      split(/(\W)/).map(&:capitalize).join
-    end
-  end
 
   def plugins
     YAML.load_file("config/plugins.yml").each do |plugin|
