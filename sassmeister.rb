@@ -15,7 +15,6 @@ require 'sass'
 require 'compass'
 require 'yaml'
 
-require './lib/sassmeister.rb'
 require './lib/array.rb'
 
 
