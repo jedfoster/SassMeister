@@ -11,6 +11,8 @@ gem 'tilt', '1.3.4' # Remove this when 1.3.5+ is good on Heroku.
 gem 'thor'
 gem 'newrelic_rpm'
 
+gem 'chairman'
+
 gem 'sass'
 gem 'compass'
 

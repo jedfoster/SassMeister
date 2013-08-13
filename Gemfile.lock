@@ -14,6 +14,9 @@ GEM
       breakpoint (>= 2.0.1)
       compass (>= 0.12.2)
       sass (>= 3.2.1)
+    chairman (0.0.1)
+      github_api (~> 0.10.2)
+      sinatra (~> 1.4.3)
     chunky_png (1.2.8)
     closure-compiler (1.1.10)
     color-schemer (0.2.5)
@@ -67,7 +70,7 @@ GEM
       compass (>= 0.12.1)
       sass (>= 3.2.0)
       sassy-math (>= 1.5)
-    multi_json (1.7.8)
+    multi_json (1.7.9)
     multi_xml (0.5.5)
     multipart-post (1.2.0)
     neat-compass (1.3.0)
@@ -154,6 +157,7 @@ DEPENDENCIES
   bourbon-compass
   breakpoint
   breakpoint-slicer
+  chairman
   closure-compiler
   color-schemer
   compass
