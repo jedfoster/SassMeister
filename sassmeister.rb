@@ -66,7 +66,7 @@ configure :production do
                                :secret => ENV['COOKIE_SECRET']
   end
 
-  Chairman.new(ENV['GITHUB_ID'], ENV['GITHUB_SECRET'], ['gist', 'user'])
+  Chairman.config(ENV['GITHUB_ID'], ENV['GITHUB_SECRET'], ['gist', 'user'])
 end
 
 configure :development do
