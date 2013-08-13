@@ -4,4 +4,4 @@ require './sassmeister'
 use Rack::Deflater
 
 # Run the application
-run Sinatra::Application
+run SassMeisterApp

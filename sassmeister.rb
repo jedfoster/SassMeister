@@ -5,10 +5,11 @@ require 'rubygems'
 # If you're using bundler, you will need to add this
 require 'bundler/setup'
 
-require 'sinatra'
+require 'sinatra/base'
 require 'sinatra/partial'
-require 'json'
 require 'github_api'
+require 'chairman'
+require 'json'
 
 require 'sass'
 require 'compass'
@@ -17,56 +18,73 @@ require 'yaml'
 require './lib/sassmeister.rb'
 require './lib/array.rb'
 
+
+class SassMeisterApp < Sinatra::Base
+  register Sinatra::Partial
+
+  use Chairman::Routes
+
+  # implement redirects
+  class Chairman::Routes
+    configure :production do
+      helpers do
+        use Rack::Session::Cookie, :key => 'sassmeister.com',
+                                   :domain => 'sassmeister.com',
+                                   :path => '/',
+                                   :expire_after => 7776000, # 90 days, in seconds
+                                   :secret => ENV['COOKIE_SECRET']
+       end
+    end
+
+    configure :development do
+      helpers do
+        use Rack::Session::Cookie, :key => 'sassmeister.dev',
+                                   :path => '/',
+                                   :expire_after => 7776000, # 90 days, in seconds
+                                   :secret => 'local'
+      end
+    end
+    
+    after '/authorize/return' do  
+      redirect to('/')
+    end
+
+    after '/logout' do
+      redirect to('/')
+    end
+  end
+
 set :partial_template_engine, :erb
 
 configure :production do
   require 'newrelic_rpm'
 
   helpers do
-
-    module Sassmeister
-      def self.gh_config
-        {
-          "client_id" => ENV['GITHUB_ID'],
-          "client_secret" => ENV['GITHUB_SECRET']
-        }
-      end
-    end
-
     use Rack::Session::Cookie, :key => 'sassmeister.com',
                                :domain => 'sassmeister.com',
                                :path => '/',
                                :expire_after => 7776000, # 90 days, in seconds
                                :secret => ENV['COOKIE_SECRET']
   end
+
+  Chairman.new(ENV['GITHUB_ID'], ENV['GITHUB_SECRET'], ['gist', 'user'])
 end
 
 configure :development do
+
   helpers do
-
-    module Sassmeister
-      def self.gh_config
-        YAML.load_file("config/github.yml")
-      end
-    end
-
     use Rack::Session::Cookie, :key => 'sassmeister.dev',
                                :path => '/',
                                :expire_after => 7776000, # 90 days, in seconds
                                :secret => 'local'
   end
+
+  yml = YAML.load_file("config/github.yml")
+  Chairman.config(yml["client_id"], yml["client_secret"], ['gist', 'user'])
 end
 
 
 helpers do
-  include ERB::Util
-  alias_method :code, :html_escape
-
-  include Sassmeister
-
-
-
-
   def plugins
     YAML.load_file("config/plugins.yml").each do |plugin|
       plugin.last[:version] = Gem.loaded_specs[plugin.last[:gem]].version.to_s
@@ -129,11 +147,11 @@ helpers do
       return nil
     else
       imports = []
-    
+
       plugins[frontmatter.first.strip][:import].each do |import|
         imports << "@import \"#{import}\""
       end
-      
+  
       return imports
     end
   end
@@ -169,11 +187,10 @@ helpers do
 end
 
 before do
-  @github = Sassmeister.github(session[:github_token])
+  @github = Chairman.session(session[:github_token])
   @gist = nil
   @plugins = plugins
 end
-
 
 get '/' do
   if ! params.empty?
@@ -253,38 +270,11 @@ get '/thankyou' do
 end
 
 
-get '/authorize' do
-  redirect to @github.authorize_url :scope => ['gist', 'user']
-end
-
-
-get '/authorize/return' do
-  token = @github.get_token(params[:code])
-
-  user = Sassmeister.github(token.token).users.get
-
-  session[:github_token] = token.token
-  session[:github_id] = user.login
-  session[:gravatar_id] = user.gravatar_id
-
-  redirect to('/')
-end
-
-
-get '/logout' do
-  session[:github_token] = nil
-  session[:github_id] = nil
-  session[:gravatar_id] = nil
-
-  redirect to('/')
-end
-
-
 get %r{/gist(?:/[\w]*)*/([\d]+)} do
   id = params[:captures].first
 
   begin
-    response = Github::Gists.new.get(id, client_id: Sassmeister.gh_config['client_id'], client_secret: Sassmeister.gh_config['client_secret'])
+    response = Github::Gists.new.get(id, client_id: Chairman.client_id, client_secret: Chairman.client_secret)
 
     # For now, we only return the first .sass or .scss file we find.
     file = response.files["#{response.files.keys.grep(/.+\.(scss|sass)/)[0]}"]
@@ -297,7 +287,7 @@ get %r{/gist(?:/[\w]*)*/([\d]+)} do
       sass = file.content
       filename = file.filename
       owner = response.owner.login
-      
+  
       syntax = file.filename.slice(-4, 4)
     end
 
@@ -369,7 +359,7 @@ post %r{/gist(?:/[\w]*)*/([\d]+)/edit} do
   end
 
   css_file = "SassMeister-output.css"
-  
+
   data = @github.gists.edit(id, files: {
     css_file => {
       content: "#{css}"
@@ -397,4 +387,7 @@ post %r{/gist(?:/[\w]*)*/([\d]+)/fork} do
   {
     id: data.id
   }.to_json.to_s
+end
+
+  run! if app_file == $0
 end
