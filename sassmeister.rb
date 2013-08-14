@@ -53,340 +53,339 @@ class SassMeisterApp < Sinatra::Base
     end
   end
 
-set :partial_template_engine, :erb
+  set :partial_template_engine, :erb
 
-configure :production do
-  require 'newrelic_rpm'
+  configure :production do
+    require 'newrelic_rpm'
+
+    helpers do
+      use Rack::Session::Cookie, :key => 'sassmeister.com',
+                                 :domain => 'sassmeister.com',
+                                 :path => '/',
+                                 :expire_after => 7776000, # 90 days, in seconds
+                                 :secret => ENV['COOKIE_SECRET']
+    end
+
+    Chairman.config(ENV['GITHUB_ID'], ENV['GITHUB_SECRET'], ['gist', 'user'])
+  end
+
+  configure :development do
+    helpers do
+      use Rack::Session::Cookie, :key => 'sassmeister.dev',
+                                 :path => '/',
+                                 :expire_after => 7776000, # 90 days, in seconds
+                                 :secret => 'local'
+    end
+
+    yml = YAML.load_file("config/github.yml")
+    Chairman.config(yml["client_id"], yml["client_secret"], ['gist', 'user'])
+  end
+
 
   helpers do
-    use Rack::Session::Cookie, :key => 'sassmeister.com',
-                               :domain => 'sassmeister.com',
-                               :path => '/',
-                               :expire_after => 7776000, # 90 days, in seconds
-                               :secret => ENV['COOKIE_SECRET']
-  end
-
-  Chairman.config(ENV['GITHUB_ID'], ENV['GITHUB_SECRET'], ['gist', 'user'])
-end
-
-configure :development do
-
-  helpers do
-    use Rack::Session::Cookie, :key => 'sassmeister.dev',
-                               :path => '/',
-                               :expire_after => 7776000, # 90 days, in seconds
-                               :secret => 'local'
-  end
-
-  yml = YAML.load_file("config/github.yml")
-  Chairman.config(yml["client_id"], yml["client_secret"], ['gist', 'user'])
-end
-
-
-helpers do
-  def plugins
-    YAML.load_file("config/plugins.yml").each do |plugin|
-      plugin.last[:version] = Gem.loaded_specs[plugin.last[:gem]].version.to_s
-    end
-  end
-
-  def require_plugins(sass)
-    get_imports_from_sass(sass) { |name, plugin| require plugin[:gem] }
-
-    Compass.sass_engine_options[:load_paths].each do |path|
-      Sass.load_paths << path
-    end
-  end
-
-  def sass_compile(params)
-    imports = ''
-
-    if ! params[:sass].match(/^\/\/ ----\n/) && params[:sass].match(/^\/\/ ([\w\s]+?) [\(\)v\d\.]+?\s*$/)
-      imports = unpack_dependencies(params[:sass])
-      imports = imports.join("#{params[:syntax] == 'scss' ? ';' : ''}\n") + "#{params[:syntax] == 'scss' ? ';' : ''}\n" if ! imports.nil?
-    end
-
-    params[:sass].slice!(/(^\/\/ [\-]{3,4}\n(?:\/\/ .+\n)*\/\/ [\-]{3,4}\s*)*/)
-
-    params[:sass] = imports + params[:sass] if ! imports.nil?
-
-    require_plugins(params[:sass])
-
-    begin
-      send("#{params[:syntax]}".to_sym, params[:sass].chomp, {:style => :"#{params[:output]}", :quiet => true})
-
-    rescue Sass::SyntaxError => e
-      status 200
-      e.to_s
-    end
-  end
-
-  def sass_convert(from_syntax, to_syntax, sass)
-    begin
-      ::Sass::Engine.new(sass, {:from => from_syntax.to_sym, :to => to_syntax.to_sym, :syntax => from_syntax.to_sym}).to_tree.send("to_#{to_syntax}").chomp
-    rescue Sass::SyntaxError => e
-      sass
-    end
-  end
-
-  def unpack_dependencies(sass)
-    frontmatter = sass.slice(/^\/\/ ---\n(?:\/\/ .+\n)*\/\/ ---\n/)
-
-    if frontmatter.nil?
-      frontmatter = sass.scan(/^\/\/ ([\w\s]+?) [\(\)v\d\.]+?\s*$/).first
-    else
-      frontmatter = frontmatter.to_s.gsub(/(\/\/ |---|\(.+$)/, '').strip.split(/\n/)
-    end
-
-    frontmatter.delete_if do |x|
-      ! plugins.key?(x.to_s.strip)
-    end
-
-    if frontmatter.empty?
-      return nil
-    else
-      imports = []
-
-      plugins[frontmatter.first.strip][:import].each do |import|
-        imports << "@import \"#{import}\""
-      end
-  
-      return imports
-    end
-  end
-
-  def get_imports_from_sass(sass)
-    imports = sass.scan(/^\s*@import[\s\"\']*(.+?)[\"\';]*$/)
-    imports.map! {|i| i.first}
-
-    plugins.each do |key, plugin|
-      if ! imports.grep(/#{plugin[:fingerprint].gsub(/\*/, '.*?')}/).empty?
-        yield key, plugin if block_given?
+    def plugins
+      YAML.load_file("config/plugins.yml").each do |plugin|
+        plugin.last[:version] = Gem.loaded_specs[plugin.last[:gem]].version.to_s
       end
     end
-  end
 
-  def pack_dependencies(sass)
-    sass.slice!(/(^\/\/ [\-]{3,4}\n(?:\/\/ .+\n)*\/\/ [\-]{3,4}\s*)*/)
+    def require_plugins(sass)
+      get_imports_from_sass(sass) { |name, plugin| require plugin[:gem] }
 
-    frontmatter = <<-END.gsub(/^ {6}/, '')
-      // ----
-      // Sass (sass-version)
-      // Compass (compass-version)
-      // ----
-    END
+      Compass.sass_engine_options[:load_paths].each do |path|
+        Sass.load_paths << path
+      end
+    end
 
-    get_imports_from_sass(sass) {|name, plugin| frontmatter.gsub!(/\/\/ ----\n\Z/, "// #{name} (v#{plugin[:version]})\n// ----\n") }
+    def sass_compile(params)
+      imports = ''
 
-    frontmatter.gsub!(/sass-version/, "v#{Gem.loaded_specs["sass"].version.to_s}")
-    frontmatter.gsub!(/compass-version/, "v#{Gem.loaded_specs["compass"].version.to_s}")
+      if ! params[:sass].match(/^\/\/ ----\n/) && params[:sass].match(/^\/\/ ([\w\s]+?) [\(\)v\d\.]+?\s*$/)
+        imports = unpack_dependencies(params[:sass])
+        imports = imports.join("#{params[:syntax] == 'scss' ? ';' : ''}\n") + "#{params[:syntax] == 'scss' ? ';' : ''}\n" if ! imports.nil?
+      end
 
-    return frontmatter
-  end
-end
+      params[:sass].slice!(/(^\/\/ [\-]{3,4}\n(?:\/\/ .+\n)*\/\/ [\-]{3,4}\s*)*/)
 
-before do
-  @github = Chairman.session(session[:github_token])
-  @gist = nil
-  @plugins = plugins
-end
+      params[:sass] = imports + params[:sass] if ! imports.nil?
 
-get '/' do
-  if ! params.empty?
-    extension = params[:extension].split(',') || []
-    syntax = (params[:syntax].downcase rescue 'scss')
-    output = (params[:output].downcase rescue 'expanded')
-    sass = ''
+      require_plugins(params[:sass])
 
-    plugins.each do |key, plugin|
-      if ! extension.grep(/#{plugin[:fingerprint].gsub(/\*/, '.*?')}/i).empty?
-        require plugin[:gem]
+      begin
+        send("#{params[:syntax]}".to_sym, params[:sass].chomp, {:style => :"#{params[:output]}", :quiet => true})
 
+      rescue Sass::SyntaxError => e
+        status 200
+        e.to_s
+      end
+    end
+
+    def sass_convert(from_syntax, to_syntax, sass)
+      begin
+        ::Sass::Engine.new(sass, {:from => from_syntax.to_sym, :to => to_syntax.to_sym, :syntax => from_syntax.to_sym}).to_tree.send("to_#{to_syntax}").chomp
+      rescue Sass::SyntaxError => e
+        sass
+      end
+    end
+
+    def unpack_dependencies(sass)
+      frontmatter = sass.slice(/^\/\/ ---\n(?:\/\/ .+\n)*\/\/ ---\n/)
+
+      if frontmatter.nil?
+        frontmatter = sass.scan(/^\/\/ ([\w\s]+?) [\(\)v\d\.]+?\s*$/).first
+      else
+        frontmatter = frontmatter.to_s.gsub(/(\/\/ |---|\(.+$)/, '').strip.split(/\n/)
+      end
+
+      frontmatter.delete_if do |x|
+        ! plugins.key?(x.to_s.strip)
+      end
+
+      if frontmatter.empty?
+        return nil
+      else
         imports = []
-        plugin[:import].each do |import|
+
+        plugins[frontmatter.first.strip][:import].each do |import|
           imports << "@import \"#{import}\""
         end
-
-        sass += imports.join("#{syntax == 'scss' ? ';' : ''}\n") + "#{syntax == 'scss' ? ';' : ''}\n" unless imports.nil?
+  
+        return imports
       end
+    end
+
+    def get_imports_from_sass(sass)
+      imports = sass.scan(/^\s*@import[\s\"\']*(.+?)[\"\';]*$/)
+      imports.map! {|i| i.first}
+
+      plugins.each do |key, plugin|
+        if ! imports.grep(/#{plugin[:fingerprint].gsub(/\*/, '.*?')}/).empty?
+          yield key, plugin if block_given?
+        end
+      end
+    end
+
+    def pack_dependencies(sass)
+      sass.slice!(/(^\/\/ [\-]{3,4}\n(?:\/\/ .+\n)*\/\/ [\-]{3,4}\s*)*/)
+
+      frontmatter = <<-END.gsub(/^ {6}/, '')
+        // ----
+        // Sass (sass-version)
+        // Compass (compass-version)
+        // ----
+      END
+
+      get_imports_from_sass(sass) {|name, plugin| frontmatter.gsub!(/\/\/ ----\n\Z/, "// #{name} (v#{plugin[:version]})\n// ----\n") }
+
+      frontmatter.gsub!(/sass-version/, "v#{Gem.loaded_specs["sass"].version.to_s}")
+      frontmatter.gsub!(/compass-version/, "v#{Gem.loaded_specs["compass"].version.to_s}")
+
+      return frontmatter
+    end
+  end
+
+  before do
+    @github = Chairman.session(session[:github_token])
+    @gist = nil
+    @plugins = plugins
+  end
+
+  get '/' do
+    if ! params.empty?
+      extension = params[:extension].split(',') || []
+      syntax = (params[:syntax].downcase rescue 'scss')
+      output = (params[:output].downcase rescue 'expanded')
+      sass = ''
+
+      plugins.each do |key, plugin|
+        if ! extension.grep(/#{plugin[:fingerprint].gsub(/\*/, '.*?')}/i).empty?
+          require plugin[:gem]
+
+          imports = []
+          plugin[:import].each do |import|
+            imports << "@import \"#{import}\""
+          end
+
+          sass += imports.join("#{syntax == 'scss' ? ';' : ''}\n") + "#{syntax == 'scss' ? ';' : ''}\n" unless imports.nil?
+        end
+      end
+
+      @gist = {
+        :sass => sass,
+        :syntax => syntax,
+        :output => output
+      }.to_json
+    end
+
+    erb :index
+  end
+
+
+  post '/compile' do
+    if params[:sass]
+      sass_compile(params)
+    else
+      # HTML
+
+      case params[:html_syntax]
+      when 'haml'
+        return haml params[:html], :suppress_eval => true
+      when 'slim'
+        # ^(\s*?)((\S+ )?=|==|-)( .*$)
+        html = params[:html].gsub(/^(\s*?)((\S+ )?=|==|-)( .*$)/, "\1/ \2\4")
+
+        return html
+        return slim html, :pretty => true, :disable_engines => [:ruby, :javascript, :css, :erb, :haml, :sass, :scss, :less, :builder, :liquid, :markdown, :textile, :rdoc, :radius, :markaby, :nokogiri, :coffee]
+
+      # when 'markdown'
+
+      # when 'textile'
+
+      else
+        return params[:html]
+      end
+    end
+  end
+
+
+  get '/compile' do
+    erb :compiled_html, :layout => false
+  end
+
+
+  post '/convert' do
+    if params[:sass]
+      sass_convert(params[:original_syntax], params[:syntax], params[:sass])
+    else
+      # HTML
+      erb :compiled_html, :layout => false
+    end
+  end
+
+
+  get '/thankyou' do
+    erb :thankyou
+  end
+
+
+  get %r{/gist(?:/[\w]*)*/([\d]+)} do
+    id = params[:captures].first
+
+    begin
+      response = Github::Gists.new.get(id, client_id: Chairman.client_id, client_secret: Chairman.client_secret)
+
+      # For now, we only return the first .sass or .scss file we find.
+      file = response.files["#{response.files.keys.grep(/.+\.(scss|sass)/)[0]}"]
+
+      if( ! file)
+        syntax = filename = owner = ''
+        sass = "// Sorry, I couldn't find any valid Sass in that Gist."
+
+      else      
+        sass = file.content
+        filename = file.filename
+        owner = response.owner.login
+  
+        syntax = file.filename.slice(-4, 4)
+      end
+
+    rescue Github::Error::NotFound => e
+      status 404
+
+      syntax = plugin = ''
+      sass = "// Sorry, that Gist doesn't exist.\n//#{e.to_s.gsub(/(GET|api.|https:\/\/)/, '')}"
     end
 
     @gist = {
-      :sass => sass,
+      :gist_id => id,
+      :gist_filename => filename,
+      :gist_owner => owner,
+      :can_update_gist => (owner == session[:github_id]),
       :syntax => syntax,
-      :output => output
+      :sass => sass
     }.to_json
+
+    erb :index
   end
 
-  erb :index
-end
+
+  post '/gist/create' do
+    sass = params[:sass]
+
+    dependencies = pack_dependencies(sass)
+
+    css = sass_compile(params)
+
+    description = "Generated by SassMeister.com."
+
+    sass_file = "SassMeister-input.#{params[:syntax]}"
+    css_file = "SassMeister-output.css"
+
+    data = @github.gists.create(description: description, public: true, files: {
+      css_file => {
+        content: "#{css}"
+      },
+      sass_file => {
+        content: "#{dependencies}\n\n#{sass}"
+      }
+    })  
+
+    content_type 'application/json'
+
+    {
+      id: data.id,
+      filename: sass_file
+    }.to_json.to_s
+  end
 
 
-post '/compile' do
-  if params[:sass]
-    sass_compile(params)
-  else
-    # HTML
+  post %r{/gist(?:/[\w]*)*/([\d]+)/edit} do
+    id = params[:captures].shift
 
-    case params[:html_syntax]
-    when 'haml'
-      return haml params[:html], :suppress_eval => true
-    when 'slim'
-      # ^(\s*?)((\S+ )?=|==|-)( .*$)
-      html = params[:html].gsub(/^(\s*?)((\S+ )?=|==|-)( .*$)/, "\1/ \2\4")
+    sass = params[:sass]
 
-      return html
-      return slim html, :pretty => true, :disable_engines => [:ruby, :javascript, :css, :erb, :haml, :sass, :scss, :less, :builder, :liquid, :markdown, :textile, :rdoc, :radius, :markaby, :nokogiri, :coffee]
+    dependencies = pack_dependencies(sass)
 
-    # when 'markdown'
+    css = sass_compile(params)
 
-    # when 'textile'
-
+    if params[:gist_filename].slice(-4, 4) == params[:syntax]
+      sass_file = params[:gist_filename]
+      deleted_files = {}
     else
-      return params[:html]
-    end
-  end
-end
-
-
-get '/compile' do
-  erb :compiled_html, :layout => false
-end
-
-
-post '/convert' do
-  if params[:sass]
-    sass_convert(params[:original_syntax], params[:syntax], params[:sass])
-  else
-    # HTML
-    erb :compiled_html, :layout => false
-  end
-end
-
-
-get '/thankyou' do
-  erb :thankyou
-end
-
-
-get %r{/gist(?:/[\w]*)*/([\d]+)} do
-  id = params[:captures].first
-
-  begin
-    response = Github::Gists.new.get(id, client_id: Chairman.client_id, client_secret: Chairman.client_secret)
-
-    # For now, we only return the first .sass or .scss file we find.
-    file = response.files["#{response.files.keys.grep(/.+\.(scss|sass)/)[0]}"]
-
-    if( ! file)
-      syntax = filename = owner = ''
-      sass = "// Sorry, I couldn't find any valid Sass in that Gist."
-
-    else      
-      sass = file.content
-      filename = file.filename
-      owner = response.owner.login
-  
-      syntax = file.filename.slice(-4, 4)
+      sass_file = "#{params[:gist_filename].slice(0..-5)}#{params[:syntax]}"
+      deleted_files = {params[:gist_filename] => {content: nil}}
     end
 
-  rescue Github::Error::NotFound => e
-    status 404
+    css_file = "SassMeister-output.css"
 
-    syntax = plugin = ''
-    sass = "// Sorry, that Gist doesn't exist.\n//#{e.to_s.gsub(/(GET|api.|https:\/\/)/, '')}"
+    data = @github.gists.edit(id, files: {
+      css_file => {
+        content: "#{css}"
+      },
+      sass_file => {
+        content: "#{dependencies}\n\n#{sass}"
+      }
+    }.merge(deleted_files))
+
+    content_type 'application/json'
+
+    {
+      id: data.id,
+      filename: sass_file
+    }.to_json.to_s
   end
 
-  @gist = {
-    :gist_id => id,
-    :gist_filename => filename,
-    :gist_owner => owner,
-    :can_update_gist => (owner == session[:github_id]),
-    :syntax => syntax,
-    :sass => sass
-  }.to_json
+  post %r{/gist(?:/[\w]*)*/([\d]+)/fork} do
+    id = params[:captures].shift
 
-  erb :index
-end
+    data = @github.gists.fork(id)
 
+    content_type 'application/json'
 
-post '/gist/create' do
-  sass = params[:sass]
-
-  dependencies = pack_dependencies(sass)
-
-  css = sass_compile(params)
-
-  description = "Generated by SassMeister.com."
-
-  sass_file = "SassMeister-input.#{params[:syntax]}"
-  css_file = "SassMeister-output.css"
-
-  data = @github.gists.create(description: description, public: true, files: {
-    css_file => {
-      content: "#{css}"
-    },
-    sass_file => {
-      content: "#{dependencies}\n\n#{sass}"
-    }
-  })  
-
-  content_type 'application/json'
-
-  {
-    id: data.id,
-    filename: sass_file
-  }.to_json.to_s
-end
-
-
-post %r{/gist(?:/[\w]*)*/([\d]+)/edit} do
-  id = params[:captures].shift
-
-  sass = params[:sass]
-
-  dependencies = pack_dependencies(sass)
-
-  css = sass_compile(params)
-
-  if params[:gist_filename].slice(-4, 4) == params[:syntax]
-    sass_file = params[:gist_filename]
-    deleted_files = {}
-  else
-    sass_file = "#{params[:gist_filename].slice(0..-5)}#{params[:syntax]}"
-    deleted_files = {params[:gist_filename] => {content: nil}}
+    {
+      id: data.id
+    }.to_json.to_s
   end
-
-  css_file = "SassMeister-output.css"
-
-  data = @github.gists.edit(id, files: {
-    css_file => {
-      content: "#{css}"
-    },
-    sass_file => {
-      content: "#{dependencies}\n\n#{sass}"
-    }
-  }.merge(deleted_files))
-
-  content_type 'application/json'
-
-  {
-    id: data.id,
-    filename: sass_file
-  }.to_json.to_s
-end
-
-post %r{/gist(?:/[\w]*)*/([\d]+)/fork} do
-  id = params[:captures].shift
-
-  data = @github.gists.fork(id)
-
-  content_type 'application/json'
-
-  {
-    id: data.id
-  }.to_json.to_s
-end
 
   run! if app_file == $0
 end
