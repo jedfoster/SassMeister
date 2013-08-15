@@ -12,8 +12,8 @@ var SassMeister;
       this.getStorage();
 
       if($('#save-gist')) {
-        if(this.storedInputs.gist_id) {
-          if (this.storedInputs.can_update_gist) {
+        if(this.storedInputs !== null && this.storedInputs.gist_id !== null) {
+          if (this.storedInputs.can_update_gist !== null) {
             $('#save-gist').text('Update Gist').data('action', 'edit').attr('class', 'edit-gist');
           }
           else {
