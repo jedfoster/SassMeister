@@ -12,7 +12,7 @@
   //   SassMeister.convert.sass();
   // });
 
-  $('#info, .logo').on('click', function() {
+  $('#info, .logo').on('click', function(event) {
     event.preventDefault();
 
     $('#footer').reveal({
@@ -23,14 +23,14 @@
     });
   });
 
-  $('#save-gist').on('click', function() {
+  $('#save-gist').on('click', function(event) {
     /* stop form from submitting normally */
     event.preventDefault();
 
     SassMeister.gist[($(this).data('action'))]();
   });
 
-  $('#reset').on('click', function() {
+  $('#reset').on('click', function(event) {
     event.preventDefault();
 
     SassMeister.reset();
