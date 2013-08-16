@@ -66,4 +66,37 @@ module SassMeister
       return imports
     end
   end
+
+
+  def sass_compile(params)
+    imports = ''
+
+    if ! params[:sass].match(/^\/\/ ----\n/) && params[:sass].match(/^\/\/ ([\w\s]+?) [\(\)v\d\.]+?\s*$/)
+      imports = unpack_dependencies(params[:sass])
+      imports = imports.join("#{params[:syntax] == 'scss' ? ';' : ''}\n") + "#{params[:syntax] == 'scss' ? ';' : ''}\n" if ! imports.nil?
+    end
+
+    params[:sass].slice!(/(^\/\/ [\-]{3,4}\n(?:\/\/ .+\n)*\/\/ [\-]{3,4}\s*)*/)
+
+    params[:sass] = imports + params[:sass] if ! imports.nil?
+
+    require_plugins(params[:sass])
+
+    begin
+      send("#{params[:syntax]}".to_sym, params[:sass].chomp, {:style => :"#{params[:output]}", :quiet => true})
+
+    rescue Sass::SyntaxError => e
+      status 200
+      e.to_s
+    end
+  end
+
+
+  def sass_convert(from_syntax, to_syntax, sass)
+    begin
+      ::Sass::Engine.new(sass, {:from => from_syntax.to_sym, :to => to_syntax.to_sym, :syntax => from_syntax.to_sym}).to_tree.send("to_#{to_syntax}").chomp
+    rescue Sass::SyntaxError => e
+      sass
+    end
+  end
 end
