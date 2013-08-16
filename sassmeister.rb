@@ -1,5 +1,5 @@
-# Those little ditties that Sinara needs to make the magic happen
-# -----------------------------------------------------------------------
+$LOAD_PATH.unshift(File.join(File.dirname(File.realpath(__FILE__)), 'lib'))
+
 require 'rubygems'
 
 # If you're using bundler, you will need to add this
@@ -15,14 +15,12 @@ require 'sass'
 require 'compass'
 require 'yaml'
 
-require './lib/sassmeister.rb'
-require './lib/array.rb'
+require 'sassmeister'
+require 'array'
 
 
 class SassMeisterApp < Sinatra::Base
   register Sinatra::Partial
-
-  
 
   use Chairman::Routes
 
