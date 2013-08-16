@@ -61,25 +61,10 @@ class SassMeisterApp < Sinatra::Base
   configure :production do
     require 'newrelic_rpm'
 
-    helpers do
-      use Rack::Session::Cookie, :key => 'sassmeister.com',
-                                 :domain => 'sassmeister.com',
-                                 :path => '/',
-                                 :expire_after => 7776000, # 90 days, in seconds
-                                 :secret => ENV['COOKIE_SECRET']
-    end
-
     Chairman.config(ENV['GITHUB_ID'], ENV['GITHUB_SECRET'], ['gist', 'user'])
   end
 
   configure :development do
-    helpers do
-      use Rack::Session::Cookie, :key => 'sassmeister.dev',
-                                 :path => '/',
-                                 :expire_after => 7776000, # 90 days, in seconds
-                                 :secret => 'local'
-    end
-
     yml = YAML.load_file("config/github.yml")
     Chairman.config(yml["client_id"], yml["client_secret"], ['gist', 'user'])
   end
