@@ -37,7 +37,6 @@ $.fn.splitter = function () {
               opacity: 0,
               position: 'absolute',
               cursor: 'ew-resize',
-              'border-left': '1px solid rgba(218, 218, 218, 0.5)',
               'z-index': 4
             }
           },
@@ -59,7 +58,6 @@ $.fn.splitter = function () {
               right: 0,
               opacity: 0,
               position: 'absolute',
-              border: 0,
               'z-index': 4
             }
           }
@@ -176,22 +174,11 @@ $.fn.splitter = function () {
 
       $blocker.css('cursor', type == 'x' ? 'ew-resize' : 'ns-resize');
 
-      // Style borders
-      if (type == 'y') {
-        $el.css('border-right', 0);
-        $prev.css('border-left', 0);
-        $prev.css('border-top', '2px solid #ccc');
-      } else {
-        $el.css('border-top', 0);
-      }
- 
       if ($el.is(':hidden')) {
         $handle.hide();
       } else {
         if ($prev.length) {
-          $el.css('border-' + props[type].cssProp, '1px solid #ccc');
-        } else {
-          $el.css('border-' + props[type].cssProp, '0');
+          $el.addClass('handle');
         }
         moveSplitter(x !== undefined ? x : $el.offset()[props[type].cssProp]);
       }
@@ -200,7 +187,6 @@ $.fn.splitter = function () {
     $handle.bind('change', function (event, toType, value) {
       $el.css(props[type].cssProp, '0');
       $prev.css(props[type].otherCssProp, '0');
-      $el.css('border-' + props[type].cssProp, '0');
 
       if (toType === 'y') {
         // 1. drop inside of a new div that encompases the elements
@@ -225,7 +211,6 @@ $.fn.splitter = function () {
         $el.appendTo($originalContainer);
         $handle.insertBefore($originalContainer);
         $handle.removeClass('vertical');
-        $el.css('border-top', 0);
         $el = $originalContainer;
         $originalContainer.show();
         $handle.css('margin-top', 0);
