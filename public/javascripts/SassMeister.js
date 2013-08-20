@@ -26,42 +26,42 @@ var SassMeister;
         }
       }     
 
-      this.inputs.syntax = $('select[name=syntax]').dropdown({
-        gutter : 0,
-        speed : 25,
-        onOptionSelect: function(opt) {
-          SassMeister.inputs.syntax = opt.data( 'value' );
-
+      this.inputs.syntax = $('select[name=syntax]').minimalect({
+        empty: '',
+        onchange: function(value, text) {
+          SassMeister.inputs.syntax = value;
+      
           // _gaq.push(['_trackEvent', 'Form', 'Control', this.value]);
-
+      
           SassMeister.convert.sass(true);
         }
-      }).value();
-
+      }).val();
+      
       $('[name="syntax"]').data('original', SassMeister.inputs.syntax);
-
-      this.inputs.output = $('select[name=output]').dropdown({
-        gutter : 0,
-        speed : 25,
-        onOptionSelect: function(opt) {
-          SassMeister.inputs.output = opt.data( 'value' );
-
+      
+      this.inputs.output = $('select[name=output]').minimalect({
+        empty: '',
+        onchange: function(value, text) {
+          SassMeister.inputs.output = value;
+      
           // _gaq.push(['_trackEvent', 'Form', 'Control', this.value]);
-
+      
           SassMeister.compile.sass();
         }
-      }).value();
-
-      this.inputs.plugin = $('select[name=plugin]').dropdown({
-        gutter : 0,
-        speed : 25,
-        onOptionSelect: function(opt) {
-          var plugins = opt.data( 'value' );
+      }).val();
+      
+      this.inputs.plugin = $('select[name=plugin]').minimalect({
+        empty: '',
+        onfilter: function(match) {
+          console.log(match);
+        },
+        onchange: function(value, text) {
+          var plugins = value;
           $.each(plugins.split(','), function(key, plugin) {
             SassMeister.inputs.sass.insert( '@import "' + plugin + '"' + ( SassMeister.inputs.syntax == 'scss' ? ';' : '' ) + '\n\n');
           });
         }
-      }).value();
+      }).val();
 
       this.outputs.css = ace.edit("css");
       this.outputs.css.setTheme("ace/theme/tomorrow");
