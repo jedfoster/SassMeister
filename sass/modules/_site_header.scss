@@ -15,8 +15,8 @@
   background: transparentize(scale-color($alpha_color, $lightness: -80%), 0.2);
 
   @each $prefix in $prefix_defaults {
-    #{$prefix}border-bottom-left-radius: em(8);
-    #{$prefix}border-bottom-right-radius: em(8);
+    #{$prefix}border-bottom-left-radius: em(3);
+    #{$prefix}border-bottom-right-radius: em(3);
   }
 }
 
