@@ -4,18 +4,10 @@
   border: 1px solid $delta_gray;
   background: $india_gray;
 
-  @media #{$mobile} {
-    margin-bottom: 1em;
-  }
-
   .pre_container {
     @extend %stretch;
 
     display: block;
-
-    @media #{$mobile} {
-      height: em(380);
-    }
   }
 
   .edit-header {
