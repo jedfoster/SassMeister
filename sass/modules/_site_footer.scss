@@ -9,9 +9,26 @@
   border-top: 1px solid $golf_gray;
   background: scale-color($india_gray, $lightness: 50%);
 
+
+  a {
+    color: $delta_gray;
+  }
+
   p {
     font-size: em(12);
   }
+
+  .info {
+    @include grid(6);
+
+    text-align: left
+  }
+  .copyright {
+    @include grid(6);
+
+    text-align: right;
+  }
+
   @media #{$mobile} {
     @include grid(12);
 
