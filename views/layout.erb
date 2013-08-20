@@ -53,6 +53,15 @@
     <script src="/javascripts/vendor/fancy_dropdown.js"></script>
     <script src="/javascripts/SassMeister.js"></script>
     <script src="/javascripts/main.js"></script>
+    <script src="/javascripts/splitter.js"></script>
+    <script src="/javascripts/panel.js"></script>
+
+    <script>
+      $('.panel').each(function(index) {
+        foo = new Panel($(this).data('name'), {  });
+        foo.show();
+      });
+    </script>
   <% end %>
 </body>
 </html>

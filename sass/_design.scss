@@ -3,11 +3,11 @@
 }
 
 .sass_input {
-  @include grid(6.125, alpha);
+  // @include grid(6.125, alpha);
 }
 
 .css_output {
-  @include grid(6.125, omega);
+  // @include grid(6.125, omega);
 
   a {
     float: left;
@@ -23,10 +23,50 @@
 
 @media #{$tablet} {
   .sass_input, .css_output {
-    @include grid(4.25, alphaomega, $grid_context: 4);
+    // @include grid(4.25, alphaomega, $grid_context: 4);
   }
 }
 
 #reset {
   float: right;
 }
+
+
+
+
+
+
+  html, body {
+    height: 100%;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  // #bin {
+  //   display: block;
+  // }
+  
+  .stretch {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  #panelswaiting {
+    display: none;
+  }
+  
+  .panel {
+    background: #f9f9f9;
+  }
+  .panel:first-child {
+    border-left: 0;
+  }
+  
+  .resize {
+    cursor: ew-resize;
+  }    
