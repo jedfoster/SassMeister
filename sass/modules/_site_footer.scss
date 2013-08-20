@@ -3,24 +3,26 @@
 
   top: auto;
   display: block;
-  height: em(30);
+  height: em(32);
   z-index: 3;
   border-top: 1px solid $golf_gray;
   background: scale-color($india_gray, $lightness: 50%);
 
   a {
-    color: $delta_gray;     
+    color: $charlie_gray;
   }
 
   p {
     @include grid(6);
 
-    font-size: em(12);
+    font-size: em(14);
+    font-weight: 300;
+    color: $charlie_gray;
   }
 
   .info {
     text-align: left;
-    
+
     a {
       margin-right: 1.5em;
     }

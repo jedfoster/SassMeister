@@ -13,8 +13,10 @@
     margin: 0;
     height: em($heading_3);
     font-size: 1em;
+    font-weight: 200;
     text-align: center;
     color: $delta_gray;
+    border-bottom: 1px solid $golf_gray;
   }
 
   pre {
