@@ -1,8 +1,7 @@
 .site_footer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  @extend %stretch;
+
+  top: auto;
   display: block;
   height: em(30);
   z-index: 3;

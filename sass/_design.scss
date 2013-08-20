@@ -1,11 +1,10 @@
 .main_body {
-  position: absolute;
+  @extend %stretch;
+
   width: 100%;
   z-index: 2;
   top: em(60);
-  right:0;
   bottom: em(30);
-  left:0;
 }
 
 .html_input, .html_output {
@@ -28,13 +27,11 @@ body {
   overflow: hidden;
 }
 
+
 .stretch {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  @extend %stretch;
 }
+
 #panelswaiting {
   display: none;
 }

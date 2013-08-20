@@ -9,12 +9,9 @@
   }
 
   .pre_container {
+    @extend %stretch;
+
     display: block;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
 
     @media #{$mobile} {
       height: em(380);
