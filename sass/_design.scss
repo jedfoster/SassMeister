@@ -1,5 +1,12 @@
 .main_body {
-  @extend %grid_12of12;
+  // @extend %grid_12of12;
+  position: absolute;
+  width: 100%;
+  z-index: 2;
+  top: em(60);
+  right:0;
+  bottom: em(30);
+  left:0;
 }
 
 .sass_input {
@@ -32,41 +39,33 @@
 }
 
 
+html, body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
 
+.stretch {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+#panelswaiting {
+  display: none;
+}
 
+.panel {
+  background: $golf_gray;
+}
+.panel:first-child {
+  border-left: 0;
+}
 
-
-  html, body {
-    height: 100%;
-  }
-  body {
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-  }
-
-  // #bin {
-  //   display: block;
-  // }
-  
-  .stretch {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-  }
-  #panelswaiting {
-    display: none;
-  }
-  
-  .panel {
-    background: #f9f9f9;
-  }
-  .panel:first-child {
-    border-left: 0;
-  }
-  
-  .resize {
-    cursor: ew-resize;
-  }    
+.resize {
+  cursor: ew-resize;
+}

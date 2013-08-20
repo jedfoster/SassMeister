@@ -7,10 +7,10 @@
   border: 1px solid $delta_gray;
   background: $india_gray;
 
-  /* useful if you don't want a bg color from leaking outside the border: */
-     -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-          background-clip: padding-box;
+  // /* useful if you don't want a bg color from leaking outside the border: */
+  //    -moz-background-clip: padding;
+  // -webkit-background-clip: padding-box;
+  //         background-clip: padding-box;
 
   @media #{$mobile} {
     margin-bottom: 1em;
@@ -18,10 +18,11 @@
 
   .pre_container {
     display: block;
-    float: left;
-    width: 99.99999%; // Yes, that's right, 7 nines. Fixes a rounding issue I saw in Chrome.
-    position: relative;
-    height: em(340);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 
     @media #{$mobile} {
       height: em(380);
@@ -44,34 +45,34 @@
     line-height: 1.5;
     outline: none;
   }
-  
+
   .ace_editor {
     font-family: $monospace-font-family;
   }
 }
 
 .ace_gutter {
-  -webkit-border-bottom-left-radius: $border-radius + 0.25em;
-     -moz-border-bottom-left-radius: $border-radius + 0.25em;
-          border-bottom-left-radius: $border-radius + 0.25em;
+  // -webkit-border-bottom-left-radius: $border-radius + 0.25em;
+  //    -moz-border-bottom-left-radius: $border-radius + 0.25em;
+  //         border-bottom-left-radius: $border-radius + 0.25em;
 
-  /* useful if you don't want a bg color from leaking outside the border: */
-     -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-          background-clip: padding-box;
+  // /* useful if you don't want a bg color from leaking outside the border: */
+  //    -moz-background-clip: padding;
+  // -webkit-background-clip: padding-box;
+  //         background-clip: padding-box;
 
   // border-top: 1px solid $delta_gray;
 }
 
 .ace_scroller {
-  -webkit-border-bottom-right-radius: $border-radius + 0.25em;
-     -moz-border-bottom-right-radius: $border-radius + 0.25em;
-          border-bottom-right-radius: $border-radius + 0.25em;
+  // -webkit-border-bottom-right-radius: $border-radius + 0.25em;
+  //    -moz-border-bottom-right-radius: $border-radius + 0.25em;
+  //         border-bottom-right-radius: $border-radius + 0.25em;
 
-  /* useful if you don't want a bg color from leaking outside the border: */
-     -moz-background-clip: padding;
-  -webkit-background-clip: padding-box;
-          background-clip: padding-box;
+  // /* useful if you don't want a bg color from leaking outside the border: */
+  //    -moz-background-clip: padding;
+  // -webkit-background-clip: padding-box;
+  //         background-clip: padding-box;
 
   // border-top: 1px solid $delta_gray;
 }

@@ -1,9 +1,17 @@
 .site_footer {
-  width: 100%;
-  float: left;
-  font-size: em(12);
-  text-align: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: block;
+  height: em(30);
+  z-index: 3;
+  border-top: 1px solid $golf_gray;
+  background: scale-color($india_gray, $lightness: 50%);
 
+  p {
+    font-size: em(12);
+  }
   @media #{$mobile} {
     @include grid(12);
 
@@ -12,15 +20,15 @@
   }
 }
 
-.footer_container {
-  font-size: em(18, 12);
-  text-align: left;
-
-  @media #{$tablet} {
-    font-size: em(12, 12);
-
-    p {
-      line-height: 1.5em;
-    }
-  }
-}
+// .footer_container {
+//   font-size: em(18, 12);
+//   text-align: left;
+//
+//   @media #{$tablet} {
+//     font-size: em(12, 12);
+//
+//     p {
+//       line-height: 1.5em;
+//     }
+//   }
+// }
