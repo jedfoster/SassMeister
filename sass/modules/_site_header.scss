@@ -98,6 +98,7 @@
 
   img {
     @include border_radius($border-radius);
+
     display: block;
     margin: em(10) 0;
   }
@@ -143,7 +144,7 @@
   @extend %tooltip;
 
   right: 0;
-  padding: em(8) em(8);
+  padding: em(8);
   text-align: left;
   width: auto;
   min-width: em(220);
@@ -166,9 +167,10 @@
   }
 
   a {
+    text-shadow: none;
+
     &:hover {
       color: white;
-      text-shadow: none;
 
       &:after {
         display: none;
