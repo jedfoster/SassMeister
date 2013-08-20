@@ -125,13 +125,13 @@
 
 
 
-.chzn-container {
+%chzn-container {
   font-size: 13px;
   position: relative;
   display: inline-block;
 }
 
-.chzn-container-multi {
+%chzn-container-multi {
   .chzn-choices {
     @include theme-container-border();
     @include theme-background;
@@ -200,7 +200,7 @@
   }
 }
 
-.chzn-container .chzn-drop {
+%chzn-container .chzn-drop {
   @extend %chzn-drop;
   
   .result-selected {
@@ -208,7 +208,7 @@
   }
 }
 
-.chzn-container .chzn-results {
+%chzn-container .chzn-results {
   @extend %chz-drop-ul;
 
   .active-result {
@@ -220,7 +220,7 @@
   }
 }
 
-.chzn-container-active .chzn-choices {
+%chzn-container-active .chzn-choices {
   @include theme-active-container;
 }
 
@@ -311,7 +311,7 @@
 
 
 
-.toggle {
+%toggle {
   @include transition(all, 0.25s, linear, 0s);
   @include theme-container-border();
   @include theme-background;
