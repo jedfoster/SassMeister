@@ -12,16 +12,16 @@
   //   SassMeister.convert.sass();
   // });
 
-  $('#info, .logo').on('click', function(event) {
-    event.preventDefault();
-
-    $('#footer').reveal({
-      animation: 'fadeAndPop', //fade, fadeAndPop, none
-      animationSpeed: 250, //how fast animations are
-      closeOnBackgroundClick: true, //if you click background will modal close?
-      dismissModalClass: 'close-icon' //the class of a button or element that will close an open modal
-    });
-  });
+  // $('#info, .logo').on('click', function(event) {
+  //   event.preventDefault();
+  // 
+  //   $('#footer').reveal({
+  //     animation: 'fadeAndPop', //fade, fadeAndPop, none
+  //     animationSpeed: 250, //how fast animations are
+  //     closeOnBackgroundClick: true, //if you click background will modal close?
+  //     dismissModalClass: 'close-icon' //the class of a button or element that will close an open modal
+  //   });
+  // });
 
   $('#save-gist').on('click', function(event) {
     /* stop form from submitting normally */

@@ -9,7 +9,7 @@
   background: scale-color($india_gray, $lightness: 50%);
 
   a {
-    color: $delta_gray;
+    color: $delta_gray;     
   }
 
   p {
@@ -19,7 +19,11 @@
   }
 
   .info {
-    text-align: left
+    text-align: left;
+    
+    a {
+      margin-right: 1.5em;
+    }
   }
   .copyright {
     text-align: right;

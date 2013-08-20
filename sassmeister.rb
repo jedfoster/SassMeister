@@ -154,6 +154,11 @@ class SassMeisterApp < Sinatra::Base
   end
 
 
+  get '/about' do
+    erb :about
+  end
+
+
   get %r{/gist(?:/[\w]*)*/([\d]+)} do
     id = params[:captures].first
 
