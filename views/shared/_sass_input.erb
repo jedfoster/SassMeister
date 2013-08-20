@@ -1,34 +1,4 @@
 <form action="/compile" method="post" accept-charset="utf-8" class="sass_input" id="sass-form">
-  <div class="controls">
-    <div class="form_control">
-      <label for="syntax">Syntax</label>
-      <select name="syntax" data-original=""  class="fancy_dropdown">
-        <option value="scss">SCSS</option>
-        <option value="sass">Sass</option>
-      </select>      
-    </div>
-
-    <div class="form_control">
-      <label for="output">Extension (inserted at cursor)</label>
-      <select name="plugin" class="fancy_dropdown">
-        <option value="">vanilla Sass&nbsp;&nbsp;(v<%=Gem.loaded_specs["sass"].version%>)</option>
-        <% @plugins.each do |plugin| %>
-          <option value="<%= plugin.last[:import].to_s.gsub(/(\"|\[|\]|\s*)/, '') %>"><%=plugin.first %>&nbsp;&nbsp;(v<%=plugin.last[:version]%>)</option>
-        <% end %>
-      </select>
-    </div>
-
-    <div class="form_control">
-      <label for="output">Output Style</label>
-      <select name="output" class="fancy_dropdown">
-        <option value="expanded" selected>expanded</option>
-        <option value="nested">nested</option>
-        <option value="compact">compact</option>
-        <option value="compressed">compressed</option>
-      </select>
-    </div>
-  </div>
-
   <div class="edit_container">
     <h2 class="edit-header">Sass</h2>
 

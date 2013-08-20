@@ -156,18 +156,19 @@
     #{$prefix}border-top-right-radius: 0;
   }
 
-  li {
+  > li {
     width: 100%;
     display: block;
-  }
-
-  li:before {
-    font-size: 0.75em;
-    margin-right: 0.5em;
+    
+    &:before {
+      font-size: 0.75em;
+      margin-right: 0.5em;
+    }
   }
 
   a {
     text-shadow: none;
+    line-height: 1;
 
     &:hover {
       color: white;
@@ -177,4 +178,29 @@
       }
     }
   }
+}
+
+.control {
+  #control_actions {
+    display:block;
+  }
+
+  &:hover #control_actions {
+    display: block;
+  }
+  
+  .control-icon {
+    color: $white;
+    line-height: em(60);
+    text-shadow: 0 0 5px darken($alpha_color, 10%);
+
+    &:hover {
+      color: darken($alpha_color, 40%);
+      text-shadow: 0 0 5px $white;
+    }
+  }
+}
+
+#control_actions {
+  @extend #account_actions;
 }

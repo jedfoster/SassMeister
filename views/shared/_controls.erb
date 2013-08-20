@@ -1,0 +1,40 @@
+<ul id="control_actions">
+
+  <li>
+    <label for="syntax">Syntax</label>
+    <select name="syntax" data-original="">
+      <option value="scss">SCSS</option>
+      <option value="sass">Sass</option>
+    </select>      
+  </li>
+
+  <li>
+    <label for="output">Extension (inserted at cursor)</label>
+    <select name="plugin">
+      <option value="nil">vanilla Sass&nbsp;&nbsp;(v<%=Gem.loaded_specs["sass"].version%>)</option>
+      <% @plugins.each do |plugin| %>
+        <option value="<%= plugin.last[:import].to_s.gsub(/(\"|\[|\]|\s*)/, '') %>"><%=plugin.first %>&nbsp;&nbsp;(v<%=plugin.last[:version]%>)</option>
+      <% end %>
+    </select>
+  </li>
+
+  <li>
+    <label for="output">Output Style</label>
+    <select name="output">
+      <option value="expanded" selected>expanded</option>
+      <option value="nested">nested</option>
+      <option value="compact">compact</option>
+      <option value="compressed">compressed</option>
+    </select>
+  </li>
+
+
+
+  <% if @github.authenticated? %>
+    <li><a href="#" id="save-gist"></a></li>
+  <% end %>
+
+  <li><a href="#" class="reset-icon" id="reset">Reset</a></li>
+
+
+</ul>

@@ -160,3 +160,11 @@
     content: "\30";
   }
 }
+
+.control-icon {
+  @extend %icon-font;
+  
+  &:before {
+    content: "\e002";
+  }
+}
