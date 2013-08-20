@@ -1,5 +1,4 @@
 .main_body {
-  // @extend %grid_12of12;
   position: absolute;
   width: 100%;
   z-index: 2;
@@ -9,29 +8,10 @@
   left:0;
 }
 
-.sass_input {
-  // @include grid(6.125, alpha);
-}
-
-.css_output {
-  // @include grid(6.125, omega);
-
-  a {
-    float: left;
-    display: block;
-  }
-}
-
 .html_input, .html_output {
   @extend %grid_full;
 
   float: left;
-}
-
-@media #{$tablet} {
-  .sass_input, .css_output {
-    // @include grid(4.25, alphaomega, $grid_context: 4);
-  }
 }
 
 #reset {

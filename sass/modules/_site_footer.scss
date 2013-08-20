@@ -9,23 +9,20 @@
   border-top: 1px solid $golf_gray;
   background: scale-color($india_gray, $lightness: 50%);
 
-
   a {
     color: $delta_gray;
   }
 
   p {
+    @include grid(6);
+
     font-size: em(12);
   }
 
   .info {
-    @include grid(6);
-
     text-align: left
   }
   .copyright {
-    @include grid(6);
-
     text-align: right;
   }
 
@@ -36,16 +33,3 @@
     text-align: left;
   }
 }
-
-// .footer_container {
-//   font-size: em(18, 12);
-//   text-align: left;
-//
-//   @media #{$tablet} {
-//     font-size: em(12, 12);
-//
-//     p {
-//       line-height: 1.5em;
-//     }
-//   }
-// }
