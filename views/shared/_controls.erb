@@ -10,8 +10,8 @@
 
   <li>
     <label for="output">Extension (inserted at cursor)</label>
-    <select name="plugin">
-      <option value="nil">vanilla Sass&nbsp;&nbsp;(v<%=Gem.loaded_specs["sass"].version%>)</option>
+    <select name="plugin" data-sass-version="<%=Gem.loaded_specs["sass"].version%>">
+      <option value="">vanilla Sass&nbsp;&nbsp;(v<%=Gem.loaded_specs["sass"].version%>)</option>
       <% @plugins.each do |plugin| %>
         <option value="<%= plugin.last[:import].to_s.gsub(/(\"|\[|\]|\s*)/, '') %>"><%=plugin.first %>&nbsp;&nbsp;(v<%=plugin.last[:version]%>)</option>
       <% end %>

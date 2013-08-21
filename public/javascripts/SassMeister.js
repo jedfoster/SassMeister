@@ -27,6 +27,7 @@ var SassMeister;
       }     
 
       this.inputs.syntax = $('select[name=syntax]').minimalect({
+        placeholder: 'Select a syntax',
         empty: '',
         theme: 'bubble',
         onchange: function(value, text) {
@@ -53,11 +54,9 @@ var SassMeister;
       }).val();
       
       this.inputs.plugin = $('select[name=plugin]').minimalect({
+        placeholder: 'vanilla Sass&nbsp;&nbsp;(v' + $('select[name=plugin]').data('sass-version') + ')',
         empty: '',
         theme: 'bubble',
-        onfilter: function(match) {
-          console.log(match);
-        },
         onchange: function(value, text) {
           var plugins = value;
           $.each(plugins.split(','), function(key, plugin) {
