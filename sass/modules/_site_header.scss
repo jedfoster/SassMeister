@@ -180,27 +180,51 @@
   }
 }
 
-.control {
-  #control_actions {
-    display: none;
+
+.control_links {
+  @extend .social_links;
+  
+  float: left;
+  margin-left: 7.5%;
+  
+  > li:last-child {
+    padding-left: 0;
   }
 
-  &:hover #control_actions {
-    display: block;
-  }
+  > li {
+    padding: 0;
   
-  .control-icon {
-    color: $white;
-    line-height: em(60);
-    text-shadow: 0 0 5px darken($alpha_color, 10%);
+    #control_actions, #cloud_actions {
+      display: none;
+    }
 
     &:hover {
       color: darken($alpha_color, 40%);
       text-shadow: 0 0 5px $white;
+      background: scale-color($alpha_color, $lightness: -70%);
+    
+      #control_actions, #cloud_actions {
+        display: block;
+      }
+    }
+  
+    .control-icon, .cloud-icon {
+      color: $white;
+      line-height: em(60);
+      text-shadow: 0 0 5px darken($alpha_color, 10%);
+      width: 4.5em;
+      text-align: center;
+    
+      border-right: 1px solid darken($alpha_color, 5%);
+      border-left: 1px solid darken($alpha_color, 5%);
+      background: transparentize(darken($alpha_color, 15%), 0.6);
     }
   }
 }
 
-#control_actions {
+#control_actions, #cloud_actions {
   @extend #account_actions;
+  
+  left: 0;
+  right: initial;
 }
