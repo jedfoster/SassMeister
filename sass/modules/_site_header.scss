@@ -20,6 +20,16 @@
   }
 }
 
+%header-button {
+  color: $white;
+  line-height: em(60);
+  text-shadow: 0 0 5px darken($alpha_color, 10%);
+
+  &:hover {
+    text-shadow: 0 0 5px $white;
+  }
+}
+
 .site_header {
   position: relative;
   height: em(60);
@@ -28,20 +38,13 @@
   background: $alpha_color_charlie;
 
   a {
-    color: $white;
-    line-height: em(60);
-    text-shadow: 0 0 5px darken($alpha_color, 10%);
+    @extend %header-button;
+    
+    &:hover:after {
+      @extend %tooltip;
 
-    &:hover {
-      color: darken($alpha_color, 40%);
-      text-shadow: 0 0 5px $white;
-
-      &:after {
-        @extend %tooltip;
-
-        @media #{$mobile} {
-          display: none;
-        }
+      @media #{$mobile} {
+        display: none;
       }
     }
   }
@@ -83,9 +86,11 @@
   > li {
     display: block;
     float:left;
-    padding-right: em(15);
+    padding: 0 em(15);
     line-height: em(1);
     position: relative;
+    min-width: 3.5em;
+    text-align: center;
 
     &:last-child {
       @extend %omega;
@@ -103,38 +108,25 @@
     margin: em(10) 0;
   }
 
-  > li:nth-last-child(2) {
-    border-right: 1px solid darken($alpha_color, 5%);
-    box-shadow: inset -1px 0px 0px 0px transparentize(white, 0.8);
+  > li {
+    border-left: 1px solid darken($alpha_color, 5%);
+    box-shadow: inset 1px 0px 0px 0px transparentize(white, 0.8);
 
     @media #{$mobile} {
       padding-right: em(12);
     }
   }
-  > li:last-child {
-    padding-left: em(16);
-
-    @media #{$mobile} {
-      padding-left: em(8);
-    }
-  }
-
-  @media #{$mobile} {
-    li:nth-child(2) {
-      display:none;
-    }
-  }
 }
 
 .github {
-  ul {
+  > ul {
     display:none;
   }
 
   &:hover {
     background: scale-color($alpha_color, $lightness: -70%);
 
-    ul {
+    > ul {
       display: block;
     }
   }
@@ -180,53 +172,20 @@
   }
 }
 
-
-.control_links {
+.social_links {
   @extend .social_links;
   
-  float: left;
-  margin-left: 7.5%;
-  
-  > li:last-child {
-    padding-left: 0;
-  }
-
-  > li {
-    padding: 0;
-  
-    #control_actions, #cloud_actions {
-      display: none;
-    }
-
-    &:hover {
-      color: darken($alpha_color, 40%);
-      text-shadow: 0 0 5px $white;
-      background: scale-color($alpha_color, $lightness: -70%);
-    
-      #control_actions, #cloud_actions {
-        display: block;
-      }
-    }
+  > li {  
+    @extend .github;
   
     .control-icon, .cloud-icon {
-      color: $white;
-      line-height: em(60);
-      text-shadow: 0 0 5px darken($alpha_color, 10%);
-      width: 4.5em;
-      text-align: center;
-    
-      border-right: 1px solid darken($alpha_color, 5%);
-      border-left: 1px solid darken($alpha_color, 5%);
-      background: transparentize(darken($alpha_color, 15%), 0.6);
+      @extend %header-button;
     }
   }
 }
 
 #control_actions, #cloud_actions {
   @extend #account_actions;
-  
-  left: 0;
-  right: initial;
   
   > li {
     padding: 0.5em 0;
