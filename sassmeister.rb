@@ -77,7 +77,7 @@ class SassMeisterApp < Sinatra::Base
   end
 
   get '/' do
-    if ! params.empty?
+    if ! params.keys.grep(/(extension|syntax|output)/).empty?
       extension = params[:extension].split(',') || []
       syntax = (params[:syntax].downcase rescue 'scss')
       output = (params[:output].downcase rescue 'expanded')
