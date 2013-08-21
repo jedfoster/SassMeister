@@ -20,8 +20,9 @@
   }
 
   pre {
-    width: 100%;
-    height: 100%;
+    @extend %stretch;
+
+    top: 2em;
     font-size: em($small_point_size);
     line-height: 1.5;
     outline: none;

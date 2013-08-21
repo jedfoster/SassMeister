@@ -1,6 +1,7 @@
 .site_footer {
   @extend %stretch;
 
+  position: fixed;
   top: auto;
   display: block;
   height: em(32);
