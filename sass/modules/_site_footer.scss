@@ -31,11 +31,4 @@
   .copyright {
     text-align: right;
   }
-
-  @media #{$mobile} {
-    @include grid(12);
-
-    margin: 0 em(18);
-    text-align: left;
-  }
 }
