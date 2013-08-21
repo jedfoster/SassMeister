@@ -28,6 +28,7 @@ var SassMeister;
 
       this.inputs.syntax = $('select[name=syntax]').minimalect({
         empty: '',
+        theme: 'bubble',
         onchange: function(value, text) {
           SassMeister.inputs.syntax = value;
       
@@ -41,6 +42,7 @@ var SassMeister;
       
       this.inputs.output = $('select[name=output]').minimalect({
         empty: '',
+        theme: 'bubble',
         onchange: function(value, text) {
           SassMeister.inputs.output = value;
       
@@ -52,6 +54,7 @@ var SassMeister;
       
       this.inputs.plugin = $('select[name=plugin]').minimalect({
         empty: '',
+        theme: 'bubble',
         onfilter: function(match) {
           console.log(match);
         },
