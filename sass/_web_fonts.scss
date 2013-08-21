@@ -168,3 +168,11 @@
     content: "\e002";
   }
 }
+
+.cloud-icon {
+  @extend %icon-font;
+  
+  &:before {
+    content: "\e003";
+  }
+}
