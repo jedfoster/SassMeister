@@ -227,4 +227,8 @@
   
   left: 0;
   right: initial;
+  
+  > li {
+    padding: 0.5em 0;
+  }
 }
