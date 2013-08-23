@@ -74,7 +74,7 @@
 			// apply the current theme to the wrapper
 			if(this.options.theme) this.wrapper.addClass(this.options.theme);
 			// create and add the input
-			this.input = $('<input type="text" value="'+(this.element.val() || "")+'" placeholder="'+(this.element.val() || this.options.placeholder)+'" '+ (this.element.is('[tabindex]') ? ('tabindex='+this.element.attr('tabindex')) : '') +' />').appendTo(this.wrapper);
+			this.input = $('<input type="text" value="'+(this.element.find("option[selected]").html() || "")+'" placeholder="'+(this.element.find("option[selected]").html() || this.options.placeholder)+'" '+ (this.element.is('[tabindex]') ? ('tabindex='+this.element.attr('tabindex')) : '') +' />').appendTo(this.wrapper);
 
 			// parse the select itself, and create the dropdown markup
 			this.ul = $('<ul>'+m.parseSelect()+'<li class="'+m.options.class_empty+'">'+m.options.empty+'</li></ul>').appendTo(this.wrapper);
