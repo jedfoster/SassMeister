@@ -5,7 +5,7 @@
     @extend %stretch;
 
     display: block;
-    padding-top: 1.5em;
+    margin-top: 1.5em;
   }
 
   .edit-header {
@@ -22,7 +22,6 @@
   pre {
     @extend %stretch;
 
-    top: 2em;
     font-size: em($small_point_size);
     line-height: 1.5;
     outline: none;
@@ -31,4 +30,24 @@
   .ace_editor {
     font-family: $monospace-font-family;
   }
+}
+
+.syntax-toggle {
+  color: $alpha_color_charlie;
+  font-size: 0.75em;
+  padding: 0 0.5em;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &.selected {
+    font-weight: bold;
+    color: $alpha_color;
+    font-size: 1em;
+  }
+}
+
+.output-toggle {
+  @extend .syntax-toggle;
 }

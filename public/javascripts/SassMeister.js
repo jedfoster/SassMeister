@@ -284,7 +284,13 @@ var SassMeister;
         SassMeister.inputs.sass.setValue(SassMeister.storedInputs.sass);
         SassMeister.inputs.sass.clearSelection();
         $('select[name="syntax"]').val(SassMeister.storedInputs.syntax).data('original', SassMeister.storedInputs.syntax);
+
+          $('.syntax-toggle.' + SassMeister.storedInputs.syntax).addClass('selected');
+
         $('select[name="output"]').val(SassMeister.storedInputs.output);
+
+          $('.output-toggle.' + SassMeister.storedInputs.output).addClass('selected');
+
         // $('select[name="html-syntax"]').val(this.storedInputs.html_syntax);
       }
     },
