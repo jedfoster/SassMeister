@@ -24,31 +24,43 @@ var SassMeister;
         else {
           $('#save-gist').text('Save Gist').data('action', 'create').attr('class', 'create-gist');
         }
-      }     
+      }
+
+      $('#sass-form .panel-toggle .selected').text(SassMeister.storedInputs.syntax);
+      $('.css_output .panel-toggle .selected').text(SassMeister.storedInputs.output);
+
+      $('.panel-toggle li span').on('click', function(event) {
+        event.preventDefault();
+
+        var selected = $(this).data('toggle-value');
+
+        console.log($(this).parents('.panel-toggle').find('.selected').text(selected));
+      });
+
 
       this.inputs.syntax = $('select[name=syntax]').minimalect({
         placeholder: 'Select a syntax',
         onchange: function(value, text) {
           SassMeister.inputs.syntax = value;
-      
+
           // _gaq.push(['_trackEvent', 'Form', 'Control', this.value]);
-      
+
           SassMeister.convert.sass(true);
         }
       }).val();
-      
+
       $('[name="syntax"]').data('original', SassMeister.inputs.syntax);
-      
+
       this.inputs.output = $('select[name=output]').minimalect({
         onchange: function(value, text) {
           SassMeister.inputs.output = value;
-      
+
           // _gaq.push(['_trackEvent', 'Form', 'Control', this.value]);
-      
+
           SassMeister.compile.sass();
         }
       }).val();
-      
+
       this.inputs.plugin = $('select[name=plugin]').minimalect({
         placeholder: 'vanilla Sass&nbsp;&nbsp;(v' + $('select[name=plugin]').data('sass-version') + ')',
         onchange: function(value, text) {
@@ -261,10 +273,10 @@ var SassMeister;
     setHeight: function() {
       // if ($("html").width() > 50 * 18) {
       //   var html = $("html").height(), header = $(".site_header").height(), footer = $(".site_footer").height(), controls = $('.sass_input .controls').height() + $('.sass_input .edit-header').height() + 52;
-      // 
+      //
       //   $('.pre_container, .ace_scroller').css('height', html - header - footer - controls);
       // }
-      // 
+      //
       // else {
       //   $('.pre_container, .ace_scroller').css('height', 480);
       // }
@@ -285,11 +297,11 @@ var SassMeister;
         SassMeister.inputs.sass.clearSelection();
         $('select[name="syntax"]').val(SassMeister.storedInputs.syntax).data('original', SassMeister.storedInputs.syntax);
 
-          $('.syntax-toggle.' + SassMeister.storedInputs.syntax).addClass('selected');
+          // $('.syntax-toggle.' + SassMeister.storedInputs.syntax).addClass('selected');
 
         $('select[name="output"]').val(SassMeister.storedInputs.output);
 
-          $('.output-toggle.' + SassMeister.storedInputs.output).addClass('selected');
+          // $('.output-toggle.' + SassMeister.storedInputs.output).addClass('selected');
 
         // $('select[name="html-syntax"]').val(this.storedInputs.html_syntax);
       }

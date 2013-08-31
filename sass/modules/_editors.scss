@@ -9,12 +9,12 @@
   }
 
   .edit-header {
+    text-align: left;
     display: block;
     margin: 0;
     height: em($heading_3);
     font-size: 1em;
     font-weight: 200;
-    text-align: center;
     color: $delta_gray;
     border-bottom: 1px solid $golf_gray;
   }
@@ -32,22 +32,45 @@
   }
 }
 
-.syntax-toggle {
-  color: $alpha_color_charlie;
-  font-size: 0.75em;
-  padding: 0 0.5em;
+.panel-toggle {
+  padding: 0 0.83333em;
+  display: inline-block;
+  width: auto;
+
+  > ul {
+    display:none;
+
+    background: transparentize(scale-color($alpha_color, $lightness: -80%), 0.2);
+    position: absolute;
+    z-index: 9999;
+    top: em($heading_3);
+    left: 0;
+    width: em(200);
+
+    @each $prefix in $prefix_defaults {
+      #{$prefix}border-bottom-left-radius: em(3);
+      #{$prefix}border-bottom-right-radius: em(3);
+    }
+
+    > li {
+      width: 100%;
+      display: block;
+      color: $white;
+      padding: 0.41665em 0.83333em;
+
+      &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+      }
+    }
+  }
 
   &:hover {
-    cursor: pointer;
-  }
+    color: $white;
+    background: transparentize(scale-color($alpha_color, $lightness: -80%), 0.2);
 
-  &.selected {
-    font-weight: bold;
-    color: $alpha_color;
-    font-size: 1em;
+    > ul {
+      display: block;
+    }
   }
-}
-
-.output-toggle {
-  @extend .syntax-toggle;
 }

@@ -74,6 +74,8 @@ class SassMeisterApp < Sinatra::Base
     @github = Chairman.session(session[:github_token])
     @gist = nil
     @plugins = plugins
+    
+    params[:syntax].downcase! unless params[:syntax].nil?
   end
 
   get '/' do
