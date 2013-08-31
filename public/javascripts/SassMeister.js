@@ -26,40 +26,47 @@ var SassMeister;
         }
       }
 
-      $('#sass-form .panel-toggle .selected').text(SassMeister.storedInputs.syntax);
-      $('.css_output .panel-toggle .selected').text(SassMeister.storedInputs.output);
-
       $('.panel-toggle li span').on('click', function(event) {
         event.preventDefault();
 
-        var selected = $(this).data('toggle-value');
+        var selected = $(this).data('toggle-value'),
+            input = $(this).data('toggle-input');
 
-        console.log($(this).parents('.panel-toggle').find('.selected').text(selected));
+        SassMeister.inputs[input] = selected;
+
+        $(this).parents('.panel-toggle').find('.selected').text(selected);
+
+        console.log(input);
+
+        if (input == 'syntax') {
+          SassMeister.convert.sass(true);
+        }
+        if (input == 'output') {
+          SassMeister.compile.sass();
+        }
       });
 
 
-      this.inputs.syntax = $('select[name=syntax]').minimalect({
-        placeholder: 'Select a syntax',
-        onchange: function(value, text) {
-          SassMeister.inputs.syntax = value;
 
-          // _gaq.push(['_trackEvent', 'Form', 'Control', this.value]);
+      if(SassMeister.storedInputs == null || !SassMeister.storedInputs.syntax) {
+        $('#syntax').text('SCSS').data('original', 'SCSS');
+        this.inputs.syntax = 'SCSS';
+      }
+      else {
+        $('#syntax').text(SassMeister.storedInputs.syntax).data('original', SassMeister.storedInputs.syntax);
+        this.inputs.syntax = SassMeister.storedInputs.syntax;
+      }
 
-          SassMeister.convert.sass(true);
-        }
-      }).val();
 
-      $('[name="syntax"]').data('original', SassMeister.inputs.syntax);
+      if(SassMeister.storedInputs == null || !SassMeister.storedInputs.output) {
+        $('#output').text('expanded');
+        this.inputs.output = 'expanded';
+      }
+      else {
+        $('#output').text(SassMeister.storedInputs.output);
+        this.inputs.output = SassMeister.storedInputs.output;
+      }
 
-      this.inputs.output = $('select[name=output]').minimalect({
-        onchange: function(value, text) {
-          SassMeister.inputs.output = value;
-
-          // _gaq.push(['_trackEvent', 'Form', 'Control', this.value]);
-
-          SassMeister.compile.sass();
-        }
-      }).val();
 
       this.inputs.plugin = $('select[name=plugin]').minimalect({
         placeholder: 'vanilla Sass&nbsp;&nbsp;(v' + $('select[name=plugin]').data('sass-version') + ')',
@@ -77,13 +84,9 @@ var SassMeister;
       this.outputs.css.getSession().$useWorker=false
       this.outputs.css.getSession().setMode("ace/mode/css");
 
-      $(window).resize(this.setHeight);
-
       if ($("html").width() > 50 * 18) {
         $('#footer').addClass('reveal-modal large').prepend('<a href="#" class="close-icon"><span class="alt">&#215;</span></a>').hide();
       }
-
-      this.setHeight();
 
       this.compile.sass();
 
@@ -101,9 +104,9 @@ var SassMeister;
 
     inputs: {
       sass: '',
-      syntax: '',
+      syntax: 'SCSS',
       plugin: '',
-      output: ''
+      output: 'expanded'
     },
 
     outputs: {
@@ -126,8 +129,10 @@ var SassMeister;
         $.post('/compile', inputs, function( data ) {
           SassMeister.outputs.css.setValue(data,-1);
 
-          $('[name="syntax"]').data('original', inputs.syntax);
+          $('#syntax').data('original', inputs.syntax);
         });
+
+        // console.log(SassMeister);
 
         SassMeister.setStorage(inputs);
       }
@@ -148,7 +153,7 @@ var SassMeister;
           var inputs = {
             sass: SassMeister.inputs.sass.getValue(),
             syntax: SassMeister.inputs.syntax,
-            original_syntax: $('[name="syntax"]').data('original'),
+            original_syntax: $('#syntax').data('original'),
             output: SassMeister.inputs.output
           }
 
@@ -157,7 +162,7 @@ var SassMeister;
 
             SassMeister.inputs.sass.setValue(data, -1);
 
-            $('[name="syntax"]').data('original', inputs.syntax);
+            $('#syntax').data('original', inputs.syntax);
 
             SassMeister.setStorage({
               sass: data,
@@ -270,18 +275,6 @@ var SassMeister;
       });
     },
 
-    setHeight: function() {
-      // if ($("html").width() > 50 * 18) {
-      //   var html = $("html").height(), header = $(".site_header").height(), footer = $(".site_footer").height(), controls = $('.sass_input .controls').height() + $('.sass_input .edit-header').height() + 52;
-      //
-      //   $('.pre_container, .ace_scroller').css('height', html - header - footer - controls);
-      // }
-      //
-      // else {
-      //   $('.pre_container, .ace_scroller').css('height', 480);
-      // }
-    },
-
     storedInputs: null,
 
     getStorage: function() {
@@ -295,15 +288,6 @@ var SassMeister;
       if( SassMeister.storedInputs !== null) {
         SassMeister.inputs.sass.setValue(SassMeister.storedInputs.sass);
         SassMeister.inputs.sass.clearSelection();
-        $('select[name="syntax"]').val(SassMeister.storedInputs.syntax).data('original', SassMeister.storedInputs.syntax);
-
-          // $('.syntax-toggle.' + SassMeister.storedInputs.syntax).addClass('selected');
-
-        $('select[name="output"]').val(SassMeister.storedInputs.output);
-
-          // $('.output-toggle.' + SassMeister.storedInputs.output).addClass('selected');
-
-        // $('select[name="html-syntax"]').val(this.storedInputs.html_syntax);
       }
     },
 

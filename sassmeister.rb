@@ -76,6 +76,7 @@ class SassMeisterApp < Sinatra::Base
     @plugins = plugins
     
     params[:syntax].downcase! unless params[:syntax].nil?
+    params[:original_syntax].downcase! unless params[:original_syntax].nil?
   end
 
   get '/' do

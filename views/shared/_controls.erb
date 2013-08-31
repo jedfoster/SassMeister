@@ -1,30 +1,12 @@
 <ul id="control_actions">
 
   <li>
-    <label for="syntax">Syntax</label>
-    <select name="syntax" data-original="">
-      <option value="SCSS">SCSS</option>
-      <option value="Sass">Sass</option>
-    </select>      
-  </li>
-
-  <li>
     <label for="output">Extension (inserted at cursor)</label>
     <select name="plugin" data-sass-version="<%=Gem.loaded_specs["sass"].version%>">
       <option value="">vanilla Sass&nbsp;&nbsp;(v<%=Gem.loaded_specs["sass"].version%>)</option>
       <% @plugins.each do |plugin| %>
         <option value="<%= plugin.last[:import].to_s.gsub(/(\"|\[|\]|\s*)/, '') %>"><%=plugin.first %>&nbsp;&nbsp;(v<%=plugin.last[:version]%>)</option>
       <% end %>
-    </select>
-  </li>
-
-  <li>
-    <label for="output">Output Style</label>
-    <select name="output">
-      <option value="expanded" selected>expanded</option>
-      <option value="nested">nested</option>
-      <option value="compact">compact</option>
-      <option value="compressed">compressed</option>
     </select>
   </li>
 
