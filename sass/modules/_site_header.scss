@@ -186,7 +186,7 @@
   > li {  
     @extend .github;
   
-    .control-icon, .cloud-icon {
+    > * {
       @extend %header-button;
     }
   }
