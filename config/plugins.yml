@@ -22,6 +22,12 @@ Breakpoint:
     - breakpoint-slicer
   :fingerprint: breakpoint-slicer
   :url: https://github.com/lolmaus/breakpoint-slicer
+Breakup:
+  :gem: breakup
+  :import: 
+    - breakup
+  :fingerprint: breakup
+  :url: https://github.com/BPScott/breakup
 "Color Schemer":
   :gem: color-schemer
   :import: 

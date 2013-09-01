@@ -71,6 +71,31 @@ Each block of SCSS should return valid CSS with no warnings or errors when teste
     }
 
 
+## Breakup ##
+
+    @import "breakup";
+
+    $breakup-included-blocks: ('basic' 'thin' 'wide' 'full');
+
+    $breakup-breakpoints: (
+      'thin' '(max-width: 35.999em)',
+      'wide' '(min-width: 36em)',
+      'full' '(min-width: 61em)'
+    );
+
+    @include breakup-block('basic') {
+      .component { background-color: red; }
+    }
+
+    @include breakup-breakpoint('thin') {
+      .component { background-color: blue; }
+    }
+
+    @include breakup-breakpoint('wide') {
+      .component { background-color: green; }
+    }
+
+
 ## Color Schemer ##
 
     @import "color-schemer";
