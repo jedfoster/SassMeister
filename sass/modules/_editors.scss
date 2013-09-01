@@ -37,6 +37,16 @@
   display: inline-block;
   width: auto;
 
+  .selected {
+    &:after {
+      @extend %icon-pseudo-content;
+
+      content: "\f0d7";
+      margin: 0 0.33333em;
+      font-size: 0.83333em;
+    }
+  }
+
   > ul {
     display:none;
 
@@ -68,6 +78,13 @@
   &:hover {
     color: $white;
     background: transparentize(scale-color($alpha_color, $lightness: -80%), 0.2);
+
+    .selected {
+
+      &:after {
+        content: "\f0d8";
+      }
+    }
 
     > ul {
       display: block;
