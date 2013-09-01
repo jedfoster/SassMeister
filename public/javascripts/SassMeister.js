@@ -11,20 +11,19 @@ var SassMeister;
 
       this.getStorage();
 
-      if($('#save-gist')) {
-        if(this.storedInputs !== null && this.storedInputs.gist_id !== null) {
-          if (this.storedInputs.can_update_gist !== null) {
-            $('#save-gist').text('Update Gist').data('action', 'edit').attr('class', 'edit-gist');
-          }
-          else {
-            $('#save-gist').text('Fork Gist').data('action', 'fork').attr('class', 'fork-gist');
-          }
-        }
 
+      if (gist) {
+        if (gist.can_update_gist) {
+          $('#save-gist').data('action', 'edit').attr('class', 'edit-gist').find('span').text('Update Gist');
+        }
         else {
-          $('#save-gist').text('Save Gist').data('action', 'create').attr('class', 'create-gist');
+          $('#save-gist').data('action', 'fork').attr('class', 'fork-gist').find('span').text('Fork Gist');
         }
       }
+      else {
+        $('#save-gist').data('action', 'create').attr('class', 'create-gist').find('span').text('Save Gist');
+      }
+
 
       $('.panel-toggle li span').on('click', function(event) {
         event.preventDefault();
@@ -278,7 +277,7 @@ var SassMeister;
     storedInputs: null,
 
     getStorage: function() {
-      if(typeof(gist) !== "undefined" && gist.trim !== '') {
+      if(gist) {
         SassMeister.storedInputs = gist;
       }
       else {

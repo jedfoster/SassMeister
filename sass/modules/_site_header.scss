@@ -40,12 +40,18 @@
 
   a {
     @extend %header-button;
-    
-    &:hover:after {
-      @extend %tooltip;
 
-      @media #{$mobile} {
-        display: none;
+    &:hover {
+      span {
+        text-decoration: underline;
+      }
+
+      &:after {
+        @extend %tooltip;
+
+        @media #{$mobile} {
+          display: none;
+        }
       }
     }
   }
@@ -74,7 +80,7 @@
       left: 5px;
     }
   }
-  
+
   .tagline {
     display: block;
     padding-top: 1.33333em;
@@ -159,7 +165,7 @@
   > li {
     width: 100%;
     display: block;
-    
+
     &:before {
       font-size: 0.75em;
       margin-right: 0.5em;
@@ -182,10 +188,10 @@
 
 .social_links {
   @extend .social_links;
-  
-  > li {  
+
+  > li {
     @extend .github;
-  
+
     > * {
       @extend %header-button;
     }
@@ -194,7 +200,7 @@
 
 #control_actions, #cloud_actions {
   @extend #account_actions;
-  
+
   > li {
     padding: 0.5em 0;
   }

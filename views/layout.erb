@@ -36,12 +36,12 @@
 	</section>
 	<%= partial :"shared/_footer" %>
 	
-	<% if ! @gist.nil? %>
+
     <script>
-      var gist = <%= @gist || '' %>;
+      var gist = <%= @gist || 'false' %>;
     </script>
 
-  <% end %>
+
 
   <% if settings.environment == :production %>
 	  <script src="/javascripts/app.js"></script>

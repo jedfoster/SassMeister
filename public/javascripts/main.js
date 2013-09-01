@@ -35,7 +35,5 @@
 
     SassMeister.reset();
   });
-
-
   
 })(jQuery);

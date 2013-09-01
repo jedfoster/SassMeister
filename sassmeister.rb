@@ -178,7 +178,7 @@ class SassMeisterApp < Sinatra::Base
       else      
         sass = file.content
         filename = file.filename
-        owner = response.owner.login
+        owner = (response.respond_to?(:owner) ? response.owner.login : '')
   
         syntax = file.filename.slice(-4, 4)
       end

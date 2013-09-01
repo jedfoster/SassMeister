@@ -10,11 +10,8 @@
     
     <li><span class="cloud-icon"><span class="alt">Save</span></span>
       <ul id="cloud_actions">
-        <% if @github.authenticated? %>
-          <li><a href="#" id="save-gist"></a></li>
-        <% end %>
-
-        <li><a href="#" class="reset-icon" id="reset">Reset</a></li>
+        <li><a href="#" id="save-gist"><span></span></a></li>
+        <li><a href="#" class="reset-icon" id="reset"><span>Reset</span></a></li>
       </ul>
     </li>
     
@@ -27,7 +24,7 @@
       <li class="github"><span><img src="http://www.gravatar.com/avatar/<%=session[:gravatar_id]%>?s=80" alt="" height="40"></span>
         <ul id="account_actions">
           <li class="checkmark-icon">Logged in as <%=session[:github_id]%></li>
-          <li class="off-icon"><a href="/logout">Logout</a></li>
+          <li class="off-icon"><a href="/logout"><span>Logout</span></a></li>
         </ul>
       </li>
 
