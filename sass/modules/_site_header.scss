@@ -35,6 +35,8 @@
   height: em(60);
   border-bottom: 1px solid scale-color($alpha_color, $lightness: -50%);
   background: $alpha_color_charlie;
+  color: $white;
+  text-shadow: 0 0 5px darken($alpha_color, 10%);
 
   a {
     @extend %header-button;
@@ -51,8 +53,7 @@
   .logo {
     @extend %icon-font;
 
-    position: relative;
-    left: 15px;
+    margin-left: 15px;
     float: left;
 
     &:before {
@@ -72,6 +73,15 @@
     @media #{$mobile} {
       left: 5px;
     }
+  }
+  
+  .tagline {
+    display: block;
+    padding-top: 1.33333em;
+    float: left;
+    font-size: 1em;
+    margin-left: 1em;
+    font-weight: 200;
   }
 }
 
