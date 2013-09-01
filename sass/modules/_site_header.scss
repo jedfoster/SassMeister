@@ -62,11 +62,10 @@
     }
 
     &:hover {
+      text-shadow: 0 0 5px darken($alpha_color, 10%);
+
       &:after {
-        top: em(60);
-        width: em(240);
-        margin-left: em(-10);
-        left: 0;
+        display: none;
       }
     }
 
