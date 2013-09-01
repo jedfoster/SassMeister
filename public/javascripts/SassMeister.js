@@ -47,23 +47,23 @@ var SassMeister;
 
 
 
-      if(SassMeister.storedInputs == null || !SassMeister.storedInputs.syntax) {
+      if (this.storedInputs == null || !this.storedInputs.syntax) {
         $('#syntax').text('SCSS').data('original', 'SCSS');
         this.inputs.syntax = 'SCSS';
       }
       else {
-        $('#syntax').text(SassMeister.storedInputs.syntax).data('original', SassMeister.storedInputs.syntax);
-        this.inputs.syntax = SassMeister.storedInputs.syntax;
+        $('#syntax').text(this.storedInputs.syntax).data('original', this.storedInputs.syntax);
+        this.inputs.syntax = this.storedInputs.syntax;
       }
 
 
-      if(SassMeister.storedInputs == null || !SassMeister.storedInputs.output) {
+      if (this.storedInputs == null || !this.storedInputs.output) {
         $('#output').text('expanded');
         this.inputs.output = 'expanded';
       }
       else {
-        $('#output').text(SassMeister.storedInputs.output);
-        this.inputs.output = SassMeister.storedInputs.output;
+        $('#output').text(this.storedInputs.output);
+        this.inputs.output = this.storedInputs.output;
       }
 
 
