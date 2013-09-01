@@ -11,20 +11,24 @@
 	border-radius: $border-radius;
 	
   &:after {
-		content: "\25BC";
+    @extend %icon-pseudo-content;
+    // content: "\25BC";
+		content: "\f0d7";
 		display: block;
 		position: absolute;
 		height: 2.1rem;
 		width: 2.1rem;
 		top: 0;
 		right: 0;
-		font-size: 0.6rem;
-		line-height: 1.9rem;
+    line-height: 1.5em;
 		text-align: center;
 	}
 	
 	&.active:after {
-		content: "\25B2";
+	  @extend %icon-pseudo-content;
+
+		content: "\f0d8";
+		line-height: 1.3em;
 	}
 	
 	input {
