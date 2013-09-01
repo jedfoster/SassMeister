@@ -14,6 +14,9 @@ GEM
       breakpoint (>= 2.0.1)
       compass (>= 0.12.2)
       sass (>= 3.2.1)
+    breakup (0.2.1)
+      compass (>= 0.12.2)
+      sass (>= 3.2.0)
     chairman (0.0.1)
       github_api (~> 0.10.2)
       sinatra (~> 1.4.3)
@@ -157,6 +160,7 @@ DEPENDENCIES
   bourbon-compass
   breakpoint
   breakpoint-slicer
+  breakup
   chairman
   closure-compiler
   color-schemer
