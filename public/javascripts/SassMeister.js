@@ -259,7 +259,7 @@ var SassMeister;
 
     modal: function(content) {
       if ($('#modal').length == 0) {
-        $('body').append('<div class="reveal-modal large" id="modal"><a href="#" class="close-icon"><span class="alt">&#215;</span></a><span class="content">' + content + '</span></div>');
+        $('body').append('<div class="reveal-modal large" id="modal"><a class="close-icon"><span class="alt">&#215;</span></a><span class="content">' + content + '</span></div>');
       }
       else {
         $('#modal .content').empty();
