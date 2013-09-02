@@ -1,4 +1,5 @@
 <div id="source" class="stretch"></div>
+
 <div id="panelswaiting">
   <div class="code stretch sass panel" data-name="sass">
     <%= partial :"shared/_sass_input" %>
@@ -6,8 +7,11 @@
   <div class="code stretch css panel" data-name="css">
     <%= partial :"shared/_sass_output" %>
   </div>
+  
+  <div class="code stretch html panel" data-name="html">
+    <%= partial :"shared/_html_input" %>
+  </div>  
+  <div class="code stretch rendered panel" data-name="rendered">
+    <iframe class="html_output" id="rendered-html" src="/compile"></iframe>
+  </div>
 </div>
-
-
-<%# partial :"shared/_html_input" %>
-<%# partial :"shared/_html_output" %>

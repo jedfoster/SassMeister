@@ -9,6 +9,10 @@ var SassMeister;
       this.inputs.sass.getSession().setMode("ace/mode/scss");
       this.inputs.sass.focus();
 
+      this.inputs.html = ace.edit("html");
+      this.inputs.html.setTheme("ace/theme/tomorrow");
+      this.inputs.html.getSession().setMode("ace/mode/html");
+
       this.getStorage();
 
 
@@ -56,7 +60,6 @@ var SassMeister;
         this.inputs.syntax = this.storedInputs.syntax;
       }
 
-
       if (this.storedInputs == null || !this.storedInputs.output) {
         $('#output').text('expanded');
         this.inputs.output = 'expanded';
@@ -64,6 +67,15 @@ var SassMeister;
       else {
         $('#output').text(this.storedInputs.output);
         this.inputs.output = this.storedInputs.output;
+      }
+      
+      if (this.storedInputs == null || !this.storedInputs.html_syntax) {
+        $('#html-input').text('HTML');
+        this.inputs.html_syntax = 'HTML';
+      }
+      else {
+        $('#html-input').text(this.storedInputs.html_syntax);
+        this.inputs.html_syntax = this.storedInputs.html_syntax;
       }
 
 
@@ -97,6 +109,15 @@ var SassMeister;
           SassMeister.compile.sass();
         }
       }, 750);
+      
+      $(this.inputs.html.getSession()).bindWithDelay('change', function(event) {
+        if(SassMeister.internalValueChange == true) {
+          SassMeister.internalValueChange = false;
+        }
+        else {
+          SassMeister.convert.html();
+        }
+      }, 750);
 
       return this;
     },
@@ -105,11 +126,14 @@ var SassMeister;
       sass: '',
       syntax: 'SCSS',
       plugin: '',
-      output: 'expanded'
+      output: 'expanded',
+      html: '',
+      html_syntax: 'HTML'
     },
 
     outputs: {
-      css: ''
+      css: '',
+      html: ''
     },
 
     timer: null,
@@ -173,7 +197,29 @@ var SassMeister;
         else {
           SassMeister.compile.sass();
         }
-      }
+      },
+
+      html: function() {
+        var inputs = {
+              html: SassMeister.inputs.html.getValue(),
+              html_syntax: $('select[name="html-syntax"]').val()
+            };
+
+        // _gaq.push(['_trackEvent', 'Form', 'Submit']);
+
+        /* Post the form and handle the returned data */
+        $.post('/compile', inputs,
+          function( data) {
+
+            $('#rendered-html').contents().find('head > style').text(SassMeister.outputs.css.getValue());
+
+            $('#rendered-html').contents().find('body').html(data);
+
+          }
+        );
+
+        SassMeister.setStorage(inputs);
+      }      
     },
 
     gist: {
