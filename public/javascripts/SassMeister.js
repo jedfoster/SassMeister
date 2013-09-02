@@ -284,7 +284,18 @@ var SassMeister;
         SassMeister.storedInputs = JSON.parse(localStorage.getItem('inputs'));
       }
 
-      if( SassMeister.storedInputs !== null) {
+      switch (SassMeister.storedInputs.syntax) {
+        case 'scss':
+          SassMeister.storedInputs.syntax = 'SCSS';
+          break;
+        case 'sass':
+          SassMeister.storedInputs.syntax = 'Sass';
+          break;
+        default:
+          break;
+      }
+
+      if(SassMeister.storedInputs) {
         SassMeister.inputs.sass.setValue(SassMeister.storedInputs.sass);
         SassMeister.inputs.sass.clearSelection();
       }
