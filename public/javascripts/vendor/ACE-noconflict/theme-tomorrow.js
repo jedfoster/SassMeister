@@ -42,7 +42,7 @@ exports.cssText = ".ace-tomorrow .ace_editor {\
 \
 .ace-tomorrow .ace_gutter {\
   background: #f6f6f6;\
-  color: #4D4D4C\
+  color: #A7A9A4\
 }\
 \
 .ace-tomorrow .ace_print_margin {\
