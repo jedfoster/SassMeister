@@ -39,8 +39,6 @@ var SassMeister;
 
         $(this).parents('.panel-toggle').find('.selected').text(selected);
 
-        console.log(input);
-
         if (input == 'syntax') {
           SassMeister.convert.sass(true);
         }
@@ -48,7 +46,6 @@ var SassMeister;
           SassMeister.compile.sass();
         }
       });
-
 
 
       if (this.storedInputs == null || !this.storedInputs.syntax) {
@@ -68,13 +65,13 @@ var SassMeister;
         $('#output').text(this.storedInputs.output);
         this.inputs.output = this.storedInputs.output;
       }
-      
+
       if (this.storedInputs == null || !this.storedInputs.html_syntax) {
-        $('#html-input').text('HTML');
+        $('#html-syntax').text('HTML');
         this.inputs.html_syntax = 'HTML';
       }
       else {
-        $('#html-input').text(this.storedInputs.html_syntax);
+        $('#html-syntax').text(this.storedInputs.html_syntax);
         this.inputs.html_syntax = this.storedInputs.html_syntax;
       }
 
@@ -100,6 +97,7 @@ var SassMeister;
       }
 
       this.compile.sass();
+      this.compile.html();
 
       $(this.inputs.sass.getSession()).bindWithDelay('change', function(event) {
         if(SassMeister.internalValueChange == true) {
@@ -109,14 +107,9 @@ var SassMeister;
           SassMeister.compile.sass();
         }
       }, 750);
-      
+
       $(this.inputs.html.getSession()).bindWithDelay('change', function(event) {
-        if(SassMeister.internalValueChange == true) {
-          SassMeister.internalValueChange = false;
-        }
-        else {
-          SassMeister.convert.html();
-        }
+        SassMeister.convert.html();
       }, 750);
 
       return this;
@@ -155,7 +148,25 @@ var SassMeister;
           $('#syntax').data('original', inputs.syntax);
         });
 
-        // console.log(SassMeister);
+        SassMeister.setStorage(inputs);
+      },
+
+      html: function() {
+        var inputs = {
+              html: SassMeister.inputs.html.getValue(),
+              html_syntax: SassMeister.inputs.html_syntax
+            };
+
+        // _gaq.push(['_trackEvent', 'Form', 'Submit']);
+
+        /* Post the form and handle the returned data */
+        $.post('/compile', inputs,
+          function( data) {
+            $('#rendered-html').contents().find('head > style').text(SassMeister.outputs.css.getValue());
+
+            $('#rendered-html').contents().find('body').html(data);
+          }
+        );
 
         SassMeister.setStorage(inputs);
       }
@@ -197,29 +208,7 @@ var SassMeister;
         else {
           SassMeister.compile.sass();
         }
-      },
-
-      html: function() {
-        var inputs = {
-              html: SassMeister.inputs.html.getValue(),
-              html_syntax: $('select[name="html-syntax"]').val()
-            };
-
-        // _gaq.push(['_trackEvent', 'Form', 'Submit']);
-
-        /* Post the form and handle the returned data */
-        $.post('/compile', inputs,
-          function( data) {
-
-            $('#rendered-html').contents().find('head > style').text(SassMeister.outputs.css.getValue());
-
-            $('#rendered-html').contents().find('body').html(data);
-
-          }
-        );
-
-        SassMeister.setStorage(inputs);
-      }      
+      }
     },
 
     gist: {
@@ -330,6 +319,8 @@ var SassMeister;
         SassMeister.storedInputs = JSON.parse(localStorage.getItem('inputs'));
       }
 
+      console.log(SassMeister.storedInputs);
+
       switch (SassMeister.storedInputs.syntax) {
         case 'scss':
           SassMeister.storedInputs.syntax = 'SCSS';
@@ -341,10 +332,36 @@ var SassMeister;
           break;
       }
 
+      switch (SassMeister.storedInputs.html_syntax) {
+        case 'html':
+          SassMeister.storedInputs.html_syntax = 'HTML';
+          break;
+        case 'haml':
+          SassMeister.storedInputs.html_syntax = 'Haml';
+          break;
+        case 'slim':
+          SassMeister.storedInputs.html_syntax = 'Slim';
+          break;
+        case 'markdown':
+          SassMeister.storedInputs.html_syntax = 'Markdown';
+          break;
+        case 'textile':
+          SassMeister.storedInputs.html_syntax = 'Textile';
+          break;
+        default:
+          break;
+      }
+
       if(SassMeister.storedInputs) {
         SassMeister.inputs.sass.setValue(SassMeister.storedInputs.sass);
         SassMeister.inputs.sass.clearSelection();
+
+        SassMeister.inputs.html.setValue(SassMeister.storedInputs.html);
+        SassMeister.inputs.html.clearSelection();
       }
+
+
+      console.log(SassMeister.inputs);
     },
 
     setStorage: function(inputs) {
