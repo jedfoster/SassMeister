@@ -92,12 +92,19 @@ var SassMeister;
       this.outputs.css.getSession().$useWorker=false
       this.outputs.css.getSession().setMode("ace/mode/css");
 
+
+      if(this.storedOutputs.css) {
+        this.outputs.css.setValue(this.storedOutputs.css);
+        this.outputs.css.clearSelection();
+      }
+      else {
+        this.compile.sass();
+      }
+
+
       if ($("html").width() > 50 * 18) {
         $('#footer').addClass('reveal-modal large').prepend('<a href="#" class="close-icon"><span class="alt">&#215;</span></a>').hide();
       }
-
-      this.compile.sass();
-      this.compile.html();
 
       $(this.inputs.sass.getSession()).bindWithDelay('change', function(event) {
         if(SassMeister.internalValueChange == true) {
@@ -136,7 +143,7 @@ var SassMeister;
         var inputs = {
               sass: SassMeister.inputs.sass.getValue(),
               syntax: SassMeister.inputs.syntax,
-              output: SassMeister.inputs.output
+              output: SassMeister.inputs.output,
             };
 
         // _gaq.push(['_trackEvent', 'Form', 'Submit']);
@@ -146,29 +153,13 @@ var SassMeister;
           SassMeister.outputs.css.setValue(data,-1);
 
           $('#syntax').data('original', inputs.syntax);
+
+          $('#rendered-html')[0].contentWindow.postMessage(JSON.stringify({
+            css: data
+          }), '*');
+
+          SassMeister.setStorage(inputs, {css: data});
         });
-
-        SassMeister.setStorage(inputs);
-      },
-
-      html: function() {
-        var inputs = {
-              html: SassMeister.inputs.html.getValue(),
-              html_syntax: SassMeister.inputs.html_syntax
-            };
-
-        // _gaq.push(['_trackEvent', 'Form', 'Submit']);
-
-        /* Post the form and handle the returned data */
-        $.post('/compile', inputs,
-          function( data) {
-            $('#rendered-html').contents().find('head > style').text(SassMeister.outputs.css.getValue());
-
-            $('#rendered-html').contents().find('body').html(data);
-          }
-        );
-
-        SassMeister.setStorage(inputs);
       }
     },
 
@@ -202,12 +193,34 @@ var SassMeister;
               sass: data,
               syntax: SassMeister.inputs.syntax,
               output: SassMeister.inputs.output
-            });
+            }, { });
           });
         }
         else {
           SassMeister.compile.sass();
         }
+      },
+
+      html: function() {
+        var inputs = {
+              html: SassMeister.inputs.html.getValue(),
+              html_syntax: SassMeister.inputs.html_syntax
+            };
+
+        // _gaq.push(['_trackEvent', 'Form', 'Submit']);
+
+        /* Post the form and handle the returned data */
+        $.post('/compile', inputs, function( data ) {
+            SassMeister.internalValueChange = true;
+
+            $('#rendered-html')[0].contentWindow.postMessage(JSON.stringify({
+              css: SassMeister.outputs.css.getValue(),
+              html: data
+            }), '*');
+
+            SassMeister.setStorage(inputs, {html: data});
+          }
+        );
       }
     },
 
@@ -279,8 +292,11 @@ var SassMeister;
 
       SassMeister.inputs.sass.setValue('');
       SassMeister.outputs.css.setValue('');
+      SassMeister.inputs.html.setValue('');
+      SassMeister.outputs.html.setValue('');
       localStorage.clear();
-      SassMeister.storedInputs = {},
+      SassMeister.storedInputs = {};
+      SassMeister.storedOutputs = {};
 
       SassMeister.setUrl('/');
     },
@@ -310,6 +326,7 @@ var SassMeister;
     },
 
     storedInputs: null,
+    storedOutputs: null,
 
     getStorage: function() {
       if(gist) {
@@ -318,8 +335,6 @@ var SassMeister;
       else {
         SassMeister.storedInputs = JSON.parse(localStorage.getItem('inputs'));
       }
-
-      console.log(SassMeister.storedInputs);
 
       switch (SassMeister.storedInputs.syntax) {
         case 'scss':
@@ -360,12 +375,12 @@ var SassMeister;
         SassMeister.inputs.html.clearSelection();
       }
 
-
-      console.log(SassMeister.inputs);
+      SassMeister.storedOutputs = $.extend({css: '', html: ''}, JSON.parse(localStorage.getItem('outputs')));
     },
 
-    setStorage: function(inputs) {
+    setStorage: function(inputs, outputs) {
       localStorage.setItem('inputs', JSON.stringify( $.extend(SassMeister.storedInputs, inputs) ));
+      localStorage.setItem('outputs', JSON.stringify( $.extend(SassMeister.storedOutputs, outputs) ));
     }
   };
 

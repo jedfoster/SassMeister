@@ -77,6 +77,7 @@ class SassMeisterApp < Sinatra::Base
     
     params[:syntax].downcase! unless params[:syntax].nil?
     params[:original_syntax].downcase! unless params[:original_syntax].nil?
+    params[:html_syntax].downcase! unless params[:html_syntax].nil?
   end
 
   get '/' do

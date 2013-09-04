@@ -182,4 +182,6 @@ $(window).on('resize', function(event) {
 $document.bind('sizeeditors', function () {
   SassMeister.inputs.sass.resize();
   SassMeister.outputs.css.resize();
+
+  SassMeister.inputs.html.resize();
 });
