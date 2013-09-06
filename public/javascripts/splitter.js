@@ -2,7 +2,7 @@ $.fn.splitter = function () {
   var $document = $(document),
       $blocker = $('<div class="block"></div>'),
       $body = $('body');
- 
+
   var splitterSettings = JSON.parse(localStorage.getItem('splitterSettings') || '[]');
   return this.each(function () {
     var $el = $(this), 
@@ -75,7 +75,7 @@ $.fn.splitter = function () {
       tracker.down.x = event.pageX;
       tracker.down.y = event.pageY;
       tracker.delta = { x: null, y: null };
-      tracker.target = $handle[type == 'x' ? 'height' : 'width']() * 0.25;
+      // tracker.target = $handle[type == 'x' ? 'height' : 'width']() * 0.25;
     });
 
     $document.bind('mousemove', function (event) {
@@ -87,12 +87,12 @@ $.fn.splitter = function () {
           tracker.down.x = event.pageX;
           tracker.down.y = event.pageY;
         }, 250);
-        var targetType = type == 'x' ? 'y' : 'x';
-        if (Math.abs(tracker.delta[targetType]) > tracker.target) {
-          $handle.trigger('change', targetType, event[props[targetType].moveProp]);
-          tracker.down.x = event.pageX;
-          tracker.down.y = event.pageY;
-        }
+        // var targetType = type == 'x' ? 'y' : 'x';
+        // if (Math.abs(tracker.delta[targetType]) > tracker.target) {
+        //   $handle.trigger('change', targetType, event[props[targetType].moveProp]);
+        //   tracker.down.x = event.pageX;
+        //   tracker.down.y = event.pageY;
+        // }
       }
     });
 

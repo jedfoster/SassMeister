@@ -4,9 +4,7 @@ var $document = $(document),
 
 var Panel = function (name, settings) {
   var panel = this,
-      $panel = null,
-      splitterSettings = {},
-      panelLanguage = name;
+      $panel = null;
 
   panel.settings = settings = settings || {};
   panel.id = panel.name = name;
@@ -24,10 +22,8 @@ var Panel = function (name, settings) {
 
   this._eventHandlers = {};
 
-  panel.processor = function (str) { return str; };
-
   if (!settings.nosplitter) {
-    panel.splitter = panel.$el.splitter(splitterSettings).data('splitter');
+    panel.splitter = panel.$el.splitter().data('splitter');
     panel.splitter.hide();
   } else {
     // create a fake splitter to let the rest of the code work
@@ -62,7 +58,6 @@ Panel.prototype = {
     if (panel.settings.show) {
       panel.settings.show.call(panel, true);
     }
-    // panel.controlButton.addClass('active');
     panel.visible = true;
 
     // update the splitter - but do it on the next tick
@@ -142,21 +137,21 @@ Panel.prototype = {
         panel.splitter.trigger('init', innerW * left/100);
         left += width;
 
-        nestedPanels = $(visible[i]).find('.panel');
-        if (nestedPanels.length > 1) {
-          top = 0;
-          nestedPanels = nestedPanels.filter(':visible');
-          height = 100 / nestedPanels.length;
-          nestedPanels.each(function (i) {
-            bottom = 100 - (height * (i+1));
-            $(this).css('top', top + '%');
-            $(this).css('bottom', bottom + '%' );
-            if (panel.splitter.hasClass('vertical')) {
-              panel.splitter.trigger('init', innerH * top/100);
-            }
-            top += height;
-          });
-        }
+        // nestedPanels = $(visible[i]).find('.panel');
+        // if (nestedPanels.length > 1) {
+        //   top = 0;
+        //   nestedPanels = nestedPanels.filter(':visible');
+        //   height = 100 / nestedPanels.length;
+        //   nestedPanels.each(function (i) {
+        //     bottom = 100 - (height * (i+1));
+        //     $(this).css('top', top + '%');
+        //     $(this).css('bottom', bottom + '%' );
+        //     if (panel.splitter.hasClass('vertical')) {
+        //       panel.splitter.trigger('init', innerH * top/100);
+        //     }
+        //     top += height;
+        //   });
+        // }
       }
     }
   },
