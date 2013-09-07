@@ -101,11 +101,11 @@ Neat:
     - neat/neat
   :fingerprint: (neat|neat/*)
   :url: http://neat.bourbon.io
-'Normalize':
+'Normalize SCSS':
   :gem: normalize-scss
   :import:
-    - normalize
-  :fingerprint: (normalize|normalize-scss)
+    - normalize-scss
+  :fingerprint: normalize-scss
   :url: https://github.com/JohnAlbin/normalize.css-with-sass-or-compass
 "Photoshop Drop Shadow":
   :gem: compass-photoshop-drop-shadow
