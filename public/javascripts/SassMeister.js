@@ -154,9 +154,9 @@ var SassMeister;
 
           $('#syntax').data('original', inputs.syntax);
 
-          $('#rendered-html')[0].contentWindow.postMessage(JSON.stringify({
+          SassMeister.updateRender({
             css: data
-          }), '*');
+          });
 
           SassMeister.setStorage(inputs, {css: data});
         });
@@ -213,15 +213,19 @@ var SassMeister;
         $.post('/compile', inputs, function( data ) {
             SassMeister.internalValueChange = true;
 
-            $('#rendered-html')[0].contentWindow.postMessage(JSON.stringify({
+            SassMeister.updateRender({
               css: SassMeister.outputs.css.getValue(),
               html: data
-            }), '*');
+            });
 
             SassMeister.setStorage(inputs, {html: data});
           }
         );
       }
+    },
+    
+    updateRender: function(new_content) {
+      $('#rendered-html')[0].contentWindow.postMessage(JSON.stringify(new_content), '*');
     },
 
     gist: {
