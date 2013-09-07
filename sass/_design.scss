@@ -67,6 +67,10 @@ article {
   padding-top: 0.66667em;
 }
 
+#rendered {
+  z-index: 200;
+}
+
 #sash_cover {
   @extend %stretch;
 
