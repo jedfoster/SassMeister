@@ -484,6 +484,26 @@ Sassy Math has been removed from SassMeister for technical reasons.
     }
 
 
+## Singularity Golden Grid ##
+
+    @import "singularitygs";
+    @import 'singularity-golden-grid';
+
+    .my-container {
+        @include grid-container;
+    }
+
+    // 2 columns
+    .my-grid-unit {
+        @include grid-column(2);
+    }
+
+    // 1 column
+    .my-another-grid-unit {
+        @include grid-column;
+    }
+
+
 ## Stipe ##
 
     @import "stipe/manifest";

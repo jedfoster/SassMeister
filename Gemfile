@@ -52,3 +52,5 @@ gem 'compass-photoshop-drop-shadow'
 gem 'grid-coordinates'
 gem 'stitch'
 gem 'breakup'
+
+gem 'singularity-golden-grid'

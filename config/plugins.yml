@@ -162,6 +162,13 @@ Singularity.gs:
     - singularity-extras
   :fingerprint: singularity-extras
   :url: https://github.com/Team-Sass/Singularity-extras
+"Singularity Golden Grid":
+  :gem: singularity-golden-grid
+  :import:
+    - singularitygs
+    - singularity-golden-grid
+  :fingerprint: singularity-golden-grid
+  :url: https://github.com/hunterman/singularity-golden-grid
 Stipe:
   :gem: stipe
   :import: 

@@ -122,6 +122,9 @@ GEM
       modular-scale (>= 1.0.6)
       sassy-math (>= 1.5)
       singularitygs (>= 0.0.1)
+    singularity-golden-grid (1.1)
+      sass (>= 3.2.1)
+      singularitygs (>= 1.1.1)
     singularitygs (1.1.2)
       breakpoint (>= 2.0.1)
       compass (>= 0.12.2)
@@ -190,6 +193,7 @@ DEPENDENCIES
   sinatra
   sinatra-partial
   singularity-extras
+  singularity-golden-grid
   singularitygs
   stipe
   stitch
