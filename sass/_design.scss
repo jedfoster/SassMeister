@@ -39,14 +39,15 @@ body {
   height: 0.66667em;
   
 
-  background-color: #f6f6f6;
+  background-color: #f8f8f8;
   
   border-top: 1px solid $golf_gray;
   // border-bottom: 1px solid $golf_gray;
   // margin-bottom: 3px;
   // padding-top: 3px;
+  padding-bottom: 0.66667em;
 
-  cursor: row-resize;
+  cursor: ns-resize;
 }
 
 
@@ -77,6 +78,9 @@ article {
   }
 }
 
+#rendered-html {
+  padding-top: 0.66667em;
+}
 
 #sash_cover {
   @extend %stretch;
