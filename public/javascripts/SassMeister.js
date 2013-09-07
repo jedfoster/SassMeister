@@ -202,29 +202,39 @@ var SassMeister;
       },
 
       html: function() {
+        // _gaq.push(['_trackEvent', 'Form', 'Submit']);
+
         var inputs = {
               html: SassMeister.inputs.html.getValue(),
               html_syntax: SassMeister.inputs.html_syntax
-            };
+            },
+            renderedHTML = null;
 
-        // _gaq.push(['_trackEvent', 'Form', 'Submit']);
+        if(inputs.html_syntax == 'HTML') {
+          renderedHTML = inputs.html;
+          console.log('Hi!');
+        }
 
-        /* Post the form and handle the returned data */
-        $.post('/compile', inputs, function( data ) {
+        else {
+          /* Post the form and handle the returned data */
+          $.post('/compile', inputs, function( data ) {
             SassMeister.internalValueChange = true;
 
-            SassMeister.updateRender({
-              css: SassMeister.outputs.css.getValue(),
-              html: data
-            });
+            renderedHTML = data;
+          });
+        }
+        
+        SassMeister.updateRender({
+          css: SassMeister.outputs.css.getValue(),
+          html: renderedHTML
+        });
 
-            SassMeister.setStorage(inputs, {html: data});
-          }
-        );
+        SassMeister.setStorage(inputs, {html: renderedHTML});
       }
     },
     
     updateRender: function(new_content) {
+      console.log(new_content);
       $('#rendered-html')[0].contentWindow.postMessage(JSON.stringify(new_content), '*');
     },
 
