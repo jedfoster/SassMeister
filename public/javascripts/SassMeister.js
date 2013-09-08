@@ -45,6 +45,9 @@ var SassMeister;
         if (input == 'output') {
           SassMeister.compile.sass();
         }
+        if (input == 'html_syntax') {
+          SassMeister.convert.html();
+        }
       });
 
 
@@ -207,12 +210,15 @@ var SassMeister;
         var inputs = {
               html: SassMeister.inputs.html.getValue(),
               html_syntax: SassMeister.inputs.html_syntax
-            },
-            renderedHTML = null;
+            };
 
         if(inputs.html_syntax == 'HTML') {
-          renderedHTML = inputs.html;
-          console.log('Hi!');
+          SassMeister.updateRender({
+            css: SassMeister.outputs.css.getValue(),
+            html: inputs.html
+          });
+
+          SassMeister.setStorage(inputs, {html: inputs.html});
         }
 
         else {
@@ -220,21 +226,19 @@ var SassMeister;
           $.post('/compile', inputs, function( data ) {
             SassMeister.internalValueChange = true;
 
-            renderedHTML = data;
+            SassMeister.updateRender({
+              css: SassMeister.outputs.css.getValue(),
+              html: data
+            });
+
+            SassMeister.setStorage(inputs, {html: data});
           });
         }
-        
-        SassMeister.updateRender({
-          css: SassMeister.outputs.css.getValue(),
-          html: renderedHTML
-        });
-
-        SassMeister.setStorage(inputs, {html: renderedHTML});
       }
     },
     
     updateRender: function(new_content) {
-      console.log(new_content);
+      // console.log(new_content);
       $('#rendered-html')[0].contentWindow.postMessage(JSON.stringify(new_content), '*');
     },
 
