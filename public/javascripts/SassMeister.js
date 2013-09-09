@@ -353,39 +353,39 @@ var SassMeister;
       else {
         SassMeister.storedInputs = JSON.parse(localStorage.getItem('inputs'));
       }
-
-      switch (SassMeister.storedInputs.syntax) {
-        case 'scss':
-          SassMeister.storedInputs.syntax = 'SCSS';
-          break;
-        case 'sass':
-          SassMeister.storedInputs.syntax = 'Sass';
-          break;
-        default:
-          break;
-      }
-
-      switch (SassMeister.storedInputs.html_syntax) {
-        case 'html':
-          SassMeister.storedInputs.html_syntax = 'HTML';
-          break;
-        case 'haml':
-          SassMeister.storedInputs.html_syntax = 'Haml';
-          break;
-        case 'slim':
-          SassMeister.storedInputs.html_syntax = 'Slim';
-          break;
-        case 'markdown':
-          SassMeister.storedInputs.html_syntax = 'Markdown';
-          break;
-        case 'textile':
-          SassMeister.storedInputs.html_syntax = 'Textile';
-          break;
-        default:
-          break;
-      }
-
+      
       if(SassMeister.storedInputs) {
+        switch (SassMeister.storedInputs.syntax) {
+          case 'scss':
+            SassMeister.storedInputs.syntax = 'SCSS';
+            break;
+          case 'sass':
+            SassMeister.storedInputs.syntax = 'Sass';
+            break;
+          default:
+            break;
+        }
+
+        switch (SassMeister.storedInputs.html_syntax) {
+          case 'html':
+            SassMeister.storedInputs.html_syntax = 'HTML';
+            break;
+          case 'haml':
+            SassMeister.storedInputs.html_syntax = 'Haml';
+            break;
+          case 'slim':
+            SassMeister.storedInputs.html_syntax = 'Slim';
+            break;
+          case 'markdown':
+            SassMeister.storedInputs.html_syntax = 'Markdown';
+            break;
+          case 'textile':
+            SassMeister.storedInputs.html_syntax = 'Textile';
+            break;
+          default:
+            break;
+        }
+
         SassMeister.inputs.sass.setValue(SassMeister.storedInputs.sass);
         SassMeister.inputs.sass.clearSelection();
 
