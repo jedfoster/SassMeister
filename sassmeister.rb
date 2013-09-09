@@ -18,9 +18,11 @@ require 'yaml'
 require 'sassmeister'
 require 'array'
 
+require 'html/pipeline'
 require 'RedCloth'
 require 'haml'
-require 'slim'
+
+require './lib/html/pipeline/haml.rb'
 
 class SassMeisterApp < Sinatra::Base
   register Sinatra::Partial
@@ -122,22 +124,13 @@ class SassMeisterApp < Sinatra::Base
 
       case params[:html_syntax]
       when 'haml'
-        begin
-          return haml params[:html], :suppress_eval => true
-        rescue
-          return '<span style="background: #B4004C; color: #FFFFFF; font: 120%/1.5 \'Helvetica Neue\', Arial, sans-serif; font-weight: 200; text-shadow: 1px 1px 0 #666666; padding: 0.5em 1em;">Haml syntax error</span>'
-        end
+          return render_html(params[:html], 'Haml')
 
-      when 'slim'
-        # ^(\s*?)((\S+ )?=|==|-)( .*$)
-        html = params[:html].gsub(/^(\s*?)((\S+ )?=|==|-)( .*$)/, "\1/ \2\4")
+      when 'markdown'
+          return render_html(params[:html], 'Markdown')
 
-        return html
-        return slim html, :pretty => true, :disable_engines => [:ruby, :javascript, :css, :erb, :haml, :sass, :scss, :less, :builder, :liquid, :markdown, :textile, :rdoc, :radius, :markaby, :nokogiri, :coffee]
-
-      # when 'markdown'
-
-      # when 'textile'
+      when 'textile'
+          return render_html(params[:html], 'Textile')
 
       else
         return params[:html]

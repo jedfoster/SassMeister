@@ -99,4 +99,28 @@ module SassMeister
       sass
     end
   end
+
+  
+  def render_html(html, filter)
+    context = {
+      :gfm => true
+    }
+
+    if filter == 'Textile'
+      filter = HTML::Pipeline::TextileFilter
+
+    elsif filter == 'Haml'
+      filter = HTML::Pipeline::HamlFilter
+
+    else
+      filter = HTML::Pipeline::MarkdownFilter
+    end
+
+    pipe = HTML::Pipeline.new [
+      filter,
+      HTML::Pipeline::Filter
+    ], context
+
+    pipe.call(html)[:output].to_html
+  end
 end

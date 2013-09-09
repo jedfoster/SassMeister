@@ -16,8 +16,13 @@ gem 'chairman'
 gem 'sass'
 gem 'compass'
 
+
+group :development do
+  gem 'activesupport', '~> 4.0.0'
+end
+
+gem 'html-pipeline', '~> 0.2.1'
 gem 'haml'
-gem 'slim'
 gem 'RedCloth'
 
 gem 'bourbon-compass'
