@@ -54,7 +54,7 @@
           });
 
           if(index !== columns - 1) {
-            var id = 'sash-x' + (index + 1) + (Math.floor(Math.random() * 101));
+            var id = 'sash-x' + (index + 1);
 
             $('<div/>').addClass('horizontal sash').css({
               top: (paneSize * (index + 1)) + '%',
@@ -80,7 +80,7 @@
           });
 
           if(index !== columns - 1) {
-            var id = 'sash-y' + (index + 1) + (Math.floor(Math.random() * 101));
+            var id = 'sash-y' + (index + 1);
 
             $('<div/>').addClass('vertical sash').css({
               left: (paneSize * (index + 1)) + '%',
@@ -138,15 +138,23 @@
     },
 
     resize: function(handle, offset) {
-
-
       if($(handle).hasClass('horizontal')) {
+        if(offset.top <= handle.prev().offset().top ||
+             offset.top >= (handle.next().offset().top - this.parentOffset.top + handle.next().outerHeight()) ) {
+          return false;
+        }
+
         var newHandleOffset = this.heightPercentage(offset.top - this.parentOffset.top);
         handle.css({top: newHandleOffset + '%'});
         handle.prev().css({bottom: (100 - newHandleOffset) + '%'});
         handle.next().css({ top: newHandleOffset + '%' });
       }
       if($(handle).hasClass('vertical')) {
+        if(offset.left <= handle.prev().offset().left ||
+             offset.left >= (handle.next().offset().left - this.parentOffset.left + handle.next().outerWidth()) ) {
+          return false;
+        }
+
         var newHandleOffset = this.widthPercentage(offset.left - this.parentOffset.left);
         handle.css({left: newHandleOffset + '%'});
         handle.prev().css({right: (100 - newHandleOffset) + '%'});
