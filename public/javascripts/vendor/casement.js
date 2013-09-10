@@ -113,14 +113,11 @@
       })
       .bind("mouseup.casement touchend.casement", function (e) {
         $dragging = null;
-        $('#sash_cover').hide();
 
         $this.options.onDragEnd($dragging, event);
       })
       .bind("mousemove.casement touchmove.casement", function(event) {
         if ($dragging !== null) {
-          $('#sash_cover').show();
-
           $this.resize($dragging, { top: event.pageY, left: event.pageX });
 
           $this.options.onDrag($dragging, event);

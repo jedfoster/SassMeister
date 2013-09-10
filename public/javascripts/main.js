@@ -29,10 +29,19 @@
     SassMeister.inputs.html.resize();
   }});
 
-  $('#casement').casement({split: 'horizontal', onDrag: function(handle, event) {
-    SassMeister.inputs.sass.resize();
-    SassMeister.outputs.css.resize();
-    SassMeister.inputs.html.resize();
-  }});
+  $('#casement').casement({
+    split: 'horizontal', 
+    onDragStart: function() {
+      $('#sash_cover').show();
+    },
+    onDrag: function() {
+      SassMeister.inputs.sass.resize();
+      SassMeister.outputs.css.resize();
+      SassMeister.inputs.html.resize();
+    },
+    onDragEnd: function() {
+      $('#sash_cover').hide();
+    }
+  });
   
 })(jQuery);
