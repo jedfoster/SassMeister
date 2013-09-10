@@ -103,7 +103,8 @@ module SassMeister
   
   def render_html(html, filter)
     context = {
-      :gfm => true
+      :gfm => true,
+      :whitelist => HTML::Pipeline::SanitizationFilter::WHITELIST
     }
 
     if filter == 'Textile'
@@ -117,10 +118,10 @@ module SassMeister
     end
 
     pipe = HTML::Pipeline.new [
-      filter,
-      HTML::Pipeline::Filter
+      filter
+
     ], context
 
-    pipe.call(html)[:output].to_html
+    pipe.call(html)[:output]
   end
 end

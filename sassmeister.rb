@@ -27,6 +27,8 @@ require './lib/html/pipeline/haml.rb'
 class SassMeisterApp < Sinatra::Base
   register Sinatra::Partial
 
+  # HTML::Pipeline::SanitizationFilter::WHITELIST[:attributes][:all].merge ['class', 'style']
+
   use Chairman::Routes
 
   helpers SassMeister
