@@ -11,7 +11,7 @@
 
   var casement = 'casement',
       defaults = {
-        orientation: 'vertical',
+        split: 'vertical',
         onDragStart: function(){},
         onDragEnd: function(){},
         onDrag: function(){}
@@ -29,41 +29,72 @@
   }
 
   Casement.prototype = {
+    parentWidth: null,
     parentHeight: null,
     parentOffset: {},
 
     init: function() {
       var $this = this,
-          height = parentHeight,
           columns = $($this.element).children().length,
           paneSize = ( 100 / columns );
 
       $($this.element).css({position: 'absolute', top: 0, right: 0, bottom: 0, left: 0});
+      this.parentWidth = $($this.element).innerWidth();
       this.parentHeight = $($this.element).innerHeight();
       this.parentOffset = $($this.element).offset();
 
 
-      $($this.element).children().each(function(index) {
-        $(this).css({
-          // width: paneSize + '%',
-          top: (paneSize * index) + '%',
-          bottom: Math.abs(paneSize * (index -1)) + '%',
-          position: 'absolute'
-        });
+      if(this.options.split == 'horizontal') {
+        $($this.element).children().each(function(index) {
+          $(this).css({
+            // width: paneSize + '%',
+            top: (paneSize * index) + '%',
+            bottom: Math.abs(paneSize * (index -1)) + '%',
+            position: 'absolute'
+          });
 
-        if(index !== columns - 1) {
-          $('<div/>').addClass('horizontal sash').css({
-            top: (paneSize * (index + 1)) + '%',
-          }).attr('id', 'sash' + (index + 1))
-          .mouseenter(function() {
-            sash_id = 'sash' + (index + 1);
-          })
-          .mouseleave(function() {
-            sash_id = null;
-          })
-          .insertAfter($(this));
-        }
-      });
+          if(index !== columns - 1) {
+            var id = 'sash-x' + (index + 1) + (Math.floor(Math.random() * 101));
+
+            $('<div/>').addClass('horizontal sash').css({
+              top: (paneSize * (index + 1)) + '%',
+            }).attr('id',  id)
+            .mouseenter(function() {
+              sash_id = id;
+            })
+            .mouseleave(function() {
+              sash_id = null;
+            })
+            .insertAfter($(this));
+          }
+        });
+      }
+
+      else {
+        $($this.element).children().each(function(index) {
+          $(this).css({
+            // width: paneSize + '%',
+            left: (paneSize * index) + '%',
+            right: Math.abs(paneSize * (columns - (index + 1))      ) + '%',
+            position: 'absolute'
+          });
+
+          if(index !== columns - 1) {
+            var id = 'sash-y' + (index + 1) + (Math.floor(Math.random() * 101));
+
+            $('<div/>').addClass('vertical sash').css({
+              left: (paneSize * (index + 1)) + '%',
+            }).attr('id', id)
+            .mouseenter(function() {
+              sash_id = id;
+            })
+            .mouseleave(function() {
+              sash_id = null;
+            })
+            .insertAfter($(this));
+          }
+        });
+      }
 
       $(document.documentElement).bind("mousedown.casement touchstart.casement", function (event) {
         if (sash_id !== null) {
@@ -98,15 +129,29 @@
       });
     },
 
-    percentage: function(int) {
+    widthPercentage: function(int) {
+      return  Math.abs( int /  ( this.parentWidth * 0.01 ) );
+    },
+
+    heightPercentage: function(int) {
       return  Math.abs( int /  ( this.parentHeight * 0.01 ) );
     },
 
     resize: function(handle, offset) {
-      var newHandleOffset = this.percentage(offset.top - this.parentOffset.top);
+
+
+      if($(handle).hasClass('horizontal')) {
+        var newHandleOffset = this.heightPercentage(offset.top - this.parentOffset.top);
         handle.css({top: newHandleOffset + '%'});
         handle.prev().css({bottom: (100 - newHandleOffset) + '%'});
         handle.next().css({ top: newHandleOffset + '%' });
+      }
+      if($(handle).hasClass('vertical')) {
+        var newHandleOffset = this.widthPercentage(offset.left - this.parentOffset.left);
+        handle.css({left: newHandleOffset + '%'});
+        handle.prev().css({right: (100 - newHandleOffset) + '%'});
+        handle.next().css({ left: newHandleOffset + '%' });
+      }
     },
   },
 

@@ -1,22 +1,19 @@
 <div id="casement">
-  <div id="source" class="stretch"></div>
+  <div id="source" class="stretch">
+    <div class="stretch sass panel" data-name="sass">
+      <%= partial :"shared/_sass_input" %>
+    </div>
+    <div class="stretch css panel" data-name="css">
+      <%= partial :"shared/_sass_output" %>
+    </div>
+    <div class="stretch html panel" data-name="html">
+      <%= partial :"shared/_html_input" %>
+    </div>
+  </div>
 
   <div id="rendered" class="stretch rendered" data-name="rendered">
     <iframe class="html_output" id="rendered-html" src="/render.html" sandbox="allow-scripts allow-same-origin allow-pointer-lock"></iframe>
     
     <div id="sash_cover"></div>    
-  </div>
-</div>
-
-
-<div id="panelswaiting">
-  <div class="stretch sass panel" data-name="sass">
-    <%= partial :"shared/_sass_input" %>
-  </div>
-  <div class="stretch css panel" data-name="css">
-    <%= partial :"shared/_sass_output" %>
-  </div>
-  <div class="stretch html panel" data-name="html">
-    <%= partial :"shared/_html_input" %>
   </div>
 </div>

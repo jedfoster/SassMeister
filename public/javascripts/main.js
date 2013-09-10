@@ -18,12 +18,18 @@
     SassMeister.reset();
   });
   
-  $('.panel').each(function(index) {
-    foo = new Panel($(this).data('name'), {  });
-    foo.show();
-  });
+  // $('.panel').each(function(index) {
+  //   foo = new Panel($(this).data('name'), {  });
+  //   foo.show();
+  // });
 
-  $('#casement').casement({onDrag: function(handle, event) {
+  $('#source').casement({split: 'vertical', onDrag: function(handle, event) {
+    SassMeister.inputs.sass.resize();
+    SassMeister.outputs.css.resize();
+    SassMeister.inputs.html.resize();
+  }});
+
+  $('#casement').casement({split: 'horizontal', onDrag: function(handle, event) {
     SassMeister.inputs.sass.resize();
     SassMeister.outputs.css.resize();
     SassMeister.inputs.html.resize();

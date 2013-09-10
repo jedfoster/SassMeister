@@ -28,12 +28,22 @@ body {
 .sash {
   position: absolute;
   z-index: 9999;
-  width: 100%;
-  height: 0.66667em;
   background-color: #f8f8f8;
-  border-top: 1px solid $golf_gray;
-  padding-bottom: 0.66667em;
-  cursor: ns-resize;
+
+  &.horizontal {
+    width: 100%;
+    height: 0.66667em;
+    border-top: 1px solid $golf_gray;
+    padding-bottom: 0.66667em;
+    cursor: ns-resize;
+  }
+  &.vertical {
+    height: 100%;
+    width: 0.66667em;
+    border-left: 1px solid $golf_gray;
+    padding-right: 0.66667em;
+    cursor: ew-resize;
+  }
 }
 
 #panelswaiting {
