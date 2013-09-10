@@ -8,7 +8,7 @@ module HTML
 
       def call
         begin
-          html = Haml::Engine.new(@text, {:suppress_eval => false}).render
+          html = Haml::Engine.new(@text).render
 
           html.rstrip!
           html
