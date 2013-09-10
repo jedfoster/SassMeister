@@ -17,11 +17,6 @@
 
     SassMeister.reset();
   });
-  
-  // $('.panel').each(function(index) {
-  //   foo = new Panel($(this).data('name'), {  });
-  //   foo.show();
-  // });
 
   $('#source').casement({split: 'vertical', onDrag: function(handle, event) {
     SassMeister.inputs.sass.resize();
