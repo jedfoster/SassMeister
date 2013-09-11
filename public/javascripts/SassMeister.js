@@ -278,6 +278,9 @@ var SassMeister;
           $('#sash_cover').hide();
         }
       });
+
+      SassMeister.orientation = orientation;
+      localStorage.setItem('orientation', SassMeister.orientation);
     },
 
     gist: {
@@ -458,7 +461,7 @@ var SassMeister;
       localStorage.setItem('inputs', JSON.stringify( $.extend(SassMeister.storedInputs, inputs) ));
       localStorage.setItem('outputs', JSON.stringify( $.extend(SassMeister.storedOutputs, outputs) ));
 
-      localStorage.setItem(SassMeister.orientation);
+      localStorage.setItem('orientation', SassMeister.orientation);
     }
   };
 
