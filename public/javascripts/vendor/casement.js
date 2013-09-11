@@ -23,7 +23,6 @@
     this.options = $.extend( {}, defaults, options) ;
 
     this._defaults = defaults;
-    this._name = casement;
 
     this.init();
   }
@@ -149,6 +148,8 @@
           return false;
         }
       });
+
+      return this;
     },
 
     widthPercentage: function(int) {
@@ -196,6 +197,16 @@
       casementSettings[handle.next().data('casement_guid')] = settings;
       localStorage.setItem('casementSettings', JSON.stringify(casementSettings));
     },
+
+    destroy: function() {
+      var $this = this,
+          $el = $($this.element);
+
+      $el.children('.sash').remove();
+      $el.children().removeAttr('style');
+      // Remove data
+      $($this.element).removeData();
+    }
   },
 
   $.fn.casement = function( options ) {

@@ -15,6 +15,14 @@ var SassMeister;
 
       this.getStorage();
 
+      this.arrangePanels(SassMeister.orientation);
+
+      $('.orientation').on('click', function(event) {
+        $('#source').casement('destroy');
+        $('#casement').casement('destroy');
+
+        SassMeister.arrangePanels( $(this).data('orientation') );
+      });
 
       if (gist) {
         if (gist.can_update_gist) {
@@ -141,6 +149,8 @@ var SassMeister;
 
     timer: null,
 
+    orientation: 'horizontal',
+
     compile: {
       sass: function() {
         var inputs = {
@@ -236,10 +246,38 @@ var SassMeister;
         }
       }
     },
-    
+
     updateRender: function(new_content) {
       // console.log(new_content);
       $('#rendered-html')[0].contentWindow.postMessage(JSON.stringify(new_content), '*');
+    },
+
+    arrangePanels: function(orientation) {
+
+      // #source has to be done FIRST, since it is nested inside #casement. TODO: Fix this.
+      $('#source').casement({
+        split: (orientation == 'horizontal' ? 'vertical' : 'horizontal'),
+        onDrag: function() {
+          SassMeister.inputs.sass.resize();
+          SassMeister.outputs.css.resize();
+          SassMeister.inputs.html.resize();
+        }
+      });
+
+      $('#casement').casement({
+        split: orientation,
+        onDragStart: function() {
+          $('#sash_cover').show();
+        },
+        onDrag: function() {
+          SassMeister.inputs.sass.resize();
+          SassMeister.outputs.css.resize();
+          SassMeister.inputs.html.resize();
+        },
+        onDragEnd: function() {
+          $('#sash_cover').hide();
+        }
+      });
     },
 
     gist: {
@@ -301,7 +339,7 @@ var SassMeister;
           SassMeister.setUrl('/gist/' + data.id);
           SassMeister.storedInputs.sass_filename = data.sass_filename;
           SassMeister.storedInputs.html_filename = data.html_filename;
-          
+
         });
       },
 
@@ -371,7 +409,7 @@ var SassMeister;
       else {
         SassMeister.storedInputs = JSON.parse(localStorage.getItem('inputs'));
       }
-      
+
       if(SassMeister.storedInputs) {
         switch (SassMeister.storedInputs.syntax) {
           case 'scss':
@@ -412,11 +450,15 @@ var SassMeister;
       }
 
       SassMeister.storedOutputs = $.extend({css: '', html: ''}, JSON.parse(localStorage.getItem('outputs')));
+
+      SassMeister.orientation = localStorage.getItem('orientation') || SassMeister.orientation;
     },
 
     setStorage: function(inputs, outputs) {
       localStorage.setItem('inputs', JSON.stringify( $.extend(SassMeister.storedInputs, inputs) ));
       localStorage.setItem('outputs', JSON.stringify( $.extend(SassMeister.storedOutputs, outputs) ));
+
+      localStorage.setItem(SassMeister.orientation);
     }
   };
 
