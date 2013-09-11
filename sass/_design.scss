@@ -36,12 +36,15 @@ body {
     border-top: 1px solid $golf_gray;
     padding-bottom: 0.66667em;
     cursor: ns-resize;
+
+    #source & {
+      background-color: transparent;
+    }
   }
   &.vertical {
     height: 100%;
     width: 0.66667em;
     border-left: 1px solid $golf_gray;
-    // padding-right: 0.66667em;
     cursor: ew-resize;
   }
 }

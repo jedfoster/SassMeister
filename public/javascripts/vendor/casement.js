@@ -57,10 +57,12 @@
             nextSettings.y = 100;
           }
 
+          var bottom = 100 - nextSettings.y;
+
           $(this).css({
             // width: paneSize + '%',
             top: ( settings.y || (paneSize * index)) + '%',
-            bottom: ( 100 - nextSettings.y || Math.abs(paneSize * (index -1))) + '%',
+            bottom: ( (bottom == 100 ? false : bottom) || Math.abs(paneSize * (columns - (index + 1)))) + '%',
             position: 'absolute'
           });
 
@@ -93,10 +95,12 @@
             nextSettings.x = 100;
           }
 
+          var right = 100 - nextSettings.x;
+
           $(this).css({
             // width: paneSize + '%',
             left: ( settings.x || (paneSize * index)) + '%',
-            right: ( 100 - nextSettings.x || Math.abs(paneSize * (columns - (index + 1)))) + '%',
+            right: ( (right == 100 ? false : right) || Math.abs(paneSize * (columns - (index + 1)))) + '%',
             position: 'absolute'
           });
 
