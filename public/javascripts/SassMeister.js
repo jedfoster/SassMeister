@@ -247,9 +247,16 @@ var SassMeister;
         _gaq.push(['_trackEvent', 'Gist']);
 
         var inputs = {
-          sass: SassMeister.inputs.sass.getValue(),
-          syntax: SassMeister.inputs.syntax,
-          output: SassMeister.inputs.output
+          sass: {
+            input: SassMeister.inputs.sass.getValue(),
+            syntax: SassMeister.inputs.syntax,
+            output: SassMeister.outputs.css.getValue(),
+          },
+          html: {
+            input: SassMeister.inputs.html.getValue(),
+            syntax: SassMeister.inputs.html_syntax,
+            output: JSON.parse(localStorage.getItem('outputs')).html
+          }
         }
 
         var confirmationText = 'is ready';
@@ -260,7 +267,8 @@ var SassMeister;
 
           SassMeister.setUrl('/gist/' + data.id);
           SassMeister.storedInputs.gist_id = data.id;
-          SassMeister.storedInputs.gist_filename = data.filename;
+          SassMeister.storedInputs.sass_filename = data.sass_filename;
+          SassMeister.storedInputs.html_filename = data.html_filename;
 
           $('#save-gist').text('Update Gist').data('action', 'edit');
         });
@@ -270,10 +278,18 @@ var SassMeister;
         _gaq.push(['_trackEvent', 'Gist']);
 
         var inputs = {
-          sass: SassMeister.inputs.sass.getValue(),
-          syntax: SassMeister.inputs.syntax,
-          output: SassMeister.inputs.output,
-          gist_filename: SassMeister.storedInputs.gist_filename
+          sass: {
+            input: SassMeister.inputs.sass.getValue(),
+            syntax: SassMeister.inputs.syntax,
+            output: SassMeister.outputs.css.getValue(),
+            filename: SassMeister.storedInputs.sass_filename
+          },
+          html: {
+            input: SassMeister.inputs.html.getValue(),
+            syntax: SassMeister.inputs.html_syntax,
+            output: JSON.parse(localStorage.getItem('outputs')).html,
+            filename: SassMeister.storedInputs.html_filename
+          }
         }
 
         var confirmationText = 'has been updated';
@@ -283,7 +299,9 @@ var SassMeister;
           SassMeister.modal('<a href="https://gist.github.com/' + data.id + '" target="_blank">Your Gist</a> ' + confirmationText + ', and here\'s the <a href="/gist/' + data.id + '">SassMeister live view.</a> ');
 
           SassMeister.setUrl('/gist/' + data.id);
-          SassMeister.storedInputs.gist_filename = data.filename;
+          SassMeister.storedInputs.sass_filename = data.sass_filename;
+          SassMeister.storedInputs.html_filename = data.html_filename;
+          
         });
       },
 
