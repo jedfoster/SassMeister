@@ -7,10 +7,10 @@
 
 ;(function($) {
 
-  var $dragging = sash_id = parentHeight = null;
+  var $handle = sash_id = null;
+  var casementSettings = JSON.parse(localStorage.getItem('casementSettings')) || {};
 
-  var casement = 'casement',
-      defaults = {
+  var defaults = {
         split: 'vertical',
         onDragStart: function(){},
         onDragEnd: function(){},
@@ -35,29 +35,40 @@
 
     init: function() {
       var $this = this,
-          columns = $($this.element).children().length,
+          $el = $($this.element),
+          columns = $el.children().length,
           paneSize = ( 100 / columns );
 
-      $($this.element).css({position: 'absolute', top: 0, right: 0, bottom: 0, left: 0});
-      this.parentWidth = $($this.element).innerWidth();
-      this.parentHeight = $($this.element).innerHeight();
-      this.parentOffset = $($this.element).offset();
 
+      $el.css({position: 'absolute', top: 0, right: 0, bottom: 0, left: 0});
+      this.parentWidth =  $el.innerWidth();
+      this.parentHeight = $el.innerHeight();
+      this.parentOffset = $el.offset();
 
       if(this.options.split == 'horizontal') {
-        $($this.element).children().each(function(index) {
+        $el.children().each(function(index) {
+          var guid = $.fn.casement.guid++,
+              settings = casementSettings[guid] || {x:null,y:null},
+              nextSettings = casementSettings[guid + 1] || {x:null,y:null};
+
+          $(this).data('casement_guid', guid);
+
+          if (index == columns - 1) {
+            nextSettings.y = 100;
+          }
+
           $(this).css({
             // width: paneSize + '%',
-            top: (paneSize * index) + '%',
-            bottom: Math.abs(paneSize * (index -1)) + '%',
+            top: ( settings.y || (paneSize * index)) + '%',
+            bottom: ( 100 - nextSettings.y || Math.abs(paneSize * (index -1))) + '%',
             position: 'absolute'
           });
 
           if(index !== columns - 1) {
-            var id = 'sash-x' + (index + 1);
+            var id = 'sash-x' + (index + 1) + '-' + guid;
 
             $('<div/>').addClass('horizontal sash').css({
-              top: (paneSize * (index + 1)) + '%',
+              top: ( nextSettings.y || (paneSize * (index + 1))) + '%',
             }).attr('id',  id)
             .mouseenter(function() {
               sash_id = id;
@@ -71,19 +82,29 @@
       }
 
       else {
-        $($this.element).children().each(function(index) {
+        $el.children().each(function(index) {
+          var guid = $.fn.casement.guid++,
+              settings = casementSettings[guid] || {x:null,y:null},
+              nextSettings = casementSettings[guid + 1] || {x:null,y:null};
+
+          $(this).data('casement_guid', guid);
+
+          if (index == columns - 1) {
+            nextSettings.x = 100;
+          }
+
           $(this).css({
             // width: paneSize + '%',
-            left: (paneSize * index) + '%',
-            right: Math.abs(paneSize * (columns - (index + 1))      ) + '%',
+            left: ( settings.x || (paneSize * index)) + '%',
+            right: ( 100 - nextSettings.x || Math.abs(paneSize * (columns - (index + 1)))) + '%',
             position: 'absolute'
           });
 
           if(index !== columns - 1) {
-            var id = 'sash-y' + (index + 1);
+            var id = 'sash-y' + (index + 1) + '-' + guid;
 
             $('<div/>').addClass('vertical sash').css({
-              left: (paneSize * (index + 1)) + '%',
+              left: ( nextSettings.x || (paneSize * (index + 1))) + '%',
             }).attr('id', id)
             .mouseenter(function() {
               sash_id = id;
@@ -98,29 +119,29 @@
 
       $(document.documentElement).bind("mousedown.casement touchstart.casement", function (event) {
         if (sash_id !== null) {
-          $dragging = null;
+          $handle = null;
 
           if( ! $(event.target).hasClass('sash') ) {
             event.stopPropagation();
             return false;
           }
 
-          $dragging = $(event.target);
+          $handle = $(event.target);
 
-          $this.options.onDragStart($dragging, event);
+          $this.options.onDragStart($handle, event);
           return false;
         }
       })
       .bind("mouseup.casement touchend.casement", function (e) {
-        $dragging = null;
+        $handle = null;
 
-        $this.options.onDragEnd($dragging, event);
+        $this.options.onDragEnd($handle, event);
       })
       .bind("mousemove.casement touchmove.casement", function(event) {
-        if ($dragging !== null) {
-          $this.resize($dragging, { top: event.pageY, left: event.pageX });
+        if ($handle !== null) {
+          $this.resize($handle, { top: event.pageY, left: event.pageX });
 
-          $this.options.onDrag($dragging, event);
+          $this.options.onDrag($handle, event);
           return false;
         }
       });
@@ -135,6 +156,11 @@
     },
 
     resize: function(handle, offset) {
+      var settings = {
+        x: null,
+        y: null
+      };
+
       if($(handle).hasClass('horizontal')) {
         if(offset.top <= handle.prev().offset().top ||
              offset.top >= (handle.next().offset().top - this.parentOffset.top + handle.next().outerHeight()) ) {
@@ -145,6 +171,8 @@
         handle.css({top: newHandleOffset + '%'});
         handle.prev().css({bottom: (100 - newHandleOffset) + '%'});
         handle.next().css({ top: newHandleOffset + '%' });
+
+        settings.y = newHandleOffset;
       }
       if($(handle).hasClass('vertical')) {
         if(offset.left <= handle.prev().offset().left ||
@@ -156,25 +184,34 @@
         handle.css({left: newHandleOffset + '%'});
         handle.prev().css({right: (100 - newHandleOffset) + '%'});
         handle.next().css({ left: newHandleOffset + '%' });
+
+        settings.x = newHandleOffset;
       }
+
+
+      casementSettings[handle.next().data('casement_guid')] = settings;
+      localStorage.setItem('casementSettings', JSON.stringify(casementSettings));
     },
   },
 
-  $.fn[casement] = function( options ) {
+  $.fn.casement = function( options ) {
     var args = arguments;
     if (options === undefined || typeof options === 'object') {
       return this.each(function () {
-        if (!$.data(this, 'plugin_' + casement)) {
-          $.data(this, 'plugin_' + casement, new Casement( this, options ));
+        if (!$.data(this, 'plugin_casement')) {
+          $.data(this, 'plugin_casement', new Casement( this, options ));
         }
       });
     } else if (typeof options === 'string' && options[0] !== '_' && options !== 'init') {
       return this.each(function () {
-        var instance = $.data(this, 'plugin_' + casement);
+        var instance = $.data(this, 'plugin_casement');
         if (instance instanceof Casement && typeof instance[options] === 'function') {
           instance[options].apply( instance, Array.prototype.slice.call( args, 1 ) );
         }
       });
     }
-  }
+  };
+
+
+  $.fn.casement.guid = $.fn.casement.guid || 0;
 })(jQuery);
