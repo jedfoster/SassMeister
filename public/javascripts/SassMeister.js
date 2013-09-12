@@ -15,6 +15,12 @@ var SassMeister;
 
       this.getStorage();
 
+      if (this.html == 'hide') {
+        $('#rendered').hide();
+        $('#html_input').hide();
+        $('#toggle_html').data("state", 'show').toggleClass('show').find('span').text('Show HTML');
+      }      
+
       this.arrangePanels(SassMeister.orientation);
 
       $('.orientation').on('click', function(event) {
@@ -145,6 +151,8 @@ var SassMeister;
 
     orientation: 'horizontal',
 
+    html: 'show',
+
     compile: {
       sass: function() {
         var inputs = {
@@ -247,6 +255,11 @@ var SassMeister;
     },
 
     arrangePanels: function(orientation) {
+      if (this.html == 'hide') {
+        $('#rendered').hide();
+        $('#html_input').hide();
+      }
+      
       // #source has to be done FIRST, since it is nested inside #casement. TODO: Fix this.
       $('#source').casement({
         split: (orientation == 'horizontal' ? 'vertical' : 'horizontal'),
@@ -283,11 +296,15 @@ var SassMeister;
       $('#rendered')[state]();
       $('#html_input')[state]();
 
+      this.html = state;
+
       this.arrangePanels(this.orientation);
 
       SassMeister.inputs.sass.resize();
       SassMeister.outputs.css.resize();
       SassMeister.inputs.html.resize();
+
+      localStorage.setItem('html', state);
     },
 
     gist: {
@@ -462,6 +479,7 @@ var SassMeister;
       SassMeister.storedOutputs = $.extend({css: '', html: ''}, JSON.parse(localStorage.getItem('outputs')));
 
       SassMeister.orientation = localStorage.getItem('orientation') || SassMeister.orientation;
+      SassMeister.html = localStorage.getItem('html') || SassMeister.html;
     },
 
     setStorage: function(inputs, outputs) {
@@ -469,6 +487,7 @@ var SassMeister;
       localStorage.setItem('outputs', JSON.stringify( $.extend(SassMeister.storedOutputs, outputs) ));
 
       localStorage.setItem('orientation', SassMeister.orientation);
+      localStorage.setItem('html', SassMeister.html);
     }
   };
 

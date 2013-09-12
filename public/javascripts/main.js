@@ -24,10 +24,10 @@
     SassMeister.toggleHTMLPanels(state);
 
     if(state == 'hide') {
-      $(this).data("state", 'show').text('Show HTML');
+      $(this).data("state", 'show').toggleClass('show').find('span').text('Show HTML');
     }
     else {
-      $(this).data("state", 'hide').text('Hide HTML');
+      $(this).data("state", 'hide').toggleClass('show').find('span').text('Hide HTML');
     }
   });
 

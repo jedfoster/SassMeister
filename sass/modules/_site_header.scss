@@ -45,7 +45,11 @@
       span {
         text-decoration: underline;
       }
-
+    }
+  }
+  
+  .github-login, .bookmark-icon {
+    &:hover {
       &:after {
         @extend %tooltip;
 
@@ -206,8 +210,13 @@
   }
 }
 
-#control_actions {
-  .show_html input {
-    font-size: 4em;
+
+
+
+#toggle_html {
+  @extend %icon-preview-hide;
+
+  &.show {
+    @extend %icon-preview-show;
   }
 }
