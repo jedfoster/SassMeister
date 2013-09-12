@@ -87,15 +87,9 @@ var SassMeister;
       }
 
 
-      this.inputs.plugin = $('select[name=plugin]').minimalect({
-        placeholder: 'vanilla Sass&nbsp;&nbsp;(v' + $('select[name=plugin]').data('sass-version') + ')',
-        onchange: function(value, text) {
-          var plugins = value;
-          $.each(plugins.split(','), function(key, plugin) {
-            SassMeister.inputs.sass.insert( '@import "' + plugin + '"' + ( SassMeister.inputs.syntax == 'scss' ? ';' : '' ) + '\n\n');
-          });
-        }
-      }).val();
+      $('[data-import]').on('click', function(event) {
+        SassMeister.inputs.sass.insert( '@import "' + $(this).data('import') + '"' + ( SassMeister.inputs.syntax == 'scss' ? ';' : '' ) + '\n\n');
+      });
 
       this.outputs.css = ace.edit("css");
       this.outputs.css.setTheme("ace/theme/tomorrow");

@@ -174,3 +174,11 @@
     content: "\e003";
   }
 }
+
+%icon-Compass {
+  @extend %icon-font;
+
+	&:before {
+	  content: "\e008";
+	}
+}

@@ -80,7 +80,6 @@
     background: transparentize(scale-color($alpha_color, $lightness: -80%), 0.2);
 
     .selected {
-
       &:after {
         content: "\f0d8";
       }
@@ -89,5 +88,38 @@
     > ul {
       display: block;
     }
+  }
+}
+
+#extension_list {
+  @extend .panel-toggle;
+  
+  float: right;
+  
+  > span {
+    @extend %icon-Compass;
+  }
+
+  > ul {
+    left: initial;
+    right: 0;
+    width: em(240);
+    
+    > li {
+      &:hover {
+        cursor: normal;
+        text-decoration: none;
+      }
+    }
+  }
+  
+  ul ul {
+    max-height: em(360);
+    overflow: scroll;
+    margin-bottom: 0.83333em;
+  }
+  
+  a {
+    color: $href_color;
   }
 }
