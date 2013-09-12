@@ -163,7 +163,11 @@
   @extend %icon-font;
   
   &:before {
-    content: "\e002";
+    // content: "\e002";
+
+    content: "\e004";
+	  font-size: 2em;
+    line-height: 0.01;
   }
 }
 
@@ -175,24 +179,24 @@
   }
 }
 
-%icon-preview-show {
-  @extend %icon-font;
-
-  &:before {
-  	content: "\e004";
-	  font-size: 2em;
-    line-height: 0.01;
-  }
-}
-%icon-preview-hide {
-  @extend %icon-font;
-
-  &:before {
-  	content: "\e005";
-	  font-size: 2em;
-    line-height: 0.01;
-  }
-}
+// %icon-preview-show {
+//   @extend %icon-font;
+// 
+//   &:before {
+//    content: "\e004";
+//    font-size: 2em;
+//     line-height: 0.01;
+//   }
+// }
+// %icon-preview-hide {
+//   @extend %icon-font;
+// 
+//   &:before {
+//    content: "\e005";
+//    font-size: 2em;
+//     line-height: 0.01;
+//   }
+// }
 %icon-Compass {
   @extend %icon-font;
 
