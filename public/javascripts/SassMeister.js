@@ -18,6 +18,9 @@ var SassMeister;
       this.arrangePanels(SassMeister.orientation);
 
       $('.orientation').on('click', function(event) {
+        $('#source').casement('destroy');
+        $('#casement').casement('destroy');
+
         SassMeister.arrangePanels( $(this).data('orientation') );
       });
 
