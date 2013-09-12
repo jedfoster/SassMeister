@@ -184,13 +184,13 @@ class SassMeisterApp < Sinatra::Base
       
       
       
-      html_file = response.files["#{response.files.keys.grep(/.+\.(scss|sass)/)[0]}"]
+      html_file = response.files["#{response.files.keys.grep(/.+\.(haml|textile|markdown|html)/)[0]}"]
 
       if(html_file)
-        html = file.content
-        html_filename = file.filename
+        html = html_file.content
+        html_filename = html_file.filename
   
-        html_syntax = file.filename.split('.').pop
+        html_syntax = html_file.filename.split('.').pop
       end
 
     rescue Github::Error::NotFound => e
