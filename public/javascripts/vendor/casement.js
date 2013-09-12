@@ -35,7 +35,7 @@
     init: function() {
       var $this = this,
           $el = $($this.element),
-          columns = $el.children().length,
+          columns = $el.children().filter(':visible').length,
           paneSize = ( 100 / columns );
 
 
@@ -45,7 +45,7 @@
       this.parentOffset = $el.offset();
 
       if(this.options.split == 'horizontal') {
-        $el.children().each(function(index) {
+        $el.children().filter(':visible').each(function(index) {
           var guid = $.fn.casement.guid++,
               settings = casementSettings[guid] || {x:null,y:null},
               nextSettings = casementSettings[guid + 1] || {x:null,y:null};
@@ -83,7 +83,7 @@
       }
 
       else {
-        $el.children().each(function(index) {
+        $el.children(':visible').each(function(index) {
           var guid = $.fn.casement.guid++,
               settings = casementSettings[guid] || {x:null,y:null},
               nextSettings = casementSettings[guid + 1] || {x:null,y:null};

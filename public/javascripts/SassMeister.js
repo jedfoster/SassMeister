@@ -18,9 +18,6 @@ var SassMeister;
       this.arrangePanels(SassMeister.orientation);
 
       $('.orientation').on('click', function(event) {
-        $('#source').casement('destroy');
-        $('#casement').casement('destroy');
-
         SassMeister.arrangePanels( $(this).data('orientation') );
       });
 
@@ -253,7 +250,6 @@ var SassMeister;
     },
 
     arrangePanels: function(orientation) {
-
       // #source has to be done FIRST, since it is nested inside #casement. TODO: Fix this.
       $('#source').casement({
         split: (orientation == 'horizontal' ? 'vertical' : 'horizontal'),
@@ -279,8 +275,22 @@ var SassMeister;
         }
       });
 
-      SassMeister.orientation = orientation;
-      localStorage.setItem('orientation', SassMeister.orientation);
+      this.orientation = orientation;
+      localStorage.setItem('orientation', this.orientation);
+    },
+
+    toggleHTMLPanels: function(state) {
+      $('#source').casement('destroy');
+      $('#casement').casement('destroy');
+
+      $('#rendered')[state]();
+      $('#html_input')[state]();
+
+      this.arrangePanels(this.orientation);
+
+      SassMeister.inputs.sass.resize();
+      SassMeister.outputs.css.resize();
+      SassMeister.inputs.html.resize();
     },
 
     gist: {

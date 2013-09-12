@@ -16,6 +16,19 @@
     SassMeister.reset();
   });
 
-  
+  $('#toggle_html').on('click', function(event) {
+    event.preventDefault();
+
+    var state = $(this).data("state")
+
+    SassMeister.toggleHTMLPanels(state);
+
+    if(state == 'hide') {
+      $(this).data("state", 'show').text('Show HTML');
+    }
+    else {
+      $(this).data("state", 'hide').text('Hide HTML');
+    }
+  });
 
 })(jQuery);
