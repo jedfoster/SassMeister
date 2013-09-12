@@ -183,14 +183,16 @@ class SassMeisterApp < Sinatra::Base
       end
       
       
-      
-      html_file = response.files["#{response.files.keys.grep(/.+\.(haml|textile|markdown|html)/)[0]}"]
+      html_file = response.files["#{response.files.keys.grep(/.+\.(haml|textile|markdown|md|html)/)[0]}"]
 
       if(html_file)
         html = html_file.content
         html_filename = html_file.filename
-  
+
         html_syntax = html_file.filename.split('.').pop
+        html_syntax = 'markdown' if html_syntax == 'md'
+
+        html_syntax.capitalize!
       end
 
     rescue Github::Error::NotFound => e
