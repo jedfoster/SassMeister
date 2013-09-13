@@ -140,8 +140,6 @@ var SassMeister;
       }, 750);
 
 
-      $('#rendered-html').attr('src', '/render.html');
-
       return this;
     },
 
