@@ -27,8 +27,6 @@ require './lib/html/pipeline/haml.rb'
 class SassMeisterApp < Sinatra::Base
   register Sinatra::Partial
 
-  # HTML::Pipeline::SanitizationFilter::WHITELIST[:attributes][:all].merge ['class', 'style']
-
   use Chairman::Routes
 
   helpers SassMeister
@@ -53,8 +51,8 @@ class SassMeisterApp < Sinatra::Base
                                    :secret => 'local'
       end
     end
-    
-    after '/authorize/return' do  
+
+    after '/authorize/return' do
       redirect to('/')
     end
 
@@ -81,7 +79,7 @@ class SassMeisterApp < Sinatra::Base
     @github = Chairman.session(session[:github_token])
     @gist = nil
     @plugins = plugins
-    
+
     params[:syntax].downcase! unless params[:syntax].nil?
     params[:original_syntax].downcase! unless params[:original_syntax].nil?
     params[:html_syntax].downcase! unless params[:html_syntax].nil?
@@ -174,15 +172,15 @@ class SassMeisterApp < Sinatra::Base
         syntax = filename = owner = ''
         sass = "// Sorry, I couldn't find any valid Sass in that Gist."
 
-      else      
+      else
         sass = file.content
         filename = file.filename
         owner = (response.respond_to?(:owner) ? response.owner.login : '')
-  
+
         syntax = file.filename.slice(-4, 4)
       end
-      
-      
+
+
       html_file = response.files["#{response.files.keys.grep(/.+\.(haml|textile|markdown|md|html)/)[0]}"]
 
       if(html_file)
@@ -229,15 +227,15 @@ class SassMeisterApp < Sinatra::Base
 
     sass_file = "SassMeister-input.#{params[:sass][:syntax]}"
     css_file = "SassMeister-output.css"
-    
+
     html = {}
-    
+
     if params[:html]
       html_file = "SassMeister-input-HTML.#{params[:html][:syntax].downcase}"
       html_input = params[:html][:input]
       rendered_file = "SassMeister-rendered.html"
       html_output = params[:html][:output]
-      
+
       html = {
         html_file => {
           content: "#{html_input}"
@@ -247,15 +245,15 @@ class SassMeisterApp < Sinatra::Base
         }
       }
     end
-    
+
     data = @github.gists.create(description: description, public: true, files: {
       css_file => {
         content: "#{css}"
       },
       sass_file => {
         content: "#{dependencies}\n\n#{sass}"
-      }      
-    }.merge(html))  
+      }
+    }.merge(html))
 
     content_type 'application/json'
 
@@ -301,7 +299,7 @@ class SassMeisterApp < Sinatra::Base
         filename = params[:html][:filename].split('.')
         filename.pop
         filename = filename.join('.')
-        
+
         html_file = "#{filename}.#{params[:html][:syntax].downcase}"
         deleted_html = {params[:html][:filename] => {content: nil}}
       end
@@ -315,7 +313,7 @@ class SassMeisterApp < Sinatra::Base
         }
       }.merge(deleted_html)
     end
-    
+
     data = @github.gists.edit(id, files: {
       css_file => {
         content: "#{css}"

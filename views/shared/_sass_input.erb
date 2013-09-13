@@ -4,32 +4,29 @@
 
       <div id="" class="panel-toggle">
         <span id="syntax" class="selected"></span>
-      
+
         <ul>
           <li><span data-toggle-value="SCSS" data-toggle-input="syntax">SCSS</span></li>
           <li><span data-toggle-value="Sass" data-toggle-input="syntax">Sass</span></li>
         </ul>
       </div>
-      
+
       <div id="extension_list">
         <span class="selected">Extensions</span>
         <ul>
           <li>
-            
+
             <ul>
               <!-- <li data-import="">vanilla Sass&nbsp;&nbsp;(v<%=Gem.loaded_specs["sass"].version%>)</li> -->
               <% @plugins.each do |plugin| %>
                 <li><a data-import="<%= plugin.last[:import].to_s.gsub(/(\"|\[|\]|\s*)/, '') %>" data-version=""><%=plugin.first %></a>&nbsp;&nbsp;(v<%=plugin.last[:version]%>)</li>
               <% end %>
             </ul>
-            
+
             <i>(Will be inserted at cursor)</i>
           </li>
         </ul>
       </div>
-      
-      
-
     </div>
 
     <div class="pre_container">
