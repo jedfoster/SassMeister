@@ -112,8 +112,17 @@ var SassMeister;
         this.compile.sass();
       }
 
-      if (gist && this.storedInputs.html_syntax) {
-        SassMeister.convert.html();
+      if (this.html == 'show') {
+        if(SassMeister.storedOutputs.html) {
+          console.log(SassMeister.storedOutputs.html);
+          SassMeister.updateRender({
+            css: SassMeister.storedOutputs.css,
+            html: SassMeister.storedOutputs.html
+          });
+        }
+        else {
+          SassMeister.convert.html();
+        }
       }
 
 
@@ -435,9 +444,11 @@ var SassMeister;
     getStorage: function() {
       if(gist) {
         SassMeister.storedInputs = gist;
+        SassMeister.storedOutputs = {css: null, html: null};
       }
       else {
         SassMeister.storedInputs = JSON.parse(localStorage.getItem('inputs'));
+        SassMeister.storedOutputs = $.extend({css: '', html: ''}, JSON.parse(localStorage.getItem('outputs')));
       }
 
       if(SassMeister.storedInputs) {
@@ -478,8 +489,6 @@ var SassMeister;
         SassMeister.inputs.html.setValue(SassMeister.storedInputs.html);
         SassMeister.inputs.html.clearSelection();
       }
-
-      SassMeister.storedOutputs = $.extend({css: '', html: ''}, JSON.parse(localStorage.getItem('outputs')));
 
       SassMeister.orientation = localStorage.getItem('orientation') || SassMeister.orientation;
       SassMeister.html = localStorage.getItem('html') || SassMeister.html;
