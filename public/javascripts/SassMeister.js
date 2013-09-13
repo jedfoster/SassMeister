@@ -19,7 +19,7 @@ var SassMeister;
         $('#rendered').hide();
         $('#html_input').hide();
         $('#toggle_html').data("state", 'show').toggleClass('show').find('span').text('Show HTML');
-      }      
+      }
 
       this.arrangePanels(SassMeister.orientation);
 
@@ -112,10 +112,10 @@ var SassMeister;
         this.compile.sass();
       }
 
-
-      if ($("html").width() > 50 * 18) {
-        $('#footer').addClass('reveal-modal large').prepend('<a href="#" class="close-icon"><span class="alt">&#215;</span></a>').hide();
+      if (gist && this.storedInputs.html_syntax) {
+        SassMeister.convert.html();
       }
+
 
       $(this.inputs.sass.getSession()).bindWithDelay('change', function(event) {
         if(SassMeister.internalValueChange == true) {
@@ -129,6 +129,9 @@ var SassMeister;
       $(this.inputs.html.getSession()).bindWithDelay('change', function(event) {
         SassMeister.convert.html();
       }, 750);
+
+
+      $('#rendered-html').attr('src', '/render.html');
 
       return this;
     },
@@ -259,7 +262,7 @@ var SassMeister;
         $('#rendered').hide();
         $('#html_input').hide();
       }
-      
+
       // #source has to be done FIRST, since it is nested inside #casement. TODO: Fix this.
       $('#source').casement({
         split: (orientation == 'horizontal' ? 'vertical' : 'horizontal'),
