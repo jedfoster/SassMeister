@@ -210,13 +210,10 @@
   }
 }
 
-
-
-
 #toggle_html {
-  @extend %icon-preview-hide;
+  // @extend %icon-preview-hide;
 
   &.show {
-    @extend %icon-preview-show;
+    // @extend %icon-preview-show;
   }
 }
