@@ -4,6 +4,9 @@ var SassMeister;
 
   window.SassMeister = {
     init: function() {
+      $('#rendered-html').attr('src', 'http://render.sassmeister.dev/');
+      
+      
       this.inputs.sass = ace.edit("sass");
       this.inputs.sass.setTheme("ace/theme/tomorrow");
       this.inputs.sass.getSession().setMode("ace/mode/scss");
@@ -111,20 +114,6 @@ var SassMeister;
       else {
         this.compile.sass();
       }
-
-      if (this.html == 'show') {
-        if(SassMeister.storedOutputs.html) {
-          console.log(SassMeister.storedOutputs.html);
-          SassMeister.updateRender({
-            css: SassMeister.storedOutputs.css,
-            html: SassMeister.storedOutputs.html
-          });
-        }
-        else {
-          SassMeister.convert.html();
-        }
-      }
-
 
       $(this.inputs.sass.getSession()).bindWithDelay('change', function(event) {
         if(SassMeister.internalValueChange == true) {
@@ -245,7 +234,7 @@ var SassMeister;
 
         else {
           /* Post the form and handle the returned data */
-          $.post('/compile', inputs, function( data ) {
+          $.post('http://render.sassmeister.dev/', inputs, function( data ) {
             SassMeister.internalValueChange = true;
 
             SassMeister.updateRender({
@@ -260,7 +249,6 @@ var SassMeister;
     },
 
     updateRender: function(new_content) {
-      // console.log(new_content);
       $('#rendered-html')[0].contentWindow.postMessage(JSON.stringify(new_content), '*');
     },
 

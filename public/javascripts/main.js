@@ -31,4 +31,15 @@
     }
   });
 
+  window.onmessage = function (event) {
+    if (SassMeister.html == 'show') {
+      if(SassMeister.storedOutputs.html) {
+        SassMeister.updateRender(SassMeister.storedOutputs);
+      }
+      else {
+        SassMeister.convert.html();
+      }
+    }
+  };
+
 })(jQuery);
