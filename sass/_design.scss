@@ -7,7 +7,7 @@
   bottom: em(32);
 }
 
-.html_input, .html_output {
+.html_output {
   @extend %grid_full;
 
   float: left;

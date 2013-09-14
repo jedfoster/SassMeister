@@ -4,7 +4,6 @@
   $("a[href^='http://'], a[href^='https://']").attr("target", "_blank");
 
   $('#save-gist').on('click', function(event) {
-    /* stop form from submitting normally */
     event.preventDefault();
 
     SassMeister.gist[($(this).data('action'))]();
