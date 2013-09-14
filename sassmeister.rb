@@ -18,11 +18,11 @@ require 'yaml'
 require 'sassmeister'
 require 'array'
 
-require 'html/pipeline'
-require 'RedCloth'
-require 'haml'
-
-require './lib/html/pipeline/haml.rb'
+# require 'html/pipeline'
+# require 'RedCloth'
+# require 'haml'
+# 
+# require './lib/html/pipeline/haml.rb'
 
 class SassMeisterApp < Sinatra::Base
   register Sinatra::Partial
@@ -117,35 +117,35 @@ class SassMeisterApp < Sinatra::Base
 
 
   post '/compile' do
-    if params[:sass]
+    # if params[:sass]
       sass_compile(params)
-    else
-      # HTML
-
-      case params[:html_syntax]
-      when 'haml'
-          return render_html(params[:html], 'Haml')
-
-      when 'markdown'
-          return render_html(params[:html], 'Markdown')
-
-      when 'textile'
-          return render_html(params[:html], 'Textile')
-
-      else
-        return params[:html]
-      end
-    end
+    # else
+    #   # HTML
+    # 
+    #   case params[:html_syntax]
+    #   when 'haml'
+    #       return render_html(params[:html], 'Haml')
+    # 
+    #   when 'markdown'
+    #       return render_html(params[:html], 'Markdown')
+    # 
+    #   when 'textile'
+    #       return render_html(params[:html], 'Textile')
+    # 
+    #   else
+    #     return params[:html]
+    #   end
+    # end
   end
 
 
   post '/convert' do
-    if params[:sass]
+    # if params[:sass]
       sass_convert(params[:original_syntax], params[:syntax], params[:sass])
-    else
-      # HTML
-      erb :compiled_html, :layout => false
-    end
+    # else
+    #   # HTML
+    #   erb :compiled_html, :layout => false
+    # end
   end
 
 
