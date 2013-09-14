@@ -4,7 +4,7 @@ var SassMeister;
 
   window.SassMeister = {
     init: function() {
-      $('#rendered-html').attr('src', 'http://render.sassmeister.dev/');
+      $('#rendered-html').attr('src', window.sandbox);
       
       
       this.inputs.sass = ace.edit("sass");
@@ -234,7 +234,7 @@ var SassMeister;
 
         else {
           /* Post the form and handle the returned data */
-          $.post('http://render.sassmeister.dev/', inputs, function( data ) {
+          $.post(sandbox, inputs, function( data ) {
             SassMeister.internalValueChange = true;
 
             SassMeister.updateRender({

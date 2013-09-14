@@ -64,12 +64,16 @@ class SassMeisterApp < Sinatra::Base
   set :partial_template_engine, :erb
 
   configure :production do
+    APP_DOMAIN = 'sassmeister.com'
+    SANDBOX_DOMAIN = 'sandbox.sassmeister.com'
     require 'newrelic_rpm'
 
     Chairman.config(ENV['GITHUB_ID'], ENV['GITHUB_SECRET'], ['gist', 'user'])
   end
 
   configure :development do
+    APP_DOMAIN = 'sassmeister.dev'
+    SANDBOX_DOMAIN = 'sandbox.sassmeister.dev'
     yml = YAML.load_file("config/github.yml")
     Chairman.config(yml["client_id"], yml["client_secret"], ['gist', 'user'])
   end

@@ -16,7 +16,7 @@
 
 	<link rel="stylesheet" href="/stylesheets/style.css" />
 
-  <script>document.domain = "sassmeister.dev";</script>
+  <script>document.domain = '<%= APP_DOMAIN %>';</script>
 
 	<script type="text/javascript">
     var _gaq = _gaq || [];
@@ -39,6 +39,7 @@
 	<%= partial :"shared/_footer" %>
 
   <script>
+    var sandbox = 'http://<%= SANDBOX_DOMAIN %>';
     var gist = <%= @gist || 'false' %>;
   </script>
 
