@@ -1,9 +1,11 @@
 /* ***** BEGIN LICENSE BLOCK *****
  * Distributed under the BSD license:
  *
- * Copyright (c) 2010, Ajax.org B.V.
+ * Copyright (c) 2013 Matthew Christopher Kastor-Inare III, Atropa Inc. Intl
  * All rights reserved.
- * 
+ *
+ * Contributed to Ajax.org under the BSD license.
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  *     * Redistributions of source code must retain the above copyright
@@ -14,7 +16,7 @@
  *     * Neither the name of Ajax.org B.V. nor the
  *       names of its contributors may be used to endorse or promote products
  *       derived from this software without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -28,13 +30,61 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
-// ace.define(function(require, exports, module) {
-ace.define('ace/theme/prettify', ['require', 'exports', 'module', 'ace/lib/dom'], function(require, exports, module) {
+ace.define('ace/ext/themelist', ['require', 'exports', 'module' , 'ace/ext/themelist_utils/themes'], function(require, exports, module) {
+module.exports.themes = require('ace/ext/themelist_utils/themes').themes;
+module.exports.ThemeDescription = function(name) {
+    this.name = name;
+    this.desc = name.split('_'
+        ).map(
+            function(namePart) {
+                return namePart[0].toUpperCase() + namePart.slice(1);
+            }
+        ).join(' ');
+    this.theme = "ace/theme/" + name;
+};
 
-exports.isDark = true;
-exports.cssClass = "ace-prettify";
-exports.cssText = ""; //require('ace/requirejs/text!./prettify.css');
+module.exports.themesByName = {};
 
-var dom = require("../lib/dom");
-dom.importCssString(exports.cssText, exports.cssClass);
+module.exports.themes = module.exports.themes.map(function(name) {
+    module.exports.themesByName[name] = new module.exports.ThemeDescription(name);
+    return module.exports.themesByName[name];
+});
+
+});
+
+ace.define('ace/ext/themelist_utils/themes', ['require', 'exports', 'module' ], function(require, exports, module) {
+
+module.exports.themes = [
+    "ambiance",
+    "chaos",
+    "chrome",
+    "clouds",
+    "clouds_midnight",
+    "cobalt",
+    "crimson_editor",
+    "dawn",
+    "dreamweaver",
+    "eclipse",
+    "github",
+    "idle_fingers",
+    "kr_theme",
+    "merbivore",
+    "merbivore_soft",
+    "mono_industrial",
+    "monokai",
+    "pastel_on_dark",
+    "solarized_dark",
+    "solarized_light",
+    "terminal",
+    "textmate",
+    "tomorrow",
+    "tomorrow_night",
+    "tomorrow_night_blue",
+    "tomorrow_night_bright",
+    "tomorrow_night_eighties",
+    "twilight",
+    "vibrant_ink",
+    "xcode"
+];
+
 });
