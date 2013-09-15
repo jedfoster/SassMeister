@@ -64,6 +64,7 @@ var SassMeister;
         }
         if (input == 'html_syntax') {
           SassMeister.convert.html();
+          SassMeister.inputs.html.getSession().setMode("ace/mode/" + selected.toLowerCase());
         }
       });
 
