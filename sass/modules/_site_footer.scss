@@ -9,12 +9,20 @@
   border-top: 1px solid $golf_gray;
   background: scale-color($india_gray, $lightness: 50%);
 
+  @media screen and (max-width: 650px) {
+    height: em(64);
+
+    p {
+      margin-bottom: 0;
+    }
+  }
+
   a {
     color: $charlie_gray;
   }
 
   p {
-    @include grid(6);
+    // @include grid(6);
 
     font-size: em(14);
     font-weight: 300;
@@ -22,16 +30,34 @@
   }
 
   .info {
+    @include grid(8);
+
     text-align: left;
 
     a {
       margin-right: 1.5em;
     }
+
+    @media screen and (max-width: 650px) {
+      @include grid(12);
+
+      text-align: center;
+    }
   }
   .copyright {
+    @include grid(4);
+
     text-align: right;
+
+    @media screen and (max-width: 650px) {
+      @include grid(12);
+
+      text-align: center;
+    }
   }
-  
+
+
+
   .twitter-icon:before, .paypal-icon:before {
     font-size: 1em;
 	  margin-right: 0.2em;

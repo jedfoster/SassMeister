@@ -5,6 +5,10 @@
   z-index: 2;
   top: em(60);
   bottom: em(32);
+
+  @media screen and (max-width: 650px) {
+    bottom: em(64);
+  }
 }
 
 .html_output {

@@ -59,6 +59,12 @@
       }
     }
   }
+  
+  .bookmark {
+    @media screen and (min-width: 460px) {
+      display: none;
+    }
+  }
 
   .logo {
     @extend %icon-font;
@@ -92,6 +98,10 @@
     font-size: 1em;
     margin-left: 1em;
     font-weight: 200;
+    
+    @media screen and (max-width: 840px) {
+      display: none;
+    }
   }
 }
 
