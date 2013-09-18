@@ -419,7 +419,7 @@ Sassy Math has been removed from SassMeister for technical reasons.
 
 ## Singularity.gs ##
 
-    @import "singularity";
+    @import "singularitygs";
 
     $grids: 1 3 5 7 9;
     $gutters: 1/3;
@@ -450,6 +450,7 @@ Sassy Math has been removed from SassMeister for technical reasons.
 
 ## Singularity Extras ##
 
+    @import "singularitygs";
     @import "singularity-extras";
 
     $grids: 3;
@@ -481,6 +482,26 @@ Sassy Math has been removed from SassMeister for technical reasons.
           }
         }
       }
+    }
+
+
+## Singularity Golden Grid ##
+
+    @import "singularitygs";
+    @import 'singularity-golden-grid';
+
+    .my-container {
+        @include grid-container;
+    }
+
+    // 2 columns
+    .my-grid-unit {
+        @include grid-column(2);
+    }
+
+    // 1 column
+    .my-another-grid-unit {
+        @include grid-column;
     }
 
 
