@@ -36,6 +36,10 @@
   padding: 0 0.83333em;
   display: inline-block;
   width: auto;
+  
+  .minimized & {
+    display: none;
+  } 
 
   .selected {
     &:after {
@@ -118,4 +122,25 @@
     overflow: scroll;
     margin-bottom: 0.83333em;
   }
+}
+
+%visibility-toggle {
+  @extend .panel-toggle;
+  @extend %icon-Minimize;
+
+  float: right;
+  padding: 0 0.416665em;
+
+  &.open {
+    @extend %icon-Open;
+    
+    float: left;
+    display: block;
+  }
+}
+
+
+
+.visibility-toggle {
+  @extend %visibility-toggle;
 }

@@ -26,6 +26,18 @@ var SassMeister;
 
       this.arrangePanels(SassMeister.orientation);
 
+      $('#css_input .visibility-toggle').on('click', function(event) {
+        $('#source').casement('minimize', '#css_input');
+        $('#css_input').toggleClass('minimized');
+        $(this).toggleClass('open');
+      });
+      
+      $('#html_input .visibility-toggle').on('click', function(event) {
+        $('#source').casement('minimize', '#html_input');
+        $('#html_input').toggleClass('minimized');
+        $(this).toggleClass('open');
+      });
+
       $('.orientation').on('click', function(event) {
         $('#source').casement('destroy');
         $('#casement').casement('destroy');
@@ -152,6 +164,8 @@ var SassMeister;
     orientation: 'horizontal',
 
     html: 'show',
+
+    panels: {css: true, html: true, result: true},
 
     compile: {
       sass: function() {
@@ -479,6 +493,7 @@ var SassMeister;
 
       SassMeister.orientation = localStorage.getItem('orientation') || SassMeister.orientation;
       SassMeister.html = localStorage.getItem('html') || SassMeister.html;
+      SassMeister.panels = localStorage.getItem('panels') || SassMeister.panels;
     },
 
     setStorage: function(inputs, outputs) {

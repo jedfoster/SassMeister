@@ -204,3 +204,26 @@
 	  content: "\e008";
 	}
 }
+
+%icon-Open {
+ @extend %icon-font;
+
+	&:before {
+    // content: "\e005";
+  	content: "\e009";
+
+    font-size: 0.9em;
+    line-height: 1.4;
+  }
+}
+%icon-Minimize {
+ @extend %icon-font;
+
+	&:before {
+    // content: "\e006";
+  	content: "\e007";
+
+    font-size: 0.9em;
+    line-height: 1.4;
+  }
+}

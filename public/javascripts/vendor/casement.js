@@ -26,6 +26,8 @@
     this._defaults = defaults;
 
     this.init();
+    
+    return this;
   }
 
   Casement.prototype = {
@@ -52,6 +54,7 @@
               nextSettings = casementSettings[guid + 1] || {x:null,y:null};
 
           $(this).data('casement_guid', guid);
+          $(this).data('casement_split', 'horizontal');
 
           if (index == columns - 1) {
             nextSettings.y = 100;
@@ -90,6 +93,7 @@
               nextSettings = casementSettings[guid + 1] || {x:null,y:null};
 
           $(this).data('casement_guid', guid);
+          $(this).data('casement_split', 'vertical');
 
           if (index == columns - 1) {
             nextSettings.x = 100;
@@ -167,9 +171,9 @@
         y: null
       };
 
-      if($(handle).hasClass('horizontal')) {
+      if($(handle).hasClass('horizontal')) {        
         if(offset.top <= handle.prev().offset().top ||
-             offset.top >= (handle.next().offset().top - this.parentOffset.top + handle.next().outerHeight()) ) {
+             offset.top >= (handle.next().offset().top + handle.next().outerHeight()) ) {
           return false;
         }
 
@@ -199,6 +203,25 @@
       localStorage.setItem('casementSettings', JSON.stringify(casementSettings));
     },
 
+    minimize: function(element) {
+      var el = $(element),
+          sash = el.prev('.sash'),
+          diff = null,
+          movement = null;
+
+      if(el.data('casement_split') == 'horizontal') {
+        diff = el.outerHeight() - 32;
+        movement = sash.offset().top  + diff;        
+        this.resize(sash, {left: 0, top: movement});
+      }
+
+      else {
+        diff = el.outerWidth() - 32;
+        movement = sash.offset().left + diff;
+        this.resize(sash, {left: movement, top: 0});
+      }
+    },
+
     destroy: function() {
       var $this = this,
           $el = $($this.element);
@@ -218,7 +241,8 @@
           $.data(this, 'plugin_casement', new Casement( this, options ));
         }
       });
-    } else if (typeof options === 'string' && options[0] !== '_' && options !== 'init') {
+    } 
+    else if (typeof options === 'string' && options[0] !== '_' && options !== 'init') {
       return this.each(function () {
         var instance = $.data(this, 'plugin_casement');
         if (instance instanceof Casement && typeof instance[options] === 'function') {
@@ -230,4 +254,5 @@
 
 
   $.fn.casement.guid = $.fn.casement.guid || 0;
+
 })(jQuery);
