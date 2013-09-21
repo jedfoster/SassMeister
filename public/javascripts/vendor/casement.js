@@ -12,6 +12,7 @@
 
   var defaults = {
         split: 'vertical',
+        minimum: 24,
         onDragStart: function(){},
         onDragEnd: function(){},
         onDrag: function(){}
@@ -180,8 +181,8 @@
         settings.y = newHandleOffset;
       }
       if($(handle).hasClass('vertical')) {
-        if(offset.left <= handle.prev().offset().left ||
-             offset.left >= (handle.next().offset().left - this.parentOffset.left + handle.next().outerWidth()) ) {
+        if(offset.left <= handle.prev().offset().left + this.options.minimum ||
+             offset.left >= (handle.next().offset().left - this.parentOffset.left + handle.next().outerWidth()) - this.options.minimum ) {
           return false;
         }
 
