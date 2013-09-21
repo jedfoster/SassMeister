@@ -26,7 +26,7 @@
     this._defaults = defaults;
 
     this.init();
-    
+
     return this;
   }
 
@@ -39,7 +39,8 @@
       var $this = this,
           $el = $($this.element),
           columns = $el.children().filter(':visible').length,
-          paneSize = ( 100 / columns );
+          paneSize = ( 100 / columns ),
+          split = this.options.split;
 
 
       $el.css({position: 'absolute', top: 0, right: 0, bottom: 0, left: 0});
@@ -47,83 +48,65 @@
       this.parentHeight = $el.innerHeight();
       this.parentOffset = $el.offset();
 
-      if(this.options.split == 'horizontal') {
-        $el.children().filter(':visible').each(function(index) {
-          var guid = $.fn.casement.guid++,
-              settings = casementSettings[guid] || {x:null,y:null},
-              nextSettings = casementSettings[guid + 1] || {x:null,y:null};
 
-          $(this).data('casement_guid', guid);
-          $(this).data('casement_split', 'horizontal');
+      $el.children().filter(':visible').each(function(index) {
+        var guid = $.fn.casement.guid++,
+            settings = casementSettings[guid] || {x:null,y:null},
+            nextSettings = casementSettings[guid + 1] || {x:null,y:null},
+            css = {position: 'absolute'},
+            sash_css = {};
 
+        $(this).data('casement_guid', guid);
+        $(this).data('casement_split', split);
+
+
+        if(typeof casementSettings[guid] !== 'undefined' && casementSettings[guid].expanded) {
+          $(this).addClass('minimized');
+        }
+
+
+        if(split == 'horizontal') {
           if (index == columns - 1) {
             nextSettings.y = 100;
           }
 
-          var bottom = 100 - nextSettings.y;
+          var bottom = 100 - nextSettings.y,
+              id = 'sash-x' + (index + 1) + '-' + guid;
 
-          $(this).css({
-            // width: paneSize + '%',
+          $.extend(css, {
             top: ( settings.y || (paneSize * index)) + '%',
-            bottom: ( (bottom == 100 ? false : bottom) || Math.abs(paneSize * (columns - (index + 1)))) + '%',
-            position: 'absolute'
+            bottom: ( (bottom == 100 ? false : bottom) || Math.abs(paneSize * (columns - (index + 1)))) + '%'
           });
 
-          if(index !== columns - 1) {
-            var id = 'sash-x' + (index + 1) + '-' + guid;
+          sash_css = {top: ( nextSettings.y || (paneSize * (index + 1))) + '%'};
+        }
 
-            $('<div/>').addClass('horizontal sash').css({
-              top: ( nextSettings.y || (paneSize * (index + 1))) + '%',
-            }).attr('id',  id)
-            .mouseenter(function() {
-              sash_id = id;
-            })
-            .mouseleave(function() {
-              sash_id = null;
-            })
-            .insertAfter($(this));
-          }
-        });
-      }
-
-      else {
-        $el.children(':visible').each(function(index) {
-          var guid = $.fn.casement.guid++,
-              settings = casementSettings[guid] || {x:null,y:null},
-              nextSettings = casementSettings[guid + 1] || {x:null,y:null};
-
-          $(this).data('casement_guid', guid);
-          $(this).data('casement_split', 'vertical');
-
+        else {
           if (index == columns - 1) {
             nextSettings.x = 100;
           }
 
-          var right = 100 - nextSettings.x;
+          var right = 100 - nextSettings.x,
+              id = 'sash-y' + (index + 1) + '-' + guid;
 
-          $(this).css({
-            // width: paneSize + '%',
+          $.extend(css, {
             left: ( settings.x || (paneSize * index)) + '%',
-            right: ( (right == 100 ? false : right) || Math.abs(paneSize * (columns - (index + 1)))) + '%',
-            position: 'absolute'
+            right: ( (right == 100 ? false : right) || Math.abs(paneSize * (columns - (index + 1)))) + '%'
           });
 
-          if(index !== columns - 1) {
-            var id = 'sash-y' + (index + 1) + '-' + guid;
+          sash_css = {left: ( nextSettings.x || (paneSize * (index + 1))) + '%'};
+        }
 
-            $('<div/>').addClass('vertical sash').css({
-              left: ( nextSettings.x || (paneSize * (index + 1))) + '%',
-            }).attr('id', id)
-            .mouseenter(function() {
-              sash_id = id;
-            })
-            .mouseleave(function() {
-              sash_id = null;
-            })
-            .insertAfter($(this));
-          }
-        });
-      }
+        $(this).css(css);
+
+        if(index !== columns - 1) {
+          $('<div/>').addClass(split + ' sash').css(sash_css).attr('id',  id)
+          .mouseenter(function() { sash_id = id; })
+          .mouseleave(function() { sash_id = null; })
+          .insertAfter($(this));
+        }
+      });
+
 
       $(document.documentElement).bind("mousedown.casement touchstart.casement", function (event) {
         if (sash_id !== null) {
@@ -154,6 +137,7 @@
         }
       });
 
+
       return this;
     },
 
@@ -171,7 +155,8 @@
         y: null
       };
 
-      if($(handle).hasClass('horizontal')) {        
+
+      if($(handle).hasClass('horizontal')) {
         if(offset.top <= handle.prev().offset().top ||
              offset.top >= (handle.next().offset().top + handle.next().outerHeight()) ) {
           return false;
@@ -184,6 +169,7 @@
 
         settings.y = newHandleOffset;
       }
+
       if($(handle).hasClass('vertical')) {
         if(offset.left <= handle.prev().offset().left + this.options.minimum ||
              offset.left >= (handle.next().offset().left - this.parentOffset.left + handle.next().outerWidth()) - this.options.minimum ) {
@@ -198,8 +184,12 @@
         settings.x = newHandleOffset;
       }
 
+      if(handle.prev().hasClass('minimized')) {
 
-      casementSettings[handle.next().data('casement_guid')] = settings;
+      }
+
+      $.extend(true, casementSettings[handle.next().data('casement_guid')], settings);
+
       localStorage.setItem('casementSettings', JSON.stringify(casementSettings));
     },
 
@@ -209,17 +199,42 @@
           diff = null,
           movement = null;
 
+
       if(el.data('casement_split') == 'horizontal') {
         diff = el.outerHeight() - 32;
-        movement = sash.offset().top  + diff;        
+        movement = sash.offset().top  + diff;
+
+        $.extend(casementSettings[el.data('casement_guid')], {expanded: {y: el.offset().top}});
+
         this.resize(sash, {left: 0, top: movement});
       }
 
       else {
         diff = el.outerWidth() - 32;
         movement = sash.offset().left + diff;
+
+        $.extend(casementSettings[el.data('casement_guid')], {expanded: {x: el.offset().left}});
+
         this.resize(sash, {left: movement, top: 0});
       }
+
+      el.addClass('minimized');
+    },
+
+    expand: function(element) {
+      var el = $(element),
+          sash = el.prev('.sash');
+
+      var offset = {
+        left: (casementSettings[el.data('casement_guid')].expanded.x || null),
+        top: (casementSettings[el.data('casement_guid')].expanded.y || null)
+      }
+
+      delete(casementSettings[el.data('casement_guid')].expanded)
+
+      this.resize(sash, offset);
+
+      el.removeClass('minimized');
     },
 
     destroy: function() {
@@ -241,7 +256,7 @@
           $.data(this, 'plugin_casement', new Casement( this, options ));
         }
       });
-    } 
+    }
     else if (typeof options === 'string' && options[0] !== '_' && options !== 'init') {
       return this.each(function () {
         var instance = $.data(this, 'plugin_casement');
