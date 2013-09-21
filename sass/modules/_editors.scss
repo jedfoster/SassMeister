@@ -131,7 +131,7 @@
   float: right;
   padding: 0 0.416665em;
 
-  &.open {
+  .minimized & {
     @extend %icon-Open;
     
     float: left;
