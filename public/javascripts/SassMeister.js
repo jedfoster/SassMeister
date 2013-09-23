@@ -27,23 +27,23 @@ var SassMeister;
       this.arrangePanels(SassMeister.orientation);
 
 
-      $('#css_input .visibility-toggle').on('click', function(event) {
-        if($('#css_input').hasClass('minimized')) {
-          $('#source').casement('expand', '#css_input');
-        }
-        else {
-          $('#source').casement('minimize', '#css_input');
-        }
-      });
-
-      $('#html_input .visibility-toggle').on('click', function(event) {
-        if($('#html_input').hasClass('minimized')) {
-          $('#source').casement('expand', '#html_input');
-        }
-        else {
-          $('#source').casement('minimize', '#html_input');
-        }
-      });
+      // $('#css_input .visibility-toggle').on('click', function(event) {
+      //   if($('#css_input').hasClass('minimized')) {
+      //     $('#source').casement('expand', '#css_input');
+      //   }
+      //   else {
+      //     $('#source').casement('minimize', '#css_input');
+      //   }
+      // });
+      // 
+      // $('#html_input .visibility-toggle').on('click', function(event) {
+      //   if($('#html_input').hasClass('minimized')) {
+      //     $('#source').casement('expand', '#html_input');
+      //   }
+      //   else {
+      //     $('#source').casement('minimize', '#html_input');
+      //   }
+      // });
 
 
       $('.orientation').on('click', function(event) {
