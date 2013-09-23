@@ -185,7 +185,7 @@
       }
 
       if(handle.prev().hasClass('minimized')) {
-
+        this.minimize(handle.prev());
       }
 
       $.extend(true, casementSettings[handle.next().data('casement_guid')], settings);
