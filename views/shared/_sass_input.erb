@@ -15,13 +15,11 @@
         <span class="selected">Extensions</span>
         <ul>
           <li>
-
-            <ul>
-              <!-- <li data-import="">vanilla Sass&nbsp;&nbsp;(v<%=Gem.loaded_specs["sass"].version%>)</li> -->
+            <ol>
               <% @plugins.each do |plugin| %>
                 <li><a data-import="<%= plugin.last[:import].to_s.gsub(/(\"|\[|\]|\s*)/, '') %>" data-version=""><%=plugin.first %></a>&nbsp;&nbsp;(v<%=plugin.last[:version]%>)</li>
               <% end %>
-            </ul>
+            </ol>
 
             <i>(Will be inserted at cursor)</i>
           </li>

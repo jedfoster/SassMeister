@@ -33,13 +33,11 @@
 }
 
 .panel-toggle {
+  @extend %sub-menu-dropdown;
+
   padding: 0 0.83333em;
   display: inline-block;
   width: auto;
-  
-  .minimized & {
-    display: none;
-  } 
 
   .selected {
     &:after {
@@ -52,26 +50,11 @@
   }
 
   > ul {
-    display:none;
-
-    background: transparentize(scale-color($alpha_color, $lightness: -80%), 0.2);
-    position: absolute;
-    z-index: 9999;
     top: em($heading_3);
     left: 0;
     width: em(200);
 
-    @each $prefix in $prefix_defaults {
-      #{$prefix}border-bottom-left-radius: em(3);
-      #{$prefix}border-bottom-right-radius: em(3);
-    }
-
-    > li {
-      width: 100%;
-      display: block;
-      color: $white;
-      padding: 0.41665em 0.83333em;
-
+    a, span {
       &:hover {
         cursor: pointer;
         text-decoration: underline;
@@ -97,49 +80,46 @@
 
 #extension_list {
   @extend .panel-toggle;
-  
+
   float: right;
-  
+
   > span {
     @extend %icon-Compass;
   }
 
-  > ul {
+  ul {
     left: initial;
     right: 0;
-    width: em(240);
-    
-    > li {
-      &:hover {
-        cursor: normal;
-        text-decoration: none;
-      }
-    }
+    width: auto;
+    min-width: em(240);
   }
-  
-  ul ul {
+
+  ol {
     max-height: em(360);
     overflow: scroll;
     margin-bottom: 0.83333em;
+
+    li {
+      padding: 0;
+    }
   }
 }
+
 
 %visibility-toggle {
   @extend .panel-toggle;
   @extend %icon-Minimize;
-  
+
   float: right;
   padding: 0 0.416665em;
-  
+
   .minimized & {
     @extend %icon-Open;
-    
+
     float: left;
     display: block;
   }
 }
-
-
 
 .visibility-toggle {
   // @extend %visibility-toggle;
