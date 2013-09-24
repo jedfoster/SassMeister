@@ -1,4 +1,36 @@
-%tooltip {
+%header-button {
+  color: $white;
+  line-height: em(60);
+  text-shadow: 0 0 5px darken($alpha_color, 10%);
+
+  &:hover {
+    background: scale-color($alpha_color, $lightness: -70%);
+    text-shadow: 0 0 5px $white;
+  }
+}
+
+%nav-block {
+  display: block;
+  float: left;
+  padding: 0 em(15);
+  height: em(60);
+  line-height: em(60);
+  position: relative;
+  min-width: 3.5em;
+  text-align: center;
+  border-left: 1px solid darken($alpha_color, 5%);
+  box-shadow: inset 1px 0px 0px 0px transparentize(white, 0.8);
+
+  &:last-child {
+    @extend %omega;
+  }
+
+  @media #{$mobile} {
+    padding-right: em(12);
+  }
+}
+
+%sub-menu {
   position: absolute;
   z-index: 9999;
   top: em(60);
@@ -6,7 +38,6 @@
   width: em(200);
   padding: 0.5em;
   line-height: 1.5em;
-  content: attr(title);
   font-family: $primary_font_family;
   font-weight: 200;
   text-shadow: 0 0 0 transparent;
@@ -20,165 +51,24 @@
   }
 }
 
-%header-button {
-  color: $white;
-  line-height: em(60);
-  text-shadow: 0 0 5px darken($alpha_color, 10%);
+%sub-menu-dropdown {
+  ul {
+    @extend %sub-menu;
 
-  &:hover {
-    text-shadow: 0 0 5px $white;
-  }
-}
-
-.site_header {
-  position: relative;
-  height: em(60);
-  border-bottom: 1px solid $echo_gray;
-  background: $alpha_color_charlie;
-  color: $white;
-  text-shadow: 0 0 5px darken($alpha_color, 10%);
-
-  a {
-    @extend %header-button;
-
-    &:hover {
-      span {
-        text-decoration: underline;
-      }
-    }
-  }
-  
-  .github-login, .bookmark-icon {
-    &:hover {
-      &:after {
-        @extend %tooltip;
-
-        @media #{$mobile} {
-          display: none;
-        }
-      }
-    }
-  }
-  
-  .bookmark {
-    @media screen and (min-width: 460px) {
-      display: none;
-    }
-  }
-
-  .logo {
-    @extend %icon-font;
-
-    margin-left: 15px;
-    float: left;
-
-    &:before {
-      content: "\e001";
-      font-size: 7.5em;
-      line-height: 0.01;
-    }
-
-    &:hover {
-      text-shadow: 0 0 5px darken($alpha_color, 10%);
-
-      &:after {
-        display: none;
-      }
-    }
-
-    @media #{$mobile} {
-      left: 5px;
-    }
-  }
-
-  .tagline {
-    display: block;
-    padding-top: 1.33333em;
-    float: left;
-    font-size: 1em;
-    margin-left: 1em;
-    font-weight: 200;
-    
-    @media screen and (max-width: 840px) {
-      display: none;
-    }
-  }
-}
-
-.social_links {
-  list-style: none;
-  text-align: right;
-  float: right;
-  position: relative;
-
-  > li {
-    display: block;
-    float:left;
-    padding: 0 em(15);
-    line-height: em(1);
-    position: relative;
-    min-width: 3.5em;
-    text-align: center;
-
-    &:last-child {
-      @extend %omega;
-    }
-
-    @media #{$mobile} {
-      padding-right: em(8);
-    }
-  }
-
-  img {
-    @include border_radius($border-radius);
-
-    display: block;
-    margin: em(10) 0;
-  }
-
-  > li {
-    border-left: 1px solid darken($alpha_color, 5%);
-    box-shadow: inset 1px 0px 0px 0px transparentize(white, 0.8);
-
-    @media #{$mobile} {
-      padding-right: em(12);
-    }
-  }
-}
-
-.github {
-  > ul {
-    display:none;
+    display: none;
   }
 
   &:hover {
-    background: scale-color($alpha_color, $lightness: -70%);
-
-    > ul {
+    ul {
       display: block;
     }
   }
-}
 
-#account_actions {
-  @extend %tooltip;
-
-  right: 0;
-  padding: em(8);
-  text-align: left;
-  width: auto;
-  min-width: em(220);
-  max-width: em(340);
-  background: transparentize(scale-color($alpha_color, $lightness: -80%), 0.2);
-
-  @each $prefix in $prefix_defaults {
-    #{$prefix}border-top-left-radius: 0;
-    #{$prefix}border-top-right-radius: 0;
-  }
-
-  > li {
+  li {
     width: 100%;
     display: block;
+    text-align: left;
+    padding: em(8);
 
     &:before {
       font-size: 0.75em;
@@ -192,6 +82,8 @@
 
     &:hover {
       color: white;
+      background: transparent;
+      text-shadow: none;
 
       &:after {
         display: none;
@@ -200,30 +92,128 @@
   }
 }
 
-.social_links {
-  @extend .social_links;
+%tooltip {
+  @extend %sub-menu;
 
-  > li {
-    @extend .github;
+  content: attr(title);
+}
 
-    > * {
+
+.site_header {
+  position: relative;
+  height: em(60);
+  border-bottom: 1px solid $echo_gray;
+  background: $alpha_color_charlie;
+  color: $white;
+  text-shadow: 0 0 0.33333em darken($alpha_color, 10%);
+
+  a {
+    @extend %header-button;
+
+    &:hover {
+      span {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .logo {
+    @extend %icon-font;
+
+    margin-left: 1em;
+    float: left;
+
+    &:before {
+      content: "\e001";
+      font-size: 7.5em;
+      line-height: 0.01;
+    }
+
+    &:hover {
+      background: transparent;
+      text-shadow: 0 0 0.33333em darken($alpha_color, 10%);
+
+      &:after {
+        display: none;
+      }
+    }
+
+    @media #{$mobile} {
+      left: 0.33333em;
+    }
+  }
+
+  nav {
+    list-style: none;
+    text-align: right;
+    float: right;
+    position: relative;
+
+    > a {
+      @extend %nav-block;
+    }
+
+    > div {
+      @extend %nav-block;
       @extend %header-button;
+      @extend %sub-menu-dropdown;
+    }
+
+    .bookmark-icon {
+      @media #{$mobile} {
+        display: none;
+      }
+    }
+
+    img {
+      @include border_radius($border-radius);
+
+      display: block;
+      margin: em(10) 0;
+    }
+
+    #account_actions {
+      width: auto;
+      li {
+        width: auto;
+        min-width: em(220);
+        max-width: em(360);
+      }
     }
   }
 }
 
-#control_actions, #cloud_actions {
-  @extend #account_actions;
+.tagline {
+  display: block;
+  padding-top: 1.33333em;
+  float: left;
+  font-size: 1em;
+  margin-left: 1em;
+  font-weight: 200;
 
-  > li {
-    padding: 0.5em 0;
+  @media screen and (max-width: 840px) {
+    display: none;
   }
 }
 
-#toggle_html {
-  // @extend %icon-preview-hide;
-
-  &.show {
-    // @extend %icon-preview-show;
+.github-login, .bookmark-icon {
+  &:hover {
+    &:after {
+      @extend %tooltip;
+      @media #{$mobile} {
+        display: none;
+      }
+    }
   }
 }
+
+
+
+//#toggle_html {
+//  // @extend %icon-preview-hide;
+//
+//  &.show {
+//    // @extend %icon-preview-show;
+//  }
+//}
+
