@@ -1,14 +1,3 @@
-%header-button {
-  color: $white;
-  line-height: em(60);
-  text-shadow: 0 0 5px darken($alpha_color, 10%);
-
-  &:hover {
-    background: scale-color($alpha_color, $lightness: -70%);
-    text-shadow: 0 0 5px $white;
-  }
-}
-
 %nav-block {
   display: block;
   float: left;
@@ -115,6 +104,10 @@
         text-decoration: underline;
       }
     }
+
+    &.show {
+      background: scale-color($alpha_color, $lightness: 45%, $saturation: -25%);
+    }
   }
 
   .logo {
@@ -207,6 +200,17 @@
   }
 }
 
+
+%header-button {
+  color: $white;
+  line-height: em(60);
+  text-shadow: 0 0 5px darken($alpha_color, 10%);
+
+  &:hover {
+    background: scale-color($alpha_color, $lightness: -70%);
+    text-shadow: 0 0 5px $white;
+  }
+}
 
 
 //#toggle_html {
