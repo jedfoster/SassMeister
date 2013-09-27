@@ -5,8 +5,8 @@ var SassMeister;
   window.SassMeister = {
     init: function() {
       $('#rendered-html').attr('src', window.sandbox);
-      
-      
+
+
       this.inputs.sass = ace.edit("sass");
       this.inputs.sass.setTheme("ace/theme/tomorrow");
       this.inputs.sass.getSession().setMode("ace/mode/scss");
@@ -21,7 +21,12 @@ var SassMeister;
       if (this.html == 'hide') {
         $('#rendered').hide();
         $('#html_input').hide();
-        $('#toggle_html').data("state", 'show').toggleClass('show').find('span').text('Show HTML');
+        $('#toggle_html').data("state", 'show').toggleClass('show');
+      }
+
+      if (this.css == 'hide') {
+        $('#css_input').hide();
+        $('#toggle_css').data("state", 'show').toggleClass('show');
       }
 
       this.arrangePanels(SassMeister.orientation);
@@ -35,7 +40,7 @@ var SassMeister;
       //     $('#source').casement('minimize', '#css_input');
       //   }
       // });
-      // 
+      //
       // $('#html_input .visibility-toggle').on('click', function(event) {
       //   if($('#html_input').hasClass('minimized')) {
       //     $('#source').casement('expand', '#html_input');
@@ -172,6 +177,8 @@ var SassMeister;
     orientation: 'horizontal',
 
     html: 'show',
+
+    css: 'show',
 
     panels: {css: true, html: true, result: true},
 
@@ -310,12 +317,33 @@ var SassMeister;
       localStorage.setItem('orientation', this.orientation);
     },
 
+    toggleCSSPanel: function(state) {
+      $('#source').casement('destroy');
+     $('#casement').casement('destroy');
+
+      $('#css_input')[state]();
+
+      $('#rendered')[this.html]();
+      $('#html_input')[this.html]();
+
+      this.css = state;
+
+      this.arrangePanels(this.orientation);
+
+      SassMeister.inputs.sass.resize();
+      SassMeister.outputs.css.resize();
+
+      localStorage.setItem('css', state);
+    },
+
     toggleHTMLPanels: function(state) {
       $('#source').casement('destroy');
       $('#casement').casement('destroy');
 
       $('#rendered')[state]();
       $('#html_input')[state]();
+
+      $('#css_input')[this.css]();
 
       this.html = state;
 
@@ -501,6 +529,7 @@ var SassMeister;
 
       SassMeister.orientation = localStorage.getItem('orientation') || SassMeister.orientation;
       SassMeister.html = localStorage.getItem('html') || SassMeister.html;
+      SassMeister.css = localStorage.getItem('css') || SassMeister.css;
       SassMeister.panels = localStorage.getItem('panels') || SassMeister.panels;
     },
 

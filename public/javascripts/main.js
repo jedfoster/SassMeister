@@ -15,6 +15,21 @@
     SassMeister.reset();
   });
 
+  $('#toggle_css').on('click', function(event) {
+    event.preventDefault();
+
+    var state = $(this).data("state")
+
+    SassMeister.toggleCSSPanel(state);
+
+    if(state == 'hide') {
+      $(this).data("state", 'show').toggleClass('show').find('span');
+    }
+    else {
+      $(this).data("state", 'hide').toggleClass('show').find('span');
+    }
+  });
+
   $('#toggle_html').on('click', function(event) {
     event.preventDefault();
 
@@ -23,10 +38,10 @@
     SassMeister.toggleHTMLPanels(state);
 
     if(state == 'hide') {
-      $(this).data("state", 'show').toggleClass('show').find('span').text('Show HTML');
+      $(this).data("state", 'show').toggleClass('show').find('span');
     }
     else {
-      $(this).data("state", 'hide').toggleClass('show').find('span').text('Hide HTML');
+      $(this).data("state", 'hide').toggleClass('show').find('span');
     }
   });
 
