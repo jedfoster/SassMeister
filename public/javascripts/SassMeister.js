@@ -437,16 +437,18 @@ var SassMeister;
     },
 
     reset: function() {
-      $("#sass-form").get(0).reset();
       $('#save-gist').text('Save Gist').data('action', 'create');
 
       SassMeister.inputs.sass.setValue('');
       SassMeister.outputs.css.setValue('');
+      SassMeister.inputs.html_syntax = $('#html-syntax').text('HTML');
       SassMeister.inputs.html.setValue('');
-      SassMeister.outputs.html.setValue('');
+
       localStorage.clear();
       SassMeister.storedInputs = {};
       SassMeister.storedOutputs = {};
+
+      SassMeister.updateRender({reset: true});
 
       SassMeister.setUrl('/');
     },
