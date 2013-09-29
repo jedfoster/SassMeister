@@ -1,9 +1,11 @@
+$site-header-height: em(60);
+
 %nav-block {
   display: block;
   float: left;
   padding: 0 em(15);
-  height: em(60);
-  line-height: em(60);
+  height: $site-header-height;
+  line-height: $site-header-height;
   position: relative;
   min-width: 3.5em;
   text-align: center;
@@ -22,7 +24,7 @@
 %sub-menu {
   position: absolute;
   z-index: 9999;
-  top: em(60);
+  top: $site-header-height;
   right: 0;
   width: em(200);
   padding: 0.5em;
@@ -90,8 +92,8 @@
 
 .site_header {
   position: relative;
-  height: em(60);
-  border-bottom: 1px solid $echo_gray;
+  height: $site-header-height;
+  border-bottom: 1px solid darken($alpha_color, 10%);
   background: $alpha_color_charlie;
   color: $white;
   text-shadow: 0 0 0.33333em darken($alpha_color, 10%);

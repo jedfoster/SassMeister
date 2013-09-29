@@ -1,10 +1,12 @@
+$site-footer-height: em(32);
+
 .site_footer {
   @extend %stretch;
 
   position: fixed;
   top: auto;
   display: block;
-  height: em(32);
+  height: $site-footer-height;
   z-index: 3;
   border-top: 1px solid $golf_gray;
   background: scale-color($india_gray, $lightness: 50%);
@@ -22,8 +24,6 @@
   }
 
   p {
-    // @include grid(6);
-
     font-size: em(14);
     font-weight: 300;
     color: $charlie_gray;
@@ -55,8 +55,6 @@
       text-align: center;
     }
   }
-
-
 
   .twitter-icon:before, .paypal-icon:before {
     font-size: 1em;
