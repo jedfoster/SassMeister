@@ -17,7 +17,7 @@ var SassMeister;
     },
 
     outputs: {
-      css: '', //".box {\n\twidth: 5em; \n\theight: 5em; \n\tbackground: blue; \n}",
+      css: '',
       html: ''
     },
 
@@ -66,14 +66,12 @@ var SassMeister;
       }, 750);
 
 
-
       this.editors.html = this.initEditor(this.inputs.html.input, 'html', this.inputs.html.syntax);
 
       $(this.editors.html.getSession()).bindWithDelay('change', function(event) {
         $this.inputs.html.input = $this.editors.html.getValue();
         $this.compile.html();
       }, 750);
-
 
 
       this.editors.css = this.initEditor(this.outputs.css.input, 'css', 'css');
@@ -140,13 +138,10 @@ var SassMeister;
           SassMeister.editors.css.setValue(data,-1);
           SassMeister.outputs.css = data;
           
-          // $('#syntax').data('original', SassMeister.inputs.sass.syntax);
-
           SassMeister.updateRender({
             css: data
           });
 
-          // SassMeister.setStorage(inputs, {css: data});
           SassMeister.setStorage();
         });
       },
@@ -202,9 +197,6 @@ var SassMeister;
     },
 
 
-
-
-
     arrangePanels: function(orientation) {
       // #source has to be done FIRST, since it is nested inside #casement. TODO: Fix this.
       $('#source').casement({
@@ -241,9 +233,8 @@ var SassMeister;
         this.inputs = $.extend(this.inputs, JSON.parse(localStorage.getItem('inputs')) );
         this.outputs = $.extend(this.outputs, JSON.parse(localStorage.getItem('outputs')) );
       }
-      
 
-      console.log(SassMeister.inputs.sass.syntax);
+      this.layout = $.extend(this.layout, JSON.parse(localStorage.getItem('layout')) );    
 
       switch (SassMeister.inputs.sass.syntax.toLowerCase()) {
         case 'sass':
@@ -273,18 +264,6 @@ var SassMeister;
           SassMeister.inputs.html.syntax = 'HTML';
           break;
       }
-      
-      console.log(SassMeister.inputs.sass.syntax);
-      //   SassMeister.inputs.sass.setValue(SassMeister.storedInputs.sass);
-      //   SassMeister.inputs.sass.clearSelection();
-      // 
-      //   SassMeister.inputs.html.setValue(SassMeister.storedInputs.html);
-      //   SassMeister.inputs.html.clearSelection();
-      // 
-      // 
-      // SassMeister.orientation = localStorage.getItem('orientation') || SassMeister.orientation;
-      // SassMeister.html = localStorage.getItem('html') || SassMeister.html;
-      // SassMeister.css = localStorage.getItem('css') || SassMeister.css;
     },
     
     setStorage: function() {

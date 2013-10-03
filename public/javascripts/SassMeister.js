@@ -328,62 +328,62 @@ var SassMeister;
       });
     },
 
-    storedInputs: null,
-    storedOutputs: null,
-
-    getStorage: function() {
-      if(gist) {
-        SassMeister.storedInputs = gist;
-        SassMeister.storedOutputs = {css: null, html: null};
-      }
-      else {
-        SassMeister.storedInputs = JSON.parse(localStorage.getItem('inputs'));
-        SassMeister.storedOutputs = $.extend({css: '', html: ''}, JSON.parse(localStorage.getItem('outputs')));
-      }
-
-      if(SassMeister.storedInputs) {
-        switch (SassMeister.storedInputs.syntax) {
-          case 'scss':
-            SassMeister.storedInputs.syntax = 'SCSS';
-            break;
-          case 'sass':
-            SassMeister.storedInputs.syntax = 'Sass';
-            break;
-          default:
-            break;
-        }
-
-        switch (SassMeister.storedInputs.html_syntax) {
-          case 'html':
-            SassMeister.storedInputs.html_syntax = 'HTML';
-            break;
-          case 'haml':
-            SassMeister.storedInputs.html_syntax = 'Haml';
-            break;
-          case 'slim':
-            SassMeister.storedInputs.html_syntax = 'Slim';
-            break;
-          case 'markdown':
-            SassMeister.storedInputs.html_syntax = 'Markdown';
-            break;
-          case 'textile':
-            SassMeister.storedInputs.html_syntax = 'Textile';
-            break;
-          default:
-            break;
-        }
-
-        SassMeister.inputs.sass.setValue(SassMeister.storedInputs.sass);
-        SassMeister.inputs.sass.clearSelection();
-
-        SassMeister.inputs.html.setValue(SassMeister.storedInputs.html);
-        SassMeister.inputs.html.clearSelection();
-      }
-
-      SassMeister.orientation = localStorage.getItem('orientation') || SassMeister.orientation;
-      SassMeister.html = localStorage.getItem('html') || SassMeister.html;
-      SassMeister.css = localStorage.getItem('css') || SassMeister.css;
-    },
+    // storedInputs: null,
+    // storedOutputs: null,
+    //
+    // getStorage: function() {
+    //   if(gist) {
+    //     SassMeister.storedInputs = gist;
+    //     SassMeister.storedOutputs = {css: null, html: null};
+    //   }
+    //   else {
+    //     SassMeister.storedInputs = JSON.parse(localStorage.getItem('inputs'));
+    //     SassMeister.storedOutputs = $.extend({css: '', html: ''}, JSON.parse(localStorage.getItem('outputs')));
+    //   }
+    //
+    //   if(SassMeister.storedInputs) {
+    //     switch (SassMeister.storedInputs.syntax) {
+    //       case 'scss':
+    //         SassMeister.storedInputs.syntax = 'SCSS';
+    //         break;
+    //       case 'sass':
+    //         SassMeister.storedInputs.syntax = 'Sass';
+    //         break;
+    //       default:
+    //         break;
+    //     }
+    //
+    //     switch (SassMeister.storedInputs.html_syntax) {
+    //       case 'html':
+    //         SassMeister.storedInputs.html_syntax = 'HTML';
+    //         break;
+    //       case 'haml':
+    //         SassMeister.storedInputs.html_syntax = 'Haml';
+    //         break;
+    //       case 'slim':
+    //         SassMeister.storedInputs.html_syntax = 'Slim';
+    //         break;
+    //       case 'markdown':
+    //         SassMeister.storedInputs.html_syntax = 'Markdown';
+    //         break;
+    //       case 'textile':
+    //         SassMeister.storedInputs.html_syntax = 'Textile';
+    //         break;
+    //       default:
+    //         break;
+    //     }
+    //
+    //     SassMeister.inputs.sass.setValue(SassMeister.storedInputs.sass);
+    //     SassMeister.inputs.sass.clearSelection();
+    //
+    //     SassMeister.inputs.html.setValue(SassMeister.storedInputs.html);
+    //     SassMeister.inputs.html.clearSelection();
+    //   }
+    //
+    //   SassMeister.orientation = localStorage.getItem('orientation') || SassMeister.orientation;
+    //   SassMeister.html = localStorage.getItem('html') || SassMeister.html;
+    //   SassMeister.css = localStorage.getItem('css') || SassMeister.css;
+    // },
 
     // setStorage: function(inputs, outputs) {
     //   localStorage.setItem('inputs', JSON.stringify( $.extend(SassMeister.storedInputs, inputs) ));
