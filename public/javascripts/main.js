@@ -13,6 +13,7 @@
     SassMeister.arrangePanels( $(this).data('orientation') );
   });
 
+
   if (gist) {
     if (gist.can_update_gist) {
       $('#save-gist').data('action', 'edit').attr('class', 'edit-gist').find('span').text('Update Gist');
@@ -25,28 +26,31 @@
     $('#save-gist').data('action', 'create').attr('class', 'create-gist').find('span').text('Save Gist');
   }
 
+
   $('.panel-toggle li span').on('click', function(event) {
     event.preventDefault();
 
     var selected = $(this).data('toggle-value'),
-        input = $(this).data('toggle-input').split('.');
+        input = $(this).data('toggle-input'),
+        foo = input.split('.');
 
-    SassMeister.inputs[input[0]][input[1]] = selected;
+    SassMeister.inputs[foo[0]][foo[1]] = selected;
 
     $(this).parents('.panel-toggle').find('.selected').text(selected);
 
-    if (input[1] == 'syntax') {
-      SassMeister.convert.sass(true);
+    if (input == 'sass.syntax') {
+      SassMeister.convert.sass();
       SassMeister.editors.sass.getSession().setMode('ace/mode/' + selected.toLowerCase());
     }
-    if (input[1] == 'output') {
+    if (input == 'sass.output') {
       SassMeister.compile.sass();
     }
-    if (input[1] == 'html_syntax') {
-      SassMeister.convert.html();
-      SassMeister.inputs.html.getSession().setMode("ace/mode/" + selected.toLowerCase());
+    if (input == 'html.syntax') {
+      SassMeister.compile.html();
+      SassMeister.editors.html.getSession().setMode("ace/mode/" + selected.toLowerCase());
     }
   });
+
 
   $('[data-import]').on('click', function(event) {
     SassMeister.inputs.sass.insert( '@import "' + $(this).data('import') + '"' + ( SassMeister.inputs.syntax == 'scss' ? ';' : '' ) + '\n\n');
@@ -71,6 +75,7 @@
 
     localStorage.setItem('css', state);
   };
+
 
   var toggleHTMLPanels = function(state) {
     $('#source').casement('destroy');
@@ -151,11 +156,13 @@
 
   window.onmessage = function (event) {
     if (SassMeister.html == 'show') {
-      if(SassMeister.storedOutputs.html) {
-        SassMeister.updateRender(SassMeister.storedOutputs);
+      if(SassMeister.outputs.html) {
+        SassMeister.updateRender(SassMeister.outputs);
+
+        console.log(SassMeister.outputs)
       }
       else {
-        SassMeister.convert.html();
+        SassMeister.compile.html();
       }
     }
   };

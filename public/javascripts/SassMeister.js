@@ -136,37 +136,35 @@ var SassMeister;
 
     // internalValueChange: false,
 
-    convert: {
-      sass: function(convert_syntax) {
-        if(convert_syntax == true) {
-          var inputs = {
-            sass: SassMeister.inputs.sass.getValue(),
-            syntax: SassMeister.inputs.syntax,
-            original_syntax: $('#syntax').data('original'),
-            output: SassMeister.inputs.output
-          }
-
-          $.post('/convert', inputs, function( data ) {
-            SassMeister.internalValueChange = true;
-
-            SassMeister.inputs.sass.setValue(data, -1);
-
-            $('#syntax').data('original', inputs.syntax);
-
-            SassMeister.setStorage({
-              sass: data,
-              syntax: SassMeister.inputs.syntax,
-              output: SassMeister.inputs.output
-            }, { });
-          });
-        }
-        else {
-          SassMeister.compile.sass();
-        }
-      },
-
-
-    },
+    // convert: {
+    //   sass: function(convert_syntax) {
+    //     if(convert_syntax == true) {
+    //       var inputs = {
+    //         sass: SassMeister.inputs.sass.getValue(),
+    //         syntax: SassMeister.inputs.syntax,
+    //         original_syntax: $('#syntax').data('original'),
+    //         output: SassMeister.inputs.output
+    //       }
+    //
+    //       $.post('/convert', inputs, function( data ) {
+    //         SassMeister.internalValueChange = true;
+    //
+    //         SassMeister.inputs.sass.setValue(data, -1);
+    //
+    //         $('#syntax').data('original', inputs.syntax);
+    //
+    //         SassMeister.setStorage({
+    //           sass: data,
+    //           syntax: SassMeister.inputs.syntax,
+    //           output: SassMeister.inputs.output
+    //         }, { });
+    //       });
+    //     }
+    //     else {
+    //       SassMeister.compile.sass();
+    //     }
+    //   }
+    // },
 
     // updateRender: function(new_content) {
     //   $('#rendered-html')[0].contentWindow.postMessage(JSON.stringify(new_content), '*');
@@ -387,13 +385,13 @@ var SassMeister;
       SassMeister.css = localStorage.getItem('css') || SassMeister.css;
     },
 
-    setStorage: function(inputs, outputs) {
-      localStorage.setItem('inputs', JSON.stringify( $.extend(SassMeister.storedInputs, inputs) ));
-      localStorage.setItem('outputs', JSON.stringify( $.extend(SassMeister.storedOutputs, outputs) ));
-
-      localStorage.setItem('orientation', SassMeister.orientation);
-      localStorage.setItem('html', SassMeister.html);
-    }
+    // setStorage: function(inputs, outputs) {
+    //   localStorage.setItem('inputs', JSON.stringify( $.extend(SassMeister.storedInputs, inputs) ));
+    //   localStorage.setItem('outputs', JSON.stringify( $.extend(SassMeister.storedOutputs, outputs) ));
+    //
+    //   localStorage.setItem('orientation', SassMeister.orientation);
+    //   localStorage.setItem('html', SassMeister.html);
+    // }
   };
 
 })(jQuery);
