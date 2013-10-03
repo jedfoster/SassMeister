@@ -4,217 +4,137 @@ var SassMeister;
 
   window.SassMeister = {
     init: function() {
-      $('#rendered-html').attr('src', window.sandbox);
-
-
-      this.inputs.sass = ace.edit("sass");
-      this.inputs.sass.setTheme("ace/theme/tomorrow");
-      this.inputs.sass.getSession().setMode("ace/mode/scss");
-      this.inputs.sass.focus();
-
-      this.inputs.html = ace.edit("html");
-      this.inputs.html.setTheme("ace/theme/tomorrow");
-      this.inputs.html.getSession().setMode("ace/mode/html");
+      // this.inputs.sass = ace.edit("sass");
+      // this.inputs.sass.setTheme("ace/theme/tomorrow");
+      // this.inputs.sass.getSession().setMode("ace/mode/scss");
+      // this.inputs.sass.focus();
+      //
+      // this.inputs.html = ace.edit("html");
+      // this.inputs.html.setTheme("ace/theme/tomorrow");
+      // this.inputs.html.getSession().setMode("ace/mode/html");
 
       this.getStorage();
 
-      if (this.html == 'hide') {
-        $('#rendered').hide();
-        $('#html_input').hide();
-        $('#toggle_html').data("state", 'show').toggleClass('show');
-      }
-
-      if (this.css == 'hide') {
-        $('#css_input').hide();
-        $('#toggle_css').data("state", 'show').toggleClass('show');
-      }
-
-      this.arrangePanels(SassMeister.orientation);
-
-
-      // $('#css_input .visibility-toggle').on('click', function(event) {
-      //   if($('#css_input').hasClass('minimized')) {
-      //     $('#source').casement('expand', '#css_input');
-      //   }
-      //   else {
-      //     $('#source').casement('minimize', '#css_input');
-      //   }
-      // });
+      // if (this.html == 'hide') {
+      //   $('#rendered').hide();
+      //   $('#html_input').hide();
+      //   $('#toggle_html').data("state", 'show').toggleClass('show');
+      // }
       //
-      // $('#html_input .visibility-toggle').on('click', function(event) {
-      //   if($('#html_input').hasClass('minimized')) {
-      //     $('#source').casement('expand', '#html_input');
+      // if (this.css == 'hide') {
+      //   $('#css_input').hide();
+      //   $('#toggle_css').data("state", 'show').toggleClass('show');
+      // }
+
+      // this.arrangePanels(SassMeister.orientation);
+
+      // if (this.storedInputs == null || !this.storedInputs.syntax) {
+      //   $('#syntax').text('SCSS').data('original', 'SCSS');
+      //   this.inputs.syntax = 'SCSS';
+      // }
+      // else {
+      //   $('#syntax').text(this.storedInputs.syntax).data('original', this.storedInputs.syntax);
+      //   this.inputs.syntax = this.storedInputs.syntax;
+      // }
+      //
+      // if (this.storedInputs == null || !this.storedInputs.output) {
+      //   $('#output').text('expanded');
+      //   this.inputs.output = 'expanded';
+      // }
+      // else {
+      //   $('#output').text(this.storedInputs.output);
+      //   this.inputs.output = this.storedInputs.output;
+      // }
+      //
+      // if (this.storedInputs == null || !this.storedInputs.html_syntax) {
+      //   $('#html-syntax').text('HTML');
+      //   this.inputs.html_syntax = 'HTML';
+      // }
+      // else {
+      //   $('#html-syntax').text(this.storedInputs.html_syntax);
+      //   this.inputs.html_syntax = this.storedInputs.html_syntax;
+      // }
+
+      // this.outputs.css = ace.edit("css");
+      // this.outputs.css.setTheme("ace/theme/tomorrow");
+      // this.outputs.css.setReadOnly(true);
+      // this.outputs.css.getSession().$useWorker=false
+      // this.outputs.css.getSession().setMode("ace/mode/css");
+
+
+      // if(this.storedOutputs.css) {
+      //   this.outputs.css.setValue(this.storedOutputs.css);
+      //   this.outputs.css.clearSelection();
+      // }
+      // else {
+      //   this.compile.sass();
+      // }
+
+      // $(this.inputs.sass.getSession()).bindWithDelay('change', function(event) {
+      //   if(SassMeister.internalValueChange == true) {
+      //     SassMeister.internalValueChange = false;
       //   }
       //   else {
-      //     $('#source').casement('minimize', '#html_input');
+      //     SassMeister.compile.sass();
       //   }
-      // });
+      // }, 750);
+
+      // $(this.inputs.html.getSession()).bindWithDelay('change', function(event) {
+      //   SassMeister.convert.html();
+      // }, 750);
 
 
-      $('.orientation').on('click', function(event) {
-        $('#source').casement('destroy');
-        $('#casement').casement('destroy');
-
-        SassMeister.arrangePanels( $(this).data('orientation') );
-      });
-
-      if (gist) {
-        if (gist.can_update_gist) {
-          $('#save-gist').data('action', 'edit').attr('class', 'edit-gist').find('span').text('Update Gist');
-        }
-        else {
-          $('#save-gist').data('action', 'fork').attr('class', 'fork-gist').find('span').text('Fork Gist');
-        }
-      }
-      else {
-        $('#save-gist').data('action', 'create').attr('class', 'create-gist').find('span').text('Save Gist');
-      }
-
-
-      $('.panel-toggle li span').on('click', function(event) {
-        event.preventDefault();
-
-        var selected = $(this).data('toggle-value'),
-            input = $(this).data('toggle-input');
-
-        SassMeister.inputs[input] = selected;
-
-        $(this).parents('.panel-toggle').find('.selected').text(selected);
-
-        if (input == 'syntax') {
-          SassMeister.convert.sass(true);
-        }
-        if (input == 'output') {
-          SassMeister.compile.sass();
-        }
-        if (input == 'html_syntax') {
-          SassMeister.convert.html();
-          SassMeister.inputs.html.getSession().setMode("ace/mode/" + selected.toLowerCase());
-        }
-      });
-
-
-      if (this.storedInputs == null || !this.storedInputs.syntax) {
-        $('#syntax').text('SCSS').data('original', 'SCSS');
-        this.inputs.syntax = 'SCSS';
-      }
-      else {
-        $('#syntax').text(this.storedInputs.syntax).data('original', this.storedInputs.syntax);
-        this.inputs.syntax = this.storedInputs.syntax;
-      }
-
-      if (this.storedInputs == null || !this.storedInputs.output) {
-        $('#output').text('expanded');
-        this.inputs.output = 'expanded';
-      }
-      else {
-        $('#output').text(this.storedInputs.output);
-        this.inputs.output = this.storedInputs.output;
-      }
-
-      if (this.storedInputs == null || !this.storedInputs.html_syntax) {
-        $('#html-syntax').text('HTML');
-        this.inputs.html_syntax = 'HTML';
-      }
-      else {
-        $('#html-syntax').text(this.storedInputs.html_syntax);
-        this.inputs.html_syntax = this.storedInputs.html_syntax;
-      }
-
-
-      $('[data-import]').on('click', function(event) {
-        SassMeister.inputs.sass.insert( '@import "' + $(this).data('import') + '"' + ( SassMeister.inputs.syntax == 'scss' ? ';' : '' ) + '\n\n');
-      });
-
-      this.outputs.css = ace.edit("css");
-      this.outputs.css.setTheme("ace/theme/tomorrow");
-      this.outputs.css.setReadOnly(true);
-      this.outputs.css.getSession().$useWorker=false
-      this.outputs.css.getSession().setMode("ace/mode/css");
-
-
-      if(this.storedOutputs.css) {
-        this.outputs.css.setValue(this.storedOutputs.css);
-        this.outputs.css.clearSelection();
-      }
-      else {
-        this.compile.sass();
-      }
-
-      $(this.inputs.sass.getSession()).bindWithDelay('change', function(event) {
-        if(SassMeister.internalValueChange == true) {
-          SassMeister.internalValueChange = false;
-        }
-        else {
-          SassMeister.compile.sass();
-        }
-      }, 750);
-
-      $(this.inputs.html.getSession()).bindWithDelay('change', function(event) {
-        SassMeister.convert.html();
-      }, 750);
-
-
-      return this;
+      // return this;
     },
 
-    inputs: {
-      sass: '',
-      syntax: 'SCSS',
-      plugin: '',
-      output: 'expanded',
-      html: '',
-      html_syntax: 'HTML'
-    },
+    // inputs: {
+    //   sass: '',
+    //   syntax: 'SCSS',
+    //   plugin: '',
+    //   output: 'expanded',
+    //   html: '',
+    //   html_syntax: 'HTML'
+    // },
+    //
+    // outputs: {
+    //   css: '',
+    //   html: ''
+    // },
 
-    outputs: {
-      css: '',
-      html: ''
-    },
+    // timer: null,
+    //
+    // orientation: 'horizontal',
+    //
+    // html: 'show',
+    //
+    // css: 'show',
 
-    timer: null,
+    // compile: {
+    //   sass: function() {
+    //     var inputs = {
+    //           sass: SassMeister.inputs.sass.getValue(),
+    //           syntax: SassMeister.inputs.syntax,
+    //           output: SassMeister.inputs.output,
+    //         };
+    //
+    //     // _gaq.push(['_trackEvent', 'Form', 'Submit']);
+    //
+    //     /* Post the form and handle the returned data */
+    //     $.post('/compile', inputs, function( data ) {
+    //       SassMeister.outputs.css.setValue(data,-1);
+    //
+    //       $('#syntax').data('original', inputs.syntax);
+    //
+    //       SassMeister.updateRender({
+    //         css: data
+    //       });
+    //
+    //       SassMeister.setStorage(inputs, {css: data});
+    //     });
+    //   }
+    // },
 
-    orientation: 'horizontal',
-
-    html: 'show',
-
-    css: 'show',
-
-    panels: {css: true, html: true, result: true},
-
-    compile: {
-      sass: function() {
-        var inputs = {
-              sass: SassMeister.inputs.sass.getValue(),
-              syntax: SassMeister.inputs.syntax,
-              output: SassMeister.inputs.output,
-            };
-
-        // _gaq.push(['_trackEvent', 'Form', 'Submit']);
-
-        /* Post the form and handle the returned data */
-        $.post('/compile', inputs, function( data ) {
-          SassMeister.outputs.css.setValue(data,-1);
-
-          $('#syntax').data('original', inputs.syntax);
-
-          SassMeister.updateRender({
-            css: data
-          });
-
-          SassMeister.setStorage(inputs, {css: data});
-        });
-      }
-    },
-
-    internalValueChange: false,
-
-    toggleInternalValue: function(value) {
-      SassMeister.internalValueChange = value;
-    },
-    internalValue: function(value) {
-      return SassMeister.internalValueChange;
-    },
+    // internalValueChange: false,
 
     convert: {
       sass: function(convert_syntax) {
@@ -245,116 +165,49 @@ var SassMeister;
         }
       },
 
-      html: function() {
-        // _gaq.push(['_trackEvent', 'Form', 'Submit']);
 
-        var inputs = {
-              html: SassMeister.inputs.html.getValue(),
-              html_syntax: SassMeister.inputs.html_syntax
-            };
-
-        if(inputs.html_syntax == 'HTML') {
-          SassMeister.updateRender({
-            css: SassMeister.outputs.css.getValue(),
-            html: inputs.html
-          });
-
-          SassMeister.setStorage(inputs, {html: inputs.html});
-        }
-
-        else {
-          /* Post the form and handle the returned data */
-          $.post(sandbox, inputs, function( data ) {
-            SassMeister.internalValueChange = true;
-
-            SassMeister.updateRender({
-              css: SassMeister.outputs.css.getValue(),
-              html: data
-            });
-
-            SassMeister.setStorage(inputs, {html: data});
-          });
-        }
-      }
     },
 
-    updateRender: function(new_content) {
-      $('#rendered-html')[0].contentWindow.postMessage(JSON.stringify(new_content), '*');
-    },
+    // updateRender: function(new_content) {
+    //   $('#rendered-html')[0].contentWindow.postMessage(JSON.stringify(new_content), '*');
+    // },
 
-    arrangePanels: function(orientation) {
-      if (this.html == 'hide') {
-        $('#rendered').hide();
-        $('#html_input').hide();
-      }
+    // arrangePanels: function(orientation) {
+    //   if (this.html == 'hide') {
+    //     $('#rendered').hide();
+    //     $('#html_input').hide();
+    //   }
+    //
+    //   // #source has to be done FIRST, since it is nested inside #casement. TODO: Fix this.
+    //   $('#source').casement({
+    //     split: (orientation == 'horizontal' ? 'vertical' : 'horizontal'),
+    //     onDrag: function() {
+    //       SassMeister.inputs.sass.resize();
+    //       SassMeister.outputs.css.resize();
+    //       SassMeister.inputs.html.resize();
+    //     }
+    //   });
+    //
+    //   $('#casement').casement({
+    //     split: orientation,
+    //     onDragStart: function() {
+    //       $('#sash_cover').show();
+    //     },
+    //     onDrag: function() {
+    //       SassMeister.inputs.sass.resize();
+    //       SassMeister.outputs.css.resize();
+    //       SassMeister.inputs.html.resize();
+    //     },
+    //     onDragEnd: function() {
+    //       $('#sash_cover').hide();
+    //     }
+    //   });
+    //
+    //   this.orientation = orientation;
+    //   localStorage.setItem('orientation', this.orientation);
+    // },
 
-      // #source has to be done FIRST, since it is nested inside #casement. TODO: Fix this.
-      $('#source').casement({
-        split: (orientation == 'horizontal' ? 'vertical' : 'horizontal'),
-        onDrag: function() {
-          SassMeister.inputs.sass.resize();
-          SassMeister.outputs.css.resize();
-          SassMeister.inputs.html.resize();
-        }
-      });
 
-      $('#casement').casement({
-        split: orientation,
-        onDragStart: function() {
-          $('#sash_cover').show();
-        },
-        onDrag: function() {
-          SassMeister.inputs.sass.resize();
-          SassMeister.outputs.css.resize();
-          SassMeister.inputs.html.resize();
-        },
-        onDragEnd: function() {
-          $('#sash_cover').hide();
-        }
-      });
-
-      this.orientation = orientation;
-      localStorage.setItem('orientation', this.orientation);
-    },
-
-    toggleCSSPanel: function(state) {
-      $('#source').casement('destroy');
-     $('#casement').casement('destroy');
-
-      $('#css_input')[state]();
-
-      $('#rendered')[this.html]();
-      $('#html_input')[this.html]();
-
-      this.css = state;
-
-      this.arrangePanels(this.orientation);
-
-      SassMeister.inputs.sass.resize();
-      SassMeister.outputs.css.resize();
-
-      localStorage.setItem('css', state);
-    },
-
-    toggleHTMLPanels: function(state) {
-      $('#source').casement('destroy');
-      $('#casement').casement('destroy');
-
-      $('#rendered')[state]();
-      $('#html_input')[state]();
-
-      $('#css_input')[this.css]();
-
-      this.html = state;
-
-      this.arrangePanels(this.orientation);
-
-      SassMeister.inputs.sass.resize();
-      SassMeister.outputs.css.resize();
-      SassMeister.inputs.html.resize();
-
-      localStorage.setItem('html', state);
-    },
 
     gist: {
       create: function() {
@@ -532,7 +385,6 @@ var SassMeister;
       SassMeister.orientation = localStorage.getItem('orientation') || SassMeister.orientation;
       SassMeister.html = localStorage.getItem('html') || SassMeister.html;
       SassMeister.css = localStorage.getItem('css') || SassMeister.css;
-      SassMeister.panels = localStorage.getItem('panels') || SassMeister.panels;
     },
 
     setStorage: function(inputs, outputs) {

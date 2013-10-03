@@ -78,9 +78,10 @@ class SassMeisterApp < Sinatra::Base
     @gist = nil
     @plugins = plugins
 
+
     params[:syntax].downcase! unless params[:syntax].nil?
     params[:original_syntax].downcase! unless params[:original_syntax].nil?
-    params[:html_syntax].downcase! unless params[:html_syntax].nil?
+    # params[:syntax].downcase! unless params[:syntax].nil?
   end
 
   get '/' do
@@ -115,12 +116,12 @@ class SassMeisterApp < Sinatra::Base
 
 
   post '/compile' do
-    sass_compile(params)
+    sass_compile(params[:input], params[:syntax], params[:output_style])
   end
 
 
   post '/convert' do
-    sass_convert(params[:original_syntax], params[:syntax], params[:sass])
+    sass_convert(params[:original_syntax], params[:syntax], params[:input])
   end
 
 
