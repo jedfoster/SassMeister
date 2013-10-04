@@ -261,12 +261,12 @@ class SassMeisterApp < Sinatra::Base
 
     css = outputs[:css]
 
-    if inputs[:sass][:filename].slice(-4, 4) == inputs[:sass][:syntax].downcase
-      sass_file = inputs[:sass][:filename]
+    if inputs[:sass_filename].slice(-4, 4) == inputs[:sass][:syntax].downcase
+      sass_file = inputs[:sass_filename]
       deleted_files = {}
     else
-      sass_file = "#{inputs[:sass][:filename].slice(0..-5)}#{inputs[:sass][:syntax].downcase}"
-      deleted_files = {inputs[:sass][:filename] => {content: nil}}
+      sass_file = "#{inputs[:sass_filename].slice(0..-5)}#{inputs[:sass][:syntax].downcase}"
+      deleted_files = {inputs[:sass_filename] => {content: nil}}
     end
 
     css_file = "SassMeister-output.css"
@@ -279,16 +279,16 @@ class SassMeisterApp < Sinatra::Base
       rendered_file = "SassMeister-rendered.html"
       html_output = outputs[:html]
 
-      if inputs[:html][:filename].split('.').last == inputs[:html][:syntax].downcase
-        html_file = inputs[:html][:filename]
+      if inputs[:html_filename].split('.').last == inputs[:html][:syntax].downcase
+        html_file = inputs[:html_filename]
         deleted_html = {}
       else
-        filename = inputs[:html][:filename].split('.')
+        filename = inputs[:html_filename].split('.')
         filename.pop
         filename = filename.join('.')
 
         html_file = "#{filename}.#{inputs[:html][:syntax].downcase}"
-        deleted_html = {inputs[:html][:filename] => {content: nil}}
+        deleted_html = {inputs[:html_filename] => {content: nil}}
       end
 
       html = {

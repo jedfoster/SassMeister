@@ -233,27 +233,32 @@ var SassMeister;
       },
 
       edit: function() {
-        _gaq.push(['_trackEvent', 'Gist']);
+        // _gaq.push(['_trackEvent', 'Gist']);
 
-        var inputs = {
-          sass: {
-            input: SassMeister.inputs.sass.getValue(),
-            syntax: SassMeister.inputs.syntax,
-            output: SassMeister.outputs.css.getValue(),
-            filename: SassMeister.storedInputs.sass_filename
-          },
-          html: {
-            input: SassMeister.inputs.html.getValue(),
-            syntax: SassMeister.inputs.html_syntax,
-            output: JSON.parse(localStorage.getItem('outputs')).html,
-            filename: SassMeister.storedInputs.html_filename
-          }
-        }
+        // var inputs = {
+        //   sass: {
+        //     input: SassMeister.inputs.sass.getValue(),
+        //     syntax: SassMeister.inputs.syntax,
+        //     output: SassMeister.outputs.css.getValue(),
+        //     filename: SassMeister.storedInputs.sass_filename
+        //   },
+        //   html: {
+        //     input: SassMeister.inputs.html.getValue(),
+        //     syntax: SassMeister.inputs.html_syntax,
+        //     output: JSON.parse(localStorage.getItem('outputs')).html,
+        //     filename: SassMeister.storedInputs.html_filename
+        //   }
+        // }
+
+        var postData = {
+          inputs: SassMeister.inputs,
+          outputs: SassMeister.outputs
+        };
 
         var confirmationText = 'has been updated';
 
         ///* Send the data using post and put the results in a div */
-        $.post('/gist/' + SassMeister.storedInputs.gist_id + '/edit', inputs, function( data ) {
+        $.post('/gist/' + SassMeister.inputs.gist_id + '/edit', postData, function( data ) {
           modal('<a href="https://gist.github.com/' + data.id + '" target="_blank">Your Gist</a> ' + confirmationText + ', and here\'s the <a href="/gist/' + data.id + '">SassMeister live view.</a> ');
 
           setUrl('/gist/' + data.id);
