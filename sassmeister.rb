@@ -181,15 +181,15 @@ class SassMeisterApp < Sinatra::Base
       :gist_owner => owner,
       :can_update_gist => (owner == session[:github_id]),
       :sass_filename => filename,
-      :html_filename => html_filename,
+      :html_filename => (html_filename || ''),
       :sass => {
         :input => sass,
         :syntax => syntax,
         :original_syntax => syntax
       },
       :html => {
-        :input => html,
-        :syntax => html_syntax,
+        :input => (html || ''),
+        :syntax => (html_syntax || ''),
       }
     }.to_json
 
