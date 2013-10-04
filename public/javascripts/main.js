@@ -104,6 +104,9 @@
 
 
 
+
+
+
   $("a[href^='http://'], a[href^='https://']").attr("target", "_blank");
 
   $('#save-gist').on('click', function(event) {
@@ -155,11 +158,9 @@
 
 
   window.onmessage = function (event) {
-    if (SassMeister.html == 'show') {
+    if (SassMeister.layout.html == 'show') {
       if(SassMeister.outputs.html) {
         SassMeister.updateRender(SassMeister.outputs);
-
-        console.log(SassMeister.outputs)
       }
       else {
         SassMeister.compile.html();

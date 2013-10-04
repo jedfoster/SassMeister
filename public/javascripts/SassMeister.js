@@ -3,7 +3,7 @@ var SassMeister;
 (function($) {
 
   window.SassMeister = {
-    init: function() {
+    // init: function() {
       // this.inputs.sass = ace.edit("sass");
       // this.inputs.sass.setTheme("ace/theme/tomorrow");
       // this.inputs.sass.getSession().setMode("ace/mode/scss");
@@ -13,7 +13,7 @@ var SassMeister;
       // this.inputs.html.setTheme("ace/theme/tomorrow");
       // this.inputs.html.getSession().setMode("ace/mode/html");
 
-      this.getStorage();
+      // this.getStorage();
 
       // if (this.html == 'hide') {
       //   $('#rendered').hide();
@@ -85,7 +85,7 @@ var SassMeister;
 
 
       // return this;
-    },
+    // },
 
     // inputs: {
     //   sass: '',
@@ -228,9 +228,9 @@ var SassMeister;
 
         ///* Send the data using post and put the results in a div */
         $.post('/gist/create', inputs, function( data ) {
-          SassMeister.modal('<a href="https://gist.github.com/' + data.id + '" target="_blank">Your Gist</a> ' + confirmationText + ', and here\'s the <a href="/gist/' + data.id + '">SassMeister live view.</a> ');
+          window.modal('<a href="https://gist.github.com/' + data.id + '" target="_blank">Your Gist</a> ' + confirmationText + ', and here\'s the <a href="/gist/' + data.id + '">SassMeister live view.</a> ');
 
-          SassMeister.setUrl('/gist/' + data.id);
+          window.setUrl('/gist/' + data.id);
           SassMeister.storedInputs.gist_id = data.id;
           SassMeister.storedInputs.sass_filename = data.sass_filename;
           SassMeister.storedInputs.html_filename = data.html_filename;
@@ -261,9 +261,9 @@ var SassMeister;
 
         ///* Send the data using post and put the results in a div */
         $.post('/gist/' + SassMeister.storedInputs.gist_id + '/edit', inputs, function( data ) {
-          SassMeister.modal('<a href="https://gist.github.com/' + data.id + '" target="_blank">Your Gist</a> ' + confirmationText + ', and here\'s the <a href="/gist/' + data.id + '">SassMeister live view.</a> ');
+          window.modal('<a href="https://gist.github.com/' + data.id + '" target="_blank">Your Gist</a> ' + confirmationText + ', and here\'s the <a href="/gist/' + data.id + '">SassMeister live view.</a> ');
 
-          SassMeister.setUrl('/gist/' + data.id);
+          window.setUrl('/gist/' + data.id);
           SassMeister.storedInputs.sass_filename = data.sass_filename;
           SassMeister.storedInputs.html_filename = data.html_filename;
 
@@ -277,9 +277,9 @@ var SassMeister;
 
         ///* Send the data using post and put the results in a div */
         $.post('/gist/' + SassMeister.storedInputs.gist_id + '/fork', function( data ) {
-          SassMeister.modal('<a href="https://gist.github.com/' + data.id + '" target="_blank">This Gist</a> ' + confirmationText + ', and here\'s the <a href="/gist/' + data.id + '">SassMeister live view.</a> ');
+          window.modal('<a href="https://gist.github.com/' + data.id + '" target="_blank">This Gist</a> ' + confirmationText + ', and here\'s the <a href="/gist/' + data.id + '">SassMeister live view.</a> ');
 
-          SassMeister.setUrl('/gist/' + data.id);
+          window.setUrl('/gist/' + data.id);
           SassMeister.storedInputs.gist_id = data.id;
 
           $('#save-gist').text('Update Gist').data('action', 'edit').attr('class', 'edit-gist');
@@ -287,46 +287,24 @@ var SassMeister;
       },
     },
 
-    reset: function() {
-      $('#save-gist').text('Save Gist').data('action', 'create');
+    // reset: function() {
+    //   $('#save-gist').text('Save Gist').data('action', 'create');
+    //
+    //   SassMeister.inputs.sass.setValue('');
+    //   SassMeister.outputs.css.setValue('');
+    //   SassMeister.inputs.html_syntax = $('#html-syntax').text('HTML');
+    //   SassMeister.inputs.html.setValue('');
+    //
+    //   localStorage.clear();
+    //   SassMeister.storedInputs = {};
+    //   SassMeister.storedOutputs = {};
+    //
+    //   SassMeister.updateRender({reset: true});
+    //
+    //   window.setUrl('/');
+    // },
 
-      SassMeister.inputs.sass.setValue('');
-      SassMeister.outputs.css.setValue('');
-      SassMeister.inputs.html_syntax = $('#html-syntax').text('HTML');
-      SassMeister.inputs.html.setValue('');
 
-      localStorage.clear();
-      SassMeister.storedInputs = {};
-      SassMeister.storedOutputs = {};
-
-      SassMeister.updateRender({reset: true});
-
-      SassMeister.setUrl('/');
-    },
-
-    setUrl: function(url) {
-      history.pushState({}, 'SassMeister | The Sass Playground!', url);
-      window.onpopstate = function(event) {
-        // console.log(event.state); // will be our state data, so {}
-      }
-    },
-
-    modal: function(content) {
-      if ($('#modal').length == 0) {
-        $('body').append('<div class="reveal-modal large" id="modal"><a class="close-icon"><span class="alt">&#215;</span></a><span class="content">' + content + '</span></div>');
-      }
-      else {
-        $('#modal .content').empty();
-        $('#modal .content').append(content);
-      }
-
-      $('#modal').reveal({
-        animation: 'fadeAndPop', //fade, fadeAndPop, none
-        animationSpeed: 250, //how fast animations are
-        closeOnBackgroundClick: true, //if you click background will modal close?
-        dismissModalClass: 'close-icon' //the class of a button or element that will close an open modal
-      });
-    },
 
     // storedInputs: null,
     // storedOutputs: null,
