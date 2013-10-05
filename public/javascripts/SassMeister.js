@@ -3,270 +3,250 @@ var SassMeister;
 (function($) {
 
   window.SassMeister = {
-    // init: function() {
-      // this.inputs.sass = ace.edit("sass");
-      // this.inputs.sass.setTheme("ace/theme/tomorrow");
-      // this.inputs.sass.getSession().setMode("ace/mode/scss");
-      // this.inputs.sass.focus();
+    _default: {
+      inputs: {
+        sass: {
+          input: '',
+          syntax: 'SCSS',
+          original_syntax: 'SCSS',
+          output_style: 'expanded'
+        },
+        html: {
+          input: '',
+          syntax: 'HTML'
+        }
+      },
+
+      outputs: {
+        css: '',
+        html: ''
+      }
+    },
+
+    inputs: null,
+
+    outputs: null,
+
+    editors: {
+      sass: null,
+      css: null,
+      html: null
+    },
+
+    layout: {
+      orientation: 'horizontal',
+      html: 'show',
+      css: 'show'
+    },
+
+    timer: null,
+
+    bypassConversion: false,
+
+    init: function() {
+      $this = this;
+
+      this.inputs = this._default.inputs;
+      this.outputs = this._default.outputs;
+
+
+      // Process:
       //
-      // this.inputs.html = ace.edit("html");
-      // this.inputs.html.setTheme("ace/theme/tomorrow");
-      // this.inputs.html.getSession().setMode("ace/mode/html");
+      // 1. retreive stored inputs and outputs
+      //   a. if gist ... do something
+      //   b. else ... do something else
 
-      // this.getStorage();
-
-      // if (this.html == 'hide') {
-      //   $('#rendered').hide();
-      //   $('#html_input').hide();
-      //   $('#toggle_html').data("state", 'show').toggleClass('show');
-      // }
-      //
-      // if (this.css == 'hide') {
-      //   $('#css_input').hide();
-      //   $('#toggle_css').data("state", 'show').toggleClass('show');
-      // }
-
-      // this.arrangePanels(SassMeister.orientation);
-
-      // if (this.storedInputs == null || !this.storedInputs.syntax) {
-      //   $('#syntax').text('SCSS').data('original', 'SCSS');
-      //   this.inputs.syntax = 'SCSS';
-      // }
-      // else {
-      //   $('#syntax').text(this.storedInputs.syntax).data('original', this.storedInputs.syntax);
-      //   this.inputs.syntax = this.storedInputs.syntax;
-      // }
-      //
-      // if (this.storedInputs == null || !this.storedInputs.output) {
-      //   $('#output').text('expanded');
-      //   this.inputs.output = 'expanded';
-      // }
-      // else {
-      //   $('#output').text(this.storedInputs.output);
-      //   this.inputs.output = this.storedInputs.output;
-      // }
-      //
-      // if (this.storedInputs == null || !this.storedInputs.html_syntax) {
-      //   $('#html-syntax').text('HTML');
-      //   this.inputs.html_syntax = 'HTML';
-      // }
-      // else {
-      //   $('#html-syntax').text(this.storedInputs.html_syntax);
-      //   this.inputs.html_syntax = this.storedInputs.html_syntax;
-      // }
-
-      // this.outputs.css = ace.edit("css");
-      // this.outputs.css.setTheme("ace/theme/tomorrow");
-      // this.outputs.css.setReadOnly(true);
-      // this.outputs.css.getSession().$useWorker=false
-      // this.outputs.css.getSession().setMode("ace/mode/css");
+      this.getStorage();
 
 
-      // if(this.storedOutputs.css) {
-      //   this.outputs.css.setValue(this.storedOutputs.css);
-      //   this.outputs.css.clearSelection();
-      // }
-      // else {
-      //   this.compile.sass();
-      // }
+      // 2. set up editors
+      //   a. sass
+      //   b. html
+      //   c. css
+      //     c1. if no stored output, recompile
+      this.editors.sass = this.initEditor(this.inputs.sass.input, 'sass', this.inputs.sass.syntax);
 
-      // $(this.inputs.sass.getSession()).bindWithDelay('change', function(event) {
-      //   if(SassMeister.internalValueChange == true) {
-      //     SassMeister.internalValueChange = false;
-      //   }
-      //   else {
-      //     SassMeister.compile.sass();
-      //   }
-      // }, 750);
-
-      // $(this.inputs.html.getSession()).bindWithDelay('change', function(event) {
-      //   SassMeister.convert.html();
-      // }, 750);
+      $(this.editors.sass.getSession()).bindWithDelay('change', function(event) {
+        if($this.bypassConversion == true) {
+          $this.bypassConversion = false;
+        }
+        else {
+          $this.inputs.sass.input = $this.editors.sass.getValue();
+          $this.compile.sass();
+        }
+      }, 750);
 
 
-      // return this;
-    // },
+      this.editors.html = this.initEditor(this.inputs.html.input, 'html', this.inputs.html.syntax);
 
-    // inputs: {
-    //   sass: '',
-    //   syntax: 'SCSS',
-    //   plugin: '',
-    //   output: 'expanded',
-    //   html: '',
-    //   html_syntax: 'HTML'
-    // },
-    //
-    // outputs: {
-    //   css: '',
-    //   html: ''
-    // },
+      $(this.editors.html.getSession()).bindWithDelay('change', function(event) {
+        $this.inputs.html.input = $this.editors.html.getValue();
+        $this.compile.html();
+      }, 750);
 
-    // timer: null,
-    //
-    // orientation: 'horizontal',
-    //
-    // html: 'show',
-    //
-    // css: 'show',
 
-    // compile: {
-    //   sass: function() {
-    //     var inputs = {
-    //           sass: SassMeister.inputs.sass.getValue(),
-    //           syntax: SassMeister.inputs.syntax,
-    //           output: SassMeister.inputs.output,
-    //         };
-    //
-    //     // _gaq.push(['_trackEvent', 'Form', 'Submit']);
-    //
-    //     /* Post the form and handle the returned data */
-    //     $.post('/compile', inputs, function( data ) {
-    //       SassMeister.outputs.css.setValue(data,-1);
-    //
-    //       $('#syntax').data('original', inputs.syntax);
-    //
-    //       SassMeister.updateRender({
-    //         css: data
-    //       });
-    //
-    //       SassMeister.setStorage(inputs, {css: data});
-    //     });
-    //   }
-    // },
+      this.editors.css = this.initEditor(this.outputs.css.input, 'css', 'css');
+      this.editors.css.setReadOnly(true);
+      this.editors.css.getSession().$useWorker = false;
 
-    // internalValueChange: false,
+      if(! this.editors.css.getValue()) {
+        $this.compile.sass();
+      }
 
-    // convert: {
-    //   sass: function(convert_syntax) {
-    //     if(convert_syntax == true) {
-    //       var inputs = {
-    //         sass: SassMeister.inputs.sass.getValue(),
-    //         syntax: SassMeister.inputs.syntax,
-    //         original_syntax: $('#syntax').data('original'),
-    //         output: SassMeister.inputs.output
-    //       }
-    //
-    //       $.post('/convert', inputs, function( data ) {
-    //         SassMeister.internalValueChange = true;
-    //
-    //         SassMeister.inputs.sass.setValue(data, -1);
-    //
-    //         $('#syntax').data('original', inputs.syntax);
-    //
-    //         SassMeister.setStorage({
-    //           sass: data,
-    //           syntax: SassMeister.inputs.syntax,
-    //           output: SassMeister.inputs.output
-    //         }, { });
-    //       });
-    //     }
-    //     else {
-    //       SassMeister.compile.sass();
-    //     }
-    //   }
-    // },
+      // Focus on the Sass input
+      this.editors.sass.focus();
 
-    // updateRender: function(new_content) {
-    //   $('#rendered-html')[0].contentWindow.postMessage(JSON.stringify(new_content), '*');
-    // },
 
-    // arrangePanels: function(orientation) {
-    //   if (this.html == 'hide') {
-    //     $('#rendered').hide();
-    //     $('#html_input').hide();
-    //   }
-    //
-    //   // #source has to be done FIRST, since it is nested inside #casement. TODO: Fix this.
-    //   $('#source').casement({
-    //     split: (orientation == 'horizontal' ? 'vertical' : 'horizontal'),
-    //     onDrag: function() {
-    //       SassMeister.inputs.sass.resize();
-    //       SassMeister.outputs.css.resize();
-    //       SassMeister.inputs.html.resize();
-    //     }
-    //   });
-    //
-    //   $('#casement').casement({
-    //     split: orientation,
-    //     onDragStart: function() {
-    //       $('#sash_cover').show();
-    //     },
-    //     onDrag: function() {
-    //       SassMeister.inputs.sass.resize();
-    //       SassMeister.outputs.css.resize();
-    //       SassMeister.inputs.html.resize();
-    //     },
-    //     onDragEnd: function() {
-    //       $('#sash_cover').hide();
-    //     }
-    //   });
-    //
-    //   this.orientation = orientation;
-    //   localStorage.setItem('orientation', this.orientation);
-    // },
 
+      // 3. arrange the panels
+      this.initControls();
+      this.initPanels();
+      this.arrangePanels(this.layout.orientation);
+
+      return this;
+    },
+
+
+    initControls: function() {
+      $('#syntax').text(this.inputs.sass.syntax).data('original', this.inputs.sass.syntax);
+
+      $('#output').text(this.inputs.sass.output_style);
+
+      $('#html-syntax').text(this.inputs.html.syntax);
+    },
+
+
+    initPanels: function() {
+      if (this.layout.html == 'hide') {
+        $('#rendered, #html_input').hide();
+        $('#toggle_html').data("state", 'show').toggleClass('show');
+      }
+
+      if (this.layout.css == 'hide') {
+        $('#css_input').hide();
+        $('#toggle_css').data("state", 'show').toggleClass('show');
+      }
+    },
+
+
+    initEditor: function(value, name, syntax) {
+      var input = ace.edit(name);
+
+      input.setTheme('ace/theme/tomorrow');
+      input.getSession().setMode('ace/mode/' + syntax.toLowerCase());
+
+      input.setValue(value);
+      input.clearSelection();
+      return input;
+    },
+
+    updateRender: function(new_content) {
+      return updateRender(new_content);
+    },
+
+    compile: {
+      sass: function() {
+        // _gaq.push(['_trackEvent', 'Form', 'Submit']);
+
+        /* Post the form and handle the returned data */
+        $.post('/compile', SassMeister.inputs.sass, function( data ) {
+          SassMeister.editors.css.setValue(data,-1);
+          SassMeister.outputs.css = data;
+
+          updateRender({
+            css: data
+          });
+
+          SassMeister.setStorage();
+        });
+      },
+
+      html: function() {
+        // _gaq.push(['_trackEvent', 'Form', 'Submit']);
+
+        if(SassMeister.inputs.html.syntax == 'HTML') {
+          updateRender({
+            css: SassMeister.outputs.css,
+            html: SassMeister.inputs.html.input
+          });
+
+          SassMeister.outputs.html = SassMeister.inputs.html.input;
+        }
+
+        else {
+          /* Post the form and handle the returned data */
+          $.post(window.sandbox, SassMeister.inputs.html, function( data ) {
+            SassMeister.bypassConversion = true;
+
+            updateRender({
+              css: SassMeister.outputs.css,
+              html: data
+            });
+
+            SassMeister.outputs.html = data;
+          });
+        }
+
+        SassMeister.setStorage();
+      }
+    },
+
+    convert: {
+      sass: function() {
+        $.post('/convert', SassMeister.inputs.sass, function( data ) {
+          SassMeister.bypassConversion = true;
+
+          SassMeister.editors.sass.setValue(data, -1);
+
+          SassMeister.inputs.sass.original_syntax = SassMeister.inputs.sass.syntax
+
+          $('#syntax').data('original', SassMeister.inputs.sass.syntax);
+
+          SassMeister.setStorage();
+        });
+      },
+    },
 
 
     gist: {
       create: function() {
-        _gaq.push(['_trackEvent', 'Gist']);
-
-        var inputs = {
-          sass: {
-            input: SassMeister.inputs.sass.getValue(),
-            syntax: SassMeister.inputs.syntax,
-            output: SassMeister.outputs.css.getValue(),
-          },
-          html: {
-            input: SassMeister.inputs.html.getValue(),
-            syntax: SassMeister.inputs.html_syntax,
-            output: JSON.parse(localStorage.getItem('outputs')).html
-          }
-        }
+        // _gaq.push(['_trackEvent', 'Gist']);
 
         var confirmationText = 'is ready';
 
-        ///* Send the data using post and put the results in a div */
-        $.post('/gist/create', inputs, function( data ) {
-          window.modal('<a href="https://gist.github.com/' + data.id + '" target="_blank">Your Gist</a> ' + confirmationText + ', and here\'s the <a href="/gist/' + data.id + '">SassMeister live view.</a> ');
+        var postData = {
+          inputs: SassMeister.inputs,
+          outputs: SassMeister.outputs
+        };
 
-          window.setUrl('/gist/' + data.id);
-          SassMeister.storedInputs.gist_id = data.id;
-          SassMeister.storedInputs.sass_filename = data.sass_filename;
-          SassMeister.storedInputs.html_filename = data.html_filename;
+        ///* Send the data using post and put the results in a div */
+        $.post('/gist/create', postData, function( data ) {
+          modal('<a href="https://gist.github.com/' + data.id + '" target="_blank">Your Gist</a> ' + confirmationText + ', and here\'s the <a href="/gist/' + data.id + '">SassMeister live view.</a> ');
+
+          setUrl('/gist/' + data.id);
+          // SassMeister.storedInputs.gist_id = data.id;
+          // SassMeister.storedInputs.sass_filename = data.sass_filename;
+          // SassMeister.storedInputs.html_filename = data.html_filename;
 
           $('#save-gist').text('Update Gist').data('action', 'edit');
         });
       },
 
       edit: function() {
-        _gaq.push(['_trackEvent', 'Gist']);
+        // _gaq.push(['_trackEvent', 'Gist']);
 
-        var inputs = {
-          sass: {
-            input: SassMeister.inputs.sass.getValue(),
-            syntax: SassMeister.inputs.syntax,
-            output: SassMeister.outputs.css.getValue(),
-            filename: SassMeister.storedInputs.sass_filename
-          },
-          html: {
-            input: SassMeister.inputs.html.getValue(),
-            syntax: SassMeister.inputs.html_syntax,
-            output: JSON.parse(localStorage.getItem('outputs')).html,
-            filename: SassMeister.storedInputs.html_filename
-          }
-        }
+        var postData = {
+          inputs: SassMeister.inputs,
+          outputs: SassMeister.outputs
+        };
 
         var confirmationText = 'has been updated';
 
         ///* Send the data using post and put the results in a div */
-        $.post('/gist/' + SassMeister.storedInputs.gist_id + '/edit', inputs, function( data ) {
-          window.modal('<a href="https://gist.github.com/' + data.id + '" target="_blank">Your Gist</a> ' + confirmationText + ', and here\'s the <a href="/gist/' + data.id + '">SassMeister live view.</a> ');
+        $.post('/gist/' + SassMeister.inputs.gist_id + '/edit', postData, function( data ) {
+          modal('<a href="https://gist.github.com/' + data.id + '" target="_blank">Your Gist</a> ' + confirmationText + ', and here\'s the <a href="/gist/' + data.id + '">SassMeister live view.</a> ');
 
-          window.setUrl('/gist/' + data.id);
-          SassMeister.storedInputs.sass_filename = data.sass_filename;
-          SassMeister.storedInputs.html_filename = data.html_filename;
-
+          setUrl('/gist/' + data.id);
         });
       },
 
@@ -277,100 +257,140 @@ var SassMeister;
 
         ///* Send the data using post and put the results in a div */
         $.post('/gist/' + SassMeister.storedInputs.gist_id + '/fork', function( data ) {
-          window.modal('<a href="https://gist.github.com/' + data.id + '" target="_blank">This Gist</a> ' + confirmationText + ', and here\'s the <a href="/gist/' + data.id + '">SassMeister live view.</a> ');
+          modal('<a href="https://gist.github.com/' + data.id + '" target="_blank">This Gist</a> ' + confirmationText + ', and here\'s the <a href="/gist/' + data.id + '">SassMeister live view.</a> ');
 
-          window.setUrl('/gist/' + data.id);
-          SassMeister.storedInputs.gist_id = data.id;
+          setUrl('/gist/' + data.id);
+          // SassMeister.storedInputs.gist_id = data.id;
 
           $('#save-gist').text('Update Gist').data('action', 'edit').attr('class', 'edit-gist');
         });
       },
     },
 
-    // reset: function() {
-    //   $('#save-gist').text('Save Gist').data('action', 'create');
-    //
-    //   SassMeister.inputs.sass.setValue('');
-    //   SassMeister.outputs.css.setValue('');
-    //   SassMeister.inputs.html_syntax = $('#html-syntax').text('HTML');
-    //   SassMeister.inputs.html.setValue('');
-    //
-    //   localStorage.clear();
-    //   SassMeister.storedInputs = {};
-    //   SassMeister.storedOutputs = {};
-    //
-    //   SassMeister.updateRender({reset: true});
-    //
-    //   window.setUrl('/');
-    // },
+    arrangePanels: function(orientation) {
+      // #source has to be done FIRST, since it is nested inside #casement. TODO: Fix this.
+      $('#source').casement({
+        split: (orientation == 'horizontal' ? 'vertical' : 'horizontal'),
+        onDrag: function() {
+          SassMeister.editors.sass.resize();
+          SassMeister.editors.html.resize();
+          SassMeister.editors.css.resize();
+        }
+      });
+
+      $('#casement').casement({
+        split: orientation,
+        onDragStart: function() {
+          $('#sash_cover').show();
+        },
+        onDrag: function() {
+          SassMeister.editors.sass.resize();
+          SassMeister.editors.html.resize();
+          SassMeister.editors.css.resize();
+        },
+        onDragEnd: function() {
+          $('#sash_cover').hide();
+        }
+      });
+    },
 
 
+    reset: function() {
+      $('#save-gist').text('Save Gist').data('action', 'create');
 
-    // storedInputs: null,
-    // storedOutputs: null,
-    //
-    // getStorage: function() {
-    //   if(gist) {
-    //     SassMeister.storedInputs = gist;
-    //     SassMeister.storedOutputs = {css: null, html: null};
-    //   }
-    //   else {
-    //     SassMeister.storedInputs = JSON.parse(localStorage.getItem('inputs'));
-    //     SassMeister.storedOutputs = $.extend({css: '', html: ''}, JSON.parse(localStorage.getItem('outputs')));
-    //   }
-    //
-    //   if(SassMeister.storedInputs) {
-    //     switch (SassMeister.storedInputs.syntax) {
-    //       case 'scss':
-    //         SassMeister.storedInputs.syntax = 'SCSS';
-    //         break;
-    //       case 'sass':
-    //         SassMeister.storedInputs.syntax = 'Sass';
-    //         break;
-    //       default:
-    //         break;
-    //     }
-    //
-    //     switch (SassMeister.storedInputs.html_syntax) {
-    //       case 'html':
-    //         SassMeister.storedInputs.html_syntax = 'HTML';
-    //         break;
-    //       case 'haml':
-    //         SassMeister.storedInputs.html_syntax = 'Haml';
-    //         break;
-    //       case 'slim':
-    //         SassMeister.storedInputs.html_syntax = 'Slim';
-    //         break;
-    //       case 'markdown':
-    //         SassMeister.storedInputs.html_syntax = 'Markdown';
-    //         break;
-    //       case 'textile':
-    //         SassMeister.storedInputs.html_syntax = 'Textile';
-    //         break;
-    //       default:
-    //         break;
-    //     }
-    //
-    //     SassMeister.inputs.sass.setValue(SassMeister.storedInputs.sass);
-    //     SassMeister.inputs.sass.clearSelection();
-    //
-    //     SassMeister.inputs.html.setValue(SassMeister.storedInputs.html);
-    //     SassMeister.inputs.html.clearSelection();
-    //   }
-    //
-    //   SassMeister.orientation = localStorage.getItem('orientation') || SassMeister.orientation;
-    //   SassMeister.html = localStorage.getItem('html') || SassMeister.html;
-    //   SassMeister.css = localStorage.getItem('css') || SassMeister.css;
-    // },
+      this.editors.sass.setValue('');
+      this.editors.css.setValue('');
+      this.editors.html.setValue('');
 
-    // setStorage: function(inputs, outputs) {
-    //   localStorage.setItem('inputs', JSON.stringify( $.extend(SassMeister.storedInputs, inputs) ));
-    //   localStorage.setItem('outputs', JSON.stringify( $.extend(SassMeister.storedOutputs, outputs) ));
-    //
-    //   localStorage.setItem('orientation', SassMeister.orientation);
-    //   localStorage.setItem('html', SassMeister.html);
-    // }
+      this.inputs = this._default.inputs;
+      this.outputs = this._default.outputs;
+
+      localStorage.clear();
+
+      updateRender({reset: true});
+
+      setUrl('/');
+    },
+
+
+    getStorage: function() {
+      if(window.gist) {
+        this.inputs = $.extend(true, this.inputs, window.gist);
+      }
+      else {
+        this.inputs = $.extend(true, this.inputs, JSON.parse(localStorage.getItem('inputs')) );
+        this.outputs = $.extend(true, this.outputs, JSON.parse(localStorage.getItem('outputs')) );
+      }
+
+      this.layout = $.extend(true, this.layout, JSON.parse(localStorage.getItem('layout')) );
+
+      switch (SassMeister.inputs.sass.syntax.toLowerCase()) {
+        case 'sass':
+          SassMeister.inputs.sass.syntax = 'Sass';
+          break;
+        case 'scss':
+        default:
+          SassMeister.inputs.sass.syntax = 'SCSS';
+          break;
+      }
+
+      switch (SassMeister.inputs.html.syntax.toLowerCase()) {
+        case 'haml':
+          SassMeister.inputs.html.syntax = 'Haml';
+          break;
+        case 'slim':
+          SassMeister.inputs.html.syntax = 'Slim';
+          break;
+        case 'markdown':
+          SassMeister.inputs.html.syntax = 'Markdown';
+          break;
+        case 'textile':
+          SassMeister.inputs.html.syntax = 'Textile';
+          break;
+        case 'html':
+        default:
+          SassMeister.inputs.html.syntax = 'HTML';
+          break;
+      }
+    },
+
+    setStorage: function() {
+      if(! window.gist) {
+        localStorage.setItem('inputs', JSON.stringify( this.inputs ));
+        localStorage.setItem('outputs', JSON.stringify( this.outputs ));
+        localStorage.setItem('layout', JSON.stringify( this.layout ));
+      }
+    }
+  };
+
+
+  var updateRender = function(new_content) {
+    $('#rendered-html')[0].contentWindow.postMessage(JSON.stringify(new_content), '*');
+  };
+
+  var setUrl = function(url) {
+    history.pushState({}, 'SassMeister | The Sass Playground!', url);
+    window.onpopstate = function(event) {
+      // console.log(event.state); // will be our state data, so {}
+    }
+  };
+
+
+  var modal = function(content) {
+    if ($('#modal').length == 0) {
+      $('body').append('<div class="reveal-modal large" id="modal"><a class="close-icon"><span class="alt">&#215;</span></a><span class="content">' + content + '</span></div>');
+    }
+    else {
+      $('#modal .content').empty();
+      $('#modal .content').append(content);
+    }
+
+    $('#modal').reveal({
+      animation: 'fadeAndPop', //fade, fadeAndPop, none
+      animationSpeed: 250, //how fast animations are
+      closeOnBackgroundClick: true, //if you click background will modal close?
+      dismissModalClass: 'close-icon' //the class of a button or element that will close an open modal
+    });
   };
 
 })(jQuery);
-
