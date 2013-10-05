@@ -13,7 +13,7 @@ javascripts:
     - public/javascripts/vendor/ACE-noconflict/worker-css.js
     - public/javascripts/vendor/jquery.foundation.reveal.js
     - public/javascripts/vendor/bindWithDelay.js
-    - public/javascripts/vendor/jquery.minimalect.js
+    # - public/javascripts/vendor/jquery.minimalect.js
     - public/javascripts/SassMeister.js
     - public/javascripts/vendor/casement.js
     - public/javascripts/main.js
