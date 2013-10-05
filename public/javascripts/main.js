@@ -31,29 +31,35 @@
     event.preventDefault();
 
     var selected = $(this).data('toggle-value'),
-        input = $(this).data('toggle-input'),
-        foo = input.split('.');
-
-    SassMeister.inputs[foo[0]][foo[1]] = selected;
+        input = $(this).data('toggle-input');
 
     $(this).parents('.panel-toggle').find('.selected').text(selected);
 
-    if (input == 'sass.syntax') {
+    if (input == 'sass') {
+      SassMeister.inputs.sass.syntax = selected;
+
       SassMeister.convert.sass();
       SassMeister.editors.sass.getSession().setMode('ace/mode/' + selected.toLowerCase());
     }
-    if (input == 'sass.output') {
+    if (input == 'css') {
+      SassMeister.inputs.sass.output_style = selected;
+
       SassMeister.compile.sass();
     }
-    if (input == 'html.syntax') {
+    if (input == 'html') {
+      SassMeister.inputs.html.syntax = selected;
+
       SassMeister.compile.html();
       SassMeister.editors.html.getSession().setMode("ace/mode/" + selected.toLowerCase());
     }
   });
 
 
+
+
+
   $('[data-import]').on('click', function(event) {
-    SassMeister.inputs.sass.insert( '@import "' + $(this).data('import') + '"' + ( SassMeister.inputs.syntax == 'scss' ? ';' : '' ) + '\n\n');
+    SassMeister.editors.sass.insert( '@import "' + $(this).data('import') + '"' + ( SassMeister.inputs.sass.syntax == 'SCSS' ? ';' : '' ) + '\n\n');
   });
 
 
