@@ -123,7 +123,7 @@
           return false;
         }
       })
-      .bind("mouseup.casement touchend.casement", function (e) {
+      .bind("mouseup.casement touchend.casement", function (event) {
         $handle = null;
 
         $this.options.onDragEnd($handle, event);
