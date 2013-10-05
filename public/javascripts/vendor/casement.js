@@ -188,7 +188,12 @@
         this.minimize(handle.prev());
       }
 
-      $.extend(true, casementSettings[handle.next().data('casement_guid')], settings);
+      if(casementSettings[handle.next().data('casement_guid')]) {
+        $.extend(true, casementSettings[handle.next().data('casement_guid')], settings);
+      }
+      else {
+        casementSettings[handle.next().data('casement_guid')] = settings;
+      }
 
       localStorage.setItem('casementSettings', JSON.stringify(casementSettings));
     },
