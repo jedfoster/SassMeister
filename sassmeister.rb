@@ -78,38 +78,36 @@ class SassMeisterApp < Sinatra::Base
     @gist = nil
     @plugins = plugins
 
-
     params[:syntax].downcase! unless params[:syntax].nil?
     params[:original_syntax].downcase! unless params[:original_syntax].nil?
-    # params[:syntax].downcase! unless params[:syntax].nil?
   end
 
   get '/' do
-    if ! params.keys.grep(/(extension|syntax|output)/).empty?
-      extension = params[:extension].split(',') || []
-      syntax = (params[:syntax].downcase rescue 'scss')
-      output = (params[:output].downcase rescue 'expanded')
-      sass = ''
-
-      plugins.each do |key, plugin|
-        if ! extension.grep(/#{plugin[:fingerprint].gsub(/\*/, '.*?')}/i).empty?
-          require plugin[:gem]
-
-          imports = []
-          plugin[:import].each do |import|
-            imports << "@import \"#{import}\""
-          end
-
-          sass += imports.join("#{syntax == 'scss' ? ';' : ''}\n") + "#{syntax == 'scss' ? ';' : ''}\n" unless imports.nil?
-        end
-      end
-
-      @gist = {
-        :sass => sass,
-        :syntax => syntax,
-        :output => output
-      }.to_json
-    end
+    # if ! params.keys.grep(/(extension|syntax|output)/).empty?
+    #   extension = params[:extension].split(',') || []
+    #   syntax = (params[:syntax].downcase rescue 'scss')
+    #   output = (params[:output].downcase rescue 'expanded')
+    #   sass = ''
+    # 
+    #   plugins.each do |key, plugin|
+    #     if ! extension.grep(/#{plugin[:fingerprint].gsub(/\*/, '.*?')}/i).empty?
+    #       require plugin[:gem]
+    # 
+    #       imports = []
+    #       plugin[:import].each do |import|
+    #         imports << "@import \"#{import}\""
+    #       end
+    # 
+    #       sass += imports.join("#{syntax == 'scss' ? ';' : ''}\n") + "#{syntax == 'scss' ? ';' : ''}\n" unless imports.nil?
+    #     end
+    #   end
+    # 
+    #   @gist = {
+    #     :sass => sass,
+    #     :syntax => syntax,
+    #     :output => output
+    #   }.to_json
+    # end
 
     erb :index, locals: {body_class: ''}
   end
