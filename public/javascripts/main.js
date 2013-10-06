@@ -1,4 +1,6 @@
 (function($) {
+if($('body.about, body.thankyou').length < 1 ) {
+
   $('#rendered-html').attr('src', window.sandbox);
 
   var SassMeister = window.SassMeister.init();
@@ -173,5 +175,7 @@
       }
     }
   };
+  
+}
 
 })(jQuery);

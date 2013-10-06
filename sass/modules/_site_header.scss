@@ -175,6 +175,10 @@ $site-header-height: em(60);
         max-width: em(360);
       }
     }
+    
+    .about &, .thankyou & {
+      display: none;
+    }
   }
 }
 

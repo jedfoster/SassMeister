@@ -111,7 +111,7 @@ class SassMeisterApp < Sinatra::Base
       }.to_json
     end
 
-    erb :index
+    erb :index, locals: {body_class: ''}
   end
 
 
@@ -126,12 +126,12 @@ class SassMeisterApp < Sinatra::Base
 
 
   get '/thankyou' do
-    erb :thankyou
+    erb :thankyou, locals: {body_class: 'thankyou'}
   end
 
 
   get '/about' do
-    erb :about
+    erb :about, locals: {body_class: 'about'}
   end
 
 
