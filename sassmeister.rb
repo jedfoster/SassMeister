@@ -191,7 +191,7 @@ class SassMeisterApp < Sinatra::Base
       }
     }.to_json
 
-    erb :index
+    erb :index, locals: {body_class: ''}
   end
 
 
