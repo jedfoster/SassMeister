@@ -35,7 +35,7 @@ var SassMeister;
 
     layout: {
       orientation: 'horizontal',
-      html: 'show',
+      html: 'hide',
       css: 'show'
     },
 
@@ -116,6 +116,17 @@ var SassMeister;
 
 
     initPanels: function() {
+      if(window.gist) {
+        localStorage.removeItem('casementSettings');
+        
+        if(!this.inputs.html.input) {
+          this.layout.html = 'hide';
+        }
+        else {
+          this.layout.html = 'show';
+        }
+      } 
+
       if (this.layout.html == 'hide') {
         $('#rendered, #html_input').hide();
         $('#toggle_html').data("state", 'show').toggleClass('show');
@@ -289,7 +300,7 @@ var SassMeister;
           $('#sash_cover').hide();
         }
       });
-      
+
       SassMeister.editors.sass.resize();
       SassMeister.editors.html.resize();
       SassMeister.editors.css.resize();

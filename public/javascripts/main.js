@@ -81,7 +81,7 @@ if($('body.about, body.thankyou').length < 1 ) {
     SassMeister.editors.sass.resize();
     SassMeister.editors.css.resize();
 
-    localStorage.setItem('css', state);
+    localStorage.setItem('layout', JSON.stringify( SassMeister.layout ));
   };
 
 
@@ -102,7 +102,7 @@ if($('body.about, body.thankyou').length < 1 ) {
     SassMeister.editors.css.resize();
     SassMeister.editors.html.resize();
 
-    localStorage.setItem('html', state);
+    localStorage.setItem('layout', JSON.stringify( SassMeister.layout ));
   };
 
 
