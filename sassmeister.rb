@@ -62,14 +62,14 @@ class SassMeisterApp < Sinatra::Base
     SANDBOX_DOMAIN = 'sandbox.sassmeister.com'
     require 'newrelic_rpm'
 
-    Chairman.config(ENV['GITHUB_ID'], ENV['GITHUB_SECRET'], ['gist', 'user'])
+    Chairman.config(ENV['GITHUB_ID'], ENV['GITHUB_SECRET'], ['gist'])
   end
 
   configure :development do
     APP_DOMAIN = 'sassmeister.dev'
     SANDBOX_DOMAIN = 'sandbox.sassmeister.dev'
     yml = YAML.load_file("config/github.yml")
-    Chairman.config(yml["client_id"], yml["client_secret"], ['gist', 'user'])
+    Chairman.config(yml["client_id"], yml["client_secret"], ['gist'])
   end
 
 
