@@ -175,8 +175,6 @@ var SassMeister;
         else {
           /* Post the form and handle the returned data */
           $.post(window.sandbox, SassMeister.inputs.html, function( data ) {
-            SassMeister.bypassConversion = true;
-
             updateRender({
               css: SassMeister.outputs.css,
               html: data
