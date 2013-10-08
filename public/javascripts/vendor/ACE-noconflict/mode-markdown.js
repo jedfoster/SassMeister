@@ -1615,20 +1615,20 @@ oop.inherits(Mode, TextMode);
         this.$outdent.autoOutdent(doc, row);
     };
 
-    this.createWorker = function(session) {
-        var worker = new WorkerClient(["ace"], "ace/mode/css_worker", "Worker");
-        worker.attachToDocument(session.getDocument());
-
-        worker.on("csslint", function(e) {
-            session.setAnnotations(e.data);
-        });
-
-        worker.on("terminate", function() {
-            session.clearAnnotations();
-        });
-
-        return worker;
-    };
+    // this.createWorker = function(session) {
+    //     var worker = new WorkerClient(["ace"], "ace/mode/css_worker", "Worker");
+    //     worker.attachToDocument(session.getDocument());
+    // 
+    //     worker.on("csslint", function(e) {
+    //         session.setAnnotations(e.data);
+    //     });
+    // 
+    //     worker.on("terminate", function() {
+    //         session.clearAnnotations();
+    //     });
+    // 
+    //     return worker;
+    // };
 
 }).call(Mode.prototype);
 

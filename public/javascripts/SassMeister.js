@@ -87,7 +87,6 @@ var SassMeister;
 
       this.editors.css = this.initEditor(this.outputs.css.input, 'css', 'css');
       this.editors.css.setReadOnly(true);
-      this.editors.css.getSession().setUseWorker(false);
 
       if(! this.editors.css.getValue()) {
         $this.compile.sass();
@@ -292,6 +291,10 @@ var SassMeister;
           $('#sash_cover').hide();
         }
       });
+      
+      SassMeister.editors.sass.resize();
+      SassMeister.editors.html.resize();
+      SassMeister.editors.css.resize();
     },
 
 
