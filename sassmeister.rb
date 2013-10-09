@@ -30,7 +30,7 @@ class SassMeisterApp < Sinatra::Base
     configure :production do
       helpers do
         use Rack::Session::Cookie, :key => 'sassmeister.com',
-                                   :domain => :all,
+                                   :domain => '.sassmeister.com',
                                    :path => '/',
                                    :expire_after => 7776000, # 90 days, in seconds
                                    :secret => ENV['COOKIE_SECRET']
