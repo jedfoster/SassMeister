@@ -16,6 +16,8 @@
 
 	<link rel="stylesheet" href="/stylesheets/style.css" />
 
+  <script>document.domain = '<%= APP_DOMAIN %>';</script>
+
 	<script type="text/javascript">
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', 'UA-35407426-1']);
@@ -29,19 +31,17 @@
   </script>
 </head>
 
-<body>
+<body class="<%= body_class || '' %>">
   <%= partial :"shared/_header" %>
 	<section class="main_body">
   	<%= yield %>
 	</section>
 	<%= partial :"shared/_footer" %>
-	
-	<% if ! @gist.nil? %>
-    <script>
-      var gist = <%= @gist || '' %>;
-    </script>
 
-  <% end %>
+  <script>
+    var sandbox = 'http://<%= SANDBOX_DOMAIN %>';
+    var gist = <%= @gist || 'false' %>;
+  </script>
 
   <% if settings.environment == :production %>
 	  <script src="/javascripts/app.js"></script>
@@ -50,8 +50,8 @@
     <script src="/javascripts/vendor/ACE-noconflict/ace.js"></script>
     <script src="/javascripts/vendor/jquery.foundation.reveal.js"></script>
     <script src="/javascripts/vendor/bindWithDelay.js"></script>
-    <script src="/javascripts/vendor/fancy_dropdown.js"></script>
-    <script src="/javascripts/SassMeister.js"></script>
+    <script src="/javascripts/Sassmeister.js"></script>
+    <script src="/javascripts/vendor/casement.js"></script>
     <script src="/javascripts/main.js"></script>
   <% end %>
 </body>

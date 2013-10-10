@@ -1,21 +1,21 @@
-<form action="/compile-html" method="post" accept-charset="utf-8" class="html_input" id="html-form">
-  <div class="controls">
-    <div class="form_control">
-      <select name="html-syntax" data-original="">
-        <option value="haml">Haml (Ruby interpretation (with = & -) is disabled)</option>
-        <option value="slim">Slim</option>
-        <option value="markdown">Markdown</option>
-        <option value="textile">Textile</option>
-      </select>
+<div class="edit_container">
+  <div class="edit-header">
+
+    <div id="" class="panel-toggle">
+      <span id="html-syntax" class="selected"></span>
+
+      <ul>
+        <li><span data-toggle-value="HTML" data-toggle-input="html">HTML</span></li>
+        <li><span data-toggle-value="Haml" data-toggle-input="html">Haml</span></li>
+        <li><span data-toggle-value="Markdown" data-toggle-input="html">Markdown</span></li>
+        <li><span data-toggle-value="Textile" data-toggle-input="html">Textile</span></li>
+      </ul>
     </div>
+
+    <div class="visibility-toggle"></div>
   </div>
 
-  <div class="edit_container">
-    <h2 class="edit-header">HTML</h2>
-
-    <div class="pre_container">
-      <pre id="html"></pre>
-    </div>
+  <div class="pre_container">
+    <pre id="html"></pre>
   </div>
-</form>
-
+</div>

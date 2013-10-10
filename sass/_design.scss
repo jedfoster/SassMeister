@@ -1,32 +1,99 @@
 .main_body {
-  @extend %grid_12of12;
-}
+  @extend %stretch;
 
-.sass_input {
-  @include grid(6.125, alpha);
-}
+  width: 100%;
+  z-index: 2;
+  top: em(60);
+  bottom: em(32);
 
-.css_output {
-  @include grid(6.125, omega);
-
-  a {
-    float: left;
-    display: block;
+  @media screen and (max-width: 650px) {
+    bottom: em(64);
   }
 }
 
-.html_input, .html_output {
+.html_output {
   @extend %grid_full;
 
   float: left;
 }
 
-@media #{$tablet} {
-  .sass_input, .css_output {
-    @include grid(4.25, alphaomega, $grid_context: 4);
+html, body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.stretch {
+  @extend %stretch;
+}
+
+.sash {
+  position: absolute;
+  z-index: 999;
+
+  &.horizontal {
+    width: 100%;
+    height: 0.66667em;
+    background-color: #f8f8f8;
+    border-top: 1px solid $golf_gray;
+    padding-bottom: 0.66667em;
+    cursor: ns-resize;
+
+    #source & {
+      background-color: transparent;
+    }
+  }
+  &.vertical {
+    height: 100%;
+    width: 0.66667em;
+    border-left: 1px solid $golf_gray;
+    cursor: ew-resize;
   }
 }
 
-#reset {
-  float: right;
+#panelswaiting {
+  display: none;
+}
+
+.panel {
+  &:first-child {
+    border-left: 0;
+  }
+
+  .handle & {
+    border-left: 1px solid $golf_gray;
+  }
+}
+
+.resize {
+  cursor: ew-resize;
+}
+
+article {
+  padding: 0 1em;
+  max-width: 42em;
+  margin: 1.5em auto 0;
+
+  p {
+    font-weight: 200;
+  }
+}
+
+#rendered-html {
+  padding-top: 0.66667em;
+  height: 100%;
+  background: $white;
+}
+
+#rendered {
+  z-index: 200;
+}
+
+#sash_cover {
+  @extend %stretch;
+
+  z-index: 201;
+  display: none;
 }

@@ -18,7 +18,6 @@ require 'yaml'
 require 'sassmeister'
 require 'array'
 
-
 class SassMeisterApp < Sinatra::Base
   register Sinatra::Partial
 
@@ -31,7 +30,7 @@ class SassMeisterApp < Sinatra::Base
     configure :production do
       helpers do
         use Rack::Session::Cookie, :key => 'sassmeister.com',
-                                   :domain => 'sassmeister.com',
+                                   :domain => '.sassmeister.com',
                                    :path => '/',
                                    :expire_after => 7776000, # 90 days, in seconds
                                    :secret => ENV['COOKIE_SECRET']
@@ -46,8 +45,8 @@ class SassMeisterApp < Sinatra::Base
                                    :secret => 'local'
       end
     end
-    
-    after '/authorize/return' do  
+
+    after '/authorize/return' do
       redirect to('/')
     end
 
@@ -59,14 +58,18 @@ class SassMeisterApp < Sinatra::Base
   set :partial_template_engine, :erb
 
   configure :production do
+    APP_DOMAIN = 'sassmeister.com'
+    SANDBOX_DOMAIN = 'sandbox.sassmeister.com'
     require 'newrelic_rpm'
 
-    Chairman.config(ENV['GITHUB_ID'], ENV['GITHUB_SECRET'], ['gist', 'user'])
+    Chairman.config(ENV['GITHUB_ID'], ENV['GITHUB_SECRET'], ['gist'])
   end
 
   configure :development do
+    APP_DOMAIN = 'sassmeister.dev'
+    SANDBOX_DOMAIN = 'sandbox.sassmeister.dev'
     yml = YAML.load_file("config/github.yml")
-    Chairman.config(yml["client_id"], yml["client_secret"], ['gist', 'user'])
+    Chairman.config(yml["client_id"], yml["client_secret"], ['gist'])
   end
 
 
@@ -74,83 +77,59 @@ class SassMeisterApp < Sinatra::Base
     @github = Chairman.session(session[:github_token])
     @gist = nil
     @plugins = plugins
+
+    params[:syntax].downcase! unless params[:syntax].nil?
+    params[:original_syntax].downcase! unless params[:original_syntax].nil?
   end
 
   get '/' do
-    if ! params.keys.grep(/(extension|syntax|output)/).empty?
-      extension = params[:extension].split(',') || []
-      syntax = (params[:syntax].downcase rescue 'scss')
-      output = (params[:output].downcase rescue 'expanded')
-      sass = ''
+    # if ! params.keys.grep(/(extension|syntax|output)/).empty?
+    #   extension = params[:extension].split(',') || []
+    #   syntax = (params[:syntax].downcase rescue 'scss')
+    #   output = (params[:output].downcase rescue 'expanded')
+    #   sass = ''
+    # 
+    #   plugins.each do |key, plugin|
+    #     if ! extension.grep(/#{plugin[:fingerprint].gsub(/\*/, '.*?')}/i).empty?
+    #       require plugin[:gem]
+    # 
+    #       imports = []
+    #       plugin[:import].each do |import|
+    #         imports << "@import \"#{import}\""
+    #       end
+    # 
+    #       sass += imports.join("#{syntax == 'scss' ? ';' : ''}\n") + "#{syntax == 'scss' ? ';' : ''}\n" unless imports.nil?
+    #     end
+    #   end
+    # 
+    #   @gist = {
+    #     :sass => sass,
+    #     :syntax => syntax,
+    #     :output => output
+    #   }.to_json
+    # end
 
-      plugins.each do |key, plugin|
-        if ! extension.grep(/#{plugin[:fingerprint].gsub(/\*/, '.*?')}/i).empty?
-          require plugin[:gem]
-
-          imports = []
-          plugin[:import].each do |import|
-            imports << "@import \"#{import}\""
-          end
-
-          sass += imports.join("#{syntax == 'scss' ? ';' : ''}\n") + "#{syntax == 'scss' ? ';' : ''}\n" unless imports.nil?
-        end
-      end
-
-      @gist = {
-        :sass => sass,
-        :syntax => syntax,
-        :output => output
-      }.to_json
-    end
-
-    erb :index
+    erb :index, locals: {body_class: ''}
   end
 
 
   post '/compile' do
-    if params[:sass]
-      sass_compile(params)
-    else
-      # HTML
-
-      case params[:html_syntax]
-      when 'haml'
-        return haml params[:html], :suppress_eval => true
-      when 'slim'
-        # ^(\s*?)((\S+ )?=|==|-)( .*$)
-        html = params[:html].gsub(/^(\s*?)((\S+ )?=|==|-)( .*$)/, "\1/ \2\4")
-
-        return html
-        return slim html, :pretty => true, :disable_engines => [:ruby, :javascript, :css, :erb, :haml, :sass, :scss, :less, :builder, :liquid, :markdown, :textile, :rdoc, :radius, :markaby, :nokogiri, :coffee]
-
-      # when 'markdown'
-
-      # when 'textile'
-
-      else
-        return params[:html]
-      end
-    end
-  end
-
-
-  get '/compile' do
-    erb :compiled_html, :layout => false
+    sass_compile(params[:input], params[:syntax], params[:output_style])
   end
 
 
   post '/convert' do
-    if params[:sass]
-      sass_convert(params[:original_syntax], params[:syntax], params[:sass])
-    else
-      # HTML
-      erb :compiled_html, :layout => false
-    end
+    sass_convert(params[:original_syntax], params[:syntax], params[:input])
   end
 
 
   get '/thankyou' do
-    erb :thankyou
+    erb :thankyou, locals: {body_class: 'thankyou'}
+  end
+
+
+  get '/about' do
+    erb :about, locals: {body_class: 'about'}
   end
 
 
@@ -161,18 +140,31 @@ class SassMeisterApp < Sinatra::Base
       response = Github::Gists.new.get(id, client_id: Chairman.client_id, client_secret: Chairman.client_secret)
 
       # For now, we only return the first .sass or .scss file we find.
-      file = response.files["#{response.files.keys.grep(/.+\.(scss|sass)/)[0]}"]
+      file = response.files["#{response.files.keys.grep(/.+\.(scss|sass)/i)[0]}"]
 
       if( ! file)
         syntax = filename = owner = ''
         sass = "// Sorry, I couldn't find any valid Sass in that Gist."
 
-      else      
+      else
         sass = file.content
         filename = file.filename
-        owner = response.owner.login
-  
+        owner = (response.respond_to?(:owner) ? response.owner.login : '')
+
         syntax = file.filename.slice(-4, 4)
+      end
+
+
+      html_file = response.files["#{response.files.keys.grep(/.+\.(haml|textile|markdown|md|html)/)[0]}"]
+
+      if(html_file)
+        html = html_file.content
+        html_filename = html_file.filename
+
+        html_syntax = html_file.filename.split('.').pop
+        html_syntax = 'markdown' if html_syntax == 'md'
+
+        html_syntax.capitalize!
       end
 
     rescue Github::Error::NotFound => e
@@ -184,28 +176,57 @@ class SassMeisterApp < Sinatra::Base
 
     @gist = {
       :gist_id => id,
-      :gist_filename => filename,
       :gist_owner => owner,
       :can_update_gist => (owner == session[:github_id]),
-      :syntax => syntax,
-      :sass => sass
+      :sass_filename => filename,
+      :html_filename => (html_filename || ''),
+      :sass => {
+        :input => sass,
+        :syntax => syntax,
+        :original_syntax => syntax
+      },
+      :html => {
+        :input => (html || ''),
+        :syntax => (html_syntax || ''),
+      }
     }.to_json
 
-    erb :index
+    erb :index, locals: {body_class: ''}
   end
 
 
   post '/gist/create' do
-    sass = params[:sass]
+    inputs = params[:inputs]
+    outputs = params[:outputs]
+
+    sass = inputs[:sass][:input]
 
     dependencies = pack_dependencies(sass)
 
-    css = sass_compile(params)
+    css = outputs[:css]
 
     description = "Generated by SassMeister.com."
 
-    sass_file = "SassMeister-input.#{params[:syntax]}"
+    sass_file = "SassMeister-input.#{inputs[:sass][:syntax].downcase}"
     css_file = "SassMeister-output.css"
+
+    html = {}
+
+    if inputs[:html]
+      html_file = "SassMeister-input-HTML.#{inputs[:html][:syntax].downcase}"
+      html_input = inputs[:html][:input]
+      rendered_file = "SassMeister-rendered.html"
+      html_output = outputs[:html]
+
+      html = {
+        html_file => {
+          content: "#{html_input}"
+        },
+        rendered_file => {
+          content: "#{html_output}"
+        }
+      }
+    end
 
     data = @github.gists.create(description: description, public: true, files: {
       css_file => {
@@ -214,13 +235,14 @@ class SassMeisterApp < Sinatra::Base
       sass_file => {
         content: "#{dependencies}\n\n#{sass}"
       }
-    })  
+    }.merge(html))
 
     content_type 'application/json'
 
     {
       id: data.id,
-      filename: sass_file
+      sass_filename: sass_file,
+      html_filename: html_file
     }.to_json.to_s
   end
 
@@ -228,21 +250,54 @@ class SassMeisterApp < Sinatra::Base
   post %r{/gist(?:/[\w]*)*/([\d]+)/edit} do
     id = params[:captures].shift
 
-    sass = params[:sass]
+    inputs = params[:inputs]
+    outputs = params[:outputs]
+
+    sass = inputs[:sass][:input]
 
     dependencies = pack_dependencies(sass)
 
-    css = sass_compile(params)
+    css = outputs[:css]
 
-    if params[:gist_filename].slice(-4, 4) == params[:syntax]
-      sass_file = params[:gist_filename]
+    if inputs[:sass_filename].slice(-4, 4) == inputs[:sass][:syntax].downcase
+      sass_file = inputs[:sass_filename]
       deleted_files = {}
     else
-      sass_file = "#{params[:gist_filename].slice(0..-5)}#{params[:syntax]}"
-      deleted_files = {params[:gist_filename] => {content: nil}}
+      sass_file = "#{inputs[:sass_filename].slice(0..-5)}#{inputs[:sass][:syntax].downcase}"
+      deleted_files = {inputs[:sass_filename] => {content: nil}}
     end
 
     css_file = "SassMeister-output.css"
+
+    html = {}
+
+    if inputs[:html]
+      html_file = "SassMeister-input-HTML.#{inputs[:html][:syntax].downcase}"
+      html_input = inputs[:html][:input]
+      rendered_file = "SassMeister-rendered.html"
+      html_output = outputs[:html]
+
+      if inputs[:html_filename].split('.').last == inputs[:html][:syntax].downcase
+        html_file = inputs[:html_filename]
+        deleted_html = {}
+      else
+        filename = inputs[:html_filename].split('.')
+        filename.pop
+        filename = filename.join('.')
+
+        html_file = "#{filename}.#{inputs[:html][:syntax].downcase}"
+        deleted_html = {inputs[:html_filename] => {content: nil}}
+      end
+
+      html = {
+        html_file => {
+          content: "#{html_input}"
+        },
+        rendered_file => {
+          content: "#{html_output}"
+        }
+      }.merge(deleted_html)
+    end
 
     data = @github.gists.edit(id, files: {
       css_file => {
@@ -251,13 +306,14 @@ class SassMeisterApp < Sinatra::Base
       sass_file => {
         content: "#{dependencies}\n\n#{sass}"
       }
-    }.merge(deleted_files))
+    }.merge(deleted_files).merge(html))
 
     content_type 'application/json'
 
     {
       id: data.id,
-      filename: sass_file
+      sass_filename: sass_file,
+      html_filename: html_file
     }.to_json.to_s
   end
 
@@ -268,9 +324,7 @@ class SassMeisterApp < Sinatra::Base
 
     content_type 'application/json'
 
-    {
-      id: data.id
-    }.to_json.to_s
+    { id: data.id }.to_json.to_s
   end
 
   run! if app_file == $0

@@ -4,15 +4,11 @@ input[type=text], input[type=password], input[type="date"], select {
   border: 1px solid $golf_gray;
 }
 
-select, label {
-  font-size: em(12, $font-size);
-}
-
 label {
 	display: block;
   line-height: 1;
 	margin-bottom: 0.5em;
-  color: $delta_gray;
+  color: $white;
 
 	@media #{$mobile} {
   	display: none;

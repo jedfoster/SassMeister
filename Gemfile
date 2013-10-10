@@ -16,8 +16,14 @@ gem 'chairman'
 gem 'sass'
 gem 'compass'
 
+
+# group :development do
+#   gem 'activesupport', '~> 4.0.0'
+# end
+# 
+# gem 'html-pipeline', '~> 0.2.1'
 # gem 'haml'
-# gem 'slim'
+# gem 'RedCloth'
 
 gem 'bourbon-compass'
 gem 'breakpoint'
@@ -44,7 +50,6 @@ gem 'sassy-text-shadow'
 gem 'compass-blend-modes'
 gem 'jacket'
 gem 'singularity-extras'
-
 gem 'normalize-scss'
 gem 'zurb-foundation'
 gem 'compass-inuit'

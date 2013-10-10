@@ -68,22 +68,22 @@ module SassMeister
   end
 
 
-  def sass_compile(params)
+  def sass_compile(sass, syntax, output_style)
     imports = ''
 
-    if ! params[:sass].match(/^\/\/ ----\n/) && params[:sass].match(/^\/\/ ([\w\s]+?) [\(\)v\d\.]+?\s*$/)
-      imports = unpack_dependencies(params[:sass])
-      imports = imports.join("#{params[:syntax] == 'scss' ? ';' : ''}\n") + "#{params[:syntax] == 'scss' ? ';' : ''}\n" if ! imports.nil?
+    if ! sass.match(/^\/\/ ----\n/) && sass.match(/^\/\/ ([\w\s]+?) [\(\)v\d\.]+?\s*$/)
+      imports = unpack_dependencies(sass)
+      imports = imports.join("#{syntax == 'scss' ? ';' : ''}\n") + "#{syntax == 'scss' ? ';' : ''}\n" if ! imports.nil?
     end
 
-    params[:sass].slice!(/(^\/\/ [\-]{3,4}\n(?:\/\/ .+\n)*\/\/ [\-]{3,4}\s*)*/)
+    sass.slice!(/(^\/\/ [\-]{3,4}\n(?:\/\/ .+\n)*\/\/ [\-]{3,4}\s*)*/)
 
-    params[:sass] = imports + params[:sass] if ! imports.nil?
+    sass = imports + sass if ! imports.nil?
 
-    require_plugins(params[:sass])
+    require_plugins(sass)
 
     begin
-      send("#{params[:syntax]}".to_sym, params[:sass].chomp, {:style => :"#{params[:output]}", :quiet => true})
+      send("#{syntax}".to_sym, sass.chomp, {:style => :"#{output_style}", :quiet => true})
 
     rescue Sass::SyntaxError => e
       status 200
@@ -98,5 +98,30 @@ module SassMeister
     rescue Sass::SyntaxError => e
       sass
     end
+  end
+
+
+  def render_html(html, filter)
+    context = {
+      :gfm => true,
+      :whitelist => HTML::Pipeline::SanitizationFilter::WHITELIST
+    }
+
+    if filter == 'Textile'
+      filter = HTML::Pipeline::TextileFilter
+
+    elsif filter == 'Haml'
+      filter = HTML::Pipeline::HamlFilter
+
+    else
+      filter = HTML::Pipeline::MarkdownFilter
+    end
+
+    pipe = HTML::Pipeline.new [
+      filter
+
+    ], context
+
+    pipe.call(html)[:output]
   end
 end

@@ -1,56 +1,121 @@
-%tooltip {
+$site-header-height: em(60);
+
+%nav-block {
+  display: block;
+  float: left;
+  padding: 0 em(15);
+  height: $site-header-height;
+  line-height: $site-header-height;
+  position: relative;
+  min-width: 3.5em;
+  text-align: center;
+  border-left: 1px solid darken($alpha_color, 5%);
+  box-shadow: inset 1px 0px 0px 0px transparentize(white, 0.8);
+
+  &:last-child {
+    @extend %omega;
+  }
+
+  @media #{$mobile} {
+    padding-right: em(12);
+  }
+}
+
+%sub-menu {
   position: absolute;
   z-index: 9999;
-  top: em(60);
-  right: 0.83333em;
+  top: $site-header-height;
+  right: 0;
   width: em(200);
   padding: 0.5em;
   line-height: 1.5em;
-  content: attr(title);
   font-family: $primary_font_family;
-  font-size: 1em;
   text-shadow: 0 0 0 transparent;
   text-align: center;
   color: $white;
   background: transparentize(scale-color($alpha_color, $lightness: -80%), 0.2);
 
   @each $prefix in $prefix_defaults {
-    #{$prefix}border-bottom-left-radius: em(8);
-    #{$prefix}border-bottom-right-radius: em(8);
+    #{$prefix}border-bottom-left-radius: em(3);
+    #{$prefix}border-bottom-right-radius: em(3);
   }
 }
 
-.site_header {
-  position: relative;
-  height: em(60);
-  margin-bottom: em(20);
-  border-bottom: 1px solid scale-color($alpha_color, $lightness: -50%);
-  background: $alpha_color_charlie;
+%sub-menu-dropdown {
+  ul {
+    @extend %sub-menu;
+
+    display: none;
+  }
+
+  &:hover {
+    ul {
+      display: block;
+    }
+  }
+
+  li {
+    width: 100%;
+    display: block;
+    text-align: left;
+    padding: em(8);
+
+    &:before {
+      font-size: 0.75em;
+      margin-right: 0.5em;
+    }
+  }
 
   a {
-    color: $white;
-    line-height: em(60);
-    text-shadow: 0 0 5px darken($alpha_color, 10%);
+    text-shadow: none;
+    line-height: 1;
 
     &:hover {
-      color: darken($alpha_color, 40%);
-      text-shadow: 0 0 5px $white;
+      color: white;
+      background: transparent;
+      text-shadow: none;
 
       &:after {
-        @extend %tooltip;
-
-        @media #{$mobile} {
-          display: none;
-        }
+        display: none;
       }
+    }
+  }
+}
+
+%tooltip {
+  @extend %sub-menu;
+
+  content: attr(title);
+}
+
+
+.site_header {
+  position: relative;
+  height: $site-header-height;
+  border-bottom: 1px solid darken($alpha_color, 10%);
+  background: $alpha_color_charlie;
+  color: $white;
+  text-shadow: 0 0 0.25em darken($alpha_color, 10%);
+  font-weight: 200;
+
+  a {
+    @extend %header-button;
+
+    &:hover {
+      span {
+        text-decoration: underline;
+      }
+    }
+
+    &.show {
+      background: scale-color($alpha_color, $lightness: 45%, $saturation: -25%);
     }
   }
 
   .logo {
     @extend %icon-font;
 
-    position: relative;
-    left: 15px;
+    margin-left: 1em;
     float: left;
 
     &:before {
@@ -60,119 +125,103 @@
     }
 
     &:hover {
-      &:after {
-        top: em(60);
-        width: em(240);
-        margin-left: em(-10);
-        left: 0;
-      }
-    }
-
-    @media #{$mobile} {
-      left: 5px;
-    }
-  }
-}
-
-.social_links {
-  list-style: none;
-  text-align: right;
-  float: right;
-  position: relative;
-
-  > li {
-    display: block;
-    float:left;
-    padding-right: em(15);
-    line-height: em(1);
-    position: relative;
-
-    &:last-child {
-      @extend %omega;
-    }
-
-    @media #{$mobile} {
-      padding-right: em(8);
-    }
-  }
-
-  img {
-    @include border_radius($border-radius);
-    display: block;
-    margin: em(10) 0;
-  }
-
-  > li:nth-last-child(2) {
-    border-right: 1px solid darken($alpha_color, 5%);
-    box-shadow: inset -1px 0px 0px 0px transparentize(white, 0.8);
-
-    @media #{$mobile} {
-      padding-right: em(12);
-    }
-  }
-  > li:last-child {
-    padding-left: em(16);
-
-    @media #{$mobile} {
-      padding-left: em(8);
-    }
-  }
-
-  @media #{$mobile} {
-    li:nth-child(2) {
-      display:none;
-    }
-  }
-}
-
-.github {
-  ul {
-    display:none;
-  }
-
-  &:hover {
-    background: scale-color($alpha_color, $lightness: -70%);
-
-    ul {
-      display: block;
-    }
-  }
-}
-
-#account_actions {
-  @extend %tooltip;
-
-  right: 0;
-  padding: em(8) em(8);
-  text-align: left;
-  width: auto;
-  min-width: em(220);
-  max-width: em(340);
-  background: transparentize(scale-color($alpha_color, $lightness: -80%), 0.2);
-
-  @each $prefix in $prefix_defaults {
-    #{$prefix}border-top-left-radius: 0;
-    #{$prefix}border-top-right-radius: 0;
-  }
-
-  li {
-    width: 100%;
-    display: block;
-  }
-
-  li:before {
-    font-size: 0.75em;
-    margin-right: 0.5em;
-  }
-
-  a {
-    &:hover {
-      color: white;
-      text-shadow: none;
+      background: transparent;
+      text-shadow: 0 0 0.25em darken($alpha_color, 10%);
 
       &:after {
         display: none;
       }
     }
+
+    @media #{$mobile} {
+      left: 0.33333em;
+    }
+  }
+
+  nav {
+    list-style: none;
+    text-align: right;
+    float: right;
+    position: relative;
+
+    > a {
+      @extend %nav-block;
+    }
+
+    > div {
+      @extend %nav-block;
+      @extend %header-button;
+      @extend %sub-menu-dropdown;
+    }
+
+    .bookmark-icon {
+      @media #{$mobile} {
+        display: none;
+      }
+    }
+
+    img {
+      @include border_radius($border-radius);
+
+      display: block;
+      margin: em(10) 0;
+    }
+
+    #account_actions {
+      width: auto;
+      li {
+        width: auto;
+        min-width: em(220);
+        max-width: em(360);
+      }
+    }
+
+    .about &, .thankyou & {
+      display: none;
+    }
   }
 }
+
+.tagline {
+  display: block;
+  line-height: $site-header-height;
+  float: left;
+  margin-left: 1em;
+
+  @media screen and (max-width: 920px) {
+    display: none;
+  }
+}
+
+.github-login, .bookmark-icon {
+  &:hover {
+    &:after {
+      @extend %tooltip;
+      @media #{$mobile} {
+        display: none;
+      }
+    }
+  }
+}
+
+
+%header-button {
+  color: $white;
+  line-height: em(60);
+  text-shadow: 0 0 0.25em darken($alpha_color, 10%);
+
+  &:hover {
+    background: scale-color($alpha_color, $lightness: -50%);
+    text-shadow: 0 0 0.25em $white;
+  }
+}
+
+
+//#toggle_html {
+//  // @extend %icon-preview-hide;
+//
+//  &.show {
+//    // @extend %icon-preview-show;
+//  }
+//}
+

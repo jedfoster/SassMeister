@@ -1,40 +1,35 @@
-<form action="/compile" method="post" accept-charset="utf-8" class="sass_input" id="sass-form">
-  <div class="controls">
-    <div class="form_control">
-      <label for="syntax">Syntax</label>
-      <select name="syntax" data-original=""  class="fancy_dropdown">
-        <option value="scss">SCSS</option>
-        <option value="sass">Sass</option>
-      </select>      
-    </div>
-
-    <div class="form_control">
-      <label for="output">Extension (inserted at cursor)</label>
-      <select name="plugin" class="fancy_dropdown">
-        <option value="">vanilla Sass&nbsp;&nbsp;(v<%=Gem.loaded_specs["sass"].version%>)</option>
-        <% @plugins.each do |plugin| %>
-          <option value="<%= plugin.last[:import].to_s.gsub(/(\"|\[|\]|\s*)/, '') %>"><%=plugin.first %>&nbsp;&nbsp;(v<%=plugin.last[:version]%>)</option>
-        <% end %>
-      </select>
-    </div>
-
-    <div class="form_control">
-      <label for="output">Output Style</label>
-      <select name="output" class="fancy_dropdown">
-        <option value="expanded" selected>expanded</option>
-        <option value="nested">nested</option>
-        <option value="compact">compact</option>
-        <option value="compressed">compressed</option>
-      </select>
-    </div>
-  </div>
-
+<div class="sass_input" id="sass-form">
   <div class="edit_container">
-    <h2 class="edit-header">Sass</h2>
+    <div class="edit-header">
+
+      <div id="" class="panel-toggle">
+        <span id="syntax" class="selected"></span>
+
+        <ul>
+          <li><span data-toggle-value="SCSS" data-toggle-input="sass">SCSS</span></li>
+          <li><span data-toggle-value="Sass" data-toggle-input="sass">Sass</span></li>
+        </ul>
+      </div>
+
+      <div id="extension_list">
+        <span class="selected">Extensions</span>
+        <ul>
+          <li>
+            <ol>
+              <% @plugins.each do |plugin| %>
+                <li><a data-import="<%= plugin.last[:import].to_s.gsub(/(\"|\[|\]|\s*)/, '') %>" data-version=""><%=plugin.first %></a>&nbsp;&nbsp;(v<%=plugin.last[:version]%>)</li>
+              <% end %>
+            </ol>
+
+            <i>(Will be inserted at cursor)</i>
+          </li>
+        </ul>
+      </div>
+    </div>
 
     <div class="pre_container">
       <pre id="sass"></pre>
     </div>
   </div>
-</form>
+</div>
 

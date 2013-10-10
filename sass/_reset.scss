@@ -104,10 +104,6 @@ pre, code, kbd, samp {
 	font-family: monospace, sans-serif;
 }
 
-.clickable, label {
-	cursor: pointer;
-}
-
 input {
 	&[type=button], &[type=submit] {
 		cursor: pointer;

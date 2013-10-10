@@ -1,26 +1,63 @@
+$site-footer-height: em(32);
+
 .site_footer {
-  width: 100%;
-  float: left;
-  font-size: em(12);
-  text-align: center;
+  @extend %stretch;
 
-  @media #{$mobile} {
-    @include grid(12);
+  position: fixed;
+  top: auto;
+  display: block;
+  height: $site-footer-height;
+  z-index: 3;
+  border-top: 1px solid $golf_gray;
+  background: scale-color($india_gray, $lightness: 50%);
 
-    margin: 0 em(18);
-    text-align: left;
-  }
-}
-
-.footer_container {
-  font-size: em(18, 12);
-  text-align: left;
-
-  @media #{$tablet} {
-    font-size: em(12, 12);
+  @media screen and (max-width: 650px) {
+    height: em(64);
 
     p {
-      line-height: 1.5em;
+      margin-bottom: 0;
     }
+  }
+
+  a {
+    color: $charlie_gray;
+  }
+
+  p {
+    font-size: em(14);
+    font-weight: 300;
+    color: $charlie_gray;
+  }
+
+  .info {
+    @include grid(8);
+
+    text-align: left;
+
+    a {
+      margin-right: 1.5em;
+    }
+
+    @media screen and (max-width: 650px) {
+      @include grid(12);
+
+      text-align: center;
+    }
+  }
+  .copyright {
+    @include grid(4);
+
+    text-align: right;
+
+    @media screen and (max-width: 650px) {
+      @include grid(12);
+
+      text-align: center;
+    }
+  }
+
+  .twitter-icon:before, .paypal-icon:before {
+    font-size: 1em;
+	  margin-right: 0.2em;
   }
 }

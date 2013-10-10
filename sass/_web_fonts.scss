@@ -93,8 +93,6 @@
 
   &:before {
 	  content: '\27';
-	  font-size: 1em;
-	  margin-right: 0.2em;
   }
 }
 
@@ -158,5 +156,74 @@
 
   &:before {
     content: "\30";
+  }
+}
+
+.control-icon {
+  @extend %icon-font;
+  
+  &:before {
+    // content: "\e002";
+
+    content: "\e004";
+	  font-size: 2em;
+    line-height: 0.01;
+  }
+}
+
+.cloud-icon {
+  @extend %icon-font;
+  
+  &:before {
+    content: "\e003";
+  }
+}
+
+// %icon-preview-show {
+//   @extend %icon-font;
+// 
+//   &:before {
+//    content: "\e004";
+//    font-size: 2em;
+//     line-height: 0.01;
+//   }
+// }
+// %icon-preview-hide {
+//   @extend %icon-font;
+// 
+//   &:before {
+//    content: "\e005";
+//    font-size: 2em;
+//     line-height: 0.01;
+//   }
+// }
+%icon-Compass {
+  @extend %icon-font;
+
+	&:before {
+	  content: "\e008";
+	}
+}
+
+%icon-Open {
+ @extend %icon-font;
+
+	&:before {
+    // content: "\e005";
+  	content: "\e009";
+
+    font-size: 0.9em;
+    line-height: 1.4;
+  }
+}
+%icon-Minimize {
+ @extend %icon-font;
+
+	&:before {
+    // content: "\e006";
+  	content: "\e007";
+
+    font-size: 0.9em;
+    line-height: 1.4;
   }
 }

@@ -15,7 +15,8 @@ html {
 
 h1 {
 	// font-size: 2em;  // user agent default
-	// @extend %headings_1;
+  @include heading();
+  font-weight:100;
 }
 
 h2 {

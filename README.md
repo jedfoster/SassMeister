@@ -41,8 +41,21 @@ heroku open
 # Rock and roll, again.
 ```
 
+## Installation, v2.0 ##
 
-## Tests
+Version 2 of SassMeister requires a separate service app that handles HTML rendering. Find it [here](https://github.com/jedfoster/sandbox.SassMeister)
+
+```
+git clone https://github.com/jedfoster/sandbox.SassMeister.git
+cd sandbox.SassMeister
+bundle install
+ln -s path/to/sandbox.sassmeister ~/.pow/sandbox.sassmeister
+```
+
+For (slightly) more detailed info, see the readme in the sandbox project.
+
+
+## Tests ##
 
 Test code for each of the included Sass libraries can be found [here](https://github.com/jedfoster/SassMeister/blob/master/TESTS.md).
 

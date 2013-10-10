@@ -2,7 +2,7 @@
 // -----------------------------------------------------------------------------
 $font_size: 12*1.5;
 
-$heading_1: $font_size * 3;
+$heading_1: $font_size * 2;
 $heading_2: $font_size * 2;
 $heading_3: $font_size * 1.5;
 $heading_4: $font_size * 1;
@@ -37,7 +37,7 @@ $alpha_primary:   #E24A8D;   //EA3F8A E02A79     // red
 // $bravo_primary:   #3e4147;        // green
 // $charlie_primary: #fffedf;        // yellow
 // $delta_primary:   #2a2c31;        // blue
-// $echo_primary:    #dfba69;        // accent
+$echo_primary:    #E7D963; //adjust_hue($alpha_primary, 91);        // accent
 
 // $alpha_gray:      #333;           //black
 
@@ -110,7 +110,7 @@ $selection_color:                      $alpha_color_hotel;
 // $selection_text_color:                 $primary_text;
 
 // default border color
-// $border_color:                         $charlie_gray;
+$border_color:                         $echo_gray;
 
 
 
@@ -153,9 +153,9 @@ $form_field_border:             $charlie_gray;
 // -----------------------------------------------------------------------------
 // $standard_round_corner:                3;                // sets default border radius
 // $standard_corner_width:                1px;              // sets default border width
-// $standard_border_color:                $border_color;    // sets default border color
+$standard_border_color:                $border_color;    // sets default border color
 
-$border-radius: 0.25em;
+$border-radius: 0.15em;
 
 
 // Config defaults for ``standard_block_spacing`` mixin
@@ -209,7 +209,7 @@ $desktop:                   "screen and (max-width: 120em) and (min-width: 50em)
 
 
 
-$minimal_border_radius: 9px !default;
+$minimal_border_radius: 4px !default;
 
 $minimal_background: scale-color($alpha_gray, $lightness: 92%) !default;
 $minimal_border_color: $charlie_gray !default;

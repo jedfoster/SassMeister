@@ -1,18 +1,9 @@
 <footer class="site_footer">
-  <div class="footer_container" id="footer">
-    <p>SassMeister is a playground for <a href="http://sass-lang.com">Sass</a>. Add some Sass and SassMeister will show you the rendered CSS. SassMeister supports both <a href="http://thesassway.com/articles/sass-vs-scss-which-syntax-is-better">Sass and SCSS syntaxes</a>, all <a href="http://sass-lang.com/docs/yardoc/file.SASS_REFERENCE.html#output_style">output styles</a>, and a growing number of <a href="http://compass-style.org/">Compass</a> extensions and Sass libraries. Current extensions are: 
-    <% 
-      links = Array.new()
-      @plugins.each do |plugin, info|
-        links.push("<a href=\"#{info[:url]}\">#{plugin}<a>")
-      end 
-    %><%=links.to_sentence%></p>
-
-    <p>SassMeister is a project of <a href="http://jedfoster.com/">Jed Foster</a> and <a href="http://www.dalesande.com">Dale Sande</a>, who hope that the Sass community will find it useful. A <a href="http://www.meetup.com/SASSlang/">Seattle Sass Meetup</a> presentation by <a href="https://peepcode.com">PeepCode Screencasts</a> inspired the name.</p>
-    <p>If you find SassMeister useful please consider making a small <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ELKSDTCSVYM3Y">monetary show of support</a>.</p>
-    <p>Is there a Compass extension or Sass library you'd like to see included? <a href="https://github.com/jedfoster/SassMeister/issues">Let us know</a>.</p>
-</div>
-
-  <p>SassMeister is &copy; <%=DateTime.now.year%> <a href="http://jedfoster.com/">Jed Foster</a> and <a href="http://www.dalesande.com">Dale Sande</a>. <br />
-    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ELKSDTCSVYM3Y" title="Help keep the lights on." class="paypal-icon"><span class="">Support SassMeister</span></a></p>
+  <p class="info">
+    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ELKSDTCSVYM3Y" title="Help keep the lights on." class="paypal-icon"><span>Support SassMeister</span></a>
+    <a href="https://twitter.com/sassmeisterapp" title="Follow @sassmeisterapp" class="twitter-icon"><span>Follow @sassmeisterapp</span></a>
+    <a href="/about" title="About SassMeister"><span>About</span></a>
+  </p>
+  
+  <p class="copyright">&copy; <%=DateTime.now.year%> <a href="http://jedfoster.com/">Jed Foster</a> &amp; <a href="http://www.dalesande.com">Dale Sande</a></p>
 </footer>

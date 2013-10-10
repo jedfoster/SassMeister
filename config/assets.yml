@@ -7,15 +7,17 @@ javascripts:
     - public/javascripts/vendor/jquery-1.8.2.js
     - public/javascripts/vendor/ACE-noconflict/ace.js
     - public/javascripts/vendor/ACE-noconflict/mode-css.js
+    - public/javascripts/vendor/ACE-noconflict/mode-sass.js
     - public/javascripts/vendor/ACE-noconflict/mode-scss.js
+    - public/javascripts/vendor/ACE-noconflict/mode-html.js
+    - public/javascripts/vendor/ACE-noconflict/mode-haml.js
+    - public/javascripts/vendor/ACE-noconflict/mode-markdown.js
+    - public/javascripts/vendor/ACE-noconflict/mode-textile.js
     - public/javascripts/vendor/ACE-noconflict/theme-tomorrow.js
-    - public/javascripts/vendor/ACE-noconflict/worker-css.js
     - public/javascripts/vendor/jquery.foundation.reveal.js
     - public/javascripts/vendor/bindWithDelay.js
-    - public/javascripts/vendor/fancy_dropdown.js
     - public/javascripts/SassMeister.js
-    # - public/javascripts/vendor/chosen.jquery.js
-    # - public/javascripts/toggle.js
+    - public/javascripts/vendor/casement.js
     - public/javascripts/main.js
 
 # stylesheets:
