@@ -30,7 +30,6 @@ $site-header-height: em(60);
   padding: 0.5em;
   line-height: 1.5em;
   font-family: $primary_font_family;
-  font-weight: 200;
   text-shadow: 0 0 0 transparent;
   text-align: center;
   color: $white;
@@ -96,7 +95,8 @@ $site-header-height: em(60);
   border-bottom: 1px solid darken($alpha_color, 10%);
   background: $alpha_color_charlie;
   color: $white;
-  text-shadow: 0 0 0.33333em darken($alpha_color, 10%);
+  text-shadow: 0 0 0.25em darken($alpha_color, 10%);
+  font-weight: 200;
 
   a {
     @extend %header-button;
@@ -126,7 +126,7 @@ $site-header-height: em(60);
 
     &:hover {
       background: transparent;
-      text-shadow: 0 0 0.33333em darken($alpha_color, 10%);
+      text-shadow: 0 0 0.25em darken($alpha_color, 10%);
 
       &:after {
         display: none;
@@ -175,7 +175,7 @@ $site-header-height: em(60);
         max-width: em(360);
       }
     }
-    
+
     .about &, .thankyou & {
       display: none;
     }
@@ -184,11 +184,9 @@ $site-header-height: em(60);
 
 .tagline {
   display: block;
-  padding-top: 1.33333em;
+  line-height: $site-header-height;
   float: left;
-  font-size: 1em;
   margin-left: 1em;
-  font-weight: 200;
 
   @media screen and (max-width: 920px) {
     display: none;
@@ -210,11 +208,11 @@ $site-header-height: em(60);
 %header-button {
   color: $white;
   line-height: em(60);
-  text-shadow: 0 0 5px darken($alpha_color, 10%);
+  text-shadow: 0 0 0.25em darken($alpha_color, 10%);
 
   &:hover {
-    background: scale-color($alpha_color, $lightness: -70%);
-    text-shadow: 0 0 5px $white;
+    background: scale-color($alpha_color, $lightness: -50%);
+    text-shadow: 0 0 0.25em $white;
   }
 }
 
