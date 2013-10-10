@@ -61,7 +61,12 @@ if($('body.about, body.thankyou').length < 1 ) {
 
 
   $('[data-import]').on('click', function(event) {
-    SassMeister.editors.sass.insert( '@import "' + $(this).data('import') + '"' + ( SassMeister.inputs.sass.syntax == 'SCSS' ? ';' : '' ) + '\n\n');
+    var imports = $(this).data('import').split(','),
+        eol = ( SassMeister.inputs.sass.syntax == 'SCSS' ? ';' : '' ) + '\n\n';
+
+    $(imports).each(function() {      
+      SassMeister.editors.sass.insert( '@import "' + this + '"' + eol);
+    });    
   });
 
 
