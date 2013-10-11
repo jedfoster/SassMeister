@@ -1,0 +1,18 @@
+%visibility-toggle {
+  @extend .panel-toggle;
+  @extend %icon-Minimize;
+
+  float: right;
+  padding: 0 0.416665em;
+
+  .minimized & {
+    @extend %icon-Open;
+
+    float: left;
+    display: block;
+  }
+}
+
+.visibility-toggle {
+  // @extend %visibility-toggle;
+}

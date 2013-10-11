@@ -92,35 +92,21 @@
     right: 0;
     width: auto;
     min-width: em(240);
+    margin: 0;
   }
 
   ol {
     max-height: em(360);
     overflow: scroll;
-    margin-bottom: 0.83333em;
+    margin-top: em(8);
 
     li {
       padding: 0;
+      display: block;
     }
   }
-}
-
-
-%visibility-toggle {
-  @extend .panel-toggle;
-  @extend %icon-Minimize;
-
-  float: right;
-  padding: 0 0.416665em;
-
-  .minimized & {
-    @extend %icon-Open;
-
-    float: left;
-    display: block;
+  
+  i {
+    font-size: em($small_point_size);
   }
-}
-
-.visibility-toggle {
-  // @extend %visibility-toggle;
 }

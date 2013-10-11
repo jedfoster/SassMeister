@@ -1,0 +1,5 @@
+%tooltip {
+  @extend %sub-menu;
+
+  content: attr(title);
+}

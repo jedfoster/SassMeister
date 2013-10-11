@@ -1,0 +1,10 @@
+%header-button {
+  color: $white;
+  line-height: em(60);
+  text-shadow: 0 0 0.25em darken($alpha_color, 10%);
+
+  &:hover {
+    background: scale-color($alpha_color, $lightness: -50%);
+    text-shadow: 0 0 0.25em $white;
+  }
+}

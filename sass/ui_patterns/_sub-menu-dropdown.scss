@@ -1,0 +1,40 @@
+%sub-menu-dropdown {
+  ul {
+    @extend %sub-menu;
+
+    display: none;
+  }
+
+  &:hover {
+    ul {
+      display: block;
+    }
+  }
+
+  li {
+    width: 100%;
+    display: block;
+    text-align: left;
+    padding: em(8);
+
+    &:before {
+      font-size: 0.75em;
+      margin-right: 0.5em;
+    }
+  }
+
+  a {
+    text-shadow: none;
+    line-height: 1;
+
+    &:hover {
+      color: white;
+      background: transparent;
+      text-shadow: none;
+
+      &:after {
+        display: none;
+      }
+    }
+  }
+}
