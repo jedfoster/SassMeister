@@ -330,38 +330,43 @@ var SassMeister;
         this.inputs = $.extend(true, this.inputs, window.gist);
       }
       else {
+        if(window.resetApp) {
+          localStorage.removeItem('inputs');
+          localStorage.removeItem('outputs');
+        }
+        
         this.inputs = $.extend(true, this.inputs, JSON.parse(localStorage.getItem('inputs')) );
         this.outputs = $.extend(true, this.outputs, JSON.parse(localStorage.getItem('outputs')) );
       }
 
       this.layout = $.extend(true, this.layout, JSON.parse(localStorage.getItem('layout')) );
 
-      switch (SassMeister.inputs.sass.syntax.toLowerCase()) {
+      switch (this.inputs.sass.syntax.toLowerCase()) {
         case 'sass':
-          SassMeister.inputs.sass.syntax = 'Sass';
+          this.inputs.sass.syntax = 'Sass';
           break;
         case 'scss':
         default:
-          SassMeister.inputs.sass.syntax = 'SCSS';
+          this.inputs.sass.syntax = 'SCSS';
           break;
       }
 
-      switch (SassMeister.inputs.html.syntax.toLowerCase()) {
+      switch (this.inputs.html.syntax.toLowerCase()) {
         case 'haml':
-          SassMeister.inputs.html.syntax = 'Haml';
+          this.inputs.html.syntax = 'Haml';
           break;
         case 'slim':
-          SassMeister.inputs.html.syntax = 'Slim';
+          this.inputs.html.syntax = 'Slim';
           break;
         case 'markdown':
-          SassMeister.inputs.html.syntax = 'Markdown';
+          this.inputs.html.syntax = 'Markdown';
           break;
         case 'textile':
-          SassMeister.inputs.html.syntax = 'Textile';
+          this.inputs.html.syntax = 'Textile';
           break;
         case 'html':
         default:
-          SassMeister.inputs.html.syntax = 'HTML';
+          this.inputs.html.syntax = 'HTML';
           break;
       }
     },

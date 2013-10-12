@@ -25,6 +25,10 @@ class SassMeisterApp < Sinatra::Base
 
   helpers SassMeister
 
+  configure do
+    APP_VERSION = '2.0.1'
+  end
+
   # implement redirects
   class Chairman::Routes
     configure :production do
@@ -47,6 +51,8 @@ class SassMeisterApp < Sinatra::Base
     end
 
     after '/authorize/return' do
+      session[:version] == SassMeisterApp::APP_VERSION
+      
       redirect to('/')
     end
 
@@ -80,6 +86,15 @@ class SassMeisterApp < Sinatra::Base
 
     params[:syntax].downcase! unless params[:syntax].nil?
     params[:original_syntax].downcase! unless params[:original_syntax].nil?
+  end
+  
+  before /^(?!\/(authorize))/ do
+    if session[:version].nil? || session[:version] != APP_VERSION
+      session[:github_token] = nil
+      session[:github_id] = nil
+      @force_invalidate = true
+      session[:version] = APP_VERSION
+    end
   end
 
   get '/' do
