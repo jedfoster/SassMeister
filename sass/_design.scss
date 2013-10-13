@@ -3,7 +3,7 @@
 
   width: 100%;
   z-index: 2;
-  top: em(60);
+  top: $site-header-height;
   bottom: em(32);
 
   @media screen and (max-width: 650px) {
