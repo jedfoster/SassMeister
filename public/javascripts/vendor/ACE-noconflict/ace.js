@@ -11330,7 +11330,7 @@ exports.commands = [{
     readOnly: true
 }, {
     name: "gotoline",
-    bindKey: bindKey("Ctrl-L", "Command-L"),
+    bindKey: bindKey("Ctrl-L", "Command-Alt-L"), // Chrome uses Cmd-L for Open Location... (focuses on URL bar), don't want to override that.
     exec: function(editor) {
         var line = parseInt(prompt("Enter line number:"), 10);
         if (!isNaN(line)) {
