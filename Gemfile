@@ -12,18 +12,12 @@ gem 'thor'
 gem 'newrelic_rpm'
 
 gem 'chairman'
-
 gem 'sass'
 gem 'compass'
 
-
 # group :development do
-#   gem 'activesupport', '~> 4.0.0'
+  # gem 'pry-remote'
 # end
-# 
-# gem 'html-pipeline', '~> 0.2.1'
-# gem 'haml'
-# gem 'RedCloth'
 
 gem 'bourbon-compass'
 gem 'breakpoint'
@@ -57,7 +51,5 @@ gem 'compass-photoshop-drop-shadow'
 gem 'grid-coordinates'
 gem 'stitch'
 gem 'breakup'
-
 gem 'singularity-golden-grid'
-
 gem 'compass-placeholders'

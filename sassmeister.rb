@@ -18,6 +18,8 @@ require 'yaml'
 require 'sassmeister'
 require 'array'
 
+# require 'pry-remote'
+
 class SassMeisterApp < Sinatra::Base
   register Sinatra::Partial
 
@@ -227,7 +229,7 @@ class SassMeisterApp < Sinatra::Base
 
     html = {}
 
-    if inputs[:html]
+    if inputs[:html] && inputs[:html][:input].chomp != ''
       html_file = "SassMeister-input-HTML.#{inputs[:html][:syntax].downcase}"
       html_input = inputs[:html][:input]
       rendered_file = "SassMeister-rendered.html"
