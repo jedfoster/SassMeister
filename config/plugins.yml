@@ -40,6 +40,13 @@ Compass:
     - compass
   :fingerprint: (compass|compass/*)
   :url: http://compass-style.org
+"Compass Placeholders":
+  :gem: compass-placeholders
+  :import:
+    - compass
+    - compass-placeholders
+  :fingerprint: compass-placeholders
+  :url: https://github.com/hagenburger/compass-placeholders
 "Compass Slideshow":
   :gem: css-slideshow
   :import: 

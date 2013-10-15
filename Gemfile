@@ -59,3 +59,5 @@ gem 'stitch'
 gem 'breakup'
 
 gem 'singularity-golden-grid'
+
+gem 'compass-placeholders'

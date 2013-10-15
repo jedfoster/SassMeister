@@ -131,6 +131,20 @@ Each block of SCSS should return valid CSS with no warnings or errors when teste
     }
 
 
+## Compass Placeholders ##
+
+    @import "compass";
+    @import "compass-placeholders";
+
+    a.first-link {
+      @extend %hover-link;
+    }
+
+    a.second-link {
+      @extend %hover-link;
+    }
+
+
 ## Compass Slideshow ##
 
     @import " css-slideshow";
