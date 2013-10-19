@@ -1,18 +1,18 @@
 input[type=text], input[type=password], input[type="date"], select {
-	@extend %input_fields;
-	height:2.5em;
+ @extend %input_fields;
+ height:2.5em;
   border: 1px solid $golf_gray;
 }
 
 label {
-	display: block;
+ display: block;
   line-height: 1;
-	margin-bottom: 0.5em;
+ margin-bottom: 0.5em;
   color: $white;
 
-	@media #{$mobile} {
-  	display: none;
-	}
+ @media #{$mobile} {
+   display: none;
+ }
 }
 
 input, textarea, button {

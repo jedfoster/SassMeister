@@ -17,7 +17,8 @@
 // This where you start building your own styles. 
 // ------------------------------------------------------------------------------
 @import "typography";
-@import "forms";
+// Since SM 2.0, there really aren't any forms anymore.
+// @import "forms";
 @import "ui_patterns";
 @import "modules";
 @import "design";
