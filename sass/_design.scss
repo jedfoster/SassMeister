@@ -8,6 +8,7 @@
 
   @media screen and (max-width: 650px) {
     bottom: em(64);
+    padding-bottom: em(64);
   }
 }
 
@@ -78,6 +79,10 @@ article {
 
   p {
     font-weight: 200;
+  }
+  
+  @media screen and (max-width: 650px) {
+    padding-bottom: em(64);
   }
 }
 
