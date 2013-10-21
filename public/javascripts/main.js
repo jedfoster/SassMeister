@@ -32,7 +32,7 @@ if($('body.about, body.thankyou').length < 1 ) {
   $('.panel-toggle li span').on('click', function(event) {
     event.preventDefault();
 
-    var selected = $(this).data('toggle-value'),
+    var selected = $(this).text(),
         input = $(this).data('toggle-input');
 
     $(this).parents('.panel-toggle').find('.selected').text(selected);
