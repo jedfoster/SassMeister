@@ -74,10 +74,10 @@ if($('body.about, body.thankyou').length < 1 ) {
     $('#source').casement('destroy');
     $('#casement').casement('destroy');
 
-    $('#css_input')[state]();
+    $('[data-name="css"]')[state]();
 
     $('#rendered')[SassMeister.layout.html]();
-    $('#html_input')[SassMeister.layout.html]();
+    $('[data-name="html"]')[SassMeister.layout.html]();
 
     SassMeister.layout.css = state;
 
@@ -95,9 +95,9 @@ if($('body.about, body.thankyou').length < 1 ) {
     $('#casement').casement('destroy');
 
     $('#rendered')[state]();
-    $('#html_input')[state]();
+    $('[data-name="html"]')[state]();
 
-    $('#css_input')[SassMeister.layout.css]();
+    $('[data-name="css"]')[SassMeister.layout.css]();
 
     SassMeister.layout.html = state;
 

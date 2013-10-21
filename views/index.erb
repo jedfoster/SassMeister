@@ -1,18 +1,18 @@
 <div id="casement">
   <div id="source">
-    <div class="sass panel" data-name="sass">
+    <div class="panel" data-name="sass">
       <%= partial :"shared/_sass_input" %>
     </div>
-    <div class="css panel" data-name="css" id="css_input">
+    <div class="panel" data-name="css">
       <%= partial :"shared/_css_output" %>
     </div>
-    <div class="html panel" data-name="html" id="html_input">
+    <div class="panel" data-name="html">
       <%= partial :"shared/_html_input" %>
     </div>
   </div>
 
-  <div class="rendered" id="rendered" data-name="rendered">
     <iframe class="html_output" id="rendered-html" sandbox="allow-scripts allow-same-origin"></iframe>
+  <div id="rendered" data-name="rendered">
 
     <div id="sash_cover"></div>
   </div>

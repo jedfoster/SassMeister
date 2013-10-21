@@ -133,7 +133,7 @@ var SassMeister;
       }
 
       if (this.layout.css == 'hide') {
-        $('#css_input').hide();
+        $('[data-name="css"]').hide();
         $('#toggle_css').data("state", 'show').toggleClass('show');
       }
     },
