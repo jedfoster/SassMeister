@@ -16,6 +16,7 @@
         <ul>
           <li>
             Sass&nbsp;&nbsp;(v<%= Gem.loaded_specs["sass"].version %>)
+
             <ol>
               <% @plugins.each do |plugin| %>
                 <li><a data-import="<%= plugin.last[:import].to_s.gsub(/(\"|\[|\]|\s*)/, '') %>" data-version=""><%=plugin.first %></a>&nbsp;&nbsp;(v<%=plugin.last[:version]%>)</li>
