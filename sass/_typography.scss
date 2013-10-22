@@ -1,74 +1,62 @@
-// Import of default text bootstrap settings
-// -----------------------------------------------------------------------
-@import "stipe/typography/default"; // Comment out if unwanted
-
-
-
-// Customize the following to fit your specifications
-// Commented out styles represent Toadstool's default bootstrap styles
-// -----------------------------------------------------------------------
 html {
-	// font: em($font_size, 16) $primary_font_family;
-	// line-height: baseline($font_size);
-	// color: $primary_text;
+  font: em($font_size, 16) $primary_font_family;
+  line-height: baseline($font_size);
+  color: $primary_text;
+  @media #{$mobile} {
+    -webkit-text-size-adjust: none; /* Prevent font scaling in landscape */
+  }
 }
 
 h1 {
-	// font-size: 2em;  // user agent default
-  @include heading();
+  //font-size: 2em;  // user agent default
+  @extend %headings_1;
+  
   font-weight:100;
 }
 
 h2 {
-	// font-size: 1.5em;  // user agent default
-	// @extend %headings_2;
+  //font-size: 1.5em;  // user agent default
+  @extend %headings_2;
 }
 
 h3 {
-	// font-size:  1.17em;  // user agent default
-	// @extend %headings_3;
+  //font-size:  1.17em;  // user agent default
+  @extend %headings_3;
 }
 
 h4 {
-	// font-size:  1em;  // user agent default
-	// @extend %headings_4;
+  //font-size:  1em;  // user agent default
+  @extend %headings_4;
 }
 
 h5 {
-	// font-size:  0.83em;  // user agent default
-	// @extend %headings_5;
+  //font-size:  0.83em;  // user agent default
+  @extend %headings_5;
 }
 
 h6 {
-	 // font-size:  0.75em;  // user agent default
-	 // @extend %headings_6;
+   //font-size:  0.75em;  // user agent default
+   @extend %headings_6;
 }
 
 // Standard body text support
 // --------------------------------
 p {
-	// margin-bottom: baseline-margin($font_size);
-	// text-indent: 0;
+  margin-bottom: baseline-margin($font_size);
+  text-indent: 0;
 }
 
 b {
-	// &:after {
-	// 	content: " ";
-	// }
+  &:after {
+    content: " ";
+  }
 }
 
-
-// :link Pseudo-class is totally not necessary as I can tell
-// code here to combat legacy code
 a {
-	// &:link {
-	// 	color: $href_color;
-	// 	text-decoration: none;
-	// }
-	// &:hover, &:active {
-	// 	text-decoration: underline;
-	// }
-	// &:visited {
-	// 	color: $href_color;
-	// }
+  color: $href_color;
+  text-decoration: none;
+
+  &:hover, &:active {
+    text-decoration: underline;
+  }
 }
