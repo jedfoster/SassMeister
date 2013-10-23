@@ -1,0 +1,22 @@
+article {
+  padding: 0 1em;
+  max-width: 42em;
+  margin: 1.5em auto;
+  padding-bottom: 3em;
+
+  @media #{$mobile} {
+    padding-bottom: 4.5em;
+  }
+
+  ol {
+    -webkit-column-count: 3;
+    -moz-column-count: 3;
+    column-count: 3;
+
+    @media #{$mobile} {
+      -webkit-column-count: 2;
+      -moz-column-count: 2;
+      column-count: 2;
+    }
+  }
+}

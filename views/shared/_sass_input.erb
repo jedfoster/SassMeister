@@ -2,12 +2,12 @@
   <div class="edit_container">
     <div class="edit-header">
 
-      <div id="" class="panel-toggle">
+      <div class="panel-toggle">
         <span id="syntax" class="selected"></span>
 
         <ul>
-          <li><span data-toggle-value="SCSS" data-toggle-input="sass">SCSS</span></li>
-          <li><span data-toggle-value="Sass" data-toggle-input="sass">Sass</span></li>
+          <li><span data-toggle-input="sass">SCSS</span></li>
+          <li><span data-toggle-input="sass">Sass</span></li>
         </ul>
       </div>
 
@@ -16,6 +16,7 @@
         <ul>
           <li>
             Sass&nbsp;&nbsp;(v<%= Gem.loaded_specs["sass"].version %>)
+
             <ol>
               <% @plugins.each do |plugin| %>
                 <li><a data-import="<%= plugin.last[:import].to_s.gsub(/(\"|\[|\]|\s*)/, '') %>" data-version=""><%=plugin.first %></a>&nbsp;&nbsp;(v<%=plugin.last[:version]%>)</li>

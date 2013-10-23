@@ -14,10 +14,16 @@
 @import "web_fonts";
 
 
+@import "vendor/reveal_modals";
+@import "vendor/casement";
+
+
 // This where you start building your own styles. 
 // ------------------------------------------------------------------------------
 @import "typography";
-@import "forms";
-@import "ui_patterns";
+// Since SM 2.0, there really aren't any forms anymore.
+// @import "forms";
+@import "patterns";
 @import "modules";
+@import "layouts";
 @import "design";
