@@ -201,6 +201,12 @@ Toolkit:
     - toolkit
   :fingerprint: toolkit
   :url: https://github.com/Team-Sass/toolkit
+"True":
+  :gem: "true"
+  :import:
+    - "true"
+  :fingerprint: "true"
+  :url: https://github.com/ericam/true
 "Zen Grids":
   :gem: zen-grids
   :import: 

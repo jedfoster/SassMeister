@@ -586,6 +586,40 @@ Sassy Math has been removed from SassMeister for technical reasons.
       @include intrinsic-ratio(7/8, 75%, 'iframe', false);
     }
 
+
+## True ##
+
+    @import "true";
+
+    // Column Math Tests
+    // =================
+
+    @include test-module('Column Math') {
+
+    // Is Symmetrical
+    // --------------
+
+    @include test('[function] is-symmetrical()') {
+      $sym: 12;
+      $asym: 1 2 4 1 2 1;
+      $baz: compact(4);
+
+      // 12 is a symmetrical grid.
+      $s: is-symmetrical($sym);
+      @include assert-true($s,
+        'Simple number should be symmetrical grid.');
+
+      // (1 2 4 1 2 1) is not a symmetrical grid.
+      $a: is-symmetrical($asym);
+      @include assert-false($a,
+        'List should be asymmetrical grid.');
+
+      // compact(4) is not a symmetrical grid (because it is a list).
+      $b: is-symmetrical($baz);
+      @include assert-false($b,
+        'Single-item list should be asymmetrical grid.');
+    }
+
 ## Zen Grids ##
 
     @import "zen";
