@@ -150,7 +150,7 @@ class SassMeisterApp < Sinatra::Base
   end
 
 
-  get %r{/gist(?:/[\w]*)*/([\d]+)} do
+  get %r{/gist(?:/[\w]*)*/([\d\w]+)} do
     id = params[:captures].first
 
     begin
@@ -188,7 +188,7 @@ class SassMeisterApp < Sinatra::Base
       status 404
 
       syntax = plugin = ''
-      sass = "// Sorry, that Gist doesn't exist.\n//#{e.to_s.gsub(/(GET|api.|https:\/\/)/, '')}"
+      sass = "// Sorry, that Gist doesn't exist.\n//#{e.to_s.gsub(/(GET|api.|https:\/\/|\?.*$)/, '')}"
     end
 
     @gist = {
