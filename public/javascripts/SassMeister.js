@@ -128,7 +128,7 @@ var SassMeister;
       } 
 
       if (this.layout.html == 'hide') {
-        $('#rendered, #html_input').hide();
+        $('#rendered, [data-name="html"]').hide();
         $('#toggle_html').data("state", 'show').toggleClass('show');
       }
 
