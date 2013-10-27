@@ -232,9 +232,9 @@ var SassMeister;
           modal('<a href="https://gist.github.com/' + data.id + '" target="_blank">Your Gist</a> ' + confirmationText + ', and here\'s the <a href="/gist/' + data.id + '">SassMeister live view.</a> ');
 
           setUrl('/gist/' + data.id);
-          // SassMeister.storedInputs.gist_id = data.id;
-          // SassMeister.storedInputs.sass_filename = data.sass_filename;
-          // SassMeister.storedInputs.html_filename = data.html_filename;
+          SassMeister.inputs.gist_id = data.id;
+          SassMeister.inputs.sass_filename = data.sass_filename;
+          SassMeister.inputs.html_filename = data.html_filename;
 
           $('#save-gist').text('Update Gist').data('action', 'edit');
         });

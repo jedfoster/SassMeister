@@ -17,15 +17,18 @@ if($('body.about, body.thankyou').length < 1 ) {
 
 
   if (gist) {
-    if (gist.can_update_gist) {
+    if (gist.can_update_gist == true) {
       $('#save-gist').data('action', 'edit').attr('class', 'edit-gist').find('span').text('Update Gist');
     }
     else {
       $('#save-gist').data('action', 'fork').attr('class', 'fork-gist').find('span').text('Fork Gist');
     }
   }
-  else {
+  else if (window.github_id != false) {
     $('#save-gist').data('action', 'create').attr('class', 'create-gist').find('span').text('Save Gist');
+  }
+  else {
+    $('#save-gist').attr('href', '/authorize').attr('class', 'github-login').find('span').text('Log in with your GitHub account to save gists');
   }
 
 
