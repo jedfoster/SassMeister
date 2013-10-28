@@ -294,9 +294,12 @@ class SassMeisterApp < Sinatra::Base
       rendered_file = "SassMeister-rendered.html"
       html_output = outputs[:html]
 
-      if inputs[:html_filename].split('.').last == inputs[:html][:syntax].downcase
+      deleted_html = {}
+
+      if inputs[:html_filename] == ''
+        html_file = "SassMeister-input-HTML.#{inputs[:html][:syntax].downcase}"
+      elsif inputs[:html_filename].split('.').last == inputs[:html][:syntax].downcase
         html_file = inputs[:html_filename]
-        deleted_html = {}
       else
         filename = inputs[:html_filename].split('.')
         filename.pop
