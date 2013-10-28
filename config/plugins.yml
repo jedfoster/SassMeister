@@ -156,6 +156,12 @@ Salsa:
     - sassy-text-shadow
   :fingerprint: sassy-text-shadow
   :url: http://sassymothereffingtextshadow.com/
+SassyLists:
+  :gem: SassyLists
+  :import:
+    - SassyLists
+  :fingerprint: SassyLists
+  :url: http://sassylists.com/
 Singularity.gs:
   :gem: singularitygs
   :import: 

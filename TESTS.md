@@ -499,6 +499,15 @@ Sassy Math has been removed from SassMeister for technical reasons.
     }
 
 
+## SassyLists ##
+
+    @import "SassyLists";
+
+    .box {
+      color: chunk(a b c d e, 2);
+    }
+
+
 ## Singularity Golden Grid ##
 
     @import "singularitygs";
