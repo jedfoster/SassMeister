@@ -124,6 +124,9 @@ GEM
       listen (~> 1.1.0)
     sassy-buttons (0.2.6)
       compass (>= 0.12.2)
+    sassy-maps (0.1.1)
+      compass (= 0.13.alpha.10)
+      sass (= 3.3.0.rc.1)
     sassy-math (1.5)
       compass (~> 0.11)
     sassy-strings (1.0.0)
@@ -210,6 +213,7 @@ DEPENDENCIES
   salsa
   sass
   sassy-buttons
+  sassy-maps
   sassy-math
   sassy-text-shadow
   sinatra

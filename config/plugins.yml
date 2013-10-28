@@ -149,6 +149,12 @@ Salsa:
 #   :import: 
 #     - '' # This space intentionally left blank 
 #   :url: https://github.com/Team-Sass/Sassy-math
+"Sassy Maps":
+  :gem: sassy-maps
+  :import: 
+    - sassy-maps
+  :fingerprint: sassy-maps
+  :url: https://github.com/Team-Sass/Sassy-Maps
 "Sassy Text Shadow":
   :gem: sassy-text-shadow
   :import:

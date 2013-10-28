@@ -379,31 +379,20 @@ Each block of SCSS should return valid CSS with no warnings or errors when teste
     .green { @include sassy-button-gradient("glass", #8cbe5f); }
 
 
-## Sassy Math ##
+## Sassy Maps ##
 
-Sassy Math has been removed from SassMeister for technical reasons.
+    @import "sassy-maps";
 
-    $fraction: 2.5;
+    $map: (400: "value", "key2": "value2");
 
-    $fraction-2: to-fraction(2.5);
+    .box {
+        debug: map-get($map, 400);
+    }
 
-    #tester {
-      numerator: numerator($fraction);
-      denominator: denominator($fraction);
-      to-fraction: to-fraction($fraction);
-      to-decimal: to-decimal(3/2);
-      exponent: exponent(8, 2, 3);
-      power: power(20, pi());
-      sqrt: sqrt(16129);
-      nth-root: nth-root(27, 3);
-      factorial: factorial(9);
-      pi: pi();
-      e: e();
-      ln: ln(e());
-      log10: log10(10);
-      golden: golden-ratio();
-      is-int: is-int(4);
-      is-float: is-float(2);
+    $map: map-set($map, 'key2', 'value3');
+
+    .box {
+        debug: map-get($map, 'key2');
     }
 
 
@@ -430,6 +419,16 @@ Sassy Math has been removed from SassMeister for technical reasons.
       @include text-shadow(long-shadow(30, #BADA55, 25, 0));
       line-height: 8em;
     }
+
+
+## SassyLists ##
+
+    @import "SassyLists";
+
+    .box {
+      color: chunk(a b c d e, 2);
+    }
+
 
 ## Singularity.gs ##
 
@@ -496,15 +495,6 @@ Sassy Math has been removed from SassMeister for technical reasons.
           }
         }
       }
-    }
-
-
-## SassyLists ##
-
-    @import "SassyLists";
-
-    .box {
-      color: chunk(a b c d e, 2);
     }
 
 
