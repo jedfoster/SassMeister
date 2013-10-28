@@ -42,7 +42,7 @@
     var sandbox = 'http://<%= SANDBOX_DOMAIN %>';
     var gist = <%= @gist || 'false' %>;
     var resetApp = <%= @force_invalidate || 'false' %>;
-    var github_id = <%= session[:github_id] || 'false' %>;
+    var github_id = <%= "'#{session[:github_id]}'" || 'false' %>;
   </script>
 
   <% if settings.environment == :production %>
