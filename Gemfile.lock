@@ -1,7 +1,7 @@
 GEM
   remote: http://rubygems.org/
   specs:
-    SassyLists (0.2.2)
+    SassyLists (0.2.3)
       compass (>= 0.12.1)
       sass (>= 3.2.0)
     addressable (2.3.5)
@@ -48,7 +48,7 @@ GEM
       compass (>= 0.11)
     faraday (0.8.8)
       multipart-post (~> 1.2.0)
-    ffi (1.9.0)
+    ffi (1.9.2)
     fittext (0.0.5)
       compass (>= 0.10.0.rc3)
     github_api (0.10.2)
