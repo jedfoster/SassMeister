@@ -276,9 +276,10 @@ class SassMeisterApp < Sinatra::Base
 
     css = outputs[:css]
 
+    deleted_files = {}
+
     if inputs[:sass_filename].slice(-4, 4) == inputs[:sass][:syntax].downcase
-      sass_file = inputs[:sass_filename]
-      deleted_files = {}
+      sass_file = inputs[:sass_filename]      
     else
       sass_file = "#{inputs[:sass_filename].slice(0..-5)}#{inputs[:sass][:syntax].downcase}"
       deleted_files = {inputs[:sass_filename] => {content: nil}}
