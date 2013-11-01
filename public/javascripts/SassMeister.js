@@ -150,6 +150,7 @@ var SassMeister;
       return input;
     },
 
+
     updateRender: function(new_content) {
       return updateRender(new_content);
     },
@@ -198,6 +199,7 @@ var SassMeister;
         SassMeister.setStorage();
       }
     },
+
 
     convert: {
       sass: function() {
@@ -274,6 +276,7 @@ var SassMeister;
         });
       },
     },
+
 
     arrangePanels: function(orientation) {
       // #source has to be done FIRST, since it is nested inside #casement. TODO: Fix this.
@@ -371,6 +374,7 @@ var SassMeister;
       }
     },
 
+
     setStorage: function() {
       if(! window.gist) {
         localStorage.setItem('inputs', JSON.stringify( this.inputs ));
@@ -398,8 +402,7 @@ var SassMeister;
       $('body').append('<div class="reveal-modal large" id="modal"><a class="close-icon"><span class="alt">&#215;</span></a><span class="content">' + content + '</span></div>');
     }
     else {
-      $('#modal .content').empty();
-      $('#modal .content').append(content);
+      $('#modal .content').empty().append(content);
     }
 
     $('#modal').reveal({
