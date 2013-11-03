@@ -6,17 +6,16 @@ gem 'sinatra-partial'
 gem 'unicorn'
 gem 'jammit'
 gem 'closure-compiler'
-gem 'github_api'
 gem 'tilt', '1.3.4' # Remove this when 1.3.5+ is good on Heroku.
 gem 'thor'
 gem 'newrelic_rpm'
 
-gem 'chairman'
+gem 'chairman', :path => '../chairman'
 gem 'sass'
 gem 'compass'
 
 # group :development do
-  # gem 'pry-remote'
+#   gem 'pry-remote'
 # end
 
 gem 'bourbon-compass'

@@ -7,7 +7,7 @@ require 'bundler/setup'
 
 require 'sinatra/base'
 require 'sinatra/partial'
-require 'github_api'
+
 require 'chairman'
 require 'json'
 
