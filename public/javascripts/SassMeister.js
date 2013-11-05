@@ -266,7 +266,7 @@ var SassMeister;
         var confirmationText = 'has been forked';
 
         ///* Send the data using post and put the results in a div */
-        $.post('/gist/' + SassMeister.storedInputs.gist_id + '/fork', function( data ) {
+        $.post('/gist/' + SassMeister.inputs.gist_id + '/fork', function( data ) {
           modal('<a href="https://gist.github.com/' + data.id + '" target="_blank">This Gist</a> ' + confirmationText + ', and here\'s the <a href="/gist/' + data.id + '">SassMeister live view.</a> ');
 
           setUrl('/gist/' + data.id);
