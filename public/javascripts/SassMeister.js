@@ -144,6 +144,9 @@ var SassMeister;
 
       input.setTheme('ace/theme/tomorrow');
       input.getSession().setMode('ace/mode/' + syntax.toLowerCase());
+      
+      input.getSession().setTabSize(2);
+      input.getSession().setUseSoftTabs(true);
 
       input.setValue(value);
       input.clearSelection();
