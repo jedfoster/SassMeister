@@ -20,13 +20,13 @@ gem 'compass'
   # gem 'pry-remote'
 # end
 
-gem 'bourbon-compass'
+gem 'bourbon-compass', "~> 3.2.0.beta.1.a"
 gem 'breakpoint'
 gem 'sassy-buttons'
 gem 'singularitygs'
 gem 'stipe'
 gem 'susy', "~> 1.0.9"
-gem 'neat-compass'
+gem 'neat-compass', "~> 1.5.0.pre"
 gem 'harsh'
 gem 'toolkit'
 gem 'color-schemer'
@@ -54,7 +54,7 @@ gem 'stitch'
 gem 'breakup'
 gem 'singularity-golden-grid'
 gem 'compass-placeholders'
-gem 'true'
+gem 'true', "~> 0.2.0.rc.3"
 gem 'SassyLists'
 gem 'sassy-maps'
 gem 'bitters-compass'
