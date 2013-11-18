@@ -1,3 +1,11 @@
+Bitters:
+  :gem: bitters-compass
+  :import:
+    - bourbon/bourbon
+    - neat/neat
+    - bitters/bitters
+  :fingerprint: (bitters|bitters/*)
+  :url: http://bitters.bourbon.io
 "Blend Modes":
   :gem: blend-mode
   :import: 

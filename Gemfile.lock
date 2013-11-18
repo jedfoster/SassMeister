@@ -8,10 +8,15 @@ GIT
 GEM
   remote: http://rubygems.org/
   specs:
-    SassyLists (0.3.2)
+    SassyLists (0.4.3)
       compass (>= 0.12.1)
       sass (>= 3.2.0)
     addressable (2.3.5)
+    bitters-compass (0.9.1)
+      bourbon-compass (>= 3.1.3)
+      compass (>= 0.11)
+      neat-compass (>= 1.4.0)
+      sass (>= 3.2)
     blend-mode (0.0.1)
       compass (~> 0.12)
     bourbon-compass (3.1.8)
@@ -98,7 +103,7 @@ GEM
       bourbon-compass (>= 3.1.3)
       compass (>= 0.11)
       sass (>= 3.2)
-    newrelic_rpm (3.6.8.168)
+    newrelic_rpm (3.6.9.171)
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
     normalize-scss (2.1.3)
@@ -190,6 +195,7 @@ PLATFORMS
 
 DEPENDENCIES
   SassyLists
+  bitters-compass
   blend-mode
   bourbon-compass
   breakpoint
