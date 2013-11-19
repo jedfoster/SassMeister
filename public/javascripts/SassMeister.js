@@ -160,7 +160,7 @@ var SassMeister;
 
     compile: {
       sass: function() {
-        // _gaq.push(['_trackEvent', 'Form', 'Submit']);
+        _gaq.push(['_trackEvent', 'Form', 'Submit']);
 
         /* Post the form and handle the returned data */
         $.post('/compile', SassMeister.inputs.sass, function( data ) {
@@ -176,7 +176,7 @@ var SassMeister;
       },
 
       html: function() {
-        // _gaq.push(['_trackEvent', 'Form', 'Submit']);
+        _gaq.push(['_trackEvent', 'Form', 'Submit']);
 
         if(SassMeister.inputs.html.syntax == 'HTML') {
           updateRender({
@@ -223,7 +223,7 @@ var SassMeister;
 
     gist: {
       create: function() {
-        // _gaq.push(['_trackEvent', 'Gist']);
+        _gaq.push(['_trackEvent', 'Gist', 'Create']);
 
         var confirmationText = 'is ready';
 
@@ -246,7 +246,7 @@ var SassMeister;
       },
 
       edit: function() {
-        // _gaq.push(['_trackEvent', 'Gist']);
+        _gaq.push(['_trackEvent', 'Gist', 'Edit']);
 
         var postData = {
           inputs: SassMeister.inputs,
@@ -264,7 +264,7 @@ var SassMeister;
       },
 
       fork: function() {
-        _gaq.push(['_trackEvent', 'Gist']);
+        _gaq.push(['_trackEvent', 'Gist', 'Fork']);
 
         var confirmationText = 'has been forked';
 
