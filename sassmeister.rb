@@ -247,7 +247,7 @@ class SassMeisterApp < Sinatra::Base
       }
     end
 
-    data = @github.gists.create(description: description, public: true, files: {
+    data = @github.create_gist(description: description, public: true, files: {
       css_file => {
         content: "#{css}"
       },
