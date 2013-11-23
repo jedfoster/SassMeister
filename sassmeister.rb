@@ -26,8 +26,8 @@ class SassMeisterApp < Sinatra::Base
   use Chairman::Routes
 
   helpers SassMeister
-  
-  
+
+
 
   configure do
     APP_VERSION = '2.0.1'
@@ -168,7 +168,7 @@ class SassMeisterApp < Sinatra::Base
       else
         sass = file.content
         filename = file.filename
-        owner = (response.respond_to?(:owner) ? response.owner.login : '')
+        owner = (response.respond_to?(:user) ? response.user.login : nil)
 
         syntax = file.filename.slice(-4, 4)
       end
@@ -322,7 +322,7 @@ class SassMeisterApp < Sinatra::Base
       }.merge(deleted_html)
     end
 
-    data = @github.gists.edit(id, files: {
+    data = @github.edit_gist(id, files: {
       css_file => {
         content: "#{css}"
       },
