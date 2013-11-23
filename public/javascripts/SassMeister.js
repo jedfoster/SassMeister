@@ -144,6 +144,9 @@ var SassMeister;
 
       input.setTheme('ace/theme/tomorrow');
       input.getSession().setMode('ace/mode/' + syntax.toLowerCase());
+      
+      input.getSession().setTabSize(2);
+      input.getSession().setUseSoftTabs(true);
 
       input.setValue(value);
       input.clearSelection();
@@ -157,7 +160,7 @@ var SassMeister;
 
     compile: {
       sass: function() {
-        // _gaq.push(['_trackEvent', 'Form', 'Submit']);
+        _gaq.push(['_trackEvent', 'Form', 'Submit']);
 
         /* Post the form and handle the returned data */
         $.post('/compile', SassMeister.inputs.sass, function( data ) {
@@ -173,7 +176,7 @@ var SassMeister;
       },
 
       html: function() {
-        // _gaq.push(['_trackEvent', 'Form', 'Submit']);
+        _gaq.push(['_trackEvent', 'Form', 'Submit']);
 
         if(SassMeister.inputs.html.syntax == 'HTML') {
           updateRender({
@@ -220,7 +223,7 @@ var SassMeister;
 
     gist: {
       create: function() {
-        // _gaq.push(['_trackEvent', 'Gist']);
+        _gaq.push(['_trackEvent', 'Gist', 'Create']);
 
         var confirmationText = 'is ready';
 
@@ -243,7 +246,7 @@ var SassMeister;
       },
 
       edit: function() {
-        // _gaq.push(['_trackEvent', 'Gist']);
+        _gaq.push(['_trackEvent', 'Gist', 'Edit']);
 
         var postData = {
           inputs: SassMeister.inputs,
@@ -261,12 +264,12 @@ var SassMeister;
       },
 
       fork: function() {
-        _gaq.push(['_trackEvent', 'Gist']);
+        _gaq.push(['_trackEvent', 'Gist', 'Fork']);
 
         var confirmationText = 'has been forked';
 
         ///* Send the data using post and put the results in a div */
-        $.post('/gist/' + SassMeister.storedInputs.gist_id + '/fork', function( data ) {
+        $.post('/gist/' + SassMeister.inputs.gist_id + '/fork', function( data ) {
           modal('<a href="https://gist.github.com/' + data.id + '" target="_blank">This Gist</a> ' + confirmationText + ', and here\'s the <a href="/gist/' + data.id + '">SassMeister live view.</a> ');
 
           setUrl('/gist/' + data.id);

@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/rack/rack-contrib.git
+  revision: 951760b1710634623ebbccef8d65df9139bb41c2
+  specs:
+    rack-contrib (1.2.0)
+      rack (>= 0.9.1)
+      sinatra (~> 1.4.3)
+
 PATH
   remote: ../chairman
   specs:
@@ -8,15 +16,20 @@ PATH
 GEM
   remote: http://rubygems.org/
   specs:
-    SassyLists (0.2.3)
+    SassyLists (0.4.3)
       compass (>= 0.12.1)
       sass (>= 3.2.0)
     addressable (2.3.5)
+    bitters-compass (0.9.1)
+      bourbon-compass (>= 3.1.3)
+      compass (>= 0.11)
+      neat-compass (>= 1.4.0)
+      sass (>= 3.2)
     blend-mode (0.0.1)
       compass (~> 0.12)
-    bourbon-compass (3.1.8)
-      compass (>= 0.11)
-      sass (>= 3.2.0)
+    bourbon-compass (3.2.0.beta.1.a)
+      compass (>= 0.13.alpha.10)
+      sass (>= 3.3.0.rc.1)
     breakpoint (2.0.7)
       compass (>= 0.12.1)
       sass (>= 3.2.0)
@@ -52,7 +65,7 @@ GEM
       compass (>= 0.11)
     faraday (0.8.8)
       multipart-post (~> 1.2.0)
-    ffi (1.9.2)
+    ffi (1.9.3)
     fittext (0.0.5)
       compass (>= 0.10.0.rc3)
     grid-coordinates (1.2.0)
@@ -77,12 +90,12 @@ GEM
       sass (>= 3.2.0)
       sassy-math (>= 1.5)
     multipart-post (1.2.0)
-    neat-compass (1.4.0)
+    neat-compass (1.5.0.pre)
       bourbon-compass (>= 3.1.3)
       compass (>= 0.11)
       sass (>= 3.2)
-    newrelic_rpm (3.6.8.168)
-    normalize-scss (2.1.2)
+    newrelic_rpm (3.6.9.171)
+    normalize-scss (2.1.3)
       sass (>= 3.2)
     octokit (2.5.1)
       sawyer (~> 0.5.1)
@@ -152,10 +165,9 @@ GEM
       compass (>= 0.12.2)
       sassy-strings (>= 1.0.0)
       singularitygs (>= 1.1.2)
-    true (0.1.5)
-      compass (>= 0.12.2)
-      sass (>= 3.2.0)
-    unicorn (4.6.3)
+    true (0.2.0.rc.3)
+      sass (~> 3.3.0.rc.1)
+    unicorn (4.7.0)
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
@@ -169,8 +181,9 @@ PLATFORMS
 
 DEPENDENCIES
   SassyLists
+  bitters-compass
   blend-mode
-  bourbon-compass
+  bourbon-compass (~> 3.2.0.beta.1.a)
   breakpoint
   breakpoint-slicer
   breakup
@@ -190,9 +203,10 @@ DEPENDENCIES
   jacket
   jammit
   modular-scale
-  neat-compass
+  neat-compass (~> 1.5.0.pre)
   newrelic_rpm
   normalize-scss
+  rack-contrib!
   responsive-sass
   rwdcalc
   salsa
@@ -212,7 +226,7 @@ DEPENDENCIES
   thor
   tilt (= 1.3.4)
   toolkit
-  true
+  true (~> 0.2.0.rc.3)
   unicorn
   zen-grids
   zurb-foundation

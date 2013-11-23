@@ -26,6 +26,8 @@ class SassMeisterApp < Sinatra::Base
   use Chairman::Routes
 
   helpers SassMeister
+  
+  
 
   configure do
     APP_VERSION = '2.0.1'

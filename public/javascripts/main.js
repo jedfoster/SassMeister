@@ -9,6 +9,8 @@ if($('body.about, body.thankyou').length < 1 ) {
 
 
   $('.orientation').on('click', function(event) {
+    _gaq.push(['_trackEvent', 'UI', 'Orientation']);
+
     $('#source').casement('destroy');
     $('#casement').casement('destroy');
 
@@ -33,6 +35,7 @@ if($('body.about, body.thankyou').length < 1 ) {
 
 
   $('.panel-toggle li span').on('click', function(event) {
+
     event.preventDefault();
 
     var selected = $(this).text(),
@@ -41,17 +44,23 @@ if($('body.about, body.thankyou').length < 1 ) {
     $(this).parents('.panel-toggle').find('.selected').text(selected);
 
     if (input == 'sass') {
+      _gaq.push(['_trackEvent', 'UI', 'SassSyntax']);
+
       SassMeister.inputs.sass.syntax = selected;
 
       SassMeister.convert.sass();
       SassMeister.editors.sass.getSession().setMode('ace/mode/' + selected.toLowerCase());
     }
     if (input == 'css') {
+      _gaq.push(['_trackEvent', 'UI', 'CSSOutput']);
+
       SassMeister.inputs.sass.output_style = selected;
 
       SassMeister.compile.sass();
     }
     if (input == 'html') {
+      _gaq.push(['_trackEvent', 'UI', 'HTMLSyntax']);
+
       SassMeister.inputs.html.syntax = selected;
 
       SassMeister.compile.html();
@@ -64,16 +73,20 @@ if($('body.about, body.thankyou').length < 1 ) {
 
 
   $('[data-import]').on('click', function(event) {
+    _gaq.push(['_trackEvent', 'UI', 'SassExtensions']);
+
     var imports = $(this).data('import').split(','),
         eol = ( SassMeister.inputs.sass.syntax == 'SCSS' ? ';' : '' ) + '\n';
 
-    $(imports).each(function() {      
+    $(imports).each(function() {
       SassMeister.editors.sass.insert( '@import "' + this + '"' + eol);
-    });    
+    });
   });
 
 
   var toggleCSSPanel = function(state) {
+    _gaq.push(['_trackEvent', 'UI', 'ToggleCSS']);
+
     $('#source').casement('destroy');
     $('#casement').casement('destroy');
 
@@ -94,6 +107,8 @@ if($('body.about, body.thankyou').length < 1 ) {
 
 
   var toggleHTMLPanels = function(state) {
+    _gaq.push(['_trackEvent', 'UI', 'ToggleHTML']);
+
     $('#source').casement('destroy');
     $('#casement').casement('destroy');
 
@@ -183,7 +198,7 @@ if($('body.about, body.thankyou').length < 1 ) {
       }
     }
   };
-  
+
 }
 
 })(jQuery);

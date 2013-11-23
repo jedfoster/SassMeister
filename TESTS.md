@@ -2,6 +2,24 @@
 
 Each block of SCSS should return valid CSS with no warnings or errors when tested against it's respective extension.
 
+## Bitters ##
+    
+    @import "bourbon/bourbon";
+    @import "neat/neat";
+    @import "bitters/bitters";
+
+    h1[id] {
+      margin-bottom: .5em;
+    }
+
+    ul.default {
+      @extend %default-ul;
+    }
+
+    ol.default {
+      @extend %default-ol;
+    }
+
 
 ## Blend Modes ##
 
