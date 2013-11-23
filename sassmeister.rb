@@ -27,8 +27,6 @@ class SassMeisterApp < Sinatra::Base
 
   helpers SassMeister
 
-
-
   configure do
     APP_VERSION = '2.0.1'
   end
@@ -343,7 +341,7 @@ class SassMeisterApp < Sinatra::Base
   post %r{/gist(?:/[\w]*)*/([\d]+)/fork} do
     id = params[:captures].shift
 
-    data = @github.gists.fork(id)
+    data = @github.fork_gist(id)
 
     content_type 'application/json'
 
