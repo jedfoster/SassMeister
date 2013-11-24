@@ -273,7 +273,7 @@ var SassMeister;
           modal('<a href="https://gist.github.com/' + data.id + '" target="_blank">This Gist</a> ' + confirmationText + ', and here\'s the <a href="/gist/' + data.id + '">SassMeister live view.</a> ');
 
           setUrl('/gist/' + data.id);
-          // SassMeister.storedInputs.gist_id = data.id;
+          SassMeister.inputs.gist_id = data.id;
 
           $('#save-gist').text('Update Gist').data('action', 'edit').attr('class', 'edit-gist');
         });

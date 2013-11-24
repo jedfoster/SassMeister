@@ -7,7 +7,7 @@ require 'bundler/setup'
 
 require 'sinatra/base'
 require 'sinatra/partial'
-require 'github_api'
+
 require 'chairman'
 require 'json'
 
@@ -26,8 +26,6 @@ class SassMeisterApp < Sinatra::Base
   use Chairman::Routes
 
   helpers SassMeister
-  
-  
 
   configure do
     APP_VERSION = '2.0.1'
@@ -56,7 +54,7 @@ class SassMeisterApp < Sinatra::Base
 
     after '/authorize/return' do
       session[:version] == SassMeisterApp::APP_VERSION
-      
+
       redirect to('/')
     end
 
@@ -91,7 +89,7 @@ class SassMeisterApp < Sinatra::Base
     params[:syntax].downcase! unless params[:syntax].nil?
     params[:original_syntax].downcase! unless params[:original_syntax].nil?
   end
-  
+
   before /^(?!\/(authorize))/ do
     if session[:version].nil? || session[:version] != APP_VERSION
       session[:github_token] = nil
@@ -107,20 +105,20 @@ class SassMeisterApp < Sinatra::Base
     #   syntax = (params[:syntax].downcase rescue 'scss')
     #   output = (params[:output].downcase rescue 'expanded')
     #   sass = ''
-    # 
+    #
     #   plugins.each do |key, plugin|
     #     if ! extension.grep(/#{plugin[:fingerprint].gsub(/\*/, '.*?')}/i).empty?
     #       require plugin[:gem]
-    # 
+    #
     #       imports = []
     #       plugin[:import].each do |import|
     #         imports << "@import \"#{import}\""
     #       end
-    # 
+    #
     #       sass += imports.join("#{syntax == 'scss' ? ';' : ''}\n") + "#{syntax == 'scss' ? ';' : ''}\n" unless imports.nil?
     #     end
     #   end
-    # 
+    #
     #   @gist = {
     #     :sass => sass,
     #     :syntax => syntax,
@@ -156,10 +154,10 @@ class SassMeisterApp < Sinatra::Base
     id = params[:captures].first
 
     begin
-      response = Github::Gists.new.get(id, client_id: Chairman.client_id, client_secret: Chairman.client_secret)
+      response = @github.gist(id)
 
       # For now, we only return the first .sass or .scss file we find.
-      file = response.files["#{response.files.keys.grep(/.+\.(scss|sass)/i)[0]}"]
+      file = response.files["#{response.files._fields.grep(/.+\.(scss|sass)/i)[0]}"]
 
       if( ! file)
         syntax = filename = owner = ''
@@ -168,13 +166,13 @@ class SassMeisterApp < Sinatra::Base
       else
         sass = file.content
         filename = file.filename
-        owner = (response.respond_to?(:owner) ? response.owner.login : '')
+        owner = (response.respond_to?(:user) ? response.user.login : nil)
 
         syntax = file.filename.slice(-4, 4)
       end
 
 
-      html_file = response.files["#{response.files.keys.grep(/.+\.(haml|textile|markdown|md|html)/)[0]}"]
+      html_file = response.files["#{response.files._fields.grep(/.+\.(haml|textile|markdown|md|html)/)[0]}"]
 
       if(html_file)
         html = html_file.content
@@ -186,7 +184,7 @@ class SassMeisterApp < Sinatra::Base
         html_syntax.capitalize!
       end
 
-    rescue Github::Error::NotFound => e
+    rescue Octokit::NotFound => e
       status 404
 
       syntax = plugin = ''
@@ -247,7 +245,7 @@ class SassMeisterApp < Sinatra::Base
       }
     end
 
-    data = @github.gists.create(description: description, public: true, files: {
+    data = @github.create_gist(description: description, public: true, files: {
       css_file => {
         content: "#{css}"
       },
@@ -281,7 +279,7 @@ class SassMeisterApp < Sinatra::Base
     deleted_files = {}
 
     if inputs[:sass_filename].slice(-4, 4) == inputs[:sass][:syntax].downcase
-      sass_file = inputs[:sass_filename]      
+      sass_file = inputs[:sass_filename]
     else
       sass_file = "#{inputs[:sass_filename].slice(0..-5)}#{inputs[:sass][:syntax].downcase}"
       deleted_files = {inputs[:sass_filename] => {content: nil}}
@@ -322,7 +320,7 @@ class SassMeisterApp < Sinatra::Base
       }.merge(deleted_html)
     end
 
-    data = @github.gists.edit(id, files: {
+    data = @github.edit_gist(id, files: {
       css_file => {
         content: "#{css}"
       },
@@ -343,7 +341,7 @@ class SassMeisterApp < Sinatra::Base
   post %r{/gist(?:/[\w]*)*/([\d]+)/fork} do
     id = params[:captures].shift
 
-    data = @github.gists.fork(id)
+    data = @github.fork_gist(id)
 
     content_type 'application/json'
 
