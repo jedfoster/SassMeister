@@ -1,5 +1,5 @@
 source 'http://rubygems.org'
-ruby '1.9.3'
+ruby '2.0.0'
 
 gem 'rack-contrib', :git => 'git://github.com/rack/rack-contrib.git'
 gem 'sinatra'
@@ -11,13 +11,13 @@ gem 'tilt', '1.3.4' # Remove this when 1.3.5+ is good on Heroku.
 gem 'thor'
 gem 'newrelic_rpm'
 
-gem 'chairman', "~> 0.1.0"
+gem 'chairman', '= 0.1.1.alpha'
 gem 'sass'
 gem 'compass'
 
-# group :development do
-#   gem 'pry-remote'
-# end
+group :development do
+  gem 'pry-remote'
+end
 
 gem 'bourbon-compass', "~> 3.2.0.beta.1.a"
 gem 'breakpoint'
