@@ -48,7 +48,6 @@ GEM
       sinatra (~> 1.4.3)
     chunky_png (1.2.9)
     closure-compiler (1.1.10)
-    coderay (1.1.0)
     color-schemer (0.2.7)
       compass (~> 0.12)
       compass-blend-modes (~> 0.0.2)
@@ -99,7 +98,6 @@ GEM
       rb-inotify (>= 0.9)
       rb-kqueue (>= 0.2)
     memcachier (0.0.2)
-    method_source (0.8.2)
     minitest (4.7.5)
     modular-scale (1.0.6)
       compass (>= 0.12.1)
@@ -117,13 +115,6 @@ GEM
     octokit (2.6.3)
       sawyer (~> 0.5.1)
     oj (2.4.0)
-    pry (0.9.12.4)
-      coderay (~> 1.0)
-      method_source (~> 0.8)
-      slop (~> 3.4)
-    pry-remote (0.1.7)
-      pry (~> 0.9)
-      slop (~> 3.0)
     rack (1.5.2)
     rack-protection (1.5.1)
       rack
@@ -174,7 +165,6 @@ GEM
       breakpoint (>= 2.0.1)
       compass (>= 0.12.2)
       sass (>= 3.2.1)
-    slop (3.4.7)
     stipe (0.0.6.4)
       compass (>= 0.11)
       sass (>= 3.2.1)
@@ -235,7 +225,6 @@ DEPENDENCIES
   neat-compass (~> 1.5.0.pre)
   newrelic_rpm
   normalize-scss
-  pry-remote
   rack-contrib!
   responsive-sass
   rwdcalc

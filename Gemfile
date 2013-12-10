@@ -15,9 +15,9 @@ gem 'chairman', '= 0.1.1.alpha'
 gem 'sass'
 gem 'compass'
 
-group :development do
-  gem 'pry-remote'
-end
+# group :development do
+#   gem 'pry-remote'
+# end
 
 gem 'bourbon-compass', "~> 3.2.0.beta.1.a"
 gem 'breakpoint'
