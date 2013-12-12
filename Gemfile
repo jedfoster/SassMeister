@@ -1,17 +1,22 @@
 source 'http://rubygems.org'
-ruby '1.9.3'
+ruby '2.0.0'
 
 gem 'rack-contrib', :git => 'git://github.com/rack/rack-contrib.git'
 gem 'sinatra'
 gem 'sinatra-partial'
 gem 'unicorn'
-gem 'jammit'
-gem 'closure-compiler'
-gem 'tilt', '1.3.4' # Remove this when 1.3.5+ is good on Heroku.
-gem 'thor'
+gem 'tilt'
+
 gem 'newrelic_rpm'
 
-gem 'chairman', "~> 0.1.0"
+group :assets do
+  gem 'rake'
+  gem 'thor'
+  gem 'jammit'
+  gem 'closure-compiler'
+end
+
+gem 'chairman', '= 0.1.1.alpha'
 gem 'sass'
 gem 'compass'
 
