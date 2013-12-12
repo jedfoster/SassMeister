@@ -16,7 +16,7 @@ group :assets do
   gem 'closure-compiler'
 end
 
-gem 'chairman', '= 0.1.1.alpha'
+gem 'chairman'
 gem 'sass'
 gem 'compass'
 
