@@ -5,9 +5,9 @@ gem 'rack-contrib', :git => 'git://github.com/rack/rack-contrib.git'
 gem 'sinatra'
 gem 'sinatra-partial'
 gem 'unicorn'
-gem 'tilt'
-
-gem 'newrelic_rpm'
+gem 'chairman'
+gem 'sass'
+gem 'compass'
 
 group :assets do
   gem 'rake'
@@ -16,13 +16,13 @@ group :assets do
   gem 'closure-compiler'
 end
 
-gem 'chairman'
-gem 'sass'
-gem 'compass'
-
 # group :development do
 #   gem 'pry-remote'
 # end
+
+group :production do
+  gem 'newrelic_rpm'
+end
 
 gem 'bourbon-compass', "~> 3.2.0.beta.1.a"
 gem 'breakpoint'
@@ -30,7 +30,7 @@ gem 'sassy-buttons'
 gem 'singularitygs'
 gem 'stipe'
 gem 'susy', "~> 1.0.9"
-gem 'neat-compass', "~> 1.5.0.pre"
+gem 'neat-compass'
 gem 'harsh'
 gem 'toolkit'
 gem 'color-schemer'
@@ -58,7 +58,7 @@ gem 'stitch'
 gem 'breakup'
 gem 'singularity-golden-grid'
 gem 'compass-placeholders'
-gem 'true', "~> 0.2.0.rc.3"
+gem 'true'
 gem 'SassyLists'
 gem 'sassy-maps'
 gem 'bitters-compass'
