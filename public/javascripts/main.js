@@ -6,8 +6,6 @@ if($('body.about, body.thankyou').length < 1 ) {
   var SassMeister = window.SassMeister.init();
 
 
-
-
   $('.orientation').on('click', function(event) {
     _gaq.push(['_trackEvent', 'UI', 'Orientation']);
 
@@ -35,7 +33,6 @@ if($('body.about, body.thankyou').length < 1 ) {
 
 
   $('.panel-toggle li span').on('click', function(event) {
-
     event.preventDefault();
 
     var selected = $(this).text(),
@@ -69,14 +66,18 @@ if($('body.about, body.thankyou').length < 1 ) {
   });
 
 
-
-
-
   $('[data-import]').on('click', function(event) {
     _gaq.push(['_trackEvent', 'UI', 'SassExtensions']);
 
-    var imports = $(this).data('import').split(','),
+    var imports = $(this).data('import'),
         eol = ( SassMeister.inputs.sass.syntax == 'SCSS' ? ';' : '' ) + '\n';
+
+    if(String(imports) === 'true') {
+      imports = [imports];
+    }
+    else {
+      imports = imports.split(',');
+    }
 
     $(imports).each(function() {
       SassMeister.editors.sass.insert( '@import "' + this + '"' + eol);
@@ -129,15 +130,6 @@ if($('body.about, body.thankyou').length < 1 ) {
   };
 
 
-
-
-
-
-
-
-
-
-
   $("a[href^='http://'], a[href^='https://']").attr("target", "_blank");
 
   $('#save-gist').on('click', function(event) {
@@ -181,11 +173,6 @@ if($('body.about, body.thankyou').length < 1 ) {
       $(this).data("state", 'hide').toggleClass('show').find('span');
     }
   });
-
-
-
-
-
 
 
   window.onmessage = function (event) {
