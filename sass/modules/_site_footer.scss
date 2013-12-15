@@ -7,16 +7,13 @@ footer {
   top: auto;
   display: block;
   height: $site-footer-height;
+  line-height: $site-footer-height;
   z-index: 3;
   border-top: 1px solid $golf_gray;
   background: scale-color($india_gray, $lightness: 50%);
 
   @media screen and (max-width: 650px) {
     height: em(64);
-
-    p {
-      margin-bottom: 0;
-    }
   }
 
   a {
@@ -26,6 +23,7 @@ footer {
   p {
     font-size: em(14);
     color: $charlie_gray;
+    margin-bottom: 0;
   }
 
   .info {
