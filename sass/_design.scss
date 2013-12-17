@@ -1,0 +1,13 @@
+body:after {
+  content: 'desktop';
+  display: none;
+  speak: none;
+
+  @media #{$tablet} {
+    content: 'tablet';
+  }
+
+  @media #{$mobile} {
+    content: 'mobile';
+  }
+}
