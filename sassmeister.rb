@@ -1,22 +1,15 @@
 $LOAD_PATH.unshift(File.join(File.dirname(File.realpath(__FILE__)), 'lib'))
 
 require 'rubygems'
-
-# If you're using bundler, you will need to add this
 require 'bundler/setup'
-
 require 'sinatra/base'
 require 'sinatra/partial'
-
 require 'chairman'
 require 'json'
-
 require 'sass'
 require 'compass'
 require 'yaml'
-
 require 'sassmeister'
-require 'array'
 
 # require 'pry-remote'
 

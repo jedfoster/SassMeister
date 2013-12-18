@@ -65,7 +65,7 @@ $grid_padding_r:             0 !default;      // sets default left/right padding
 // $grid_child:                 none;           // sets parent child relationship between grid blocks
 // $grid_align:                 default;        // by default grids float left. Optional argument is ``center``
 // $col_base:                   10;             // equal to 10px in the standard 960.gs
-// $col_gutter:                 $col_base * 2;  // sets default grid gutter width                            
+// $col_gutter:                 $col_base * 2;  // sets default grid gutter width
 // $grid_960:                   960 / 100%;     // grid math for percentages
 
 
@@ -122,15 +122,15 @@ $border_color:                         $echo_gray;
 // $input_disabled_bkg:            lighten($input_disabled, 75%);
 // $input_disabled_border:         lighten($input_disabled, 50%);
 // $input_disabled_text:           lighten($input_disabled, 50%);
-//                                 
+//
 // $form_field_background_color:   $white;
 // $form_field_focus_color:        $white;
 // $form_field_fail_bkg:           $white;
-//                                 
+//
 $form_field_border:             $charlie_gray;
 // $form_field_border_fail:        $alpha_color;
 // $form_field_focus_border_color: $charlie_gray;
-//                                 
+//
 // $form_field_text:               $primary_text;
 // $error_text:                    $alpha_color;
 // $form_field_fail:               $alpha_color;
@@ -183,7 +183,7 @@ $border-radius: 0.15em;
 // $h-shadow:                             0;                // horizontal shadow settings
 // $v-shadow:                             2;                // vertical shaddow settings
 // $blur:                                 3;                // blur settings
-// 
+//
 // $inset_color:                          $shadow_color;    // for use with ``dual_box_shadow`` mixin
 // $ih-shadow:                            0;                // inset horizontal shadow settings
 // $iv-shadow:                            2;                // inset vertical shaddow settings
@@ -195,28 +195,15 @@ $border-radius: 0.15em;
 
 /////////////// UI @media breakpoint defaults ////////////////
 // -----------------------------------------------------------------------------
-$mobile:                    "screen and (max-width: 40em)" !default;
-$mobile_portrait:	          "screen and (max-width: 40em) and (orientation : portrait)" !default;
-$mobile_landscape:	        "screen and (max-width: 40em) and (orientation : landscape)" !default; 
+$mobile:                    "screen and (max-width: 40em)";
+$mobile_portrait:	          "screen and (max-width: 40em) and (orientation : portrait)";
+$mobile_landscape:	        "screen and (max-width: 40em) and (orientation : landscape)";
 
-$tablet:                    "screen and (max-width: 64em)" !default;
-$tablet_portrait:           "screen and (max-width: 64em) and (orientation: portrait)" !default;
-$tablet_landscape:          "screen and (max-width: 64em) and (orientation: landscape)" !default;
+$tablet:                    "screen and (max-width: 64em)";
+$tablet_portrait:           "screen and (max-width: 64em) and (orientation: portrait)";
+$tablet_landscape:          "screen and (max-width: 64em) and (orientation: landscape)";
 
-$desktop:                   "screen and (max-width: 120em) and (min-width: 50em)" !default;
-
-
-
-
-
-$minimal_border_radius: 4px !default;
-
-$minimal_background: scale-color($alpha_gray, $lightness: 92%) !default;
-$minimal_border_color: $charlie_gray !default;
-$minimal_inset_shadow_color: scale-color($alpha_gray, $lightness: 95%) !default;
-$minimal_font_color: #333 !default;
-$minimal_font_weight: bold !default;
-$minimal_text_shadow: 0 1px 0 #fff !default;
+$desktop:                   "screen and (min-width: 64em)";
 
 
 

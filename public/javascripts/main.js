@@ -195,7 +195,5 @@ if($('body.about, body.thankyou').length < 1 ) {
       }
     }
   };
-
 }
-
 })(jQuery);
