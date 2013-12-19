@@ -97,6 +97,13 @@ if($('body.about, body.thankyou').length < 1 ) {
       $('#extension_list').replaceWith(data);
       watchExtensions();
       SassMeister.compile.sass();
+      
+      if(SassMeister.sass_endpoint.match(/lib\./)) {
+        $('#sass-syntax-toggle').addClass('disabled');
+      }
+      else {
+        $('#sass-syntax-toggle').removeClass('disabled');
+      }
     });
   };
 
@@ -126,10 +133,14 @@ if($('body.about, body.thankyou').length < 1 ) {
 
   $('[data-endpoint]').on('click', function(event) {
     _gaq.push(['_trackEvent', 'UI', 'SassVersion']);
+    
+    var endpoint = $(this).data('endpoint');
 
-    SassMeister.sass_endpoint = 'http://' + $(this).data('endpoint') + '.' + document.domain + '/';
+    SassMeister.sass_endpoint = 'http://' + endpoint + '.' + document.domain + '/';
 
     getExtensions();
+
+    
 
     $('#sass-version').text($(this).text());
   });

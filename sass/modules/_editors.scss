@@ -39,6 +39,7 @@
   display: inline-block;
   width: auto;
   float: left;
+  cursor: pointer;
 
   .selected {
     &:after {
@@ -57,7 +58,6 @@
 
     a, span {
       &:hover {
-        cursor: pointer;
         text-decoration: underline;
       }
     }
@@ -106,19 +106,39 @@
       display: block;
     }
   }
-  
+
   i {
     font-size: em($small_point_size);
   }
 }
 
+#sass-syntax-toggle {
+  @extend .panel-toggle;
+
+  &.disabled {
+    cursor: initial;
+    
+    .selected:after {
+      display: none;
+    }
+
+    &:hover {
+      color: $delta_gray;
+      background: transparent;
+
+      > ul {
+        display: none;
+      }
+    }
+  }
+}
 
 #sass-versions {
   @extend .panel-toggle;
-  
+
   float: none;
   margin: 0 auto;
-  
+
   > ul {
     left: calc(50% - 109px);
   }
