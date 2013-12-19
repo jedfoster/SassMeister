@@ -34,11 +34,12 @@ if($('body.about, body.thankyou').length < 1 ) {
       $('#save-gist').data('action', 'fork').attr('class', 'fork-gist').find('span').text('Fork Gist');
     }
 
-    if(SassMeister.inputs.sass.dependencies.Sass) {
+    if(SassMeister.inputs.sass.dependencies.libsass) {
+      $('#sass-version').text($('[data-endpoint="lib"]').text());
+    }
+
+    else if(SassMeister.inputs.sass.dependencies.Sass) {
       switch(SassMeister.inputs.sass.dependencies.Sass.slice(0, 3)) {
-        case 'lib':
-          $('#sass-version').text($('[data-endpoint="lib"]').text());
-          break;
         case '3.2':
           $('#sass-version').text($('[data-endpoint="sass3-2"]').text());
           break;
@@ -91,6 +92,14 @@ if($('body.about, body.thankyou').length < 1 ) {
   });
 
 
+  var getExtensions = function() {
+    $.get(SassMeister.sass_endpoint + 'extensions', function( data ) {
+      $('#extension_list').replaceWith(data);
+      watchExtensions();
+      SassMeister.compile.sass();
+    });
+  };
+
   var watchExtensions = function() {
     $('[data-import]').on('click', function(event) {
       _gaq.push(['_trackEvent', 'UI', 'SassExtensions']);
@@ -111,7 +120,8 @@ if($('body.about, body.thankyou').length < 1 ) {
     });
   };
 
-  watchExtensions();
+
+  getExtensions();
 
 
   $('[data-endpoint]').on('click', function(event) {
@@ -119,11 +129,7 @@ if($('body.about, body.thankyou').length < 1 ) {
 
     SassMeister.sass_endpoint = 'http://' + $(this).data('endpoint') + '.' + document.domain + '/';
 
-    $.get(SassMeister.sass_endpoint + 'extensions', function( data ) {
-      $('#extension_list').replaceWith(data);
-      watchExtensions();
-      SassMeister.compile.sass();
-    });
+    getExtensions();
 
     $('#sass-version').text($(this).text());
   });

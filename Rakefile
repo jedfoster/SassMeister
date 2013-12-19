@@ -55,7 +55,7 @@ task "bundle:update" do
     sass_input_list.push "<li><a data-import=\"#{info[:import].to_s.gsub(/(\"|\[|\]|\s*)/, '')}\">#{plugin}</a>&nbsp;&nbsp;(v#{version})</li>"
   end
 
-  Utilities.new.update_plugin_list('views/shared/_sass_input.erb', sass_input_list)
+  Utilities.new.update_plugin_list('views/extension_list.erb', sass_input_list)
   Utilities.new.update_sass_version(stdout.scan(/ sass \((.+?)\)/)[0][0].to_s)
 end
 
