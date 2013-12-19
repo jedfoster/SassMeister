@@ -33,6 +33,18 @@ if($('body.about, body.thankyou').length < 1 ) {
     else {
       $('#save-gist').data('action', 'fork').attr('class', 'fork-gist').find('span').text('Fork Gist');
     }
+    
+    if(SassMeister.inputs.sass.dependencies.Sass) {
+      switch(SassMeister.inputs.sass.dependencies.Sass.slice(0, 3)) {
+        case '3.2':
+          $('#sass-version').text($('[data-endpoint="sass3-2"]').text());          
+          break;
+        case '3.3':
+        default:
+          $('#sass-version').text($('[data-endpoint="sass3-3"]').text());
+          break;
+      }
+    }
   }
   else if (window.github_id != false) {
     $('#save-gist').data('action', 'create').attr('class', 'create-gist').find('span').text('Save Gist');
@@ -107,6 +119,7 @@ if($('body.about, body.thankyou').length < 1 ) {
     $.get(SassMeister.sass_endpoint + 'extensions', function( data ) {
       $('#extension_list').replaceWith(data);
       watchExtensions();
+      SassMeister.compile.sass();
     });
 
     $('#sass-version').text($(this).text());

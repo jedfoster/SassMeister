@@ -46,6 +46,7 @@ var SassMeister;
 
     bypassConversion: false,
 
+
     init: function() {
       $this = this;
 
@@ -339,6 +340,18 @@ var SassMeister;
     getStorage: function() {
       if(window.gist) {
         this.inputs = $.extend(true, this.inputs, window.gist);
+        
+        if(this.inputs.sass.dependencies.Sass) {
+          switch(this.inputs.sass.dependencies.Sass.slice(0, 3)) {
+            case '3.2':
+              this.sass_endpoint = 'http://sass3-2.' + document.domain + '/';
+              break;
+            case '3.3':
+            default:
+              // this.inputs.sass.syntax = 'SCSS';
+              break;
+          }
+        }
       }
       else {
         if(window.resetApp) {
@@ -352,7 +365,7 @@ var SassMeister;
 
       this.layout = $.extend(true, this.layout, JSON.parse(localStorage.getItem('layout')) );
 
-      switch (this.inputs.sass.syntax.toLowerCase()) {
+      switch(this.inputs.sass.syntax.toLowerCase()) {
         case 'sass':
           this.inputs.sass.syntax = 'Sass';
           break;
@@ -362,7 +375,7 @@ var SassMeister;
           break;
       }
 
-      switch (this.inputs.html.syntax.toLowerCase()) {
+      switch(this.inputs.html.syntax.toLowerCase()) {
         case 'haml':
           this.inputs.html.syntax = 'Haml';
           break;
