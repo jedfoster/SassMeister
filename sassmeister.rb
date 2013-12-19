@@ -142,16 +142,9 @@ class SassMeisterApp < Sinatra::Base
   post '/compile' do
     content_type 'application/json'
 
-    dependencies = {
-      'Sass' =>  Gem.loaded_specs["sass"].version.to_s,
-      'Compass' => Gem.loaded_specs["compass"].version.to_s
-    }
-
-    get_imports_from_sass(params[:input]) {|name, plugin| dependencies[name] = plugin[:version] }
-
     {
       css: sass_compile(params[:input], params[:syntax], params[:output_style]),
-      dependencies: dependencies
+      dependencies: get_build_dependencies(params[:input])
     }.to_json.to_s
   end
 
@@ -159,16 +152,9 @@ class SassMeisterApp < Sinatra::Base
   post '/convert' do
     content_type 'application/json'
 
-    dependencies = {
-      'Sass' =>  Gem.loaded_specs["sass"].version.to_s,
-      'Compass' => Gem.loaded_specs["compass"].version.to_s
-    }
-
-    get_imports_from_sass(params[:input]) {|name, plugin| dependencies[name] = plugin[:version] }
-
     {
       css: sass_convert(params[:original_syntax], params[:syntax], params[:input]),
-      dependencies: dependencies
+      dependencies: get_build_dependencies(params[:input])
     }.to_json.to_s    
   end
 
@@ -209,7 +195,6 @@ class SassMeisterApp < Sinatra::Base
         syntax = file.filename.slice(-4, 4)
       end
 
-
       html_file = response.files["#{response.files._fields.grep(/.+\.(haml|textile|markdown|md|html)/)[0]}"]
 
       if(html_file)
@@ -238,7 +223,8 @@ class SassMeisterApp < Sinatra::Base
       :sass => {
         :input => sass,
         :syntax => syntax,
-        :original_syntax => syntax
+        :original_syntax => syntax,
+        :dependencies => get_frontmatter_dependencies(sass)
       },
       :html => {
         :input => (html || ''),

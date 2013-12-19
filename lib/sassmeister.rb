@@ -27,6 +27,31 @@ module SassMeister
   end
 
 
+  def get_build_dependencies(sass)
+    dependencies = {
+      'Sass' =>  Gem.loaded_specs["sass"].version.to_s,
+      'Compass' => Gem.loaded_specs["compass"].version.to_s
+    }
+
+    get_imports_from_sass(sass) {|name, plugin| dependencies[name] = plugin[:version] }
+
+    return dependencies
+  end
+
+
+  def get_frontmatter_dependencies(sass)
+    frontmatter = sass.scan(/^\/\/ ([\w\s]+?) \(v([[:alnum:]\.]+?)\)\s*$/)
+
+    dependencies = {}
+
+    unless frontmatter.empty?
+      frontmatter.each {|name, version| dependencies[name] = version}
+    end
+
+    return dependencies
+  end
+
+
   def pack_dependencies(sass, dependencies)
     sass.slice!(/(^\/\/ [\-]{3,4}\n(?:\/\/ .+\n)*\/\/ [\-]{3,4}\s*)*/)
 
@@ -45,7 +70,7 @@ module SassMeister
     frontmatter = sass.slice(/^\/\/ ---\n(?:\/\/ .+\n)*\/\/ ---\n/)
 
     if frontmatter.nil?
-      frontmatter = sass.scan(/^\/\/ ([\w\s]+?) [\(\)v\d\.]+?\s*$/).first
+      frontmatter = sass.scan(/^\/\/ ([\w\s]+?) [\(\)v[:alnum:]\.]+?\s*$/).first
     else
       frontmatter = frontmatter.to_s.gsub(/(\/\/ |---|\(.+$)/, '').strip.split(/\n/)
     end
