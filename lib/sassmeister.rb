@@ -27,15 +27,15 @@ module SassMeister
   end
 
 
-  def pack_dependencies(sass)
+  def pack_dependencies(sass, dependencies)
     sass.slice!(/(^\/\/ [\-]{3,4}\n(?:\/\/ .+\n)*\/\/ [\-]{3,4}\s*)*/)
 
     frontmatter = "// ----\n// Sass (sass-version)\n// Compass (compass-version)\n// ----"
 
-    get_imports_from_sass(sass) {|name, plugin| frontmatter.gsub!(/\/\/ ----\n\Z/, "// #{name} (v#{plugin[:version]})\n// ----\n") }
+    frontmatter.gsub!(/sass-version/, "v#{dependencies.delete('Sass')}")
+    frontmatter.gsub!(/compass-version/, "v#{dependencies.delete('Compass')}")
 
-    frontmatter.gsub!(/sass-version/, "v#{Gem.loaded_specs["sass"].version.to_s}")
-    frontmatter.gsub!(/compass-version/, "v#{Gem.loaded_specs["compass"].version.to_s}")
+    dependencies.each {|name, version| frontmatter.gsub!(/\/\/ ----\Z/, "// #{name} (v#{version})\n// ----") }
 
     return frontmatter
   end

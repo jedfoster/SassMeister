@@ -9,7 +9,8 @@ var SassMeister;
           input: '',
           syntax: 'SCSS',
           original_syntax: 'SCSS',
-          output_style: 'expanded'
+          output_style: 'expanded',
+          dependencies: {}
         },
         html: {
           input: '',
@@ -165,12 +166,13 @@ var SassMeister;
         _gaq.push(['_trackEvent', 'Form', 'Submit']);
 
         /* Post the form and handle the returned data */
-        $.post(SassMeister.sass_endpoint + 'compile', SassMeister.inputs.sass, function( data ) {
-          SassMeister.editors.css.setValue(data,-1);
-          SassMeister.outputs.css = data;
+        $.post(SassMeister.sass_endpoint + 'compile', SassMeister.inputs.sass, function( data ) {          
+          SassMeister.editors.css.setValue(data.css,-1);
+          SassMeister.outputs.css = data.css;
+          SassMeister.inputs.sass.dependencies = data.dependencies;
 
           updateRender({
-            css: data
+            css: data.css
           });
 
           SassMeister.setStorage();
@@ -211,9 +213,10 @@ var SassMeister;
         $.post(SassMeister.sass_endpoint + 'convert', SassMeister.inputs.sass, function( data ) {
           SassMeister.bypassConversion = true;
 
-          SassMeister.editors.sass.setValue(data, -1);
+          SassMeister.editors.sass.setValue(data.css, -1);
 
           SassMeister.inputs.sass.original_syntax = SassMeister.inputs.sass.syntax
+          SassMeister.inputs.sass.dependencies = data.dependencies;
 
           $('#syntax').data('original', SassMeister.inputs.sass.syntax);
 

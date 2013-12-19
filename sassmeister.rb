@@ -140,12 +140,36 @@ class SassMeisterApp < Sinatra::Base
 
 
   post '/compile' do
-    sass_compile(params[:input], params[:syntax], params[:output_style])
+    content_type 'application/json'
+
+    dependencies = {
+      'Sass' =>  Gem.loaded_specs["sass"].version.to_s,
+      'Compass' => Gem.loaded_specs["compass"].version.to_s
+    }
+
+    get_imports_from_sass(params[:input]) {|name, plugin| dependencies[name] = plugin[:version] }
+
+    {
+      css: sass_compile(params[:input], params[:syntax], params[:output_style]),
+      dependencies: dependencies
+    }.to_json.to_s
   end
 
 
   post '/convert' do
-    sass_convert(params[:original_syntax], params[:syntax], params[:input])
+    content_type 'application/json'
+
+    dependencies = {
+      'Sass' =>  Gem.loaded_specs["sass"].version.to_s,
+      'Compass' => Gem.loaded_specs["compass"].version.to_s
+    }
+
+    get_imports_from_sass(params[:input]) {|name, plugin| dependencies[name] = plugin[:version] }
+
+    {
+      css: sass_convert(params[:original_syntax], params[:syntax], params[:input]),
+      dependencies: dependencies
+    }.to_json.to_s    
   end
 
 
@@ -160,7 +184,7 @@ class SassMeisterApp < Sinatra::Base
 
 
   get '/extensions' do
-    erb :extension_list, layout: false #ocals: {body_class: 'about'}
+    erb :extension_list, layout: false
   end
 
 
@@ -232,7 +256,7 @@ class SassMeisterApp < Sinatra::Base
 
     sass = inputs[:sass][:input]
 
-    dependencies = pack_dependencies(sass)
+    dependencies = pack_dependencies(sass, inputs[:sass][:dependencies])
 
     css = outputs[:css]
 
@@ -286,7 +310,7 @@ class SassMeisterApp < Sinatra::Base
 
     sass = inputs[:sass][:input]
 
-    dependencies = pack_dependencies(sass)
+    dependencies = pack_dependencies(sass, inputs[:sass][:dependencies])
 
     css = outputs[:css]
 
