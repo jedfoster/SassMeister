@@ -9,7 +9,7 @@
   }
 
   .edit-header {
-    text-align: left;
+    text-align: center;
     display: block;
     margin: 0;
     height: em($heading_3);
@@ -38,6 +38,7 @@
   padding: 0 0.83333em;
   display: inline-block;
   width: auto;
+  float: left;
 
   .selected {
     &:after {
@@ -108,5 +109,17 @@
   
   i {
     font-size: em($small_point_size);
+  }
+}
+
+
+#sass-versions {
+  @extend .panel-toggle;
+  
+  float: none;
+  margin: 0 auto;
+  
+  > ul {
+    left: calc(50% - 109px);
   }
 }

@@ -1,0 +1,15 @@
+<div id="extension_list">
+  <span class="selected">Extensions</span>
+  <ul>
+    <li>
+
+      <ol>
+        <% @plugins.each do |plugin| %>
+          <li><a data-import="<%= plugin.last[:import].to_s.gsub(/(\"|\[|\]|\s*)/, '') %>" data-version=""><%=plugin.first %></a>&nbsp;&nbsp;(v<%=plugin.last[:version]%>)</li>
+        <% end %>
+      </ol>
+
+      <i>(Will be inserted at cursor)</i>
+    </li>
+  </ul>
+</div>

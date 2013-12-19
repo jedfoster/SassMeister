@@ -4,8 +4,8 @@ if($('body.about, body.thankyou').length < 1 ) {
   $('#rendered-html').attr('src', window.sandbox);
 
   var SassMeister = window.SassMeister.init();
-  
-  
+
+
   if(window.github_id) {
     $('#github-auth').replaceWith('<div class="github"><span><img src="http://www.gravatar.com/avatar/' + window.gravatar_id + '?s=80" alt="" height="40"></span>\
       <ul id="account_actions">\
@@ -13,7 +13,7 @@ if($('body.about, body.thankyou').length < 1 ) {
         <li class="off-icon"><a href="/logout"><span>Logout</span></a></li>\
       </ul>\
     </div>');
-  }   
+  }
 
 
   $('.orientation').on('click', function(event) {
@@ -76,22 +76,40 @@ if($('body.about, body.thankyou').length < 1 ) {
   });
 
 
-  $('[data-import]').on('click', function(event) {
-    _gaq.push(['_trackEvent', 'UI', 'SassExtensions']);
+  var watchExtensions = function() {
+    $('[data-import]').on('click', function(event) {
+      _gaq.push(['_trackEvent', 'UI', 'SassExtensions']);
 
-    var imports = $(this).data('import'),
-        eol = ( SassMeister.inputs.sass.syntax == 'SCSS' ? ';' : '' ) + '\n';
+      var imports = $(this).data('import'),
+          eol = ( SassMeister.inputs.sass.syntax == 'SCSS' ? ';' : '' ) + '\n';
 
-    if(String(imports) === 'true') {
-      imports = [imports];
-    }
-    else {
-      imports = imports.split(',');
-    }
+      if(String(imports) === 'true') {
+        imports = [imports];
+      }
+      else {
+        imports = imports.split(',');
+      }
 
-    $(imports).each(function() {
-      SassMeister.editors.sass.insert( '@import "' + this + '"' + eol);
+      $(imports).each(function() {
+        SassMeister.editors.sass.insert( '@import "' + this + '"' + eol);
+      });
     });
+  };
+
+  watchExtensions();
+
+
+  $('[data-endpoint]').on('click', function(event) {
+    _gaq.push(['_trackEvent', 'UI', 'SassVersion']);
+
+    SassMeister.sass_endpoint = 'http://' + $(this).data('endpoint') + '.' + document.domain + '/';
+
+    $.get(SassMeister.sass_endpoint + 'extensions', function( data ) {
+      $('#extension_list').replaceWith(data);
+      watchExtensions();
+    });
+
+    $('#sass-version').text($(this).text());
   });
 
 

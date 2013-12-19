@@ -73,6 +73,20 @@ class SassMeisterApp < Sinatra::Base
     Chairman.config(yml["client_id"], yml["client_secret"], ['gist'])
   end
 
+  helpers do
+    def origin
+      return request.env["HTTP_ORIGIN"] if origin_allowed? request.env["HTTP_ORIGIN"]
+
+      return false
+    end
+
+    def origin_allowed?(uri)
+      return false if uri.nil?
+
+      return uri.match(/^http:\/\/((beta|edge|sass3-2|sass3-3)\.){0,1}sassmeister\.(com|dev|([\d+\.]{4}xip\.io))/)
+    end
+  end
+
 
   before do
     @github = Chairman.session(session[:github_token])
@@ -81,6 +95,8 @@ class SassMeisterApp < Sinatra::Base
 
     params[:syntax].downcase! unless params[:syntax].nil?
     params[:original_syntax].downcase! unless params[:original_syntax].nil?
+
+    headers 'Access-Control-Allow-Origin' => origin if origin
   end
 
   before /^(?!\/(authorize))/ do
@@ -140,6 +156,11 @@ class SassMeisterApp < Sinatra::Base
 
   get '/about' do
     erb :about, locals: {body_class: 'about'}
+  end
+
+
+  get '/extensions' do
+    erb :extension_list, layout: false #ocals: {body_class: 'about'}
   end
 
 

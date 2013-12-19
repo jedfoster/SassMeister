@@ -39,6 +39,8 @@ var SassMeister;
       css: 'show'
     },
 
+    sass_endpoint: '/',
+
     timer: null,
 
     bypassConversion: false,
@@ -118,14 +120,14 @@ var SassMeister;
     initPanels: function() {
       if(window.gist) {
         localStorage.removeItem('casementSettings');
-        
+
         if(!this.inputs.html.input) {
           this.layout.html = 'hide';
         }
         else {
           this.layout.html = 'show';
         }
-      } 
+      }
 
       if (this.layout.html == 'hide') {
         $('#rendered, [data-name="html"]').hide();
@@ -144,7 +146,7 @@ var SassMeister;
 
       input.setTheme('ace/theme/tomorrow');
       input.getSession().setMode('ace/mode/' + syntax.toLowerCase());
-      
+
       input.getSession().setTabSize(2);
       input.getSession().setUseSoftTabs(true);
 
@@ -163,7 +165,7 @@ var SassMeister;
         _gaq.push(['_trackEvent', 'Form', 'Submit']);
 
         /* Post the form and handle the returned data */
-        $.post('/compile', SassMeister.inputs.sass, function( data ) {
+        $.post(SassMeister.sass_endpoint + 'compile', SassMeister.inputs.sass, function( data ) {
           SassMeister.editors.css.setValue(data,-1);
           SassMeister.outputs.css = data;
 
@@ -206,7 +208,7 @@ var SassMeister;
 
     convert: {
       sass: function() {
-        $.post('/convert', SassMeister.inputs.sass, function( data ) {
+        $.post(SassMeister.sass_endpoint + 'convert', SassMeister.inputs.sass, function( data ) {
           SassMeister.bypassConversion = true;
 
           SassMeister.editors.sass.setValue(data, -1);
@@ -340,7 +342,7 @@ var SassMeister;
           localStorage.removeItem('inputs');
           localStorage.removeItem('outputs');
         }
-        
+
         this.inputs = $.extend(true, this.inputs, JSON.parse(localStorage.getItem('inputs')) );
         this.outputs = $.extend(true, this.outputs, JSON.parse(localStorage.getItem('outputs')) );
       }
