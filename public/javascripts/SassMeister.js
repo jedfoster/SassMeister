@@ -341,7 +341,12 @@ var SassMeister;
       if(window.gist) {
         this.inputs = $.extend(true, this.inputs, window.gist);
         
-        if(this.inputs.sass.dependencies.Sass) {
+        if(this.inputs.sass.dependencies.libsass) {
+          this.sass_endpoint = 'http://lib.' + document.domain + '/';
+          // this.inputs.sass.syntax = 'SCSS';
+        }
+        
+        else if(this.inputs.sass.dependencies.Sass) {
           switch(this.inputs.sass.dependencies.Sass.slice(0, 3)) {
             case '3.2':
               this.sass_endpoint = 'http://sass3-2.' + document.domain + '/';
