@@ -33,11 +33,14 @@ if($('body.about, body.thankyou').length < 1 ) {
     else {
       $('#save-gist').data('action', 'fork').attr('class', 'fork-gist').find('span').text('Fork Gist');
     }
-    
+
     if(SassMeister.inputs.sass.dependencies.Sass) {
       switch(SassMeister.inputs.sass.dependencies.Sass.slice(0, 3)) {
+        case 'lib':
+          $('#sass-version').text($('[data-endpoint="lib"]').text());
+          break;
         case '3.2':
-          $('#sass-version').text($('[data-endpoint="sass3-2"]').text());          
+          $('#sass-version').text($('[data-endpoint="sass3-2"]').text());
           break;
         case '3.3':
         default:
