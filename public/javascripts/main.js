@@ -130,6 +130,9 @@ if($('body.about, body.thankyou').length < 1 ) {
 
   getExtensions();
 
+  if(SassMeister.sass_endpoint == '/') {
+    $('#sass-version').text($('#sass-version + ul li:first-child').text());
+  }
 
   $('[data-endpoint]').on('click', function(event) {
     _gaq.push(['_trackEvent', 'UI', 'SassVersion']);
@@ -139,8 +142,6 @@ if($('body.about, body.thankyou').length < 1 ) {
     SassMeister.sass_endpoint = 'http://' + endpoint + '.' + document.domain + '/';
 
     getExtensions();
-
-    
 
     $('#sass-version').text($(this).text());
   });
