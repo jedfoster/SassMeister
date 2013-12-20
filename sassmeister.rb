@@ -170,7 +170,7 @@ class SassMeisterApp < Sinatra::Base
 
 
   get '/extensions' do
-    erb :extension_list, layout: false
+    erb :extensions, layout: false
   end
 
 
