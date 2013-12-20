@@ -35,17 +35,17 @@ if($('body.about, body.thankyou').length < 1 ) {
     }
 
     if(SassMeister.inputs.sass.dependencies.libsass) {
-      $('#sass-version').text($('[data-endpoint="lib"]').text());
+      displaySassVersion($('[data-endpoint="lib"]').text());
     }
 
     else if(SassMeister.inputs.sass.dependencies.Sass) {
       switch(SassMeister.inputs.sass.dependencies.Sass.slice(0, 3)) {
         case '3.2':
-          $('#sass-version').text($('[data-endpoint="sass3-2"]').text());
+          displaySassVersion($('[data-endpoint="sass3-2"]').text());
           break;
         case '3.3':
         default:
-          $('#sass-version').text($('[data-endpoint="sass3-3"]').text());
+          displaySassVersion($('[data-endpoint="sass3-3"]').text());
           break;
       }
     }
@@ -127,11 +127,18 @@ if($('body.about, body.thankyou').length < 1 ) {
     });
   };
 
+  var displaySassVersion = function(versionString) {
+    if(! versionString.match(/lib/)) {
+      versionString = 'Sass v' + versionString.slice(0, 3);
+    }
+    
+    $('#sass-version').text(versionString);
+  };
 
   getExtensions();
 
   if(SassMeister.sass_endpoint == '/') {
-    $('#sass-version').text($('#sass-version + ul li:first-child').text());
+    displaySassVersion($('#sass-version + ul li:first-child').text());
   }
 
   $('[data-endpoint]').on('click', function(event) {
@@ -143,7 +150,7 @@ if($('body.about, body.thankyou').length < 1 ) {
 
     getExtensions();
 
-    $('#sass-version').text($(this).text());
+    displaySassVersion($(this).text());
   });
 
 

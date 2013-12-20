@@ -11,3 +11,11 @@ body:after {
     content: 'mobile';
   }
 }
+
+#sass-versions {  
+  > ul {
+    right: initial;
+    left: 0;
+    width: em(160);
+  }
+}

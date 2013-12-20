@@ -132,14 +132,3 @@
     }
   }
 }
-
-#sass-versions {
-  @extend .panel-toggle;
-
-  float: none;
-  margin: 0 auto;
-
-  > ul {
-    left: calc(50% - 109px);
-  }
-}
