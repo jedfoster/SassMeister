@@ -12,10 +12,45 @@ body:after {
   }
 }
 
-#sass-versions {  
-  > ul {
-    right: initial;
-    left: 0;
-    width: em(160);
+.swag-promo {
+  clear: both;
+  
+  a {
+    color: darken($delta_color, 15%);
+    color: $delta_color;
+  }
+  
+  p {
+    font-size: em($heading_4);
+    font-weight: 200;
+  }
+  
+  h1 {
+    font-size: em($heading_1 * 1.5); 
+  }  
+
+  .messenger-message {
+    float: left;
+  }
+  
+  .message .messenger-message-inner{
+    text-align: left;
+  }  
+
+  img {
+    float: right;
+    width: 40%;
+    margin-left: 1em;
+    
+    @each $prefix in $prefix_defaults {
+      #{$prefix}border-radius: em(3);
+    }
+    
+    @media #{$mobile} {
+      // float: none;
+      width: 50%;
+      // margin-left: 0;
+      // margin-bottom: 0.5em;
+    }
   }
 }

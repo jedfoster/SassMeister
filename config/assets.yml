@@ -16,6 +16,7 @@ javascripts:
     - public/javascripts/vendor/ACE-noconflict/theme-tomorrow.js
     - public/javascripts/vendor/jquery.foundation.reveal.js
     - public/javascripts/vendor/bindWithDelay.js
+    - public/javascripts/vendor/messenger.min.js
     - public/javascripts/viewport.js
     - public/javascripts/SassMeister.js
     - public/javascripts/vendor/casement.js

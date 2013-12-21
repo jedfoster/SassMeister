@@ -34,9 +34,9 @@ $monospace-font-family: #{'SourceCodePro', monospace};
 // Using Toadstool, all you need to do is edit these 6 hex values and everything else is created
 // by magic, unicorns and fairy dust!
 $alpha_primary:   #E24A8D;   //EA3F8A E02A79     // red
-// $bravo_primary:   #3e4147;        // green
+$bravo_primary:   #92e24a;        // green
 // $charlie_primary: #fffedf;        // yellow
-// $delta_primary:   #2a2c31;        // blue
+$delta_primary:   #4abbe2;        // blue
 $echo_primary:    #E7D963; //adjust_hue($alpha_primary, 91);        // accent
 
 // $alpha_gray:      #333;           //black

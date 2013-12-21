@@ -16,6 +16,33 @@ if($('body.about, body.thankyou').length < 1 ) {
   }
 
 
+  Messenger.options = {
+      extraClasses: 'messenger-on-top',
+      theme: 'block'
+  };
+  
+  promoMsg = function() {
+    msgs = [
+      'Show off your sassy side &amp; help support SassMeister.',
+      'Get sweet, sassy stickers &amp; help support SassMeister.'
+    ];
+    
+    
+    return msgs[Math.floor(Math.random() * msgs.length)];
+  };
+  
+
+  Messenger({extraClasses: 'messenger-on-bottom swag-promo'}).post({
+    message: '<a href="http://devswag.com/products/sassmeister-stickers-4">\
+    \
+    <h1>Swag Alert! </h1> \
+    <p><img src="/images/sassmeister-detail-v02_medium.jpg"> ' + promoMsg() + '</p>\
+</a>',
+    hideAfter: 600,
+    showCloseButton: true
+  });
+
+
   $('.orientation').on('click', function(event) {
     _gaq.push(['_trackEvent', 'UI', 'Orientation']);
 
@@ -32,22 +59,6 @@ if($('body.about, body.thankyou').length < 1 ) {
     }
     else {
       $('#save-gist').data('action', 'fork').attr('class', 'fork-gist').find('span').text('Fork Gist');
-    }
-
-    if(SassMeister.inputs.sass.dependencies.libsass) {
-      displaySassVersion($('[data-endpoint="lib"]').text());
-    }
-
-    else if(SassMeister.inputs.sass.dependencies.Sass) {
-      switch(SassMeister.inputs.sass.dependencies.Sass.slice(0, 3)) {
-        case '3.2':
-          displaySassVersion($('[data-endpoint="sass3-2"]').text());
-          break;
-        case '3.3':
-        default:
-          displaySassVersion($('[data-endpoint="sass3-3"]').text());
-          break;
-      }
     }
   }
   else if (window.github_id != false) {
@@ -92,65 +103,22 @@ if($('body.about, body.thankyou').length < 1 ) {
   });
 
 
-  var getExtensions = function() {
-    $.get(SassMeister.sass_endpoint + 'extensions', function( data ) {
-      $('#extension_list').replaceWith(data);
-      watchExtensions();
-      SassMeister.compile.sass();
-      
-      if(SassMeister.sass_endpoint.match(/lib\./)) {
-        $('#sass-syntax-toggle').addClass('disabled');
-      }
-      else {
-        $('#sass-syntax-toggle').removeClass('disabled');
-      }
-    });
-  };
+  $('[data-import]').on('click', function(event) {
+    _gaq.push(['_trackEvent', 'UI', 'SassExtensions']);
 
-  var watchExtensions = function() {
-    $('[data-import]').on('click', function(event) {
-      _gaq.push(['_trackEvent', 'UI', 'SassExtensions']);
+    var imports = $(this).data('import'),
+        eol = ( SassMeister.inputs.sass.syntax == 'SCSS' ? ';' : '' ) + '\n';
 
-      var imports = $(this).data('import'),
-          eol = ( SassMeister.inputs.sass.syntax == 'SCSS' ? ';' : '' ) + '\n';
-
-      if(String(imports) === 'true') {
-        imports = [imports];
-      }
-      else {
-        imports = imports.split(',');
-      }
-
-      $(imports).each(function() {
-        SassMeister.editors.sass.insert( '@import "' + this + '"' + eol);
-      });
-    });
-  };
-
-  var displaySassVersion = function(versionString) {
-    if(! versionString.match(/lib/)) {
-      versionString = 'Sass v' + versionString.slice(0, 3);
+    if(String(imports) === 'true') {
+      imports = [imports];
     }
-    
-    $('#sass-version').text(versionString);
-  };
+    else {
+      imports = imports.split(',');
+    }
 
-  getExtensions();
-
-  if(SassMeister.sass_endpoint == '/') {
-    displaySassVersion($('#sass-version + ul li:first-child').text());
-  }
-
-  $('[data-endpoint]').on('click', function(event) {
-    _gaq.push(['_trackEvent', 'UI', 'SassVersion']);
-    
-    var endpoint = $(this).data('endpoint');
-
-    SassMeister.sass_endpoint = 'http://' + endpoint + '.' + document.domain + '/';
-
-    getExtensions();
-
-    displaySassVersion($(this).text());
+    $(imports).each(function() {
+      SassMeister.editors.sass.insert( '@import "' + this + '"' + eol);
+    });
   });
 
 

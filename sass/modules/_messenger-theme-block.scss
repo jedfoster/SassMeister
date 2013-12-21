@@ -1,0 +1,147 @@
+// @import "compass/utilities/general/clearfix";
+@import "compass/css3";
+
+ul.messenger {
+  // top: 0;
+  // left: 0;
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  z-index: 10000;
+  width: 45%;
+  
+  @media #{$tablet} {
+    width: 50%;
+  }
+  
+  @media #{$mobile} {
+    width: 70%;
+  }
+
+  &.messenger-on-bottom {
+    top: auto;
+    bottom: $site-footer-height;
+    
+    .messenger-message {
+      border-bottom: 0;
+
+      @each $prefix in $prefix_defaults {
+        #{$prefix}border-top-left-radius: em(3);
+        #{$prefix}border-top-right-radius: em(3);
+      }
+    }    
+
+    @media screen and (max-width: 650px) {
+      bottom: em(64);
+    }
+  }
+
+  &.messenger-on-top {
+    top: 0;
+    bottom: auto;
+    
+    .messenger-message {
+      border-top: 0;
+
+      @each $prefix in $prefix_defaults {
+        #{$prefix}border-bottom-left-radius: em(3);
+        #{$prefix}border-bottom-right-radius: em(3);
+      }
+    }
+  }
+
+  // &.messenger-on-top, &.messenger-on-bottom {
+    left: 0;
+    right: 0;
+
+    // &.messenger-on-left {
+    //   right: auto;
+    // }
+
+    // &.messenger-on-right {
+      left: auto;
+    // }
+  // }
+
+  .messenger-message-slot {
+    max-width: none;
+  }
+
+  .messenger-message {
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    border-width: 1px;
+    border-style: solid;
+    text-align: center;
+    padding: 1em;
+    
+
+    &.alert-warning {
+      color: #c09853;
+      background-color: #fcf8e3;
+      border-color: #fbeed5;
+    }
+
+    &.alert-error, &.alert-danger {
+      color: #b94a48;
+      background-color: #f2dede;
+      border-color: #eed3d7;
+    }
+
+    &.alert-success {
+      color: #468847;
+      background-color: #dff0d8;
+      border-color: #d6e9c6;
+    }
+
+    &.alert-info {
+      color: $delta_color;
+      background-color: $delta_color_india;
+      border-color: $delta_color_bravo;
+    }
+
+    &.messenger-hidden {
+      display: none;
+    }
+
+    .messenger-phrase, .messenger-actions a {
+      padding-right: 5px;
+    }
+
+    .messenger-actions {
+      float: right;
+
+      a {
+        cursor: pointer;
+        text-decoration: underline;
+      }
+    }
+
+    ul, ol {
+      margin: 10px 18px 0;
+    }
+
+    .messenger-close {
+      @include opacity(0.5);
+
+      padding: 0;
+      cursor: pointer;
+      color: inherit;
+      background: transparent;
+      border: 0;
+      -webkit-appearance: none;
+      float: right;
+      position: relative;
+      top: -13px;
+      left: 11px;
+      font-size: 22px;
+
+      &:hover {
+        @include opacity(0.8);
+      }
+
+      &:active {
+        @include opacity(1);
+      }
+    }
+  }
+}
