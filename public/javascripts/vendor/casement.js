@@ -43,7 +43,7 @@
           split = this.options.split;
 
 
-      $el.css({position: 'absolute', top: 0, right: 0, bottom: 0, left: 0});
+      $el.css({});
       this.parentWidth =  $el.innerWidth();
       this.parentHeight = $el.innerHeight();
       this.parentOffset = $el.offset();
@@ -53,7 +53,7 @@
         var guid = $.fn.casement.guid++,
             settings = casementSettings[guid] || {x:null,y:null},
             nextSettings = casementSettings[guid + 1] || {x:null,y:null},
-            css = {position: 'absolute'},
+            css = {position: 'absolute', top: 0, right: 0, bottom: 0, left: 0},
             sash_css = {};
 
         $(this).data('casement_guid', guid);

@@ -12,6 +12,66 @@
   }
 }
 
+#control-column {
+  position: relative;
+
+  width: em($font_size * 2.125, $small_point_size);
+  height: 100%;
+  float: right;
+  border-left: 1px solid $golf_gray;
+  font-size: em($small_point_size);
+  
+  background: scale-color($alpha_gray, $lightness: 90%);
+  
+  // &.open {
+    width: 20%;
+    
+    .control-icon:before {
+      content: "\22";
+    }
+    
+    section {
+      border-bottom: 1px solid $delta_gray;
+    }
+  // }
+  
+  .control-icon {
+    font-size: em($font_size);
+    color: $delta_gray;
+    cursor: pointer;
+    position: absolute;
+    top: 0.5em;
+    left: 0.65em;
+    display: block;
+    width: 1em;
+    z-index: 1;
+  }
+  
+  > div {
+    height: inherit;
+    position:relative;
+    top:0;
+    bottom: 0;
+    
+     overflow-x: scroll;
+  }
+  
+  section {
+    padding: 1em 0.5em 1em 3em;
+    
+  }
+}
+
+#casement {
+  @extend %stretch;
+  
+  right: 2.125em;
+  
+  // &.controls-open {
+    right: 20%;
+  // }
+}
+
 #rendered-html {
   @extend %grid_full;
 
