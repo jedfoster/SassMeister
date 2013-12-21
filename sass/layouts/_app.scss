@@ -13,28 +13,42 @@
 }
 
 #control-column {
-  position: relative;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
 
   width: em($font_size * 2.125, $small_point_size);
   height: 100%;
-  float: right;
   border-left: 1px solid $golf_gray;
   font-size: em($small_point_size);
-  
+
   background: scale-color($alpha_gray, $lightness: 90%);
-  
-  // &.open {
-    width: 20%;
-    
+
+  &.open {
+    width: 33%;
+
     .control-icon:before {
       content: "\22";
     }
-    
+
     section {
-      border-bottom: 1px solid $delta_gray;
+      border-bottom: 1px solid $golf_gray;
+
+      &:last-child {
+        border: 0;
+      }
     }
-  // }
-  
+    
+    .control-container {
+      border-bottom: 1px solid $golf_gray;
+    }
+    
+    #promo {
+      display: block;
+    }
+  }
+
   .control-icon {
     font-size: em($font_size);
     color: $delta_gray;
@@ -46,30 +60,223 @@
     width: 1em;
     z-index: 1;
   }
-  
-  > div {
-    height: inherit;
-    position:relative;
+
+  .control-container {
+    position:absolute;
     top:0;
-    bottom: 0;
-    
+    bottom: 12em;
+    width: 100%;
+
      overflow-x: scroll;
+
+     
   }
-  
+
+  #promo {
+    display: none;
+    position:absolute;
+    height: 12em;
+
+    bottom: 0;
+    float: left;
+    overflow-x: scroll;
+  }
+
   section {
-    padding: 1em 0.5em 1em 3em;
-    
+    padding: 1em 2.5em 1em 3em;
+    float: left;
+    width: 100%;
+    clear: both;
   }
+
+  h2 {
+
+  }
+
+  h3 {
+    font-weight: 100;
+    color: $bravo_gray
+  }
+
+
+  %toggle-group {
+    @include border_radius(em(8));
+
+    border: 1px solid $golf_gray;
+    display: block;
+    position: relative;
+    z-index: 1;
+    float: left;
+    width: 100%;
+
+    margin-top: 0.5em;
+    margin-bottom: 1.5em;
+
+    input {
+      position: absolute;
+      opacity: 0;
+      z-index: -10;
+    }
+
+    label {
+      padding: 0.5em 0.5em;
+      display: inline-block;
+      float: left;
+      cursor: pointer;
+      z-index: 3;
+      position: relative;
+      text-align: center;
+    }
+
+    span {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+
+      -webkit-transition: left 0.2s ease;
+      -moz-transition: left 0.2s ease;
+      transition: left 0.2s ease;
+
+      @include border_radius(em(8));
+    }
+
+    %toggle-input {
+      background: $bravo_color_charlie;
+    }
+  }
+
+  .syntax-toggle-group {
+    @extend %toggle-group;
+
+    width: 50%;
+    display: inline-block;
+    float: none;
+
+    label, span {
+      width: 50%;
+    }
+
+    %toggle-input {
+      width: 50%
+    }
+
+    #syntax-scss:checked ~ span {
+      @extend %toggle-input;
+    }
+
+    #syntax-sass:checked ~ span {
+      @extend %toggle-input;
+
+      left: 50%;
+    }
+  }
+
+
+  .version-toggle-group {
+    @extend %toggle-group;
+
+
+    label, span {
+      width: 33.33334%;
+    }
+
+    %toggle-input {
+      width: 33.33334%
+    }
+
+    #version-sass3-3:checked ~ span {
+      @extend %toggle-input;
+    }
+
+    #version-sass3-2:checked ~ span {
+      @extend %toggle-input;
+
+      left: 33.33334%;
+    }
+
+    #version-lib:checked ~ span {
+      @extend %toggle-input;
+
+      left: 66.66667%;
+    }
+  }
+
+
+  .output-toggle-group {
+    @extend %toggle-group;
+
+    font-size: 0.8125em;
+
+    label, span {
+      width: 25%;
+    }
+
+
+    %toggle-input {
+      width: 25%
+    }
+
+    #expanded-output:checked ~ span {
+      @extend %toggle-input;
+    }
+    #nested-output:checked ~ span {
+      @extend %toggle-input;
+      left: 25%;
+    }
+    #compact-output:checked ~ span {
+      @extend %toggle-input;
+      left: 50%;
+    }
+    #compressed-output:checked ~ span {
+      @extend %toggle-input;
+      left: 75%;
+    }
+  }
+
+  .html-toggle-group {
+    @extend %toggle-group;
+
+
+    label, span {
+      width: 25%;
+    }
+
+    %toggle-input {
+      width: 25%
+    }
+
+    #html-html:checked ~ span {
+      @extend %toggle-input;
+    }
+    #html-haml:checked ~ span {
+      @extend %toggle-input;
+      left: 25%;
+    }
+    #html-mkdn:checked ~ span {
+      @extend %toggle-input;
+      left: 50%;
+    }
+    #html-txtl:checked ~ span {
+      @extend %toggle-input;
+      left: 75%;
+    }
+  }
+
+
+
+
+
 }
 
 #casement {
   @extend %stretch;
-  
+
   right: 2.125em;
-  
-  // &.controls-open {
-    right: 20%;
-  // }
+
+  &.controls-open {
+    right: 33%;
+  }
 }
 
 #rendered-html {
