@@ -17,6 +17,17 @@
     font-weight: 200;
     color: $delta_gray;
     border-bottom: 1px solid $golf_gray;
+    vertical-align: middle;
+    
+    h2 {
+      font-size: inherit;
+      font-weight: inherit;
+      color: inherit;
+      display: inline-block;
+      float: left;
+      padding: 0 0.83333em;
+      line-height: 1.5;
+    }
   }
 
   pre {
@@ -33,71 +44,71 @@
 }
 
 .panel-toggle {
-  @extend %sub-menu-dropdown;
-
-  padding: 0 0.83333em;
+  // @extend %sub-menu-dropdown;
+  // 
+  // padding: 0 0.83333em;
   display: inline-block;
-  width: auto;
-  float: left;
-  cursor: pointer;
-
-  .selected {
-    &:after {
-      @extend %icon-pseudo-content;
-
-      content: "\f0d7";
-      margin: 0 0.33333em;
-      font-size: 0.83333em;
-    }
-  }
-
-  > ul {
-    top: em($heading_3);
-    left: 0;
-    width: em(200);
-
-    a, span {
-      &:hover {
-        text-decoration: underline;
-      }
-    }
-  }
-
-  &:hover {
-    color: $white;
-    background: transparentize(scale-color($alpha_color, $lightness: -80%), 0.2);
-
-    .selected {
-      &:after {
-        content: "\f0d8";
-      }
-    }
-
-    > ul {
-      display: block;
-    }
-  }
+  // width: auto;
+  // float: left;
+  // cursor: pointer;
+  // 
+  // .selected {
+  //   &:after {
+  //     @extend %icon-pseudo-content;
+  // 
+  //     content: "\f0d7";
+  //     margin: 0 0.33333em;
+  //     font-size: 0.83333em;
+  //   }
+  // }
+  // 
+  // > ul {
+  //   top: em($heading_3);
+  //   left: 0;
+  //   width: em(200);
+  // 
+  //   a, span {
+  //     &:hover {
+  //       text-decoration: underline;
+  //     }
+  //   }
+  // }
+  // 
+  // &:hover {
+  //   color: $white;
+  //   background: transparentize(scale-color($alpha_color, $lightness: -80%), 0.2);
+  // 
+  //   .selected {
+  //     &:after {
+  //       content: "\f0d8";
+  //     }
+  //   }
+  // 
+  //   > ul {
+  //     display: block;
+  //   }
+  // }
 }
 
 #extension_list {
   @extend .panel-toggle;
 
-  float: right;
+  // float: right;
 
   > span {
     @extend %icon-Compass;
   }
 
   ul {
-    left: initial;
-    right: 0;
-    width: auto;
-    min-width: em(240);
-    margin: 0;
+    // left: initial;
+    // right: 0;
+    // width: auto;
+    // min-width: em(240);
+    // margin: 0;
   }
 
   ol {
-    max-height: em(360);
+    max-height: em(80);
     overflow: scroll;
     margin-top: em(8);
 
@@ -127,7 +138,7 @@
       background: transparent;
 
       > ul {
-        display: none;
+        // display: none;
       }
     }
   }

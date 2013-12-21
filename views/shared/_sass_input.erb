@@ -1,17 +1,27 @@
 <div class="sass_input" id="sass-form">
   <div class="edit_container">
     <div class="edit-header">
+      <h2><span id="syntax" class="selected"></span></h2>
 
-      <div id="sass-syntax-toggle" class="panel-toggle">
-        <span id="syntax" class="selected"></span>
+      <div class="controls">
+        <label></label>
 
-        <ul>
-          <li><span data-toggle-input="sass">SCSS</span></li>
-          <li><span data-toggle-input="sass">Sass</span></li>
-        </ul>
+        <menu>
+          <div id="sass-syntax-toggle" class="panel-toggle">
+            <h3>Syntax</h3>
+
+
+            <ul>
+              <li><span data-toggle-input="sass">SCSS</span></li>
+              <li><span data-toggle-input="sass">Sass</span></li>
+            </ul>
+          </div>
+
+          <div id="extension_list"></div>
+        </menu>
       </div>
 
-      <div id="extension_list"></div>
+
     </div>
 
     <div class="pre_container">

@@ -163,11 +163,11 @@
   @extend %icon-font;
   
   &:before {
-    // content: "\e002";
+    content: "\e002";
 
-    content: "\e004";
-	  font-size: 2em;
-    line-height: 0.01;
+    // content: "\e004";
+    // font-size: 2em;
+    // line-height: 0.01;
   }
 }
 
