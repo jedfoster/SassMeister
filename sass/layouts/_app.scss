@@ -18,7 +18,7 @@
   bottom: 0;
   right: 0;
 
-  width: em($font_size * 2.125, $small_point_size);
+  width: em(32, $small_point_size); //($font_size * 2.125, $small_point_size);
   height: 100%;
   border-left: 1px solid $golf_gray;
   font-size: em($small_point_size);
@@ -50,12 +50,12 @@
   }
 
   .control-icon {
-    font-size: em($font_size);
+    font-size: 1em; //($small_point_size);
     color: $delta_gray;
     cursor: pointer;
     position: absolute;
-    top: 0.5em;
-    left: 0.65em;
+    top: 0.25em;
+    left: 0.35em;
     display: block;
     width: 1em;
     z-index: 1;
@@ -272,7 +272,7 @@
 #casement {
   @extend %stretch;
 
-  right: 2.125em;
+  right: em(32);
 
   &.controls-open {
     right: 33%;
