@@ -24,18 +24,19 @@
   <a id="open-controls" class="control-icon"></a>
 
   <div class="control-container">
-    <section>
+    <fieldset>
       <h2>Sass</h2>
 
       <h3>Version <span>X.X.X</span></h3>
 
       <span class="version-toggle-group">
         <input type="radio" name="sass-version" data-toggle-input="sass" value="sass3-3" id="version-sass3-3">
-        <input type="radio" name="sass-version" data-toggle-input="sass" value="sass3-2" id="version-sass3-2">
-        <input type="radio" name="sass-version" data-toggle-input="sass" value="lib    " id="version-lib">
-
         <label for="version-sass3-3">3.3.0.rc.1</label>
+
+        <input type="radio" name="sass-version" data-toggle-input="sass" value="sass3-2" id="version-sass3-2">
         <label for="version-sass3-2">3.2.13    </label>
+
+        <input type="radio" name="sass-version" data-toggle-input="sass" value="lib    " id="version-lib">
         <label for="version-lib">libSass   </label>
 
         <span></span>
@@ -45,52 +46,56 @@
 
       <span class="syntax-toggle-group">
         <input type="radio" name="sass_syntax" data-toggle-input="sass" value="sass" id="syntax-sass">
-        <input type="radio" name="sass_syntax" data-toggle-input="sass" value="scss" id="syntax-scss">
-
         <label for="syntax-scss">SCSS</label>
+        
+        <input type="radio" name="sass_syntax" data-toggle-input="sass" value="scss" id="syntax-scss">
         <label for="syntax-sass">Sass</label>
 
         <span></span>
       </span>
 
       <div id="extension_list"></div>
-    </section>
+    </fieldset>
 
-    <section>
+    <fieldset>
       <h2>CSS</h2>
 
       <span class="output-toggle-group">
-        <input type="radio" name="output_style" data-toggle-input="css" value="expanded  " id="expanded-output">
-        <input type="radio" name="output_style" data-toggle-input="css" value="nested    " id="nested-output">
-        <input type="radio" name="output_style" data-toggle-input="css" value="compact   " id="compact-output">
-        <input type="radio" name="output_style" data-toggle-input="css" value="compressed" id="compressed-output">
-
+        <input type="radio" name="output_style" data-toggle-input="css" value="expanded" id="expanded-output">  
         <label for="expanded-output">expanded</label>
+        
+        <input type="radio" name="output_style" data-toggle-input="css" value="nested" id="nested-output">    
         <label for="nested-output">nested</label>
+        
+        <input type="radio" name="output_style" data-toggle-input="css" value="compact" id="compact-output">   
         <label for="compact-output">compact</label>
+        
+        <input type="radio" name="output_style" data-toggle-input="css" value="compressed" id="compressed-output">
         <label for="compressed-output">compressed</label>
 
         <span></span>
       </span>
-    </section>
+    </fieldset>
 
-    <section>
+    <fieldset>
       <h2>HTML</h2>
 
       <span class="html-toggle-group">
         <input type="radio" name="html_syntax" data-toggle-input="css" value="HTML    " id="html-html">
-        <input type="radio" name="html_syntax" data-toggle-input="css" value="Haml    " id="html-haml">
-        <input type="radio" name="html_syntax" data-toggle-input="css" value="Markdown" id="html-mkdn">
-        <input type="radio" name="html_syntax" data-toggle-input="css" value="Textile " id="html-txtl">
-
         <label for="html-html">HTML    </label>
+        
+        <input type="radio" name="html_syntax" data-toggle-input="css" value="Haml    " id="html-haml">
         <label for="html-haml">Haml    </label>
+        
+        <input type="radio" name="html_syntax" data-toggle-input="css" value="Markdown" id="html-mkdn">
         <label for="html-mkdn">Markdown</label>
+        
+        <input type="radio" name="html_syntax" data-toggle-input="css" value="Textile " id="html-txtl">
         <label for="html-txtl">Textile </label>
 
         <span></span>
       </span>
-    </section>
+    </fieldset>
   </div>
 
   <div id="promo">

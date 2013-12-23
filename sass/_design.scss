@@ -25,12 +25,10 @@ body:after {
   p {
     font-size: em($heading_4);
     font-weight: 200;
-    // clear: both;
   }
   
   h1 {
     font-size: em($heading_1 * 1.5); 
-    // float: left;
   }  
 
   .messenger-message {
@@ -47,8 +45,6 @@ body:after {
     max-width: 120px;
     margin-left: 0.5em;
     display: inline-block;
-    // margin-top: -3em;
-    // clear: left;
     
     @each $prefix in $prefix_defaults {
       #{$prefix}border-radius: em(3);

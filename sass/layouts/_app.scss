@@ -17,13 +17,15 @@
   top: 0;
   bottom: 0;
   right: 0;
-
-  width: em(32, $small_point_size); //($font_size * 2.125, $small_point_size);
+  width: em(32, $small_point_size);
   height: 100%;
   border-left: 1px solid $golf_gray;
   font-size: em($small_point_size);
-
   background: scale-color($alpha_gray, $lightness: 90%);
+  
+  -webkit-transition: width 0.1s ease-in-out;
+  -moz-transition: width 0.1s ease-in-out;
+  transition: width 0.1s ease-in-out;
 
   &.open {
     width: 33%;
@@ -32,7 +34,7 @@
       content: "\22";
     }
 
-    section {
+    fieldset, section {
       border-bottom: 1px solid $golf_gray;
 
       &:last-child {
@@ -50,7 +52,7 @@
   }
 
   .control-icon {
-    font-size: 1em; //($small_point_size);
+    font-size: 1em;
     color: $delta_gray;
     cursor: pointer;
     position: absolute;
@@ -66,10 +68,7 @@
     top:0;
     bottom: 12em;
     width: 100%;
-
-     overflow-x: scroll;
-
-     
+    overflow-x: scroll;
   }
 
   #promo {
@@ -82,22 +81,20 @@
     overflow-x: scroll;
   }
 
-  section {
+  fieldset, section {
     padding: 1em 2.5em 1em 3em;
     float: left;
     width: 100%;
     clear: both;
   }
-
+  
   h2 {
+    @extend %headings_2;
 
-  }
-
-  h3 {
     font-weight: 100;
-    color: $bravo_gray
+    color: $bravo_gray;
+    margin-bottom: 0.5em;
   }
-
 
   %toggle-group {
     @include border_radius(em(8));
@@ -134,9 +131,9 @@
       bottom: 0;
       left: 0;
 
-      -webkit-transition: left 0.2s ease;
-      -moz-transition: left 0.2s ease;
-      transition: left 0.2s ease;
+      -webkit-transition: left 0.2s ease-in-out;
+      -moz-transition: left 0.2s ease-in-out;
+      transition: left 0.2s ease-in-out;
 
       @include border_radius(em(8));
     }
@@ -273,6 +270,10 @@
   @extend %stretch;
 
   right: em(32);
+  
+  -webkit-transition: right 0.1s ease-in-out;
+  -moz-transition: right 0.1s ease-in-out;
+  transition: right 0.1s ease-in-out;
 
   &.controls-open {
     right: 33%;
