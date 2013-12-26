@@ -20,7 +20,7 @@
 
 
 
-<div id="control-column">
+<div id="control-column" class="open">
   <a id="open-controls" class="control-icon"></a>
 
   <div class="control-container">
@@ -29,30 +29,30 @@
 
       <h3>Version <span>X.X.X</span></h3>
 
-      <span class="version-toggle-group">
-        <input type="radio" name="sass-version" data-toggle-input="sass" value="sass3-3" id="version-sass3-3">
-        <label for="version-sass3-3">3.3.0.rc.1</label>
+      <fieldset class="version-toggle-group" data-event-name="SassVersion">
+        <input type="radio" name="sass_version" value="sass3-3" id="version-sass3-3">
+        <label for="version-sass3-3" data-toggle-input="version">3.3.0.rc.1</label>
 
-        <input type="radio" name="sass-version" data-toggle-input="sass" value="sass3-2" id="version-sass3-2">
-        <label for="version-sass3-2">3.2.13    </label>
+        <input type="radio" name="sass_version" value="sass3-2" id="version-sass3-2">
+        <label for="version-sass3-2" data-toggle-input="version">3.2.13</label>
 
-        <input type="radio" name="sass-version" data-toggle-input="sass" value="lib    " id="version-lib">
-        <label for="version-lib">libSass   </label>
+        <input type="radio" name="sass_version" value="lib" id="version-lib">
+        <label for="version-lib" data-toggle-input="version">libSass</label>
 
         <span></span>
-      </span>
+      </fieldset>
 
       <h3>Syntax</h3>
 
-      <span class="syntax-toggle-group">
-        <input type="radio" name="sass_syntax" data-toggle-input="sass" value="sass" id="syntax-sass">
-        <label for="syntax-scss">SCSS</label>
+      <fieldset class="syntax-toggle-group" data-event-name="SassSyntax">
+        <input type="radio" name="sass_syntax" value="scss" id="syntax-scss">
+        <label for="syntax-scss" data-toggle-input="sass">SCSS</label>
         
-        <input type="radio" name="sass_syntax" data-toggle-input="sass" value="scss" id="syntax-scss">
-        <label for="syntax-sass">Sass</label>
+        <input type="radio" name="sass_syntax" value="sass" id="syntax-sass">
+        <label for="syntax-sass" data-toggle-input="sass">Sass</label>
 
         <span></span>
-      </span>
+      </fieldset>
 
       <div id="extension_list"></div>
     </fieldset>
@@ -60,41 +60,41 @@
     <fieldset>
       <h2>CSS</h2>
 
-      <span class="output-toggle-group">
-        <input type="radio" name="output_style" data-toggle-input="css" value="expanded" id="expanded-output">  
-        <label for="expanded-output">expanded</label>
+      <fieldset class="output-toggle-group" data-event-name="CSSOutput">
+        <input type="radio" name="output_style" value="expanded" id="expanded-output">  
+        <label for="expanded-output" data-toggle-input="css">expanded</label>
         
-        <input type="radio" name="output_style" data-toggle-input="css" value="nested" id="nested-output">    
-        <label for="nested-output">nested</label>
+        <input type="radio" name="output_style" value="nested" id="nested-output">    
+        <label for="nested-output" data-toggle-input="css">nested</label>
         
-        <input type="radio" name="output_style" data-toggle-input="css" value="compact" id="compact-output">   
-        <label for="compact-output">compact</label>
+        <input type="radio" name="output_style" value="compact" id="compact-output">   
+        <label for="compact-output" data-toggle-input="css">compact</label>
         
-        <input type="radio" name="output_style" data-toggle-input="css" value="compressed" id="compressed-output">
-        <label for="compressed-output">compressed</label>
+        <input type="radio" name="output_style" value="compressed" id="compressed-output">
+        <label for="compressed-output" data-toggle-input="css">compressed</label>
 
         <span></span>
-      </span>
+      </fieldset>
     </fieldset>
 
     <fieldset>
       <h2>HTML</h2>
 
-      <span class="html-toggle-group">
-        <input type="radio" name="html_syntax" data-toggle-input="css" value="HTML    " id="html-html">
-        <label for="html-html">HTML    </label>
+      <fieldset class="html-toggle-group" data-event-name="HTMLSyntax">
+        <input type="radio" name="html_syntax" value="HTML" id="html-html">
+        <label for="html-html" data-toggle-input="html">HTML</label>
         
-        <input type="radio" name="html_syntax" data-toggle-input="css" value="Haml    " id="html-haml">
-        <label for="html-haml">Haml    </label>
+        <input type="radio" name="html_syntax" value="Haml" id="html-haml">
+        <label for="html-haml" data-toggle-input="html">Haml</label>
         
-        <input type="radio" name="html_syntax" data-toggle-input="css" value="Markdown" id="html-mkdn">
-        <label for="html-mkdn">Markdown</label>
+        <input type="radio" name="html_syntax" value="Markdown" id="html-mkdn">
+        <label for="html-mkdn" data-toggle-input="html">Markdown</label>
         
-        <input type="radio" name="html_syntax" data-toggle-input="css" value="Textile " id="html-txtl">
-        <label for="html-txtl">Textile </label>
+        <input type="radio" name="html_syntax" value="Textile" id="html-txtl">
+        <label for="html-txtl" data-toggle-input="html">Textile</label>
 
         <span></span>
-      </span>
+      </fieldset>
     </fieldset>
   </div>
 

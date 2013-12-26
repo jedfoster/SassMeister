@@ -12,47 +12,56 @@
   }
 }
 
+
+$control-column-closed-width: em(32);
+$control-column-open-width: em(480);
+
 #control-column {
   position: absolute;
   top: 0;
   bottom: 0;
   right: 0;
-  width: em(32, $small_point_size);
+  width: $control-column-closed-width;
   height: 100%;
   border-left: 1px solid $golf_gray;
-  font-size: em($small_point_size);
-  background: scale-color($alpha_gray, $lightness: 90%);
   
+  background: scale-color($alpha_gray, $lightness: 90%);
+
   -webkit-transition: width 0.1s ease-in-out;
   -moz-transition: width 0.1s ease-in-out;
   transition: width 0.1s ease-in-out;
+  
+  > * {
+    font-size: em($small_point_size);
+  }
 
   &.open {
-    width: 33%;
+    width: $control-column-open-width;
+    z-index: 9999;
 
     .control-icon:before {
       content: "\22";
     }
 
-    fieldset, section {
-      border-bottom: 1px solid $golf_gray;
-
-      &:last-child {
-        border: 0;
-      }
-    }
-    
     .control-container {
       border-bottom: 1px solid $golf_gray;
+
+      > fieldset, > section {
+        border-bottom: 1px solid $golf_gray;
+
+        &:last-child {
+          border: 0;
+        }
+      }
     }
-    
+
     #promo {
       display: block;
     }
   }
 
   .control-icon {
-    font-size: 1em;
+    font-size: em($small_point_size);
     color: $delta_gray;
     cursor: pointer;
     position: absolute;
@@ -87,7 +96,7 @@
     width: 100%;
     clear: both;
   }
-  
+
   h2 {
     @extend %headings_2;
 
@@ -105,6 +114,8 @@
     z-index: 1;
     float: left;
     width: 100%;
+    padding: 0;
+    background: $white;
 
     margin-top: 0.5em;
     margin-bottom: 1.5em;
@@ -116,13 +127,25 @@
     }
 
     label {
-      padding: 0.5em 0.5em;
+      font-weight: 300;
+      padding: 0.5em;
       display: inline-block;
       float: left;
       cursor: pointer;
       z-index: 3;
       position: relative;
       text-align: center;
+      text-shadow: none;
+      color: inherit;
+      
+      -webkit-transition: all 0.2s ease-in-out;
+      -moz-transition: all 0.2s ease-in-out;
+      transition: all 0.2s ease-in-out;
+    }
+    
+    input:checked + label {
+      color: $white;
+      text-shadow: 0 0 0.25em darken($alpha_color, 10%);
     }
 
     span {
@@ -135,11 +158,11 @@
       -moz-transition: left 0.2s ease-in-out;
       transition: left 0.2s ease-in-out;
 
-      @include border_radius(em(8));
+      @include border_radius(em(6));
     }
 
     %toggle-input {
-      background: $bravo_color_charlie;
+      background: $alpha_color_delta;
     }
   }
 
@@ -203,8 +226,6 @@
   .output-toggle-group {
     @extend %toggle-group;
 
-    font-size: 0.8125em;
-
     label, span {
       width: 25%;
     }
@@ -259,24 +280,15 @@
       left: 75%;
     }
   }
-
-
-
-
-
 }
 
 #casement {
   @extend %stretch;
 
-  right: em(32);
-  
-  -webkit-transition: right 0.1s ease-in-out;
-  -moz-transition: right 0.1s ease-in-out;
-  transition: right 0.1s ease-in-out;
+  right: $control-column-closed-width;
 
   &.controls-open {
-    right: 33%;
+    // right: $control-column-open-width;
   }
 }
 

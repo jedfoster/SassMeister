@@ -48,6 +48,7 @@
   // 
   // padding: 0 0.83333em;
   display: inline-block;
+  
   // width: auto;
   // float: left;
   // cursor: pointer;
@@ -91,29 +92,31 @@
 }
 
 #extension_list {
-  @extend .panel-toggle;
-
-  // float: right;
+  
+  
+  
 
   > span {
     @extend %icon-Compass;
   }
 
-  ul {
-    // left: initial;
-    // right: 0;
-    // width: auto;
-    // min-width: em(240);
-    // margin: 0;
-  }
 
   ol {
+    @include border_radius(em(8));
+
+    border: 1px solid $golf_gray;
+    width: 100%;
     max-height: em(200);
     overflow: scroll;
-    margin-top: em(8);
+    margin: 0;
+        background: $white;
+    
+    a {
+      cursor: pointer;
+    }
 
     li {
-      padding: 0;
+      padding: 0.5em 1em;
       display: block;
     }
   }
