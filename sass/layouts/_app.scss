@@ -24,13 +24,13 @@ $control-column-open-width: em(480);
   width: $control-column-closed-width;
   height: 100%;
   border-left: 1px solid $golf_gray;
-  
+
   background: scale-color($alpha_gray, $lightness: 90%);
 
   -webkit-transition: width 0.1s ease-in-out;
   -moz-transition: width 0.1s ease-in-out;
   transition: width 0.1s ease-in-out;
-  
+
   > * {
     font-size: em($small_point_size);
   }
@@ -91,7 +91,7 @@ $control-column-open-width: em(480);
   }
 
   fieldset, section {
-    padding: 1em 2.5em 1em 3em;
+    padding: 1em 2.5em 0 3em;
     float: left;
     width: 100%;
     clear: both;
@@ -102,7 +102,23 @@ $control-column-open-width: em(480);
 
     font-weight: 100;
     color: $bravo_gray;
-    margin-bottom: 0.5em;
+    margin-bottom: 0;
+  }
+
+  h3 {
+    @extend %headings_6;
+
+    font-weight: 300;
+    color: $charlie_gray;
+    margin: 0;
+
+    &.syntax, &.version {
+      width: 15%;
+      display: block;
+      float: left;
+      clear: both;
+      line-height: 2.5;
+    }
   }
 
   %toggle-group {
@@ -116,8 +132,6 @@ $control-column-open-width: em(480);
     width: 100%;
     padding: 0;
     background: $white;
-
-    margin-top: 0.5em;
     margin-bottom: 1.5em;
 
     input {
@@ -137,12 +151,12 @@ $control-column-open-width: em(480);
       text-align: center;
       text-shadow: none;
       color: inherit;
-      
+
       -webkit-transition: all 0.2s ease-in-out;
       -moz-transition: all 0.2s ease-in-out;
       transition: all 0.2s ease-in-out;
     }
-    
+
     input:checked + label {
       color: $white;
       text-shadow: 0 0 0.25em darken($alpha_color, 10%);
@@ -170,8 +184,7 @@ $control-column-open-width: em(480);
     @extend %toggle-group;
 
     width: 50%;
-    display: inline-block;
-    float: none;
+    clear: right;
 
     label, span {
       width: 50%;
@@ -196,6 +209,10 @@ $control-column-open-width: em(480);
   .version-toggle-group {
     @extend %toggle-group;
 
+    width: 66%;
+    clear: right;
+
+    &:after { content:"\A"; display: block;white-space:pre; }
 
     label, span {
       width: 33.33334%;
