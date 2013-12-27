@@ -22,6 +22,26 @@ if($('body.about, body.thankyou').length < 1 ) {
   });
 
 
+  // promoMsg = function() {
+  //   msgs = [
+  //     'Show off your sassy side &amp; help support SassMeister.',
+  //     'Get sweet, sassy stickers &amp; help support SassMeister.'
+  //   ];
+  // 
+  //   return msgs[Math.floor(Math.random() * msgs.length)];
+  // };
+
+
+  //   Messenger({extraClasses: 'messenger-on-bottom swag-promo'}).post({
+  //     message: '<a href="http://devswag.com/products/sassmeister-stickers-4">\
+  //     \
+  //     <h1>Swag Alert! </h1> \
+  //     <p><img src="/images/sassmeister-detail-v02_medium.jpg"> ' + promoMsg() + '</p>\
+  // </a>',
+  //     hideAfter: 600,
+  //     showCloseButton: true
+
+
   $('.orientation').on('click', function(event) {
     _gaq.push(['_trackEvent', 'UI', 'Orientation']);
 
@@ -64,13 +84,13 @@ if($('body.about, body.thankyou').length < 1 ) {
   }
 
 
-  $('.panel-toggle li span').on('click', function(event) {
-    event.preventDefault();
+  $('[data-toggle-input]').on('click', function(event) {
+    // event.preventDefault();
 
-    var selected = $(this).text(),
+    var selected = $('#' + $(this).attr('for')).val(),
         input = $(this).data('toggle-input');
 
-    $(this).parents('.panel-toggle').find('.selected').text(selected);
+    // $(this).parents('.panel-toggle').find('.selected').text(selected);
 
     if (input == 'sass') {
       _gaq.push(['_trackEvent', 'UI', 'SassSyntax']);
