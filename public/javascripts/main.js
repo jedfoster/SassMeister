@@ -16,15 +16,27 @@ if($('body.about, body.thankyou').length < 1 ) {
   }
 
 
-  $('#open-controls').on('click', function(event) {
+  $(document).on('click', function(event) {
+    $('#control-column').removeClass('open');
+  });
+
+  $("#control-column").on('click', function(event) {
+    event.stopPropagation();
+  });
+
+  $('.control-icon').on('click', function(event) {
+    event.stopPropagation();
     $('#control-column').toggleClass('open');
   });
 
 
   var initControls = function() {
+    $('#sass-syntax-display').text(SassMeister.inputs.sass.syntax);
+    $('#html-syntax-display').text(SassMeister.inputs.html.syntax);
+
     $('input[name="version"][value="' + SassMeister.sass_version + '"]').prop('checked', true);
-    
-    $('input[name="syntax"][value="' + SassMeister.inputs.sass.syntax + '"]').prop('checked', true); //.data('original', SassMeister.inputs.sass.syntax);
+
+    $('input[name="syntax"][value="' + SassMeister.inputs.sass.syntax.toLowerCase() + '"]').prop('checked', true);
 
     $('input[name="output-style"][value="' + SassMeister.inputs.sass.output_style + '"]').prop('checked', true);
 
@@ -38,7 +50,7 @@ if($('body.about, body.thankyou').length < 1 ) {
   //     'Show off your sassy side &amp; help support SassMeister.',
   //     'Get sweet, sassy stickers &amp; help support SassMeister.'
   //   ];
-  // 
+  //
   //   return msgs[Math.floor(Math.random() * msgs.length)];
   // };
 
@@ -144,7 +156,7 @@ if($('body.about, body.thankyou').length < 1 ) {
       $('#extension_list').replaceWith(data);
       watchExtensions();
       SassMeister.compile.sass();
-      
+
       if(SassMeister.sass_version == 'lib') { //.match(/lib\./)) {
         $('#sass-syntax-toggle').addClass('disabled');
       }
@@ -178,7 +190,7 @@ if($('body.about, body.thankyou').length < 1 ) {
     if(! versionString.match(/lib/)) {
       versionString = 'Sass v' + versionString.slice(0, 3);
     }
-    
+
     $('#sass-version').text(versionString);
   };
 

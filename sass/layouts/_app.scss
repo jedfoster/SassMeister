@@ -13,7 +13,7 @@
 }
 
 
-$control-column-closed-width: em(32);
+$control-column-closed-width: 0;
 $control-column-open-width: em(480);
 
 #control-column {
@@ -23,7 +23,8 @@ $control-column-open-width: em(480);
   right: 0;
   width: $control-column-closed-width;
   height: 100%;
-  border-left: 1px solid $golf_gray;
+  
+  display: none;
 
   background: scale-color($alpha_gray, $lightness: 90%);
 
@@ -38,6 +39,9 @@ $control-column-open-width: em(480);
   &.open {
     width: $control-column-open-width;
     z-index: 9999;
+    border-left: 1px solid $golf_gray;
+
+    display: block;
 
     .control-icon:before {
       content: "\22";
