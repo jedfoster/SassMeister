@@ -1,34 +1,40 @@
 (function($) {
-if($('body.about, body.thankyou').length < 1 ) {
   Messenger.options = {
-    extraClasses: 'messenger-on-top',
-    theme: 'block'
+    theme: 'block',
+    messageDefaults: {
+      hideAfter: 120,
+      showCloseButton: true
+    }
   };
 
   var randomMsg = function() {
     msgs = [
-      'Show off your sassy side &amp; help support SassMeister.',
+      'Show off your sassy side with a SassMeister sticker.',
       'Get sweet, sassy stickers &amp; help support SassMeister.'
-    ];  
-  
+    ];
+
     return msgs[Math.floor(Math.random() * msgs.length)];
   };
-  
-  var stickerMsg = '<a href="http://devswag.com/products/sassmeister-stickers-4">\
-\
-<h1>Swag Alert! </h1> \
-<p><img src="/images/sassmeister-detail-v02_medium.jpg"> ' + randomMsg() + '</p>\
+
+
+
+  if($('body.about, body.thankyou').length < 1 ) {
+
+    var stickerMsg = '<a href="http://devswag.com/products/sassmeister-stickers-4">\
+  <h1>Swag Alert! </h1>\
+  <p><img src="/images/sassmeister-detail-v02_medium.jpg"> ' + randomMsg() + '</p>\
 </a>';
-  
-  
-  $('#promo .swag-promo').html(stickerMsg);
 
 
-  // Messenger({extraClasses: 'messenger-on-bottom swag-promo'}).post({
-  //   message: stickerMsg,
-  //   hideAfter: 600,
-  //   showCloseButton: true
-  // });
-  
-}
+    // Add promo message to the control panel
+    $('#promo .swag-promo').html(stickerMsg);
+
+
+    // var stickerAlert = Messenger({ extraClasses: 'messenger-on-bottom swag-promo' }).post({ message: stickerMsg });
+
+
+
+
+
+  }
 })(jQuery);

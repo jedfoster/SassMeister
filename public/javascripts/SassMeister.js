@@ -285,7 +285,7 @@ var SassMeister;
 
         ///* Send the data using post and put the results in a div */
         $.post('/gist/create', postData, function( data ) {
-          modal('<a href="https://gist.github.com/' + data.id + '" target="_blank">Your Gist</a> ' + confirmationText + ', and here\'s the <a href="/gist/' + data.id + '">SassMeister live view.</a> ');
+          modal('<a href="https://gist.github.com/' + data.id + '" target="_blank">Your Gist</a> ' + confirmationText + '.');
 
           setUrl('/gist/' + data.id);
           SassMeister.inputs.gist_id = data.id;
@@ -308,7 +308,7 @@ var SassMeister;
 
         ///* Send the data using post and put the results in a div */
         $.post('/gist/' + SassMeister.inputs.gist_id + '/edit', postData, function( data ) {
-          modal('<a href="https://gist.github.com/' + data.id + '" target="_blank">Your Gist</a> ' + confirmationText + ', and here\'s the <a href="/gist/' + data.id + '">SassMeister live view.</a> ');
+          modal('<a href="https://gist.github.com/' + data.id + '" target="_blank">Your Gist</a> ' + confirmationText + '.');
 
           setUrl('/gist/' + data.id);
         });
@@ -321,7 +321,7 @@ var SassMeister;
 
         ///* Send the data using post and put the results in a div */
         $.post('/gist/' + SassMeister.inputs.gist_id + '/fork', function( data ) {
-          modal('<a href="https://gist.github.com/' + data.id + '" target="_blank">This Gist</a> ' + confirmationText + ', and here\'s the <a href="/gist/' + data.id + '">SassMeister live view.</a> ');
+          modal('<a href="https://gist.github.com/' + data.id + '" target="_blank">This Gist</a> ' + confirmationText + '.');
 
           setUrl('/gist/' + data.id);
           SassMeister.inputs.gist_id = data.id;
@@ -461,19 +461,7 @@ var SassMeister;
 
 
   var modal = function(content) {
-    if ($('#modal').length == 0) {
-      $('body').append('<div class="reveal-modal large" id="modal"><a class="close-icon"><span class="alt">&#215;</span></a><span class="content">' + content + '</span></div>');
-    }
-    else {
-      $('#modal .content').empty().append(content);
-    }
-
-    $('#modal').reveal({
-      animation: 'fadeAndPop', //fade, fadeAndPop, none
-      animationSpeed: 250, //how fast animations are
-      closeOnBackgroundClick: true, //if you click background will modal close?
-      dismissModalClass: 'close-icon' //the class of a button or element that will close an open modal
-    });
+    Messenger({ extraClasses: 'messenger-on-top' }).post({ message: content, hideAfter: 5, type: 'success' });
   };
 
 })(jQuery);

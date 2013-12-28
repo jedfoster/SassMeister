@@ -14,30 +14,30 @@ body:after {
 
 .swag-promo {
   clear: both;
-  height: inherit;
-  background-color: $delta_color_india;
-  
+
+
   a {
     color: darken($delta_color, 15%);
     color: $delta_color;
   }
-  
+
   p {
-    font-size: em($heading_4);
+    font-size: em($heading_5);
     font-weight: 200;
+    margin-bottom: 0.5em;
   }
-  
+
   h1 {
-    font-size: em($heading_1 * 1.5); 
-  }  
+    font-size: em($heading_1 * 1);
+  }
 
   .messenger-message {
     float: left;
   }
-  
+
   .message .messenger-message-inner{
     text-align: left;
-  }  
+  }
 
   img {
     float: right;
@@ -45,18 +45,19 @@ body:after {
     max-width: 120px;
     margin-left: 0.5em;
     display: inline-block;
-    
+
     @each $prefix in $prefix_defaults {
       #{$prefix}border-radius: em(3);
     }
-    
-    @media #{$mobile} {
-      
-      display: block;
-      float: none;
-      width: 100%;
-      margin-left: 0;
-      margin-bottom: 0.5em;
+
+    .messenger & {
+      @media #{$mobile} {
+        display: block;
+        float: none;
+        width: 100%;
+        margin-left: 0;
+        margin-bottom: 0.5em;
+      }
     }
   }
 }

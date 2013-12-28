@@ -7,8 +7,9 @@ ul.messenger {
   margin: 0;
   padding: 0;
   position: fixed;
-  z-index: 10000;
-  width: 45%;
+  z-index: 1000;
+
+  width: em(400);
   
   @media #{$tablet} {
     width: 50%;
@@ -37,7 +38,7 @@ ul.messenger {
   }
 
   &.messenger-on-top {
-    top: 0;
+    top: $site-header-height;
     bottom: auto;
     
     .messenger-message {
@@ -51,8 +52,8 @@ ul.messenger {
   }
 
   // &.messenger-on-top, &.messenger-on-bottom {
-    left: 0;
-    right: 0;
+    left: em(32);
+    right: em(32);
 
     // &.messenger-on-left {
     //   right: auto;
@@ -73,7 +74,7 @@ ul.messenger {
     border-style: solid;
     text-align: center;
     padding: 1em;
-    
+    width: 100%;
 
     &.alert-warning {
       color: #c09853;
@@ -91,6 +92,15 @@ ul.messenger {
       color: #468847;
       background-color: #dff0d8;
       border-color: #d6e9c6;
+      
+      color: darken($bravo_color, 20%);
+      background-color: $bravo_color_india;
+      border-color: $bravo_color_bravo;
+      
+      a {
+        color: darken($bravo_color, 20%);
+        text-decoration: underline;
+      }
     }
 
     &.alert-info {
