@@ -45,25 +45,6 @@ if($('body.about, body.thankyou').length < 1 ) {
 
   initControls();
 
-  // promoMsg = function() {
-  //   msgs = [
-  //     'Show off your sassy side &amp; help support SassMeister.',
-  //     'Get sweet, sassy stickers &amp; help support SassMeister.'
-  //   ];
-  //
-  //   return msgs[Math.floor(Math.random() * msgs.length)];
-  // };
-
-
-  //   Messenger({extraClasses: 'messenger-on-bottom swag-promo'}).post({
-  //     message: '<a href="http://devswag.com/products/sassmeister-stickers-4">\
-  //     \
-  //     <h1>Swag Alert! </h1> \
-  //     <p><img src="/images/sassmeister-detail-v02_medium.jpg"> ' + promoMsg() + '</p>\
-  // </a>',
-  //     hideAfter: 600,
-  //     showCloseButton: true
-
 
   $('.orientation').on('click', function(event) {
     _gaq.push(['_trackEvent', 'UI', 'Orientation']);
@@ -82,21 +63,6 @@ if($('body.about, body.thankyou').length < 1 ) {
     else {
       $('#save-gist').data('action', 'fork').attr('class', 'fork-gist').find('span').text('Fork Gist');
     }
-
-    // if(SassMeister.inputs.sass.dependencies.libsass) {
-    //   displaySassVersion($('[data-endpoint="lib"]').text());
-    // }
-    // else if(SassMeister.inputs.sass.dependencies.Sass) {
-    //   switch(SassMeister.inputs.sass.dependencies.Sass.slice(0, 3)) {
-    //     case '3.2':
-    //       displaySassVersion($('[data-endpoint="sass3-2"]').text());
-    //       break;
-    //     case '3.3':
-    //     default:
-    //       displaySassVersion($('[data-endpoint="sass3-3"]').text());
-    //       break;
-    //   }
-    // }
   }
   else if (window.github_id != false) {
     $('#save-gist').data('action', 'create').attr('class', 'create-gist').find('span').text('Save Gist');
@@ -196,13 +162,7 @@ if($('body.about, body.thankyou').length < 1 ) {
 
   getExtensions();
 
-  // if(SassMeister.sass_endpoint == '/') {
-  //   displaySassVersion($('#sass-version + ul li:first-child').text());
-  // }
-
-
-
-
+  
   var toggleCSSPanel = function(state) {
     _gaq.push(['_trackEvent', 'UI', 'ToggleCSS']);
 
