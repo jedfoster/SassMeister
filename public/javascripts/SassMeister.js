@@ -68,6 +68,10 @@ var SassMeister;
       //   b. html
       //   c. css
       //     c1. if no stored output, recompile
+      //   d. rendered html
+      //     d1. if no stored output, recompile
+
+      // Sass
       this.editors.sass = this.initEditor(this.inputs.sass.input, 'sass', this.inputs.sass.syntax);
 
       $(this.editors.sass.getSession()).bindWithDelay('change', function(event) {
@@ -81,6 +85,7 @@ var SassMeister;
       }, 750);
 
 
+      // HTML (input only)
       this.editors.html = this.initEditor(this.inputs.html.input, 'html', this.inputs.html.syntax);
 
       $(this.editors.html.getSession()).bindWithDelay('change', function(event) {
@@ -89,16 +94,26 @@ var SassMeister;
       }, 750);
 
 
-      this.editors.css = this.initEditor(this.outputs.css.input, 'css', 'css');
+      // CSS
+      this.editors.css = this.initEditor(this.outputs.css, 'css', 'css');
       this.editors.css.setReadOnly(true);
 
       if(! this.editors.css.getValue()) {
         $this.compile.sass();
       }
 
+
       // Focus on the Sass input
       this.editors.sass.focus();
 
+
+      // HTML (rendered)
+      if(this.outputs.html) {
+        this.updateRender(this.outputs);
+      }
+      else if(this.inputs.html.input) {
+        $this.compile.html();
+      }
 
 
       // 3. arrange the panels
