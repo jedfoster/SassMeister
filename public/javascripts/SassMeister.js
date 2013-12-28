@@ -40,7 +40,13 @@ var SassMeister;
       css: 'show'
     },
 
-    sass_endpoint: '/',
+    sass_version: '3.3',
+
+    endpoints: {
+      '3.3': 'sass3-3',
+      '3.2': 'sass3-2',
+      'lib': 'lib'
+    },
 
     timer: null,
 
@@ -117,7 +123,7 @@ var SassMeister;
 
 
       // 3. arrange the panels
-      this.initControls();
+      // this.initControls();
       this.initPanels();
       this.arrangePanels(this.layout.orientation);
 
@@ -177,12 +183,36 @@ var SassMeister;
       return updateRender(new_content);
     },
 
+    sass_endpoint: function() {
+      return 'http://' + this.endpoints[this.sass_version] + '.' + document.domain + '/';
+
+
+      // if(this.inputs.sass.dependencies.libsass) {
+      //   this.sass_endpoint = 'http://lib.' + document.domain + '/';
+      //   // this.inputs.sass.syntax = 'SCSS';
+      // }
+      //
+      // else if(this.inputs.sass.dependencies.Sass) {
+      //   switch(this.inputs.sass.dependencies.Sass.slice(0, 3)) {
+      //     case '3.2':
+      //       this.sass_endpoint = 'http://sass3-2.' + document.domain + '/';
+      //       break;
+      //     case '3.3':
+      //       this.sass_endpoint = 'http://sass3-3.' + document.domain + '/';
+      //       break;
+      //     default:
+      //       // this.inputs.sass.syntax = 'SCSS';
+      //       break;
+      //   }
+      // }
+    },
+
     compile: {
       sass: function() {
         _gaq.push(['_trackEvent', 'Form', 'Submit']);
 
         /* Post the form and handle the returned data */
-        $.post(SassMeister.sass_endpoint + 'compile', SassMeister.inputs.sass, function( data ) {          
+        $.post(SassMeister.sass_endpoint() + 'compile', SassMeister.inputs.sass, function( data ) {
           SassMeister.editors.css.setValue(data.css,-1);
           SassMeister.outputs.css = data.css;
           SassMeister.inputs.sass.dependencies = data.dependencies;
@@ -226,7 +256,7 @@ var SassMeister;
 
     convert: {
       sass: function() {
-        $.post(SassMeister.sass_endpoint + 'convert', SassMeister.inputs.sass, function( data ) {
+        $.post(SassMeister.sass_endpoint() + 'convert', SassMeister.inputs.sass, function( data ) {
           SassMeister.bypassConversion = true;
 
           SassMeister.editors.sass.setValue(data.css, -1);
@@ -355,22 +385,14 @@ var SassMeister;
     getStorage: function() {
       if(window.gist) {
         this.inputs = $.extend(true, this.inputs, window.gist);
-        
+
         if(this.inputs.sass.dependencies.libsass) {
-          this.sass_endpoint = 'http://lib.' + document.domain + '/';
+          this.sass_version = 'lib';
           // this.inputs.sass.syntax = 'SCSS';
         }
-        
+
         else if(this.inputs.sass.dependencies.Sass) {
-          switch(this.inputs.sass.dependencies.Sass.slice(0, 3)) {
-            case '3.2':
-              this.sass_endpoint = 'http://sass3-2.' + document.domain + '/';
-              break;
-            case '3.3':
-            default:
-              // this.inputs.sass.syntax = 'SCSS';
-              break;
-          }
+          this.sass_version = this.inputs.sass.dependencies.Sass.slice(0, 3);
         }
       }
       else {

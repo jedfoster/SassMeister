@@ -18,9 +18,20 @@ if($('body.about, body.thankyou').length < 1 ) {
 
   $('#open-controls').on('click', function(event) {
     $('#control-column').toggleClass('open');
-    $('#casement').toggleClass('controls-open');
   });
 
+
+  var initControls = function() {
+    $('input[name="version"][value="' + SassMeister.sass_version + '"]').prop('checked', true);
+    
+    $('input[name="syntax"][value="' + SassMeister.inputs.sass.syntax + '"]').prop('checked', true); //.data('original', SassMeister.inputs.sass.syntax);
+
+    $('input[name="output-style"][value="' + SassMeister.inputs.sass.output_style + '"]').prop('checked', true);
+
+    $('input[name="html-syntax"][value="' + SassMeister.inputs.html.syntax + '"]').prop('checked', true);
+  };
+
+  initControls();
 
   // promoMsg = function() {
   //   msgs = [
@@ -60,21 +71,20 @@ if($('body.about, body.thankyou').length < 1 ) {
       $('#save-gist').data('action', 'fork').attr('class', 'fork-gist').find('span').text('Fork Gist');
     }
 
-    if(SassMeister.inputs.sass.dependencies.libsass) {
-      displaySassVersion($('[data-endpoint="lib"]').text());
-    }
-
-    else if(SassMeister.inputs.sass.dependencies.Sass) {
-      switch(SassMeister.inputs.sass.dependencies.Sass.slice(0, 3)) {
-        case '3.2':
-          displaySassVersion($('[data-endpoint="sass3-2"]').text());
-          break;
-        case '3.3':
-        default:
-          displaySassVersion($('[data-endpoint="sass3-3"]').text());
-          break;
-      }
-    }
+    // if(SassMeister.inputs.sass.dependencies.libsass) {
+    //   displaySassVersion($('[data-endpoint="lib"]').text());
+    // }
+    // else if(SassMeister.inputs.sass.dependencies.Sass) {
+    //   switch(SassMeister.inputs.sass.dependencies.Sass.slice(0, 3)) {
+    //     case '3.2':
+    //       displaySassVersion($('[data-endpoint="sass3-2"]').text());
+    //       break;
+    //     case '3.3':
+    //     default:
+    //       displaySassVersion($('[data-endpoint="sass3-3"]').text());
+    //       break;
+    //   }
+    // }
   }
   else if (window.github_id != false) {
     $('#save-gist').data('action', 'create').attr('class', 'create-gist').find('span').text('Save Gist');
@@ -92,10 +102,20 @@ if($('body.about, body.thankyou').length < 1 ) {
 
     // $(this).parents('.panel-toggle').find('.selected').text(selected);
 
+    if (input == 'version') {
+      _gaq.push(['_trackEvent', 'UI', 'SassVersion']);
+
+      SassMeister.sass_version = selected; //endpoint = 'http://' + selected + '.' + document.domain + '/';
+
+      getExtensions();
+
+      // displaySassVersion($(this).text());
+    }
     if (input == 'sass') {
       _gaq.push(['_trackEvent', 'UI', 'SassSyntax']);
 
       SassMeister.inputs.sass.syntax = selected;
+      $('#sass-syntax-display').text($(this).text());
 
       SassMeister.convert.sass();
       SassMeister.editors.sass.getSession().setMode('ace/mode/' + selected.toLowerCase());
@@ -111,6 +131,7 @@ if($('body.about, body.thankyou').length < 1 ) {
       _gaq.push(['_trackEvent', 'UI', 'HTMLSyntax']);
 
       SassMeister.inputs.html.syntax = selected;
+      $('#html-syntax-display').text($(this).text());
 
       SassMeister.compile.html();
       SassMeister.editors.html.getSession().setMode("ace/mode/" + selected.toLowerCase());
@@ -119,12 +140,12 @@ if($('body.about, body.thankyou').length < 1 ) {
 
 
   var getExtensions = function() {
-    $.get(SassMeister.sass_endpoint + 'extensions', function( data ) {
+    $.get(SassMeister.sass_endpoint() + 'extensions', function( data ) {
       $('#extension_list').replaceWith(data);
       watchExtensions();
       SassMeister.compile.sass();
       
-      if(SassMeister.sass_endpoint.match(/lib\./)) {
+      if(SassMeister.sass_version == 'lib') { //.match(/lib\./)) {
         $('#sass-syntax-toggle').addClass('disabled');
       }
       else {
@@ -163,21 +184,11 @@ if($('body.about, body.thankyou').length < 1 ) {
 
   getExtensions();
 
-  if(SassMeister.sass_endpoint == '/') {
-    displaySassVersion($('#sass-version + ul li:first-child').text());
-  }
+  // if(SassMeister.sass_endpoint == '/') {
+  //   displaySassVersion($('#sass-version + ul li:first-child').text());
+  // }
 
-  $('[data-endpoint]').on('click', function(event) {
-    _gaq.push(['_trackEvent', 'UI', 'SassVersion']);
-    
-    var endpoint = $(this).data('endpoint');
 
-    SassMeister.sass_endpoint = 'http://' + endpoint + '.' + document.domain + '/';
-
-    getExtensions();
-
-    displaySassVersion($(this).text());
-  });
 
 
   var toggleCSSPanel = function(state) {
