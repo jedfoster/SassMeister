@@ -102,7 +102,7 @@
   }
 }
 
-.github-login, .bookmark-icon {
+.github-login, .bookmark-icon, .site_header .control-icon {
   &:hover {
     &:after {
       @extend %tooltip;

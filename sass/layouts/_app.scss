@@ -23,10 +23,9 @@ $control-column-open-width: em(480);
   right: 0;
   width: $control-column-closed-width;
   height: 100%;
-  
-  display: none;
-
+  border-left: 0;
   background: scale-color($alpha_gray, $lightness: 90%);
+  z-index: 9999;
 
   -webkit-transition: width 0.1s ease-in-out;
   -moz-transition: width 0.1s ease-in-out;
@@ -38,30 +37,8 @@ $control-column-open-width: em(480);
 
   &.open {
     width: $control-column-open-width;
-    z-index: 9999;
+    
     border-left: 1px solid $golf_gray;
-
-    display: block;
-
-    .control-icon:before {
-      content: "\22";
-    }
-
-    .control-container {
-      border-bottom: 1px solid $golf_gray;
-
-      > fieldset, > section {
-        border-bottom: 1px solid $golf_gray;
-
-        &:last-child {
-          border: 0;
-        }
-      }
-    }
-
-    #promo {
-      display: block;
-    }
   }
 
   .control-icon {
@@ -74,20 +51,36 @@ $control-column-open-width: em(480);
     display: block;
     width: 1em;
     z-index: 1;
+    
+    &:before {
+      content: "\22";
+    }
   }
 
   .control-container {
     position:absolute;
     top:0;
-    bottom: 12em;
+    bottom: 0;
     width: 100%;
     overflow-x: scroll;
+    
+    > fieldset, > section {
+      border-bottom: 1px solid $golf_gray;
+
+      &:last-child {
+        border: 0;
+      }
+    }
+    
+    &.promo {
+      bottom: 12em;
+    }
   }
 
   #promo {
-    display: none;
     position:absolute;
     height: 12em;
+    border-top: 1px solid $delta_color_fox;
 
     bottom: 0;
     float: left;
@@ -209,7 +202,6 @@ $control-column-open-width: em(480);
     }
   }
 
-
   .version-toggle-group {
     @extend %toggle-group;
 
@@ -242,7 +234,6 @@ $control-column-open-width: em(480);
       left: 66.66667%;
     }
   }
-
 
   .output-toggle-group {
     @extend %toggle-group;
@@ -305,12 +296,6 @@ $control-column-open-width: em(480);
 
 #casement {
   @extend %stretch;
-
-  right: $control-column-closed-width;
-
-  &.controls-open {
-    // right: $control-column-open-width;
-  }
 }
 
 #rendered-html {
