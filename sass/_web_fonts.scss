@@ -131,7 +131,8 @@
 
   &:before {
   	content: "\e018";
-  	margin-right: 0.2em;
+  	font-size: 1.33334em;
+  	margin-right: 0.3em;
   }
 }
 
@@ -164,10 +165,6 @@
   
   &:before {
     content: "\e002";
-
-    // content: "\e004";
-    // font-size: 2em;
-    // line-height: 0.01;
   }
 }
 
@@ -209,9 +206,7 @@
  @extend %icon-font;
 
 	&:before {
-    // content: "\e005";
   	content: "\e009";
-
     font-size: 0.9em;
     line-height: 1.4;
   }
@@ -220,9 +215,7 @@
  @extend %icon-font;
 
 	&:before {
-    // content: "\e006";
   	content: "\e007";
-
     font-size: 0.9em;
     line-height: 1.4;
   }

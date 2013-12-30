@@ -31,10 +31,10 @@
   </script>
 </head>
 
-<body class="<%= body_class || 'app' %>">
+<body class="<%= @body_class || 'app' %>">
   <%= partial :"shared/_header" %>
   
-  <%= partial :"shared/_control_panel" unless body_class %>
+  <%= partial :"shared/_control_panel" unless @body_class %>
   
 	<section class="main_body">
   	<%= yield %>

@@ -64,7 +64,7 @@ if($('body.about, body.thankyou').length < 1 ) {
       $('#save-gist').data('action', 'fork').attr('class', 'fork-gist').find('span').text('Fork Gist');
     }
     
-    $('#cloud_actions li:first-child').after('<a href="https://gist.github.com/' + gist.gist_id + '" target="_blank" class="jump-icon" id="gist-link">View on GitHub</a>');
+    $('#cloud_actions li:first-child').after('<li><a href="https://gist.github.com/' + gist.gist_id + '" target="_blank" class="jump-icon" id="gist-link">View on GitHub</a></li>');
   }
   else if (window.github_id != false) {
     $('#save-gist').data('action', 'create').attr('class', 'create-gist').find('span').text('Save Gist');

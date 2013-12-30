@@ -293,7 +293,7 @@ var SassMeister;
           SassMeister.inputs.html_filename = data.html_filename;
 
           $('#save-gist').text('Update Gist').data('action', 'edit');
-          $('#cloud_actions li:first-child').after('<a href="https://gist.github.com/' + data.id + '" target="_blank" class="jump-icon" id="gist-link">View on GitHub</a>');
+          $('#cloud_actions li:first-child').after('<li><a href="https://gist.github.com/' + data.id + '" target="_blank" class="jump-icon" id="gist-link">View on GitHub</a></li>');
         });
       },
 

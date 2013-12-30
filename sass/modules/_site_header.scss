@@ -38,7 +38,15 @@
       text-shadow: 0 0 0.25em darken($alpha_color, 10%);
 
       &:after {
-        display: none;
+        @extend %tooltip;
+        
+        right: initial;
+        left: 0;
+        width: em(260);
+        
+        @media #{$mobile} {
+          display: none;
+        }
       }
     }
 
