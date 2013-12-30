@@ -293,6 +293,7 @@ var SassMeister;
           SassMeister.inputs.html_filename = data.html_filename;
 
           $('#save-gist').text('Update Gist').data('action', 'edit');
+          $('#cloud_actions li:first-child').after('<a href="https://gist.github.com/' + data.id + '" target="_blank" class="jump-icon" id="gist-link">View on GitHub</a>');
         });
       },
 
@@ -310,6 +311,7 @@ var SassMeister;
         $.post('/gist/' + SassMeister.inputs.gist_id + '/edit', postData, function( data ) {
           modal('<a href="https://gist.github.com/' + data.id + '" target="_blank">Your Gist</a> ' + confirmationText + '.');
 
+          $('#gist-link').attr('href', 'https://gist.github.com/' + data.id);
           setUrl('/gist/' + data.id);
         });
       },
@@ -323,6 +325,7 @@ var SassMeister;
         $.post('/gist/' + SassMeister.inputs.gist_id + '/fork', function( data ) {
           modal('<a href="https://gist.github.com/' + data.id + '" target="_blank">This Gist</a> ' + confirmationText + '.');
 
+          $('#gist-link').attr('href', 'https://gist.github.com/' + data.id);
           setUrl('/gist/' + data.id);
           SassMeister.inputs.gist_id = data.id;
 

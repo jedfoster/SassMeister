@@ -81,10 +81,19 @@ $control-column-open-width: em(480);
     position:absolute;
     height: 12em;
     border-top: 1px solid $delta_color_fox;
+    background-color: $delta_color_india;
 
     bottom: 0;
     float: left;
     overflow-x: scroll;
+    
+    .swag-promo {
+      height: inherit;
+    }
+    
+    img {
+      margin-top: -3em;
+    }
   }
 
   fieldset, section {

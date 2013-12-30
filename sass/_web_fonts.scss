@@ -227,3 +227,12 @@
     line-height: 1.4;
   }
 }
+
+.jump-icon {
+ @extend %icon-font;
+
+	&:before {
+    content: "\e004";
+    margin-right: 0.2em;
+  }
+}
