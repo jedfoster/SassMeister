@@ -402,6 +402,7 @@ var SassMeister;
         if(window.resetApp) {
           localStorage.removeItem('inputs');
           localStorage.removeItem('outputs');
+          localStorage.removeItem('alertStats');
         }
 
         this.inputs = $.extend(true, this.inputs, JSON.parse(localStorage.getItem('inputs')) );
