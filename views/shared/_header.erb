@@ -1,6 +1,6 @@
 <header class="site_header">
   
-  <a href="<%= @body_class.nil? || @gist.nil? ? '/about' : '/' %>" class="logo" title="The sassiest way to play with Sass, Compass, &amp; Libsass!"><span class="alt">Sassmeister</span></a>
+  <a href="<%= !@body_class ? '/about' : '/' %>" class="logo" title="The sassiest way to play with Sass, Compass, &amp; Libsass!"><span class="alt">Sassmeister</span></a>
 
   <nav>
     <a id="toggle_css" data-state="hide"><span class="alt">CSS</span></a>
