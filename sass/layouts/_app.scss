@@ -26,6 +26,7 @@ $control-column-open-width: em(480);
   border-left: 0;
   background: scale-color($alpha_gray, $lightness: 90%);
   z-index: 9999;
+  overflow-x: hidden;
 
   -webkit-transition: width 0.1s ease-in-out;
   -moz-transition: width 0.1s ease-in-out;
