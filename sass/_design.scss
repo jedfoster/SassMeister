@@ -15,7 +15,6 @@ body:after {
 .swag-promo {
   clear: both;
 
-
   a {
     color: darken($delta_color, 15%);
     color: $delta_color;
@@ -43,7 +42,7 @@ body:after {
     float: right;
     width: 40%;
     max-width: 120px;
-    margin-left: 0.5em;
+    padding-left: 0.5em;
     display: inline-block;
 
     @each $prefix in $prefix_defaults {

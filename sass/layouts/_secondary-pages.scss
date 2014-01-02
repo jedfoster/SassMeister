@@ -7,6 +7,10 @@ article {
   @media #{$mobile} {
     padding-bottom: 4.5em;
   }
+  
+  h1 {
+    font-size: em($heading_2);
+  }
 
   ol {
     -webkit-column-count: 3;
@@ -18,5 +22,66 @@ article {
       -moz-column-count: 2;
       column-count: 2;
     }
+  }
+  
+  aside {
+    @extend .swag-promo;
+
+    border: 1px solid $delta_color_fox;
+    background-color: $delta_color_india;
+    padding: 1em;
+    float: left; 
+    width: 100%;
+    clear: both;
+    margin-bottom: 1.5em;
+    
+    @each $prefix in $prefix_defaults {
+      #{$prefix}border-radius: em(3);
+    }
+    
+    a h1 {
+      float: right;
+      width: 75%;
+      
+      @media screen and (max-width: 380px) {
+        width: 100%;
+        clear: both;
+        // font-size: em($heading_2);
+      }
+    }
+
+    p {
+      float: right;
+      width: 75%;
+      
+      @media #{$mobile} {
+        width: 100%;
+        clear: both;
+      }
+    }
+    
+    a img {
+      float: left;
+      width: 25%;
+      max-width: 180px;
+      padding-right: 1em;
+      padding-left: 0;
+      
+      @media screen and (max-width: 380px) {
+        width: 100%;
+        
+      }
+    }
+  }
+  
+  .swag-line img {
+    float: left;
+    width: 3.5em;
+    max-width: 120px;
+    margin: 0 0.75em 0 0;
+  }
+  
+  .swag-line {
+    @include clearfix;
   }
 }
