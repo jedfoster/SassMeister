@@ -56,40 +56,39 @@ if($('body.about, body.thankyou').length < 1 ) {
   });
 
 
-  if (gist) {
-    if (gist.can_update_gist == true) {
-      $('#save-gist').data('action', 'edit').attr('class', 'edit-gist').find('span').text('Update Gist');
+  if (window.github_id) {
+    if (window.gist) {
+      if (window.gist.can_update_gist == true) {
+        $('#save-gist').data('action', 'edit').attr('class', 'edit-gist').find('span').text('Update Gist');
+      }
+      else {
+        $('#save-gist').data('action', 'fork').attr('class', 'fork-gist').find('span').text('Fork Gist');
+      }
     }
     else {
-      $('#save-gist').data('action', 'fork').attr('class', 'fork-gist').find('span').text('Fork Gist');
+      $('#save-gist').data('action', 'create').attr('class', 'create-gist').find('span').text('Save Gist');
     }
-    
-    $('#cloud_actions li:first-child').after('<li><a href="https://gist.github.com/' + gist.gist_id + '" target="_blank" class="jump-icon" id="gist-link">View on GitHub</a></li>');
-  }
-  else if (window.github_id != false) {
-    $('#save-gist').data('action', 'create').attr('class', 'create-gist').find('span').text('Save Gist');
   }
   else {
     $('#save-gist').attr('href', '/authorize').attr('class', 'github-login').find('span').text('Log in with your GitHub account to save gists');
   }
 
 
-  $('[data-toggle-input]').on('click', function(event) {
-    // event.preventDefault();
+  if (window.gist) {
+    $('#cloud_actions li:first-child').after('<li><a href="https://gist.github.com/' + window.gist.gist_id + '" target="_blank" class="jump-icon" id="gist-link">View on GitHub</a></li>');
+  }
 
+
+  $('[data-toggle-input]').on('click', function(event) {
     var selected = $('#' + $(this).attr('for')).val(),
         input = $(this).data('toggle-input');
-
-    // $(this).parents('.panel-toggle').find('.selected').text(selected);
 
     if (input == 'version') {
       _gaq.push(['_trackEvent', 'UI', 'SassVersion']);
 
-      SassMeister.sass_version = selected; //endpoint = 'http://' + selected + '.' + document.domain + '/';
+      SassMeister.sass_version = selected;
 
       getExtensions();
-
-      // displaySassVersion($(this).text());
     }
     if (input == 'sass') {
       _gaq.push(['_trackEvent', 'UI', 'SassSyntax']);
@@ -125,7 +124,7 @@ if($('body.about, body.thankyou').length < 1 ) {
       watchExtensions();
       SassMeister.compile.sass();
 
-      if(SassMeister.sass_version == 'lib') { //.match(/lib\./)) {
+      if(SassMeister.sass_version == 'lib') {
         $('#sass-syntax-toggle').addClass('disabled');
       }
       else {
@@ -133,6 +132,7 @@ if($('body.about, body.thankyou').length < 1 ) {
       }
     });
   };
+
 
   var watchExtensions = function() {
     $('[data-import]').on('click', function(event) {
@@ -154,17 +154,10 @@ if($('body.about, body.thankyou').length < 1 ) {
     });
   };
 
-  var displaySassVersion = function(versionString) {
-    if(! versionString.match(/lib/)) {
-      versionString = 'Sass v' + versionString.slice(0, 3);
-    }
-
-    $('#sass-version').text(versionString);
-  };
 
   getExtensions();
 
-  
+
   var toggleCSSPanel = function(state) {
     _gaq.push(['_trackEvent', 'UI', 'ToggleCSS']);
 
@@ -211,6 +204,7 @@ if($('body.about, body.thankyou').length < 1 ) {
 
 
   $("a[href^='http://'], a[href^='https://']").attr("target", "_blank");
+
 
   $('#save-gist').on('click', function(event) {
     event.preventDefault();
