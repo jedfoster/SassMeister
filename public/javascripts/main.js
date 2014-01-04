@@ -16,8 +16,8 @@ if($('body.about, body.thankyou').length < 1 ) {
   }
 
 
-  $(document).on('click', function(event) {
-    $('#control-column').removeClass('open');
+  $('#control-column-bg').on('click', function(event) {
+    $('#control-column, #control-column-bg').removeClass('open');
   });
 
   $("#control-column").on('click', function(event) {
@@ -26,7 +26,7 @@ if($('body.about, body.thankyou').length < 1 ) {
 
   $('.control-icon').on('click', function(event) {
     event.stopPropagation();
-    $('#control-column').toggleClass('open');
+    $('#control-column, #control-column-bg').toggleClass('open');
   });
 
 

@@ -16,6 +16,17 @@
 $control-column-closed-width: 0;
 $control-column-open-width: em(480);
 
+#control-column-bg {
+  @extend %stretch;
+
+  z-index: 9998;
+  display: none;
+
+  &.open {
+    display: block;
+  }
+}
+
 #control-column {
   position: absolute;
   top: 0;
@@ -38,7 +49,7 @@ $control-column-open-width: em(480);
 
   &.open {
     width: $control-column-open-width;
-    
+
     border-left: 1px solid $golf_gray;
   }
 
@@ -52,7 +63,7 @@ $control-column-open-width: em(480);
     display: block;
     width: 1em;
     z-index: 1;
-    
+
     &:before {
       content: "\22";
     }
@@ -64,7 +75,7 @@ $control-column-open-width: em(480);
     bottom: 0;
     width: 100%;
     overflow-x: scroll;
-    
+
     > fieldset, > section {
       border-bottom: 1px solid $golf_gray;
 
@@ -72,7 +83,7 @@ $control-column-open-width: em(480);
         border: 0;
       }
     }
-    
+
     &.promo {
       bottom: 12em;
     }
@@ -87,11 +98,11 @@ $control-column-open-width: em(480);
     bottom: 0;
     float: left;
     overflow-x: scroll;
-    
+
     .swag-promo {
       height: inherit;
     }
-    
+
     img {
       margin-top: -2em;
     }
