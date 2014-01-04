@@ -29,7 +29,7 @@ article {
 
     border: 1px solid $delta_color_fox;
     background-color: $delta_color_india;
-    padding: 1em;
+    padding: 0.5em 1em;
     float: left; 
     width: 100%;
     clear: both;
@@ -49,10 +49,15 @@ article {
         // font-size: em($heading_2);
       }
     }
+    
+    a p {
+      color: inherit;
+    }
 
     p {
       float: right;
       width: 75%;
+      color: $delta_gray;
       
       @media #{$mobile} {
         width: 100%;
@@ -64,6 +69,7 @@ article {
       float: left;
       width: 25%;
       max-width: 180px;
+      padding-top: 0.5em;
       padding-right: 1em;
       padding-left: 0;
       
