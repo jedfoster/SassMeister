@@ -96,6 +96,14 @@
   }
 }
 
+.heart-icon {
+  @extend %icon-font;
+
+  &:before {
+	  content: '\67';
+  }
+}
+
 .close-icon {
   @extend %icon-font;
   position: absolute;
