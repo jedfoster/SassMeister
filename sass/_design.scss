@@ -14,11 +14,11 @@ body:after {
 
 .swag-promo {
   clear: both;
+  text-align: left;
 
-  a {
-    color: darken($delta_color, 15%);
+
     color: $delta_color;
-  }
+
 
   p {
     font-size: em($heading_5);

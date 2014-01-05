@@ -39,7 +39,7 @@ article {
       #{$prefix}border-radius: em(3);
     }
     
-    a h1 {
+    > h1 {
       float: right;
       width: 75%;
       
@@ -50,7 +50,7 @@ article {
       }
     }
     
-    a p {
+    > p {
       color: inherit;
     }
 
@@ -65,7 +65,7 @@ article {
       }
     }
     
-    a img {
+    > img {
       float: left;
       width: 25%;
       max-width: 180px;
