@@ -63,6 +63,10 @@ ul.messenger {
       left: auto;
     // }
   // }
+  
+  p:last-child {
+    margin-bottom: 0;
+  }
 
   .messenger-message-slot {
     max-width: none;
