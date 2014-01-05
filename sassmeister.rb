@@ -10,6 +10,7 @@ require 'sass'
 require 'compass'
 require 'yaml'
 require 'sassmeister'
+require 'array'
 
 # require 'pry-remote'
 
