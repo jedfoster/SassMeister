@@ -27,12 +27,12 @@ if (!Number.isInteger) {
   
  
   var stickerMsg = '<a href="http://devswag.com/products/sassmeister-stickers-4">\
-<h1>Swag Alert! </h1>\
+<h1>Swag message! </h1>\
 <p><img src="/images/sassmeister-detail-v02_medium.jpg"> ' + randomMsg() + '</p>\
 </a>';
 
 
-  var alertCatalog = {
+  var messageCatalog = {
     'stickers': {
       visit_interval: 30,
       time_interval: 86400 * 7,
@@ -43,42 +43,41 @@ if (!Number.isInteger) {
     
 
   if($('body.about, body.thankyou').length < 1 ) {
-    var alertStats = $.extend(true, {
+    var messageStats = $.extend(true, {
       last_visit: Date.now(),
       visit_number: 0,
-      alerts: []
-    }, JSON.parse(localStorage.getItem('alertStats')) );
+      messages: []
+    }, JSON.parse(localStorage.getItem('messageStats')) );
 
 
-    var alertQueue = {};
+    var messageQueue = {};
 
 
-    var queueAddAlert = function(name, message) {
-      alertQueue[name] = message;
+    var queueAddMessage = function(name, message) {
+      messageQueue[name] = message;
     };
 
 
-    // loop through alertCatalog and check if it is contained in alertStats.alerts
-    $.each(alertCatalog, function(name, message) {
-      if((alertStats.last_visit < (Date.now() - message.time_interval * 1000) ) || (Number.isInteger(alertStats.visit_number / message.visit_interval))){
-        // display an alert
-        queueAddAlert(name, message);
-        console.log('ALERT! A');
+    // loop through messageCatalog and check if it is contained in messageStats.messages
+    $.each(messageCatalog, function(name, message) {
+      if((messageStats.last_visit < (Date.now() - message.time_interval * 1000) ) || (Number.isInteger(messageStats.visit_number / message.visit_interval))){
+        // display a message
+        queueAddMessage(name, message);
       }
     });
 
 
-    // Clean up stored alert info
-    if(alertStats.alerts) {
-      $.each(alertStats.alerts, function(alertName) {
-        if(! alertCatalog[alertName]) { delete(alertStats.alerts[alertName]) }
+    // Clean up stored message info
+    if(messageStats.messages) {
+      $.each(messageStats.messages, function(messageName) {
+        if(! messageCatalog[messageName]) { delete(messageStats.messages[messageName]) }
       });
     }
 
-    alertStats.last_visit = Date.now();
-    alertStats.visit_number++;
+    messageStats.last_visit = Date.now();
+    messageStats.visit_number++;
 
-    localStorage.setItem('alertStats', JSON.stringify( alertStats ));
+    localStorage.setItem('messageStats', JSON.stringify( messageStats ));
 
 
     // Add promo message to the control panel
@@ -86,9 +85,9 @@ if (!Number.isInteger) {
     $('#promo .swag-promo').html(stickerMsg);
     
     
-    // Loop through queued alerts and display them.
-    // May need a refactor as I've only tested with a single alert
-    $.each(alertQueue, function(i, message) {      
+    // Loop through queued messages and display them.
+    // May need a refactor as I've only tested with a single message
+    $.each(messageQueue, function(i, message) {      
       Messenger({ extraClasses: message.extraClasses }).post({ message: message.content });
     });
   }
