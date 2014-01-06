@@ -221,6 +221,30 @@ $control-column-open-width: em(480);
 
       left: 50%;
     }
+    
+    &.libsass {
+      width: 25%;
+      
+      label, span {
+        width: 100%;
+      }
+      
+      label {
+        -webkit-transition: all 0.0s ease-in-out;
+        -moz-transition: all 0.0s ease-in-out;
+        transition: all 0.0s ease-in-out;
+      }
+
+      #syntax-scss:checked ~ span {
+        width: 100%;
+      }
+
+      label[for="syntax-sass"] {
+        padding: 0;
+        width: 0;
+        overflow: hidden;
+      }
+    }
   }
 
   .version-toggle-group {

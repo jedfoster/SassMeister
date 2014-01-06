@@ -88,6 +88,15 @@ if($('body.about, body.thankyou').length < 1 ) {
 
       SassMeister.sass_version = selected;
 
+      if (selected == 'lib') {
+        $('#syntax-scss').prop('checked', true);
+        
+        $('.syntax-toggle-group').addClass('libsass');
+      }
+      else {
+        $('.syntax-toggle-group').removeClass('libsass');
+      }
+
       getExtensions();
     }
     if (input == 'sass') {
