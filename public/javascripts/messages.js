@@ -29,7 +29,7 @@ Object.size = function(obj) {
       visit_interval: 20,
       time_interval: 86400 * 1,
       impression_limit: 5,
-      content: '<h1>libSass is here!</h1><p>Click the <span class="control-icon" style="font-size: 0.66em;"><span class="alt">gear</span></span> icon above, and select "libSass" as the compiler.</p>',
+      content: '<h1>LibSass is here!</h1><p>Click the <span class="control-icon" style="font-size: 0.66em;"><span class="alt">gear</span></span> icon above, and select "LibSass" as the compiler.</p>',
       messengerOptions: {
         extraClasses: 'messenger-on-top',
         postOptions: {hideAfter: 10}
