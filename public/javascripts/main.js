@@ -91,10 +91,10 @@ if($('body.about, body.thankyou').length < 1 ) {
       if (selected == 'lib') {
         $('#syntax-scss').prop('checked', true);
         
-        $('.syntax-toggle-group').addClass('libsass');
+        $('#control-column').addClass('libsass');
       }
       else {
-        $('.syntax-toggle-group').removeClass('libsass');
+        $('#control-column').removeClass('libsass');
       }
 
       getExtensions();
