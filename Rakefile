@@ -23,7 +23,7 @@ end
 desc "Compile the app's Sass"
 task "assets:precompile" do
   system("bundle exec jammit --force")
-  system("bundle exec compass compile")
+  system("bundle exec compass compile -e production")
 end
 
 
