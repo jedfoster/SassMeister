@@ -1,0 +1,193 @@
+$control-column-closed-width: 0;
+$control-column-open-width: em(480);
+
+#control-column-bg {
+  @extend %stretch;
+
+  z-index: 9998;
+  display: none;
+
+  &.open {
+    display: block;
+  }
+}
+
+#control-column {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: $control-column-closed-width;
+  height: 100%;
+  border-left: 0;
+  background: scale-color($alpha_gray, $lightness: 90%);
+  z-index: 9999;
+  overflow-x: hidden;
+
+  -webkit-transition: width 0.1s ease-in-out;
+  -moz-transition: width 0.1s ease-in-out;
+  transition: width 0.1s ease-in-out;
+
+  > * {
+    font-size: em($small_point_size);
+  }
+
+  &.open {
+    width: $control-column-open-width;
+
+    border-left: 1px solid $golf_gray;
+  }
+
+  .control-icon {
+    font-size: em($small_point_size);
+    color: $delta_gray;
+    cursor: pointer;
+    position: absolute;
+    top: 0.25em;
+    left: 0.35em;
+    display: block;
+    width: 1em;
+    z-index: 1;
+
+    &:before {
+      content: "\22";
+    }
+  }
+
+  .control-container {
+    position:absolute;
+    top:0;
+    bottom: 0;
+    width: 100%;
+    overflow-x: scroll;
+
+    > fieldset, > section {
+      border-bottom: 1px solid $golf_gray;
+
+      &:last-child {
+        border: 0;
+      }
+    }
+
+    &.promo {
+      bottom: 12em;
+    }
+  }
+
+  #promo {
+    position:absolute;
+    height: 12em;
+    border-top: 1px solid $delta_color_fox;
+    background-color: $delta_color_india;
+
+    bottom: 0;
+    float: left;
+    overflow-x: scroll;
+
+    .swag-promo {
+      height: inherit;
+    }
+
+    img {
+      margin-top: -2em;
+    }
+  }
+
+  fieldset, section {
+    padding: 1em 2.5em 0 3em;
+    float: left;
+    width: 100%;
+    clear: both;
+  }
+
+  h2 {
+    @extend %headings_2;
+
+    font-weight: 100;
+    color: $bravo_gray;
+    margin-bottom: 0;
+  }
+
+  h3 {
+    @extend %headings_6;
+
+    font-weight: 300;
+    color: $charlie_gray;
+    margin: 0;
+
+    &.syntax, &.version {
+      width: 15%;
+      display: block;
+      float: left;
+      clear: both;
+      line-height: 2.5;
+    }
+  }
+
+
+  .libsass-output-note {
+    display: none;
+  }
+  
+  &.libsass .libsass-output-note {
+    display: block;
+  }
+  
+  // The above could be written like this using @at-root, but this is just dumb.
+  // How is this at all readable? WTF is even going on here? ARGH!!!!!!!!!!!!!!!
+  /*
+    .libsass-output-note {
+      display: none;
+  
+      @at-root { 
+        .libsass#{&} { 
+          display: block;
+        }
+      }
+    }
+  */
+
+
+  .syntax-toggle-group {
+    @include toggle-group(50%, (syntax-scss, syntax-sass));
+
+    clear: right;
+  }
+
+  &.libsass .syntax-toggle-group {
+   @include toggle-group(25%, (syntax-scss, syntax-sass));
+
+    label {
+      -webkit-transition: all 0.0s ease-in-out;
+      -moz-transition: all 0.0s ease-in-out;
+      transition: all 0.0s ease-in-out;
+      width: 100%;
+    }
+
+    #syntax-scss:checked ~ span {
+      width: 100%;
+    }
+
+    label[for="syntax-sass"] {
+      padding: 0;
+      width: 0;
+      overflow: hidden;
+    }
+  }
+
+  .version-toggle-group {
+    @include toggle-group(66%, (version-sass3-3, version-sass3-2, version-lib));
+
+    clear: right;
+
+    &:after { content:"\A"; display: block;white-space:pre; }
+  }
+
+  .output-toggle-group {
+    @include toggle-group(100%, (expanded-output, nested-output, compact-output, compressed-output));
+  }
+
+  .html-toggle-group {
+    @include toggle-group(100%, (html-html, html-haml, html-mkdn, html-txtl));
+  }
+}

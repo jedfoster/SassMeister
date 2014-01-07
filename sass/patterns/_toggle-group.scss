@@ -1,0 +1,77 @@
+@mixin toggle-group($width, $values: '') {
+  @include border_radius(em(8));
+
+  border: 1px solid $golf_gray;
+  display: block;
+  position: relative;
+  z-index: 1;
+  float: left;
+  width: $width;
+  padding: 0;
+  background: $white;
+  margin-bottom: 1.5em;
+
+  input {
+    position: absolute;
+    opacity: 0;
+    z-index: -10;
+  }
+
+  label {
+    font-weight: 300;
+    padding: 0.5em;
+    display: inline-block;
+    float: left;
+    cursor: pointer;
+    z-index: 3;
+    position: relative;
+    text-align: center;
+    text-shadow: none;
+    color: inherit;
+
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+  }
+
+  input:checked + label {
+    color: $white;
+    text-shadow: 0 0 0.25em darken($alpha_color, 10%);
+  }
+
+  span {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+
+    -webkit-transition: left 0.2s ease-in-out;
+    -moz-transition: left 0.2s ease-in-out;
+    transition: left 0.2s ease-in-out;
+
+    @include border_radius(em(6));
+  }
+
+  $rand: random(999);
+  $toggle: toggle-input-#{$rand};
+  $length: length($values);
+
+  %#{$toggle} {
+    width: 100% / $length;
+  }
+
+  label, span {
+    @extend %#{$toggle};
+  }
+
+  @each $val in $values {
+    ##{$val}:checked ~ span {
+      @extend %#{$toggle};
+
+      $i: index($values, $val) - 1;
+
+      background: $alpha_color_delta;
+      left: $i * (100% / $length);
+    }
+  }
+}
