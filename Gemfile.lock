@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/rack/rack-contrib.git
-  revision: 951760b1710634623ebbccef8d65df9139bb41c2
+  revision: 6ff3ca2b2d988911ca52a2712f6a7da5e064aa27
   specs:
     rack-contrib (1.2.0)
       rack (>= 0.9.1)
@@ -8,9 +8,6 @@ GIT
 GEM
   remote: http://rubygems.org/
   specs:
-    SassyLists (0.4.6)
-      compass (>= 0.12.1)
-      sass (>= 3.2.0)
     activesupport (4.0.2)
       i18n (~> 0.6, >= 0.6.4)
       minitest (~> 4.2)
@@ -19,26 +16,6 @@ GEM
       tzinfo (~> 0.3.37)
     addressable (2.3.5)
     atomic (1.1.14)
-    bitters-compass (0.9.2)
-      bourbon-compass (>= 3.1.3)
-      compass (>= 0.11)
-      neat-compass (>= 1.4.0)
-      sass (>= 3.2)
-    blend-mode (0.0.1)
-      compass (~> 0.12)
-    bourbon-compass (3.2.0.beta.1.a)
-      compass (>= 0.13.alpha.10)
-      sass (>= 3.3.0.rc.1)
-    breakpoint (2.2.0)
-      compass (~> 0.13.alpha.7)
-      sass (~> 3.3.0.rc.1)
-    breakpoint-slicer (1.2)
-      breakpoint (>= 2.0.1)
-      compass (>= 0.12.2)
-      sass (>= 3.2.1)
-    breakup (0.2.1)
-      compass (>= 0.12.2)
-      sass (>= 3.2.0)
     chairman (0.1.1)
       dalli (~> 2.6.4)
       faraday-http-cache (~> 0.3.0)
@@ -48,105 +25,40 @@ GEM
       sinatra (~> 1.4.3)
     chunky_png (1.2.9)
     closure-compiler (1.1.10)
-    color-schemer (0.2.7)
-      compass (~> 0.12)
-      compass-blend-modes (~> 0.0.2)
-    compass (0.13.alpha.10)
+    compass (0.12.2)
       chunky_png (~> 1.2)
-      json
-      listen (~> 1.1.0)
-      sass (~> 3.3.0.rc.1)
-    compass-blend-modes (0.0.2)
-      compass
-    compass-inuit (5.0.2)
-      compass (>= 0.12.2)
-    compass-photoshop-drop-shadow (0.0.1)
-      compass
-    compass-placeholders (1.0.0)
-      compass
-    css-slideshow (0.2.0)
-      compass (>= 0.10.0.rc3)
+      fssm (>= 0.2.7)
+      sass (~> 3.1)
     cssmin (1.0.3)
     dalli (2.6.4)
-    fancy-buttons (1.2.0)
-      compass (>= 0.11)
     faraday (0.8.8)
       multipart-post (~> 1.2.0)
     faraday-http-cache (0.3.0)
       activesupport (>= 3.0)
       faraday (~> 0.8)
       multi_json (~> 1.3)
-    ffi (1.9.3)
-    fittext (0.0.5)
-      compass (>= 0.10.0.rc3)
-    grid-coordinates (1.2.0)
-      compass (>= 0.11.5)
-    harsh (1.0.0)
-      compass (>= 0.10.0.rc3)
+    fssm (0.2.10)
     i18n (0.6.9)
-    jacket (1.0.0)
-      compass (>= 0.12.2)
-      sass (>= 3.2.0)
     jammit (0.6.6)
       cssmin (>= 1.0.3)
       jsmin (>= 1.0.1)
     jsmin (1.0.1)
-    json (1.8.1)
     kgio (2.8.1)
-    listen (1.1.6)
-      rb-fsevent (>= 0.9.3)
-      rb-inotify (>= 0.9)
-      rb-kqueue (>= 0.2)
     memcachier (0.0.2)
     minitest (4.7.5)
-    modular-scale (1.0.6)
-      compass (>= 0.12.1)
-      sass (>= 3.2.0)
-      sassy-math (>= 1.5)
-    multi_json (1.8.2)
+    multi_json (1.8.4)
     multipart-post (1.2.0)
-    neat-compass (1.5.0)
-      bourbon-compass (>= 3.1.3)
-      compass (>= 0.11)
-      sass (>= 3.2)
-    newrelic_rpm (3.7.0.177)
-    normalize-scss (2.1.3)
-      sass (>= 3.2)
-    octokit (2.6.3)
-      sawyer (~> 0.5.1)
+    newrelic_rpm (3.7.1.182)
+    octokit (2.7.0)
+      sawyer (~> 0.5.2)
     oj (2.4.0)
     rack (1.5.2)
     rack-protection (1.5.1)
       rack
     raindrops (0.12.0)
-    rake (10.1.0)
-    rb-fsevent (0.9.3)
-    rb-inotify (0.9.3)
-      ffi (>= 0.5.0)
-    rb-kqueue (0.2.0)
-      ffi (>= 0.5.0)
-    responsive-sass (0.1.1)
-      compass (>= 0.11)
-    rwdcalc (0.0.2)
-      compass (>= 0.12.2)
-      sass (>= 3.2.1)
-    salsa (0.0.1)
-      compass (>= 0.12.1)
-      sass (>= 3.2.0)
-    sass (3.3.0.rc.1)
-      listen (~> 1.1.0)
-    sassy-buttons (0.2.6)
-      compass (>= 0.12.2)
-    sassy-maps (0.1.1)
-      compass (= 0.13.alpha.10)
-      sass (= 3.3.0.rc.1)
-    sassy-math (1.5)
-      compass (~> 0.11)
-    sassy-strings (1.0.0)
-      compass (>= 0.12.2)
-    sassy-text-shadow (0.0.4)
-      compass (>= 0.11.5)
-    sawyer (0.5.1)
+    rake (10.1.1)
+    sass (3.2.13)
+    sawyer (0.5.2)
       addressable (~> 2.3.5)
       faraday (~> 0.8, < 0.10)
     sinatra (1.4.4)
@@ -155,99 +67,31 @@ GEM
       tilt (~> 1.3, >= 1.3.4)
     sinatra-partial (0.4.0)
       sinatra
-    singularity-extras (0.0.3)
-      modular-scale (>= 1.0.6)
-      sassy-math (>= 1.5)
-      singularitygs (>= 0.0.1)
-    singularity-golden-grid (1.1)
-      sass (>= 3.2.1)
-      singularitygs (>= 1.1.1)
-    singularitygs (1.1.2)
-      breakpoint (>= 2.0.1)
-      compass (>= 0.12.2)
-      sass (>= 3.2.1)
     stipe (0.0.6.4)
       compass (>= 0.11)
       sass (>= 3.2.1)
-    stitch (0.1.4)
-      compass
-    susy (1.0.9)
-      compass (>= 0.12.2)
-      sass (>= 3.2.0)
-    thor (0.18.1)
     thread_safe (0.1.3)
       atomic
     tilt (1.4.1)
-    toolkit (1.3.8)
-      breakpoint (>= 2.0.6)
-      color-schemer (>= 0.2.7)
-      compass (>= 0.12.2)
-      sassy-strings (>= 1.0.0)
-      singularitygs (>= 1.1.2)
-    true (0.1.5)
-      compass (>= 0.12.2)
-      sass (>= 3.2.0)
     tzinfo (0.3.38)
     unicorn (4.7.0)
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
-    zen-grids (1.4)
-      sass (>= 3.1)
-    zurb-foundation (4.3.2)
-      sass (>= 3.2.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  SassyLists
-  bitters-compass
-  blend-mode
-  bourbon-compass (~> 3.2.0.beta.1.a)
-  breakpoint
-  breakpoint-slicer
-  breakup
   chairman
   closure-compiler
-  color-schemer
   compass
-  compass-blend-modes
-  compass-inuit
-  compass-photoshop-drop-shadow
-  compass-placeholders
-  css-slideshow
-  fancy-buttons
-  fittext
-  grid-coordinates
-  harsh
-  jacket
   jammit
-  modular-scale
-  neat-compass
   newrelic_rpm
-  normalize-scss
   rack-contrib!
   rake
-  responsive-sass
-  rwdcalc
-  salsa
   sass
-  sassy-buttons
-  sassy-maps
-  sassy-math
-  sassy-text-shadow
   sinatra
   sinatra-partial
-  singularity-extras
-  singularity-golden-grid
-  singularitygs
   stipe
-  stitch
-  susy (~> 1.0.9)
-  thor
-  toolkit
-  true
   unicorn
-  zen-grids
-  zurb-foundation
