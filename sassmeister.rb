@@ -1,13 +1,9 @@
 $LOAD_PATH.unshift(File.join(File.dirname(File.realpath(__FILE__)), 'lib'))
 
-require 'rubygems'
-require 'bundler/setup'
 require 'sinatra/base'
 require 'sinatra/partial'
 require 'chairman'
 require 'json'
-require 'sass'
-require 'compass'
 require 'yaml'
 require 'sassmeister'
 require 'array'
@@ -92,7 +88,6 @@ class SassMeisterApp < Sinatra::Base
   before do
     @github = Chairman.session(session[:github_token])
     @gist = nil
-    @plugins = plugins
 
     params[:syntax].downcase! unless params[:syntax].nil?
     params[:original_syntax].downcase! unless params[:original_syntax].nil?
@@ -110,55 +105,9 @@ class SassMeisterApp < Sinatra::Base
   end
 
   get '/' do
-    # if ! params.keys.grep(/(extension|syntax|output)/).empty?
-    #   extension = params[:extension].split(',') || []
-    #   syntax = (params[:syntax].downcase rescue 'scss')
-    #   output = (params[:output].downcase rescue 'expanded')
-    #   sass = ''
-    #
-    #   plugins.each do |key, plugin|
-    #     if ! extension.grep(/#{plugin[:fingerprint].gsub(/\*/, '.*?')}/i).empty?
-    #       require plugin[:gem]
-    #
-    #       imports = []
-    #       plugin[:import].each do |import|
-    #         imports << "@import \"#{import}\""
-    #       end
-    #
-    #       sass += imports.join("#{syntax == 'scss' ? ';' : ''}\n") + "#{syntax == 'scss' ? ';' : ''}\n" unless imports.nil?
-    #     end
-    #   end
-    #
-    #   @gist = {
-    #     :sass => sass,
-    #     :syntax => syntax,
-    #     :output => output
-    #   }.to_json
-    # end
-
     @body_class = false
 
     erb :index
-  end
-
-
-  post '/compile' do
-    content_type 'application/json'
-
-    {
-      css: sass_compile(params[:input], params[:syntax], params[:output_style]),
-      dependencies: get_build_dependencies(params[:input])
-    }.to_json.to_s
-  end
-
-
-  post '/convert' do
-    content_type 'application/json'
-
-    {
-      css: sass_convert(params[:original_syntax], params[:syntax], params[:input]),
-      dependencies: get_build_dependencies(params[:input])
-    }.to_json.to_s    
   end
 
 
@@ -173,11 +122,6 @@ class SassMeisterApp < Sinatra::Base
     @body_class = 'about'
 
     erb :about
-  end
-
-
-  get '/extensions' do
-    erb :extensions, layout: false
   end
 
 
@@ -217,7 +161,7 @@ class SassMeisterApp < Sinatra::Base
     rescue Octokit::NotFound => e
       status 404
 
-      syntax = plugin = ''
+      syntax = ''
       sass = "// Sorry, that Gist doesn't exist.\n//#{e.to_s.gsub(/(GET|api.|https:\/\/|\?.*$)/, '')}"
     end
 
