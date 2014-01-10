@@ -9,8 +9,8 @@ gem 'chairman'
 
 group :assets do
   gem 'rake'
-  gem 'sass'
-  gem 'compass'
+  gem 'sass', "~> 3.3.0.rc.2"
+  gem 'compass', "~> 1.0.0.alpha.17"
   gem 'stipe'
   gem 'jammit'
   gem 'closure-compiler'
