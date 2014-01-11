@@ -38,7 +38,7 @@ GEM
     compass-import-once (1.0.2)
     cssmin (1.0.3)
     dalli (2.6.4)
-    faraday (0.8.8)
+    faraday (0.8.9)
       multipart-post (~> 1.2.0)
     faraday-http-cache (0.3.0)
       activesupport (>= 3.0)
