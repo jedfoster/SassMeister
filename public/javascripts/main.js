@@ -90,7 +90,7 @@ if($('body.about, body.thankyou').length < 1 ) {
 
       if (selected == 'lib') {
         $('#syntax-scss').prop('checked', true);
-        
+
         $('#control-column').addClass('libsass');
       }
       else {
@@ -132,13 +132,6 @@ if($('body.about, body.thankyou').length < 1 ) {
       $('#extension_list').replaceWith(data);
       watchExtensions();
       SassMeister.compile.sass();
-
-      if(SassMeister.sass_version == 'lib') {
-        $('#sass-syntax-toggle').addClass('disabled');
-      }
-      else {
-        $('#sass-syntax-toggle').removeClass('disabled');
-      }
     });
   };
 

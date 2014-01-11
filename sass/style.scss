@@ -3,7 +3,6 @@
 @import "config";  // Editing defaults here will override any set in the Stipe gem
 
 @import "stipe/manifest";
-@import "stipe/grid/extends";
 
 @import "mixins"; // Need to override some Stipe mixins
 
@@ -14,10 +13,6 @@
 @import "web_fonts";
 
 
-@import "vendor/reveal_modals";
-@import "vendor/casement";
-
-
 // This where you start building your own styles. 
 // ------------------------------------------------------------------------------
 @import "typography";
@@ -26,6 +21,7 @@
 @import "patterns";
 @import "modules";
 @import "layouts";
-@import "design";
 
-@import "modules/messenger-theme-block";
+@import "vendor/casement";
+@import "vendor/messenger";
+@import "design";

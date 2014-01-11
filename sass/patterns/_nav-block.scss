@@ -10,10 +10,6 @@
   border-left: 1px solid darken($alpha_color, 5%);
   box-shadow: inset 1px 0px 0px 0px transparentize(white, 0.8);
 
-  &:last-child {
-    @extend %omega;
-  }
-
   @media #{$mobile} {
     padding-right: em(12);
   }

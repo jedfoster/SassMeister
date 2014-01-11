@@ -18,7 +18,7 @@
     color: $delta_gray;
     border-bottom: 1px solid $golf_gray;
     vertical-align: middle;
-    
+
     h2 {
       font-size: inherit;
       font-weight: inherit;
@@ -43,64 +43,11 @@
   }
 }
 
-.panel-toggle {
-  // @extend %sub-menu-dropdown;
-  // 
-  // padding: 0 0.83333em;
-  display: inline-block;
-  
-  // width: auto;
-  // float: left;
-  // cursor: pointer;
-  // 
-  // .selected {
-  //   &:after {
-  //     @extend %icon-pseudo-content;
-  // 
-  //     content: "\f0d7";
-  //     margin: 0 0.33333em;
-  //     font-size: 0.83333em;
-  //   }
-  // }
-  // 
-  // > ul {
-  //   top: em($heading_3);
-  //   left: 0;
-  //   width: em(200);
-  // 
-  //   a, span {
-  //     &:hover {
-  //       text-decoration: underline;
-  //     }
-  //   }
-  // }
-  // 
-  // &:hover {
-  //   color: $white;
-  //   background: transparentize(scale-color($alpha_color, $lightness: -80%), 0.2);
-  // 
-  //   .selected {
-  //     &:after {
-  //       content: "\f0d8";
-  //     }
-  //   }
-  // 
-  //   > ul {
-  //     display: block;
-  //   }
-  // }
-}
-
 #extension_list {
-  
+
   float: left;
   width: 100%;
   clear: both;
-
-  > span {
-    // @extend %icon-Compass;
-  }
-
 
   ol {
     @include border_radius(em(8));
@@ -111,7 +58,7 @@
     overflow: scroll;
     margin: 0 0 1.5em;
         background: $white;
-    
+
     a {
       cursor: pointer;
     }
@@ -124,26 +71,5 @@
 
   i {
     font-size: em($small_point_size);
-  }
-}
-
-#sass-syntax-toggle {
-  @extend .panel-toggle;
-
-  &.disabled {
-    cursor: initial;
-    
-    .selected:after {
-      display: none;
-    }
-
-    &:hover {
-      color: $delta_gray;
-      background: transparent;
-
-      > ul {
-        // display: none;
-      }
-    }
   }
 }

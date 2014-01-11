@@ -18,11 +18,10 @@
 }
 
 #rendered-html {
-  @extend %grid_full;
-
+  width: 100%;
+  height: 100%;
   float: left;
   padding-top: 0.66667em;
-  height: 100%;
   background: $white;
 }
 
