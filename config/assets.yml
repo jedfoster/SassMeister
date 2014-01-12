@@ -5,16 +5,33 @@ gzip_assets: off
 javascripts:
   app:
     - public/javascripts/vendor/jquery-1.8.2.js
-    - public/javascripts/vendor/ACE-noconflict/ace.js
-    - public/javascripts/vendor/ACE-noconflict/mode-css.js
-    - public/javascripts/vendor/ACE-noconflict/mode-sass.js
-    - public/javascripts/vendor/ACE-noconflict/mode-scss.js
-    - public/javascripts/vendor/ACE-noconflict/mode-html.js
-    - public/javascripts/vendor/ACE-noconflict/mode-haml.js
-    - public/javascripts/vendor/ACE-noconflict/mode-markdown.js
-    - public/javascripts/vendor/ACE-noconflict/mode-textile.js
-    - public/javascripts/vendor/ACE-noconflict/theme-tomorrow.js
-    - public/javascripts/vendor/jquery.foundation.reveal.js
+    - public/javascripts/vendor/codemirror-3.20/lib/codemirror.js
+    - public/javascripts/vendor/codemirror-3.20/addon/comment/comment.js
+    - public/javascripts/vendor/codemirror-3.20/addon/comment/continuecomment.js
+    - public/javascripts/vendor/codemirror-3.20/addon/edit/closebrackets.js
+    - public/javascripts/vendor/codemirror-3.20/addon/edit/closetag.js
+    - public/javascripts/vendor/codemirror-3.20/addon/edit/continuelist.js
+    - public/javascripts/vendor/codemirror-3.20/addon/edit/matchbrackets.js
+    - public/javascripts/vendor/codemirror-3.20/addon/edit/matchtags.js
+    - public/javascripts/vendor/codemirror-3.20/addon/edit/trailingspace.js
+    - public/javascripts/vendor/codemirror-3.20/addon/fold/foldcode.js
+    - public/javascripts/vendor/codemirror-3.20/addon/fold/foldgutter.js
+    - public/javascripts/vendor/codemirror-3.20/addon/search/match-highlighter.js
+    - public/javascripts/vendor/codemirror-3.20/addon/search/search.js
+    - public/javascripts/vendor/codemirror-3.20/addon/search/searchcursor.js
+    - public/javascripts/vendor/codemirror-3.20/addon/dialog/dialog.js
+    # - public/javascripts/vendor/codemirror-3.20/addon/dialog/dialog.css
+    - public/javascripts/vendor/codemirror-3.20/addon/mode/loadmode.js
+    - public/javascripts/vendor/codemirror-3.20/addon/selection/mark-selection.js
+    - public/javascripts/vendor/codemirror-3.20/addon/selection/active-line.js
+    - public/javascripts/vendor/codemirror-3.20/addon/display/placeholder.js
+    - public/javascripts/vendor/codemirror-3.20/mode/css/css.js
+    - public/javascripts/vendor/codemirror-3.20/mode/sass/sass.js
+    - public/javascripts/vendor/codemirror-3.20/mode/xml/xml.js
+    - public/javascripts/vendor/codemirror-3.20/mode/ruby/ruby.js
+    - public/javascripts/vendor/codemirror-3.20/mode/htmlmixed/htmlmixed.js
+    - public/javascripts/vendor/codemirror-3.20/mode/haml/haml.js
+    - public/javascripts/vendor/codemirror-3.20/mode/markdown/markdown.js
     - public/javascripts/vendor/bindWithDelay.js
     - public/javascripts/vendor/messenger.min.js
     - public/javascripts/viewport.js

@@ -80,7 +80,7 @@ var SassMeister;
       // Sass
       this.editors.sass = this.initEditor(this.inputs.sass.input, 'sass', this.inputs.sass.syntax);
 
-      $(this.editors.sass.getSession()).bindWithDelay('change', function(event) {
+      $('#sass').bindWithDelay('keyup', function(event) {
         if($this.bypassConversion == true) {
           $this.bypassConversion = false;
         }
@@ -94,7 +94,7 @@ var SassMeister;
       // HTML (input only)
       this.editors.html = this.initEditor(this.inputs.html.input, 'html', this.inputs.html.syntax);
 
-      $(this.editors.html.getSession()).bindWithDelay('change', function(event) {
+      $('#html').bindWithDelay('keyup', function(event) {
         $this.inputs.html.input = $this.editors.html.getValue();
         $this.compile.html();
       }, 750);
@@ -102,7 +102,7 @@ var SassMeister;
 
       // CSS
       this.editors.css = this.initEditor(this.outputs.css, 'css', 'css');
-      this.editors.css.setReadOnly(true);
+      this.editors.css.setOption('readOnly', true);
 
       if(! this.editors.css.getValue()) {
         $this.compile.sass();
@@ -110,7 +110,7 @@ var SassMeister;
 
 
       // Focus on the Sass input
-      this.editors.sass.focus();
+      //this.editors.sass.focus();
 
 
       // HTML (rendered)
@@ -164,18 +164,54 @@ var SassMeister;
     },
 
 
-    initEditor: function(value, name, syntax) {
-      var input = ace.edit(name);
+    initEditor: function(value, name, syntax) {      
+      var element = document.getElementById(name),
+          mode = '';
+      
+      switch(syntax.toLowerCase()) {
+        case 'scss' :
+          mode = 'text/x-scss';
+          break;
+        case 'sass' :
+          mode = 'text/x-sass';
+          break;
+        case 'css' :
+          mode = 'text/css';
+          break;
+        case 'html' :
+          mode = 'text/html';
+          break;
+        case 'haml' :
+          mode = 'text/x-haml';
+          break;
+        case 'markdown' :
+          mode = 'text/x-markdown';
+          break;
+        case 'textile' :
+          break;
+      }
 
-      input.setTheme('ace/theme/tomorrow');
-      input.getSession().setMode('ace/mode/' + syntax.toLowerCase());
+      return CodeMirror(function(el) { element.appendChild(el, element); }, {
+        value: value,
+        mode: mode,
+        theme: 'base16-light',
+        lineNumbers: true,
+        //styleActiveLine: true,
+        matchBrackets: true,
+        smartIndent: true,
+        tabSize: true
+      });
 
-      input.getSession().setTabSize(2);
-      input.getSession().setUseSoftTabs(true);
 
-      input.setValue(value);
-      input.clearSelection();
-      return input;
+      //input.setTheme('ace/theme/tomorrow');
+      //input.getSession().setMode('ace/mode/' + syntax.toLowerCase());
+
+      //input.getSession().setTabSize(2);
+      //input.getSession().setUseSoftTabs(true);
+
+      //input.setValue(value);
+      //input.clearSelection();
+      //return input;
     },
 
 
@@ -340,9 +376,9 @@ var SassMeister;
       $('#source').casement({
         split: (orientation == 'horizontal' ? 'vertical' : 'horizontal'),
         onDrag: function() {
-          SassMeister.editors.sass.resize();
-          SassMeister.editors.html.resize();
-          SassMeister.editors.css.resize();
+          //SassMeister.editors.sass.resize();
+          //SassMeister.editors.html.resize();
+          //SassMeister.editors.css.resize();
         }
       });
 
@@ -352,18 +388,18 @@ var SassMeister;
           $('#sash_cover').show();
         },
         onDrag: function() {
-          SassMeister.editors.sass.resize();
-          SassMeister.editors.html.resize();
-          SassMeister.editors.css.resize();
+          //SassMeister.editors.sass.resize();
+          //SassMeister.editors.html.resize();
+          //SassMeister.editors.css.resize();
         },
         onDragEnd: function() {
           $('#sash_cover').hide();
         }
       });
 
-      SassMeister.editors.sass.resize();
-      SassMeister.editors.html.resize();
-      SassMeister.editors.css.resize();
+      //SassMeister.editors.sass.resize();
+      //SassMeister.editors.html.resize();
+      //SassMeister.editors.css.resize();
     },
 
 
