@@ -106,7 +106,7 @@ if($('body.about, body.thankyou').length < 1 ) {
       $('#sass-syntax-display').text($(this).text());
 
       SassMeister.convert.sass();
-      SassMeister.editors.sass.getSession().setMode('ace/mode/' + selected.toLowerCase());
+      SassMeister.editors.sass.setOption('mode', SassMeister.findMode(selected.toLowerCase()));
     }
     if (input == 'css') {
       _gaq.push(['_trackEvent', 'UI', 'CSSOutput']);
@@ -122,7 +122,7 @@ if($('body.about, body.thankyou').length < 1 ) {
       $('#html-syntax-display').text($(this).text());
 
       SassMeister.compile.html();
-      SassMeister.editors.html.getSession().setMode("ace/mode/" + selected.toLowerCase());
+      SassMeister.editors.sass.setOption('mode', SassMeister.findMode(selected.toLowerCase()));
     }
   });
 
@@ -175,8 +175,8 @@ if($('body.about, body.thankyou').length < 1 ) {
 
     SassMeister.arrangePanels(SassMeister.layout.orientation);
 
-    SassMeister.editors.sass.resize();
-    SassMeister.editors.css.resize();
+    SassMeister.editors.sass.refresh();
+    SassMeister.editors.css.refresh();
 
     localStorage.setItem('layout', JSON.stringify( SassMeister.layout ));
   };
@@ -197,9 +197,9 @@ if($('body.about, body.thankyou').length < 1 ) {
 
     SassMeister.arrangePanels(SassMeister.layout.orientation);
 
-    SassMeister.editors.sass.resize();
-    SassMeister.editors.css.resize();
-    SassMeister.editors.html.resize();
+    SassMeister.editors.sass.refresh();
+    SassMeister.editors.css.refresh();
+    SassMeister.editors.html.refresh();
 
     localStorage.setItem('layout', JSON.stringify( SassMeister.layout ));
   };

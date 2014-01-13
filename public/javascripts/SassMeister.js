@@ -164,33 +164,37 @@ var SassMeister;
     },
 
 
-    initEditor: function(value, name, syntax) {      
-      var element = document.getElementById(name),
-          mode = '';
-      
+    findMode: function(syntax) {
       switch(syntax.toLowerCase()) {
         case 'scss' :
-          mode = 'text/x-scss';
+          return 'text/x-scss';
           break;
         case 'sass' :
-          mode = 'text/x-sass';
+          return 'text/x-sass';
           break;
         case 'css' :
-          mode = 'text/css';
+          return 'text/css';
           break;
         case 'html' :
-          mode = 'text/html';
+          return 'text/html';
           break;
         case 'haml' :
-          mode = 'text/x-haml';
+          return 'text/x-haml';
           break;
         case 'markdown' :
-          mode = 'text/x-markdown';
+          return 'text/x-markdown';
           break;
         case 'textile' :
+          return 'text/html';
           break;
       }
+    },
 
+
+    initEditor: function(value, name, syntax) {      
+      var element = document.getElementById(name),
+          mode = this.findMode(syntax);
+ 
       return CodeMirror(function(el) { element.appendChild(el, element); }, {
         value: value,
         mode: mode,
@@ -376,9 +380,9 @@ var SassMeister;
       $('#source').casement({
         split: (orientation == 'horizontal' ? 'vertical' : 'horizontal'),
         onDrag: function() {
-          //SassMeister.editors.sass.resize();
-          //SassMeister.editors.html.resize();
-          //SassMeister.editors.css.resize();
+          SassMeister.editors.sass.refresh();
+          SassMeister.editors.html.refresh();
+          SassMeister.editors.css.refresh();
         }
       });
 
@@ -388,18 +392,18 @@ var SassMeister;
           $('#sash_cover').show();
         },
         onDrag: function() {
-          //SassMeister.editors.sass.resize();
-          //SassMeister.editors.html.resize();
-          //SassMeister.editors.css.resize();
+          SassMeister.editors.sass.refresh();
+          SassMeister.editors.html.refresh();
+          SassMeister.editors.css.refresh();
         },
         onDragEnd: function() {
           $('#sash_cover').hide();
         }
       });
 
-      //SassMeister.editors.sass.resize();
-      //SassMeister.editors.html.resize();
-      //SassMeister.editors.css.resize();
+      SassMeister.editors.sass.refresh();
+      SassMeister.editors.html.refresh();
+      SassMeister.editors.css.refresh();
     },
 
 
