@@ -127,6 +127,11 @@ var SassMeister;
       this.initPanels();
       this.arrangePanels(this.layout.orientation);
 
+
+      $(window).on('resize', function(event) {
+        SassMeister.resizeEditors();
+      });
+
       return this;
     },
 
@@ -380,9 +385,7 @@ var SassMeister;
       $('#source').casement({
         split: (orientation == 'horizontal' ? 'vertical' : 'horizontal'),
         onDrag: function() {
-          SassMeister.editors.sass.refresh();
-          SassMeister.editors.html.refresh();
-          SassMeister.editors.css.refresh();
+          SassMeister.resizeEditors();
         }
       });
 
@@ -392,18 +395,22 @@ var SassMeister;
           $('#sash_cover').show();
         },
         onDrag: function() {
-          SassMeister.editors.sass.refresh();
-          SassMeister.editors.html.refresh();
-          SassMeister.editors.css.refresh();
+          SassMeister.resizeEditors();
         },
         onDragEnd: function() {
           $('#sash_cover').hide();
         }
       });
+      
+      SassMeister.resizeEditors();
+    },
 
-      SassMeister.editors.sass.refresh();
-      SassMeister.editors.html.refresh();
-      SassMeister.editors.css.refresh();
+
+    resizeEditors: function() {
+      $.each(this.editors, function(i, editor) {
+        editor.setSize(null, $(editor.getWrapperElement()).parent().height());
+        editor.refresh();
+      });
     },
 
 

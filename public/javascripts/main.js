@@ -175,8 +175,7 @@ if($('body.about, body.thankyou').length < 1 ) {
 
     SassMeister.arrangePanels(SassMeister.layout.orientation);
 
-    SassMeister.editors.sass.refresh();
-    SassMeister.editors.css.refresh();
+    SassMeister.resizeEditors();
 
     localStorage.setItem('layout', JSON.stringify( SassMeister.layout ));
   };
@@ -197,9 +196,7 @@ if($('body.about, body.thankyou').length < 1 ) {
 
     SassMeister.arrangePanels(SassMeister.layout.orientation);
 
-    SassMeister.editors.sass.refresh();
-    SassMeister.editors.css.refresh();
-    SassMeister.editors.html.refresh();
+    SassMeister.resizeEditors();
 
     localStorage.setItem('layout', JSON.stringify( SassMeister.layout ));
   };
