@@ -122,7 +122,7 @@ if($('body.about, body.thankyou').length < 1 ) {
       $('#html-syntax-display').text($(this).text());
 
       SassMeister.compile.html();
-      SassMeister.editors.sass.setOption('mode', SassMeister.findMode(selected.toLowerCase()));
+      SassMeister.editors.html.setOption('mode', SassMeister.findMode(selected.toLowerCase()));
     }
   });
 
