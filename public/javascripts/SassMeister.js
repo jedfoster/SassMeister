@@ -189,9 +189,6 @@ var SassMeister;
         case 'markdown' :
           return 'text/x-markdown';
           break;
-        case 'textile' :
-          return 'text/html';
-          break;
       }
     },
 
