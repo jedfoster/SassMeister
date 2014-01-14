@@ -303,6 +303,7 @@ var SassMeister;
 
           SassMeister.editors.sass.setValue(data.css, -1);
 
+          SassMeister.inputs.sass.input = data.css;
           SassMeister.inputs.sass.original_syntax = SassMeister.inputs.sass.syntax
           SassMeister.inputs.sass.dependencies = data.dependencies;
 
@@ -487,6 +488,7 @@ var SassMeister;
 
 
     setStorage: function() {
+      console.log(this.inputs);
       if(! window.gist) {
         localStorage.setItem('inputs', JSON.stringify( this.inputs ));
         localStorage.setItem('outputs', JSON.stringify( this.outputs ));
