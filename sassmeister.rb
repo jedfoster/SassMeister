@@ -82,7 +82,7 @@ class SassMeisterApp < Sinatra::Base
     def origin_allowed?(uri)
       return false if uri.nil?
 
-      return uri.match(/^http:\/\/(.+\.){0,1}sassmeister\.(com|dev|([\d+\.]{4}xip\.io))/)
+      return uri.match(/^http:\/\/(.+\.){0,1}sassmeister\.(com|dev|((\d+\.){4}xip\.io))/)
     end
   end
 
