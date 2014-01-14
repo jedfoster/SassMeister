@@ -452,6 +452,15 @@ var SassMeister;
 
         this.inputs = $.extend(true, this.inputs, JSON.parse(localStorage.getItem('inputs')) );
         this.outputs = $.extend(true, this.outputs, JSON.parse(localStorage.getItem('outputs')) );
+
+        if(this.inputs.sass.dependencies.libsass) {
+          this.sass_version = 'lib';
+          // this.inputs.sass.syntax = 'SCSS';
+        }
+
+        else if(this.inputs.sass.dependencies.Sass) {
+          this.sass_version = this.inputs.sass.dependencies.Sass.slice(0, 3);
+        }
       }
 
       this.layout = $.extend(true, this.layout, JSON.parse(localStorage.getItem('layout')) );
@@ -488,7 +497,6 @@ var SassMeister;
 
 
     setStorage: function() {
-      console.log(this.inputs);
       if(! window.gist) {
         localStorage.setItem('inputs', JSON.stringify( this.inputs ));
         localStorage.setItem('outputs', JSON.stringify( this.outputs ));

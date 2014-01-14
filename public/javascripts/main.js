@@ -98,6 +98,7 @@ if($('body.about, body.thankyou').length < 1 ) {
       }
 
       getExtensions();
+      SassMeister.compile.sass();
     }
     if (input == 'sass') {
       _gaq.push(['_trackEvent', 'UI', 'SassSyntax']);
@@ -131,7 +132,6 @@ if($('body.about, body.thankyou').length < 1 ) {
     $.get(SassMeister.sass_endpoint() + 'extensions', function( data ) {
       $('#extension_list').replaceWith(data);
       watchExtensions();
-      SassMeister.compile.sass();
     });
   };
 
