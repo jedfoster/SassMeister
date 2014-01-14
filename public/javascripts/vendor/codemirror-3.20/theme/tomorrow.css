@@ -1,0 +1,36 @@
+/*
+
+    Name:       Tomorrow Night
+    Author:     Chris Kempson
+
+    CodeMirror template by Jan T. Sott (https://github.com/idleberg/base16-codemirror)
+    Original Base16 color scheme by Chris Kempson (https://github.com/chriskempson/base16)
+
+*/
+
+    .cm-s-tomorrow.CodeMirror {background: #fff; color: #4D4D4C;}
+    .cm-s-tomorrow div.CodeMirror-selected {background: #D6D6D6 !important;}
+    .cm-s-tomorrow .CodeMirror-gutters {background: #f6f6f6; border-right: 0px;}
+    .cm-s-tomorrow .CodeMirror-linenumbers { text-align: right; }
+
+    .cm-s-tomorrow .CodeMirror-linenumber {color: #A7A9A4; padding: 0 1em; text-align: right; }
+    .cm-s-tomorrow .CodeMirror-cursor {border-left: 1px solid #AEAFAD !important;}
+
+    .cm-s-tomorrow span.cm-comment {color: #8E908C;}
+    .cm-s-tomorrow span.cm-atom {color: #F5871F;}
+    .cm-s-tomorrow span.cm-number {color: #F5871F;}
+
+    .cm-s-tomorrow span.cm-property, .cm-s-tomorrow span.cm-attribute {color: #C99E00;}
+    .cm-s-tomorrow span.cm-keyword {color: #C82829;}
+    .cm-s-tomorrow span.cm-string {color: #718C00;}
+
+    .cm-s-tomorrow span.cm-variable {color: #C99E00;}
+    .cm-s-tomorrow span.cm-variable-2 {color: #4271AE;}
+.cm-s-tomorrow span.cm-def {color: #f99157;}
+.cm-s-tomorrow span.cm-bracket {color: #CCCCCC;}
+    .cm-s-tomorrow span.cm-tag {color: #C82829;}
+    .cm-s-tomorrow span.cm-link {color: #F5871F;}
+    .cm-s-tomorrow span.cm-error {background: #C82829; color: #6A6A6A;}
+
+    .cm-s-tomorrow .CodeMirror-activeline-background {background: #EFEFEF !important;}
+.cm-s-tomorrow .CodeMirror-matchingbracket { text-decoration: underline; color: white !important; background: #8959A8 !important}

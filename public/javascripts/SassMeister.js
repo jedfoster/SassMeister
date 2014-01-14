@@ -203,7 +203,7 @@ var SassMeister;
       return CodeMirror(function(el) { element.appendChild(el, element); }, {
         value: value,
         mode: mode,
-        theme: 'base16-light',
+        theme: 'tomorrow',
         lineNumbers: true,
         //styleActiveLine: true,
         matchBrackets: true,
