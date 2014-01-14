@@ -255,7 +255,7 @@ CodeMirror.defineMode("sass", function(config) {
       if (stream.peek() === ":" && !stream.match(pseudoElementsRegexp, false))
         return "property";
       else
-        return "atom";
+        return "tag";
     }
 
     if (stream.match(opRegexp)){
