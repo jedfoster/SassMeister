@@ -125,14 +125,11 @@ var SassMeister;
       // 3. arrange the panels
       // this.initControls();
       this.initPanels();
-      
-      if(window.viewportSize !== 'desktop') {
-         this.resizeEditors();
-      }
- 
-      else {
-        this.arrangePanels(this.layout.orientation);
-      }
+      this.arrangePanels(this.layout.orientation);
+
+      $(window).on('resize', function(event) {
+        SassMeister.arrangePanels(SassMeister.layout.orientation);
+      });
 
       return this;
     },
@@ -171,9 +168,9 @@ var SassMeister;
     },
 
 
-    initEditor: function(value, name, syntax) {
+    initEditor: function(value, name, syntax) {      
       var input = ace.edit(name);
-
+ 
       input.setTheme('ace/theme/tomorrow');
       input.getSession().setMode('ace/mode/' + syntax.toLowerCase());
 
@@ -344,31 +341,36 @@ var SassMeister;
 
 
     arrangePanels: function(orientation) {
-      // #source has to be done FIRST, since it is nested inside #casement. TODO: Fix this.
-      $('#source').casement({
-        split: (orientation == 'horizontal' ? 'vertical' : 'horizontal'),
-        onDrag: function() {
+      $('#source').casement('destroy');
+      $('#casement').casement('destroy');
+
+      if(window.viewportSize == 'desktop') {
+        // #source has to be done FIRST, since it is nested inside #casement. TODO: Fix this.
+        $('#source').casement({
+          split: (orientation == 'horizontal' ? 'vertical' : 'horizontal'),
+          onDrag: function() {
           SassMeister.editors.sass.resize();
           SassMeister.editors.html.resize();
           SassMeister.editors.css.resize();
-        }
-      });
+          }
+        });
 
-      $('#casement').casement({
-        split: orientation,
-        onDragStart: function() {
-          $('#sash_cover').show();
-        },
-        onDrag: function() {
+        $('#casement').casement({
+          split: orientation,
+          onDragStart: function() {
+            $('#sash_cover').show();
+          },
+          onDrag: function() {
           SassMeister.editors.sass.resize();
           SassMeister.editors.html.resize();
           SassMeister.editors.css.resize();
-        },
-        onDragEnd: function() {
-          $('#sash_cover').hide();
-        }
-      });
-
+          },
+          onDragEnd: function() {
+            $('#sash_cover').hide();
+          }
+        });
+      }
+      
       SassMeister.editors.sass.resize();
       SassMeister.editors.html.resize();
       SassMeister.editors.css.resize();
