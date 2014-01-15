@@ -251,6 +251,19 @@ if($('body.about, body.thankyou').length < 1 ) {
   });
 
 
+  $('.pre_container, #rendered-html').removeClass('show-panel').addClass('hide-panel');
+
+
+  $('.edit-header').on('click', function(event) {
+    console.log($(this));
+
+    $('.pre_container, #rendered-html').removeClass('show-panel').addClass('hide-panel');
+
+    $(this).next('.pre_container, #rendered-html').removeClass('hide-panel').addClass('show-panel');
+    SassMeister.resizeEditors();
+  });
+
+
   window.onmessage = function (event) {
     if (SassMeister.layout.html == 'show') {
       if(SassMeister.outputs.html) {
