@@ -79,6 +79,7 @@ ul.messenger {
     text-align: center;
     padding: 1em;
     width: 100%;
+    overflow: hidden;
 
     &.alert-warning {
       color: #c09853;
