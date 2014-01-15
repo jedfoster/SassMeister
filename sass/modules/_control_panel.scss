@@ -33,7 +33,8 @@ $control-column-open-width: em(480);
   }
 
   &.open {
-    width: $control-column-open-width;
+    width: 100%;
+    max-width: $control-column-open-width;
 
     border-left: 1px solid $golf_gray;
   }
@@ -59,7 +60,8 @@ $control-column-open-width: em(480);
     top:0;
     bottom: 0;
     width: 100%;
-    overflow-x: scroll;
+    overflow-x: hidden;
+    overflow-y: scroll;
 
     > fieldset, > section {
       border-bottom: 1px solid $golf_gray;
@@ -82,7 +84,7 @@ $control-column-open-width: em(480);
 
     bottom: 0;
     float: left;
-    overflow-x: scroll;
+    overflow: hidden;
 
     .swag-promo {
       height: inherit;
@@ -116,7 +118,7 @@ $control-column-open-width: em(480);
     margin: 0;
 
     &.syntax, &.version {
-      width: 15%;
+      width: 25%;
       display: block;
       float: left;
       clear: both;

@@ -55,9 +55,9 @@
     border: 1px solid $golf_gray;
     width: 100%;
     max-height: em(200);
-    overflow: scroll;
+    overflow-y: scroll;
     margin: 0 0 1.5em;
-        background: $white;
+    background: $white;
 
     a {
       cursor: pointer;
