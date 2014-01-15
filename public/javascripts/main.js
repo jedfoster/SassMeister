@@ -249,11 +249,9 @@ if($('body.about, body.thankyou').length < 1 ) {
 
 
   $('.pre_container, #rendered-html').removeClass('show-panel').addClass('hide-panel');
-
+  $('#sass').removeClass('hide-panel').addClass('show-panel');
 
   $('.edit-header').on('click', function(event) {
-    console.log($(this));
-
     $('.pre_container, #rendered-html').removeClass('show-panel').addClass('hide-panel');
 
     $(this).next('.pre_container, #rendered-html').removeClass('hide-panel').addClass('show-panel');

@@ -71,12 +71,15 @@ body:after {
 
 #rendered .edit-header {
   @extend %edit-header;
-}
-
-.edit_container {
-  background: transparent;
+  
+  display: none;
+  
+  @media #{$tablet} {
+    display: block;
+  }
   
 }
+
 
 .edit-header {
   z-index: 9999;
@@ -100,19 +103,15 @@ body:after {
 
 
 
-.edit_container .pre_container, #rendered iframe {
-  display: none;
-}
-
 [data-name="sass"] .edit-header {
   left: 0;
 }
 [data-name="css"] .edit-header {
-  left: 4em;
+  left: 25%;
 }
 [data-name="html"] .edit-header {
-  left: 8em;
+  left: 50%;
 }
 #rendered .edit-header {
-  left: 12em;
+  left: 75%;
 }

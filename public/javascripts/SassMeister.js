@@ -125,18 +125,10 @@ var SassMeister;
       // 3. arrange the panels
       // this.initControls();
       this.initPanels();
-      
-      if(window.viewportSize !== 'desktop') {
-         this.resizeEditors();
-      }
- 
-      else {
-        this.arrangePanels(this.layout.orientation);
-      }
-
+      this.arrangePanels(this.layout.orientation);
 
       $(window).on('resize', function(event) {
-        SassMeister.resizeEditors();
+        SassMeister.arrangePanels(SassMeister.layout.orientation);
       });
 
       return this;
@@ -386,26 +378,31 @@ var SassMeister;
 
 
     arrangePanels: function(orientation) {
-      // #source has to be done FIRST, since it is nested inside #casement. TODO: Fix this.
-      $('#source').casement({
-        split: (orientation == 'horizontal' ? 'vertical' : 'horizontal'),
-        onDrag: function() {
-          SassMeister.resizeEditors();
-        }
-      });
+      $('#source').casement('destroy');
+      $('#casement').casement('destroy');
 
-      $('#casement').casement({
-        split: orientation,
-        onDragStart: function() {
-          $('#sash_cover').show();
-        },
-        onDrag: function() {
-          SassMeister.resizeEditors();
-        },
-        onDragEnd: function() {
-          $('#sash_cover').hide();
-        }
-      });
+      if(window.viewportSize == 'desktop') {
+        // #source has to be done FIRST, since it is nested inside #casement. TODO: Fix this.
+        $('#source').casement({
+          split: (orientation == 'horizontal' ? 'vertical' : 'horizontal'),
+          onDrag: function() {
+            SassMeister.resizeEditors();
+          }
+        });
+
+        $('#casement').casement({
+          split: orientation,
+          onDragStart: function() {
+            $('#sash_cover').show();
+          },
+          onDrag: function() {
+            SassMeister.resizeEditors();
+          },
+          onDragEnd: function() {
+            $('#sash_cover').hide();
+          }
+        });
+      }
       
       SassMeister.resizeEditors();
     },

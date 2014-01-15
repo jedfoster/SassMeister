@@ -8,8 +8,6 @@
   color: $delta_gray;
   border-bottom: 1px solid $golf_gray;
   vertical-align: middle;
-  width: 4em;
-  position: relative;
 
   h2 {
     font-size: inherit;
@@ -20,10 +18,20 @@
     padding: 0 0.83333em;
     line-height: 1.5;
   }
+
+  @media #{$tablet} {
+    position: relative;
+    width: 25%;
+    background: $india_gray;
+  }
 }
 
 .edit_container {
   background: $india_gray;
+
+  @media #{$tablet} {
+    background: transparent;
+  }
 
   .pre_container {
     @extend %stretch;
