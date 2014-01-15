@@ -1,3 +1,11 @@
+#casement {
+  @extend %stretch;
+}
+ 
+#source {
+  @extend %stretch;
+}
+
 body:after {
   content: 'desktop';
   display: none;
@@ -59,4 +67,57 @@ body:after {
       }
     }
   }
+}
+
+#rendered .edit-header {
+  @extend %edit-header;
+}
+
+.edit_container {
+  background: transparent;
+  
+}
+
+.edit-header {
+  z-index: 9999;
+}
+
+.edit_container .pre_container, #rendered iframe {
+
+  display: none !important;
+}
+
+[data-name="sass"] .edit-header {
+  left: 0;
+}
+[data-name="css"] .edit-header {
+  left: 4em;
+}
+[data-name="html"] .edit-header {
+  left: 8em;
+}
+#rendered .edit-header {
+  left: 12em;
+}
+
+
+
+
+#sass_toggle:checked ~ #casement [data-name="sass"] .pre_container {
+  display: block !important;
+  z-index: 998;
+}
+
+#css_toggle:checked ~ #casement [data-name="css"] .pre_container {
+  display: block !important;
+  z-index: 998;
+}
+
+#html_toggle:checked ~ #casement [data-name="html"] .pre_container {
+  display: block !important;
+  z-index: 998;
+}
+#result_toggle:checked ~ #casement #rendered iframe {
+  display: block !important;
+  z-index: 998;
 }

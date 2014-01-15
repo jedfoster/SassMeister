@@ -125,7 +125,14 @@ var SassMeister;
       // 3. arrange the panels
       // this.initControls();
       this.initPanels();
-      this.arrangePanels(this.layout.orientation);
+      
+      if(window.viewportSize !== 'desktop') {
+         this.resizeEditors();
+      }
+ 
+      else {
+        this.arrangePanels(this.layout.orientation);
+      }
 
 
       $(window).on('resize', function(event) {
