@@ -1,3 +1,27 @@
+%edit-header {
+  text-align: center;
+  display: block;
+  margin: 0;
+  height: em($heading_3);
+  font-size: 1em;
+  font-weight: 200;
+  color: $delta_gray;
+  border-bottom: 1px solid $golf_gray;
+  vertical-align: middle;
+  width: 4em;
+  position: relative;
+
+  h2 {
+    font-size: inherit;
+    font-weight: inherit;
+    color: inherit;
+    display: inline-block;
+    float: left;
+    padding: 0 0.83333em;
+    line-height: 1.5;
+  }
+}
+
 .edit_container {
   background: $india_gray;
 
@@ -9,25 +33,7 @@
   }
 
   .edit-header {
-    text-align: center;
-    display: block;
-    margin: 0;
-    height: em($heading_3);
-    font-size: 1em;
-    font-weight: 200;
-    color: $delta_gray;
-    border-bottom: 1px solid $golf_gray;
-    vertical-align: middle;
-
-    h2 {
-      font-size: inherit;
-      font-weight: inherit;
-      color: inherit;
-      display: inline-block;
-      float: left;
-      padding: 0 0.83333em;
-      line-height: 1.5;
-    }
+    @extend %edit-header;
   }
 
   pre {
