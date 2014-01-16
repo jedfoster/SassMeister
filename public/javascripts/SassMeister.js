@@ -369,6 +369,16 @@ var SassMeister;
             $('#sash_cover').hide();
           }
         });
+
+        $('.pre_container, #rendered-html').removeClass('hide-panel').removeClass('show-panel');
+        $(document.body).removeClass('single-column');
+      }
+
+      else {
+        $('.pre_container, #rendered-html').removeClass('show-panel').addClass('hide-panel');
+        $('#sass').removeClass('hide-panel').addClass('show-panel');
+        $('[data-name="sass"] .edit-header').addClass('current');
+        $(document.body).addClass('single-column');
       }
       
       SassMeister.editors.sass.resize();
