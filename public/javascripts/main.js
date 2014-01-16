@@ -151,7 +151,7 @@ if($('body.about, body.thankyou').length < 1 ) {
       }
 
       $(imports).each(function() {
-        SassMeister.editors.sass.insert( '@import "' + this + '"' + eol);
+        SassMeister.editors.sass.replaceRange('@import "' + this + '"' + eol, SassMeister.editors.sass.getCursor());
       });
     });
   };
