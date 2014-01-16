@@ -12,9 +12,6 @@ footer {
   border-top: 1px solid $golf_gray;
   background: scale-color($india_gray, $lightness: 50%);
 
-  @media screen and (max-width: 650px) {
-    height: em(64);
-  }
 
   a {
     color: $charlie_gray;
@@ -57,9 +54,15 @@ footer {
     font-size: 1em;
 	  margin-right: 0.2em;
   }
-  
-  .heart-icon:before {
-    font-size: 1.2em;
-	  margin-right: 0.2em;
+
+  .heart-icon {
+    &:before {
+      font-size: 1.2em;
+  	  margin-right: 0.2em;
+    }
+
+    @media #{$mobile} {
+      display: none;
+    }
   }
 }
