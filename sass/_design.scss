@@ -69,49 +69,52 @@ body:after {
   }
 }
 
+
 #rendered .edit-header {
-  @extend %edit-header;
-  
   display: none;
-  
-  @media #{$tablet} {
+}
+
+.single-column {
+  #rendered .edit-header {
+    position : relative;
     display: block;
   }
   
-}
-
-
-.edit-header {
-  z-index: 9999;
-}
-
-
-.hide-panel {
-  &.pre_container, &#rendered-html {
-    display: none !important;
-    z-index: 1;
+  .edit-header {
+    @extend %edit-header;
+    z-index: 9999;
+    cursor: pointer;
+    
+    &.current {
+      background: $bravo_gray;
+      color: $white;
+    }
   }
-}
-
-.show-panel {
-  &.pre_container, &#rendered-html {
-    display: block !important;
-    z-index: 999;
+  
+  .hide-panel {
+    &.pre_container, &#rendered-html {
+      display: none !important;
+      z-index: 1;
+    }
   }
-}
-
-
-
-
-[data-name="sass"] .edit-header {
-  left: 0;
-}
-[data-name="css"] .edit-header {
-  left: 25%;
-}
-[data-name="html"] .edit-header {
-  left: 50%;
-}
-#rendered .edit-header {
-  left: 75%;
+  
+  .show-panel {
+    &.pre_container, &#rendered-html {
+      display: block !important;
+      z-index: 999;
+    }
+  }
+  
+  [data-name="sass"] .edit-header {
+    left: 0;
+  }
+  [data-name="css"] .edit-header {
+    left: 25%;
+  }
+  [data-name="html"] .edit-header {
+    left: 50%;
+  }
+  #rendered .edit-header {
+    left: 75%;
+  }
 }
