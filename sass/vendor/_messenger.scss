@@ -10,11 +10,11 @@ ul.messenger {
   z-index: 1000;
 
   width: em(400);
-  
+
   @media #{$tablet} {
     width: 50%;
   }
-  
+
   @media #{$mobile} {
     width: 70%;
   }
@@ -22,7 +22,7 @@ ul.messenger {
   &.messenger-on-bottom {
     top: auto;
     bottom: $site-footer-height;
-    
+
     .messenger-message {
       border-bottom: 0;
 
@@ -31,16 +31,12 @@ ul.messenger {
         #{$prefix}border-top-right-radius: em(3);
       }
     }    
-
-    @media screen and (max-width: 650px) {
-      bottom: em(64);
-    }
   }
 
   &.messenger-on-top {
     top: $site-header-height;
     bottom: auto;
-    
+
     .messenger-message {
       border-top: 0;
 
@@ -63,7 +59,7 @@ ul.messenger {
       left: auto;
     // }
   // }
-  
+
   p:last-child {
     margin-bottom: 0;
   }
@@ -97,11 +93,11 @@ ul.messenger {
       color: #468847;
       background-color: #dff0d8;
       border-color: #d6e9c6;
-      
+
       color: darken($bravo_color, 20%);
       background-color: $bravo_color_india;
       border-color: $bravo_color_bravo;
-      
+
       a {
         color: darken($bravo_color, 20%);
         text-decoration: underline;
