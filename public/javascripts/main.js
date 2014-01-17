@@ -6,16 +6,6 @@ if($('body.about, body.thankyou').length < 1 ) {
   var SassMeister = window.SassMeister.init();
 
 
-  if(window.github_id) {
-    $('#github-auth').replaceWith('<div class="github"><span><img src="http://www.gravatar.com/avatar/' + window.gravatar_id + '?s=80" alt="" height="40"></span>\
-      <ul id="account_actions">\
-        <li class="checkmark-icon">Logged in as ' + window.github_id + '</li>\
-        <li class="off-icon"><a href="/logout"><span>Logout</span></a></li>\
-      </ul>\
-    </div>');
-  }
-
-
   $('#control-column-bg').on('click', function(event) {
     $('#control-column, #control-column-bg').removeClass('open');
   });
