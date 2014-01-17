@@ -175,8 +175,8 @@ if($('body.about, body.thankyou').length < 1 ) {
 
     SassMeister.arrangePanels(SassMeister.layout.orientation);
 
-    SassMeister.editors.sass.resize();
-    SassMeister.editors.css.resize();
+    //SassMeister.editors.sass.resize();
+    //SassMeister.editors.css.resize();
 
     localStorage.setItem('layout', JSON.stringify( SassMeister.layout ));
   };
@@ -197,9 +197,9 @@ if($('body.about, body.thankyou').length < 1 ) {
 
     SassMeister.arrangePanels(SassMeister.layout.orientation);
 
-    SassMeister.editors.sass.resize();
-    SassMeister.editors.css.resize();
-    SassMeister.editors.html.resize();
+    //SassMeister.editors.sass.resize();
+    //SassMeister.editors.css.resize();
+    //SassMeister.editors.html.resize();
 
     localStorage.setItem('layout', JSON.stringify( SassMeister.layout ));
   };

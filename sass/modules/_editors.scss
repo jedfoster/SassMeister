@@ -37,20 +37,24 @@
     @extend %stretch;
 
     display: block;
-    margin-top: 1.5em;
+    margin-top: 2em;
+
+    font-size: em($small_point_size);
+    line-height: 1.5;
+    outline: none;
   }
 
   .edit-header {
     @extend %edit-header;
   }
 
-  pre {
-    @extend %stretch;
-
-    font-size: em($small_point_size);
-    line-height: 1.5;
-    outline: none;
-  }
+  // pre {
+  //   @extend %stretch;
+  //
+  //   font-size: em($small_point_size);
+  //   line-height: 1.5;
+  //   outline: none;
+  // }
 
   .ace_editor {
     font-family: $monospace-font-family;

@@ -349,9 +349,7 @@ var SassMeister;
         $('#source').casement({
           split: (orientation == 'horizontal' ? 'vertical' : 'horizontal'),
           onDrag: function() {
-          SassMeister.editors.sass.resize();
-          SassMeister.editors.html.resize();
-          SassMeister.editors.css.resize();
+          SassMeister.resizeEditors();
           }
         });
 
@@ -361,9 +359,7 @@ var SassMeister;
             $('#sash_cover').show();
           },
           onDrag: function() {
-          SassMeister.editors.sass.resize();
-          SassMeister.editors.html.resize();
-          SassMeister.editors.css.resize();
+            SassMeister.resizeEditors();
           },
           onDragEnd: function() {
             $('#sash_cover').hide();
@@ -381,9 +377,14 @@ var SassMeister;
         $(document.body).addClass('single-column');
       }
       
-      SassMeister.editors.sass.resize();
-      SassMeister.editors.html.resize();
-      SassMeister.editors.css.resize();
+      SassMeister.resizeEditors();
+    },
+
+
+    resizeEditors: function() {
+      $.each(this.editors, function(i, editor) {
+        editor.resize();
+      });
     },
 
 
