@@ -39,11 +39,11 @@
 
       &:after {
         @extend %tooltip;
-        
+
         right: initial;
         left: 0;
         width: em(260);
-        
+
         @media #{$mobile} {
           display: none;
         }
@@ -72,7 +72,7 @@
     }
 
     .bookmark-icon {
-      @media #{$mobile} {
+      @media #{$tablet} {
         display: none;
       }
     }
