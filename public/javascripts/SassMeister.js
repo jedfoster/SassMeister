@@ -168,9 +168,9 @@ var SassMeister;
     },
 
 
-    initEditor: function(value, name, syntax) {      
+    initEditor: function(value, name, syntax) {
       var input = ace.edit(name);
- 
+
       input.setTheme('ace/theme/tomorrow');
       input.getSession().setMode('ace/mode/' + syntax.toLowerCase());
 
@@ -366,17 +366,17 @@ var SassMeister;
           }
         });
 
-        $('.pre_container, #rendered-html').removeClass('hide-panel').removeClass('show-panel');
+        $('.editor, #rendered-html').removeClass('hide-panel').removeClass('show-panel');
         $(document.body).removeClass('single-column');
       }
 
       else {
-        $('.pre_container, #rendered-html').removeClass('show-panel').addClass('hide-panel');
+        $('.editor, #rendered-html').removeClass('show-panel').addClass('hide-panel');
         $('#sass').removeClass('hide-panel').addClass('show-panel');
         $('[data-name="sass"] .edit-header').addClass('current');
         $(document.body).addClass('single-column');
       }
-      
+
       SassMeister.resizeEditors();
     },
 

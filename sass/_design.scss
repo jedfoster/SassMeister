@@ -92,14 +92,14 @@ body:after {
   }
   
   .hide-panel {
-    &.pre_container, &#rendered-html {
+    &.editor, &#rendered-html {
       display: none !important;
       z-index: 1;
     }
   }
   
   .show-panel {
-    &.pre_container, &#rendered-html {
+    &.editor, &#rendered-html {
       display: block !important;
       z-index: 999;
     }
