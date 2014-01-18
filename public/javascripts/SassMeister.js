@@ -373,7 +373,7 @@ var SassMeister;
       else {
         $('.editor, #rendered-html').removeClass('show-panel').addClass('hide-panel');
         $('#sass').removeClass('hide-panel').addClass('show-panel');
-        $('[data-name="sass"] .edit-header').addClass('current');
+        $('[data-name="sass"] .editor-header').addClass('current');
         $(document.body).addClass('single-column');
       }
 

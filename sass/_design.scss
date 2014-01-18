@@ -70,18 +70,18 @@ body:after {
 }
 
 
-#rendered .edit-header {
+#rendered .editor-header {
   display: none;
 }
 
 .single-column {
-  #rendered .edit-header {
+  #rendered .editor-header {
     position : relative;
     display: block;
   }
   
-  .edit-header {
-    @extend %edit-header;
+  .editor-header {
+    @extend %editor-header;
     z-index: 9999;
     cursor: pointer;
     
@@ -105,16 +105,16 @@ body:after {
     }
   }
   
-  [data-name="sass"] .edit-header {
+  [data-name="sass"] .editor-header {
     left: 0;
   }
-  [data-name="css"] .edit-header {
+  [data-name="css"] .editor-header {
     left: 25%;
   }
-  [data-name="html"] .edit-header {
+  [data-name="html"] .editor-header {
     left: 50%;
   }
-  #rendered .edit-header {
+  #rendered .editor-header {
     left: 75%;
   }
 }

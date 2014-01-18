@@ -1,4 +1,4 @@
-%edit-header {
+%editor-header {
   text-align: center;
   display: block;
   margin: 0;
@@ -44,8 +44,8 @@
     outline: none;
   }
 
-  .edit-header {
-    @extend %edit-header;
+  .editor-header {
+    @extend %editor-header;
   }
 
   // pre {

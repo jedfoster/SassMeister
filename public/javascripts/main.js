@@ -241,9 +241,9 @@ if($('body.about, body.thankyou').length < 1 ) {
   });
 
 
-  $('.edit-header').on('click', function(event) {
+  $('.editor-header').on('click', function(event) {
     if(window.viewportSize !== 'desktop') {
-      $('.editor, #rendered-html, .edit-header.current').removeClass('current').removeClass('show-panel').addClass('hide-panel');
+      $('.editor, #rendered-html, .editor-header.current').removeClass('current').removeClass('show-panel').addClass('hide-panel');
 
       $(this).toggleClass('current').next('.editor, #rendered-html').removeClass('hide-panel').addClass('show-panel');
     }
