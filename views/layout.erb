@@ -33,22 +33,14 @@
 
 <body class="<%= @body_class || 'app' %>">
   <%= partial :"shared/_header" %>
-  
+
   <%= partial :"shared/_control_panel" unless @body_class %>
-  
+
   <section class="main_body">
   <%= yield %>
   </section>
 
   <%= partial :"shared/_footer" %>
-
-  <script>
-    var sandbox = 'http://<%= SANDBOX_DOMAIN %>';
-    var gist = <%= @gist || 'false' %>;
-    var resetApp = <%= @force_invalidate ? "'#{@force_invalidate}'" : 'false' %>;
-    var github_id = <%= session[:github_id] ? "'#{session[:github_id]}'" : 'false' %>;
-    var gravatar_id = <%= session[:gravatar_id] ? "'#{session[:gravatar_id]}'" : 'false' %>;
-  </script>
 
   <%= javascript_tags %>
 </body>
