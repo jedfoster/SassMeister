@@ -18,15 +18,16 @@ $control-column-open-width: em(480);
   bottom: 0;
   right: 0;
   width: $control-column-closed-width;
+  max-width: 0;
   height: 100%;
   border-left: 0;
   background: scale-color($alpha_gray, $lightness: 90%);
   z-index: 9999;
   overflow-x: hidden;
 
-  -webkit-transition: width 0.1s ease-in-out;
-  -moz-transition: width 0.1s ease-in-out;
-  transition: width 0.1s ease-in-out;
+  -webkit-transition: max-width 0.1s ease-in-out;
+  -moz-transition: max-width 0.1s ease-in-out;
+  transition: max-width 0.1s ease-in-out;
 
   > * {
     font-size: em($small_point_size);
