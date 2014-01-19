@@ -5,11 +5,6 @@
   z-index: 2;
   top: $site-header-height;
   bottom: em(32);
-
-  @media screen and (max-width: 650px) {
-    bottom: em(64);
-    padding-bottom: em(64);
-  }
 }
 
 

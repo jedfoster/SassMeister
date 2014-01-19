@@ -58,6 +58,7 @@
 
   %#{$toggle} {
     width: 100% / $length;
+    overflow: hidden;
   }
 
   label, span {

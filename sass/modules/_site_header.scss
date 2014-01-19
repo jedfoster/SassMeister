@@ -136,3 +136,8 @@
 //  }
 //}
 
+#toggle_css, #toggle_html {
+  @media #{$tablet} {
+    display: none;
+  }
+}
