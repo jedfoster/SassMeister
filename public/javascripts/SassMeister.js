@@ -342,6 +342,9 @@ var SassMeister;
 
     arrangePanels: function(orientation) {
       if(window.viewportSize == 'desktop') {
+        $('.panel, .current').removeClass('hide-panel').removeClass('show-panel').removeClass('current');
+        $(document.body).removeClass('single-column');
+
         // #source has to be done FIRST, since it is nested inside #casement. TODO: Fix this.
         $('#source').casement({
           split: (orientation == 'horizontal' ? 'vertical' : 'horizontal'),
@@ -362,9 +365,6 @@ var SassMeister;
             $('#sash_cover').hide();
           }
         });
-
-        $('.hide-panel, .show-panel, .current').removeClass('hide-panel').removeClass('show-panel').removeClass('current');
-        $(document.body).removeClass('single-column');
       }
 
       else {
@@ -375,8 +375,8 @@ var SassMeister;
         }
 
         if($('.hide-panel').length < 1 ) {
-          $('.editor-mask, #rendered-html').removeClass('show-panel').addClass('hide-panel');
-          $('[data-name="sass"] .editor-mask').removeClass('hide-panel').addClass('show-panel');
+          $('.panel').removeClass('show-panel').addClass('hide-panel');
+          $('[data-name="sass"]').removeClass('hide-panel').addClass('show-panel');
           $('#mobile-tabs .current').removeClass('current');
           $('[data-tab="sass"]').addClass('current');
           $(document.body).addClass('single-column');

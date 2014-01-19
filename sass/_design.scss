@@ -101,22 +101,17 @@ body:after {
     }
   }
   .panel .editor-header {
-    z-index: -1;
     display: none;
   }
 
   .hide-panel {
-    &.editor-mask, &#rendered-html {
       display: none !important;
-      z-index: 1;
-    }
+      z-index: -999;
   }
 
   .show-panel {
-    &.editor-mask, &#rendered-html {
       display: block !important;
       z-index: 999;
-    }
   }
 
  // [data-name="sass"] .editor-header {

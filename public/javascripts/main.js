@@ -243,15 +243,15 @@ if($('body.about, body.thankyou').length < 1 ) {
 
   $('#mobile-tabs h2').on('click', function(event) {
     if(window.viewportSize !== 'desktop') {
-      $('.editor-mask, #rendered-html').removeClass('show-panel').addClass('hide-panel');
+      $('.panel').removeClass('show-panel').addClass('hide-panel');
       $('#mobile-tabs .current').removeClass('current');
       $(this).toggleClass('current')
     
-      $('[data-name="' + $(this).data('tab') + '"] .editor-mask, [data-name="' + $(this).data('tab') + '"] #rendered-html').removeClass('hide-panel').addClass('show-panel');
+      $('[data-name="' + $(this).data('tab') + '"]').removeClass('hide-panel').addClass('show-panel');
     }
 
     else {
-      $('.editor-mask, #rendered-html').removeClass('hide-panel').removeClass('show-panel');
+      $('.panel').removeClass('hide-panel').removeClass('show-panel');
     }
 
     SassMeister.resizeEditors();
