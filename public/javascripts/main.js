@@ -50,7 +50,7 @@ if($('body.about, body.thankyou').length < 1 ) {
     if (window.gist) {
       if (window.gist.can_update_gist == true) {
         $('#save-gist').data('action', 'edit').attr('class', 'edit-gist').find('span').text('Update Gist');
-        $('#save-gist').parent('li').after('<li><a id="fork-gist" class="fork-gist" data-action="create">Fork Gist</a></li>');
+        $('#save-gist').parent('li').after('<li><a id="fork-gist" class="fork-gist" data-action="create">Save as new Gist</a></li>');
       }
       else {
         $('#save-gist').data('action', 'fork').attr('class', 'fork-gist').find('span').text('Fork Gist');
