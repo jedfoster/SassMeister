@@ -341,9 +341,6 @@ var SassMeister;
 
 
     arrangePanels: function(orientation) {
-      $('#source').casement('destroy');
-      $('#casement').casement('destroy');
-
       if(window.viewportSize == 'desktop') {
         // #source has to be done FIRST, since it is nested inside #casement. TODO: Fix this.
         $('#source').casement({
@@ -366,15 +363,24 @@ var SassMeister;
           }
         });
 
-        $('.editor, #rendered-html').removeClass('hide-panel').removeClass('show-panel');
+        $('.hide-panel, .show-panel, .current').removeClass('hide-panel').removeClass('show-panel').removeClass('current');
         $(document.body).removeClass('single-column');
       }
 
       else {
-        $('.editor, #rendered-html').removeClass('show-panel').addClass('hide-panel');
-        $('#sass').removeClass('hide-panel').addClass('show-panel');
-        $('[data-name="sass"] .editor-header').addClass('current');
-        $(document.body).addClass('single-column');
+        // Remove Casement, if it exists
+        if($('#source .sash').length > 0) {
+          $('#source').casement('destroy');
+          $('#casement').casement('destroy');
+        }
+
+        if($('.hide-panel').length < 1 ) {
+          $('.editor-mask, #rendered-html').removeClass('show-panel').addClass('hide-panel');
+          $('[data-name="sass"] .editor-mask').removeClass('hide-panel').addClass('show-panel');
+          $('#mobile-tabs .current').removeClass('current');
+          $('[data-tab="sass"]').addClass('current');
+          $(document.body).addClass('single-column');
+        }
       }
 
       SassMeister.resizeEditors();

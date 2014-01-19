@@ -20,9 +20,9 @@
   }
 
   @media #{$tablet} {
-    position: relative;
-    width: 25%;
-    background: $india_gray;
+    //position: relative;
+    //width: 25%;
+    //background: $india_gray;
   }
 }
 
@@ -32,7 +32,9 @@
   @media #{$tablet} {
     background: transparent;
   }
+}
 
+.main_body {
   .editor {
     @extend %stretch;
 
@@ -42,6 +44,10 @@
     font-size: em($small_point_size);
     line-height: 1.5;
     outline: none;
+
+    @media #{$tablet} {
+      margin-top: 0;
+    }
   }
 
   .editor-header {
@@ -61,8 +67,22 @@
   }
 }
 
-#extension_list {
 
+@media #{$tablet} {
+  .editor-mask {
+    height: 1000px;
+    overflow-y: hidden;
+    background: $white;
+  }
+
+  .editor-wrapper {
+    position: relative;
+    height: 10000px;
+  }
+}
+
+
+#extension_list {
   float: left;
   width: 100%;
   clear: both;

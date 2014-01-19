@@ -21,8 +21,8 @@ if($('body.about, body.thankyou').length < 1 ) {
 
 
   var initControls = function() {
-    $('#sass-syntax-display').text(SassMeister.inputs.sass.syntax);
-    $('#html-syntax-display').text(SassMeister.inputs.html.syntax);
+    $('.sass-syntax-display').text(SassMeister.inputs.sass.syntax);
+    $('.html-syntax-display').text(SassMeister.inputs.html.syntax);
 
     $('input[name="version"][value="' + SassMeister.sass_version + '"]').prop('checked', true);
 
@@ -241,15 +241,17 @@ if($('body.about, body.thankyou').length < 1 ) {
   });
 
 
-  $('.editor-header').on('click', function(event) {
-    if(window.viewportSize !== 'desktop') {
-      $('.editor, #rendered-html, .editor-header.current').removeClass('current').removeClass('show-panel').addClass('hide-panel');
-
-      $(this).toggleClass('current').next('.editor, #rendered-html').removeClass('hide-panel').addClass('show-panel');
+  $('#mobile-tabs h2').on('click', function(event) {
+    if(window.viewportSize !== 'desktop') {
+      $('.editor-mask, #rendered-html').removeClass('show-panel').addClass('hide-panel');
+      $('#mobile-tabs .current').removeClass('current');
+      $(this).toggleClass('current')
+    
+      $('[data-name="' + $(this).data('tab') + '"] .editor-mask, [data-name="' + $(this).data('tab') + '"] #rendered-html').removeClass('hide-panel').addClass('show-panel');
     }
 
     else {
-      $('.editor, #rendered-html').removeClass('hide-panel').removeClass('show-panel');
+      $('.editor-mask, #rendered-html').removeClass('hide-panel').removeClass('show-panel');
     }
 
     SassMeister.resizeEditors();
