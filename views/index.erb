@@ -1,3 +1,10 @@
+<div class="editor-header" id="mobile-tabs">
+  <h2 class="sass-syntax-display" data-tab="sass">Sass</h2>
+  <h2 data-tab="css">CSS</h2>
+  <h2 class="html-syntax-display" data-tab="html">HTML</h2>
+  <h2 data-tab="rendered">Result</h2>
+</div>
+
 <div id="casement">
   <div id="source">
     <div class="panel" data-name="sass">
@@ -11,12 +18,17 @@
     </div>
   </div>
 
-  <div id="rendered" data-name="rendered">
+  <div class="panel" id="rendered" data-name="rendered">
     <iframe id="rendered-html" sandbox="allow-scripts allow-same-origin"></iframe>
 
     <div id="sash_cover"></div>
   </div>
 </div>
 
-
-
+<script>
+  var sandbox = 'http://<%= SANDBOX_DOMAIN %>';
+  var gist = <%= @gist || 'false' %>;
+  var resetApp = <%= @force_invalidate ? "'#{@force_invalidate}'" : 'false' %>;
+  var github_id = <%= session[:github_id] ? "'#{session[:github_id]}'" : 'false' %>;
+  var gravatar_id = <%= session[:gravatar_id] ? "'#{session[:gravatar_id]}'" : 'false' %>;
+</script>

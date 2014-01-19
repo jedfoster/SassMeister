@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-	<title>SassMeister | The Sass Playground!</title>
+  <title>SassMeister | The Sass Playground!</title>
 
-	<meta http-equiv="Content-Language" content="en-us">
-	<meta name="description" content="SassMeister is a playground for Sass. Add some Sass and SassMeister will show you the rendered CSS.">
-	<meta name="author" content="Jed Foster and Dale Sande">
+  <meta http-equiv="Content-Language" content="en-us">
+  <meta name="description" content="SassMeister is a playground for Sass. Add some Sass and SassMeister will show you the rendered CSS.">
+  <meta name="author" content="Jed Foster and Dale Sande">
 
-	<!--  Mobile Viewport Fix, use at own risk -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5 maximum-scale=1.0">
-	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <!--  Mobile Viewport Fix, use at own risk -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5 maximum-scale=1.0">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-	<link rel="stylesheet" href="/stylesheets/style.css" />
+  <link rel="stylesheet" href="/stylesheets/style.css" />
 
   <script>document.domain = '<%= APP_DOMAIN %>';</script>
 
-	<script type="text/javascript">
+  <script type="text/javascript">
     var _gaq = _gaq || [];
-   <% if settings.environment == :production %> _gaq.push(['_setAccount', 'UA-35407426-1']);
+    <% if settings.environment == :production %> _gaq.push(['_setAccount', 'UA-35407426-1']);
     _gaq.push(['_trackPageview']);
 
     (function() {
@@ -33,34 +33,15 @@
 
 <body class="<%= @body_class || 'app' %>">
   <%= partial :"shared/_header" %>
-  
+
   <%= partial :"shared/_control_panel" unless @body_class %>
-  
-	<section class="main_body">
-  	<%= yield %>
-	</section>
-	<%= partial :"shared/_footer" %>
 
-  <script>
-    var sandbox = 'http://<%= SANDBOX_DOMAIN %>';
-    var gist = <%= @gist || 'false' %>;
-    var resetApp = <%= @force_invalidate ? "'#{@force_invalidate}'" : 'false' %>;
-    var github_id = <%= session[:github_id] ? "'#{session[:github_id]}'" : 'false' %>;
-    var gravatar_id = <%= session[:gravatar_id] ? "'#{session[:gravatar_id]}'" : 'false' %>;
-  </script>
+  <section class="main_body">
+  <%= yield %>
+  </section>
 
-  <% if settings.environment == :production %>
-	  <script src="/javascripts/app.js"></script>
-	<% else %>
-  	<script src="/javascripts/vendor/jquery-1.8.2.js"></script>
-    <script src="/javascripts/vendor/ACE-noconflict/ace.js"></script>
-    <script src="/javascripts/vendor/bindWithDelay.js"></script>
-    <script src="/javascripts/vendor/messenger.min.js"></script>
-    <script src="/javascripts/viewport.js"></script>
-    <script src="/javascripts/messages.js"></script>
-    <script src="/javascripts/Sassmeister.js"></script>
-    <script src="/javascripts/vendor/casement.js"></script>
-    <script src="/javascripts/main.js"></script>
-  <% end %>
+  <%= partial :"shared/_footer" %>
+
+  <%= javascript_tags %>
 </body>
 </html>

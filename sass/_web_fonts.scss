@@ -46,11 +46,15 @@
 %icon-pseudo-content {
   font-size: 1.5em;
   font-family: 'SassMeisterIcons';
-	font-style: normal;
-	line-height: 1;
-	vertical-align: middle;
-	speak: none;
+  font-style: normal;
+  line-height: 1;
+  vertical-align: middle;
+  speak: none;
   -webkit-font-smoothing: antialiased;
+
+  @media #{$mobile} {
+    font-size: 1em;
+  }
 }
 
 

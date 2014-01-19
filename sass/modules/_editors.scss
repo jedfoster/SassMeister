@@ -1,50 +1,88 @@
+%editor-header {
+  text-align: center;
+  display: block;
+  margin: 0;
+  height: em($heading_3);
+  font-size: 1em;
+  font-weight: 200;
+  color: $delta_gray;
+  border-bottom: 1px solid $golf_gray;
+  vertical-align: middle;
+
+  h2 {
+    font-size: inherit;
+    font-weight: inherit;
+    color: inherit;
+    display: inline-block;
+    float: left;
+    padding: 0 0.83333em;
+    line-height: 1.5;
+  }
+
+  @media #{$tablet} {
+    //position: relative;
+    //width: 25%;
+    //background: $india_gray;
+  }
+}
+
 .edit_container {
   background: $india_gray;
 
-  .pre_container {
+  @media #{$tablet} {
+    background: transparent;
+  }
+}
+
+.main_body {
+  .editor {
     @extend %stretch;
 
     display: block;
-    margin-top: 1.5em;
-  }
-
-  .edit-header {
-    text-align: center;
-    display: block;
-    margin: 0;
-    height: em($heading_3);
-    font-size: 1em;
-    font-weight: 200;
-    color: $delta_gray;
-    border-bottom: 1px solid $golf_gray;
-    vertical-align: middle;
-
-    h2 {
-      font-size: inherit;
-      font-weight: inherit;
-      color: inherit;
-      display: inline-block;
-      float: left;
-      padding: 0 0.83333em;
-      line-height: 1.5;
-    }
-  }
-
-  pre {
-    @extend %stretch;
+    margin-top: 2em;
 
     font-size: em($small_point_size);
     line-height: 1.5;
     outline: none;
+
+    @media #{$tablet} {
+      margin-top: 0;
+    }
   }
+
+  .editor-header {
+    @extend %editor-header;
+  }
+
+  // pre {
+  //   @extend %stretch;
+  //
+  //   font-size: em($small_point_size);
+  //   line-height: 1.5;
+  //   outline: none;
+  // }
 
   .ace_editor {
     font-family: $monospace-font-family;
   }
 }
 
-#extension_list {
 
+@media #{$tablet} {
+  .editor-mask {
+    height: 1000px;
+    overflow-y: hidden;
+    background: $white;
+  }
+
+  .editor-wrapper {
+    position: relative;
+    height: 10000px;
+  }
+}
+
+
+#extension_list {
   float: left;
   width: 100%;
   clear: both;
@@ -55,9 +93,9 @@
     border: 1px solid $golf_gray;
     width: 100%;
     max-height: em(200);
-    overflow: scroll;
+    overflow-y: scroll;
     margin: 0 0 1.5em;
-        background: $white;
+    background: $white;
 
     a {
       cursor: pointer;

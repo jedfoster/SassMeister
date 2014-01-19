@@ -6,16 +6,6 @@ if($('body.about, body.thankyou').length < 1 ) {
   var SassMeister = window.SassMeister.init();
 
 
-  if(window.github_id) {
-    $('#github-auth').replaceWith('<div class="github"><span><img src="http://www.gravatar.com/avatar/' + window.gravatar_id + '?s=80" alt="" height="40"></span>\
-      <ul id="account_actions">\
-        <li class="checkmark-icon">Logged in as ' + window.github_id + '</li>\
-        <li class="off-icon"><a href="/logout"><span>Logout</span></a></li>\
-      </ul>\
-    </div>');
-  }
-
-
   $('#control-column-bg').on('click', function(event) {
     $('#control-column, #control-column-bg').removeClass('open');
   });
@@ -31,8 +21,8 @@ if($('body.about, body.thankyou').length < 1 ) {
 
 
   var initControls = function() {
-    $('#sass-syntax-display').text(SassMeister.inputs.sass.syntax);
-    $('#html-syntax-display').text(SassMeister.inputs.html.syntax);
+    $('.sass-syntax-display').text(SassMeister.inputs.sass.syntax);
+    $('.html-syntax-display').text(SassMeister.inputs.html.syntax);
 
     $('input[name="version"][value="' + SassMeister.sass_version + '"]').prop('checked', true);
 
@@ -98,6 +88,7 @@ if($('body.about, body.thankyou').length < 1 ) {
       }
 
       getExtensions();
+      SassMeister.compile.sass();
     }
     if (input == 'sass') {
       _gaq.push(['_trackEvent', 'UI', 'SassSyntax']);
@@ -131,7 +122,6 @@ if($('body.about, body.thankyou').length < 1 ) {
     $.get(SassMeister.sass_endpoint() + 'extensions', function( data ) {
       $('#extension_list').replaceWith(data);
       watchExtensions();
-      SassMeister.compile.sass();
     });
   };
 
@@ -175,8 +165,8 @@ if($('body.about, body.thankyou').length < 1 ) {
 
     SassMeister.arrangePanels(SassMeister.layout.orientation);
 
-    SassMeister.editors.sass.resize();
-    SassMeister.editors.css.resize();
+    //SassMeister.editors.sass.resize();
+    //SassMeister.editors.css.resize();
 
     localStorage.setItem('layout', JSON.stringify( SassMeister.layout ));
   };
@@ -197,9 +187,9 @@ if($('body.about, body.thankyou').length < 1 ) {
 
     SassMeister.arrangePanels(SassMeister.layout.orientation);
 
-    SassMeister.editors.sass.resize();
-    SassMeister.editors.css.resize();
-    SassMeister.editors.html.resize();
+    //SassMeister.editors.sass.resize();
+    //SassMeister.editors.css.resize();
+    //SassMeister.editors.html.resize();
 
     localStorage.setItem('layout', JSON.stringify( SassMeister.layout ));
   };
@@ -248,6 +238,23 @@ if($('body.about, body.thankyou').length < 1 ) {
     else {
       $(this).data("state", 'hide').toggleClass('show').find('span');
     }
+  });
+
+
+  $('#mobile-tabs h2').on('click', function(event) {
+    if(window.viewportSize !== 'desktop') {
+      $('.panel').removeClass('show-panel').addClass('hide-panel');
+      $('#mobile-tabs .current').removeClass('current');
+      $(this).toggleClass('current')
+    
+      $('[data-name="' + $(this).data('tab') + '"]').removeClass('hide-panel').addClass('show-panel');
+    }
+
+    else {
+      $('.panel').removeClass('hide-panel').removeClass('show-panel');
+    }
+
+    SassMeister.resizeEditors();
   });
 
 

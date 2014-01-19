@@ -7,6 +7,7 @@ require 'json'
 require 'yaml'
 require 'sassmeister'
 require 'array'
+require 'assets'
 
 # require 'pry-remote'
 
@@ -16,6 +17,7 @@ class SassMeisterApp < Sinatra::Base
   use Chairman::Routes
 
   helpers SassMeister
+  helpers Assets
 
   configure do
     APP_VERSION = '2.0.1'
@@ -80,7 +82,7 @@ class SassMeisterApp < Sinatra::Base
     def origin_allowed?(uri)
       return false if uri.nil?
 
-      return uri.match(/^http:\/\/(.+\.){0,1}sassmeister\.(com|dev|([\d+\.]{4}xip\.io))/)
+      return uri.match(/^http:\/\/(.+\.){0,1}sassmeister\.(com|dev|((\d+\.){4}xip\.io))/)
     end
   end
 

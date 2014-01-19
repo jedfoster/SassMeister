@@ -1,4 +1,4 @@
-%sub-menu {
+@mixin sub-menu {
   position: absolute;
   z-index: 9999;
   top: $site-header-height;
@@ -16,4 +16,8 @@
     #{$prefix}border-bottom-left-radius: em(3);
     #{$prefix}border-bottom-right-radius: em(3);
   }
+}
+
+%sub-menu {
+  @include sub-menu;
 }

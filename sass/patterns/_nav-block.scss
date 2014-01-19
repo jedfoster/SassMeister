@@ -12,5 +12,6 @@
 
   @media #{$mobile} {
     padding-right: em(12);
+    min-width: 3em;
   }
 }

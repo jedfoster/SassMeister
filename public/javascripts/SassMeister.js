@@ -127,6 +127,10 @@ var SassMeister;
       this.initPanels();
       this.arrangePanels(this.layout.orientation);
 
+      $(window).on('resize', function(event) {
+        SassMeister.arrangePanels(SassMeister.layout.orientation);
+      });
+
       return this;
     },
 
@@ -261,6 +265,7 @@ var SassMeister;
 
           SassMeister.editors.sass.setValue(data.css, -1);
 
+          SassMeister.inputs.sass.input = data.css;
           SassMeister.inputs.sass.original_syntax = SassMeister.inputs.sass.syntax
           SassMeister.inputs.sass.dependencies = data.dependencies;
 
@@ -336,34 +341,56 @@ var SassMeister;
 
 
     arrangePanels: function(orientation) {
-      // #source has to be done FIRST, since it is nested inside #casement. TODO: Fix this.
-      $('#source').casement({
-        split: (orientation == 'horizontal' ? 'vertical' : 'horizontal'),
-        onDrag: function() {
-          SassMeister.editors.sass.resize();
-          SassMeister.editors.html.resize();
-          SassMeister.editors.css.resize();
-        }
-      });
+      if(window.viewportSize == 'desktop') {
+        $('.panel, .current').removeClass('hide-panel').removeClass('show-panel').removeClass('current');
+        $(document.body).removeClass('single-column');
 
-      $('#casement').casement({
-        split: orientation,
-        onDragStart: function() {
-          $('#sash_cover').show();
-        },
-        onDrag: function() {
-          SassMeister.editors.sass.resize();
-          SassMeister.editors.html.resize();
-          SassMeister.editors.css.resize();
-        },
-        onDragEnd: function() {
-          $('#sash_cover').hide();
-        }
-      });
+        // #source has to be done FIRST, since it is nested inside #casement. TODO: Fix this.
+        $('#source').casement({
+          split: (orientation == 'horizontal' ? 'vertical' : 'horizontal'),
+          onDrag: function() {
+          SassMeister.resizeEditors();
+          }
+        });
 
-      SassMeister.editors.sass.resize();
-      SassMeister.editors.html.resize();
-      SassMeister.editors.css.resize();
+        $('#casement').casement({
+          split: orientation,
+          onDragStart: function() {
+            $('#sash_cover').show();
+          },
+          onDrag: function() {
+            SassMeister.resizeEditors();
+          },
+          onDragEnd: function() {
+            $('#sash_cover').hide();
+          }
+        });
+      }
+
+      else {
+        // Remove Casement, if it exists
+        if($('#source .sash').length > 0) {
+          $('#source').casement('destroy');
+          $('#casement').casement('destroy');
+        }
+
+        if($('.hide-panel').length < 1 ) {
+          $('.panel').removeClass('show-panel').addClass('hide-panel');
+          $('[data-name="sass"]').removeClass('hide-panel').addClass('show-panel');
+          $('#mobile-tabs .current').removeClass('current');
+          $('[data-tab="sass"]').addClass('current');
+          $(document.body).addClass('single-column');
+        }
+      }
+
+      SassMeister.resizeEditors();
+    },
+
+
+    resizeEditors: function() {
+      $.each(this.editors, function(i, editor) {
+        editor.resize();
+      });
     },
 
 
@@ -407,6 +434,15 @@ var SassMeister;
 
         this.inputs = $.extend(true, this.inputs, JSON.parse(localStorage.getItem('inputs')) );
         this.outputs = $.extend(true, this.outputs, JSON.parse(localStorage.getItem('outputs')) );
+
+        if(this.inputs.sass.dependencies.libsass) {
+          this.sass_version = 'lib';
+          // this.inputs.sass.syntax = 'SCSS';
+        }
+
+        else if(this.inputs.sass.dependencies.Sass) {
+          this.sass_version = this.inputs.sass.dependencies.Sass.slice(0, 3);
+        }
       }
 
       this.layout = $.extend(true, this.layout, JSON.parse(localStorage.getItem('layout')) );
