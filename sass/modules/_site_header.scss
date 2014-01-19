@@ -31,6 +31,10 @@
       content: "\e001";
       font-size: 7.5em;
       line-height: 0.01;
+
+      @media #{$mobile} {
+        font-size: 5.5em;
+      }
     }
 
     &:hover {
@@ -88,6 +92,7 @@
 
     #account_actions {
       width: auto;
+
       li {
         width: auto;
         min-width: em(220);
@@ -116,6 +121,7 @@
   &:hover {
     &:after {
       @extend %tooltip;
+
       @media #{$mobile} {
         display: none;
       }
