@@ -18,12 +18,18 @@
   float: left;
   padding-top: 0.66667em;
   background: $white;
+
+  @media #{$tablet} {
+    padding-top: 0;
+  }
 }
 
 #rendered {
   @extend %stretch;
 
   z-index: 200;
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 #sash_cover {
