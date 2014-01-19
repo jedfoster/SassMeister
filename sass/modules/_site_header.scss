@@ -37,15 +37,17 @@
       background: transparent;
       text-shadow: 0 0 0.25em darken($alpha_color, 10%);
 
-      &:after {
-        @extend %tooltip;
+      @media #{$desktop} {
+        &:after {
+          @include tooltip;
 
-        right: initial;
-        left: 0;
-        width: em(260);
+          right: initial;
+          left: 0;
+          width: em(260);
 
-        @media #{$mobile} {
-          display: none;
+          @media #{$mobile} {
+            display: none;
+          }
         }
       }
     }
