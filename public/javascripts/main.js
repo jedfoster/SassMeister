@@ -94,7 +94,7 @@ if($('body.about, body.thankyou').length < 1 ) {
       _gaq.push(['_trackEvent', 'UI', 'SassSyntax']);
 
       SassMeister.inputs.sass.syntax = selected;
-      $('#sass-syntax-display').text($(this).text());
+      $('.sass-syntax-display').text($(this).text());
 
       SassMeister.convert.sass();
       SassMeister.editors.sass.getSession().setMode('ace/mode/' + selected.toLowerCase());
@@ -110,7 +110,7 @@ if($('body.about, body.thankyou').length < 1 ) {
       _gaq.push(['_trackEvent', 'UI', 'HTMLSyntax']);
 
       SassMeister.inputs.html.syntax = selected;
-      $('#html-syntax-display').text($(this).text());
+      $('.html-syntax-display').text($(this).text());
 
       SassMeister.compile.html();
       SassMeister.editors.html.getSession().setMode("ace/mode/" + selected.toLowerCase());
@@ -165,9 +165,6 @@ if($('body.about, body.thankyou').length < 1 ) {
 
     SassMeister.arrangePanels(SassMeister.layout.orientation);
 
-    //SassMeister.editors.sass.resize();
-    //SassMeister.editors.css.resize();
-
     localStorage.setItem('layout', JSON.stringify( SassMeister.layout ));
   };
 
@@ -186,10 +183,6 @@ if($('body.about, body.thankyou').length < 1 ) {
     SassMeister.layout.html = state;
 
     SassMeister.arrangePanels(SassMeister.layout.orientation);
-
-    //SassMeister.editors.sass.resize();
-    //SassMeister.editors.css.resize();
-    //SassMeister.editors.html.resize();
 
     localStorage.setItem('layout', JSON.stringify( SassMeister.layout ));
   };
