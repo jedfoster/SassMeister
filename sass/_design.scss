@@ -27,10 +27,7 @@ body:after {
 .swag-promo {
   clear: both;
   text-align: left;
-
-
-    color: $delta_color;
-
+  color: $delta_color;
 
   p {
     font-size: em($heading_5);
@@ -73,17 +70,11 @@ body:after {
   }
 }
 
-
 #rendered .editor-header {
   display: none;
 }
 
 .single-column {
-  //#rendered .editor-header {
-  //  position : relative;
-  //  display: block;
-  //}
-
   .editor-header {
     @extend %editor-header;
     z-index: 9999;
@@ -113,17 +104,20 @@ body:after {
       display: block !important;
       z-index: 999;
   }
+}
 
- // [data-name="sass"] .editor-header {
- //   left: 0;
- // }
- // [data-name="css"] .editor-header {
- //   left: 25%;
- // }
- // [data-name="html"] .editor-header {
- //   left: 50%;
- // }
- // #rendered .editor-header {
- //   left: 75%;
- // }
+.hide {
+  display: none !important;
+}
+
+#sass-compiling {
+  position: relative;
+  margin-left: 0.25em;
+  padding-left: 1.5em;
+}
+
+.spinner {
+  position: absolute;
+  width: 1.5em;
+  height: 1.5em;
 }

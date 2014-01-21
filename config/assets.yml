@@ -14,9 +14,10 @@ javascripts:
     - public/javascripts/vendor/ACE-noconflict/mode-markdown.js
     - public/javascripts/vendor/ACE-noconflict/mode-textile.js
     - public/javascripts/vendor/ACE-noconflict/theme-tomorrow.js
-    - public/javascripts/vendor/jquery.foundation.reveal.js
     - public/javascripts/vendor/bindWithDelay.js
     - public/javascripts/vendor/messenger.min.js
+    - public/javascripts/vendor/spin/spin.min.js
+    - public/javascripts/vendor/spin/jquery.spin.js
     - public/javascripts/viewport.js
     - public/javascripts/messages.js
     - public/javascripts/SassMeister.js

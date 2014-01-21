@@ -215,6 +215,8 @@ var SassMeister;
       sass: function() {
         _gaq.push(['_trackEvent', 'Form', 'Submit']);
 
+        $('#sass-compiling').removeClass('hide');
+
         /* Post the form and handle the returned data */
         $.post(SassMeister.sass_endpoint() + 'compile', SassMeister.inputs.sass, function( data ) {
           SassMeister.editors.css.setValue(data.css,-1);
@@ -226,6 +228,8 @@ var SassMeister;
           });
 
           SassMeister.setStorage();
+
+          $('#sass-compiling').addClass('hide');
         });
       },
 
