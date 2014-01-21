@@ -216,6 +216,7 @@ var SassMeister;
         _gaq.push(['_trackEvent', 'Form', 'Submit']);
 
         $('#sass-compiling').removeClass('hide');
+        $('#compile-time').text('').removeClass('fade');
 
         /* Post the form and handle the returned data */
         $.post(SassMeister.sass_endpoint() + 'compile', SassMeister.inputs.sass, function( data ) {
@@ -230,6 +231,7 @@ var SassMeister;
           SassMeister.setStorage();
 
           $('#sass-compiling').addClass('hide');
+          $('#compile-time').text('Compiled in ' + data.time + 's').addClass('fade');
         });
       },
 

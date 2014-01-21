@@ -21,7 +21,7 @@ body:after {
 
   @media #{$mobile} {
     content: 'mobile';
-  } 
+  }
 }
 
 .swag-promo {
@@ -121,3 +121,21 @@ body:after {
   width: 1.5em;
   height: 1.5em;
 }
+
+#compile-time {
+  opacity: 1;
+
+  &.fade {
+    opacity: 0;
+
+    -webkit-transition: opacity 0.5s ease-in-out;
+    -moz-transition: opacity 0.5s ease-in-out;
+    transition: opacity 0.5s ease-in-out;
+
+    -webkit-transition-delay: 6s !important;
+    -moz-transition-delay: 6s !important;
+    transition-delay: 6s !important;
+  }
+}
+
+
