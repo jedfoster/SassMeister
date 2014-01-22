@@ -3,8 +3,9 @@
     var size;
     window.viewportSize = 'desktop';
     if (window.getComputedStyle) {
-      size = window.getComputedStyle(document.body, ':after').content;
-      return window.viewportSize = size.match(/\w+/)[0];
+      if(size = window.getComputedStyle(document.body, ':after').content.trim()) {
+        return window.viewportSize = size;
+      }
     }
   };
 
