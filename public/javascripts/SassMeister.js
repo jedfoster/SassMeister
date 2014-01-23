@@ -52,6 +52,15 @@ var SassMeister;
 
     bypassConversion: false,
 
+    ajaxCalls: {
+      'getExtensions': false,
+      'postCompileSass': false,
+      'postConvertSass': false,
+      'postCompileHtml': false,
+      'postGistCreate': false,
+      'postGistEdit': false,
+      'postGistFork': false
+    },
 
     init: function() {
       $this = this;
@@ -218,21 +227,29 @@ var SassMeister;
         $('#sass-compiling').removeClass('hide');
         $('#compile-time').text('').removeClass('fade');
 
+        if(SassMeister.ajaxCalls.postCompileSass) {
+          SassMeister.ajaxCalls.postCompileSass.abort();
+        }
+
         /* Post the form and handle the returned data */
-        $.post(SassMeister.sass_endpoint() + 'compile', SassMeister.inputs.sass, function( data ) {
-          SassMeister.editors.css.setValue(data.css,-1);
-          SassMeister.outputs.css = data.css;
-          SassMeister.inputs.sass.dependencies = data.dependencies;
+        SassMeister.ajaxCalls.postCompileSass = $.post(SassMeister.sass_endpoint() + 'compile', SassMeister.inputs.sass)
+          .done(function( data ) {
+            SassMeister.editors.css.setValue(data.css,-1);
+            SassMeister.outputs.css = data.css;
+            SassMeister.inputs.sass.dependencies = data.dependencies;
 
-          updateRender({
-            css: data.css
+            updateRender({
+              css: data.css
+            });
+
+            SassMeister.setStorage();
+
+            $('#sass-compiling').addClass('hide');
+            $('#compile-time').text('Compiled in ' + data.time + 's').addClass('fade');
+          })
+          .always(function() {
+            SassMeister.ajaxCalls.postCompileSass = false;
           });
-
-          SassMeister.setStorage();
-
-          $('#sass-compiling').addClass('hide');
-          $('#compile-time').text('Compiled in ' + data.time + 's').addClass('fade');
-        });
       },
 
       html: function() {
@@ -248,15 +265,23 @@ var SassMeister;
         }
 
         else {
-          /* Post the form and handle the returned data */
-          $.post(window.sandbox, SassMeister.inputs.html, function( data ) {
-            updateRender({
-              css: SassMeister.outputs.css,
-              html: data
-            });
+          if(SassMeister.ajaxCalls.postCompileHtml) {
+            SassMeister.ajaxCalls.postCompileHtml.abort();
+          }
 
-            SassMeister.outputs.html = data;
-          });
+          /* Post the form and handle the returned data */
+          SassMeister.ajaxCalls.postCompileHtml = $.post(window.sandbox, SassMeister.inputs.html)
+            .done(function( data ) {
+              updateRender({
+                css: SassMeister.outputs.css,
+                html: data
+              });
+
+              SassMeister.outputs.html = data;
+            })
+            .always(function() {
+              SassMeister.ajaxCalls.postCompileHtml = false;
+            });
         }
 
         SassMeister.setStorage();
@@ -266,19 +291,28 @@ var SassMeister;
 
     convert: {
       sass: function() {
-        $.post(SassMeister.sass_endpoint() + 'convert', SassMeister.inputs.sass, function( data ) {
-          SassMeister.bypassConversion = true;
+        if(SassMeister.ajaxCalls.postConvertSass) {
+          SassMeister.ajaxCalls.postConvertSass.abort();
+        }
 
-          SassMeister.editors.sass.setValue(data.css, -1);
+        /* Post the form and handle the returned data */
+        SassMeister.ajaxCalls.postConvertSass = $.post(SassMeister.sass_endpoint() + 'convert', SassMeister.inputs.sass)
+          .done(function( data ) {
+            SassMeister.bypassConversion = true;
 
-          SassMeister.inputs.sass.input = data.css;
-          SassMeister.inputs.sass.original_syntax = SassMeister.inputs.sass.syntax
-          SassMeister.inputs.sass.dependencies = data.dependencies;
+            SassMeister.editors.sass.setValue(data.css, -1);
 
-          $('#syntax').data('original', SassMeister.inputs.sass.syntax);
+            SassMeister.inputs.sass.input = data.css;
+            SassMeister.inputs.sass.original_syntax = SassMeister.inputs.sass.syntax
+            SassMeister.inputs.sass.dependencies = data.dependencies;
 
-          SassMeister.setStorage();
-        });
+            $('#syntax').data('original', SassMeister.inputs.sass.syntax);
+
+            SassMeister.setStorage();
+          })
+          .always(function() {
+            SassMeister.ajaxCalls.postConvertSass = false;
+          });
       },
     },
 
@@ -294,21 +328,29 @@ var SassMeister;
           outputs: SassMeister.outputs
         };
 
+        if(SassMeister.ajaxCalls.postGistCreate) {
+          SassMeister.ajaxCalls.postGistCreate.abort();
+        }
+
         ///* Send the data using post and put the results in a div */
-        $.post('/gist/create', postData, function( data ) {
-          modal('<a href="https://gist.github.com/' + data.id + '" target="_blank">Your Gist</a> ' + confirmationText + '.');
+        SassMeister.ajaxCalls.postGistCreate = $.post('/gist/create', postData)
+          .done(function( data ) {
+            modal('<a href="https://gist.github.com/' + data.id + '" target="_blank">Your Gist</a> ' + confirmationText + '.');
 
-          setUrl('/gist/' + data.id);
-          SassMeister.inputs.gist_id = data.id;
-          SassMeister.inputs.sass_filename = data.sass_filename;
-          SassMeister.inputs.html_filename = data.html_filename;
+            setUrl('/gist/' + data.id);
+            SassMeister.inputs.gist_id = data.id;
+            SassMeister.inputs.sass_filename = data.sass_filename;
+            SassMeister.inputs.html_filename = data.html_filename;
 
-          $('#save-gist').text('Update Gist').data('action', 'edit');
+            $('#save-gist').text('Update Gist').data('action', 'edit');
 
-          if($('#gist-link').length < 1) {
-            $('#cloud_actions li:first-child').after('<li><a href="https://gist.github.com/' + data.id + '" target="_blank" class="jump-icon" id="gist-link">View on GitHub</a></li>');
-          }
-        });
+            if($('#gist-link').length < 1) {
+              $('#cloud_actions li:first-child').after('<li><a href="https://gist.github.com/' + data.id + '" target="_blank" class="jump-icon" id="gist-link">View on GitHub</a></li>');
+            }
+          })
+          .always(function() {
+            SassMeister.ajaxCalls.postGistCreate = false;
+          });
       },
 
       edit: function() {
@@ -321,13 +363,21 @@ var SassMeister;
 
         var confirmationText = 'has been updated';
 
-        ///* Send the data using post and put the results in a div */
-        $.post('/gist/' + SassMeister.inputs.gist_id + '/edit', postData, function( data ) {
-          modal('<a href="https://gist.github.com/' + data.id + '" target="_blank">Your Gist</a> ' + confirmationText + '.');
+        if(SassMeister.ajaxCalls.postGistEdit) {
+          SassMeister.ajaxCalls.postGistEdit.abort();
+        }
 
-          $('#gist-link').attr('href', 'https://gist.github.com/' + data.id);
-          setUrl('/gist/' + data.id);
-        });
+        ///* Send the data using post and put the results in a div */
+        SassMeister.ajaxCalls.postGistEdit = $.post('/gist/' + SassMeister.inputs.gist_id + '/edit', postData)
+          .done(function( data ) {
+            modal('<a href="https://gist.github.com/' + data.id + '" target="_blank">Your Gist</a> ' + confirmationText + '.');
+
+            $('#gist-link').attr('href', 'https://gist.github.com/' + data.id);
+            setUrl('/gist/' + data.id);
+          })
+          .always(function() {
+            SassMeister.ajaxCalls.postGistEdit = false;
+          });
       },
 
       fork: function() {
@@ -335,16 +385,24 @@ var SassMeister;
 
         var confirmationText = 'has been forked';
 
+        if(SassMeister.ajaxCalls.postGistFork) {
+          SassMeister.ajaxCalls.postGistFork.abort();
+        }
+
         ///* Send the data using post and put the results in a div */
-        $.post('/gist/' + SassMeister.inputs.gist_id + '/fork', function( data ) {
-          modal('<a href="https://gist.github.com/' + data.id + '" target="_blank">This Gist</a> ' + confirmationText + '.');
+        SassMeister.ajaxCalls.postGistFork = $.post('/gist/' + SassMeister.inputs.gist_id + '/fork')
+          .done(function( data ) {
+            modal('<a href="https://gist.github.com/' + data.id + '" target="_blank">This Gist</a> ' + confirmationText + '.');
 
-          $('#gist-link').attr('href', 'https://gist.github.com/' + data.id);
-          setUrl('/gist/' + data.id);
-          SassMeister.inputs.gist_id = data.id;
+            $('#gist-link').attr('href', 'https://gist.github.com/' + data.id);
+            setUrl('/gist/' + data.id);
+            SassMeister.inputs.gist_id = data.id;
 
-          $('#save-gist').text('Update Gist').data('action', 'edit').attr('class', 'edit-gist');
-        });
+            $('#save-gist').text('Update Gist').data('action', 'edit').attr('class', 'edit-gist');
+          })
+          .always(function() {
+            SassMeister.ajaxCalls.postGistFork = false;
+          });
       },
     },
 

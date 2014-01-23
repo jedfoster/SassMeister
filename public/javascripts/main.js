@@ -120,10 +120,18 @@ if($('body.about, body.thankyou').length < 1 ) {
 
 
   var getExtensions = function() {
-    $.get(SassMeister.sass_endpoint() + 'extensions', function( data ) {
-      $('#extension_list').replaceWith(data);
-      watchExtensions();
-    });
+    if(SassMeister.ajaxCalls.getExtensions) {
+      SassMeister.ajaxCalls.getExtensions.abort();
+    }
+
+    SassMeister.ajaxCalls.getExtensions = $.get(SassMeister.sass_endpoint() + 'extensions')
+      .done(function( data ) {
+        $('#extension_list').replaceWith(data);
+        watchExtensions();
+      })
+      .always(function() {
+        SassMeister.ajaxCalls.getExtensions = false;
+      });
   };
 
 
