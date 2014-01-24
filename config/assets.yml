@@ -1,4 +1,6 @@
-javascript_compressor: closure
+javascript_compressor: closure 
+# compressor_options:
+#   compilation_level: "ADVANCED_OPTIMIZATIONS"
 package_path: "javascripts/"
 gzip_assets: off
 
@@ -14,6 +16,8 @@ javascripts:
     - public/javascripts/vendor/ACE-noconflict/mode-markdown.js
     - public/javascripts/vendor/ACE-noconflict/mode-textile.js
     - public/javascripts/vendor/ACE-noconflict/theme-tomorrow.js
+    - public/javascripts/vendor/ACE-noconflict/theme-tomorrow_night_eighties.js
+    - public/javascripts/vendor/ACE-noconflict/ext-settings_menu.js
     - public/javascripts/vendor/bindWithDelay.js
     - public/javascripts/vendor/messenger.min.js
     - public/javascripts/vendor/spin/spin.min.js
