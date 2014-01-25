@@ -180,8 +180,8 @@ class SassMeisterApp < Sinatra::Base
         :dependencies => get_frontmatter_dependencies(sass)
       },
       :html => {
-        :input => (html || ''),
-        :syntax => (html_syntax || ''),
+        :input => (html || '').gsub('</script>', '<\/script>'), # (html_escape((html || ''))),
+        :syntax => (html_syntax || '').gsub('</script>', '<\/script>') # (html_escape((html_syntax || ''))),
       }
     }.to_json
 

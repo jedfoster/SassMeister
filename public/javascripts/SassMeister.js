@@ -524,6 +524,9 @@ var SassMeister;
           break;
       }
 
+      this.inputs.html.input = this.inputs.html.input.replace(/<\\+\/script>/g, '</script>');
+      this.outputs.html = this.outputs.html.replace(/<\\+\/script>/g, '</script>');
+
       switch(this.inputs.html.syntax.toLowerCase()) {
         case 'haml':
           this.inputs.html.syntax = 'Haml';
