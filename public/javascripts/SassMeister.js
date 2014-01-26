@@ -222,69 +222,73 @@ var SassMeister;
 
     compile: {
       sass: function() {
-        _gaq.push(['_trackEvent', 'Form', 'Submit']);
+        if(SassMeister.inputs.sass.input.trim()) {
+          _gaq.push(['_trackEvent', 'Form', 'Submit']);
 
-        $('#sass-compiling').removeClass('hide');
-        $('#compile-time').text('').removeClass('fade');
+          $('#sass-compiling').removeClass('hide');
+          $('#compile-time').text('').removeClass('fade');
 
-        if(SassMeister.ajaxCalls.postCompileSass) {
-          SassMeister.ajaxCalls.postCompileSass.abort();
-        }
-
-        /* Post the form and handle the returned data */
-        SassMeister.ajaxCalls.postCompileSass = $.post(SassMeister.sass_endpoint() + 'compile', SassMeister.inputs.sass)
-          .done(function( data ) {
-            SassMeister.editors.css.setValue(data.css,-1);
-            SassMeister.outputs.css = data.css;
-            SassMeister.inputs.sass.dependencies = data.dependencies;
-
-            updateRender({
-              css: data.css
-            });
-
-            SassMeister.setStorage();
-
-            $('#sass-compiling').addClass('hide');
-            $('#compile-time').text('Compiled in ' + data.time + 's').addClass('fade');
-          })
-          .always(function() {
-            SassMeister.ajaxCalls.postCompileSass = false;
-          });
-      },
-
-      html: function() {
-        _gaq.push(['_trackEvent', 'Form', 'Submit']);
-
-        if(SassMeister.inputs.html.syntax == 'HTML') {
-          updateRender({
-            css: SassMeister.outputs.css,
-            html: SassMeister.inputs.html.input
-          });
-
-          SassMeister.outputs.html = SassMeister.inputs.html.input;
-        }
-
-        else {
-          if(SassMeister.ajaxCalls.postCompileHtml) {
-            SassMeister.ajaxCalls.postCompileHtml.abort();
+          if(SassMeister.ajaxCalls.postCompileSass) {
+            SassMeister.ajaxCalls.postCompileSass.abort();
           }
 
           /* Post the form and handle the returned data */
-          SassMeister.ajaxCalls.postCompileHtml = $.post(window.sandbox, SassMeister.inputs.html)
+          SassMeister.ajaxCalls.postCompileSass = $.post(SassMeister.sass_endpoint() + 'compile', SassMeister.inputs.sass)
             .done(function( data ) {
+              SassMeister.editors.css.setValue(data.css,-1);
+              SassMeister.outputs.css = data.css;
+              SassMeister.inputs.sass.dependencies = data.dependencies;
+
               updateRender({
-                css: SassMeister.outputs.css,
-                html: data
+                css: data.css
               });
 
-              SassMeister.outputs.html = data;
+              SassMeister.setStorage();
+
+              $('#sass-compiling').addClass('hide');
+              $('#compile-time').text('Compiled in ' + data.time + 's').addClass('fade');
             })
             .always(function() {
-              SassMeister.ajaxCalls.postCompileHtml = false;
+              SassMeister.ajaxCalls.postCompileSass = false;
             });
         }
+      },
 
-        SassMeister.setStorage();
+      html: function() {
+        if(SassMeister.inputs.html.input.trim()) {
+          _gaq.push(['_trackEvent', 'Form', 'Submit']);
+
+          if(SassMeister.inputs.html.syntax == 'HTML') {
+            updateRender({
+              css: SassMeister.outputs.css,
+              html: SassMeister.inputs.html.input
+            });
+
+            SassMeister.outputs.html = SassMeister.inputs.html.input;
+          }
+
+          else {
+            if(SassMeister.ajaxCalls.postCompileHtml) {
+              SassMeister.ajaxCalls.postCompileHtml.abort();
+            }
+
+            /* Post the form and handle the returned data */
+            SassMeister.ajaxCalls.postCompileHtml = $.post(window.sandbox, SassMeister.inputs.html)
+              .done(function( data ) {
+                updateRender({
+                  css: SassMeister.outputs.css,
+                  html: data
+                });
+
+                SassMeister.outputs.html = data;
+              })
+              .always(function() {
+                SassMeister.ajaxCalls.postCompileHtml = false;
+              });
+          }
+
+          SassMeister.setStorage();
+        }
       }
     },
 
@@ -490,6 +494,10 @@ var SassMeister;
 
         else if(this.inputs.sass.dependencies.Sass) {
           this.sass_version = this.inputs.sass.dependencies.Sass.slice(0, 3);
+        }
+
+        if(window.gist_output) {
+          this.outputs = $.extend(true, this.outputs, window.gist_output);
         }
       }
       else {

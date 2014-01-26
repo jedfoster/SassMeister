@@ -115,7 +115,7 @@ class SassMeisterApp < Sinatra::Base
 
   get '/thankyou' do
     @body_class = 'thankyou'
-    
+
     erb :thankyou
   end
 
@@ -160,6 +160,14 @@ class SassMeisterApp < Sinatra::Base
         html_syntax.capitalize!
       end
 
+      if css_file = response.files["#{response.files._fields.grep(/.+-output\.css/)[0]}"]
+        css_file = css_file.content.to_s
+      end
+
+      if rendered_file = response.files["#{response.files._fields.grep(/.+-rendered\.html/)[0]}"]
+        rendered_file = response.files["#{response.files._fields.grep(/.+-rendered\.html/)[0]}"].content.to_s
+      end
+
     rescue Octokit::NotFound => e
       status 404
 
@@ -180,9 +188,14 @@ class SassMeisterApp < Sinatra::Base
         :dependencies => get_frontmatter_dependencies(sass)
       },
       :html => {
-        :input => (html || '').gsub('</script>', '<\/script>'), # (html_escape((html || ''))),
-        :syntax => (html_syntax || '').gsub('</script>', '<\/script>') # (html_escape((html_syntax || ''))),
+        :input => (html || '').gsub('</script>', '<\/script>'),
+        :syntax => (html_syntax || '').gsub('</script>', '<\/script>')
       }
+    }.to_json
+
+    @gist_output = {
+      :css => (css_file || ''),
+      :html => (rendered_file || '').gsub('</script>', '<\/script>')
     }.to_json
 
     @body_class = false
