@@ -11846,12 +11846,10 @@ color: black;\
 }\
 .ace_scroller {\
 position: absolute;\
-/*overflow: hidden;*/\
+overflow: hidden;\
 top: 0;\
 bottom: 0;\
 background-color: inherit;\
--webkit-overflow-scrolling: touch;\
-overflow-y: scroll;\
 }\
 .ace_content {\
 position: absolute;\
