@@ -64,17 +64,24 @@
   .ace_editor {
     font-family: $monospace-font-family;
   }
+
+  .touch & {
+    .ace_scroller {
+      -webkit-overflow-scrolling: touch !important;
+      overflow-y: scroll !important;
+    }
+  }
 }
 
 
 @media #{$tablet} {
-  .editor-mask {
     height: 1000px;
     overflow-y: hidden;
+  .touch .editor-mask {
     background: $white;
   }
 
-  .editor-wrapper {
+  .touch .editor-wrapper {
     position: relative;
     height: 10000px;
   }
