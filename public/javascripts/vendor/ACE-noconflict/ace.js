@@ -1091,24 +1091,24 @@ exports.importCssString = function importCssString(cssText, id, doc) {
     if (id && exports.hasCssString(id, doc))
         return null;
 
-    var style;
-
-    if (doc.createStyleSheet) {
-        style = doc.createStyleSheet();
-        style.cssText = cssText;
-        if (id)
-            style.owningElement.id = id;
-    } else {
-        style = doc.createElementNS
-            ? doc.createElementNS(XHTML_NS, "style")
-            : doc.createElement("style");
-
-        style.appendChild(doc.createTextNode(cssText));
-        if (id)
-            style.id = id;
-
-        exports.getDocumentHead(doc).appendChild(style);
-    }
+    // var style;
+    //
+    // if (doc.createStyleSheet) {
+    //     style = doc.createStyleSheet();
+    //     style.cssText = cssText;
+    //     if (id)
+    //         style.owningElement.id = id;
+    // } else {
+    //     style = doc.createElementNS
+    //         ? doc.createElementNS(XHTML_NS, "style")
+    //         : doc.createElement("style");
+    //
+    //     style.appendChild(doc.createTextNode(cssText));
+    //     if (id)
+    //         style.id = id;
+    //
+    //     exports.getDocumentHead(doc).appendChild(style);
+    // }
 };
 
 exports.importCssStylsheet = function(uri, doc) {
@@ -12817,7 +12817,7 @@ var VirtualRenderer = function(container, theme) {
         _self._dispatchEvent('themeChange',{theme:theme});
 
         if (!theme || typeof theme == "string") {
-            var moduleName = theme || "ace/theme/tomorrow";
+            var moduleName = theme || "tomorrow";
             config.loadModule(["theme", moduleName], afterLoad);
         } else {
             afterLoad(theme);
@@ -15762,12 +15762,12 @@ var FoldMode = exports.FoldMode = function() {};
 });
 
 // ace.define('ace/theme/textmate', ['require', 'exports', 'module' , 'ace/lib/dom'], function(require, exports, module) {
-// 
-// 
+//
+//
 // exports.isDark = false;
 // exports.cssClass = "ace-tm";
 // exports.cssText = "";
-// 
+//
 // var dom = require("../lib/dom");
 // dom.importCssString(exports.cssText, exports.cssClass);
 // });

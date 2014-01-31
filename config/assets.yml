@@ -1,4 +1,4 @@
-javascript_compressor: closure 
+javascript_compressor: closure
 # compressor_options:
 #   compilation_level: "ADVANCED_OPTIMIZATIONS"
 package_path: "javascripts/"
@@ -15,8 +15,19 @@ javascripts:
     - public/javascripts/vendor/ACE-noconflict/mode-haml.js
     - public/javascripts/vendor/ACE-noconflict/mode-markdown.js
     - public/javascripts/vendor/ACE-noconflict/mode-textile.js
+    # Themes - light
+    - public/javascripts/vendor/ACE-noconflict/theme-clouds.js
+    - public/javascripts/vendor/ACE-noconflict/theme-dawn.js
+    - public/javascripts/vendor/ACE-noconflict/theme-github.js
+    - public/javascripts/vendor/ACE-noconflict/theme-solarized_light.js
     - public/javascripts/vendor/ACE-noconflict/theme-tomorrow.js
+    # Themes - dark
+    - public/javascripts/vendor/ACE-noconflict/theme-clouds_midnight.js
+    - public/javascripts/vendor/ACE-noconflict/theme-merbivore_soft.js
+    - public/javascripts/vendor/ACE-noconflict/theme-monokai.js
+    - public/javascripts/vendor/ACE-noconflict/theme-solarized_dark.js
     - public/javascripts/vendor/ACE-noconflict/theme-tomorrow_night_eighties.js
+
     - public/javascripts/vendor/ACE-noconflict/ext-settings_menu.js
     - public/javascripts/vendor/bindWithDelay.js
     - public/javascripts/vendor/messenger.min.js
