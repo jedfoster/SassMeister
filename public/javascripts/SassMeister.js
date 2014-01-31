@@ -180,7 +180,7 @@ var SassMeister;
     initEditor: function(value, name, syntax) {
       var input = ace.edit(name);
 
-      input.setTheme('ace/theme/tomorrow');
+      // input.setTheme('tomorrow');
       input.getSession().setMode('ace/mode/' + syntax.toLowerCase());
 
       input.getSession().setTabSize(2);
