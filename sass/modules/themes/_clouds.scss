@@ -1,0 +1,117 @@
+.ace-clouds {
+  background-color: #FFFFFF;
+  color: black;
+
+  .ace_gutter {
+    background: #ebebeb;
+    color: #333333;
+  }
+
+  .ace_print-margin {
+    width: 1px;
+    background: #e8e8e8;
+  }
+  
+  .ace_cursor {
+    border-left: 2px solid black;
+  }
+
+  .ace_overwrite-cursors .ace_cursor {
+    border-left: 0px;
+    border-bottom: 1px solid black;
+  }
+
+  .ace_marker-layer .ace_selection {
+    background: #bdd5fc;
+  }
+
+  &.ace_multiselect .ace_selection.ace_start {
+    box-shadow: 0 0 3px 0px #FFFFFF;
+    border-radius: 2px;
+  }
+
+  .ace_marker-layer .ace_step {
+    background: rgb(255, 255, 0);
+  }
+
+  .ace_marker-layer .ace_bracket {
+    margin: -1px 0 0 -1px;
+    border: 1px solid #bfbfbf;
+  }
+
+  .ace_marker-layer .ace_active-line {
+    background: #fffbd1;
+  }
+
+  .ace_gutter-active-line {
+    background-color: gainsboro;
+  }
+
+  .ace_marker-layer .ace_selected-word {
+    border: 1px solid #bdd5fc;
+  }
+
+  .ace_invisible {
+    color: #bfbfbf;
+  }
+
+  .ace_keyword,
+  .ace_meta,
+  .ace_support.ace_constant.ace_property-value {
+    color: #af956f;
+  }
+
+  .ace_keyword.ace_operator {
+    color: #484848;
+  }
+
+  .ace_keyword.ace_other.ace_unit {
+    color: #96dc5f;
+  }
+
+  .ace_constant.ace_language {
+    color: #39946a;
+  }
+
+  .ace_constant.ace_numeric {
+    color: #46a609;
+  }
+
+  .ace_constant.ace_character.ace_entity {
+    color: #bf78cc;
+  }
+
+  .ace_invalid {
+    background-color: #ff002a;
+  }
+
+  .ace_fold {
+    background-color: #AF956F;
+    border-color: black;
+  }
+
+  .ace_storage,
+  .ace_support.ace_class,
+  .ace_support.ace_function,
+  .ace_support.ace_other,
+  .ace_support.ace_type {
+    color: #c52727;
+  }
+
+  .ace_string {
+    color: #5d90cd;
+  }
+
+  .ace_comment {
+    color: #bcc8ba;
+  }
+
+  .ace_entity.ace_name.ace_tag,
+  .ace_entity.ace_other.ace_attribute-name {
+    color: #606060;
+  }
+
+  .ace_indent-guide {
+    background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bLly//BwAmVgd1/w11/gAAAABJRU5ErkJggg==") right repeat-y;
+  }
+}
