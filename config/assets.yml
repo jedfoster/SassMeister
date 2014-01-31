@@ -19,6 +19,7 @@ javascripts:
     # - public/javascripts/vendor/ACE-noconflict/theme-clouds.js
     - public/javascripts/vendor/ACE-noconflict/theme-dawn.js
     - public/javascripts/vendor/ACE-noconflict/theme-github.js
+    - public/javascripts/vendor/ACE-noconflict/theme-kuroir.js
     - public/javascripts/vendor/ACE-noconflict/theme-solarized_light.js
     - public/javascripts/vendor/ACE-noconflict/theme-tomorrow.js
     # Themes - dark
