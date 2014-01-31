@@ -21,7 +21,6 @@ desc "Compile the app's Sass"
 task "assets:precompile" do
   system("bundle exec jammit --force")
   system("bundle exec compass compile -e production")
+
+  File.open("config/build.txt", 'w') {|f| f.write(Time.now.to_i) }
 end
-
-
-

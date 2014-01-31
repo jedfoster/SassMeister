@@ -12,3 +12,4 @@ github.yml
 /log
 .rvmrc
 .powrc
+config/build.txt
