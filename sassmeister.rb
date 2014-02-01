@@ -106,11 +106,15 @@ class SassMeisterApp < Sinatra::Base
     end
   end
 
+
   not_found do
     @body_class = 'oops-404'
 
-    erb :'404'
+    return erb :'404' unless @id
+
+    return erb :'gist-404', locals: {id: @id}
   end
+
 
   get '/' do
     @body_class = false
@@ -177,11 +181,10 @@ class SassMeisterApp < Sinatra::Base
       end
 
     rescue Octokit::NotFound => e
+      @id = id
       status 404
 
-      @body_class = 'oops-404'
-
-      return erb :'gist-404', locals: {id: id}
+      return
     end
 
     @gist = {
