@@ -59,7 +59,7 @@ Object.size = function(obj) {
   };
 
 
-  if($('body.about, body.thankyou').length < 1 ) {
+  if($('body.app').length > 0 ) {
     var messageStats = $.extend(true, {
       last_visit: Date.now(),
       visit_number: 0,

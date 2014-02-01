@@ -1,20 +1,45 @@
 input[type=text], input[type=password], input[type="date"], select {
- @extend %input_fields;
- height:2.5em;
+  @extend %input_fields;
+
+  height:2.5em;
   border: 1px solid $golf_gray;
+  margin-bottom: baseline-margin($font_size);
+  width: auto;
+  padding-left: em(10);
+  padding-right: em(10);
 }
 
 label {
- display: block;
+  display: block;
   line-height: 1;
- margin-bottom: 0.5em;
+  margin-bottom: 0.5em;
   color: $white;
 
- @media #{$mobile} {
-   display: none;
- }
+  @media #{$mobile} {
+    display: none;
+  }
 }
 
-input, textarea, button {
+input, textarea {
   font-family: $monospace-font-family;
+}
+
+button {
+  @extend %input_fields;
+
+  font-family: $primary_font_family;
+  cursor: pointer;
+  background: $delta_gray;
+  color: $white;
+  text-shadow: 0 0 0.25em darken($delta_gray, 10%);
+  font-weight: 300;
+  border-color: darken($delta_gray, 10%);
+  width: auto;
+  padding: em(6) em(10);
+  height: 2em;
+
+  &:hover {
+    color: $alpha_color_delta;
+    background: $bravo_gray;
+  }
 }

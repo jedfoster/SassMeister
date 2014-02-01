@@ -106,6 +106,12 @@ class SassMeisterApp < Sinatra::Base
     end
   end
 
+  not_found do
+    @body_class = 'oops-404'
+
+    erb :'404'
+  end
+
   get '/' do
     @body_class = false
 
@@ -132,6 +138,8 @@ class SassMeisterApp < Sinatra::Base
 
     begin
       response = @github.gist(id)
+
+      raise Octokit::NotFound unless response.message.nil?
 
       # For now, we only return the first .sass or .scss file we find.
       file = response.files["#{response.files._fields.grep(/.+\.(scss|sass)/i)[0]}"]
@@ -171,8 +179,9 @@ class SassMeisterApp < Sinatra::Base
     rescue Octokit::NotFound => e
       status 404
 
-      syntax = ''
-      sass = "// Sorry, that Gist doesn't exist.\n//#{e.to_s.gsub(/(GET|api.|https:\/\/|\?.*$)/, '')}"
+      @body_class = 'oops-404'
+
+      return erb :'gist-404', locals: {id: id}
     end
 
     @gist = {

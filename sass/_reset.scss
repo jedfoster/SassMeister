@@ -20,11 +20,11 @@
 // *-------------------------------------------------------------------------------
 
 html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, code, em, img, ins, strong, sub, sup, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, article, aside, footer, header, hgroup, menu, nav, section {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	vertical-align: baseline;
-	background: transparent;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+  background: transparent;
 }
 
 html, body {
@@ -36,12 +36,12 @@ html, body {
 }
 
 body {
-	font-size: 100%;
-	-webkit-font-smoothing: antialiased;
+  font-size: 100%;
+  -webkit-font-smoothing: antialiased;
 }
 
 article, aside, footer, header, hgroup, nav, section {
-	display: block;
+  display: block;
 }
 
 // img, object, embed {
@@ -55,24 +55,24 @@ article, aside, footer, header, hgroup, nav, section {
 // }
 
 ol, ul {
-	list-style: none;
+  list-style: none;
 }
 
 a {
-	margin: 0;
-	padding: 0;
-	font-size: 100%;
-	vertical-align: baseline;
-	background: transparent;
-	&:focus {
-		text-decoration: underline ;
-		outline: none;
-	}
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+  &:focus {
+    text-decoration: underline ;
+    outline: none;
+  }
 }
 
 pre {
-	white-space: pre-wrap;
-	word-wrap: break-word;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 
 // input {
@@ -96,7 +96,7 @@ pre {
 // }
 
 pre, code, kbd, samp {
-	font-family: monospace, sans-serif;
+  font-family: $monospace-font-family;
 }
 
 // input {
@@ -117,15 +117,15 @@ pre, code, kbd, samp {
 // }
 
 a {
-	-webkit-tap-highlight-color: $webkit_tap_hightlight;
+  -webkit-tap-highlight-color: $webkit_tap_hightlight;
 }
 	
 ::selection {
-	background: $selection_color;
-	color: $selection_text_color;
+  background: $selection_color;
+  color: $selection_text_color;
 }
 
 ::-moz-selection {
-	background: $selection_color;
-	color: $selection_text_color;
+  background: $selection_color;
+  color: $selection_text_color;
 }
