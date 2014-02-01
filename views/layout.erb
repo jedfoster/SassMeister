@@ -29,8 +29,6 @@
 
   <%= partial :"shared/_footer" %>
 
-  <script>document.domain = '<%= APP_DOMAIN %>';</script>
-
   <script type="text/javascript">
     var _gaq = _gaq || [];
     <% if settings.environment == :production %> _gaq.push(['_setAccount', 'UA-35407426-1']);
