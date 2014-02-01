@@ -106,6 +106,12 @@ class SassMeisterApp < Sinatra::Base
     end
   end
 
+  not_found do
+    @body_class = 'oops-404'
+
+    erb :'404'
+  end
+
   get '/' do
     @body_class = false
 
