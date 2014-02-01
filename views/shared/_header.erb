@@ -2,6 +2,7 @@
 
   <a href="<%= !@body_class ? '/about' : '/' %>" class="logo" title="The sassiest way to play with Sass, Compass, &amp; LibSass!"><span class="alt">Sassmeister</span></a>
 
+<% if not @body_class %>
   <nav>
     <a id="toggle_css" data-state="hide"><span class="alt">CSS</span></a>
 
@@ -34,4 +35,5 @@
     <% end %>
 
   </nav>
+<% end %>
 </header>

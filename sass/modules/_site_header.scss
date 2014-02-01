@@ -66,7 +66,6 @@
     text-align: right;
     float: right;
     position: relative;
-    display: none;
 
     > a {
       @extend %nav-block;
@@ -99,10 +98,6 @@
         min-width: em(220);
         max-width: em(360);
       }
-    }
-
-    .app & {
-      display: block;
     }
   }
 }
