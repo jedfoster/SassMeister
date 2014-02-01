@@ -16,6 +16,18 @@
   <%= stylesheet_tags %>
 
   <script src="/javascripts/modernizr.js"></script>
+</head>
+
+<body class="<%= @body_class || 'app' %>">
+  <%= partial :"shared/_header" %>
+
+  <%= partial :"shared/_control_panel" unless @body_class %>
+
+  <section class="main_body">
+  <%= yield %>
+  </section>
+
+  <%= partial :"shared/_footer" %>
 
   <script>document.domain = '<%= APP_DOMAIN %>';</script>
 
@@ -30,19 +42,7 @@
       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();<% end %>
   </script>
-</head>
-
-<body class="<%= @body_class || 'app' %>">
-  <%= partial :"shared/_header" %>
-
-  <%= partial :"shared/_control_panel" unless @body_class %>
-
-  <section class="main_body">
-  <%= yield %>
-  </section>
-
-  <%= partial :"shared/_footer" %>
-
+  
   <%= javascript_tags %>
 </body>
 </html>
