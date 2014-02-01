@@ -66,6 +66,7 @@
     text-align: right;
     float: right;
     position: relative;
+    display: none;
 
     > a {
       @extend %nav-block;
@@ -100,8 +101,8 @@
       }
     }
 
-    .about &, .thankyou & {
-      display: none;
+    .app & {
+      display: block;
     }
   }
 }
