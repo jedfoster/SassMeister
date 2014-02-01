@@ -7,9 +7,47 @@ article {
   @media #{$mobile} {
     padding-bottom: 4.5em;
   }
+
+
+  @import "../forms";
+
   
   h1 {
     font-size: em($heading_2);
+
+    code {
+      color: $bravo_gray;
+      font-size: 2em;
+
+      @media #{$tablet} {
+        font-size: 1.5em;
+      }
+
+      @media #{$mobile} {
+        font-size: 1em;
+      }
+
+      .variable {
+        color: #c82829;
+      }
+
+      .numeric {
+        //color: #f5871f;
+      }
+
+      .string {
+        color: #718c00;
+      }
+
+      .comment {
+        color: #8e908c;
+        white-space: nowrap;
+      }
+
+      .frowny {
+        
+      }
+    }
   }
 
   ol {

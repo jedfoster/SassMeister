@@ -291,4 +291,24 @@ if($('body.app').length > 0 ) {
     }
   };
 }
+
+if($('body.oops-404').length > 0 ) {
+  var gotogist = function() {
+    var id = document.getElementById('gist-id').value;
+
+    if(id) {
+      window.location = '/gist/' + id;
+    }
+
+    return true;
+  };
+
+  $('#gist-id').on('keydown', function(event) {
+    if(event.which == 13) {
+      gotogist();
+    }
+  });
+
+  $('button').on('click', gotogist);
+}
 })(jQuery);
