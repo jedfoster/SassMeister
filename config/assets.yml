@@ -27,7 +27,6 @@ javascripts:
     # - public/javascripts/vendor/ACE-noconflict/theme-solarized_dark.js
     # - public/javascripts/vendor/ACE-noconflict/theme-tomorrow_night_eighties.js
 
-    - public/javascripts/vendor/ACE-noconflict/ext-settings_menu.js
     - public/javascripts/vendor/bindWithDelay.js
     - public/javascripts/vendor/messenger.min.js
     - public/javascripts/vendor/spin/spin.min.js
