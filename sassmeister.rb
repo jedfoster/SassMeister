@@ -60,6 +60,7 @@ class SassMeisterApp < Sinatra::Base
   configure :production do
     APP_DOMAIN = 'sassmeister.com'
     SANDBOX_DOMAIN = 'sandbox.sassmeister.com'
+    Assets::HOST = 'http://static.sassmeister.com'
     require 'newrelic_rpm'
 
     Chairman.config(ENV['GITHUB_ID'], ENV['GITHUB_SECRET'], ['gist'])
