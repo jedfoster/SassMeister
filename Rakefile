@@ -1,3 +1,5 @@
+require "execjs"
+
 desc "Run the app's server in either development or production mode"
 task :server do
   environment = 'development'
@@ -19,6 +21,14 @@ end
 # Heroku will run this task as part of the deployment process.
 desc "Compile the app's Sass"
 task "assets:precompile" do
+  coffee = File.read("lib/coffee-script.js")
+  source = File.read('coffee/embed.coffee')
+
+  context = ExecJS.compile(coffee)
+  js = context.call("CoffeeScript.compile", source)
+
+  File.open("public/javascripts/embed.js", 'w') {|f| f.write(js) }
+
   system("bundle exec jammit --force")
   system("bundle exec compass compile -e production")
 

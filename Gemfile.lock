@@ -52,6 +52,7 @@ GEM
     dalli (2.6.4)
     deep_merge (1.0.0)
     erubis (2.7.0)
+    execjs (2.0.2)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
     faraday-http-cache (0.3.0)
@@ -144,6 +145,7 @@ DEPENDENCIES
   chairman!
   closure-compiler
   compass (~> 1.0.0.alpha.17)
+  execjs
   jammit
   newrelic_rpm
   pry-remote
