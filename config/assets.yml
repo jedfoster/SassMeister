@@ -1,47 +1,50 @@
 javascript_compressor: closure
 # compressor_options:
 #   compilation_level: "ADVANCED_OPTIMIZATIONS"
-package_path: "javascripts/"
+package_path: "js/"
 gzip_assets: off
 
 javascripts:
   app:
-    - public/javascripts/vendor/jquery-1.8.2.js
-    - public/javascripts/vendor/ACE-noconflict/ace.js
-    - public/javascripts/vendor/ACE-noconflict/mode-css.js
-    - public/javascripts/vendor/ACE-noconflict/mode-sass.js
-    - public/javascripts/vendor/ACE-noconflict/mode-scss.js
-    - public/javascripts/vendor/ACE-noconflict/mode-html.js
-    - public/javascripts/vendor/ACE-noconflict/mode-haml.js
-    - public/javascripts/vendor/ACE-noconflict/mode-markdown.js
-    - public/javascripts/vendor/ACE-noconflict/mode-textile.js
+    - javascripts/vendor/jquery-1.8.2.js
+    - javascripts/vendor/ACE-noconflict/ace.js
+    - javascripts/vendor/ACE-noconflict/mode-css.js
+    - javascripts/vendor/ACE-noconflict/mode-sass.js
+    - javascripts/vendor/ACE-noconflict/mode-scss.js
+    - javascripts/vendor/ACE-noconflict/mode-html.js
+    - javascripts/vendor/ACE-noconflict/mode-haml.js
+    - javascripts/vendor/ACE-noconflict/mode-markdown.js
+    - javascripts/vendor/ACE-noconflict/mode-textile.js
     # Themes - light
-    # - public/javascripts/vendor/ACE-noconflict/theme-dawn.js
-    # - public/javascripts/vendor/ACE-noconflict/theme-github.js
-    # - public/javascripts/vendor/ACE-noconflict/theme-kuroir.js
-    # - public/javascripts/vendor/ACE-noconflict/theme-solarized_light.js
-    - public/javascripts/vendor/ACE-noconflict/theme-tomorrow.js
+    # - javascripts/vendor/ACE-noconflict/theme-dawn.js
+    # - javascripts/vendor/ACE-noconflict/theme-github.js
+    # - javascripts/vendor/ACE-noconflict/theme-kuroir.js
+    # - javascripts/vendor/ACE-noconflict/theme-solarized_light.js
+    - javascripts/vendor/ACE-noconflict/theme-tomorrow.js
     # Themes - dark
-    # - public/javascripts/vendor/ACE-noconflict/theme-merbivore_soft.js
-    # - public/javascripts/vendor/ACE-noconflict/theme-monokai.js
-    # - public/javascripts/vendor/ACE-noconflict/theme-solarized_dark.js
-    # - public/javascripts/vendor/ACE-noconflict/theme-tomorrow_night_eighties.js
+    # - javascripts/vendor/ACE-noconflict/theme-merbivore_soft.js
+    # - javascripts/vendor/ACE-noconflict/theme-monokai.js
+    # - javascripts/vendor/ACE-noconflict/theme-solarized_dark.js
+    # - javascripts/vendor/ACE-noconflict/theme-tomorrow_night_eighties.js
 
-    - public/javascripts/vendor/bindWithDelay.js
-    - public/javascripts/vendor/messenger.min.js
-    - public/javascripts/vendor/spin/spin.min.js
-    - public/javascripts/vendor/spin/jquery.spin.js
-    - public/javascripts/viewport.js
-    - public/javascripts/messages.js
-    - public/javascripts/SassMeister.js
-    - public/javascripts/vendor/casement.js
-    - public/javascripts/main.js
+    - javascripts/vendor/bindWithDelay.js
+    - javascripts/vendor/messenger.min.js
+    - javascripts/vendor/spin/spin.min.js
+    - javascripts/vendor/spin/jquery.spin.js
+    - javascripts/viewport.js
+    - javascripts/messages.js
+    - javascripts/SassMeister.js
+    - javascripts/vendor/casement.js
+    - javascripts/main.js
+
+  modernizr:
+    - javascripts/modernizr.js
 
 # stylesheets:
 #   common:
-#     - public/stylesheets/reset.css
-#     - public/stylesheets/widgets/*.css
+#     - stylesheets/reset.css
+#     - stylesheets/widgets/*.css
 #   workspace:
-#     - public/stylesheets/pages/workspace.css
+#     - stylesheets/pages/workspace.css
 #   empty:
-#     - public/stylesheets/pages/empty.css
+#     - stylesheets/pages/empty.css
