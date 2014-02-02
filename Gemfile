@@ -14,6 +14,7 @@ group :assets do
   gem 'stipe'
   gem 'jammit'
   gem 'closure-compiler'
+  gem 's3_website'
 end
 
 # group :development do

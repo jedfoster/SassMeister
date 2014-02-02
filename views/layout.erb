@@ -13,9 +13,9 @@
   <!--  Mobile Viewport Fix, use at own risk -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5 maximum-scale=1.0">
 
-  <%= stylesheet_tags %>
+  <%= stylesheet_tags('style') %>
 
-  <script src="/javascripts/modernizr.js"></script>
+  <%= javascript_tags('modernizr') %>
 </head>
 
 <body class="<%= @body_class || 'app' %>">
@@ -40,7 +40,7 @@
       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();<% end %>
   </script>
-  
-  <%= javascript_tags %>
+
+  <%= javascript_tags('app') %>
 </body>
 </html>

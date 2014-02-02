@@ -2,20 +2,24 @@ require 'yaml'
 
 module Assets
 
-  def javascript_tags
-    return "<script src=\"/javascripts/app.js#{version}\"></script>" if settings.environment == :production
+  HOST = ''
+
+  def javascript_tags(bundle)
+    return "<script src=\"#{HOST}/js/#{bundle}.js#{version}\"></script>" if settings.environment == :production
 
     assets = YAML.load_file("config/assets.yml")
 
-    javascripts = assets['javascripts']['app'].collect do |js|
-      "<script src=\"#{js.sub('public', '')}\"></script>"
+    javascripts = assets['javascripts'][bundle].collect do |js|
+      "<script src=\"#{HOST}/#{js.sub('javascripts', 'js')}\"></script>"
     end
 
-    return javascripts.join("\n")
+    javascripts.join("\n")
   end
 
-  def stylesheet_tags
-    "<link rel=\"stylesheet\" href=\"/stylesheets/style.css#{version if settings.environment == :production}\">"
+  def stylesheet_tags(bundle)
+    return "<link rel=\"stylesheet\" href=\"#{HOST}/css/#{bundle}.css#{version}\">" if settings.environment == :production
+
+    "<link rel=\"stylesheet\" href=\"#{HOST}/css/#{bundle}.css\">"
   end
 
   def version

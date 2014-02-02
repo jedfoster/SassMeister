@@ -3,9 +3,10 @@
 .sass-cache/*
 .rvmrc
 .pow*
-public/javascripts/app.js*
-public/stylesheets/*
+public/js/*
+public/css/*
 github.yml
 tmp
 log
 config/build.txt
+s3_website.yml
