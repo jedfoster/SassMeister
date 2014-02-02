@@ -16,6 +16,7 @@
   <%= stylesheet_tags('style') %>
 
   <%= javascript_tags('modernizr') %>
+  <script>document.domain = '<%= APP_DOMAIN %>';</script>
 </head>
 
 <body class="<%= @body_class || 'app' %>">
