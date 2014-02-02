@@ -3,8 +3,6 @@ require "bundler/setup"
 require 'rack/contrib'
 require './lib/rack/static_cache'
 
-require './sassmeister'
-
 # Gzip responses
 use Rack::Deflater
 
@@ -18,5 +16,17 @@ else
 use Rack::StaticCache, :urls => ['/js', '/css', '/fonts', '/favicon.ico'], :root => "public", :duration => 90
 end
 
-# Run the application
-run SassMeisterApp
+require './sassmeister'
+require './sassmeister_embedded'
+
+if ENV['RACK_ENV'] != 'production'
+  run Rack::URLMap.new({
+    "http://embed.sassmeister.dev/" => SassMeisterEmbeddedApp,
+    "/" => SassMeisterApp
+  })
+else
+  run Rack::URLMap.new({
+    "http://embed.sassmeister.com/" => SassMeisterEmbeddedApp,
+    "/" => SassMeisterApp
+  })
+end

@@ -5,6 +5,17 @@ GIT
     rack-contrib (1.2.0)
       rack (>= 0.9.1)
 
+PATH
+  remote: ~/Code/Chairman
+  specs:
+    chairman (0.1.1)
+      dalli (~> 2.6.4)
+      faraday-http-cache (~> 0.3.0)
+      memcachier (= 0.0.2)
+      octokit (~> 2.0)
+      oj (= 2.4.0)
+      sinatra (~> 1.4.3)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -20,15 +31,9 @@ GEM
       json (~> 1.4)
       nokogiri (>= 1.4.4)
       uuidtools (~> 2.1)
-    chairman (0.1.1)
-      dalli (~> 2.6.4)
-      faraday-http-cache (~> 0.3.0)
-      memcachier (= 0.0.2)
-      octokit (~> 2.0)
-      oj (= 2.4.0)
-      sinatra (~> 1.4.3)
     chunky_png (1.2.9)
     closure-compiler (1.1.10)
+    coderay (1.1.0)
     colored (1.2)
     compass (1.0.0.alpha.17)
       chunky_png (~> 1.2)
@@ -47,8 +52,8 @@ GEM
     dalli (2.6.4)
     deep_merge (1.0.0)
     erubis (2.7.0)
-    faraday (0.8.9)
-      multipart-post (~> 1.2.0)
+    faraday (0.9.0)
+      multipart-post (>= 1.2, < 3)
     faraday-http-cache (0.3.0)
       activesupport (>= 3.0)
       faraday (~> 0.8)
@@ -67,17 +72,25 @@ GEM
       rb-inotify (>= 0.9)
       rb-kqueue (>= 0.2)
     memcachier (0.0.2)
+    method_source (0.8.2)
     mime-types (1.19)
     mini_portile (0.5.2)
     minitest (4.7.5)
     multi_json (1.8.4)
-    multipart-post (1.2.0)
+    multipart-post (2.0.0)
     newrelic_rpm (3.7.1.182)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
-    octokit (2.7.0)
+    octokit (2.7.1)
       sawyer (~> 0.5.2)
     oj (2.4.0)
+    pry (0.9.12.6)
+      coderay (~> 1.0)
+      method_source (~> 0.8)
+      slop (~> 3.4)
+    pry-remote (0.1.8)
+      pry (~> 0.9)
+      slop (~> 3.0)
     rack (1.5.2)
     rack-protection (1.5.1)
       rack
@@ -98,7 +111,7 @@ GEM
       thor (= 0.18.1)
     sass (3.3.0.rc.2)
       listen (~> 1.1.0)
-    sawyer (0.5.2)
+    sawyer (0.5.3)
       addressable (~> 2.3.5)
       faraday (~> 0.8, < 0.10)
     simple-cloudfront-invalidator (1.0.1)
@@ -109,6 +122,7 @@ GEM
       tilt (~> 1.3, >= 1.3.4)
     sinatra-partial (0.4.0)
       sinatra
+    slop (3.4.7)
     stipe (0.0.6.4)
       compass (>= 0.11)
       sass (>= 3.2.1)
@@ -127,11 +141,12 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  chairman
+  chairman!
   closure-compiler
   compass (~> 1.0.0.alpha.17)
   jammit
   newrelic_rpm
+  pry-remote
   rack-contrib!
   rake
   s3_website
