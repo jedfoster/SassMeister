@@ -204,12 +204,12 @@ class SassMeisterApp < Sinatra::Base
         :input => (html || '').gsub('</script>', '<\/script>'),
         :syntax => (html_syntax || '').gsub('</script>', '<\/script>')
       }
-    }.to_json
+    }
 
     @gist_output = {
       :css => (css_file || ''),
       :html => (rendered_file || '').gsub('</script>', '<\/script>')
-    }.to_json
+    }
 
     @body_class = false
 
