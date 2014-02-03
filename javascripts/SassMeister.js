@@ -414,7 +414,7 @@ var SassMeister;
 
 
     arrangePanels: function(orientation) {
-      if(window.viewportSize == 'desktop') {
+      if(window.viewportSize == 'desktop' && $.fn.casement) {
         $('.panel, .current').removeClass('hide-panel').removeClass('show-panel').removeClass('current');
         $(document.body).removeClass('single-column');
 
