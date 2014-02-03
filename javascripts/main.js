@@ -244,7 +244,7 @@ if($('body.app').length > 0 ) {
 
 
   $('#mobile-tabs h2').on('click', function(event) {
-    if(window.viewportSize !== 'desktop') {
+    if($('body').hasClass('single-column')) {
       $('.panel').removeClass('show-panel').addClass('hide-panel');
       $('#mobile-tabs .current').removeClass('current');
       $(this).toggleClass('current')
