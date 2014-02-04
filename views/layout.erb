@@ -20,7 +20,7 @@
 </head>
 
 <body class="<%= @body_class || 'app' %>">
-  <%= partial :"shared/_header" %>
+  <%= partial :"shared/_header" unless @body_class == 'embedded' %>
 
   <%= partial :"shared/_control_panel" unless @body_class %>
 
@@ -28,7 +28,13 @@
   <%= yield %>
   </section>
 
-  <%= partial :"shared/_footer" %>
+  <%=
+    if @body_class == 'embedded'
+      partial :"shared/_embedded_footer"
+    else
+      partial :"shared/_footer"
+    end
+  %>
 
   <script type="text/javascript">
     var _gaq = _gaq || [];

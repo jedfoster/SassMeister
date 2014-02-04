@@ -1,5 +1,5 @@
 (function($) {
-if($('body.app').length > 0 ) {
+if($('body.app, body.embedded').length > 0 ) {
 
   $('#rendered-html').attr('src', window.sandbox);
 

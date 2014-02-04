@@ -5,6 +5,10 @@
   z-index: 2;
   top: $site-header-height;
   bottom: em(32);
+
+  .embedded & {
+    top: 0;
+  }
 }
 
 

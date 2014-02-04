@@ -138,7 +138,7 @@ class SassMeisterEmbeddedApp < Sinatra::Base
       :html => (rendered_file || '').gsub('</script>', '<\/script>')
     }
 
-    @body_class = false
+    @body_class = 'embedded'
 
     erb :index
   end

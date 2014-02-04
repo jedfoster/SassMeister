@@ -38,15 +38,72 @@ footer {
       text-align: center;
     }
   }
+
   .copyright {
     @include grid(4);
 
     text-align: right;
 
-    @media screen and (max-width: 650px) {
-      @include grid(12);
+    @media #{$mobile} {
+      width: 100%;
 
       text-align: center;
+    }
+  }
+
+
+  .built-by {
+    @include grid(6);
+
+    text-align: left;
+
+    @media #{$mobile} {
+      @include grid(8);
+    }
+
+    a {
+      margin-right: 1.5em;
+    }
+  }
+
+  .app-link {
+    @include grid(6);
+
+    text-align: right;
+    line-height: .75;
+    padding-top: 0.75em;
+
+    @media #{$mobile} {
+      @include grid(4);
+
+      .cta {
+        display: none;
+      }
+    }
+  }
+
+  .logo {
+    @extend %icon-font;
+
+    margin-left: 0.3em;
+
+    &:before {
+      content: "\e001";
+      font-size: 4.5em;
+      line-height: 1px;
+
+      @media #{$mobile} {
+        font-size: 4em;
+      }
+    }
+
+    &:hover {
+      background: transparent;
+      text-shadow: 0 0 0.1em $alpha_color_delta;
+    }
+
+    @media #{$mobile} {
+      left: 0.33333em;
     }
   }
 
