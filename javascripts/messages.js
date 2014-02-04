@@ -59,7 +59,7 @@ Object.size = function(obj) {
   };
 
 
-  if($('body.app').length > 0 ) {
+  if($('body.app').length > 0 && Modernizr.localstorage) {
     var messageStats = $.extend(true, {
       last_visit: Date.now(),
       visit_number: 0,

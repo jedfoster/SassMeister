@@ -8,7 +8,11 @@
 ;(function($) {
 
   var $handle = sash_id = null;
-  var casementSettings = JSON.parse(localStorage.getItem('casementSettings')) || {};
+  var casementSettings = {};
+  
+  if(Modernizr.localstorage) {
+    casementSettings = JSON.parse(localStorage.getItem('casementSettings')) || {};
+  }
 
   var defaults = {
         split: 'vertical',
@@ -195,7 +199,9 @@
         casementSettings[handle.next().data('casement_guid')] = settings;
       }
 
-      localStorage.setItem('casementSettings', JSON.stringify(casementSettings));
+      if(Modernizr.localstorage) {
+        localStorage.setItem('casementSettings', JSON.stringify(casementSettings));
+      }
     },
 
     minimize: function(element) {

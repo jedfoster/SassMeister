@@ -1,7 +1,7 @@
 #casement {
   @extend %stretch;
 
-  @media #{$tablet} {
+  .single-column & {
     top: 1.5em;
   }
 }
@@ -75,6 +75,10 @@ body:after {
 }
 
 .single-column {
+  .main_body .editor {
+    margin: 0;
+  }
+
   .editor-header {
     @extend %editor-header;
     z-index: 9999;
@@ -84,6 +88,10 @@ body:after {
     h2 {
       display: inline-block;
       padding: 0 1em;
+      
+      @media #{$mobile} {
+        padding: 0 0.66667em;
+      }
     }
 
     & .current {
@@ -105,6 +113,15 @@ body:after {
       z-index: 999;
   }
 }
+
+.embedded .editor-header {
+  background: $alpha_color_fox;
+
+  & .current {
+    background: transparentize($bravo_gray, 0.25);
+  }
+}
+
 
 .hide {
   display: none !important;

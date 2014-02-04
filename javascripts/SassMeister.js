@@ -155,7 +155,9 @@ var SassMeister;
 
     initPanels: function() {
       if(window.gist) {
-        localStorage.removeItem('casementSettings');
+        if(Modernizr.localstorage) {
+          localStorage.removeItem('casementSettings');
+        }
 
         if(!this.inputs.html.input) {
           this.layout.html = 'hide';
@@ -412,9 +414,14 @@ var SassMeister;
 
 
     arrangePanels: function(orientation) {
-      if(window.viewportSize == 'desktop') {
+      if(window.viewportSize == 'desktop' && $.fn.casement) {
         $('.panel, .current').removeClass('hide-panel').removeClass('show-panel').removeClass('current');
         $(document.body).removeClass('single-column');
+
+        if (this.layout.html == 'hide') {
+          $('#rendered, [data-name="html"]').hide();
+          $('#toggle_html').data("state", 'show').toggleClass('show');
+        }
 
         // #source has to be done FIRST, since it is nested inside #casement. TODO: Fix this.
         $('#source').casement({
@@ -475,7 +482,9 @@ var SassMeister;
       this.inputs = this._default.inputs;
       this.outputs = this._default.outputs;
 
-      localStorage.clear();
+      if(Modernizr.localstorage) {
+        localStorage.clear();
+      }
 
       updateRender({reset: true});
 
@@ -501,15 +510,14 @@ var SassMeister;
         }
       }
       else {
-        if(window.resetApp) {
-          localStorage.removeItem('inputs');
-          localStorage.removeItem('outputs');
-          localStorage.removeItem('alertStats');
+        if(Modernizr.localstorage) {
+          this.inputs = $.extend(true, this.inputs, JSON.parse(localStorage.getItem('inputs')) );
+          this.outputs = $.extend(true, this.outputs, JSON.parse(localStorage.getItem('outputs')) );
         }
-
-        this.inputs = $.extend(true, this.inputs, JSON.parse(localStorage.getItem('inputs')) );
-        this.outputs = $.extend(true, this.outputs, JSON.parse(localStorage.getItem('outputs')) );
-
+        else {
+          this.inputs = $.extend(true, this.inputs, {} );
+          this.outputs = $.extend(true, this.outputs, {} );
+        }
         if(this.inputs.sass.dependencies.libsass) {
           this.sass_version = 'lib';
           // this.inputs.sass.syntax = 'SCSS';
@@ -520,7 +528,12 @@ var SassMeister;
         }
       }
 
-      this.layout = $.extend(true, this.layout, JSON.parse(localStorage.getItem('layout')) );
+      if(Modernizr.localstorage) {
+        this.layout = $.extend(true, this.layout, JSON.parse(localStorage.getItem('layout')) );
+      }
+      else {
+        this.layout = $.extend(true, this.layout, {} );
+      }
 
       switch(this.inputs.sass.syntax.toLowerCase()) {
         case 'sass':
@@ -557,7 +570,7 @@ var SassMeister;
 
 
     setStorage: function() {
-      if(! window.gist) {
+      if(! window.gist && Modernizr.localstorage) {
         localStorage.setItem('inputs', JSON.stringify( this.inputs ));
         localStorage.setItem('outputs', JSON.stringify( this.outputs ));
         localStorage.setItem('layout', JSON.stringify( this.layout ));

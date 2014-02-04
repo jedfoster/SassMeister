@@ -12,6 +12,25 @@ $control-column-open-width: em(480);
   }
 }
 
+  #promo {
+    position:absolute;
+    height: 12em;
+    border-top: 1px solid $delta_color_fox;
+    background-color: $delta_color_india;
+
+    bottom: 0;
+    float: left;
+    overflow: hidden;
+
+    .swag-promo {
+      height: inherit;
+    }
+
+    img {
+      margin-top: -2em;
+    }
+  }
+
 #control-column {
   position: absolute;
   top: 0;
@@ -77,24 +96,7 @@ $control-column-open-width: em(480);
     }
   }
 
-  #promo {
-    position:absolute;
-    height: 12em;
-    border-top: 1px solid $delta_color_fox;
-    background-color: $delta_color_india;
 
-    bottom: 0;
-    float: left;
-    overflow: hidden;
-
-    .swag-promo {
-      height: inherit;
-    }
-
-    img {
-      margin-top: -2em;
-    }
-  }
 
   fieldset, section {
     padding: 1em 2.5em 0 3em;
@@ -103,13 +105,6 @@ $control-column-open-width: em(480);
     clear: both;
   }
 
-  h2 {
-    @extend %headings_2;
-
-    font-weight: 100;
-    color: $bravo_gray;
-    margin-bottom: 0;
-  }
 
   h3 {
     @extend %headings_6;
@@ -131,33 +126,33 @@ $control-column-open-width: em(480);
   .libsass-output-note {
     display: none;
   }
-  
+
   &.libsass .libsass-output-note {
     display: block;
   }
-  
+
   // The above could be written like this using @at-root, but this is just dumb.
   // How is this at all readable? WTF is even going on here? ARGH!!!!!!!!!!!!!!!
   /*
     .libsass-output-note {
       display: none;
-  
-      @at-root { 
-        .libsass#{&} { 
+
+      @at-root {
+        .libsass#{&} {
           display: block;
         }
       }
     }
   */
-
+}
 
   .syntax-toggle-group {
     @include toggle-group(50%, (syntax-scss, syntax-sass));
 
-    clear: right;
+    clear: right !important;
   }
 
-  &.libsass .syntax-toggle-group {
+  .libsass .syntax-toggle-group {
    @include toggle-group(25%, (syntax-scss, syntax-sass));
 
     label {
@@ -181,7 +176,7 @@ $control-column-open-width: em(480);
   .version-toggle-group {
     @include toggle-group(66%, (version-sass3-3, version-sass3-2, version-lib));
 
-    clear: right;
+    clear: right !important;
 
     &:after { content:"\A"; display: block;white-space:pre; }
   }
@@ -193,4 +188,4 @@ $control-column-open-width: em(480);
   .html-toggle-group {
     @include toggle-group(100%, (html-html, html-haml, html-mkdn, html-txtl));
   }
-}
+

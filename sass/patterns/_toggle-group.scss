@@ -6,8 +6,8 @@
   position: relative;
   z-index: 1;
   float: left;
-  width: $width;
-  padding: 0;
+  width: $width !important;
+  padding: 0 !important;
   background: $white;
   margin-bottom: 1.5em;
 
