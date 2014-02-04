@@ -6,6 +6,7 @@ gem 'sinatra'
 gem 'sinatra-partial'
 gem 'unicorn'
 gem 'chairman', path: "~/Code/Chairman"
+gem 'rack-cache'
 
 group :assets do
   gem 'execjs'

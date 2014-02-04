@@ -8,6 +8,8 @@ require 'yaml'
 require 'sassmeister'
 require 'array'
 require 'assets'
+require 'dalli'
+require 'rack-cache'
 
 require 'pry-remote'
 
@@ -32,6 +34,7 @@ class SassMeisterEmbeddedApp < Sinatra::Base
     require 'newrelic_rpm'
 
     Chairman.config(ENV['GITHUB_ID'], ENV['GITHUB_SECRET'], ['gist'])
+    CACHE_MAX_AGE = 1800
   end
 
   configure :development do
@@ -39,6 +42,7 @@ class SassMeisterEmbeddedApp < Sinatra::Base
     SANDBOX_DOMAIN = 'sandbox.sassmeister.dev'
     yml = YAML.load_file("config/github.yml")
     Chairman.config(yml["client_id"], yml["client_secret"], ['gist'])
+    CACHE_MAX_AGE = 60
   end
 
 
@@ -48,6 +52,8 @@ class SassMeisterEmbeddedApp < Sinatra::Base
 
     params[:syntax].downcase! unless params[:syntax].nil?
     params[:original_syntax].downcase! unless params[:original_syntax].nil?
+
+    cache_control :public, max_age: CACHE_MAX_AGE
   end
 
 
