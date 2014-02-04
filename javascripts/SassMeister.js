@@ -418,6 +418,11 @@ var SassMeister;
         $('.panel, .current').removeClass('hide-panel').removeClass('show-panel').removeClass('current');
         $(document.body).removeClass('single-column');
 
+        if (this.layout.html == 'hide') {
+          $('#rendered, [data-name="html"]').hide();
+          $('#toggle_html').data("state", 'show').toggleClass('show');
+        }
+
         // #source has to be done FIRST, since it is nested inside #casement. TODO: Fix this.
         $('#source').casement({
           split: (orientation == 'horizontal' ? 'vertical' : 'horizontal'),
