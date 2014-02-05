@@ -5,7 +5,7 @@ gem 'rack-contrib', :git => 'git://github.com/rack/rack-contrib.git'
 gem 'sinatra'
 gem 'sinatra-partial'
 gem 'unicorn'
-gem 'chairman', path: "~/Code/Chairman"
+gem 'chairman'
 gem 'rack-cache'
 
 group :assets do
@@ -16,11 +16,11 @@ group :assets do
   gem 'stipe'
   gem 'jammit'
   gem 'closure-compiler'
-  gem 's3_website'
 end
 
 group :development do
   gem 'pry-remote'
+  gem 's3_website'
 end
 
 group :production do
