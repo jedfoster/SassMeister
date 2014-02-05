@@ -42,7 +42,7 @@ class SassMeisterEmbeddedApp < Sinatra::Base
     SANDBOX_DOMAIN = 'sandbox.sassmeister.dev'
     yml = YAML.load_file("config/github.yml")
     Chairman.config(yml["client_id"], yml["client_secret"], ['gist'])
-    CACHE_MAX_AGE = 60
+    CACHE_MAX_AGE = 0
   end
 
 
