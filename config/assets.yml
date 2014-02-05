@@ -32,8 +32,6 @@ javascripts:
 
     - javascripts/vendor/bindWithDelay.js
     - javascripts/vendor/messenger.min.js
-    - javascripts/vendor/spin/spin.min.js
-    - javascripts/vendor/spin/jquery.spin.js
     - javascripts/vendor/casement.js
     - javascripts/viewport.js
     - javascripts/messages.js

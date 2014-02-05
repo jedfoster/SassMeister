@@ -88,7 +88,7 @@ body:after {
     h2 {
       display: inline-block;
       padding: 0 1em;
-      
+
       @media #{$mobile} {
         padding: 0 0.66667em;
       }
@@ -130,13 +130,13 @@ body:after {
 #sass-compiling {
   position: relative;
   margin-left: 0.25em;
-  padding-left: 1.5em;
 }
 
-.spinner {
+.timer {
   position: absolute;
-  width: 1.5em;
-  height: 1.5em;
+  width: 1.125em;
+  height: 1.125em;
+  top: 0.2em
 }
 
 #compile-time {

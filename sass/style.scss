@@ -6,18 +6,17 @@
 
 @import "mixins"; // Need to override some Stipe mixins
 
+@import "compass";
+@import "compass/css3";
 
 @import "reset";
 
-
 @import "web_fonts";
-
 
 // This where you start building your own styles.
 // ------------------------------------------------------------------------------
 @import "typography";
-// Since SM 2.0, there really aren't any forms anymore.
-// @import "forms";
+
 @import "patterns";
 @import "modules";
 @import "layouts";
