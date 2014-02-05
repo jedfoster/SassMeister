@@ -4,7 +4,7 @@ desc "Release the Kraken!"
 task :deploy do
   Rake::Task["assets:precompile"].invoke
 
-  system("git push beta")
+  system("git push heroku")
   system("git push origin")
   system("bundle exec s3_website push --site public")
 end
