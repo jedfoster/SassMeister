@@ -14,7 +14,7 @@
   @include experimental(animation-timing-function, $value, -webkit, -moz, -ms, official);
 }
 
-$timer-size: 20px;
+$timer-size: 21px;
 $timer-speed: 1000ms;
 $timer-color: #888;
 $timer-border-width: 2px;
@@ -33,8 +33,9 @@ $timer-border-width: 2px;
   overflow: hidden;
   position: relative;
   text-indent: -9999px;
-  // width: $timer-size;
-  // height: $timer-size;
+  width: $timer-size;
+  height: $timer-size;
+  top: 0.2em;
 
   &::before, &::after {
     @include animation(timer $timer-speed infinite linear);
