@@ -27,7 +27,7 @@ task "assets:precompile" do
   context = ExecJS.compile(coffee)
   js = context.call("CoffeeScript.compile", source)
 
-  File.open("public/javascripts/embed.js", 'w') {|f| f.write(js) }
+  File.open("public/js/embed.js", 'w') {|f| f.write(js) }
 
   system("bundle exec jammit --force")
   system("bundle exec compass compile -e production")

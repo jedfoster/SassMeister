@@ -5,6 +5,9 @@ package_path: "js/"
 gzip_assets: off
 
 javascripts:
+  embed:
+    - public/js/embed.js
+
   app:
     - javascripts/vendor/jquery-1.8.2.js
     - javascripts/vendor/ACE-noconflict/ace.js
@@ -31,10 +34,10 @@ javascripts:
     - javascripts/vendor/messenger.min.js
     - javascripts/vendor/spin/spin.min.js
     - javascripts/vendor/spin/jquery.spin.js
+    - javascripts/vendor/casement.js
     - javascripts/viewport.js
     - javascripts/messages.js
     - javascripts/SassMeister.js
-    - javascripts/vendor/casement.js
     - javascripts/main.js
 
   modernizr:
