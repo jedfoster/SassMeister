@@ -11,7 +11,7 @@ require 'assets'
 require 'dalli'
 require 'rack-cache'
 
-require 'pry-remote'
+# require 'pry-remote'
 
 class SassMeisterEmbeddedApp < Sinatra::Base
   register Sinatra::Partial
