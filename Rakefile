@@ -30,7 +30,7 @@ task "assets:precompile" do
   File.open("public/js/embed.js", 'w') {|f| f.write(js) }
 
   system("bundle exec jammit --force")
-  system("bundle exec compass compile -e production")
+  system("bundle exec compass compile --force -e production")
 
   File.open("config/build.txt", 'w') {|f| f.write(Time.now.to_i) }
 end
