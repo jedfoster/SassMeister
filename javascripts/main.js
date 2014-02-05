@@ -61,12 +61,12 @@ if($('body.app, body.embedded').length > 0 ) {
     }
   }
   else {
-    $('#save-gist').attr('href', '/authorize').attr('class', 'github-login').find('span').text('Log in with your GitHub account to save gists');
+    $('#save-gist').attr('href', '/authorize').attr('class', 'github').find('span').text('Log in with your GitHub account to save gists');
   }
 
 
   if (window.gist) {
-    $('#cloud_actions li:last-child').before('<li><a href="https://gist.github.com/' + window.gist.gist_id + '" target="_blank" class="jump-icon" id="gist-link">View on GitHub</a></li>');
+    $('#cloud_actions li:last-child').before('<li><a href="https://gist.github.com/' + window.gist.gist_id + '" target="_blank" class="github" id="gist-link">View on GitHub</a></li>');
   }
 
 

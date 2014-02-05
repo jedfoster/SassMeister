@@ -84,7 +84,7 @@
 }
 
 // Github login
-.github-login {
+.github {
   @extend %icon-font;
 
   &:before {
@@ -174,7 +174,7 @@
 
 .control-icon {
   @extend %icon-font;
-  
+
   &:before {
     content: "\e002";
   }
@@ -182,7 +182,7 @@
 
 .cloud-icon {
   @extend %icon-font;
-  
+
   &:before {
     content: "\e003";
   }
@@ -190,7 +190,7 @@
 
 // %icon-preview-show {
 //   @extend %icon-font;
-// 
+//
 //   &:before {
 //    content: "\e004";
 //    font-size: 2em;
@@ -199,7 +199,7 @@
 // }
 // %icon-preview-hide {
 //   @extend %icon-font;
-// 
+//
 //   &:before {
 //    content: "\e005";
 //    font-size: 2em;
