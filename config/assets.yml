@@ -9,7 +9,7 @@ javascripts:
     - public/js/embed.js
 
   app:
-    - javascripts/vendor/jquery-1.8.2.js
+    - javascripts/vendor/jquery-2.1.0.js
     - javascripts/vendor/ACE-noconflict/ace.js
     - javascripts/vendor/ACE-noconflict/mode-css.js
     - javascripts/vendor/ACE-noconflict/mode-sass.js
