@@ -1,7 +1,7 @@
 <div class="editor-header" id="mobile-tabs">
   <h2 class="sass-syntax-display" data-tab="sass">Sass</h2>
   <h2 data-tab="css">CSS</h2>
-  <% unless @gist[:html_filename] == '' && @body_class == 'embedded' %>
+  <% unless @gist && @gist[:html_filename] == '' && @body_class == 'embedded' %>
     <h2 class="html-syntax-display" data-tab="html">HTML</h2>
     <h2 data-tab="rendered">Result</h2>
   <% end %>
