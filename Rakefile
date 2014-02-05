@@ -30,10 +30,11 @@ end
 # Heroku will run this task as part of the deployment process.
 desc "Compile the app's Sass"
 task "assets:precompile" do
-  coffee = File.read("lib/coffee-script.js")
+  Dir.mkdir("public/js/") unless Dir.exists? "public/js/"
+
   source = File.read('coffee/embed.coffee')
 
-  context = ExecJS.compile(coffee)
+  context = ExecJS.compile File.read("lib/coffee-script.js")
   js = context.call("CoffeeScript.compile", source)
 
   File.open("public/js/embed.js", 'w') {|f| f.write(js) }
