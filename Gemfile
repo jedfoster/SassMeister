@@ -7,6 +7,7 @@ gem 'sinatra-partial'
 gem 'unicorn'
 gem 'chairman'
 gem 'rack-cache'
+gem 'activesupport'
 
 group :assets do
   gem 'execjs'
