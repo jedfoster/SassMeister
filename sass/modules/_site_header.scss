@@ -132,6 +132,35 @@
   }
 }
 
+#share_actions ul {
+  width: em(380);
+
+  textarea {
+    width: 100%;
+    height: 5em;
+    font-family: $monospace_font_family;
+
+    border: 1px solid $delta_gray;
+    padding: 0 0.25em;
+    outline: none;
+    -webkit-appearance: none;
+    resize: none;
+  }
+}
+
+.share-widget {
+  display: inline-block;
+  margin-right: 1em;
+
+  * {
+    box-sizing: content-box;
+  }
+}
+
+#twitter-widget-0 {
+  width: 80px !important;
+}
+
 //#toggle_html {
 //  // @extend %icon-preview-hide;
 //

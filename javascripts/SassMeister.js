@@ -140,6 +140,10 @@ var SassMeister;
         SassMeister.arrangePanels(SassMeister.layout.orientation);
       });
 
+      if(SassMeister.inputs.gist_id) {
+        updateEmbedCode();
+      }
+
       return this;
     },
 
@@ -350,9 +354,15 @@ var SassMeister;
 
             $('#save-gist').text('Update Gist').data('action', 'edit');
 
+            $('#save-gist').parent('li').after('<li><a id="fork-gist" class="fork-gist" data-action="create">Fork Gist</a></li>');
+
             if($('#gist-link').length < 1) {
               $('#cloud_actions li:first-child').after('<li><a href="https://gist.github.com/' + data.id + '" target="_blank" class="jump-icon" id="gist-link">View on GitHub</a></li>');
             }
+
+            updateEmbedCode();
+    
+            $('#share_actions').removeClass('hide');
           })
           .always(function() {
             SassMeister.ajaxCalls.postGistCreate = false;
@@ -403,6 +413,8 @@ var SassMeister;
             $('#gist-link').attr('href', 'https://gist.github.com/' + data.id);
             setUrl('/gist/' + data.id);
             SassMeister.inputs.gist_id = data.id;
+
+            updateEmbedCode();
 
             $('#save-gist').text('Update Gist').data('action', 'edit').attr('class', 'edit-gist');
           })
@@ -474,6 +486,7 @@ var SassMeister;
 
     reset: function() {
       $('#save-gist').text('Save Gist').data('action', 'create');
+      $('#share_actions').addClass('hide');
 
       this.editors.sass.setValue('');
       this.editors.css.setValue('');
@@ -590,6 +603,11 @@ var SassMeister;
     }
   };
 
+  var updateEmbedCode = function() {
+    var embedCode = '<p class="sassmeister" data-gist-id="' + SassMeister.inputs.gist_id + '" data-height="480"><a href="http://' + document.domain + '/gist/' + SassMeister.inputs.gist_id + '">Play with this gist on SassMeister.</a></p><script src="http://static.' + document.domain + '/js/embed.js" async></script>';
+    
+    $('#share_actions textarea').val(embedCode);
+  };
 
   var modal = function(content) {
     Messenger({ extraClasses: 'messenger-on-top' }).post({ message: content, hideAfter: 5, type: 'success' });

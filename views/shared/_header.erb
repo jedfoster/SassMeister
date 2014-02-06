@@ -8,6 +8,40 @@
 
     <a id="toggle_html" data-state="hide"><span class="alt">HTML</span></a>
 
+
+    <div id="share_actions" class="<%= 'hide' unless @gist %>">
+      <span class="jump-icon"><span class="alt">Share</span></span>
+      <ul>
+        <li>
+          Embed code:
+            <textarea onclick="this.focus();this.select();" readonly="readonly"></textarea>
+        </li>
+        <li>
+          <div class="share-widget">
+            <a href="https://twitter.com/share" class="twitter-share-button" data-text="Check out this sassy gist." data-via="sassmeisterapp">Tweet</a>
+            <script async>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+          </div>
+
+          <div class="share-widget">
+            <script async src="//platform.linkedin.com/in.js">lang: en_US </script>
+            <script async type="IN/Share" data-counter="right"></script>
+          </div>
+
+          <div class="share-widget">
+            <div class="g-plusone" data-size="medium"></div>
+            <script async>
+              (function() {
+                var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                po.src = 'https://apis.google.com/js/platform.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+              })();
+            </script>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+
     <div>
       <span class="cloud-icon"><span class="alt">Save</span></span>
       <ul id="cloud_actions">
