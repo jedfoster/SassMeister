@@ -130,6 +130,7 @@ body:after {
 #sass-compiling {
   position: relative;
   margin-left: 0.25em;
+  z-index: 1;
 }
 
 #compile-time {
