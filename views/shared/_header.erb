@@ -11,10 +11,21 @@
     <div>
       <span class="cloud-icon"><span class="alt">Save</span></span>
       <ul id="cloud_actions">
-        <li><a id="save-gist"><span></span></a></li>
+        <% if session[:github_id] %>
+          <% if @gist && @gist[:can_update_gist] %>
+            <li><a id="save-gist" data-action="edit" class="edit-gist"><span>Update Gist</span></a></li>
+          <% else %>
+            <li><a id="save-gist" data-action="create" class="create-gist"><span>Save Gist</span></a></li>
+          <% end %>
+        <% end %>
+
+        <%= '<li><a id="fork-gist" data-action="create" class="fork-gist"><span>Fork Gist</span></a></li>' if session[:github_id] && @gist %>
+        <%= '<li><a href="/authorize" class="github"><span>Log in with your GitHub account to save gists</span></a></li>' unless session[:github_id] %>
+        <%= '<li><a href="https://gist.github.com/' + @gist[:gist_id] + '" class="github" id="gist-link"><span>View on GitHub</span></a></li>' if @gist %>
         <li><a class="reset-icon" id="reset"><span>Reset</span></a></li>
       </ul>
     </div>
+
 
     <a id="open-controls" class="control-icon" title="Open control panel"><span class="alt">Control panel</span></a>
 

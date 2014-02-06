@@ -5,7 +5,6 @@ if($('body.app, body.embedded').length > 0 ) {
 
   var SassMeister = window.SassMeister.init();
 
-
   $('#control-column-bg').on('click', function(event) {
     $('#control-column, #control-column-bg').removeClass('open');
   });
@@ -44,30 +43,6 @@ if($('body.app, body.embedded').length > 0 ) {
 
     SassMeister.arrangePanels( $(this).data('orientation') );
   });
-
-
-  if (window.github_id) {
-    if (window.gist) {
-      if (window.gist.can_update_gist == true) {
-        $('#save-gist').data('action', 'edit').attr('class', 'edit-gist').find('span').text('Update Gist');
-        $('#save-gist').parent('li').after('<li><a id="fork-gist" class="fork-gist" data-action="create">Save as new Gist</a></li>');
-      }
-      else {
-        $('#save-gist').data('action', 'fork').attr('class', 'fork-gist').find('span').text('Fork Gist');
-      }
-    }
-    else {
-      $('#save-gist').data('action', 'create').attr('class', 'create-gist').find('span').text('Save Gist');
-    }
-  }
-  else {
-    $('#save-gist').attr('href', '/authorize').attr('class', 'github').find('span').text('Log in with your GitHub account to save gists');
-  }
-
-
-  if (window.gist) {
-    $('#cloud_actions li:last-child').before('<li><a href="https://gist.github.com/' + window.gist.gist_id + '" target="_blank" class="github" id="gist-link">View on GitHub</a></li>');
-  }
 
 
   $('[data-toggle-input]').on('click', function(event) {
