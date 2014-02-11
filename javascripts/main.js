@@ -236,7 +236,7 @@ if($('body.app, body.embedded').length > 0 ) {
 
 
   window.onmessage = function (event) {
-    if (SassMeister.layout.html == 'show') {
+    if(event.origin == window.sandbox && SassMeister.layout.html == 'show') {
       if(SassMeister.outputs.html) {
         SassMeister.updateRender(SassMeister.outputs);
       }
