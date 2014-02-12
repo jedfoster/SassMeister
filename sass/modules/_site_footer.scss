@@ -72,6 +72,12 @@ footer {
     text-align: right;
     line-height: .75;
     padding-top: 0.75em;
+  
+    &:hover .logo {
+      background: transparent;
+      text-shadow: 0 0 0.1em $alpha_color_delta;
+    }
+
 
     @media #{$mobile} {
       @include grid(4);
@@ -97,11 +103,7 @@ footer {
       }
     }
 
-    &:hover {
-      background: transparent;
-      text-shadow: 0 0 0.1em $alpha_color_delta;
-    }
-
+    
     @media #{$mobile} {
       left: 0.33333em;
     }

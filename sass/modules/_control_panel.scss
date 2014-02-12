@@ -133,17 +133,17 @@ $control-column-open-width: em(480);
 
   // The above could be written like this using @at-root, but this is just dumb.
   // How is this at all readable? WTF is even going on here? ARGH!!!!!!!!!!!!!!!
-  /*
-    .libsass-output-note {
-      display: none;
+  ///*
+  //  .libsass-output-note {
+  //    display: none;
 
-      @at-root {
-        .libsass#{&} {
-          display: block;
-        }
-      }
-    }
-  */
+  //    @at-root {
+  //      .libsass#{&} {
+  //        display: block;
+  //      }
+  //    }
+  //  }
+  //*/
 }
 
   .syntax-toggle-group {
