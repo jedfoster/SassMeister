@@ -352,12 +352,12 @@ var SassMeister;
             SassMeister.inputs.sass_filename = data.sass_filename;
             SassMeister.inputs.html_filename = data.html_filename;
 
-            $('#save-gist').text('Update Gist').data('action', 'edit');
+            $('#save-gist').data('action', 'edit').html('<span>Update Gist</span>');
 
-            $('#save-gist').parent('li').after('<li><a id="fork-gist" class="fork-gist" data-action="create">Fork Gist</a></li>');
+            $('#save-gist').parent('li').after('<li><a id="fork-gist" class="fork-gist" data-action="create"><span>Fork Gist</span></a></li>');
 
             if($('#gist-link').length < 1) {
-              $('#cloud_actions li:first-child').after('<li><a href="https://gist.github.com/' + data.id + '" target="_blank" class="jump-icon" id="gist-link">View on GitHub</a></li>');
+              $('#cloud_actions li:first-child').after('<li><a href="https://gist.github.com/' + data.id + '" target="_blank" class="jump-icon" id="gist-link"><span>View on GitHub</span></a></li>');
             }
 
             updateEmbedCode();
@@ -416,7 +416,7 @@ var SassMeister;
 
             updateEmbedCode();
 
-            $('#save-gist').text('Update Gist').data('action', 'edit').attr('class', 'edit-gist');
+            $('#save-gist').data('action', 'edit').attr('class', 'edit-gist').html('<span>Update Gist</span>');
           })
           .always(function() {
             SassMeister.ajaxCalls.postGistFork = false;
