@@ -8,5 +8,5 @@ public/css/*
 github.yml
 tmp
 log
-config/build.txt
+config/*.txt
 s3_website.yml

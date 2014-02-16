@@ -8,8 +8,10 @@ javascripts:
   embed:
     - public/js/embed.js
 
-  app:
+  jquery:
     - javascripts/vendor/jquery-2.1.0.js
+
+  utilities:    
     - javascripts/vendor/ACE-noconflict/ace.js
     - javascripts/vendor/ACE-noconflict/mode-css.js
     - javascripts/vendor/ACE-noconflict/mode-sass.js
@@ -34,6 +36,8 @@ javascripts:
     - javascripts/vendor/messenger.min.js
     - javascripts/vendor/casement.js
     - javascripts/viewport.js
+
+  application:
     - javascripts/messages.js
     - javascripts/SassMeister.js
     - javascripts/main.js
