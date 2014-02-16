@@ -195,10 +195,10 @@ if($('body.app, body.embedded').length > 0 ) {
     toggleCSSPanel(state);
 
     if(state == 'hide') {
-      $(this).data("state", 'show').toggleClass('show').find('span');
+      $(this).data("state", 'show').addClass('show');
     }
     else {
-      $(this).data("state", 'hide').toggleClass('show').find('span');
+      $(this).data("state", 'hide').removeClass('show');
     }
   });
 
@@ -210,10 +210,10 @@ if($('body.app, body.embedded').length > 0 ) {
     toggleHTMLPanels(state);
 
     if(state == 'hide') {
-      $(this).data("state", 'show').toggleClass('show').find('span');
+      $(this).data("state", 'show').addClass('show');
     }
     else {
-      $(this).data("state", 'hide').toggleClass('show').find('span');
+      $(this).data("state", 'hide').removeClass('show');
     }
   });
 

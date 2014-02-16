@@ -173,12 +173,12 @@ var SassMeister;
 
       if (this.layout.html == 'hide') {
         $('#rendered, [data-name="html"]').hide();
-        $('#toggle_html').data("state", 'show').toggleClass('show');
+        $('#toggle_html').data("state", 'show').removeClass('show');
       }
 
       if (this.layout.css == 'hide') {
         $('[data-name="css"]').hide();
-        $('#toggle_css').data("state", 'show').toggleClass('show');
+        $('#toggle_css').data("state", 'show').removeClass('show');
       }
     },
 
@@ -432,7 +432,11 @@ var SassMeister;
 
         if (this.layout.html == 'hide') {
           $('#rendered, [data-name="html"]').hide();
-          $('#toggle_html').data("state", 'show').toggleClass('show');
+          $('#toggle_html').data("state", 'show').addClass('show');
+        }
+
+        if (this.layout.css == 'hide') {
+          $('#toggle_css').data("state", 'show').addClass('show');
         }
 
         // #source has to be done FIRST, since it is nested inside #casement. TODO: Fix this.
