@@ -35,6 +35,7 @@ javascripts:
     - javascripts/vendor/bindWithDelay.js
     - javascripts/vendor/messenger.min.js
     - javascripts/vendor/casement.js
+    - javascripts/vendor/fancy_dropdown.js
     - javascripts/viewport.js
 
   application:

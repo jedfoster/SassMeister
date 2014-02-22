@@ -30,6 +30,12 @@ if($('body.app, body.embedded').length > 0 ) {
     $('input[name="output-style"][value="' + SassMeister.inputs.sass.output_style + '"]').prop('checked', true);
 
     $('input[name="html-syntax"][value="' + SassMeister.inputs.html.syntax + '"]').prop('checked', true);
+    $('select[name="theme"]').dropdown({
+      gutter : 0,
+      speed : 25,
+      onOptionSelect: function(opt) {
+      }
+    });
   };
 
   initControls();
