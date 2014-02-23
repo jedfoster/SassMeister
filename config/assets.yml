@@ -21,16 +21,16 @@ javascripts:
     - javascripts/vendor/ACE-noconflict/mode-markdown.js
     - javascripts/vendor/ACE-noconflict/mode-textile.js
     # Themes - light
-    # - javascripts/vendor/ACE-noconflict/theme-dawn.js
-    # - javascripts/vendor/ACE-noconflict/theme-github.js
-    # - javascripts/vendor/ACE-noconflict/theme-kuroir.js
-    # - javascripts/vendor/ACE-noconflict/theme-solarized_light.js
+    - javascripts/vendor/ACE-noconflict/theme-dawn.js
+    - javascripts/vendor/ACE-noconflict/theme-github.js
+    - javascripts/vendor/ACE-noconflict/theme-kuroir.js
+    - javascripts/vendor/ACE-noconflict/theme-solarized_light.js
     - javascripts/vendor/ACE-noconflict/theme-tomorrow.js
     # Themes - dark
-    # - javascripts/vendor/ACE-noconflict/theme-merbivore_soft.js
-    # - javascripts/vendor/ACE-noconflict/theme-monokai.js
-    # - javascripts/vendor/ACE-noconflict/theme-solarized_dark.js
-    # - javascripts/vendor/ACE-noconflict/theme-tomorrow_night_eighties.js
+    - javascripts/vendor/ACE-noconflict/theme-merbivore_soft.js
+    - javascripts/vendor/ACE-noconflict/theme-monokai.js
+    - javascripts/vendor/ACE-noconflict/theme-solarized_dark.js
+    - javascripts/vendor/ACE-noconflict/theme-tomorrow_night_eighties.js
 
     - javascripts/vendor/bindWithDelay.js
     - javascripts/vendor/messenger.min.js
