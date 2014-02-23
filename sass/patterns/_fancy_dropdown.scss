@@ -1,0 +1,216 @@
+@mixin theme-background() {
+  background-color: #fff;
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(1%, #eeeeee), color-stop(15%, #ffffff));
+  background-image: -webkit-linear-gradient(top, #eeeeee 1%, #ffffff 15%);
+  background-image: -moz-linear-gradient(top, #eeeeee 1%, #ffffff 15%);
+  background-image: -o-linear-gradient(top, #eeeeee 1%, #ffffff 15%);
+  background-image: linear-gradient(#eeeeee 1%, #ffffff 15%);
+}
+
+@mixin theme-gradient() {
+ // @include linear_gradient_w3c (#e4e4e4, #{#f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eeeeee 100%});
+ // @include dual_box_shadow($shadow_color: rgba(0,0,0,0.05), $shadow: 0 1px 0, $inset_shadow: 0 0 2px, $inset_color: #fff, $prefixes: -moz- -webkit- '');
+}
+
+@mixin theme-container-border() {
+  @include border_radius($border-radius);
+
+  border: 1px solid #aaa;
+}
+
+@mixin theme-inner-border() {
+  @include border_radius(3px);
+
+  -moz-background-clip   : padding;
+  -webkit-background-clip: padding-box;
+  background-clip        : padding-box;
+  border: 1px solid $golf_gray;
+}
+
+@mixin theme-active-container() {
+  -webkit-box-shadow: 0 0 5px rgba(0,0,0,.3);
+  -moz-box-shadow   : 0 0 5px rgba(0,0,0,.3);
+  box-shadow        : 0 0 5px rgba(0,0,0,.3);
+  border: 1px solid $alpha_color_charlie;
+}
+
+
+
+.fancy_dropdown {
+  @include sm_border_radius($border-radius);
+
+  border: 1px solid #aaa;
+  background-color: #fff;
+  //background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(1%, #eeeeee), color-stop(15%, #ffffff));
+  //background-image: -webkit-linear-gradient(top, #eeeeee 1%, #ffffff 15%);
+  //background-image: -moz-linear-gradient(top, #eeeeee 1%, #ffffff 15%);
+  //background-image: -o-linear-gradient(top, #eeeeee 1%, #ffffff 15%);
+  //background-image: linear-gradient(#eeeeee 1%, #ffffff 15%);
+  width: 100%;
+  position: relative;
+  display: block;
+  margin-bottom: 1em;
+  padding:0;
+  text-align: left;
+
+  > span {
+    width: 100%;
+    display: block;
+    padding: 0 0 0 1em;
+    position: relative;
+    cursor: pointer;
+    height: 1.5em;
+  }
+
+  > span:after {
+    font-family: 'SassMeisterIcons';
+    font-style: normal;
+    width: 3em;
+    color: $delta_gray;
+    position: absolute;
+    right: 0;
+    content: '\25BC'; // downward arrow
+    text-align: center;
+    border-left: 1px solid $golf_gray;
+
+    @include linear_gradient_w3c (#e4e4e4, #{#f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eeeeee 100%});
+   // @include dual_box_shadow($shadow_color: rgba(0,0,0,0.05), $shadow: 0 1px 0, $inset_shadow: 0 0 2px, $inset_color: #fff, $prefixes: -moz- -webkit- '');
+
+    line-height: 1.5;
+    -webkit-background-clip: padding-box;
+       -moz-background-clip: padding;
+            background-clip: padding-box;
+    @include sm_border_radius($border-radius, $corner: top-right);
+    @include sm_border_radius($border-radius, $corner: bottom-right);
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    display: block;
+    position: absolute;
+  }
+
+  ul li {
+    //position: absolute;
+    width: 100%;
+    line-height: 1.5em;
+  }
+
+  ul li span {
+    //background: $india_gray;
+    //display: block;
+    //cursor: pointer;
+    //padding: 0 2em;
+  }
+
+  ul li:last-child > span {
+    @include sm_border_radius($border-radius, $corner: bottom-left);
+    @include sm_border_radius($border-radius, $corner: bottom-right);
+  }
+
+  &.active {
+    //@include box_shadow(none, null);
+
+    > span:after {
+      content: '\25B2'; // upward arrow
+    }
+
+    > span, ul li span {
+     // box-shadow: 0 1px 1px $india_gray;
+    }
+
+    ul li span {
+      @include transition(all, 0.1s, linear, 0s);
+    }
+
+    ul li span:hover {
+     // background: darken($india_gray, 5);
+    }
+  }
+}
+
+
+
+
+
+.fancy_dropdown {
+  @include theme-container-border();
+  //@include theme-background;
+
+  vertical-align: middle;
+  //font-size: 1em;
+  height: 32px;
+  line-height: 32px;
+  font-family: $primary_font_family;
+
+  > span {
+    padding: 0 0 0 0.5em;
+    vertical-align: middle;
+  }
+
+  > span:after {
+    @include theme-gradient;
+    @include sm_border_radius($border-radius, $corner: top-right);
+    @include sm_border_radius($border-radius, $corner: bottom-right);
+
+    @extend %icon-pseudo-content;
+    
+    font-size: 1em;
+    width: 1.5em;
+    content: '\f0d7'; // downward arrow
+    line-height: 30px;
+  }
+
+  div {
+    background: #fff;
+    border: 1px solid #aaa;
+    border-top: 0;
+    position: absolute;
+    //-webkit-box-shadow: 0 4px 5px rgba(0,0,0,.15);
+    //-moz-box-shadow   : 0 4px 5px rgba(0,0,0,.15);
+    //box-shadow        : 0 4px 5px rgba(0,0,0,.15);
+    z-index: 10;
+    margin-bottom: 2em;
+  }
+
+  ul {
+    //margin: 0 4px 4px 0;
+    max-height: em(140);
+    //padding: 0 0 0 4px;
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+
+    li {
+      display: none;
+      line-height: 15px;
+      padding: 5px 6px;
+      margin: 0;
+      list-style: none;
+      cursor: pointer;
+      display: list-item;
+    }
+  }
+
+  li:hover {
+    background-color: $alpha_color_delta;
+    //background-image: -webkit-gradient(linear, 0 0, 0 100%, color-stop(20%, $alpha_color_delta), color-stop(90%, $alpha_color_bravo));
+    //background-image: -webkit-linear-gradient(top, $alpha_color_delta 20%, $alpha_color_bravo 90%);
+    //background-image: -moz-linear-gradient(top, $alpha_color_delta 20%, $alpha_color_bravo 90%);
+    //background-image: -o-linear-gradient(top, $alpha_color_delta 20%, $alpha_color_bravo 90%);
+    //background-image: linear-gradient($alpha_color_delta 20%, $alpha_color_bravo 90%);
+    color: #fff;
+  }
+
+  &.active {
+    > span:after {
+    	content: '\f0d8';
+    }
+  }
+}
+
+
+
+

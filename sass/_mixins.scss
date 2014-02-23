@@ -1,4 +1,4 @@
-@mixin border_radius ($border_radius, $corner: null, $prefixes: $webkit_support) {
+@mixin sm_border_radius ($border_radius, $corner: null, $prefixes: $webkit_support) {
   @if $corner != null {
     $corner: -#{$corner};
   }
