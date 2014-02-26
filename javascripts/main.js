@@ -41,6 +41,19 @@ if($('body.app, body.embedded').length > 0 ) {
         SassMeister.editors.html.setTheme(theme);
       }
     });
+
+    $('#enable-vim').on('change', function(event) {
+       if($(this).prop('checked')) {
+        SassMeister.editors.sass.setKeyboardHandler("ace/keyboard/vim");
+        SassMeister.editors.css.setKeyboardHandler("ace/keyboard/vim");
+        SassMeister.editors.html.setKeyboardHandler("ace/keyboard/vim");
+      }
+      else {
+        SassMeister.editors.sass.setKeyboardHandler(null);
+        SassMeister.editors.css.setKeyboardHandler(null);
+        SassMeister.editors.html.setKeyboardHandler(null);
+      }
+    });
   };
 
   initControls();
