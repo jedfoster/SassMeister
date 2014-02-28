@@ -20,6 +20,7 @@ javascripts:
     - javascripts/vendor/ACE-noconflict/mode-haml.js
     - javascripts/vendor/ACE-noconflict/mode-markdown.js
     - javascripts/vendor/ACE-noconflict/mode-textile.js
+    - javascripts/vendor/ACE-noconflict/ext-emmet.js
     - javascripts/vendor/ACE-noconflict/keybinding-vim.js
     # Themes - light
     - javascripts/vendor/ACE-noconflict/theme-dawn.js

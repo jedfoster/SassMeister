@@ -42,8 +42,10 @@ if($('body.app, body.embedded').length > 0 ) {
       }
     });
 
-    $('#enable-vim').on('change', function(event) {
-       if($(this).prop('checked')) {
+    ace.require("ace/ext/emmet");
+
+    $('.edit-prefs input[type="checkbox"]').on('change', function(event) {
+       if($('#enable-vim').prop('checked')) {
         SassMeister.editors.sass.setKeyboardHandler("ace/keyboard/vim");
         SassMeister.editors.css.setKeyboardHandler("ace/keyboard/vim");
         SassMeister.editors.html.setKeyboardHandler("ace/keyboard/vim");
@@ -53,6 +55,10 @@ if($('body.app, body.embedded').length > 0 ) {
         SassMeister.editors.css.setKeyboardHandler(null);
         SassMeister.editors.html.setKeyboardHandler(null);
       }
+
+      SassMeister.editors.sass.setOption("enableEmmet", $('#enable-emmet').prop('checked'));
+      SassMeister.editors.css.setOption("enableEmmet", $('#enable-emmet').prop('checked'));
+      SassMeister.editors.html.setOption("enableEmmet", $('#enable-emmet').prop('checked'));
     });
   };
 
