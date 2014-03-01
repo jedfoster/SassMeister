@@ -196,6 +196,16 @@ var SassMeister;
       var input = ace.edit(name);
 
       input.setTheme(this.preferences.theme);
+
+      if(this.preferences.vim) {
+        input.setKeyboardHandler("ace/keyboard/vim");
+      }
+      else {
+        input.setKeyboardHandler(null);
+      }
+
+      input.setOption("enableEmmet", this.preferences.emmet);
+
       input.getSession().setMode('ace/mode/' + syntax.toLowerCase());
 
       input.getSession().setTabSize(2);
