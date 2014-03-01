@@ -507,6 +507,29 @@ var SassMeister;
       this.setStorage();
     },
 
+
+    setEditorPreferences: function(key, value) {
+      this.preferences[key] = value;
+
+      if(this.preferences.vim) {
+        this.editors.sass.setKeyboardHandler("ace/keyboard/vim");
+        this.editors.css.setKeyboardHandler("ace/keyboard/vim");
+        this.editors.html.setKeyboardHandler("ace/keyboard/vim");
+      }
+      else {
+        this.editors.sass.setKeyboardHandler(null);
+        this.editors.css.setKeyboardHandler(null);
+        this.editors.html.setKeyboardHandler(null);
+      }
+
+      this.editors.sass.setOption("enableEmmet", this.preferences.emmet);
+      this.editors.css.setOption("enableEmmet", this.preferences.emmet);
+      this.editors.html.setOption("enableEmmet", this.preferences.emmet);
+
+      this.setStorage();
+    },
+
+
     reset: function() {
       $('#save-gist').text('Save Gist').data('action', 'create');
       $('#share_actions').addClass('hide');
