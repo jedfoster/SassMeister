@@ -195,7 +195,7 @@ var SassMeister;
     initEditor: function(value, name, syntax) {
       var input = ace.edit(name);
 
-      // input.setTheme('tomorrow');
+      input.setTheme(this.preferences.theme);
       input.getSession().setMode('ace/mode/' + syntax.toLowerCase());
 
       input.getSession().setTabSize(2);
@@ -566,9 +566,11 @@ var SassMeister;
 
       if(Modernizr.localstorage) {
         this.layout = $.extend(true, this.layout, JSON.parse(localStorage.getItem('layout')) );
+        this.preferences = $.extend(true, this.preferences, JSON.parse(localStorage.getItem('preferences')) );
       }
       else {
         this.layout = $.extend(true, this.layout, {} );
+        this.preferences = $.extend(true, this.preferences, {} );
       }
 
       switch(this.inputs.sass.syntax.toLowerCase()) {
