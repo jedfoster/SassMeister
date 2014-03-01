@@ -21,12 +21,20 @@ var SassMeister;
       outputs: {
         css: '',
         html: ''
+      },
+
+      preferences: {
+        theme: 'tomorrow',
+        emmet: false,
+        vim: false
       }
     },
 
     inputs: null,
 
     outputs: null,
+
+    preferences: null,
 
     editors: {
       sass: null,
@@ -67,6 +75,7 @@ var SassMeister;
 
       this.inputs = this._default.inputs;
       this.outputs = this._default.outputs;
+      this.preferences = this._default.preferences;
 
 
       // Process:
@@ -488,6 +497,16 @@ var SassMeister;
     },
 
 
+    setTheme: function(theme) {
+      this.preferences.theme = theme;
+
+      this.editors.sass.setTheme(theme);
+      this.editors.css.setTheme(theme);
+      this.editors.html.setTheme(theme);
+
+      this.setStorage();
+    },
+
     reset: function() {
       $('#save-gist').text('Save Gist').data('action', 'create');
       $('#share_actions').addClass('hide');
@@ -592,6 +611,8 @@ var SassMeister;
         localStorage.setItem('outputs', JSON.stringify( this.outputs ));
         localStorage.setItem('layout', JSON.stringify( this.layout ));
       }
+
+      localStorage.setItem('preferences', JSON.stringify( this.preferences ));
     }
   };
 

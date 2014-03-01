@@ -34,11 +34,7 @@ if($('body.app, body.embedded').length > 0 ) {
       gutter : 0,
       speed : 25,
       onOptionSelect: function(opt) {
-        var theme = opt.data('value');
-
-        SassMeister.editors.sass.setTheme(theme);
-        SassMeister.editors.css.setTheme(theme);
-        SassMeister.editors.html.setTheme(theme);
+        SassMeister.setTheme(opt.data('value'));
       }
     });
 
