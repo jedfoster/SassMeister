@@ -52,7 +52,6 @@ if($('body.app, body.embedded').length > 0 ) {
 
   initControls();
 
-
   $('.orientation').on('click', function(event) {
     _gaq.push(['_trackEvent', 'UI', 'Orientation']);
 
@@ -208,7 +207,7 @@ if($('body.app, body.embedded').length > 0 ) {
   $('#toggle_css').on('click', function(event) {
     event.preventDefault();
 
-    var state = $(this).data('state')
+    var state = $(this).data('state');
 
     toggleCSSPanel(state);
 
