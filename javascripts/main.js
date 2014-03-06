@@ -283,4 +283,8 @@ if($('body.oops-404').length > 0 ) {
 
   $('button').on('click', gotogist);
 }
+
+if($('body.embedded').length > 0 ) {
+  SassMeister.editors.sass.blur();
+}
 })(jQuery);
