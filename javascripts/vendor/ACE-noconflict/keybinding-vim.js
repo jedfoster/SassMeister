@@ -761,17 +761,6 @@ ace.define('ace/keyboard/vim/maps/util', ['require', 'exports', 'module' , 'ace/
 var registers = require("../registers");
 
 var dom = require("../../../lib/dom");
-dom.importCssString('.insert-mode .ace_cursor{\
-    border-left: 2px solid #333333;\
-}\
-.ace_dark.insert-mode .ace_cursor{\
-    border-left: 2px solid #eeeeee;\
-}\
-.normal-mode .ace_cursor{\
-    border: 0!important;\
-    background-color: red;\
-    opacity: 0.5;\
-}', 'vimMode');
 
 module.exports = {
     onVisualMode: false,

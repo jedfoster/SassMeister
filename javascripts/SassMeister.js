@@ -21,12 +21,20 @@ var SassMeister;
       outputs: {
         css: '',
         html: ''
+      },
+
+      preferences: {
+        theme: 'tomorrow',
+        emmet: false,
+        vim: false
       }
     },
 
     inputs: null,
 
     outputs: null,
+
+    preferences: null,
 
     editors: {
       sass: null,
@@ -67,6 +75,7 @@ var SassMeister;
 
       this.inputs = this._default.inputs;
       this.outputs = this._default.outputs;
+      this.preferences = this._default.preferences;
 
 
       // Process:
@@ -186,7 +195,17 @@ var SassMeister;
     initEditor: function(value, name, syntax) {
       var input = ace.edit(name);
 
-      // input.setTheme('tomorrow');
+      input.setTheme(this.preferences.theme);
+
+      if(this.preferences.vim) {
+        input.setKeyboardHandler("ace/keyboard/vim");
+      }
+      else {
+        input.setKeyboardHandler(null);
+      }
+
+      input.setOption("enableEmmet", this.preferences.emmet);
+
       input.getSession().setMode('ace/mode/' + syntax.toLowerCase());
 
       input.getSession().setTabSize(2);
@@ -488,6 +507,39 @@ var SassMeister;
     },
 
 
+    setTheme: function(theme) {
+      this.preferences.theme = theme;
+
+      this.editors.sass.setTheme(theme);
+      this.editors.css.setTheme(theme);
+      this.editors.html.setTheme(theme);
+
+      this.setStorage();
+    },
+
+
+    setEditorPreferences: function(key, value) {
+      this.preferences[key] = value;
+
+      if(this.preferences.vim) {
+        this.editors.sass.setKeyboardHandler("ace/keyboard/vim");
+        this.editors.css.setKeyboardHandler("ace/keyboard/vim");
+        this.editors.html.setKeyboardHandler("ace/keyboard/vim");
+      }
+      else {
+        this.editors.sass.setKeyboardHandler(null);
+        this.editors.css.setKeyboardHandler(null);
+        this.editors.html.setKeyboardHandler(null);
+      }
+
+      this.editors.sass.setOption("enableEmmet", this.preferences.emmet);
+      this.editors.css.setOption("enableEmmet", this.preferences.emmet);
+      this.editors.html.setOption("enableEmmet", this.preferences.emmet);
+
+      this.setStorage();
+    },
+
+
     reset: function() {
       $('#save-gist').text('Save Gist').data('action', 'create');
       $('#share_actions').addClass('hide');
@@ -547,9 +599,11 @@ var SassMeister;
 
       if(Modernizr.localstorage) {
         this.layout = $.extend(true, this.layout, JSON.parse(localStorage.getItem('layout')) );
+        this.preferences = $.extend(true, this.preferences, JSON.parse(localStorage.getItem('preferences')) );
       }
       else {
         this.layout = $.extend(true, this.layout, {} );
+        this.preferences = $.extend(true, this.preferences, {} );
       }
 
       switch(this.inputs.sass.syntax.toLowerCase()) {
@@ -592,6 +646,8 @@ var SassMeister;
         localStorage.setItem('outputs', JSON.stringify( this.outputs ));
         localStorage.setItem('layout', JSON.stringify( this.layout ));
       }
+
+      localStorage.setItem('preferences', JSON.stringify( this.preferences ));
     }
   };
 

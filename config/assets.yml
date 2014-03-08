@@ -20,21 +20,24 @@ javascripts:
     - javascripts/vendor/ACE-noconflict/mode-haml.js
     - javascripts/vendor/ACE-noconflict/mode-markdown.js
     - javascripts/vendor/ACE-noconflict/mode-textile.js
+    - javascripts/vendor/ACE-noconflict/ext-emmet.js
+    - javascripts/vendor/ACE-noconflict/keybinding-vim.js
     # Themes - light
-    # - javascripts/vendor/ACE-noconflict/theme-dawn.js
-    # - javascripts/vendor/ACE-noconflict/theme-github.js
-    # - javascripts/vendor/ACE-noconflict/theme-kuroir.js
-    # - javascripts/vendor/ACE-noconflict/theme-solarized_light.js
+    - javascripts/vendor/ACE-noconflict/theme-dawn.js
+    - javascripts/vendor/ACE-noconflict/theme-github.js
+    - javascripts/vendor/ACE-noconflict/theme-kuroir.js
+    - javascripts/vendor/ACE-noconflict/theme-solarized_light.js
     - javascripts/vendor/ACE-noconflict/theme-tomorrow.js
     # Themes - dark
-    # - javascripts/vendor/ACE-noconflict/theme-merbivore_soft.js
-    # - javascripts/vendor/ACE-noconflict/theme-monokai.js
-    # - javascripts/vendor/ACE-noconflict/theme-solarized_dark.js
-    # - javascripts/vendor/ACE-noconflict/theme-tomorrow_night_eighties.js
+    - javascripts/vendor/ACE-noconflict/theme-merbivore_soft.js
+    - javascripts/vendor/ACE-noconflict/theme-monokai.js
+    - javascripts/vendor/ACE-noconflict/theme-solarized_dark.js
+    - javascripts/vendor/ACE-noconflict/theme-tomorrow_night_eighties.js
 
     - javascripts/vendor/bindWithDelay.js
     - javascripts/vendor/messenger.min.js
     - javascripts/vendor/casement.js
+    - javascripts/vendor/fancy_dropdown.js
     - javascripts/viewport.js
 
   application:

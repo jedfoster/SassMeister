@@ -52,6 +52,10 @@ $control-column-open-width: em(480);
     font-size: em($small_point_size);
   }
 
+  label {
+    font-weight: 300;
+  }
+
   &.open {
     width: 100%;
     max-width: $control-column-open-width;
@@ -89,6 +93,11 @@ $control-column-open-width: em(480);
       &:last-child {
         border: 0;
       }
+    }
+
+    > fieldset > fieldset {
+      padding: 0;
+      margin-bottom: 1.5em;
     }
 
     &.promo {
