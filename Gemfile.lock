@@ -53,7 +53,7 @@ GEM
       multipart-post (>= 1.2, < 3)
     faraday-http-cache (0.4.0)
       faraday (~> 0.8)
-    ffi (1.9.3)
+    ffi (1.9.0)
     filey-diff (1.4.3)
     i18n (0.6.9)
     jammit (0.6.6)
@@ -127,7 +127,7 @@ GEM
     thread_safe (0.2.0)
       atomic (>= 1.1.7, < 2)
     tilt (1.4.1)
-    tzinfo (0.3.38)
+    tzinfo (0.3.39)
     unicorn (4.8.2)
       kgio (~> 2.6)
       rack
@@ -143,6 +143,7 @@ DEPENDENCIES
   closure-compiler
   compass (= 1.0.0.alpha.18)
   execjs
+  ffi (= 1.9.0)
   jammit
   newrelic_rpm
   pry-remote
