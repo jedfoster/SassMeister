@@ -373,7 +373,9 @@ var SassMeister;
 
             $('#save-gist').data('action', 'edit').html('<span>Update Gist</span>');
 
-            $('#save-gist').parent('li').after('<li><a id="fork-gist" class="fork-gist" data-action="create"><span>Fork Gist</span></a></li>');
+            if($('#fork-gist').length < 1) {
+              $('#save-gist').parent('li').after('<li><a id="fork-gist" class="fork-gist" data-action="create"><span>Fork Gist</span></a></li>');
+            }
 
             if($('#gist-link').length < 1) {
               $('#cloud_actions li:first-child').after('<li><a href="https://gist.github.com/' + data.id + '" target="_blank" class="jump-icon" id="gist-link"><span>View on GitHub</span></a></li>');
