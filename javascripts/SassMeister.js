@@ -150,7 +150,7 @@ var SassMeister;
       });
 
       if(SassMeister.inputs.gist_id) {
-        updateEmbedCode();
+        updateShareCode();
       }
 
       return this;
@@ -373,13 +373,15 @@ var SassMeister;
 
             $('#save-gist').data('action', 'edit').html('<span>Update Gist</span>');
 
-            $('#save-gist').parent('li').after('<li><a id="fork-gist" class="fork-gist" data-action="create"><span>Fork Gist</span></a></li>');
+            if($('#fork-gist').length < 1) {
+              $('#save-gist').parent('li').after('<li><a id="fork-gist" class="fork-gist" data-action="create"><span>Fork Gist</span></a></li>');
+            }
 
             if($('#gist-link').length < 1) {
               $('#cloud_actions li:first-child').after('<li><a href="https://gist.github.com/' + data.id + '" target="_blank" class="jump-icon" id="gist-link"><span>View on GitHub</span></a></li>');
             }
 
-            updateEmbedCode();
+            updateShareCode();
     
             $('#share_actions').removeClass('hide');
           })
@@ -433,7 +435,7 @@ var SassMeister;
             setUrl('/gist/' + data.id);
             SassMeister.inputs.gist_id = data.id;
 
-            updateEmbedCode();
+            updateShareCode();
 
             $('#save-gist').data('action', 'edit').attr('class', 'edit-gist').html('<span>Update Gist</span>');
           })
@@ -663,10 +665,19 @@ var SassMeister;
     }
   };
 
-  var updateEmbedCode = function() {
+  var updateShareCode = function() {
     var embedCode = '<p class="sassmeister" data-gist-id="' + SassMeister.inputs.gist_id + '" data-height="480"><a href="http://' + document.domain + '/gist/' + SassMeister.inputs.gist_id + '">Play with this gist on SassMeister.</a></p><script src="http://static.' + document.domain + '/js/embed.js" async></script>';
     
     $('#share_actions textarea').val(embedCode);
+
+    // Update Twitter, if it's already been init'd
+    if($('.twitter-share-button').attr('src')) {
+      var parent = $('.twitter-share-button').parent();
+      $('.twitter-share-button').remove();
+
+      $(parent).prepend('<a href="https://twitter.com/share" class="twitter-share-button" data-text="Check out this sassy gist." data-url="http://' + document.domain + '/gist/' + SassMeister.inputs.gist_id + '" data-via="sassmeisterapp">Tweet</a>');
+      twttr.widgets.load();
+    }
   };
 
   var modal = function(content) {

@@ -1,12 +1,16 @@
 (function($) {
   window.setViewportSize = function() {
-    var size;
+    var dynamicStyle, size;
     window.viewportSize = 'desktop';
     if (window.getComputedStyle) { // IE 8 doesn't support this method. Because it sucks.
-      // Chrome 34 (dev) has a broken getComputedStyle, so size will actually be null
-      if (size = window.getComputedStyle(document.body, ':after').content.trim()) {
-        return window.viewportSize = size.match(/\w+/)[0]; // Firefox includes extra quotes
-      }
+      // Chrome 33+ returns null for pseudo element contents when the pseudo element is hidden.
+      dynamicStyle = $('<style>body:after{display: block;}</style>');
+      dynamicStyle.appendTo('head');
+
+      size = window.getComputedStyle(document.body, ':after').content;
+      dynamicStyle.remove();
+
+      return window.viewportSize = size.match(/\w+/)[0]; // Firefox includes extra quotes
     }
   };
 

@@ -135,11 +135,15 @@
 #share_actions ul {
   width: em(380);
 
+  label {
+    display: inline-block;
+    margin-bottom: 0.5em;
+  }
+
   textarea {
     width: 100%;
     height: 5em;
     font-family: $monospace_font_family;
-
     border: 1px solid $delta_gray;
     padding: 0 0.25em;
     outline: none;
@@ -150,11 +154,7 @@
 
 .share-widget {
   display: inline-block;
-  margin-right: 1em;
-
-  * {
-    box-sizing: content-box;
-  }
+  float: right;
 }
 
 #twitter-widget-0 {

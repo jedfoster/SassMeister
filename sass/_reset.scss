@@ -19,7 +19,7 @@
 // * Let's default this puppy out
 // *-------------------------------------------------------------------------------
 
-html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, code, em, img, ins, strong, sub, sup, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, article, aside, footer, header, hgroup, menu, nav, section {
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, code, em, img, strong, sub, sup, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, article, aside, footer, header, menu, nav, section {
   margin: 0;
   padding: 0;
   border: 0;
@@ -38,21 +38,12 @@ html, body {
 body {
   font-size: 100%;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-article, aside, footer, header, hgroup, nav, section {
+article, aside, footer, header, nav, section {
   display: block;
 }
-
-// img, object, embed {
-//  max-width: 100%;
-// }
-//
-// img {
-//  border-style: none;
-//  border-color: transparent;
-//  border-width: 0;
-// }
 
 ol, ul {
   list-style: none;
@@ -75,46 +66,9 @@ pre {
   word-wrap: break-word;
 }
 
-// input {
-//  &[type="radio"] {
-//    vertical-align: text-bottom;
-//  }
-// }
-
-// input, textarea, select, button {
-//  font-family: inherit;
-//  font-weight: inherit;
-//  background-color: #fff;
-//  border: 0;
-//  padding: 0;
-//  margin: 0;
-// }
-
-// table {
-//  font-size: inherit;
-//  font: 100%;
-// }
-
 pre, code {
   font-family: $monospace-font-family;
 }
-
-// input {
-//  &[type=button], &[type=submit] {
-//    cursor: pointer;
-//  }
-// }
-
-// button {
-//  cursor: pointer;
-//  margin: 0;
-//  width: auto;
-//  overflow: visible;
-// }
-
-// a.button {
-//  display: inline-block;
-// }
 
 a {
   -webkit-tap-highlight-color: $webkit_tap_hightlight;

@@ -52,7 +52,6 @@ if($('body.app, body.embedded').length > 0 ) {
 
   initControls();
 
-
   $('.orientation').on('click', function(event) {
     _gaq.push(['_trackEvent', 'UI', 'Orientation']);
 
@@ -208,7 +207,7 @@ if($('body.app, body.embedded').length > 0 ) {
   $('#toggle_css').on('click', function(event) {
     event.preventDefault();
 
-    var state = $(this).data('state')
+    var state = $(this).data('state');
 
     toggleCSSPanel(state);
 
@@ -283,5 +282,9 @@ if($('body.oops-404').length > 0 ) {
   });
 
   $('button').on('click', gotogist);
+}
+
+if($('body.embedded').length > 0 ) {
+  SassMeister.editors.sass.blur();
 }
 })(jQuery);
