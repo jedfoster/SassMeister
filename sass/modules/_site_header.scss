@@ -161,14 +161,6 @@
   width: 80px !important;
 }
 
-//#toggle_html {
-//  // @extend %icon-preview-hide;
-//
-//  &.show {
-//    // @extend %icon-preview-show;
-//  }
-//}
-
 #toggle_css, #toggle_html {
   @media #{$tablet} {
     display: none;
