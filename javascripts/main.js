@@ -1,9 +1,9 @@
 (function($) {
+var SassMeister = window.SassMeister.init();
+
 if($('body.app, body.embedded').length > 0 ) {
 
   $('#rendered-html').attr('src', window.sandbox);
-
-  var SassMeister = window.SassMeister.init();
 
   $('#control-column-bg').on('click', function(event) {
     $('#control-column, #control-column-bg').removeClass('open');
@@ -262,6 +262,10 @@ if($('body.app, body.embedded').length > 0 ) {
       }
     }
   };
+
+  if($('body.app').length > 0 ) {
+    SassMeister.editors.sass.focus();
+  }
 }
 
 if($('body.oops-404').length > 0 ) {
@@ -282,9 +286,5 @@ if($('body.oops-404').length > 0 ) {
   });
 
   $('button').on('click', gotogist);
-}
-
-if($('body.embedded').length > 0 ) {
-  SassMeister.editors.sass.blur();
 }
 })(jQuery);

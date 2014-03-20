@@ -128,7 +128,7 @@ var SassMeister;
 
 
       // Focus on the Sass input
-      this.editors.sass.focus();
+      //this.editors.sass.focus();
 
 
       // HTML (rendered)
