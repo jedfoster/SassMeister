@@ -521,24 +521,38 @@ var SassMeister;
 
 
     setEditorPreferences: function(key, value) {
-      this.preferences[key] = value;
+      var $this = this;
+      $this.preferences[key] = value;
 
-      if(this.preferences.vim) {
-        this.editors.sass.setKeyboardHandler("ace/keyboard/vim");
-        this.editors.css.setKeyboardHandler("ace/keyboard/vim");
-        this.editors.html.setKeyboardHandler("ace/keyboard/vim");
+      if($this.preferences.vim) {
+        $this.editors.sass.setKeyboardHandler('ace/keyboard/vim');
+        $this.editors.css.setKeyboardHandler('ace/keyboard/vim');
+        $this.editors.html.setKeyboardHandler('ace/keyboard/vim');
       }
       else {
-        this.editors.sass.setKeyboardHandler(null);
-        this.editors.css.setKeyboardHandler(null);
-        this.editors.html.setKeyboardHandler(null);
+        $this.editors.sass.setKeyboardHandler(null);
+        $this.editors.css.setKeyboardHandler(null);
+        $this.editors.html.setKeyboardHandler(null);
       }
 
-      this.editors.sass.setOption("enableEmmet", this.preferences.emmet);
-      this.editors.css.setOption("enableEmmet", this.preferences.emmet);
-      this.editors.html.setOption("enableEmmet", this.preferences.emmet);
+      if($this.preferences.emmet && !window.emmet) {
+        $.ajax({
+          url: 'http://nightwing.github.io/emmet-core/emmet.js',
+          dataType: 'script',
+          cache: true
+        }).done(function() {
+          $this.editors.sass.setOption('enableEmmet', true);
+          $this.editors.css.setOption('enableEmmet', true);
+          $this.editors.html.setOption('enableEmmet', true);
+        });
+      }
+      else {
+        $this.editors.sass.setOption('enableEmmet', $this.preferences.emmet);
+        $this.editors.css.setOption('enableEmmet', $this.preferences.emmet);
+        $this.editors.html.setOption('enableEmmet', $this.preferences.emmet);
+      }
 
-      this.setStorage();
+      $this.setStorage();
     },
 
 
