@@ -129,7 +129,10 @@ AceEmmetEditor.prototype = {
     },
     getProfileName: function() {
         switch(this.getSyntax()) {
-          case "css": return "css";
+          case "css": 
+          case "scss":
+          case "sass":
+            return "css";
           case "xml":
           case "xsl":
             return "xml";
