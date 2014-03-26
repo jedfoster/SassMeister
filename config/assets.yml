@@ -48,6 +48,9 @@ javascripts:
   modernizr:
     - javascripts/modernizr.js
 
+  jade:
+    - javascripts/vendor/jade-1.3.0.js
+
 # stylesheets:
 #   common:
 #     - stylesheets/reset.css
