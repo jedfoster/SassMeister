@@ -292,6 +292,32 @@ var SassMeister;
             SassMeister.outputs.html = SassMeister.inputs.html.input;
           }
 
+          else if(SassMeister.inputs.html.syntax == 'Jade') {
+            var jadeCompile = function(input) {
+              data = window.jade.render(SassMeister.inputs.html.input, {pretty: true});
+
+              updateRender({
+                css: SassMeister.outputs.css,
+                html: data
+              });
+
+              return data;
+            };
+
+            if(!window.jade) {
+              $.ajax({
+                url: '/js/jade.js',
+                dataType: 'script',
+                cache: true
+              }).done(function() {
+                SassMeister.outputs.html = jadeCompile(SassMeister.inputs.html.input);
+              });
+            }
+            else {
+              SassMeister.outputs.html = jadeCompile(SassMeister.inputs.html.input);
+            }
+          }
+
           else {
             if(SassMeister.ajaxCalls.postCompileHtml) {
               SassMeister.ajaxCalls.postCompileHtml.abort();
@@ -382,7 +408,7 @@ var SassMeister;
             }
 
             updateShareCode();
-    
+
             $('#share_actions').removeClass('hide');
           })
           .always(function() {
@@ -681,7 +707,7 @@ var SassMeister;
 
   var updateShareCode = function() {
     var embedCode = '<p class="sassmeister" data-gist-id="' + SassMeister.inputs.gist_id + '" data-height="480"><a href="http://' + document.domain + '/gist/' + SassMeister.inputs.gist_id + '">Play with this gist on SassMeister.</a></p><script src="http://static.' + document.domain + '/js/embed.js" async></script>';
-    
+
     $('#share_actions textarea').val(embedCode);
 
     // Update Twitter, if it's already been init'd
