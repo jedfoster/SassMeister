@@ -195,6 +195,6 @@ $control-column-open-width: em(480);
   }
 
   .html-toggle-group {
-    @include toggle-group(100%, (html-html, html-haml, html-mkdn, html-txtl));
+    @include toggle-group(100%, (html-html, html-haml, html-mkdn, html-txtl, html-jade));
   }
 
