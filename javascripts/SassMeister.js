@@ -674,6 +674,9 @@ var SassMeister;
         case 'textile':
           this.inputs.html.syntax = 'Textile';
           break;
+        case 'jade':
+          this.inputs.html.syntax = 'Jade';
+          break;
         case 'html':
         default:
           this.inputs.html.syntax = 'HTML';
