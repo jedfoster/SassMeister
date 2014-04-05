@@ -25,24 +25,24 @@ Object.size = function(obj) {
 
 
   var messageCatalog = {
-    'libsass': {
-      visit_interval: 20,
-      time_interval: 86400 * 1,
-      impression_limit: 5,
-      content: '<h1>LibSass is here!</h1><p>Click the <span class="control-icon" style="font-size: 0.66em;"><span class="alt">gear</span></span> icon above, and select "LibSass" as the compiler.</p>',
-      messengerOptions: {
-        extraClasses: 'messenger-on-top',
-        postOptions: {hideAfter: 10}
-      },
-      conditions: function(stats) {
-        // If this message has been seen 5 times already, r
-        if(stats.messages[name] && stats.messages[name].impression_count == 5) {
-          return false;
-        }
+    //'libsass': {
+    //  visit_interval: 20,
+    //  time_interval: 86400 * 1,
+    //  impression_limit: 5,
+    //  content: '<h1>LibSass is here!</h1><p>Click the <span class="control-icon" style="font-size: 0.66em;"><span class="alt">gear</span></span> icon above, and select "LibSass" as the compiler.</p>',
+    //  messengerOptions: {
+    //    extraClasses: 'messenger-on-top',
+    //    postOptions: {hideAfter: 10}
+    //  },
+    //  conditions: function(stats) {
+    //    // If this message has been seen 5 times already, r
+    //    if(stats.messages[name] && stats.messages[name].impression_count == 5) {
+    //      return false;
+    //    }
 
-        return (!window.gist || (window.gist && window.gist.can_update_gist == true));
-      }
-    },
+    //    return (!window.gist || (window.gist && window.gist.can_update_gist == true));
+    //  }
+    //},
     'stickers': {
       visit_interval: 30,
       time_interval: 86400 * 7,
