@@ -274,7 +274,7 @@ class SassMeisterApp < Sinatra::Base
   end
 
 
-  post %r{/gist(?:/[\w]*)*/([\d]+)/edit} do
+  post %r{/gist(?:/[\w]*)*/([\d\w]+)/edit} do
     id = params[:captures].shift
 
     inputs = params[:inputs]
@@ -353,7 +353,7 @@ class SassMeisterApp < Sinatra::Base
     }.to_json.to_s if data
   end
 
-  post %r{/gist(?:/[\w]*)*/([\d]+)/fork} do
+  post %r{/gist(?:/[\w]*)*/([\d\w]+)/fork} do
     id = params[:captures].shift
 
     data = @github.fork_gist(id)
