@@ -119,7 +119,6 @@ if($('body.app, body.embedded').length > 0 ) {
     SassMeister.ajaxCalls.getExtensions = $.get(SassMeister.sass_endpoint() + 'extensions')
       .done(function( data ) {
         $('#extension_list').replaceWith(data);
-        watchExtensions();
       })
       .always(function() {
         SassMeister.ajaxCalls.getExtensions = false;
@@ -127,28 +126,26 @@ if($('body.app, body.embedded').length > 0 ) {
   };
 
 
-  var watchExtensions = function() {
-    $('[data-import]').on('click', function(event) {
-      _gaq.push(['_trackEvent', 'UI', 'SassExtensions']);
-
-      var imports = $(this).data('import'),
-          eol = ( SassMeister.inputs.sass.syntax == 'SCSS' ? ';' : '' ) + '\n';
-
-      if(String(imports) === 'true') {
-        imports = [imports];
-      }
-      else {
-        imports = imports.split(',');
-      }
-
-      $(imports).each(function() {
-        SassMeister.editors.sass.insert( '@import "' + this + '"' + eol);
-      });
-    });
-  };
-
-
   getExtensions();
+
+
+  $('#control-column').on('click', 'a[data-import]', function(event) {
+    _gaq.push(['_trackEvent', 'UI', 'SassExtensions']);
+
+    var imports = $(this).data('import'),
+        eol = ( SassMeister.inputs.sass.syntax == 'SCSS' ? ';' : '' ) + '\n';
+
+    if(String(imports) === 'true') {
+      imports = [imports];
+    }
+    else {
+      imports = imports.split(',');
+    }
+
+    $(imports).each(function() {
+      SassMeister.editors.sass.insert( '@import "' + this + '"' + eol);
+    });
+  });
 
 
   var toggleCSSPanel = function(state) {
