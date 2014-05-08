@@ -112,6 +112,13 @@ if($('body.app, body.embedded').length > 0 ) {
 
 
   var getExtensions = function() {
+    var html = $('input[value=\'' + SassMeister.sass_version + '\']').data('extensions');
+
+    if(html) {
+      $('#extension_list').replaceWith(html);
+      return;
+    }
+
     if(SassMeister.ajaxCalls.getExtensions) {
       SassMeister.ajaxCalls.getExtensions.abort();
     }
@@ -119,6 +126,7 @@ if($('body.app, body.embedded').length > 0 ) {
     SassMeister.ajaxCalls.getExtensions = $.get(SassMeister.sass_endpoint() + 'extensions')
       .done(function( data ) {
         $('#extension_list').replaceWith(data);
+        $('input[value=\'' + SassMeister.sass_version + '\']').data('extensions', data);
       })
       .always(function() {
         SassMeister.ajaxCalls.getExtensions = false;
