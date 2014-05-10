@@ -111,11 +111,22 @@ if($('body.app, body.embedded').length > 0 ) {
   });
 
 
+  var buildExtensionList = function(data) {
+    var list = $('<ol />');
+
+    $.each(data, function(name, info) {
+      list.append('<li><a data-import="' + info.import + '">' + name + '</a>&nbsp;&nbsp;(v' + info.version + ')</li>');
+    });
+
+    return list;
+  };
+
+
   var getExtensions = function() {
     var html = $('input[value=\'' + SassMeister.sass_version + '\']').data('extensions');
 
     if(html) {
-      $('#extension_list').replaceWith(html);
+      $('#extension_list ol').replaceWith(buildExtensionList(html));
       return;
     }
 
@@ -125,7 +136,7 @@ if($('body.app, body.embedded').length > 0 ) {
 
     SassMeister.ajaxCalls.getExtensions = $.get(SassMeister.sass_endpoint() + 'extensions')
       .done(function( data ) {
-        $('#extension_list').replaceWith(data);
+        $('#extension_list ol').replaceWith(buildExtensionList(data));
         $('input[value=\'' + SassMeister.sass_version + '\']').data('extensions', data);
       })
       .always(function() {
