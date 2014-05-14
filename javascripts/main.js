@@ -115,7 +115,7 @@ if($('body.app, body.embedded').length > 0 ) {
     var list = $('<ol />');
 
     $.each(data, function(name, info) {
-      list.append('<li><a data-import="' + info.import + '">' + name + '</a>&nbsp;&nbsp;(v' + info.version + ')</li>');
+      list.append('<li><a data-import="' + info.import + '">' + name + '</a>' + (info.version ? '&nbsp;&nbsp;(v' + info.version + ')' : '' ) + '</li>');
     });
 
     return list;
