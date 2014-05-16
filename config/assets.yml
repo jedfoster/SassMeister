@@ -6,7 +6,7 @@ gzip_assets: off
 
 javascripts:
   embed:
-    - public/js/embed.js
+    - javascripts/compiled/embed.js
 
   jquery:
     - javascripts/vendor/jquery-2.1.0.js

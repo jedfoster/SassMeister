@@ -38,12 +38,14 @@ task 'assets:precompile' do
   system('rm public/css/*')
   system('rm public/js/*')
 
-  source = File.read('coffee/embed.coffee')
-
   context = ExecJS.compile File.read('lib/coffee-script.js')
-  js = context.call('CoffeeScript.compile', source)
 
-  File.open('public/js/embed.js', 'w') {|f| f.write(js) }
+  Dir.glob('coffee/*.coffee').each do |file|
+    name = file.gsub('coffee/', '').gsub('.coffee', '')
+    js = context.call('CoffeeScript.compile', File.read(file))
+
+    File.open("javascripts/compiled/#{name}.js", 'w') {|f| f.write(js) }
+  end
 
   system('bundle exec jammit --force')
   system('bundle exec compass compile --force -e production')

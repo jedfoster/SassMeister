@@ -10,3 +10,4 @@ tmp
 log
 config/*.txt
 s3_website.yml
+javascripts/compiled/*
