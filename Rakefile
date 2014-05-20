@@ -34,6 +34,8 @@ task 'assets:precompile' do
   require 'digest/sha1'
 
   Dir.mkdir('public/js/') unless Dir.exists? 'public/js/'
+  Dir.mkdir('javascripts/compiled/') unless Dir.exists? 'javascripts/compiled/'
+
 
   system('rm public/css/*')
   system('rm public/js/*')
