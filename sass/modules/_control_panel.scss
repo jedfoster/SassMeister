@@ -188,6 +188,18 @@ $control-column-open-width: em(480);
     clear: right !important;
 
     &:after { content:"\A"; display: block;white-space:pre; }
+
+    label[for="version-lib"] sup {
+      vertical-align: super;
+      font-size: 0.5em;
+      color: #7ABE3B;
+    }
+  }
+
+  .libsass .version-toggle-group {
+    label[for="version-lib"] sup {
+      color: lighten(#7ABE3B, 50%);
+    }
   }
 
   .output-toggle-group {

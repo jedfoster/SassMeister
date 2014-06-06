@@ -23,6 +23,10 @@ if($('body.app, body.embedded').length > 0 ) {
     $('.sass-syntax-display').text(SassMeister.inputs.sass.syntax);
     $('.html-syntax-display').text(SassMeister.inputs.html.syntax);
 
+    if (SassMeister.sass_version == 'lib') {
+      $('#control-column').addClass('libsass');
+    }
+
     $('input[name="version"][value="' + SassMeister.sass_version + '"]').prop('checked', true);
 
     $('input[name="syntax"][value="' + SassMeister.inputs.sass.syntax.toLowerCase() + '"]').prop('checked', true);
