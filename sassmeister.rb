@@ -96,6 +96,10 @@ class SassMeisterApp < Sinatra::Base
     params[:original_syntax].downcase! unless params[:original_syntax].nil?
 
     headers 'Access-Control-Allow-Origin' => origin if origin
+
+    if request.request_method == "GET"
+      cache_control :public, max_age: 1800  # 30 mins.
+    end
   end
 
   before /^(?!\/(authorize))/ do
