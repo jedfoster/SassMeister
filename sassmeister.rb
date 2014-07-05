@@ -206,7 +206,6 @@ class SassMeisterApp < Sinatra::Base
     @gist = {
       :gist_id => id,
       :gist_owner => owner,
-      :can_update_gist => (owner == session[:github_id]),
       :sass_filename => filename,
       :html_filename => (html_filename || ''),
       :sass => {
