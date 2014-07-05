@@ -1,6 +1,8 @@
 require "bundler/setup"
 
 require 'rack/contrib'
+require 'dalli'
+require 'memcachier'
 require './lib/rack/static_cache'
 
 require './sassmeister'
@@ -20,11 +22,12 @@ else
 end
 
 
-if memcache_host = ENV['MEMCACHIER_SERVERS'] || 'localhost:11211'
-  use Rack::Cache,
-    verbose: true,
-    metastore:   "memcached://#{memcache_host}",
-    entitystore: "memcached://#{memcache_host}"
+if memcachier_servers = ENV['MEMCACHIER_SERVERS']
+  cache = Dalli::Client.new memcachier_servers.split(','), {
+    username: ENV['MEMCACHIER_USERNAME'],
+    password: ENV['MEMCACHIER_PASSWORD']
+  }
+  use Rack::Cache, verbose: true, metastore: cache, entitystore: cache
 end
 
 
