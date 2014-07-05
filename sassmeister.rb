@@ -50,6 +50,10 @@ class SassMeisterApp < Sinatra::Base
     end
 
     after '/logout' do
+      ['github_id', 'gravatar_id'].each do |cookie|
+        response.delete_cookie cookie
+      end
+
       redirect to('/')
     end
   end
