@@ -6,6 +6,7 @@ require 'chairman'
 require 'json'
 require 'yaml'
 require 'sassmeister'
+require 'object'
 require 'array'
 require 'assets'
 require 'dalli'
@@ -30,7 +31,7 @@ class SassMeisterEmbeddedApp < Sinatra::Base
   configure :production do
     APP_DOMAIN = 'sassmeister.com'
     SANDBOX_DOMAIN = 'sandbox.sassmeister.com'
-    Assets::HOST = 'http://static.sassmeister.com'
+    Assets::HOST = 'http://cdn.sassmeister.com'
     require 'newrelic_rpm'
 
     Chairman.config(ENV['GITHUB_ID'], ENV['GITHUB_SECRET'], ['gist'])
@@ -121,10 +122,11 @@ class SassMeisterEmbeddedApp < Sinatra::Base
       return
     end
 
+    headers 'Last-Modified' => response.updated_at.httpdate
+
     @gist = {
       :gist_id => id,
       :gist_owner => owner,
-      :can_update_gist => (owner == session[:github_id]),
       :sass_filename => filename,
       :html_filename => (html_filename || ''),
       :sass => {
