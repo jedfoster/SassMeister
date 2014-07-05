@@ -96,6 +96,9 @@ class SassMeisterApp < Sinatra::Base
 
     headers 'Access-Control-Allow-Origin' => origin if origin
 
+    response.set_cookie 'github_id', {:value => session[:github_id], :max_age => '7776000'} unless request.cookies['github_id'].present?
+    response.set_cookie 'gravatar_id', {:value => session[:gravatar_id], :max_age => '7776000'} unless request.cookies['gravatar_id'].present?
+
     if request.request_method == "GET"
       cache_control :public, max_age: 1800  # 30 mins.
 

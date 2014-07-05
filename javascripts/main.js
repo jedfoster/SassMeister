@@ -1,4 +1,8 @@
 (function($) {
+
+window.github_id = $.cookie('github_id');
+window.gravatar_id = $.cookie('gravatar_id');
+
 var SassMeister = window.SassMeister.init();
 
 if($('body.app, body.embedded').length > 0 ) {

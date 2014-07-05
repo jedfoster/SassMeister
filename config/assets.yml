@@ -11,7 +11,8 @@ javascripts:
   jquery:
     - javascripts/vendor/jquery-2.1.0.js
 
-  utilities:    
+  utilities:
+    - javascripts/vendor/jquery.cookie.js
     - javascripts/vendor/ACE-noconflict/ace.js
     - javascripts/vendor/ACE-noconflict/mode-css.js
     - javascripts/vendor/ACE-noconflict/mode-sass.js
