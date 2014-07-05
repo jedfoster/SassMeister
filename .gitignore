@@ -9,5 +9,6 @@ github.yml
 tmp
 log
 config/*.txt
+config/asset-manifest.yml
 s3_website.yml
 javascripts/compiled/*

@@ -53,19 +53,27 @@ task 'assets:precompile' do
   system('bundle exec compass compile --force -e production')
 
   assets = YAML.load_file("config/assets.yml")
+  manifest = {}
 
   assets['javascripts'].each do |js|
     file = File.read("public/js/#{js[0]}.js")
     sha1 = Digest::SHA1.hexdigest(file).slice(0..15)
  
-    File.open("config/#{js[0]}.txt", 'w') {|f| f.write(sha1) }
+    # File.open("config/#{js[0]}.txt", 'w') {|f| f.write(sha1) }
+
+    manifest[js[0]] = sha1
+
     File.open("public/js/#{js[0]}-#{sha1}.js", 'w') {|f| f.write(file) }
   end
 
   file = File.read('public/css/style.css')
   sha1 = Digest::SHA1.hexdigest(file).slice(0..15)
 
-  File.open('config/style.txt', 'w') {|f| f.write(sha1) }
+  # File.open('config/style.txt', 'w') {|f| f.write(sha1) }
+
+  manifest['style'] = sha1
+
   File.open("public/css/style-#{sha1}.css", 'w') {|f| f.write(file) }
 
+  File.open("config/asset-manifest.yml", 'w') {|f| f.write(manifest.to_yaml) }
 end
