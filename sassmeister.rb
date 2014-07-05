@@ -6,10 +6,9 @@ require 'chairman'
 require 'json'
 require 'yaml'
 require 'sassmeister'
+require 'object'
 require 'array'
 require 'assets'
-
-# require 'pry-remote'
 
 class SassMeisterApp < Sinatra::Base
   register Sinatra::Partial
