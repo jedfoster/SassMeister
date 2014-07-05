@@ -23,17 +23,7 @@
     <div>
       <span class="cloud-icon"><span class="alt">Save</span></span>
       <ul id="cloud_actions">
-        <% if session[:github_id] %>
-          <% if @gist && @gist[:can_update_gist] %>
-            <li><a id="save-gist" data-action="edit" class="edit-gist"><span>Update Gist</span></a></li>
-          <% else %>
-            <li><a id="save-gist" data-action="create" class="create-gist"><span>Save Gist</span></a></li>
-          <% end %>
-        <% end %>
-
-        <%= '<li><a id="fork-gist" data-action="create" class="fork-gist"><span>Fork Gist</span></a></li>' if session[:github_id] && @gist %>
-        <%= '<li><a href="/authorize" class="github"><span>Log in with your GitHub account to save gists</span></a></li>' unless session[:github_id] %>
-        <%= '<li><a href="https://gist.github.com/' + @gist[:gist_id] + '" class="github" id="gist-link"><span>View on GitHub</span></a></li>' if @gist %>
+        <li id="menu-placeholder"></li>
         <li><a class="reset-icon" id="reset"><span>Reset</span></a></li>
       </ul>
     </div>
@@ -44,19 +34,7 @@
 
     <a href="javascript:(function(e,a,g,h,f,c,b,d){if(!(f=e.jQuery)||g>f.fn.jquery||h(f)){c=a.createElement('script');c.type='text/javascript';c.src='http://ajax.googleapis.com/ajax/libs/jquery/'+g+'/jquery.min.js';c.onload=c.onreadystatechange=function(){if(!b&&(!(d=this.readyState)||d=='loaded'||d=='complete')){h((f=e.jQuery).noConflict(1),b=1);f(c).remove()}};a.documentElement.childNodes[0].appendChild(c)}})(window,document,'1.4.2',function($,L){var gist_re=/^https?\:\/\/gist\.github\.com\/(\d*)/i,rel_re=/^\/?(\d+)$/,on_gist=gist_re.test(location.href);if(on_gist){location.href='http://sassmeister.com/gist'+location.pathname;}else{$('a').each(function(){var b=$(this).attr('href')||'',a=b.match(gist_re);if(on_gist&&!(a&&a[1])){a=b.match(rel_re)}if(a&&a[1]){$(this).after(' <a href=&quot;http://sassmeister.com/gist/'+a[1]+'&quot;>[sassmeister.com/gist]</a>')}});}});" class="bookmark-icon" title="I am a bookmarklet, drag me into your bookmark bar and click me when you're on a Gist page with Sass. It will be awesome!"><span class="alt">SassMeister Bookmarklet</span></a>
 
-    <% if session[:github_id] %>
-      <div><span><img src="http://www.gravatar.com/avatar/<%= session[:gravatar_id] %>?s=80" alt="" height="40"></span>
-        <ul id="account_actions">
-          <li class="checkmark-icon">Logged in as <%= session[:github_id] %></li>
-          <li class="off-icon"><a href="/logout"><span>Logout</span></a></li>
-        </ul>
-      </div>
-
-    <% else %>
-      <a href="/authorize" class="github" title="Login with Github" id="github-auth"><span class="alt">Login with Github</a>
-
-    <% end %>
-
+    <a href="/authorize" class="github" title="Login with Github" id="github-auth"><span class="alt">Login with Github</a>
   </nav>
 <% end %>
 </header>

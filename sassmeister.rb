@@ -6,10 +6,9 @@ require 'chairman'
 require 'json'
 require 'yaml'
 require 'sassmeister'
+require 'object'
 require 'array'
 require 'assets'
-
-# require 'pry-remote'
 
 class SassMeisterApp < Sinatra::Base
   register Sinatra::Partial
@@ -51,6 +50,10 @@ class SassMeisterApp < Sinatra::Base
     end
 
     after '/logout' do
+      ['github_id', 'gravatar_id'].each do |cookie|
+        response.delete_cookie cookie
+      end
+
       redirect to('/')
     end
   end
@@ -96,6 +99,16 @@ class SassMeisterApp < Sinatra::Base
     params[:original_syntax].downcase! unless params[:original_syntax].nil?
 
     headers 'Access-Control-Allow-Origin' => origin if origin
+
+    ['github_id', 'gravatar_id'].each do |cookie|
+      response.set_cookie cookie, {:value => session[cookie.to_sym], :max_age => '7776000'} unless request.cookies[cookie].present?
+    end
+
+    if request.request_method == "GET"
+      cache_control :public, max_age: 1800  # 30 mins.
+
+      headers 'Last-Modified' => app_last_modified.httpdate unless request.path.include? 'gist'
+    end
   end
 
   before /^(?!\/(authorize))/ do
@@ -188,10 +201,11 @@ class SassMeisterApp < Sinatra::Base
       return
     end
 
+    headers 'Last-Modified' => response.updated_at.httpdate
+
     @gist = {
       :gist_id => id,
       :gist_owner => owner,
-      :can_update_gist => (owner == session[:github_id]),
       :sass_filename => filename,
       :html_filename => (html_filename || ''),
       :sass => {

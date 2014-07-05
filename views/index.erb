@@ -31,7 +31,5 @@
   var sandbox = 'http://<%= SANDBOX_DOMAIN %>';
   var gist = <%= @gist.to_json || 'false' %>;
   var gist_output =  <%= @gist_output.to_json || 'false' %>;
-  <%= 'var resetApp = true;' if @force_invalidate %>
-  var github_id = <%= session[:github_id] ? "'#{session[:github_id]}'" : 'false' %>;
-  var gravatar_id = <%= session[:gravatar_id] ? "'#{session[:gravatar_id]}'" : 'false' %>;
+  <%#= 'var resetApp = true;' if @force_invalidate %>
 </script>

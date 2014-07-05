@@ -1,7 +1,48 @@
 (function($) {
-var SassMeister = window.SassMeister.init();
-
 if($('body.app, body.embedded').length > 0 ) {
+
+  var github_id = $.cookie('github_id'),
+      gravatar_id = $.cookie('gravatar_id');
+
+  if(github_id && gravatar_id) {
+    $('#github-auth').replaceWith('<div><span><img src="http://www.gravatar.com/avatar/' + gravatar_id + '?s=80" alt="" height="40"></span>\
+      <ul id="account_actions">\
+        <li class="checkmark-icon">Logged in as ' + github_id + '</li>\
+        <li class="off-icon"><a href="/logout"><span>Logout</span></a></li>\
+      </ul>\
+    </div>');
+  }
+
+
+  var buildCloudMenu = function() {
+    var menu = '';
+
+    if(!! github_id) {
+      if(!! (window.gist && (window.gist.owner == github_id))) {
+        menu += '<li><a id="save-gist" data-action="edit" class="edit-gist"><span>Update Gist</span></a></li>'
+      }
+      else {
+        menu += '<li><a id="save-gist" data-action="create" class="create-gist"><span>Save Gist</span></a></li>'
+      }
+    }
+    if(!! (github_id && window.gist)) {
+      menu += '<li><a id="fork-gist" data-action="create" class="fork-gist"><span>Fork Gist</span></a></li>'
+    }
+    if(! github_id) {
+      menu += '<li><a href="/authorize" class="github"><span>Log in with your GitHub account to save gists</span></a></li>'
+    }
+    if(window.gist) {
+      menu += '<li><a href="https://gist.github.com/' + window.gist.gist_id + '" class="github" id="gist-link"><span>View on GitHub</span></a></li>'
+    }
+
+    $('#menu-placeholder').replaceWith(menu);
+  };
+
+  buildCloudMenu();
+
+
+  var SassMeister = window.SassMeister.init();
+
 
   $('#rendered-html').attr('src', window.sandbox);
 

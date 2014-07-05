@@ -15,10 +15,8 @@ if ENV['RACK_ENV'] != 'production'
     run Rack::File.new("javascripts")
   end
 else
-
-
-# Set Cache-Control and ETag headers
-use Rack::StaticCache, :urls => ['/js', '/css', '/fonts', '/favicon.ico'], :root => "public", :duration => 90
+  # Set Cache-Control and ETag headers
+  use Rack::StaticCache, :urls => ['/js', '/css', '/fonts', '/favicon.ico'], :root => "public", :duration => 90
 end
 
 

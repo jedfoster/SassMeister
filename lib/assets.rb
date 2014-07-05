@@ -7,8 +7,6 @@ module Assets
   def javascript_tags(bundle)
     return "<script src=\"#{HOST}/js/#{bundle}#{version(bundle)}.js\"></script>" if settings.environment == :production
 
-    assets = YAML.load_file("config/assets.yml")
-
     javascripts = assets['javascripts'][bundle].collect do |js|
       "<script src=\"#{HOST}/#{js.sub('javascripts', 'js')}\"></script>"
     end
@@ -23,10 +21,26 @@ module Assets
   end
 
   def version(bundle)
-    if build = (File.read("config/#{bundle}.txt") rescue false)
-      return "-#{build}"
-    end
+    build = manifest[bundle] || false
+
+    return "-#{build}" if build
 
     nil
   end
+
+  def app_last_modified
+    return @mtime ||= File.mtime(__FILE__) if settings.environment == :production
+
+    Time.now
+  end
+
+  private
+
+    def assets
+      @assets ||= YAML.load_file("config/assets.yml")
+    end
+
+    def manifest
+      @manifest ||= YAML.load_file('config/asset-manifest.yml')
+    end
 end
