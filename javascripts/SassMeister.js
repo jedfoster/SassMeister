@@ -709,7 +709,7 @@ var SassMeister;
   };
 
   var updateShareCode = function() {
-    var embedCode = '<p class="sassmeister" data-gist-id="' + SassMeister.inputs.gist_id + '" data-height="480"><a href="http://' + document.domain + '/gist/' + SassMeister.inputs.gist_id + '">Play with this gist on SassMeister.</a></p><script src="http://static.' + document.domain + '/js/embed.js" async></script>';
+    var embedCode = '<p class="sassmeister" data-gist-id="' + SassMeister.inputs.gist_id + '" data-height="480"><a href="http://' + document.domain + '/gist/' + SassMeister.inputs.gist_id + '">Play with this gist on SassMeister.</a></p><script src="http://cdn.' + document.domain + '/js/embed.js" async></script>';
 
     $('#share_actions textarea').val(embedCode);
 
