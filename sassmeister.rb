@@ -99,6 +99,8 @@ class SassMeisterApp < Sinatra::Base
 
     if request.request_method == "GET"
       cache_control :public, max_age: 1800  # 30 mins.
+
+      headers 'Last-Modified' => app_last_modified.httpdate unless request.path.include? 'gist'
     end
   end
 
@@ -191,6 +193,8 @@ class SassMeisterApp < Sinatra::Base
 
       return
     end
+
+    headers 'Last-Modified' => response.updated_at.httpdate
 
     @gist = {
       :gist_id => id,
