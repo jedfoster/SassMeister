@@ -110,7 +110,7 @@ class SassMeisterApp < Sinatra::Base
     if request.request_method == "GET"
       cache_control :public, max_age: CACHE_MAX_AGE
 
-      headers 'Last-Modified' => app_last_modified.httpdate unless request.path.include? 'gist'
+      last_modified app_last_modified.httpdate unless request.path.include? 'gist'
     end
   end
 
@@ -160,6 +160,8 @@ class SassMeisterApp < Sinatra::Base
 
       raise Octokit::NotFound unless response.message.nil?
 
+      last_modified response.updated_at.httpdate
+
       # For now, we only return the first .sass or .scss file we find.
       file = response.files["#{response.files._fields.grep(/.+\.(scss|sass)/i)[0]}"]
 
@@ -201,8 +203,6 @@ class SassMeisterApp < Sinatra::Base
 
       return
     end
-
-    headers 'Last-Modified' => response.updated_at.httpdate
 
     @gist = {
       :gist_id => id,

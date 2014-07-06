@@ -118,7 +118,7 @@ class SassMeisterEmbeddedApp < Sinatra::Base
       return
     end
 
-    headers 'Last-Modified' => response.updated_at.httpdate
+    last_modified response.updated_at.httpdate
 
     @gist = {
       :gist_id => id,
