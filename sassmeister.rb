@@ -24,6 +24,7 @@ class SassMeisterApp < Sinatra::Base
     SESSION_COOKIE_SECRET = 'local'
     yml = YAML.load_file("config/github.yml")
     Chairman.config(yml["client_id"], yml["client_secret"], ['gist'])
+    CACHE_MAX_AGE = 0
   end
 
   configure :production do
@@ -34,6 +35,7 @@ class SassMeisterApp < Sinatra::Base
     require 'newrelic_rpm'
 
     Chairman.config(ENV['GITHUB_ID'], ENV['GITHUB_SECRET'], ['gist'])
+    CACHE_MAX_AGE = 300  # 5 mins.
   end
 
   configure do
@@ -106,7 +108,7 @@ class SassMeisterApp < Sinatra::Base
     headers 'Access-Control-Allow-Origin' => origin if origin
 
     if request.request_method == "GET"
-      cache_control :public, max_age: 1800  # 30 mins.
+      cache_control :public, max_age: CACHE_MAX_AGE
 
       headers 'Last-Modified' => app_last_modified.httpdate unless request.path.include? 'gist'
     end

@@ -31,7 +31,7 @@ class SassMeisterEmbeddedApp < Sinatra::Base
     require 'newrelic_rpm'
 
     Chairman.config(ENV['GITHUB_ID'], ENV['GITHUB_SECRET'], ['gist'])
-    CACHE_MAX_AGE = 1800
+    CACHE_MAX_AGE = 1800  # 30 mins.
   end
 
   configure :development do
