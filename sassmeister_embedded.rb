@@ -9,10 +9,6 @@ require 'sassmeister'
 require 'object'
 require 'array'
 require 'assets'
-require 'dalli'
-require 'rack-cache'
-
-# require 'pry-remote'
 
 class SassMeisterEmbeddedApp < Sinatra::Base
   register Sinatra::Partial
