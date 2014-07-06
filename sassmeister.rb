@@ -18,30 +18,40 @@ class SassMeisterApp < Sinatra::Base
   helpers SassMeister
   helpers Assets
 
+  configure :development do
+    APP_DOMAIN = 'sassmeister.dev'
+    SANDBOX_DOMAIN = 'sandbox.sassmeister.dev'
+    SESSION_COOKIE_SECRET = 'local'
+    yml = YAML.load_file("config/github.yml")
+    Chairman.config(yml["client_id"], yml["client_secret"], ['gist'])
+  end
+
+  configure :production do
+    APP_DOMAIN = 'sassmeister.com'
+    SANDBOX_DOMAIN = 'sandbox.sassmeister.com'
+    SESSION_COOKIE_SECRET = ENV['COOKIE_SECRET']
+    Assets::HOST = 'http://cdn.sassmeister.com'
+    require 'newrelic_rpm'
+
+    Chairman.config(ENV['GITHUB_ID'], ENV['GITHUB_SECRET'], ['gist'])
+  end
+
   configure do
     APP_VERSION = '2.0.1'
     SESSION_DURATION = 7776000 # 90 days, in seconds
+    COOKIE_DOMAIN = ".#{APP_DOMAIN}"
   end
 
   # implement redirects
   class Chairman::Routes
-    configure :production do
+    configure do
       helpers do
-        use Rack::Session::Cookie, :key => 'sassmeister.com',
-                                   :domain => '.sassmeister.com',
+        use Rack::Session::Cookie, :key => SassMeisterApp::APP_DOMAIN,
+                                   :domain => SassMeisterApp::COOKIE_DOMAIN,
                                    :path => '/',
                                    :expire_after => SassMeisterApp::SESSION_DURATION,
                                    :secret => ENV['COOKIE_SECRET']
        end
-    end
-
-    configure :development do
-      helpers do
-        use Rack::Session::Cookie, :key => 'sassmeister.dev',
-                                   :path => '/',
-                                   :expire_after => SassMeisterApp::SESSION_DURATION, # 90 days, in seconds
-                                   :secret => 'local'
-      end
     end
 
     after '/authorize/return' do
@@ -50,9 +60,8 @@ class SassMeisterApp < Sinatra::Base
       ['github_id', 'gravatar_id'].each do |cookie|
         response.set_cookie(cookie, {
           :value => session[cookie.to_sym], 
-          :max_age => "#{SassMeisterApp::SESSION_DURATION}",
           :expires => (Time.now + SassMeisterApp::SESSION_DURATION),
-          :domain => '.sassmeister.com',
+          :domain => SassMeisterApp::COOKIE_DOMAIN,
           :path => '/'
         })
       end
@@ -62,7 +71,7 @@ class SassMeisterApp < Sinatra::Base
 
     after '/logout' do
       ['github_id', 'gravatar_id'].each do |cookie|
-        response.delete_cookie cookie, {:domain => '.sassmeister.com', :path => '/'}
+        response.delete_cookie cookie, {:domain => SassMeisterApp::COOKIE_DOMAIN, :path => '/'}
       end
 
       redirect to('/')
@@ -70,22 +79,6 @@ class SassMeisterApp < Sinatra::Base
   end
 
   set :partial_template_engine, :erb
-
-  configure :production do
-    APP_DOMAIN = 'sassmeister.com'
-    SANDBOX_DOMAIN = 'sandbox.sassmeister.com'
-    Assets::HOST = 'http://cdn.sassmeister.com'
-    require 'newrelic_rpm'
-
-    Chairman.config(ENV['GITHUB_ID'], ENV['GITHUB_SECRET'], ['gist'])
-  end
-
-  configure :development do
-    APP_DOMAIN = 'sassmeister.dev'
-    SANDBOX_DOMAIN = 'sandbox.sassmeister.dev'
-    yml = YAML.load_file("config/github.yml")
-    Chairman.config(yml["client_id"], yml["client_secret"], ['gist'])
-  end
 
   helpers do
     def origin
