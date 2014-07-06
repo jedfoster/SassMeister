@@ -19,10 +19,10 @@
   <script>document.domain = '<%= APP_DOMAIN %>';</script>
 </head>
 
-<body class="<%= @body_class || 'app' %>">
+<body class="<%= @body_class %>">
   <%= partial :"shared/_header" unless @body_class == 'embedded' %>
 
-  <%= partial :"shared/_control_panel" unless @body_class %>
+  <%= partial :"shared/_control_panel" if @body_class == 'app' %>
 
   <section class="main_body">
   <%= yield %>

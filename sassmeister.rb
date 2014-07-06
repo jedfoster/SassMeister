@@ -98,6 +98,7 @@ class SassMeisterApp < Sinatra::Base
   before do
     @github = Chairman.session(session[:github_token])
     @gist = nil
+    @body_class = 'app'
 
     params[:syntax].downcase! unless params[:syntax].nil?
     params[:original_syntax].downcase! unless params[:original_syntax].nil?
@@ -131,8 +132,6 @@ class SassMeisterApp < Sinatra::Base
 
 
   get '/' do
-    @body_class = false
-
     erb :index
   end
 
@@ -224,8 +223,6 @@ class SassMeisterApp < Sinatra::Base
       :css => (css_file || ''),
       :html => (rendered_file || '').gsub('</script>', '<\/script>')
     }
-
-    @body_class = false
 
     erb :index
   end
