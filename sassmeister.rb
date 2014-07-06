@@ -20,6 +20,7 @@ class SassMeisterApp < Sinatra::Base
 
   configure do
     APP_VERSION = '2.0.1'
+    SESSION_DURATION = 7776000 # 90 days, in seconds
   end
 
   # implement redirects
@@ -29,7 +30,7 @@ class SassMeisterApp < Sinatra::Base
         use Rack::Session::Cookie, :key => 'sassmeister.com',
                                    :domain => '.sassmeister.com',
                                    :path => '/',
-                                   :expire_after => 7776000, # 90 days, in seconds
+                                   :expire_after => SassMeisterApp::SESSION_DURATION,
                                    :secret => ENV['COOKIE_SECRET']
        end
     end
@@ -38,7 +39,7 @@ class SassMeisterApp < Sinatra::Base
       helpers do
         use Rack::Session::Cookie, :key => 'sassmeister.dev',
                                    :path => '/',
-                                   :expire_after => 7776000, # 90 days, in seconds
+                                   :expire_after => SassMeisterApp::SESSION_DURATION, # 90 days, in seconds
                                    :secret => 'local'
       end
     end
@@ -49,8 +50,8 @@ class SassMeisterApp < Sinatra::Base
       ['github_id', 'gravatar_id'].each do |cookie|
         response.set_cookie(cookie, {
           :value => session[cookie.to_sym], 
-          :max_age => "7776000",
-          :expires => (Time.now + 7776000),
+          :max_age => "#{SassMeisterApp::SESSION_DURATION}",
+          :expires => (Time.now + SassMeisterApp::SESSION_DURATION),
           :domain => '.sassmeister.com',
           :path => '/'
         })
