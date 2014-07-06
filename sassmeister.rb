@@ -46,12 +46,22 @@ class SassMeisterApp < Sinatra::Base
     after '/authorize/return' do
       session[:version] == SassMeisterApp::APP_VERSION
 
+      ['github_id', 'gravatar_id'].each do |cookie|
+        response.set_cookie(cookie, {
+          :value => session[cookie.to_sym], 
+          :max_age => "7776000",
+          :expires => (Time.now + 7776000),
+          :domain => '.sassmeister.com',
+          :path => '/'
+        })
+      end
+
       redirect to('/')
     end
 
     after '/logout' do
       ['github_id', 'gravatar_id'].each do |cookie|
-        response.delete_cookie cookie
+        response.delete_cookie cookie, {:domain => '.sassmeister.com', :path => '/'}
       end
 
       redirect to('/')
@@ -99,10 +109,6 @@ class SassMeisterApp < Sinatra::Base
     params[:original_syntax].downcase! unless params[:original_syntax].nil?
 
     headers 'Access-Control-Allow-Origin' => origin if origin
-
-    ['github_id', 'gravatar_id'].each do |cookie|
-      response.set_cookie cookie, {:value => session[cookie.to_sym], :max_age => '7776000'} unless request.cookies[cookie].present?
-    end
 
     if request.request_method == "GET"
       cache_control :public, max_age: 1800  # 30 mins.
