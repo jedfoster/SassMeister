@@ -21,7 +21,6 @@ class SassMeisterApp < Sinatra::Base
   configure :development do
     APP_DOMAIN = 'sassmeister.dev'
     SANDBOX_DOMAIN = 'sandbox.sassmeister.dev'
-    SESSION_COOKIE_SECRET = 'local'
     yml = YAML.load_file("config/github.yml")
     Chairman.config(yml["client_id"], yml["client_secret"], ['gist'])
     CACHE_MAX_AGE = 0
@@ -30,7 +29,6 @@ class SassMeisterApp < Sinatra::Base
   configure :production do
     APP_DOMAIN = 'sassmeister.com'
     SANDBOX_DOMAIN = 'sandbox.sassmeister.com'
-    SESSION_COOKIE_SECRET = ENV['COOKIE_SECRET']
     Assets::HOST = 'http://cdn.sassmeister.com'
     require 'newrelic_rpm'
 
@@ -52,7 +50,7 @@ class SassMeisterApp < Sinatra::Base
                                    :domain => SassMeisterApp::COOKIE_DOMAIN,
                                    :path => '/',
                                    :expire_after => SassMeisterApp::SESSION_DURATION,
-                                   :secret => ENV['COOKIE_SECRET']
+                                   :secret => ENV['COOKIE_SECRET'] # null if there's no COOKIE_SECRET in the environment
        end
     end
 
