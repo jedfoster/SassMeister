@@ -118,6 +118,11 @@ class SassMeisterApp < Sinatra::Base
       session[:github_id] = nil
       @force_invalidate = true
       session[:version] = APP_VERSION
+
+      # Delete the user info cookies, too
+      ['github_id', 'gravatar_id'].each do |cookie|
+        response.delete_cookie cookie, {:domain => SassMeisterApp::COOKIE_DOMAIN, :path => '/'}
+      end
     end
   end
 
