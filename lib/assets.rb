@@ -19,6 +19,10 @@ module Assets
 
     "<link rel=\"stylesheet\" href=\"#{HOST}/css/#{bundle}.css\">"
   end
+  
+  def image_tag(image)
+    "<img src=\"#{HOST}/images/#{image}\">"
+  end
 
   def version(bundle)
     build = manifest[bundle] || false
