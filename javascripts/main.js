@@ -98,12 +98,14 @@ if($('body.app, body.embedded').length > 0 ) {
   initControls();
 
   $('.orientation').on('click', function(event) {
-    _gaq.push(['_trackEvent', 'UI', 'Orientation']);
+    var orientation = $(this).data('orientation')
+
+    _gaq.push(['_trackEvent', 'UI', 'Orientation', orientation]);
 
     $('#source').casement('destroy');
     $('#casement').casement('destroy');
 
-    SassMeister.arrangePanels( $(this).data('orientation') );
+    SassMeister.arrangePanels(orientation);
   });
 
 
@@ -112,7 +114,7 @@ if($('body.app, body.embedded').length > 0 ) {
         input = $(this).data('toggle-input');
 
     if (input == 'version') {
-      _gaq.push(['_trackEvent', 'UI', 'SassVersion']);
+      _gaq.push(['_trackEvent', 'UI', 'SassVersion', selected]);
 
       SassMeister.sass_version = selected;
 
@@ -129,7 +131,7 @@ if($('body.app, body.embedded').length > 0 ) {
       SassMeister.compile.sass();
     }
     if (input == 'sass') {
-      _gaq.push(['_trackEvent', 'UI', 'SassSyntax']);
+      _gaq.push(['_trackEvent', 'UI', 'SassSyntax', selected]);
 
       SassMeister.inputs.sass.syntax = selected;
       $('.sass-syntax-display').text($(this).text());
@@ -138,14 +140,14 @@ if($('body.app, body.embedded').length > 0 ) {
       SassMeister.editors.sass.getSession().setMode('ace/mode/' + selected.toLowerCase());
     }
     if (input == 'css') {
-      _gaq.push(['_trackEvent', 'UI', 'CSSOutput']);
+      _gaq.push(['_trackEvent', 'UI', 'CSSOutput', selected]);
 
       SassMeister.inputs.sass.output_style = selected;
 
       SassMeister.compile.sass();
     }
     if (input == 'html') {
-      _gaq.push(['_trackEvent', 'UI', 'HTMLSyntax']);
+      _gaq.push(['_trackEvent', 'UI', 'HTMLSyntax', selected]);
 
       SassMeister.inputs.html.syntax = selected;
       $('.html-syntax-display').text($(this).text());
@@ -194,10 +196,10 @@ if($('body.app, body.embedded').length > 0 ) {
 
 
   $('#control-column').on('click', 'a[data-import]', function(event) {
-    _gaq.push(['_trackEvent', 'UI', 'SassExtensions']);
-
     var imports = $(this).data('import'),
         eol = ( SassMeister.inputs.sass.syntax == 'SCSS' ? ';' : '' ) + '\n';
+
+    _gaq.push(['_trackEvent', 'UI', 'SassExtensions', imports]);
 
     if(String(imports) === 'true') {
       imports = [imports];
@@ -213,7 +215,7 @@ if($('body.app, body.embedded').length > 0 ) {
 
 
   var toggleCSSPanel = function(state) {
-    _gaq.push(['_trackEvent', 'UI', 'ToggleCSS']);
+    _gaq.push(['_trackEvent', 'UI', 'ToggleCSS', state]);
 
     $('#source').casement('destroy');
     $('#casement').casement('destroy');
@@ -232,7 +234,7 @@ if($('body.app, body.embedded').length > 0 ) {
 
 
   var toggleHTMLPanels = function(state) {
-    _gaq.push(['_trackEvent', 'UI', 'ToggleHTML']);
+    _gaq.push(['_trackEvent', 'UI', 'ToggleHTML', state]);
 
     $('#source').casement('destroy');
     $('#casement').casement('destroy');
