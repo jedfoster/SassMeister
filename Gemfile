@@ -22,7 +22,7 @@ end
 
 group :development do
   gem 'pry-remote'
-  gem 's3_website'
+  gem 's3_website', :github => 'jedfoster/s3_website', :branch => '1.x'
 end
 
 group :production do

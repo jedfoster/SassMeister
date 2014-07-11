@@ -1,4 +1,20 @@
 GIT
+  remote: git://github.com/jedfoster/s3_website.git
+  revision: b3cf08bc0fadde5dbb38a81b1717e1bd675f550f
+  branch: 1.x
+  specs:
+    s3_website (1.8.1)
+      aws-sdk (~> 1)
+      configure-s3-website (= 1.5.5)
+      dotenv (~> 0.11.1)
+      erubis (~> 2.7.0)
+      filey-diff (~> 2.0.0)
+      mime-types (~> 1)
+      simple-cloudfront-invalidator (~> 1)
+      thor (= 0.18.1)
+      zopfli (~> 0.0.3)
+
+GIT
   remote: git://github.com/rack/rack-contrib.git
   revision: 6ff3ca2b2d988911ca52a2712f6a7da5e064aa27
   specs:
@@ -16,10 +32,9 @@ GEM
       tzinfo (~> 0.3.37)
     addressable (2.3.5)
     atomic (1.1.15)
-    aws-sdk (1.33.0)
+    aws-sdk (1.47.0)
       json (~> 1.4)
       nokogiri (>= 1.4.4)
-      uuidtools (~> 2.1)
     chairman (0.1.5)
       dalli (~> 2.6.4)
       faraday-http-cache (~> 0.4.0)
@@ -42,11 +57,14 @@ GEM
       multi_json (~> 1.0)
       sass (>= 3.3.rc.3)
     compass-import-once (1.0.2)
-    configure-s3-website (1.5.2)
+    configure-s3-website (1.5.5)
       deep_merge (= 1.0.0)
     cssmin (1.0.3)
     dalli (2.6.4)
     deep_merge (1.0.0)
+    dotenv (0.11.1)
+      dotenv-deployment (~> 0.0.2)
+    dotenv-deployment (0.0.2)
     erubis (2.7.0)
     execjs (2.0.2)
     faraday (0.9.0)
@@ -54,7 +72,7 @@ GEM
     faraday-http-cache (0.4.0)
       faraday (~> 0.8)
     ffi (1.9.0)
-    filey-diff (1.4.3)
+    filey-diff (2.0.0)
     i18n (0.6.9)
     jammit (0.6.6)
       cssmin (>= 1.0.3)
@@ -69,13 +87,13 @@ GEM
     memcachier (0.0.2)
     method_source (0.8.2)
     mime-types (1.25.1)
-    mini_portile (0.5.2)
+    mini_portile (0.6.0)
     minitest (4.7.5)
     multi_json (1.9.0)
     multipart-post (2.0.0)
     newrelic_rpm (3.7.3.199)
-    nokogiri (1.6.1)
-      mini_portile (~> 0.5.0)
+    nokogiri (1.6.2.1)
+      mini_portile (= 0.6.0)
     octokit (2.7.2)
       sawyer (~> 0.5.2)
     oj (2.4.3)
@@ -98,14 +116,6 @@ GEM
       ffi (>= 0.5.0)
     rb-kqueue (0.2.2)
       ffi (>= 0.5.0)
-    s3_website (1.6.12)
-      aws-sdk (= 1.33.0)
-      configure-s3-website (= 1.5.2)
-      erubis (~> 2.7.0)
-      filey-diff (~> 1.4.3)
-      mime-types (~> 1)
-      simple-cloudfront-invalidator (~> 1)
-      thor (= 0.18.1)
     sass (3.3.0)
       rake
     sawyer (0.5.3)
@@ -132,7 +142,7 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
-    uuidtools (2.1.4)
+    zopfli (0.0.3)
 
 PLATFORMS
   ruby
@@ -150,7 +160,7 @@ DEPENDENCIES
   rack-cache
   rack-contrib!
   rake
-  s3_website
+  s3_website!
   sass
   sinatra
   sinatra-partial
