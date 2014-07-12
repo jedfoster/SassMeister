@@ -7,6 +7,7 @@ var SassMeister;
       inputs: {
         sass: {
           input: '',
+          compiler: '3.3',
           syntax: 'SCSS',
           original_syntax: 'SCSS',
           output_style: 'expanded',
@@ -47,8 +48,6 @@ var SassMeister;
       html: 'hide',
       css: 'show'
     },
-
-    sass_version: '3.3',
 
     timer: null,
 
@@ -578,12 +577,12 @@ var SassMeister;
         this.inputs = $.extend(true, this.inputs, window.gist);
 
         if(this.inputs.sass.dependencies.libsass) {
-          this.sass_version = 'lib';
+          this.inputs.sass.compiler = 'lib';
           // this.inputs.sass.syntax = 'SCSS';
         }
 
         else if(this.inputs.sass.dependencies.Sass) {
-          this.sass_version = this.inputs.sass.dependencies.Sass.slice(0, 3);
+          this.inputs.sass.compiler = this.inputs.sass.dependencies.Sass.slice(0, 3);
         }
 
         if(window.gist_output) {
@@ -600,12 +599,12 @@ var SassMeister;
           this.outputs = $.extend(true, this.outputs, {} );
         }
         if(this.inputs.sass.dependencies.libsass) {
-          this.sass_version = 'lib';
+          this.inputs.sass.compiler = 'lib';
           // this.inputs.sass.syntax = 'SCSS';
         }
 
         else if(this.inputs.sass.dependencies.Sass) {
-          this.sass_version = this.inputs.sass.dependencies.Sass.slice(0, 3);
+          this.inputs.sass.compiler = this.inputs.sass.dependencies.Sass.slice(0, 3);
         }
       }
 

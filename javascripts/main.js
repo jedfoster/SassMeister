@@ -64,11 +64,11 @@ if($('body.app, body.embedded').length > 0 ) {
     $('.sass-syntax-display').text(SassMeister.inputs.sass.syntax);
     $('.html-syntax-display').text(SassMeister.inputs.html.syntax);
 
-    if (SassMeister.sass_version == 'lib') {
+    if (SassMeister.inputs.sass.compiler == 'lib') {
       $('#control-column').addClass('libsass');
     }
 
-    $('input[name="version"][value="' + SassMeister.sass_version + '"]').prop('checked', true);
+    $('input[name="version"][value="' + SassMeister.inputs.sass.compiler + '"]').prop('checked', true);
 
     $('input[name="syntax"][value="' + SassMeister.inputs.sass.syntax.toLowerCase() + '"]').prop('checked', true);
 
@@ -116,7 +116,7 @@ if($('body.app, body.embedded').length > 0 ) {
     if (input == 'version') {
       _gaq.push(['_trackEvent', 'UI', 'SassVersion', selected]);
 
-      SassMeister.sass_version = selected;
+      SassMeister.inputs.sass.compiler = selected;
 
       if (selected == 'lib') {
         $('#syntax-scss').prop('checked', true);
@@ -170,7 +170,7 @@ if($('body.app, body.embedded').length > 0 ) {
 
 
   var getExtensions = function() {
-    var html = $('input[value=\'' + SassMeister.sass_version + '\']').data('extensions');
+    var html = $('input[value=\'' + SassMeister.inputs.sass.compiler + '\']').data('extensions');
 
     if(html) {
       $('#extension_list ol').replaceWith(buildExtensionList(html));
@@ -184,7 +184,7 @@ if($('body.app, body.embedded').length > 0 ) {
     SassMeister.ajaxCalls.getExtensions = $.get('/extensions?compiler=' + SassMeister.inputs.sass.compiler)
       .done(function( data ) {
         $('#extension_list ol').replaceWith(buildExtensionList(data));
-        $('input[value=\'' + SassMeister.sass_version + '\']').data('extensions', data);
+        $('input[value=\'' + SassMeister.inputs.sass.compiler + '\']').data('extensions', data);
       })
       .always(function() {
         SassMeister.ajaxCalls.getExtensions = false;
