@@ -181,7 +181,7 @@ if($('body.app, body.embedded').length > 0 ) {
       SassMeister.ajaxCalls.getExtensions.abort();
     }
 
-    SassMeister.ajaxCalls.getExtensions = $.get(SassMeister.sass_endpoint() + 'extensions')
+    SassMeister.ajaxCalls.getExtensions = $.get('/extensions?compiler=' + SassMeister.inputs.sass.compiler)
       .done(function( data ) {
         $('#extension_list ol').replaceWith(buildExtensionList(data));
         $('input[value=\'' + SassMeister.sass_version + '\']').data('extensions', data);
