@@ -9,6 +9,7 @@ require 'sassmeister/helper'
 require 'object'
 require 'array'
 require 'assets'
+require 'sassmeister/client'
 
 class SassMeisterApp < Sinatra::Base
   register Sinatra::Partial
