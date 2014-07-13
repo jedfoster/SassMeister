@@ -25,6 +25,12 @@ class SassMeisterApp < Sinatra::Base
     yml = YAML.load_file("config/github.yml")
     Chairman.config(yml["client_id"], yml["client_secret"], ['gist'])
     CACHE_MAX_AGE = 0
+
+    COMPILER_ENDPOINTS = {
+      '3.3' => "http://localhost:3333",
+      '3.2' => "http://localhost:3322",
+      'lib' => "http://localhost:1337"
+    }
   end
 
   configure :production do
@@ -155,6 +161,34 @@ class SassMeisterApp < Sinatra::Base
     erb :about
   end
 
+
+  before '/app/:compiler/*' do
+    return erb :'404' unless COMPILER_ENDPOINTS.include? params[:compiler]
+
+    @api = SassMeister::Client.new(COMPILER_ENDPOINTS[params[:compiler]])
+  end
+
+  after '/app/*' do
+    headers @api.headers
+  end
+
+  get '/app/:compiler/extensions' do
+    @api.extensions
+
+    return @api.body
+  end
+  
+  post '/app/:compiler/convert' do
+    @api.convert params
+
+    return @api.body
+  end
+
+  post '/app/:compiler/compile' do
+    @api.convert params
+
+    return @api.body
+  end
 
   get %r{/gist(?:/[\w]*)*/([\d\w]+)} do
     id = params[:captures].first

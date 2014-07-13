@@ -227,7 +227,7 @@ var SassMeister;
           }
 
           /* Post the form and handle the returned data */
-          SassMeister.ajaxCalls.postCompileSass = $.post('/compile', SassMeister.inputs.sass)
+          SassMeister.ajaxCalls.postCompileSass = $.post('/app/' + SassMeister.inputs.sass.compiler + '/compile', SassMeister.inputs.sass)
             .done(function( data ) {
               SassMeister.editors.css.setValue(data.css,-1);
               SassMeister.outputs.css = data.css;
@@ -320,7 +320,7 @@ var SassMeister;
         }
 
         /* Post the form and handle the returned data */
-        SassMeister.ajaxCalls.postConvertSass = $.post('/convert', SassMeister.inputs.sass)
+        SassMeister.ajaxCalls.postConvertSass = $.post('/app/' + SassMeister.inputs.sass.compiler + '/convert', SassMeister.inputs.sass)
           .done(function( data ) {
             SassMeister.bypassConversion = true;
 
