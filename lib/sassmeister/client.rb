@@ -4,9 +4,8 @@ module SassMeister
   class Client
     attr_accessor :headers, :body
 
-    def initialize(host, params = {})
+    def initialize(host)
       @api_client = Faraday.new(:url => host)
-      @params = params
       @headers = {}
       @body = ''
     end
@@ -15,20 +14,20 @@ module SassMeister
       get '/extensions'
     end
 
-    def compile
-      post '/compile', @params
+    def compile(params)
+      post '/compile', params
     end
 
-    def convert
-      post '/convert', @params
+    def convert(params)
+      post '/convert', params
     end
 
     private
-      
+
       def passthrough_headers
         [
-          'content-type', 
-          'last-modified', 
+          'content-type',
+          'last-modified',
           'cache-control'
         ]
       end
@@ -47,9 +46,9 @@ module SassMeister
             @headers[key] = value
           end
         end
-  
+
         @body = api_response.body
-        
+
         return api_response.status
       end
   end

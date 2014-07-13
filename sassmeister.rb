@@ -66,7 +66,7 @@ class SassMeisterApp < Sinatra::Base
 
       ['github_id', 'gravatar_id'].each do |cookie|
         response.set_cookie(cookie, {
-          :value => session[cookie.to_sym], 
+          :value => session[cookie.to_sym],
           :expires => (Time.now + SassMeisterApp::SESSION_DURATION),
           :domain => SassMeisterApp::COOKIE_DOMAIN,
           :path => '/'
@@ -177,18 +177,19 @@ class SassMeisterApp < Sinatra::Base
 
     return @api.body
   end
-  
+
+  post '/app/:compiler/compile' do
+    @api.compile params
+
+    return @api.body
+  end
+
   post '/app/:compiler/convert' do
     @api.convert params
 
     return @api.body
   end
 
-  post '/app/:compiler/compile' do
-    @api.convert params
-
-    return @api.body
-  end
 
   get %r{/gist(?:/[\w]*)*/([\d\w]+)} do
     id = params[:captures].first
