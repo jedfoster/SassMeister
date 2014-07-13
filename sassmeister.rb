@@ -27,6 +27,7 @@ class SassMeisterApp < Sinatra::Base
     CACHE_MAX_AGE = 0
 
     COMPILER_ENDPOINTS = {
+      '3.4' => "http://localhost:3344",
       '3.3' => "http://localhost:3333",
       '3.2' => "http://localhost:3322",
       'lib' => "http://localhost:1337"
