@@ -68,7 +68,7 @@ if($('body.app, body.embedded').length > 0 ) {
       $('#control-column').addClass('libsass');
     }
 
-    $('input[name="version"][value="' + SassMeister.inputs.sass.compiler + '"]').prop('checked', true);
+    $('select[name="version"] option[value="' + SassMeister.inputs.sass.compiler + '"]').prop('selected', true);
 
     $('input[name="syntax"][value="' + SassMeister.inputs.sass.syntax.toLowerCase() + '"]').prop('checked', true);
 
@@ -85,6 +85,30 @@ if($('body.app, body.embedded').length > 0 ) {
       speed : 25,
       onOptionSelect: function(opt) {
         SassMeister.setTheme(opt.data('value'));
+      }
+    });
+
+    $('select[name="version"]').dropdown({
+      gutter : 0,
+      speed : 25,
+      onOptionSelect: function(opt) {
+        var selected = opt.data('value');
+        
+        _gaq.push(['_trackEvent', 'UI', 'SassVersion', selected]);
+
+        SassMeister.inputs.sass.compiler = selected;
+
+        if (selected == 'lib') {
+          $('#syntax-scss').prop('checked', true);
+
+          $('#control-column').addClass('libsass');
+        }
+        else {
+          $('#control-column').removeClass('libsass');
+        }
+
+        getExtensions();
+        SassMeister.compile.sass();
       }
     });
 
@@ -113,23 +137,6 @@ if($('body.app, body.embedded').length > 0 ) {
     var selected = $('#' + $(this).attr('for')).val(),
         input = $(this).data('toggle-input');
 
-    if (input == 'version') {
-      _gaq.push(['_trackEvent', 'UI', 'SassVersion', selected]);
-
-      SassMeister.inputs.sass.compiler = selected;
-
-      if (selected == 'lib') {
-        $('#syntax-scss').prop('checked', true);
-
-        $('#control-column').addClass('libsass');
-      }
-      else {
-        $('#control-column').removeClass('libsass');
-      }
-
-      getExtensions();
-      SassMeister.compile.sass();
-    }
     if (input == 'sass') {
       _gaq.push(['_trackEvent', 'UI', 'SassSyntax', selected]);
 
