@@ -213,13 +213,14 @@
 
 
 input[type="checkbox"] {
+  @include border_radius($border-radius * 2.25);
+
   border: 1px solid #aaa;
   height: 2em;
   width: 2em;
   display: inline-block;
   -webkit-appearance: none;
   background: linear-gradient(to bottom, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eeeeee 100%);
-  border-radius: 0.5em;
   outline: none;
 
   &:after {
