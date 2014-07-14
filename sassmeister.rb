@@ -176,7 +176,7 @@ class SassMeisterApp < Sinatra::Base
     @api = SassMeister::Client.new(COMPILER_ENDPOINTS[params[:compiler]])
   end
 
-  after '/app/*' do
+  after '/app/:compiler/*' do
     headers @api.headers
   end
 
