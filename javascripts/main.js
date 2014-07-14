@@ -64,9 +64,9 @@ if($('body.app, body.embedded').length > 0 ) {
     $('.sass-syntax-display').text(SassMeister.inputs.sass.syntax);
     $('.html-syntax-display').text(SassMeister.inputs.html.syntax);
 
-    if (SassMeister.inputs.sass.compiler == 'lib') {
-      $('#control-column').addClass('libsass');
-    }
+    // if (SassMeister.inputs.sass.compiler == 'lib') {
+    //   $('#control-column').addClass('libsass');
+    // }
 
     $('select[name="version"] option[value="' + SassMeister.inputs.sass.compiler + '"]').prop('selected', true);
 
@@ -98,14 +98,14 @@ if($('body.app, body.embedded').length > 0 ) {
 
         SassMeister.inputs.sass.compiler = selected;
 
-        if (selected == 'lib') {
-          $('#syntax-scss').prop('checked', true);
+        // if (selected == 'lib') {
+        //   $('#syntax-scss').prop('checked', true);
 
-          $('#control-column').addClass('libsass');
-        }
-        else {
-          $('#control-column').removeClass('libsass');
-        }
+        //   $('#control-column').addClass('libsass');
+        // }
+        // else {
+        //   $('#control-column').removeClass('libsass');
+        // }
 
         getExtensions();
         SassMeister.compile.sass();

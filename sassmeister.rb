@@ -193,6 +193,11 @@ class SassMeisterApp < Sinatra::Base
   end
 
   post '/app/:compiler/convert' do
+    if params[:compiler] == 'lib'
+      @api = SassMeister::Client.new(COMPILER_ENDPOINTS['3.3'])
+    end
+
+
     @api.convert params
 
     return @api.body
