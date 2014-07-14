@@ -27,10 +27,10 @@ class SassMeisterApp < Sinatra::Base
     CACHE_MAX_AGE = 0
 
     COMPILER_ENDPOINTS = {
-      '3.4' => "http://localhost:3344",
-      '3.3' => "http://localhost:3333",
-      '3.2' => "http://localhost:3322",
-      'lib' => "http://localhost:1337"
+      '3.4' => "http://sass3-4.sassmeister.dev",
+      '3.3' => "http://sass3-3.sassmeister.dev",
+      '3.2' => "http://sass3-2.sassmeister.dev",
+      'lib' => "http://lib.sassmeister.dev"
     }
   end
 
@@ -42,6 +42,13 @@ class SassMeisterApp < Sinatra::Base
 
     Chairman.config(ENV['GITHUB_ID'], ENV['GITHUB_SECRET'], ['gist'])
     CACHE_MAX_AGE = 300  # 5 mins.
+
+    COMPILER_ENDPOINTS = {
+      '3.4' => "http://sassmeister-34.herokuapp.com",
+      '3.3' => "http://sassmeister-34.herokuapp.com",
+      '3.2' => "http://sassmeister-32.herokuapp.com",
+      'lib' => "http://sassmeister-libsass.herokuapp.com"
+    }
   end
 
   configure do
