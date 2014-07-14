@@ -8,6 +8,7 @@ gem 'unicorn'
 gem 'chairman'
 gem 'rack-cache'
 gem 'activesupport'
+gem 'faraday'
 
 group :assets do
   gem 'execjs'

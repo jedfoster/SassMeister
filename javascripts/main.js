@@ -64,11 +64,11 @@ if($('body.app, body.embedded').length > 0 ) {
     $('.sass-syntax-display').text(SassMeister.inputs.sass.syntax);
     $('.html-syntax-display').text(SassMeister.inputs.html.syntax);
 
-    if (SassMeister.sass_version == 'lib') {
-      $('#control-column').addClass('libsass');
-    }
+    // if (SassMeister.inputs.sass.compiler == 'lib') {
+    //   $('#control-column').addClass('libsass');
+    // }
 
-    $('input[name="version"][value="' + SassMeister.sass_version + '"]').prop('checked', true);
+    $('select[name="version"] option[value="' + SassMeister.inputs.sass.compiler + '"]').prop('selected', true);
 
     $('input[name="syntax"][value="' + SassMeister.inputs.sass.syntax.toLowerCase() + '"]').prop('checked', true);
 
@@ -85,6 +85,30 @@ if($('body.app, body.embedded').length > 0 ) {
       speed : 25,
       onOptionSelect: function(opt) {
         SassMeister.setTheme(opt.data('value'));
+      }
+    });
+
+    $('select[name="version"]').dropdown({
+      gutter : 0,
+      speed : 25,
+      onOptionSelect: function(opt) {
+        var selected = opt.data('value');
+        
+        _gaq.push(['_trackEvent', 'UI', 'SassVersion', selected]);
+
+        SassMeister.inputs.sass.compiler = selected;
+
+        // if (selected == 'lib') {
+        //   $('#syntax-scss').prop('checked', true);
+
+        //   $('#control-column').addClass('libsass');
+        // }
+        // else {
+        //   $('#control-column').removeClass('libsass');
+        // }
+
+        getExtensions();
+        SassMeister.compile.sass();
       }
     });
 
@@ -113,23 +137,6 @@ if($('body.app, body.embedded').length > 0 ) {
     var selected = $('#' + $(this).attr('for')).val(),
         input = $(this).data('toggle-input');
 
-    if (input == 'version') {
-      _gaq.push(['_trackEvent', 'UI', 'SassVersion', selected]);
-
-      SassMeister.sass_version = selected;
-
-      if (selected == 'lib') {
-        $('#syntax-scss').prop('checked', true);
-
-        $('#control-column').addClass('libsass');
-      }
-      else {
-        $('#control-column').removeClass('libsass');
-      }
-
-      getExtensions();
-      SassMeister.compile.sass();
-    }
     if (input == 'sass') {
       _gaq.push(['_trackEvent', 'UI', 'SassSyntax', selected]);
 
@@ -170,7 +177,7 @@ if($('body.app, body.embedded').length > 0 ) {
 
 
   var getExtensions = function() {
-    var html = $('input[value=\'' + SassMeister.sass_version + '\']').data('extensions');
+    var html = $('input[value=\'' + SassMeister.inputs.sass.compiler + '\']').data('extensions');
 
     if(html) {
       $('#extension_list ol').replaceWith(buildExtensionList(html));
@@ -181,10 +188,10 @@ if($('body.app, body.embedded').length > 0 ) {
       SassMeister.ajaxCalls.getExtensions.abort();
     }
 
-    SassMeister.ajaxCalls.getExtensions = $.get(SassMeister.sass_endpoint() + 'extensions')
+    SassMeister.ajaxCalls.getExtensions = $.get('/app/' + SassMeister.inputs.sass.compiler + '/extensions')
       .done(function( data ) {
         $('#extension_list ol').replaceWith(buildExtensionList(data));
-        $('input[value=\'' + SassMeister.sass_version + '\']').data('extensions', data);
+        $('input[value=\'' + SassMeister.inputs.sass.compiler + '\']').data('extensions', data);
       })
       .always(function() {
         SassMeister.ajaxCalls.getExtensions = false;

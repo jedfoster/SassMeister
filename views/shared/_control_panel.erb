@@ -5,20 +5,18 @@
     <fieldset>
       <h2>Sass</h2>
 
-      <h3 class="version">Compiler</h3>
+      <fieldset data-event-name="SassVersion">
+        <h3 class="version">Compiler</h3>
 
-      <fieldset class="version-toggle-group" data-event-name="SassVersion">
-        <input type="radio" name="version" value="3.3" id="version-sass3-3">
-        <label for="version-sass3-3" data-toggle-input="version">3.3.9</label>
-
-        <input type="radio" name="version" value="3.2" id="version-sass3-2">
-        <label for="version-sass3-2" data-toggle-input="version">3.2.19</label>
-
-        <input type="radio" name="version" value="lib" id="version-lib">
-        <label for="version-lib" data-toggle-input="version">LibSass <sup>2.0.0</sup></label>
-
-        <span></span>
+        <select name="version" class="fancy_dropdown">
+          <option value="lib">LibSass 2.0.0</option>
+          <option value="3.4">3.4.0.rc.1</option>
+          <option value="3.3">3.3.9</option>
+          <option value="3.2">3.2.19</option>
+        </select>
       </fieldset>
+
+
 
       <h3 class="syntax">Syntax</h3>
 
@@ -89,9 +87,11 @@
     <fieldset class="edit-prefs">
       <h2>Editor</h2>
 
+
+
       <fieldset>
+        <h3 class="theme">Theme</h3>
         <p>
-          <label>Theme</label>
           <select name="theme" class="fancy_dropdown">
             <option value="tomorrow">Tomorrow</option>
             <option value="dawn">Dawn</option>

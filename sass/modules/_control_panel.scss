@@ -54,6 +54,7 @@ $control-column-open-width: em(480);
 
   label {
     font-weight: 300;
+    display: inline-block;
   }
 
   &.open {
@@ -122,12 +123,12 @@ $control-column-open-width: em(480);
     color: $charlie_gray;
     margin: 0;
 
-    &.syntax, &.version {
-      width: 25%;
+    &.syntax, &.version, &.theme {
+      width: 18%;
       display: block;
       float: left;
       clear: both;
-      line-height: 2.5;
+      line-height: 2;
     }
   }
 
@@ -182,19 +183,19 @@ $control-column-open-width: em(480);
     }
   }
 
-  .version-toggle-group {
-    @include toggle-group(66%, (version-sass3-3, version-sass3-2, version-lib));
+  // .version-toggle-group {
+  //   @include toggle-group(66%, (version-sass3-3, version-sass3-2, version-lib));
 
-    clear: right !important;
+  //   clear: right !important;
 
-    &:after { content:"\A"; display: block;white-space:pre; }
+  //   &:after { content:"\A"; display: block;white-space:pre; }
 
-    label[for="version-lib"] sup {
-      vertical-align: super;
-      font-size: 0.5em;
-      color: #7ABE3B;
-    }
-  }
+  //   label[for="version-lib"] sup {
+  //     vertical-align: super;
+  //     font-size: 0.5em;
+  //     color: #7ABE3B;
+  //   }
+  // }
 
   .libsass .version-toggle-group {
     label[for="version-lib"] sup {

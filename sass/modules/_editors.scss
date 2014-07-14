@@ -82,7 +82,7 @@
   clear: both;
 
   ol {
-    @include border_radius(em(8));
+    @include border_radius($border-radius);
 
     border: 1px solid $golf_gray;
     width: 100%;

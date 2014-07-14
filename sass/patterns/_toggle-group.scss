@@ -1,5 +1,5 @@
 @mixin toggle-group($width, $values: '') {
-  @include border_radius(em(8));
+  @include border_radius($border-radius);
 
   border: 1px solid $golf_gray;
   display: block;
@@ -47,7 +47,7 @@
     -moz-transition: left 0.2s ease-in-out;
     transition: left 0.2s ease-in-out;
 
-    @include border_radius(em(6));
+    @include border_radius($border-radius);
   }
 
   $rand: random(999);
