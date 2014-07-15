@@ -92,11 +92,9 @@ if($('body.app, body.embedded').length > 0 ) {
       gutter : 0,
       speed : 25,
       onOptionSelect: function(opt) {
-        var selected = opt.data('value');
-        
-        _gaq.push(['_trackEvent', 'UI', 'SassVersion', selected]);
+        _gaq.push(['_trackEvent', 'UI', 'SassVersion', 'v ' + opt.data('value')]);
 
-        SassMeister.inputs.sass.compiler = selected;
+        SassMeister.inputs.sass.compiler = opt.data('value');
 
         // if (selected == 'lib') {
         //   $('#syntax-scss').prop('checked', true);
