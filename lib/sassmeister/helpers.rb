@@ -31,4 +31,10 @@ module SassMeister
       return frontmatter
     end
   end
+
+  def app_last_modified
+    return @mtime ||= File.mtime(__FILE__) if settings.environment == :production
+
+    Time.now
+  end
 end
