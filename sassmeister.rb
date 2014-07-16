@@ -9,7 +9,7 @@ require 'sassmeister/helpers'
 require 'object'
 require 'array'
 require 'assets'
-require 'sassmeister/client'
+require 'sassmeister/api_routes'
 
 class SassMeisterApp < Sinatra::Base
   register Sinatra::Partial
@@ -17,6 +17,7 @@ class SassMeisterApp < Sinatra::Base
   set :partial_template_engine, :erb
 
   use Chairman::Routes
+  use SassMeister::ApiRoutes
 
   helpers SassMeister::Helpers
   helpers Assets
@@ -28,13 +29,6 @@ class SassMeisterApp < Sinatra::Base
     yml = YAML.load_file("config/github.yml")
     Chairman.config(yml["client_id"], yml["client_secret"], ['gist'])
     CACHE_MAX_AGE = 0
-
-    COMPILER_ENDPOINTS = {
-      '3.4' => 'http://sass3-4.sassmeister.dev',
-      '3.3' => 'http://sass3-3.sassmeister.dev',
-      '3.2' => 'http://sass3-2.sassmeister.dev',
-      'lib' => 'http://lib.sassmeister.dev'
-    }
   end
 
   configure :production do
@@ -45,13 +39,6 @@ class SassMeisterApp < Sinatra::Base
 
     Chairman.config(ENV['GITHUB_ID'], ENV['GITHUB_SECRET'], ['gist'])
     CACHE_MAX_AGE = 300  # 5 mins.
-
-    COMPILER_ENDPOINTS = {
-      '3.4' => 'http://sassmeister-34.herokuapp.com',
-      '3.3' => 'http://sassmeister-33.herokuapp.com',
-      '3.2' => 'http://sassmeister-32.herokuapp.com',
-      'lib' => 'http://sassmeister-libsass.herokuapp.com'
-    }
   end
 
   configure do
@@ -155,39 +142,6 @@ class SassMeisterApp < Sinatra::Base
     @body_class = 'about'
 
     erb :about
-  end
-
-
-  before '/app/:compiler/*' do
-    return erb :'404' unless COMPILER_ENDPOINTS.include? params[:compiler]
-
-    @api = SassMeister::Client.new(COMPILER_ENDPOINTS[params[:compiler]])
-  end
-
-  after '/app/:compiler/*' do
-    headers @api.headers
-  end
-
-  get '/app/:compiler/extensions' do
-    @api.extensions
-
-    return @api.body
-  end
-
-  post '/app/:compiler/compile' do
-    @api.compile params
-
-    return @api.body
-  end
-
-  post '/app/:compiler/convert' do
-    if params[:compiler] == 'lib'
-      @api = SassMeister::Client.new(COMPILER_ENDPOINTS['3.3'])
-    end
-
-    @api.convert params
-
-    return @api.body
   end
 
 
