@@ -95,20 +95,6 @@ class SassMeisterApp < Sinatra::Base
 
   set :partial_template_engine, :erb
 
-  helpers do
-    def origin
-      return request.env["HTTP_ORIGIN"] if origin_allowed? request.env["HTTP_ORIGIN"]
-
-      return false
-    end
-
-    def origin_allowed?(uri)
-      return false if uri.nil?
-
-      return uri.match(/^http:\/\/(.+\.){0,1}sassmeister\.(com|dev|((\d+\.){4}xip\.io))/)
-    end
-  end
-
 
   before do
     @github = Chairman.session(session[:github_token])
