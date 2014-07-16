@@ -1,5 +1,5 @@
 module SassMeister
-  module Helper
+  module Helpers
     def get_frontmatter_dependencies(sass)
       frontmatter = sass.scan(/^\/\/ ([\w\s]+?) \(v([[:alnum:]\.]+?)\)\s*$/)
 

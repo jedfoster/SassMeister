@@ -5,7 +5,7 @@ require 'sinatra/partial'
 require 'chairman'
 require 'json'
 require 'yaml'
-require 'sassmeister/helper'
+require 'sassmeister/helpers'
 require 'object'
 require 'array'
 require 'assets'
@@ -16,7 +16,7 @@ class SassMeisterApp < Sinatra::Base
 
   use Chairman::Routes
 
-  helpers SassMeister::Helper
+  helpers SassMeister::Helpers
   helpers Assets
 
   configure :development do

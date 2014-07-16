@@ -5,7 +5,7 @@ require 'sinatra/partial'
 require 'chairman'
 require 'json'
 require 'yaml'
-require 'sassmeister/helper'
+require 'sassmeister/helpers'
 require 'object'
 require 'array'
 require 'assets'
@@ -16,7 +16,7 @@ class SassMeisterEmbeddedApp < Sinatra::Base
 
   set :protection, :except => :frame_options
 
-  helpers SassMeister::Helper
+  helpers SassMeister::Helpers
   helpers Assets
 
   configure do
