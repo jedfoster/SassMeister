@@ -14,16 +14,27 @@ require 'sassmeister/client'
 class SassMeisterEmbeddedApp < Sinatra::Base
   register Sinatra::Partial
 
+  set :partial_template_engine, :erb
   set :protection, :except => :frame_options
 
   helpers SassMeister::Helpers
   helpers Assets
 
-  configure do
-    APP_VERSION = '2.0.1'
-  end
 
-  set :partial_template_engine, :erb
+  configure :development do
+    APP_DOMAIN = 'sassmeister.dev'
+    SANDBOX_DOMAIN = 'sandbox.sassmeister.dev'
+    yml = YAML.load_file("config/github.yml")
+    Chairman.config(yml["client_id"], yml["client_secret"], ['gist'])
+    CACHE_MAX_AGE = 0
+
+    COMPILER_ENDPOINTS = {
+      '3.4' => 'http://sass3-4.sassmeister.dev',
+      '3.3' => 'http://sass3-3.sassmeister.dev',
+      '3.2' => 'http://sass3-2.sassmeister.dev',
+      'lib' => 'http://lib.sassmeister.dev'
+    }
+  end
 
   configure :production do
     APP_DOMAIN = 'sassmeister.com'
@@ -35,26 +46,15 @@ class SassMeisterEmbeddedApp < Sinatra::Base
     CACHE_MAX_AGE = 1800  # 30 mins.
 
     COMPILER_ENDPOINTS = {
-      '3.4' => "http://sassmeister-34.herokuapp.com",
-      '3.3' => "http://sassmeister-34.herokuapp.com",
-      '3.2' => "http://sassmeister-32.herokuapp.com",
-      'lib' => "http://sassmeister-libsass.herokuapp.com"
+      '3.4' => 'http://sassmeister-34.herokuapp.com',
+      '3.3' => 'http://sassmeister-34.herokuapp.com',
+      '3.2' => 'http://sassmeister-32.herokuapp.com',
+      'lib' => 'http://sassmeister-libsass.herokuapp.com'
     }
   end
 
-  configure :development do
-    APP_DOMAIN = 'sassmeister.dev'
-    SANDBOX_DOMAIN = 'sandbox.sassmeister.dev'
-    yml = YAML.load_file("config/github.yml")
-    Chairman.config(yml["client_id"], yml["client_secret"], ['gist'])
-    CACHE_MAX_AGE = 0
-
-    COMPILER_ENDPOINTS = {
-      '3.4' => "http://sass3-4.sassmeister.dev",
-      '3.3' => "http://sass3-3.sassmeister.dev",
-      '3.2' => "http://sass3-2.sassmeister.dev",
-      'lib' => "http://lib.sassmeister.dev"
-    }
+  configure do
+    APP_VERSION = '2.0.1'
   end
 
 

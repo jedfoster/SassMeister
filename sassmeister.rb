@@ -14,10 +14,13 @@ require 'sassmeister/client'
 class SassMeisterApp < Sinatra::Base
   register Sinatra::Partial
 
+  set :partial_template_engine, :erb
+
   use Chairman::Routes
 
   helpers SassMeister::Helpers
   helpers Assets
+  
 
   configure :development do
     APP_DOMAIN = 'sassmeister.dev'
@@ -27,10 +30,10 @@ class SassMeisterApp < Sinatra::Base
     CACHE_MAX_AGE = 0
 
     COMPILER_ENDPOINTS = {
-      '3.4' => "http://sass3-4.sassmeister.dev",
-      '3.3' => "http://sass3-3.sassmeister.dev",
-      '3.2' => "http://sass3-2.sassmeister.dev",
-      'lib' => "http://lib.sassmeister.dev"
+      '3.4' => 'http://sass3-4.sassmeister.dev',
+      '3.3' => 'http://sass3-3.sassmeister.dev',
+      '3.2' => 'http://sass3-2.sassmeister.dev',
+      'lib' => 'http://lib.sassmeister.dev'
     }
   end
 
@@ -44,10 +47,10 @@ class SassMeisterApp < Sinatra::Base
     CACHE_MAX_AGE = 300  # 5 mins.
 
     COMPILER_ENDPOINTS = {
-      '3.4' => "http://sassmeister-34.herokuapp.com",
-      '3.3' => "http://sassmeister-33.herokuapp.com",
-      '3.2' => "http://sassmeister-32.herokuapp.com",
-      'lib' => "http://sassmeister-libsass.herokuapp.com"
+      '3.4' => 'http://sassmeister-34.herokuapp.com',
+      '3.3' => 'http://sassmeister-33.herokuapp.com',
+      '3.2' => 'http://sassmeister-32.herokuapp.com',
+      'lib' => 'http://sassmeister-libsass.herokuapp.com'
     }
   end
 
@@ -56,6 +59,7 @@ class SassMeisterApp < Sinatra::Base
     SESSION_DURATION = 7776000 # 90 days, in seconds
     COOKIE_DOMAIN = ".#{APP_DOMAIN}"
   end
+
 
   # implement redirects
   class Chairman::Routes
@@ -92,8 +96,6 @@ class SassMeisterApp < Sinatra::Base
       redirect to('/')
     end
   end
-
-  set :partial_template_engine, :erb
 
 
   before do
@@ -182,7 +184,6 @@ class SassMeisterApp < Sinatra::Base
     if params[:compiler] == 'lib'
       @api = SassMeister::Client.new(COMPILER_ENDPOINTS['3.3'])
     end
-
 
     @api.convert params
 
