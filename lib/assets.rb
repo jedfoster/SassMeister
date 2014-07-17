@@ -32,12 +32,6 @@ module Assets
     nil
   end
 
-  def app_last_modified
-    return @mtime ||= File.mtime(__FILE__) if settings.environment == :production
-
-    Time.now
-  end
-
   private
 
     def assets
