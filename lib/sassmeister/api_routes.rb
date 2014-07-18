@@ -5,9 +5,9 @@ module SassMeister
   class ApiRoutes < Sinatra::Base
     configure :development do
       COMPILER_ENDPOINTS = {
-        '3.4' => 'http://sass3-4.sassmeister.dev',
-        '3.3' => 'http://sass3-3.sassmeister.dev',
-        '3.2' => 'http://sass3-2.sassmeister.dev',
+        '3.4' => 'http://sass34.sassmeister.dev',
+        '3.3' => 'http://sass33.sassmeister.dev',
+        '3.2' => 'http://sass32.sassmeister.dev',
         'lib' => 'http://lib.sassmeister.dev'
       }
     end
