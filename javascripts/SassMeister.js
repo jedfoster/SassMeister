@@ -7,7 +7,7 @@ var SassMeister;
       inputs: {
         sass: {
           input: '',
-          compiler: '3.3',
+          compiler: '3.4',
           syntax: 'SCSS',
           original_syntax: 'SCSS',
           output_style: 'expanded',
