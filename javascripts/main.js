@@ -42,10 +42,10 @@ if($('body.app, body.embedded').length > 0 ) {
 
 if($('body.app').length > 0 ) {
   var github_id = $.cookie('github_id'),
-      gravatar_id = $.cookie('gravatar_id');
+      avatar_url = $.cookie('avatar_url');
 
-  if(github_id && gravatar_id) {
-    $('#github-auth').replaceWith('<div><span><img src="http://www.gravatar.com/avatar/' + gravatar_id + '?s=80" alt="" height="40"></span>\
+  if(github_id && avatar_url) {
+    $('#github-auth').replaceWith('<div><span><img src="' + avatar_url + '" alt="" height="40"></span>\
       <ul id="account_actions">\
         <li class="checkmark-icon">Logged in as ' + github_id + '</li>\
         <li class="off-icon"><a href="/logout"><span>Logout</span></a></li>\

@@ -21,7 +21,7 @@ class SassMeisterApp < Sinatra::Base
 
   helpers SassMeister::Helpers
   helpers Assets
-  
+
 
   configure :development do
     APP_DOMAIN = 'sassmeister.dev'
@@ -63,20 +63,25 @@ class SassMeisterApp < Sinatra::Base
     after '/authorize/return' do
       session[:version] == SassMeisterApp::APP_VERSION
 
-      ['github_id', 'gravatar_id'].each do |cookie|
-        response.set_cookie(cookie, {
-          :value => session[cookie.to_sym],
-          :expires => (Time.now + SassMeisterApp::SESSION_DURATION),
-          :domain => SassMeisterApp::COOKIE_DOMAIN,
-          :path => '/'
-        })
-      end
+      response.set_cookie('github_id', {
+        :value => @user.login,
+        :expires => (Time.now + SassMeisterApp::SESSION_DURATION),
+        :domain => SassMeisterApp::COOKIE_DOMAIN,
+        :path => '/'
+      })
+
+      response.set_cookie('avatar_url', {
+        :value => @user.avatar_url,
+        :expires => (Time.now + SassMeisterApp::SESSION_DURATION),
+        :domain => SassMeisterApp::COOKIE_DOMAIN,
+        :path => '/'
+      })
 
       redirect to('/')
     end
 
     after '/logout' do
-      ['github_id', 'gravatar_id'].each do |cookie|
+      ['github_id', 'avatar_url'].each do |cookie|
         response.delete_cookie cookie, {:domain => SassMeisterApp::COOKIE_DOMAIN, :path => '/'}
       end
 
@@ -110,7 +115,7 @@ class SassMeisterApp < Sinatra::Base
       session[:version] = APP_VERSION
 
       # Delete the user info cookies, too
-      ['github_id', 'gravatar_id'].each do |cookie|
+      ['github_id', 'avatar_url'].each do |cookie|
         response.delete_cookie cookie, {:domain => SassMeisterApp::COOKIE_DOMAIN, :path => '/'}
       end
     end
