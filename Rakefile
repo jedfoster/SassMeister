@@ -37,7 +37,7 @@ task 'compile:coffee' do
     name = file.gsub('coffee/', '').gsub('.coffee', '')
     js = context.call('CoffeeScript.compile', File.read(file))
 
-    File.open("public/js/#{name}.js", 'w') {|f| f.write(js) }
+    File.open("javascripts/compiled/#{name}.js", 'w') {|f| f.write(js) }
   end
 end
 
