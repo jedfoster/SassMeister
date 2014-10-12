@@ -25,20 +25,11 @@ task :server do
   task environment.to_sym do ; end
 end
 
-
-# Heroku will run this task as part of the deployment process.
-desc 'Compile the app\'s Sass'
-task 'assets:precompile' do
+desc 'Compile Coffeescript'
+task 'compile:coffee' do
   require 'execjs'
-  require 'yaml'
-  require 'digest/sha1'
 
-  Dir.mkdir('public/js/') unless Dir.exists? 'public/js/'
   Dir.mkdir('javascripts/compiled/') unless Dir.exists? 'javascripts/compiled/'
-
-
-  system('rm public/css/*')
-  system('rm public/js/*')
 
   context = ExecJS.compile File.read('lib/coffee-script.js')
 
@@ -46,8 +37,22 @@ task 'assets:precompile' do
     name = file.gsub('coffee/', '').gsub('.coffee', '')
     js = context.call('CoffeeScript.compile', File.read(file))
 
-    File.open("javascripts/compiled/#{name}.js", 'w') {|f| f.write(js) }
+    File.open("public/js/#{name}.js", 'w') {|f| f.write(js) }
   end
+end
+
+# Heroku will run this task as part of the deployment process.
+desc 'Compile the app\'s Sass'
+task 'assets:precompile' do
+  require 'yaml'
+  require 'digest/sha1'
+
+  Dir.mkdir('public/js/') unless Dir.exists? 'public/js/'
+
+  system('rm public/css/*')
+  system('rm public/js/*')
+
+  Rake::Task['compile:coffee'].invoke
 
   system('bundle exec jammit --force')
   system('bundle exec compass compile --force -e production')

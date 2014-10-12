@@ -1,6 +1,17 @@
 var SassMeister;
 
 (function($) {
+  function getHashParam(param) {
+    var query = window.location.hash.substring(1);
+    var vars = query.split(",");
+    for (var i=0;i<vars.length;i++) {
+      var pair = vars[i].split("=");
+      if(pair[0] == param){
+        return pair[1];
+      }
+    }
+    return(false);
+  }
 
   window.SassMeister = {
     _default: {
@@ -65,12 +76,16 @@ var SassMeister;
     },
 
     init: function() {
+      var fontSize;
       $this = this;
 
       this.inputs = this._default.inputs;
       this.outputs = this._default.outputs;
       this.preferences = this._default.preferences;
 
+      if(fontSize = getHashParam('font-size')) {
+        $('head').append('<style>body { font-size: ' + fontSize + '%; }</style>');
+      }
 
       // Process:
       //
@@ -187,9 +202,11 @@ var SassMeister;
 
 
     initEditor: function(value, name, syntax) {
-      var input = ace.edit(name);
+      var input = ace.edit(name),
+          themeParam = getHashParam('theme'),
+          theme = themeParam ? themeParam : this.preferences.theme;
 
-      input.setTheme(this.preferences.theme);
+      input.setTheme(theme);
 
       if(this.preferences.vim) {
         input.setKeyboardHandler("ace/keyboard/vim");
