@@ -83,7 +83,7 @@ var SassMeister;
       this.outputs = this._default.outputs;
       this.preferences = this._default.preferences;
 
-      if(fontSize = getHashParam('font-size')) {
+      if(fontSize = (getHashParam('font-size') * 100)) {
         $('head').append('<style>body { font-size: ' + fontSize + '%; }</style>');
       }
 
