@@ -27,7 +27,8 @@ var SassMeister;
       preferences: {
         theme: 'tomorrow',
         emmet: false,
-        vim: false
+        vim: false,
+        scrollPastEnd: false
       }
     },
 
@@ -198,6 +199,7 @@ var SassMeister;
       }
 
       input.setOption("enableEmmet", this.preferences.emmet);
+      input.setOption("scrollPastEnd", this.preferences.scrollPastEnd);
 
       input.getSession().setMode('ace/mode/' + syntax.toLowerCase());
 
@@ -518,6 +520,7 @@ var SassMeister;
     setEditorPreferences: function(key, value) {
       var $this = this;
       $this.preferences[key] = value;
+      console.log(key, value);
 
       if($this.preferences.vim) {
         $this.editors.sass.setKeyboardHandler('ace/keyboard/vim');
@@ -545,6 +548,17 @@ var SassMeister;
         $this.editors.sass.setOption('enableEmmet', $this.preferences.emmet);
         $this.editors.css.setOption('enableEmmet', $this.preferences.emmet);
         $this.editors.html.setOption('enableEmmet', $this.preferences.emmet);
+      }
+
+      if($this.preferences.scrollPastEnd) {
+        $this.editors.sass.setOption('scrollPastEnd', true);
+        $this.editors.css.setOption('scrollPastEnd', true);
+        $this.editors.html.setOption('scrollPastEnd', true);
+      }
+      else {
+        $this.editors.sass.setOption('scrollPastEnd', $this.preferences.scrollPastEnd);
+        $this.editors.css.setOption('scrollPastEnd', $this.preferences.scrollPastEnd);
+        $this.editors.html.setOption('scrollPastEnd', $this.preferences.scrollPastEnd);
       }
 
       $this.setStorage();

@@ -105,6 +105,7 @@ if($('body.app').length > 0 ) {
     $('select[name="theme"] option[value="' + SassMeister.preferences.theme + '"]').prop('selected', true);
     $('input[name="emmet"]').prop('checked', SassMeister.preferences.emmet);
     $('input[name="vim"]').prop('checked', SassMeister.preferences.vim);
+    $('input[name="scrollPastEnd"]').prop('checked', SassMeister.preferences.scrollPastEnd);
 
     $('select[name="theme"]').dropdown({
       gutter : 0,
