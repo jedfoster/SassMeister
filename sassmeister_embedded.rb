@@ -125,7 +125,7 @@ class SassMeisterEmbeddedApp < Sinatra::Base
 
     @gist = {
       :gist_id => id,
-      :gist_owner => owner,
+      :owner => owner,
       :sass_filename => filename,
       :html_filename => (html_filename || ''),
       :sass => {
