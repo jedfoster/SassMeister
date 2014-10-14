@@ -13,57 +13,42 @@ var SassMeister;
     return(false);
   }
 
-  window.SassMeister = {
-    _default: {
-      inputs: {
-        sass: {
-          input: '',
-          compiler: '3.4',
-          syntax: 'SCSS',
-          original_syntax: 'SCSS',
-          output_style: 'expanded',
-          dependencies: {}
-        },
-        html: {
-          input: '',
-          syntax: 'HTML'
-        }
+  var defaults = {
+    inputs: {
+      sass: {
+        input: '',
+        compiler: '3.4',
+        syntax: 'SCSS',
+        original_syntax: 'SCSS',
+        output_style: 'expanded',
+        dependencies: {}
       },
-
-      outputs: {
-        css: '',
-        html: ''
-      },
-
-      preferences: {
-        theme: 'tomorrow',
-        emmet: false,
-        vim: false,
-        scrollPastEnd: false
+      html: {
+        input: '',
+        syntax: 'HTML'
       }
     },
 
-    inputs: null,
+    outputs: {},
 
-    outputs: null,
+    preferences: {
+      theme: 'tomorrow',
+      emmet: false,
+      vim: false,
+      scrollPastEnd: false
+    }
+  };
 
-    preferences: null,
-
-    editors: {
-      sass: null,
-      css: null,
-      html: null
-    },
+  window.SassMeister = {
+    timer: null,
+    bypassConversion: false,
+    editors: {},
 
     layout: {
       orientation: 'horizontal',
       html: 'hide',
       css: 'show'
     },
-
-    timer: null,
-
-    bypassConversion: false,
 
     ajaxCalls: {
       'getExtensions': false,
@@ -79,9 +64,9 @@ var SassMeister;
       var fontSize;
       $this = this;
 
-      this.inputs = this._default.inputs;
-      this.outputs = this._default.outputs;
-      this.preferences = this._default.preferences;
+      this.inputs = defaults.inputs;
+      this.outputs = defaults.outputs;
+      this.preferences = defaults.preferences;
 
       if(fontSize = (getHashParam('font-size') * 100)) {
         $('head').append('<style>body { font-size: ' + fontSize + '%; }</style>');
@@ -136,10 +121,6 @@ var SassMeister;
       }
 
 
-      // Focus on the Sass input
-      //this.editors.sass.focus();
-
-
       // HTML (rendered)
       if(this.outputs.html) {
         this.updateRender(this.outputs);
@@ -168,9 +149,7 @@ var SassMeister;
 
     initControls: function() {
       $('#syntax').text(this.inputs.sass.syntax).data('original', this.inputs.sass.syntax);
-
       $('#output').text(this.inputs.sass.output_style);
-
       $('#html-syntax').text(this.inputs.html.syntax);
     },
 
@@ -590,8 +569,8 @@ var SassMeister;
       this.editors.css.setValue('');
       this.editors.html.setValue('');
 
-      this.inputs = this._default.inputs;
-      this.outputs = this._default.outputs;
+      this.inputs = defaults.inputs;
+      this.outputs = defaults.outputs;
 
       if(Modernizr.localstorage) {
         localStorage.clear();
@@ -629,11 +608,10 @@ var SassMeister;
           this.inputs = $.extend(true, this.inputs, {} );
           this.outputs = $.extend(true, this.outputs, {} );
         }
+
         if(this.inputs.sass.dependencies.libsass) {
           this.inputs.sass.compiler = 'lib';
-          // this.inputs.sass.syntax = 'SCSS';
         }
-
         else if(this.inputs.sass.dependencies.Sass) {
           this.inputs.sass.compiler = this.inputs.sass.dependencies.Sass.slice(0, 3);
         }
@@ -728,3 +706,4 @@ var SassMeister;
   };
 
 })(jQuery);
+
