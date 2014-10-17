@@ -29,7 +29,10 @@ var SassMeister;
       }
     },
 
-    outputs: {},
+    outputs: {
+      css: '',
+      html: ''
+    },
 
     preferences: {
       theme: 'tomorrow',
