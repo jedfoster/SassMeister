@@ -17,7 +17,7 @@ module SassMeister
         '3.4' => 'http://sassmeister-34.herokuapp.com',
         '3.3' => 'http://sassmeister-33.herokuapp.com',
         '3.2' => 'http://sassmeister-32.herokuapp.com',
-        'lib' => 'http://sassmeister-libsass.herokuapp.com'
+        'lib' => 'http://libsass.api.sassmeister.com'
       }
     end
 
