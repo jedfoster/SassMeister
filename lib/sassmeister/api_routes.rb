@@ -14,10 +14,10 @@ module SassMeister
 
     configure :production do
       COMPILER_ENDPOINTS = {
-        '3.4' => 'http://sassmeister-34.herokuapp.com',
-        '3.3' => 'http://sassmeister-33.herokuapp.com',
-        '3.2' => 'http://sassmeister-32.herokuapp.com',
-        'lib' => 'http://libsass.api.sassmeister.com'
+        '3.4' => ENV['SASS_34_ENDPOINT'] || 'http://sassmeister-34.herokuapp.com',
+        '3.3' => ENV['SASS_33_ENDPOINT'] || 'http://sassmeister-33.herokuapp.com',
+        '3.2' => ENV['SASS_32_ENDPOINT'] || 'http://sassmeister-32.herokuapp.com',
+        'lib' => ENV['LIBSASS_ENDPOINT'] || 'http://libsass.api.sassmeister.com'
       }
     end
 
@@ -38,25 +38,24 @@ module SassMeister
     get '/app/:compiler/extensions' do
       @api.extensions
 
-      return @api.body
+      @api.body
     end
 
 
     post '/app/:compiler/compile' do
       @api.compile params
 
-      return @api.body
+      @api.body
     end
 
 
     post '/app/:compiler/convert' do
-      if params[:compiler] == 'lib'
-        @api = SassMeister::Client.new(COMPILER_ENDPOINTS['3.3'])
-      end
+      @api = SassMeister::Client.new(COMPILER_ENDPOINTS['3.3']) if params[:compiler] == 'lib'
 
       @api.convert params
 
-      return @api.body
+      @api.body
     end
   end
 end
+
