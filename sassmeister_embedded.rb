@@ -9,7 +9,7 @@ require 'sassmeister/helpers'
 require 'object'
 require 'array'
 require 'assets'
-require 'sassmeister/client'
+require 'sassmeister/api_routes'
 
 class SassMeisterEmbeddedApp < Sinatra::Base
   register Sinatra::Partial
@@ -17,11 +17,10 @@ class SassMeisterEmbeddedApp < Sinatra::Base
   set :partial_template_engine, :erb
   set :protection, :except => :frame_options
 
-  helpers SassMeister::Helpers
   use SassMeister::ApiRoutes
 
+  helpers SassMeister::Helpers
   helpers Assets
-
 
   configure :development do
     APP_DOMAIN = 'sassmeister.dev'
@@ -35,7 +34,6 @@ class SassMeisterEmbeddedApp < Sinatra::Base
     APP_DOMAIN = 'sassmeister.com'
     SANDBOX_DOMAIN = 'sandbox.sassmeister.com'
     Assets::HOST = 'http://cdn.sassmeister.com'
-    require 'newrelic_rpm'
 
     Chairman.config(ENV['GITHUB_ID'], ENV['GITHUB_SECRET'], ['gist'])
     CACHE_MAX_AGE = 1800  # 30 mins.

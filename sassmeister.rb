@@ -22,7 +22,6 @@ class SassMeisterApp < Sinatra::Base
   helpers SassMeister::Helpers
   helpers Assets
 
-
   configure :development do
     APP_DOMAIN = 'sassmeister.dev'
     SANDBOX_DOMAIN = 'sandbox.sassmeister.dev'

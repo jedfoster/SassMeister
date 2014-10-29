@@ -1,4 +1,3 @@
-# require 'sassmeister/helpers'
 require 'sassmeister/client'
 
 module SassMeister
