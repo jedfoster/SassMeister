@@ -20,12 +20,12 @@ module SassMeister
       }
     end
 
-    set :protection, :except => :frame_options
+    set :protection, except: :frame_options
 
     before '/app/:compiler/*' do
       return erb :'404' unless COMPILER_ENDPOINTS.include? params[:compiler]
 
-      @api = SassMeister::Client.new(COMPILER_ENDPOINTS[params[:compiler]])
+      @api = SassMeister::Client.new COMPILER_ENDPOINTS[params[:compiler]]
     end
 
 
