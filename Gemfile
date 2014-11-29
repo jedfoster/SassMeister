@@ -9,6 +9,7 @@ gem 'chairman'
 gem 'rack-cache'
 gem 'activesupport'
 gem 'faraday'
+gem 'sawyer'
 
 group :assets do
   gem 'execjs'

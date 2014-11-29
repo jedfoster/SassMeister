@@ -163,6 +163,7 @@ DEPENDENCIES
   rake
   s3_website!
   sass
+  sawyer
   sinatra
   sinatra-partial
   stipe
