@@ -1,13 +1,13 @@
 module Rack
   class StaticCache
     def call(env)
-      path = env["PATH_INFO"]
+      path = env['PATH_INFO']
       url = @urls.detect{ |u| path.index(u) == 0 }
       unless url.nil?
         path.sub!(/-[\d.]+([.][a-zA-Z][\w]+)?$/, '\1') if @versioning_enabled
         status, headers, body = @file_server.call(env)
         if @no_cache[url].nil?
-          headers['Cache-Control'] ="public, max-age=#{@duration_in_seconds}"
+          headers['Cache-Control'] = "public, max-age=#{@duration_in_seconds}"
           headers['Expires'] = @duration_in_words
           headers.delete 'Etag'
           headers.delete 'Pragma'
@@ -24,3 +24,4 @@ module Rack
     end
   end
 end
+

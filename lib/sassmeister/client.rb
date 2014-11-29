@@ -5,6 +5,7 @@ module SassMeister
   class Client
     attr_accessor :headers, :body
 
+
     def initialize(host)
       @api_client = Sawyer::Agent.new(host, {serializer: Sawyer::Serializer.yajl}) do |http|
         http.headers['content-type'] = 'application/json'
@@ -14,17 +15,21 @@ module SassMeister
       @body = ''
     end
 
+
     def extensions
       get '/extensions'
     end
+
 
     def compile(params)
       post '/compile', params
     end
 
+
     def convert(params)
       post '/convert', params
     end
+
 
     private
 
@@ -36,13 +41,16 @@ module SassMeister
         ]
       end
 
+
       def get(path, params = {})
         call @api_client.call :get, path, params
       end
 
+
       def post(path, params = {})
         call @api_client.call :post, path, params
       end
+
 
       def call(api_response)
         api_response.headers.each do |key, value|

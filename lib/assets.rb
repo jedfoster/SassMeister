@@ -35,10 +35,11 @@ module Assets
   private
 
     def assets
-      @assets ||= YAML.load_file("config/assets.yml")
+      @assets ||= YAML.load_file 'config/assets.yml'
     end
 
     def manifest
-      @manifest ||= YAML.load_file('config/asset-manifest.yml')
+      @manifest ||= YAML.load_file 'config/asset-manifest.yml'
     end
 end
+
