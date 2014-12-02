@@ -22,7 +22,7 @@ class SassMeisterApp < Sinatra::Base
   helpers SassMeister::Helpers
   helpers Assets
 
-  configure :development do
+  configure :development, :test do
     APP_DOMAIN = 'sassmeister.dev'
     SANDBOX_DOMAIN = 'sandbox.sassmeister.dev'
     yml = YAML.load_file 'config/github.yml'
@@ -99,7 +99,7 @@ class SassMeisterApp < Sinatra::Base
 
     headers 'Access-Control-Allow-Origin' => origin if origin
 
-    if request.request_method == "GET"
+    if request.get?
       cache_control :public, max_age: CACHE_MAX_AGE
 
       last_modified app_last_modified.httpdate unless request.path.include? 'gist'
@@ -147,6 +147,8 @@ class SassMeisterApp < Sinatra::Base
 
     erb :about
   end
+
+
 
 
   get %r{/gist(?:/[\w-]*)*/([\d\w]+)} do

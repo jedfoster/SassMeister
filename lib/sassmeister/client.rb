@@ -16,6 +16,11 @@ module SassMeister
     end
 
 
+    def root
+      get '/'
+    end
+
+
     def extensions
       get '/extensions'
     end

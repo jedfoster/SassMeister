@@ -22,9 +22,10 @@ group :assets do
   gem 'closure-compiler'
 end
 
-group :development do
+group :development, :test do
   gem 'pry-remote'
   gem 's3_website', :github => 'jedfoster/s3_website', :branch => '1.x'
+  gem 'rack-test'
 end
 
 group :production do

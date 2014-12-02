@@ -109,6 +109,8 @@ GEM
       rack (>= 0.4)
     rack-protection (1.5.3)
       rack
+    rack-test (0.6.2)
+      rack (>= 1.0)
     raindrops (0.13.0)
     rake (10.1.1)
     rb-fsevent (0.9.4)
@@ -160,6 +162,7 @@ DEPENDENCIES
   pry-remote
   rack-cache
   rack-contrib!
+  rack-test
   rake
   s3_website!
   sass
