@@ -8,22 +8,6 @@ task :deploy do
   system('git push origin')
 end
 
-desc 'Run the app\'s server in either development or production mode'
-task :server do
-  environment = 'development'
-
-  if ARGV.last.match(/(development|production)/)
-    environment = ARGV.last
-  end
-
-  Rake::Task['assets:precompile'].invoke
-
-  puts "Starting SassMeister in #{environment.upcase} mode..."
-
-  system("bundle exec rackup config.ru -p 3000 -E #{environment}")
-
-  task environment.to_sym do ; end
-end
 
 desc 'Compile Coffeescript'
 task 'compile:coffee' do
@@ -64,8 +48,6 @@ task 'assets:precompile' do
     file = File.read("public/js/#{js[0]}.js")
     sha1 = Digest::SHA1.hexdigest(file).slice(0..15)
  
-    # File.open("config/#{js[0]}.txt", 'w') {|f| f.write(sha1) }
-
     manifest[js[0]] = sha1
 
     File.open("public/js/#{js[0]}-#{sha1}.js", 'w') {|f| f.write(file) }
@@ -73,8 +55,6 @@ task 'assets:precompile' do
 
   file = File.read('public/css/style.css')
   sha1 = Digest::SHA1.hexdigest(file).slice(0..15)
-
-  # File.open('config/style.txt', 'w') {|f| f.write(sha1) }
 
   manifest['style'] = sha1
 
