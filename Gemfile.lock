@@ -35,6 +35,7 @@ GEM
     aws-sdk (1.47.0)
       json (~> 1.4)
       nokogiri (>= 1.4.4)
+    backports (3.6.4)
     chairman (0.1.6)
       dalli (~> 2.6.4)
       faraday-http-cache (~> 0.4.0)
@@ -129,6 +130,13 @@ GEM
       rack (~> 1.4)
       rack-protection (~> 1.4)
       tilt (~> 1.3, >= 1.3.4)
+    sinatra-contrib (1.4.2)
+      backports (>= 2.0)
+      multi_json
+      rack-protection
+      rack-test
+      sinatra (~> 1.4.0)
+      tilt (~> 1.3)
     sinatra-partial (0.4.0)
       sinatra
     slop (3.4.7)
@@ -168,6 +176,7 @@ DEPENDENCIES
   sass
   sawyer
   sinatra
+  sinatra-contrib
   sinatra-partial
   stipe
   unicorn

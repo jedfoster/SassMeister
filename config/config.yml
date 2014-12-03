@@ -1,0 +1,20 @@
+development: &default_settings
+  app_version: '2.0.1'
+  session_duration: 7776000 # 90 days, in seconds
+  app_domain: 'sassmeister.dev'
+  sandbox_domain: 'sandbox.sassmeister.dev'
+  assets_host: '/'
+  cache_max_age: 0
+  cookie_domain: '.sassmeister.dev'
+
+test:
+  <<: *default_settings
+
+production:
+  <<: *default_settings
+  app_domain: 'sassmeister.com'
+  sandbox_domain: 'sandbox.sassmeister.com'
+  assets_host: 'http://cdn.sassmeister.com'
+  cache_max_age: 300 # 5 minutes
+  cookie_domain: '.sassmeister.com'
+

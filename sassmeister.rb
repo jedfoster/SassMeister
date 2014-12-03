@@ -2,6 +2,7 @@ $LOAD_PATH.unshift(File.join(File.dirname(File.realpath(__FILE__)), 'lib'))
 
 require 'sinatra/base'
 require 'sinatra/partial'
+require 'sinatra/config_file'
 require 'chairman'
 require 'json'
 require 'yaml'
@@ -13,8 +14,11 @@ require 'sassmeister/api_routes'
 
 class SassMeisterApp < Sinatra::Base
   register Sinatra::Partial
+  register Sinatra::ConfigFile
 
   set :partial_template_engine, :erb
+
+  config_file 'config/config.yml'
 
   use Chairman::Routes
   use SassMeister::ApiRoutes
@@ -22,30 +26,23 @@ class SassMeisterApp < Sinatra::Base
   helpers SassMeister::Helpers
   helpers Assets
 
+  APP_DOMAIN = settings.app_domain
+  SANDBOX_DOMAIN = settings.sandbox_domain
+  CACHE_MAX_AGE = settings.cache_max_age
+  Assets::HOST = settings.assets_host
+  COOKIE_DOMAIN = settings.cookie_domain
+  APP_VERSION = settings.app_version
+  SESSION_DURATION = settings.session_duration
+
   configure :development, :test do
-    APP_DOMAIN = 'sassmeister.dev'
-    SANDBOX_DOMAIN = 'sandbox.sassmeister.dev'
     yml = YAML.load_file 'config/github.yml'
     Chairman.config yml['client_id'], yml['client_secret'], ['gist']
-    CACHE_MAX_AGE = 0
   end
 
   configure :production do
-    APP_DOMAIN = 'sassmeister.com'
-    SANDBOX_DOMAIN = 'sandbox.sassmeister.com'
-    Assets::HOST = 'http://cdn.sassmeister.com'
     require 'newrelic_rpm'
-
     Chairman.config ENV['GITHUB_ID'], ENV['GITHUB_SECRET'], ['gist']
-    CACHE_MAX_AGE = 300  # 5 mins.
   end
-
-  configure do
-    APP_VERSION = '2.0.1'
-    SESSION_DURATION = 7776000 # 90 days, in seconds
-    COOKIE_DOMAIN = ".#{APP_DOMAIN}"
-  end
-
 
   # implement redirects
   class Chairman::Routes

@@ -1,25 +1,22 @@
+require 'sinatra/base'
+require 'sinatra/config_file'
 require 'sassmeister/client'
 
 module SassMeister
   class ApiRoutes < Sinatra::Base
-    configure :development, :test do
-      COMPILER_ENDPOINTS = {
-        'lib' => 'http://lib.sassmeister.dev',
-        '3.4' => 'http://sass34.sassmeister.dev',
-        '3.3' => 'http://sass33.sassmeister.dev',
-        '3.2' => 'http://sass32.sassmeister.dev'
-      }
-    end
+    register Sinatra::ConfigFile
 
-    configure :production do
-      COMPILER_ENDPOINTS = {
-        'lib' => ENV['LIBSASS_ENDPOINT'] || 'http://libsass.api.sassmeister.com',
-        '3.4' => ENV['SASS_34_ENDPOINT'] || 'http://sassmeister-34.herokuapp.com',
-        '3.3' => ENV['SASS_33_ENDPOINT'] || 'http://sassmeister-33.herokuapp.com',
-        '3.2' => ENV['SASS_32_ENDPOINT'] || 'http://sassmeister-32.herokuapp.com'
-      }
-    end
+    config_file '../../config/api.yml'
+    
+    env_endpoints = {
+      'lib' => ENV['LIBSASS_ENDPOINT'],
+      '3.4' => ENV['SASS_34_ENDPOINT'],
+      '3.3' => ENV['SASS_33_ENDPOINT'],
+      '3.2' => ENV['SASS_32_ENDPOINT']
+    }
 
+    COMPILER_ENDPOINTS = settings.api[:endpoints].merge(env_endpoints) {|k, yml, env| env.nil? ? yml : env}
+    
     set :protection, except: :frame_options
 
     before '/app/:compiler/*' do
