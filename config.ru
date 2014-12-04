@@ -36,6 +36,9 @@ else
     run Rack::File.new("javascripts")
   end
 
+  require 'rack/env'
+  use Rack::Env
+
   use Rack::Cache,
     verbose: true,
     metastore:   'memcached://localhost:11211',

@@ -33,15 +33,10 @@ class SassMeisterApp < Sinatra::Base
   COOKIE_DOMAIN = settings.cookie_domain
   APP_VERSION = settings.app_version
   SESSION_DURATION = settings.session_duration
-
-  configure :development, :test do
-    yml = YAML.load_file 'config/github.yml'
-    Chairman.config yml['client_id'], yml['client_secret'], ['gist']
-  end
+  Chairman.config ENV['GITHUB_ID'], ENV['GITHUB_SECRET'], ['gist']
 
   configure :production do
     require 'newrelic_rpm'
-    Chairman.config ENV['GITHUB_ID'], ENV['GITHUB_SECRET'], ['gist']
   end
 
   # implement redirects

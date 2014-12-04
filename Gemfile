@@ -27,6 +27,7 @@ group :development, :test do
   gem 'pry-remote'
   gem 's3_website', :github => 'jedfoster/s3_website', :branch => '1.x'
   gem 'rack-test'
+  gem 'rack-env'
 end
 
 group :production do

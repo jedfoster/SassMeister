@@ -33,15 +33,7 @@ class SassMeisterEmbeddedApp < Sinatra::Base
   COOKIE_DOMAIN = settings.cookie_domain
   APP_VERSION = settings.app_version
   SESSION_DURATION = settings.session_duration
-
-  configure :development do
-    yml = YAML.load_file 'config/github.yml'
-    Chairman.config yml['client_id'], yml['client_secret'], ['gist']
-  end
-
-  configure :production do
-    Chairman.config ENV['GITHUB_ID'], ENV['GITHUB_SECRET'], ['gist']
-  end
+  Chairman.config ENV['GITHUB_ID'], ENV['GITHUB_SECRET'], ['gist']
 
   before do
     @github = Chairman.session(nil)
