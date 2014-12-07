@@ -5,7 +5,6 @@ module SassMeister
   class Client
     attr_accessor :headers, :body
 
-
     def initialize(host)
       @api_client = Sawyer::Agent.new(host, {serializer: Sawyer::Serializer.yajl}) do |http|
         http.headers['content-type'] = 'application/json'
