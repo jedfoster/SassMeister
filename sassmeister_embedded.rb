@@ -29,7 +29,9 @@ class SassMeisterEmbeddedApp < Sinatra::Base
   APP_DOMAIN = settings.app_domain
   SANDBOX_DOMAIN = settings.sandbox_domain
   CACHE_MAX_AGE = settings.cache_max_age
-  Assets::HOST = settings.assets_host
+  # Assets::HOST = settings.assets_host
+  Assets::HOST = settings.assets_host unless defined? Assets::HOST
+
   COOKIE_DOMAIN = settings.cookie_domain
   APP_VERSION = settings.app_version
   SESSION_DURATION = settings.session_duration

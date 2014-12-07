@@ -2,7 +2,7 @@ require 'yaml'
 
 module Assets
 
-  HOST = ''
+  HOST = '' unless defined? HOST
 
   def javascript_tags(bundle)
     return "<script src=\"#{HOST}/js/#{bundle}#{version(bundle)}.js\"></script>" if settings.environment == :production
