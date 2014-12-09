@@ -11,6 +11,7 @@ gem 'rack-cache'
 gem 'activesupport'
 gem 'faraday'
 gem 'sawyer'
+gem 'redis'
 
 group :assets do
   gem 'execjs'
@@ -28,6 +29,14 @@ group :development, :test do
   gem 's3_website', :github => 'jedfoster/s3_website', :branch => '1.x'
   gem 'rack-test'
   gem 'rack-env'
+end
+
+group :test do
+  gem 'fakeredis'
+end
+
+group :develeopment, :production do
+  gem 'redis'
 end
 
 group :production do
