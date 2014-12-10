@@ -11,7 +11,7 @@ gem 'rack-cache'
 gem 'activesupport'
 gem 'faraday'
 gem 'sawyer'
-gem 'redis'
+gem 'thor'
 
 group :assets do
   gem 'execjs'

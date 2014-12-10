@@ -186,4 +186,5 @@ DEPENDENCIES
   sinatra-contrib
   sinatra-partial
   stipe
+  thor
   unicorn

@@ -25,11 +25,36 @@ task 'compile:coffee' do
   end
 end
 
+
+desc 'Warm up the Redis cache'
+task 'warm:cache' do
+  require_relative 'sassmeister.rb'
+  require 'thor'
+
+  class Utilities < Thor
+    include Thor::Actions
+  end
+
+  utilities = Utilities.new
+  app = SassMeisterApp.new
+
+  unless app.helpers.build_compiler_menu
+    utilities.say_status('error', 'Could not build compiler menu', :red)
+  end
+
+  unless app.helpers.build_extension_info_list
+    utilities.say_status('error', 'Could not build extension info list', :red)
+  end
+end
+
+
 # Heroku will run this task as part of the deployment process.
 desc 'Compile the app\'s Sass'
 task 'assets:precompile' do
   require 'yaml'
   require 'digest/sha1'
+
+  Rake::Task['warm:cache'].invoke
 
   Dir.mkdir('public/js/') unless Dir.exists? 'public/js/'
 
