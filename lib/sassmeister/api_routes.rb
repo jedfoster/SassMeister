@@ -31,20 +31,6 @@ module SassMeister
     end
 
 
-    get '/app/compilers' do
-      x = []
-      COMPILER_ENDPOINTS.each do |compiler|
-        api = SassMeister::Client.new compiler[1]
-
-        x.push JSON.parse(api.body) if api.root == 200
-      end
-
-      content_type 'application/json'
-
-      JSON.generate x
-    end
-
-
     get '/app/:compiler/extensions' do
       @api.extensions
 
