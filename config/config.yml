@@ -6,6 +6,7 @@ development: &default_settings
   assets_host: '/'
   cache_max_age: 0
   cookie_domain: '.sassmeister.dev'
+  cookie_secret: 'dev'
 
 test:
   <<: *default_settings

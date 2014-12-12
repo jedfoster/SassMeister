@@ -31,6 +31,7 @@ class SassMeisterApp < Sinatra::Base
   CACHE_MAX_AGE = settings.cache_max_age
   Assets::HOST = settings.assets_host unless defined? Assets::HOST
   COOKIE_DOMAIN = settings.cookie_domain
+  COOKIE_SECRET = ENV['COOKIE_SECRET'] || settings.cookie_secret
   APP_VERSION = settings.app_version
   SESSION_DURATION = settings.session_duration
   Chairman.config ENV['GITHUB_ID'], ENV['GITHUB_SECRET'], ['gist']
@@ -47,7 +48,7 @@ class SassMeisterApp < Sinatra::Base
                                    domain: SassMeisterApp::COOKIE_DOMAIN,
                                    path: '/',
                                    expire_after: SassMeisterApp::SESSION_DURATION,
-                                   secret: ENV['COOKIE_SECRET'] # null if there's no COOKIE_SECRET in the environment
+                                   secret: SassMeisterApp::COOKIE_SECRET
        end
     end
 
