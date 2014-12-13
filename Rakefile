@@ -28,7 +28,8 @@ end
 
 desc 'Warm up the Redis cache'
 task 'warm:cache' do
-  require_relative 'sassmeister.rb'
+  require_relative 'sassmeister'
+  require_relative 'lib/sassmeister/redis'
   require 'thor'
 
   class Utilities < Thor
@@ -37,6 +38,45 @@ task 'warm:cache' do
 
   utilities = Utilities.new
   app = SassMeisterApp.new
+  
+  # Pre-populate to ensure we have _something_
+  compilers = SassMeister::Redis.new 'compilers'
+  compilers.set_defaults '{"3.2":{"sass":"3.2","engine":"Ruby"},"3.3":{"sass":"3.3","engine":"Ruby"},"3.4":{"sass":"3.4","engine":"Ruby"},"lib":{"sass":"3","engine":"LibSass"}}'
+
+  extensions = SassMeister::Redis.new 'extensions'
+  extensions.set_defaults '{"Ark":{"homepage":"https://github.com/drewbolles/ark"},"Bitters":{"homepage":"https://github.com/jedfoster/bitters-compass"},
+"Blend Modes":{"homepage":"https://github.com/heygrady/scss-blend-modes"},"Bootstrap Sass":{"homepage":"https://github.com/twbs/bootstrap-sass"},
+"Bourbon":{"homepage":"https://github.com/jedfoster/bourbon-compass"},"Breakpoint":{"homepage":"https://github.com/Team-Sass/breakpoint"},
+"Breakpoint Slicer":{"homepage":"https://github.com/lolmaus/breakpoint-slicer"},"Breakup":{"homepage":"https://github.com/bpscott/breakup"},
+"Ceasar Easing":{"homepage":"https://github.com/jhardy/compass-ceaser-easing"},"Color Schemer":{"homepage":"https://github.com/scottkellum/color-schemer"},
+"Compass":{"homepage":"http://compass-style.org"},"Compass Inuit":{"homepage":"http://github.com/stephenway/compass-intuit"},
+"Compass Slideshow":{"homepage":"http://www.oddbird.net/"},"Fancy Buttons":{"homepage":"http://github.com/imathis/fancy-buttons"},
+"Fittext":{"homepage":"http://www.bookcasey.com/fittext/"},"Foundation":{"homepage":"https://github.com/zurb/bower-foundation"},
+"Grid Coordinates":{"homepage":"http://grid-coordinates.com/"},"Guff":{"homepage":"http://kenwheeler.github.io/guff/"},
+"Harsh":{"homepage":"http://www.bookcasey.com/harsh/"},"Jacket":{"homepage":"http://github.com/robwierzbowski/jacket"},
+"Modular Scale":{"homepage":"http://extension.com"},"Neat":{"homepage":"https://github.com/jedfoster/neat-compass"},
+"Normalize SCSS":{"homepage":"https://github.com/JohnAlbin/normalize-scss"},
+"Photoshop Drop Shadow":{"homepage":"https://github.com/heygrady/compass-photoshop-drop-shadow"},
+"Responsive Calculator":{"homepage":"http://rwdcalc.com"},"Responsive Modular Scale":{"homepage":"http://github.com/gakimball/responsive-modular-scale"},
+"Responsive Sass":{"homepage":"http://ntreadway.github.com/responsive-sass/welcome"},"Salsa":{"homepage":"http://tsi.github.com/Salsa/"},
+"Sass List-Maps":{"homepage":"https://github.com/lunelson/sass-list-maps"},"Sassy Buttons":{"homepage":"http://www.jaredhardy.com/sassy-buttons"},
+"Sassy Text Shadow":{"homepage":"http://sassymothereffingtextshadow.com"},"Scut":{"homepage":"http://davidtheclark.github.io/scut/"},
+"Singularity Extras":{"homepage":"http://singularity.gs"},"Singularity Golden Grid":{"homepage":"https://github.com/hunterman/singularity-golden-grid"},
+"Singularity.gs":{"homepage":"http://singularity.gs"},"Stipe":{"homepage":"https://github.com/Toadstool-Stipe/stipe"},
+"Stitch":{"homepage":"https://github.com/anthonyshort/stitch-css"},"Susy":{"homepage":"http://susy.oddbird.net/"},"Toolkit":{"homepage":"https://github.com/Snugug/toolkit"},
+"True":{"homepage":"http://ericsuzanne.com/true"},"YIQ Color Contrast":{"homepage":"https://github.com/timhettler/compass-yiq-color-contrast"},
+"Zen Grids":{"homepage":"http://zengrids.com"},"Base.Sass":{"homepage":"https://github.com/jsw0528/base.sass"},
+"CSShake":{"homepage":"https://github.com/elrumordelaluz/csshake"},"Color Hacker":{"homepage":"http://github.com/imathis/color-hacker"},
+"Flint":{"homepage":"http://flint.gs"},"Garnish":{"homepage":"https://github.com/paulozoom/garnish"},"MathSass":{"homepage":"http://github.com/terkel/mathsass"},
+"Position":{"homepage":"https://github.com/Undistraction/position"},"Quotation Marks":{"homepage":"http://quotation-marks.org"},
+"Sass Color Helpers":{"homepage":"https://github.com/voxpelli/sass-color-helpers"},"Sassifaction":{"homepage":"https://github.com/sturobson/Sassifaction"},
+"Sassy Maps":{"homepage":"https://github.com/Snugug/Sassy-Maps"},"Sassy-Gridlover":{"homepage":"https://github.com/hiulit/Sassy-Gridlover"},
+"SassyBitwise":{"homepage":"http://github.com/HugoGiraudel/SassyBitwise"},"SassyCast":{"homepage":"https://github.com/HugoGiraudel/SassyCast/"},
+"SassyJSON":{"homepage":"https://github.com/HugoGiraudel/SassyJSON/"},"SassyLists":{"homepage":"http://sassylists.com/"},
+"SassyMatrix":{"homepage":"https://github.com/HugoGiraudel/SassyMatrix/"},"SassySort":{"homepage":"https://github.com/HugoGiraudel/SassySort/"},
+"SassyStrings":{"homepage":"https://github.com/HugoGiraudel/SassyStrings"},"Singularity Quick Spanner":{"homepage":"https://github.com/lolmaus/singularity-quick-spanner"},
+"Sunglass":{"homepage":"https://github.com/devatrox/Sunglass"},"Typecsset":{"homepage":"https://github.com/csswizardry/typecsset"},
+"Typesettings":{"homepage":"https://github.com/ianrose/typesettings"},"UtilityBelt":{"homepage":"https://github.com/dmtintner/UtilityBelt"}}'
 
   unless app.helpers.build_compiler_menu
     utilities.say_status('error', 'Could not build compiler menu', :red)

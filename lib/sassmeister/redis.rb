@@ -41,6 +41,18 @@ module SassMeister
 
       RedisConnection.connect.set @key, value
     end
+
+    def set_defaults(defaults)
+      if defaults.is_a? String
+        defaults = JSON.parse(defaults, symbolize_names: true) rescue defaults
+      end
+
+      @value.merge! defaults do |key, old, new|
+        (@value.key?(key) && !old.nil?) ? old : new
+      end
+
+      set
+    end
   end
 end
 
