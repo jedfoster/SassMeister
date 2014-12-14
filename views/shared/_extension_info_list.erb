@@ -1,5 +1,5 @@
 <ol>
-<% extensions.each do |key, value| %>
-  <li><a href="<%= value[:homepage] %>"><%= key %></a></li>
+<% extensions.keys.sort.each do |key| %>
+  <li><a href="<%= extensions[key][:homepage] %>"><%= key %></a></li>
 <% end %>
 </ol>
