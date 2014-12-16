@@ -1,0 +1,25 @@
+api:
+
+  # These defaults can be overridden with the following environment variables:
+  #   ENV['LIBSASS_ENDPOINT'] 
+  #   ENV['SASS_34_ENDPOINT']
+  #   ENV['SASS_33_ENDPOINT']
+  #   ENV['SASS_32_ENDPOINT']
+
+  development: &default_settings
+    endpoints:
+      lib: 'http://lib.sassmeister.dev'
+      '3.4': 'http://sass34.sassmeister.dev'
+      '3.3': 'http://sass33.sassmeister.dev'
+      '3.2': 'http://sass32.sassmeister.dev'
+
+  test:
+    <<: *default_settings
+
+  production:
+    endpoints:
+      lib: 'http://libsass.api.sassmeister.com'
+      '3.4': 'http://sassmeister-34.herokuapp.com'
+      '3.3': 'http://sassmeister-33.herokuapp.com'
+      '3.2': 'http://sassmeister-32.herokuapp.com'
+

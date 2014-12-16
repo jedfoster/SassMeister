@@ -1,11 +1,11 @@
 .DS_Store
 .bundle
+.env
 .sass-cache/*
 .rvmrc
 .pow*
 public/js/*
 public/css/*
-github.yml
 tmp
 log
 config/*.txt

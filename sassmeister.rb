@@ -2,6 +2,7 @@ $LOAD_PATH.unshift(File.join(File.dirname(File.realpath(__FILE__)), 'lib'))
 
 require 'sinatra/base'
 require 'sinatra/partial'
+require 'sinatra/config_file'
 require 'chairman'
 require 'json'
 require 'yaml'
@@ -13,8 +14,11 @@ require 'sassmeister/api_routes'
 
 class SassMeisterApp < Sinatra::Base
   register Sinatra::Partial
+  register Sinatra::ConfigFile
 
   set :partial_template_engine, :erb
+
+  config_file 'config/config.yml'
 
   use Chairman::Routes
   use SassMeister::ApiRoutes
@@ -22,40 +26,29 @@ class SassMeisterApp < Sinatra::Base
   helpers SassMeister::Helpers
   helpers Assets
 
-  configure :development do
-    APP_DOMAIN = 'sassmeister.dev'
-    SANDBOX_DOMAIN = 'sandbox.sassmeister.dev'
-    yml = YAML.load_file("config/github.yml")
-    Chairman.config(yml["client_id"], yml["client_secret"], ['gist'])
-    CACHE_MAX_AGE = 0
-  end
+  APP_DOMAIN = settings.app_domain
+  SANDBOX_DOMAIN = settings.sandbox_domain
+  CACHE_MAX_AGE = settings.cache_max_age
+  Assets::HOST = settings.assets_host unless defined? Assets::HOST
+  COOKIE_DOMAIN = settings.cookie_domain
+  COOKIE_SECRET = ENV['COOKIE_SECRET'] || settings.cookie_secret
+  APP_VERSION = settings.app_version
+  SESSION_DURATION = settings.session_duration
+  Chairman.config ENV['GITHUB_ID'], ENV['GITHUB_SECRET'], ['gist']
 
   configure :production do
-    APP_DOMAIN = 'sassmeister.com'
-    SANDBOX_DOMAIN = 'sandbox.sassmeister.com'
-    Assets::HOST = 'http://cdn.sassmeister.com'
     require 'newrelic_rpm'
-
-    Chairman.config(ENV['GITHUB_ID'], ENV['GITHUB_SECRET'], ['gist'])
-    CACHE_MAX_AGE = 300  # 5 mins.
   end
-
-  configure do
-    APP_VERSION = '2.0.1'
-    SESSION_DURATION = 7776000 # 90 days, in seconds
-    COOKIE_DOMAIN = ".#{APP_DOMAIN}"
-  end
-
 
   # implement redirects
   class Chairman::Routes
     configure do
       helpers do
-        use Rack::Session::Cookie, :key => SassMeisterApp::APP_DOMAIN,
-                                   :domain => SassMeisterApp::COOKIE_DOMAIN,
-                                   :path => '/',
-                                   :expire_after => SassMeisterApp::SESSION_DURATION,
-                                   :secret => ENV['COOKIE_SECRET'] # null if there's no COOKIE_SECRET in the environment
+        use Rack::Session::Cookie, key: SassMeisterApp::APP_DOMAIN,
+                                   domain: SassMeisterApp::COOKIE_DOMAIN,
+                                   path: '/',
+                                   expire_after: SassMeisterApp::SESSION_DURATION,
+                                   secret: SassMeisterApp::COOKIE_SECRET
        end
     end
 
@@ -63,28 +56,28 @@ class SassMeisterApp < Sinatra::Base
       session[:version] == SassMeisterApp::APP_VERSION
 
       response.set_cookie('github_id', {
-        :value => @user.login,
-        :expires => (Time.now + SassMeisterApp::SESSION_DURATION),
-        :domain => SassMeisterApp::COOKIE_DOMAIN,
-        :path => '/'
+        value: @user.login,
+        expires: (Time.now + SassMeisterApp::SESSION_DURATION),
+        domain: SassMeisterApp::COOKIE_DOMAIN,
+        path: '/'
       })
 
       response.set_cookie('avatar_url', {
-        :value => @user.avatar_url,
-        :expires => (Time.now + SassMeisterApp::SESSION_DURATION),
-        :domain => SassMeisterApp::COOKIE_DOMAIN,
-        :path => '/'
+        value: @user.avatar_url,
+        expires: (Time.now + SassMeisterApp::SESSION_DURATION),
+        domain: SassMeisterApp::COOKIE_DOMAIN,
+        path: '/'
       })
 
-      redirect to('/')
+      redirect to '/'
     end
 
     after '/logout' do
       ['github_id', 'avatar_url'].each do |cookie|
-        response.delete_cookie cookie, {:domain => SassMeisterApp::COOKIE_DOMAIN, :path => '/'}
+        response.delete_cookie cookie, {domain: SassMeisterApp::COOKIE_DOMAIN, path: '/'}
       end
 
-      redirect to('/')
+      redirect to '/'
     end
   end
 
@@ -99,7 +92,7 @@ class SassMeisterApp < Sinatra::Base
 
     headers 'Access-Control-Allow-Origin' => origin if origin
 
-    if request.request_method == "GET"
+    if request.get?
       cache_control :public, max_age: CACHE_MAX_AGE
 
       last_modified app_last_modified.httpdate unless request.path.include? 'gist'
@@ -115,7 +108,7 @@ class SassMeisterApp < Sinatra::Base
 
       # Delete the user info cookies, too
       ['github_id', 'avatar_url'].each do |cookie|
-        response.delete_cookie cookie, {:domain => SassMeisterApp::COOKIE_DOMAIN, :path => '/'}
+        response.delete_cookie cookie, {domain: SassMeisterApp::COOKIE_DOMAIN, path: '/'}
       end
     end
   end
@@ -202,25 +195,25 @@ class SassMeisterApp < Sinatra::Base
     end
 
     @gist = {
-      :gist_id => id,
-      :owner => owner,
-      :sass_filename => filename,
-      :html_filename => (html_filename || ''),
-      :sass => {
-        :input => sass,
-        :syntax => syntax,
-        :original_syntax => syntax,
-        :dependencies => get_frontmatter_dependencies(sass)
+      gist_id: id,
+      owner: owner,
+      sass_filename: filename,
+      html_filename: (html_filename || ''),
+      sass: {
+        input: sass,
+        syntax: syntax,
+        original_syntax: syntax,
+        dependencies: get_frontmatter_dependencies(sass)
       },
-      :html => {
-        :input => (html || '').gsub('</script>', '<\/script>'),
-        :syntax => (html_syntax || '').gsub('</script>', '<\/script>')
+      html: {
+        input: (html || '').gsub('</script>', '<\/script>'),
+        syntax: (html_syntax || '').gsub('</script>', '<\/script>')
       }
     }
 
     @gist_output = {
-      :css => (css_file || ''),
-      :html => (rendered_file || '').gsub('</script>', '<\/script>')
+      css: (css_file || ''),
+      html: (rendered_file || '').gsub('</script>', '<\/script>')
     }
 
     erb :index
@@ -239,25 +232,25 @@ class SassMeisterApp < Sinatra::Base
 
     css = outputs[:css]
 
-    description = "Generated by SassMeister.com."
+    description = 'Generated by SassMeister.com.'
 
     sass_file = "SassMeister-input.#{inputs[:sass][:syntax].downcase}"
-    css_file = "SassMeister-output.css"
+    css_file = 'SassMeister-output.css'
 
     html = {}
 
     if inputs[:html] && inputs[:html][:input].chomp != ''
       html_file = "SassMeister-input-HTML.#{inputs[:html][:syntax].downcase}"
       html_input = inputs[:html][:input]
-      rendered_file = "SassMeister-rendered.html"
+      rendered_file = 'SassMeister-rendered.html'
       html_output = outputs[:html]
 
       html = {
         html_file => {
-          content: "#{html_input}"
+          content: html_input
         },
         rendered_file => {
-          content: "#{html_output}"
+          content: html_output
         }
       }
     end
@@ -307,14 +300,14 @@ class SassMeisterApp < Sinatra::Base
       deleted_files = {inputs[:sass_filename] => {content: nil}}
     end
 
-    css_file = "SassMeister-output.css"
+    css_file = 'SassMeister-output.css'
 
     html = {}
 
     if inputs[:html] && inputs[:html][:input].chomp != ''
       html_file = "SassMeister-input-HTML.#{inputs[:html][:syntax].downcase}"
       html_input = inputs[:html][:input]
-      rendered_file = "SassMeister-rendered.html"
+      rendered_file = 'SassMeister-rendered.html'
       html_output = outputs[:html]
 
       deleted_html = {}
@@ -324,9 +317,9 @@ class SassMeisterApp < Sinatra::Base
       elsif inputs[:html_filename].split('.').last == inputs[:html][:syntax].downcase
         html_file = inputs[:html_filename]
       else
-        filename = inputs[:html_filename].split('.')
+        filename = inputs[:html_filename].split '.'
         filename.pop
-        filename = filename.join('.')
+        filename = filename.join '.'
 
         html_file = "#{filename}.#{inputs[:html][:syntax].downcase}"
         deleted_html = {inputs[:html_filename] => {content: nil}}
@@ -339,7 +332,7 @@ class SassMeisterApp < Sinatra::Base
         rendered_file => {
           content: "#{html_output}"
         }
-      }.merge(deleted_html)
+      }.merge deleted_html
     end
 
     files = {}
@@ -375,3 +368,4 @@ class SassMeisterApp < Sinatra::Base
 
   run! if app_file == $0
 end
+

@@ -2,7 +2,7 @@ require 'yaml'
 
 module Assets
 
-  HOST = ''
+  HOST = '' unless defined? HOST
 
   def javascript_tags(bundle)
     return "<script src=\"#{HOST}/js/#{bundle}#{version(bundle)}.js\"></script>" if settings.environment == :production
@@ -19,7 +19,7 @@ module Assets
 
     "<link rel=\"stylesheet\" href=\"#{HOST}/css/#{bundle}.css\">"
   end
-  
+
   def image_tag(image)
     "<img src=\"#{HOST}/images/#{image}\">"
   end
@@ -35,10 +35,11 @@ module Assets
   private
 
     def assets
-      @assets ||= YAML.load_file("config/assets.yml")
+      @assets ||= YAML.load_file 'config/assets.yml'
     end
 
     def manifest
-      @manifest ||= YAML.load_file('config/asset-manifest.yml')
+      @manifest ||= YAML.load_file 'config/asset-manifest.yml'
     end
 end
+

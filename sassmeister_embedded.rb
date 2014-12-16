@@ -2,6 +2,7 @@ $LOAD_PATH.unshift(File.join(File.dirname(File.realpath(__FILE__)), 'lib'))
 
 require 'sinatra/base'
 require 'sinatra/partial'
+require 'sinatra/config_file'
 require 'chairman'
 require 'json'
 require 'yaml'
@@ -13,36 +14,28 @@ require 'sassmeister/api_routes'
 
 class SassMeisterEmbeddedApp < Sinatra::Base
   register Sinatra::Partial
+  register Sinatra::ConfigFile
 
   set :partial_template_engine, :erb
-  set :protection, :except => :frame_options
+  set :protection, except: :frame_options
+
+  config_file 'config/config.yml'
 
   use SassMeister::ApiRoutes
 
   helpers SassMeister::Helpers
   helpers Assets
 
-  configure :development do
-    APP_DOMAIN = 'sassmeister.dev'
-    SANDBOX_DOMAIN = 'sandbox.sassmeister.dev'
-    yml = YAML.load_file("config/github.yml")
-    Chairman.config(yml["client_id"], yml["client_secret"], ['gist'])
-    CACHE_MAX_AGE = 0
-  end
+  APP_DOMAIN = settings.app_domain
+  SANDBOX_DOMAIN = settings.sandbox_domain
+  CACHE_MAX_AGE = settings.cache_max_age
+  # Assets::HOST = settings.assets_host
+  Assets::HOST = settings.assets_host unless defined? Assets::HOST
 
-  configure :production do
-    APP_DOMAIN = 'sassmeister.com'
-    SANDBOX_DOMAIN = 'sandbox.sassmeister.com'
-    Assets::HOST = 'http://cdn.sassmeister.com'
-
-    Chairman.config(ENV['GITHUB_ID'], ENV['GITHUB_SECRET'], ['gist'])
-    CACHE_MAX_AGE = 1800  # 30 mins.
-  end
-
-  configure do
-    APP_VERSION = '2.0.1'
-  end
-
+  COOKIE_DOMAIN = settings.cookie_domain
+  APP_VERSION = settings.app_version
+  SESSION_DURATION = settings.session_duration
+  Chairman.config ENV['GITHUB_ID'], ENV['GITHUB_SECRET'], ['gist']
 
   before do
     @github = Chairman.session(nil)
@@ -73,7 +66,7 @@ class SassMeisterEmbeddedApp < Sinatra::Base
     id = params[:captures].first
 
     begin
-      response = @github.gist(id)
+      response = @github.gist id
 
       raise Octokit::NotFound unless response.message.nil?
 
@@ -82,7 +75,7 @@ class SassMeisterEmbeddedApp < Sinatra::Base
 
       if( ! file)
         syntax = filename = owner = ''
-        sass = "// Sorry, I couldn't find any valid Sass in that Gist."
+        sass = '// Sorry, I couldn\'t find any valid Sass in that Gist.'
 
       else
         sass = file.content
@@ -122,25 +115,25 @@ class SassMeisterEmbeddedApp < Sinatra::Base
     last_modified response.updated_at.httpdate
 
     @gist = {
-      :gist_id => id,
-      :owner => owner,
-      :sass_filename => filename,
-      :html_filename => (html_filename || ''),
-      :sass => {
-        :input => sass,
-        :syntax => syntax,
-        :original_syntax => syntax,
-        :dependencies => get_frontmatter_dependencies(sass)
+      gist_id: id,
+      owner: owner,
+      sass_filename: filename,
+      html_filename: (html_filename || ''),
+      sass: {
+        input: sass,
+        syntax: syntax,
+        original_syntax: syntax,
+        dependencies: get_frontmatter_dependencies(sass)
       },
-      :html => {
-        :input => (html || '').gsub('</script>', '<\/script>'),
-        :syntax => (html_syntax || '').gsub('</script>', '<\/script>')
+      html: {
+        input: (html || '').gsub('</script>', '<\/script>'),
+        syntax: (html_syntax || '').gsub('</script>', '<\/script>')
       }
     }
 
     @gist_output = {
-      :css => (css_file || ''),
-      :html => (rendered_file || '').gsub('</script>', '<\/script>')
+      css: (css_file || ''),
+      html: (rendered_file || '').gsub('</script>', '<\/script>')
     }
 
     @body_class = 'embedded'
@@ -150,3 +143,4 @@ class SassMeisterEmbeddedApp < Sinatra::Base
 
   run! if app_file == $0
 end
+
