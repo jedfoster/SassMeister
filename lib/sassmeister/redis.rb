@@ -5,7 +5,7 @@ module SassMeister
   class RedisConnection
     def self.connect
       @connection ||= begin
-        uri = ::URI.parse(ENV["REDISTOGO_URL"] || 'redis://localhost:6379')
+        uri = ::URI.parse(ENV["REDISCLOUD_URL"] || 'redis://localhost:6379')
         ::Redis.new(host: uri.host, port: uri.port, password: uri.password)
       end
     end
