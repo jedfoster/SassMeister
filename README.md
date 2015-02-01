@@ -5,59 +5,23 @@ Become a Sass master with SassMeister, the Sass playground.
 
 ## Installation ##
 
-```
-git clone https://github.com/jedfoster/SassMeister.git
-cd SassMeister
-bundle install
-```
+__tl;dr:__ Running the app locally is much more involved than it used to be. 
 
-Certain features of the app depend on the GitHub API. In production the app's GitHub credentials are stored in environment variables, but in development I use a YAML file to store those. You'll need to [register your app with GitHub](https://github.com/settings/applications/new). Once you have your client ID and secret, rename `config/github.example.yml` to `config/github.yml` and paste in your app's credentials. Mine looks something like this:
+Up through version 2.0 of SassMeister, local set up and installation was fairly straightforward, but with [the introduction of support for LibSass in January 2014](https://twitter.com/sassmeisterapp/status/420093890729766912), things got... complicated.
 
-```yaml
-client_id: 9ef1xxxx
-client_secret: 5784xxxxxxxx
-```
+I may someday write an article on the evolution of the architecture of SassMeister, but that's a much longer story than I can fit in a simple README. For now, here are some highlights. 
 
-**FAIR WARNING:** Your client ID and secret should _not_ be shared publicly. Do not commit github.yml to your repo, especially if you post your repo on GitHub. Read the instructions for configuring Heroku with your credentials, below.
+In order to support LibSass—and to offer both Sass 3.3 _and_ 3.2—I broke out the "compile" functions of SassMeister to separate apps. Sass compilation now happens in dedicated apps, giving each version of Sass its own sandbox. That refactor leaves this app with responsibility for the front end and communication with the GitHub API. I also saw _significant_ improvements in performance and throughput by moving computationally heavy compilation away from the front end app. 
 
-Once you have your `config/github.yml` file:
+These micro-service apps are:
 
-```
-rake server
-# Rock and roll
-```
+* [Sass 3.4 compiler app](https://github.com/SassMeister/sass34.sassmeister), compiles against Sass 3.4. This is the default compiler, if you only install one compiler, this should be it.
+* [Sass 3.3 compiler app](https://github.com/SassMeister/sass33.sassmeister), compiles against Sass 3.3. Optional.
+* [Sass 3.2 compiler app](https://github.com/SassMeister/sass32.sassmeister), compiles against Sass 3.2. Optional.
+* [LibSass compiler app](https://github.com/SassMeister/libsass.sassmeister), compiles against libsass. Optional. This is a Node.js app, not a Ruby app, like the others.
+* [HTML compiler app](https://github.com/SassMeister/sandbox.sassmeister), compiles HTML. Optional.
 
-Go to [127.0.0.1:3000](http://127.0.0.1:3000) and start playing with Sass!
-
-
-### GitHub authentication on Heroku ###
-
-Since the YAML file with your API credentials is not committed to your repo, it won't be sent to Heroku, so we need another way of storing that information. Enter Heroku environment variables:
-
-```
-heroku config:set GITHUB_ID=9ef1xxxx
-heroku config:set GITHUB_SECRET=5784xxxxxxxx
-heroku open
-# Rock and roll, again.
-```
-
-## Installation, v2.0 ##
-
-Version 2 of SassMeister requires a separate service app that handles HTML rendering. Find it [here](https://github.com/jedfoster/sandbox.SassMeister)
-
-```
-git clone https://github.com/jedfoster/sandbox.SassMeister.git
-cd sandbox.SassMeister
-bundle install
-ln -s path/to/sandbox.sassmeister ~/.pow/sandbox.sassmeister
-```
-
-For (slightly) more detailed info, see the readme in the sandbox project.
-
-
-## Tests ##
-
-Test code for each of the included Sass libraries can be found [here](https://github.com/jedfoster/SassMeister/blob/master/TESTS.md).
+Full installation instructions would be overwhelming for this document; if you _really_ want to run SassMeister locally, and run into trouble, [contact me](https://twitter.com/jed_foster) and I'll help you out.
 
 ## Caveats
 
@@ -65,18 +29,15 @@ Test code for each of the included Sass libraries can be found [here](https://gi
 
 If you find anything else that doesn't work, please let me know.
 
-## RVM
-SassMeister is includes a `.rvmrc` example file named `.rvmrc.example`. To use this file, simply run from the command line `$cp .rvmrc.example .rvmrc` and edit as needed. 
+## Authors
 
-`.rvmrc` is ignored from the `.gitignore` file, so it is suggested to copy it versus move the file and thus deleting `.rvmrc.example` from your forked project.
-
-## Author
-SassMeister is written by [Jed Foster][jedfoster].
+SassMeister and all supporting apps are written by [Jed Foster][jedfoster]. I credit [@anotheruiguy](https://github.com/anotheruiguy) with the original idea for SassMeister, and he has provided very helpful advice through the years.
 
 The name was inspired by a [Seattle Sass Meetup][meetup] presentation from [PeepCode Screencasts][peepcode].
 
 ## License
-Copyright (c) 2012-2013 Jed Foster<br>
+
+Copyright (c) 2012-2015 Jed Foster
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
@@ -87,3 +48,4 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 [jedfoster]: http://jedfoster.com
 [meetup]: http://www.meetup.com/SASSlang/
 [peepcode]: [https://peepcode.com]
+
