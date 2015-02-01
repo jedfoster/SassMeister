@@ -57,22 +57,22 @@ if($('body.app').length > 0 ) {
   var buildCloudMenu = function() {
     var menu = '';
 
-    if(!! window.github_id) {
-      if(!! (window.gist && (window.gist.owner == window.github_id))) {
-        menu += '<li><a id="save-gist" data-action="edit" class="edit-gist"><span>Update Gist</span></a></li>'
+    if(window.github_id) {
+      if((window.gist && (window.gist.owner == window.github_id))) {
+        menu += '<li><a id="save-gist" data-action="edit" class="edit-gist"><span>Update Gist</span></a></li>';
       }
-      else {
-        menu += '<li><a id="save-gist" data-action="create" class="create-gist"><span>Save Gist</span></a></li>'
+      else if(! window.gist) {
+        menu += '<li><a id="save-gist" data-action="create" class="create-gist"><span>Save Gist</span></a></li>';
       }
     }
-    if(!! (window.github_id && window.gist)) {
-      menu += '<li><a id="fork-gist" data-action="create" class="fork-gist"><span>Fork Gist</span></a></li>'
+    if((window.github_id && window.gist)) {
+      menu += '<li><a id="fork-gist" data-action="create" class="fork-gist"><span>Fork Gist</span></a></li>';
     }
     if(! window.github_id) {
-      menu += '<li><a href="/authorize" class="github"><span>Log in with your GitHub account to save gists</span></a></li>'
+      menu += '<li><a href="/authorize" class="github"><span>Log in with your GitHub account to save gists</span></a></li>';
     }
     if(window.gist) {
-      menu += '<li><a href="https://gist.github.com/' + window.gist.gist_id + '" class="github" id="gist-link"><span>View on GitHub</span></a></li>'
+      menu += '<li><a href="https://gist.github.com/' + window.gist.gist_id + '" class="github" id="gist-link"><span>View on GitHub</span></a></li>';
     }
 
     $('#menu-placeholder').replaceWith(menu);
