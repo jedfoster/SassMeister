@@ -139,7 +139,7 @@ if($('body.app').length > 0 ) {
 
 
   $('.orientation').on('click', function(event) {
-    var orientation = $(this).data('orientation')
+    var orientation = $(this).data('orientation');
 
     _gaq.push(['_trackEvent', 'UI', 'Orientation', orientation]);
 
