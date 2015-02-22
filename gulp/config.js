@@ -1,9 +1,9 @@
-var dest = "./public";
+var dest = './public';
 var src = './app';
 
 module.exports = {
   sass: {
-    src: src + "/css/*.{sass,scss}",
+    src: src + '/css/*.{sass,scss}',
     dest: dest + '/css/',
     settings: {
       indentedSyntax: true, // Enable .sass syntax!
@@ -11,7 +11,7 @@ module.exports = {
     }
   },
   markup: {
-    src: src + "/*.jade",
+    src: [src + '/*.jade', '!' + src + '/_*.jade'],
     dest: dest
   },
   browserify: {
