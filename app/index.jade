@@ -2,5 +2,32 @@
 
 extends ./_layout.jade
 
+
+block header
+  //- no-op
+
+block controlPanel
+  //- no-op
+
+block footer
+  //- no-op
+
 block content
-  h1 Hi!
+  ng-view
+
+  script(type='text/ng-template' id='index.html')
+    .left
+      h3 Input
+
+      textarea(ng-model='sassInput' ng-change='compile()')
+
+      select(ng-model='selectedStyle' ng-change='compile()' ng-options='style for style in outputStyles')
+
+      button(ng-click='compile()') Go
+
+    .right
+      h3 Output
+
+      pre
+        code(ng-bind='css')
+
