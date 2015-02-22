@@ -32,9 +32,7 @@ if ENV['RACK_ENV'] == 'production'
   }) 
 
 else
-  map "/js" do
-    run Rack::File.new("javascripts")
-  end
+  use Rack::Static, urls: ['/js', '/css', '/fonts', '/favicon.ico'], root: 'public'
 
   require 'rack/env'
   use Rack::Env
