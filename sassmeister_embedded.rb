@@ -70,6 +70,8 @@ class SassMeisterEmbeddedApp < Sinatra::Base
 
       raise Octokit::NotFound unless response.message.nil?
 
+      last_modified response.updated_at.httpdate
+
       # For now, we only return the first .sass or .scss file we find.
       file = response.files["#{response.files._fields.grep(/.+\.(scss|sass)/i)[0]}"]
 
@@ -111,8 +113,6 @@ class SassMeisterEmbeddedApp < Sinatra::Base
 
       return
     end
-
-    last_modified response.updated_at.httpdate
 
     @gist = {
       gist_id: id,
