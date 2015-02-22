@@ -3,6 +3,7 @@ $LOAD_PATH.unshift(File.join(File.dirname(File.realpath(__FILE__)), 'lib'))
 require 'sinatra/base'
 require 'sinatra/partial'
 require 'sinatra/config_file'
+require 'sinatra/respond_with'
 require 'chairman'
 require 'json'
 require 'yaml'
@@ -13,6 +14,7 @@ require 'assets'
 require 'sassmeister/api_routes'
 
 class SassMeisterApp < Sinatra::Base
+  register Sinatra::RespondWith
   register Sinatra::Partial
   register Sinatra::ConfigFile
 
@@ -216,7 +218,10 @@ class SassMeisterApp < Sinatra::Base
       html: (rendered_file || '').gsub('</script>', '<\/script>')
     }
 
-    erb :index
+    respond_to do |wants|
+      wants.html { erb :index }
+      wants.json { {gist: @gist, gist_output: @gist_output}.to_json }
+    end
   end
 
 
