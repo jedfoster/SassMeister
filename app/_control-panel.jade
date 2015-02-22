@@ -1,0 +1,109 @@
+div#control-column
+  a.control-icon
+
+  div.control-container.promo
+    fieldset
+      h2 Sass
+
+      fieldset(data-event-name='SassVersion')
+        h3.version Compiler
+
+        //- include ./_compiler-menu.jade
+
+      h3.syntax Syntax
+
+      fieldset.syntax-toggle-group(data-event-name='SassSyntax')
+        input#syntax-scss(type='radio' name='syntax' value='scss')
+        label(for='syntax-scss' data-toggle-input='sass') SCSS
+
+        input#syntax-sass(type='radio' name='syntax' value='sass')
+        label(for='syntax-sass' data-toggle-input='sass') Sass
+
+        span
+
+      div#extension_list
+        h3.selected Extensions 
+          i (Inserted at cursor)
+
+        ol
+
+    fieldset
+      h2 CSS
+
+      fieldset.output-toggle-group(data-event-name='CSSOutput')
+        input#expanded-output(type='radio' name='output-style' value='expanded')
+        label(for='expanded-output' data-toggle-input='css') expanded
+
+        input#nested-output(type='radio' name='output-style' value='nested')
+        label(for='nested-output' data-toggle-input='css') nested
+
+        input#compact-output(type='radio' name='output-style' value='compact')
+        label(for='compact-output' data-toggle-input='css') compact
+
+        input#compressed-output(type='radio' name='output-style' value='compressed')
+        label(for='compressed-output' data-toggle-input='css') compressed
+
+        span
+
+        p.libsass-output-note Note: LibSass currently only supports <code>nested</code> and <code>compressed</code> output. See <a href="https://github.com/hcatlin/libsass/issues/233">this issue</a> for details.
+
+    fieldset
+      h2 HTML
+
+      fieldset.html-toggle-group(data-event-name='HTMLSyntax')
+        input#html-html(type='radio' name='html-syntax' value='HTML')
+        label(for='html-html' data-toggle-input='html') HTML
+
+        input#html-haml(type='radio' name='html-syntax' value='Haml')
+        label(for='html-haml' data-toggle-input='html') Haml
+
+        input#html-mkdn(type='radio' name='html-syntax' value='Markdown')
+        label(for='html-mkdn' data-toggle-input='html') Markdown
+
+        input#html-txtl(type='radio' name='html-syntax' value='Textile')
+        label(for='html-txtl' data-toggle-input='html') Textile
+
+        input#html-jade(type='radio' name='html-syntax' value='Jade')
+        label(for='html-jade' data-toggle-input='html') Jade
+
+        span
+
+    fieldset.edit-prefs
+      h2 Editor
+
+      fieldset
+        h3.theme Theme
+        p
+          select.fancy_dropdown(name='theme')
+            option(value='tomorrow') Tomorrow
+            option(value='dawn') Dawn
+            option(value='github') GitHub
+            option(value='kuroir') Kuroir
+            option(value='solarized-light') Solarized Light
+            option(value='merbivore-soft') Merbivore Soft
+            option(value='monokai') Monokai
+            option(value='solarized-dark') Solarized Dark
+            option(value='tomorrow-night-eighties') Tomorrow Night Eighties
+        
+        p
+          input#enable-emmet(type='checkbox' name='emmet' value='true')
+          label(for='enable-emmet') Enable Emmet support
+        
+        p
+          input#enable-vim(type='checkbox' name='vim' value='true')
+          label(for='enable-vim') Use Vim keybindings
+        
+        p
+          input#enable-scrollPastEnd(type='checkbox' name='scrollPastEnd' value='true')
+          label(for='enable-scrollPastEnd') Scroll Past End
+
+  div#promo
+    section.swag-promo
+      a.swag-promo(href='http://devswag.com/products/sassmeister-stickers-4')
+        h1 SassMeister Stickers
+        p
+          img(src='/img/sassmeister-detail-v02_medium.jpg')
+          | Get sweet, sassy stickers &amp; help support SassMeister.
+
+div#control-column-bg
+

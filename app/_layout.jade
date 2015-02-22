@@ -7,34 +7,24 @@ html.no-js
     title SassMeister | The Sass Playground!
 
     meta(name='description' content='SassMeister is a playground for Sass. Add some Sass and SassMeister will show you the rendered CSS.')
-
     meta(name='author' lang='en' content='Jed Foster and Dale Sande')
-
     meta(name="viewport" content='width=device-width, initial-scale=1.0, minimum-scale=0.5 maximum-scale=1.0')
 
-    link(rel='stylesheet' href='/css/styles.css')
-    script(src='/js/modernizr.js')
-
-    script.
-      //- document.domain = '%= APP_DOMAIN %';
+    //- link(rel='stylesheet' href='/css/styles.css')
+    //- script(src='/js/modernizr.js')
 
   body(class=bodyClass)
-    include ./_header.jade
-    //- :"shared/_header" unless @body_class == 'embedded'
+    block header
+      include ./_header.jade
 
-    //- %= partial :"shared/_control_panel" if @body_class == 'app'
+    block controlPanel
+      include ./_control-panel.jade
 
     section
       block content
 
-
-    //- %=
-    //-  if @body_class == 'embedded'
-    //-    partial :"shared/_embedded_footer"
-    //-  else
-    //-    partial :"shared/_footer"
-    //-  end
-    
+    block footer
+      include ./_footer.jade
 
     script.
       //- var _gaq = _gaq || [];
@@ -47,7 +37,5 @@ html.no-js
       //-   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       //- })();% end %
 
-    //- %#= javascript_tags('jquery') %
-    //- %#= javascript_tags('utilities') %
-    //- %#= javascript_tags('application') %
+    script(src='/js/app.js')
 
