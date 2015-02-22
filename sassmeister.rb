@@ -116,32 +116,33 @@ class SassMeisterApp < Sinatra::Base
   end
 
 
-  not_found do
-    @body_class = 'oops-404'
+  # not_found do
+  #   @body_class = 'oops-404'
 
-    return erb :'404' unless @id
+  #   return erb :'404' unless @id
 
-    return erb :'gist-404', locals: {id: @id}
-  end
-
-
-  get '/' do
-    erb :index
-  end
+  #   return erb :'gist-404', locals: {id: @id}
+  # end
+  
 
 
-  get '/thankyou' do
-    @body_class = 'thankyou'
-
-    erb :thankyou
-  end
+#   get '/' do
+    
+#   end
 
 
-  get '/about' do
-    @body_class = 'about'
+#   get '/thankyou' do
+#     @body_class = 'thankyou'
 
-    erb :about
-  end
+#     erb :thankyou
+#   end
+
+
+#   get '/about' do
+#     @body_class = 'about'
+
+#     erb :about
+#   end
 
 
   get %r{/gist(?:/[\w-]*)*/([\d\w]+)} do
@@ -370,6 +371,15 @@ class SassMeisterApp < Sinatra::Base
 
     { id: data.id }.to_json.to_s
   end
+
+  get '/' do
+    File.read 'public/index.html'
+  end
+
+  get %r{about|thankyou} do
+    File.read 'public/index.html'
+  end
+
 
   run! if app_file == $0
 end
