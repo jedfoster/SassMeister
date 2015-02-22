@@ -6,6 +6,7 @@
 .pow*
 public/js/*
 public/css/*
+public/*.html
 tmp
 log
 config/*.txt
