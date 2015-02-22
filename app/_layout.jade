@@ -1,0 +1,53 @@
+doctype html
+html.no-js
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible' content='IE=edge,chrome=1')
+
+    title SassMeister | The Sass Playground!
+
+    meta(name='description' content='SassMeister is a playground for Sass. Add some Sass and SassMeister will show you the rendered CSS.')
+
+    meta(name='author' lang='en' content='Jed Foster and Dale Sande')
+
+    meta(name="viewport" content='width=device-width, initial-scale=1.0, minimum-scale=0.5 maximum-scale=1.0')
+
+    link(rel='stylesheet' href='/css/styles.css')
+    script(src='/js/modernizr.js')
+
+    script.
+      //- document.domain = '%= APP_DOMAIN %';
+
+  body(class=bodyClass)
+    include ./_header.jade
+    //- :"shared/_header" unless @body_class == 'embedded'
+
+    //- %= partial :"shared/_control_panel" if @body_class == 'app'
+
+    section
+      block content
+
+
+    //- %=
+    //-  if @body_class == 'embedded'
+    //-    partial :"shared/_embedded_footer"
+    //-  else
+    //-    partial :"shared/_footer"
+    //-  end
+    
+
+    script.
+      //- var _gaq = _gaq || [];
+      //- % if settings.environment == :production % _gaq.push(['_setAccount', 'UA-35407426-1']);
+      //- _gaq.push(['_trackPageview']);
+
+      //- (function() {
+      //-   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      //-   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      //-   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      //- })();% end %
+
+    //- %#= javascript_tags('jquery') %
+    //- %#= javascript_tags('utilities') %
+    //- %#= javascript_tags('application') %
+
