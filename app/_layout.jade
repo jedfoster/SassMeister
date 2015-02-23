@@ -1,5 +1,5 @@
 doctype html
-html.no-js
+html.no-js(ng-app='sassmeisterApp')
   head
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible' content='IE=edge,chrome=1')
@@ -9,6 +9,8 @@ html.no-js
     meta(name='description' content='SassMeister is a playground for Sass. Add some Sass and SassMeister will show you the rendered CSS.')
     meta(name='author' lang='en' content='Jed Foster and Dale Sande')
     meta(name="viewport" content='width=device-width, initial-scale=1.0, minimum-scale=0.5 maximum-scale=1.0')
+
+    base(href='/')
 
     //- link(rel='stylesheet' href='/css/styles.css')
     //- script(src='/js/modernizr.js')

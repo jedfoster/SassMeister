@@ -1,21 +1,29 @@
-# Browserify entry point for the global.js bundle (yay CoffeeScript!)
-# View =  require './view'
-console.log 'global.js loaded!'
+'use strict'
 
+require 'angular'
+require 'angular-ui-router'
+require 'angular-resource'
 
-app = angular.module('App', [
+app = angular.module('sassmeisterApp', [
   'ngResource'
-  'ngRoute'
+  'ui.router'
 ])
 
-app.config ($routeProvider, $locationProvider) ->
+app.config ($stateProvider, $urlRouterProvider, $locationProvider) ->
   $locationProvider.html5Mode true
-  $routeProvider
-    .when('/gist/:id',
+
+  $urlRouterProvider.otherwise '/'
+  
+  $stateProvider
+    .state(
+      name: 'gist'
+      url: '/gist/:id'
       templateUrl: 'gist.html'
       controller: 'GistController'
     )
-    .otherwise(
+    .state(
+      name: 'index'
+      url: '/'
       templateUrl: 'index.html'
       controller: 'IndexController'
     )
