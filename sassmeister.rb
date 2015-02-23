@@ -116,35 +116,6 @@ class SassMeisterApp < Sinatra::Base
   end
 
 
-  # not_found do
-  #   @body_class = 'oops-404'
-
-  #   return erb :'404' unless @id
-
-  #   return erb :'gist-404', locals: {id: @id}
-  # end
-  
-
-
-#   get '/' do
-    
-#   end
-
-
-#   get '/thankyou' do
-#     @body_class = 'thankyou'
-
-#     erb :thankyou
-#   end
-
-
-#   get '/about' do
-#     @body_class = 'about'
-
-#     erb :about
-#   end
-
-
   get %r{/gist(?:/[\w-]*)*/([\d\w]+)} do
     id = params[:captures].first
 

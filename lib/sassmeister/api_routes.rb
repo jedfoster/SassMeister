@@ -39,7 +39,9 @@ module SassMeister
 
 
     post '/app/:compiler/compile' do
-      @api.compile params
+      payload = request.content_type.include?('application/json') ? JSON.parse(request.body.read) : params
+
+      @api.compile payload
 
       @api.body
     end
@@ -48,7 +50,9 @@ module SassMeister
     post '/app/:compiler/convert' do
       @api = SassMeister::Client.new(COMPILER_ENDPOINTS['3.3']) if params[:compiler] == 'lib'
 
-      @api.convert params
+      payload = request.content_type.include?('application/json') ? JSON.parse(request.body.read) : params
+
+      @api.convert payload
 
       @api.body
     end

@@ -29,7 +29,7 @@ if ENV['RACK_ENV'] == 'production'
   run Rack::URLMap.new({
     'http://embed.sassmeister.com/' => SassMeisterEmbeddedApp,
     '/' => SassMeisterApp
-  }) 
+  })
 
 else
   use Rack::Static, urls: ['/js', '/css', '/fonts', '/favicon.ico'], root: 'public'
@@ -41,7 +41,7 @@ else
     verbose: true,
     metastore:   'memcached://localhost:11211',
     entitystore: 'memcached://localhost:11211'
-  
+
   run Rack::URLMap.new({
     'http://embed.sassmeister.dev/' => SassMeisterEmbeddedApp,
     '/' => SassMeisterApp
