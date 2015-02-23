@@ -33,7 +33,9 @@ app.factory 'Gist', ($resource) ->
   $resource 'http://gist.drft.io/gists/:id.json'
 
 app.factory 'Compiler', ($resource) ->
-  $resource 'compile', null, 'compile': method: 'PUT'
+  $resource 'app/3.4/compile', null,
+    'compile':
+      method: 'POST'
 
 app.controller 'GistController', ($scope, $routeParams, Gist) ->
   Gist.get { id: $routeParams.id }, (data) ->
@@ -52,10 +54,14 @@ app.controller 'IndexController', ($scope, Compiler) ->
   $scope.sassInput = ''
 
   $scope.compile = ->
-    Compiler.compile { compiler:
-      sass: $scope.sassInput
-      outputStyle: $scope.selectedStyle }, (data) ->
-      $scope.css = data.compiler.css
+    Compiler.compile {
+      input: $scope.sassInput
+      compiler: '3.4'
+      syntax: 'SCSS'
+      original_syntax: 'SCSS'
+      output_style: $scope.selectedStyle
+    }, (data) ->
+      $scope.css = data.css
       return
     return
 
