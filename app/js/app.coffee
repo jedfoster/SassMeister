@@ -9,7 +9,7 @@ app = angular.module('sassmeisterApp', [
   'ui.router'
 ])
 
-app.config ($stateProvider, $urlRouterProvider, $locationProvider) ->
+.config ($stateProvider, $urlRouterProvider, $locationProvider) ->
   $locationProvider.html5Mode true
 
   $urlRouterProvider.otherwise '/'
@@ -29,22 +29,22 @@ app.config ($stateProvider, $urlRouterProvider, $locationProvider) ->
     )
   return
 
-app.factory 'Gist', ($resource) ->
+.factory 'Gist', ($resource) ->
   $resource 'http://gist.drft.io/gists/:id.json'
 
-app.factory 'Compiler', ($resource) ->
+.factory 'Compiler', ($resource) ->
   $resource 'app/3.4/compile', null,
     'compile':
       method: 'POST'
 
-app.controller 'GistController', ($scope, $routeParams, Gist) ->
+.controller 'GistController', ($scope, $routeParams, Gist) ->
   Gist.get { id: $routeParams.id }, (data) ->
     $scope.sass = data.gist.sass
     $scope.css = data.gist.css
     return
   return
 
-app.controller 'IndexController', ($scope, Compiler) ->
+.controller 'IndexController', ($scope, Compiler) ->
   $scope.outputStyles = [
     'nested'
     'compressed'
