@@ -15,22 +15,6 @@ block footer
 block content
   ui-view
 
-  script(type='text/ng-template' id='index.html')
-    .left
-      h3 Input
-
-      textarea(ng-model='sassInput' ng-change='compile()')
-
-      select(ng-model='selectedStyle' ng-change='compile()' ng-options='style for style in outputStyles')
-
-      button(ng-click='compile()') Go
-
-    .right
-      h3 Output
-
-      pre
-        code(ng-bind='css')
-
   :markdown
     # Modules:
 
@@ -46,14 +30,14 @@ block content
     app/
     |- module/
     |  |- module.coffee
-    |  |- module.css.sass
+    |  |- module.sass
     |  |- module.spec.coffee
-    |  |- module.html.hbs
+    |  |- module.jade
     |  |- submodule/
     |  |  |- submodule.coffee
-    |  |  |- submodule.css.sass
+    |  |  |- submodule.sass
     |  |  |- submodule.spec.coffee
-    |  |  |- submodule.html.hbs
+    |  |  |- submodule.jade
     ```
 
     One problem is Sass configs. Module-specific configs should be declared in `module.sass`, but there will need to be some dependency on app-level configs (color, font-size, etc.) Could be solved with module-level `!defaults` with the same name as globals. 

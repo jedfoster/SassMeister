@@ -1,0 +1,14 @@
+.left
+  h3 Input
+
+  textarea(ng-model='sassInput' ng-change='compile()')
+
+  select(ng-model='selectedStyle' ng-change='compile()' ng-options='style for style in outputStyles')
+
+  button(ng-click='compile()') Go
+
+.right
+  h3 Output
+
+  pre
+    code(ng-bind='css')
