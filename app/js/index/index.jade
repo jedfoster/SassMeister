@@ -1,7 +1,8 @@
 .left
   h3 Input
 
-  textarea(ng-model='sassInput' ng-change='compile()')
+  .editor-wrapper
+    ui-ace(ng-model='sassInput' ng-change='compile()')
 
   select(ng-model='selectedStyle' ng-change='compile()' ng-options='style for style in outputStyles')
 

@@ -13,8 +13,22 @@ block footer
   //- no-op
 
 block content
-  ui-view
+  style.
+    .editor-wrapper {
+      position: relative;
+      height: 20em;
+      width: 100%;
+    }
+    ui-ace {
+      position: absolute !important;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
 
+  ui-view
+  
   :markdown
     # Modules:
 
