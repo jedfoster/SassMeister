@@ -3,7 +3,6 @@
 require 'angular'
 require 'angular-ui-router'
 
-template = require './index.jade'
 debounce = (func, wait, immediate) ->
   timeout = undefined
   ->
@@ -31,6 +30,8 @@ angular.module('sassMeister.index', [
 .config ($stateProvider, $locationProvider) ->
   $locationProvider.html5Mode true
 
+  template = require './index.jade'
+
   $stateProvider
     .state(
       name: 'index'
@@ -38,7 +39,6 @@ angular.module('sassMeister.index', [
       template: template
       controller: 'IndexController'
     )
-  return
 
 .controller 'IndexController', ($scope, Compiler) ->
   $scope.outputStyles = [

@@ -19,7 +19,6 @@ angular.module('sassMeister.gist', [
       templateUrl: 'gist.html'
       controller: 'GistController'
     )
-  return
 
 .factory 'Gist', ($resource) ->
   $resource 'http://gist.drft.io/gists/:id.json'
@@ -28,6 +27,4 @@ angular.module('sassMeister.gist', [
   Gist.get { id: $routeParams.id }, (data) ->
     $scope.sass = data.gist.sass
     $scope.css = data.gist.css
-    return
-  return
 

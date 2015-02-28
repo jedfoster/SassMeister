@@ -54,8 +54,8 @@ block content
     |  |  |- submodule.jade
     ```
 
-    One problem is Sass configs. Module-specific configs should be declared in `module.sass`, but there will need to be some dependency on app-level configs (color, font-size, etc.) Could be solved with module-level `!defaults` with the same name as globals. 
-    
+    One problem is Sass configs. Module-specific configs should be declared in `module.sass`, but there will need to be some dependency on app-level configs (color, font-size, etc.) Could be solved with module-level `!defaults` with the same name as globals.
+
     Also need to think about Sass var scoping. Would be nice to be able to declare module-level vars in a module scope, so they don't leak into the global space. One solution might be to declare the entire module within a mixin and then in `app.sass`, after `@import/module/module.sass`, you would `@include module`. And perhaps at that point, you could inject the global vars that the module depends on. See this for example of possible scoping: http://sassmeister.com/gist/269f045104c4f969f0c3
 
     But, can't declare mixins within mixins, so can't scope mixins that way. Module-specific mixins would need to be namespaced: `@mixin module-mixin`

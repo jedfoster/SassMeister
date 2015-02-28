@@ -23,5 +23,3 @@ angular.module('sassMeister', [
 
   $urlRouterProvider.otherwise '/'
 
-  return
-

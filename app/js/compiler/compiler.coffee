@@ -12,4 +12,3 @@ angular.module('sassMeister.compiler', [
     'compile':
       method: 'POST'
 
-
