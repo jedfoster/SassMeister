@@ -4,7 +4,7 @@ require 'angular'
 require 'angular-ui-router'
 require 'angular-resource'
 
-angular.module('sassMeister.gist', [
+angular.module('SassMeister.gist', [
   'ngResource'
   'ui.router'
 ])

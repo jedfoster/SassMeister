@@ -6,12 +6,11 @@ require './gist/gist'
 require './index/index'
 require './compiler/compiler'
 
-angular.module('sassMeister', [
+angular.module('SassMeister', [
   'ui.router'
-  'sassMeister.gist'
-  'sassMeister.index'
-  'sassMeister.compiler'
-  'ui.ace'
+  'SassMeister.gist'
+  'SassMeister.index'
+  'SassMeister.compiler'
 ])
 
 .config ($stateProvider, $urlRouterProvider, $locationProvider) ->

@@ -3,7 +3,7 @@
 require 'angular'
 require 'angular-resource'
 
-angular.module('sassMeister.compiler', [
+angular.module('SassMeister.compiler', [
   'ngResource'
 ])
 

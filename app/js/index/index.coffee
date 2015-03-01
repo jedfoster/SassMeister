@@ -6,8 +6,9 @@ require '../ace/ace'
 
 debounce = require '../lib/debounce'
 
-angular.module('sassMeister.index', [
+angular.module('SassMeister.index', [
   'ui.router'
+  'SassMeister.ace'
 ])
 
 .config ($stateProvider, $locationProvider) ->
