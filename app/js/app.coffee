@@ -6,10 +6,6 @@ require './gist/gist'
 require './index/index'
 require './compiler/compiler'
 
-ace = require 'brace'
-require 'brace/mode/javascript'
-require 'angular-ui-ace/src/ui-ace'
-
 angular.module('sassMeister', [
   'ui.router'
   'sassMeister.gist'

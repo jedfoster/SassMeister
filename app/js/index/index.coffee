@@ -2,26 +2,9 @@
 
 require 'angular'
 require 'angular-ui-router'
+require '../ace/ace'
 
-debounce = (func, wait, immediate) ->
-  timeout = undefined
-  ->
-    context = this
-    args = arguments
-
-    later = ->
-      timeout = null
-      if !immediate
-        func.apply context, args
-      return
-
-    callNow = immediate and !timeout
-    clearTimeout timeout
-    timeout = setTimeout(later, wait)
-    if callNow
-      func.apply context, args
-    return
-
+debounce = require '../lib/debounce'
 
 angular.module('sassMeister.index', [
   'ui.router'
