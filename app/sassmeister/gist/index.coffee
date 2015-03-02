@@ -9,23 +9,28 @@ angular.module('SassMeister.gist', [
   'ui.router'
 ])
 
-.config ($stateProvider, $urlRouterProvider, $locationProvider) ->
-  $locationProvider.html5Mode true
-
-  $stateProvider
-    .state('application.gist',
-      url: '/gist/:id'
-      controller: 'GistController'
-    )
-
 .factory 'Gist', ($resource) ->
   $resource 'http://gist.drft.io/gists/:id.json'
 
-.controller 'GistController', ($scope, $routeParams, Gist) ->
-  
-  Gist.get { id: $routeParams.id }, (data) ->
-    $scope.sass = data.gist.sass
-    $scope.css = data.gist.css
+.config ($stateProvider, $urlRouterProvider, $locationProvider) ->
+  $locationProvider.html5Mode true
 
+  template = require '../application.jade'
 
+  $stateProvider
+    .state('application.gist',
+      url: '^/gist/:id'
+      template: template
+      controller: 'ApplicationController'
+      resolve:
+        data: (Gist, $stateParams) ->
+          # `$resource` returns a `Resource` object, not a `Promise` like `$http`does.
+          # But `Resource` has an equivalent property: `$promise`
+
+          Gist.get({ id: $stateParams.id })
+            .$promise
+            .then (data) ->
+              sass: data.gist.sass
+              css: data.gist.css
+    )
 

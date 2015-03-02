@@ -24,23 +24,28 @@ angular.module('SassMeister', [
 
   $urlRouterProvider.otherwise '/'
 
-  template = require './application.jade'
-
   $stateProvider
     .state('application',
       abstract: true
-      template: template
+      url: '/'
+      template: '<ui-view/>'
       controller: 'ApplicationController'
+      resolve:
+        data: ->
+          sass: ''
+          css: ''
     )
 
-.controller 'ApplicationController', ($scope, Compiler) ->
+.controller 'ApplicationController', ($scope, data, Compiler) ->
+  $scope.sass = data.sass
+  $scope.css = data.css
+
   $scope.outputStyles = [
     'nested'
     'compressed'
   ]
 
   $scope.selectedStyle = 'nested'
-  $scope.sassInput = ''
 
   $scope.compile = debounce( ->
       Compiler.compile {

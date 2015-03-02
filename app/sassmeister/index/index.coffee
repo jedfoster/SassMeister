@@ -10,8 +10,11 @@ angular.module('SassMeister.index', [
 .config ($stateProvider, $urlRouterProvider, $locationProvider) ->
   $locationProvider.html5Mode true
 
+  template = require '../application.jade'
+
   $stateProvider
     .state('application.index',
-      url: '/'
+      url: '^/'
+      template: template
     )
 
