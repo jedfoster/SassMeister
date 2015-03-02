@@ -9,14 +9,12 @@ angular.module('SassMeister.gist', [
   'ui.router'
 ])
 
-.config ($stateProvider, $locationProvider) ->
+.config ($stateProvider, $urlRouterProvider, $locationProvider) ->
   $locationProvider.html5Mode true
 
   $stateProvider
-    .state(
-      name: 'gist'
+    .state('application.gist',
       url: '/gist/:id'
-      templateUrl: 'gist.html'
       controller: 'GistController'
     )
 
@@ -24,7 +22,10 @@ angular.module('SassMeister.gist', [
   $resource 'http://gist.drft.io/gists/:id.json'
 
 .controller 'GistController', ($scope, $routeParams, Gist) ->
+  
   Gist.get { id: $routeParams.id }, (data) ->
     $scope.sass = data.gist.sass
     $scope.css = data.gist.css
+
+
 

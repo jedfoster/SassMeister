@@ -1,7 +1,7 @@
-div#control-column
+div
   a.control-icon
 
-  div.control-container.promo
+  div.control-container
     fieldset
       h2 Sass
 
@@ -29,6 +29,8 @@ div#control-column
 
     fieldset
       h2 CSS
+
+      select(ng-model='selectedStyle' ng-change='compile()' ng-options='style for style in outputStyles')
 
       fieldset.output-toggle-group(data-event-name='CSSOutput')
         input#expanded-output(type='radio' name='output-style' value='expanded')
@@ -68,7 +70,7 @@ div#control-column
 
         span
 
-    fieldset.edit-prefs
+    fieldset
       h2 Editor
 
       fieldset
@@ -96,14 +98,6 @@ div#control-column
         p
           input#enable-scrollPastEnd(type='checkbox' name='scrollPastEnd' value='true')
           label(for='enable-scrollPastEnd') Scroll Past End
-
-  div#promo
-    section.swag-promo
-      a.swag-promo(href='http://devswag.com/products/sassmeister-stickers-4')
-        h1 SassMeister Stickers
-        p
-          img(src='/img/sassmeister-detail-v02_medium.jpg')
-          | Get sweet, sassy stickers &amp; help support SassMeister.
 
 div#control-column-bg
 

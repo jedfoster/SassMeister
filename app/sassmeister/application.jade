@@ -1,16 +1,13 @@
-.left
+section
   h3 Input
 
   .editor-wrapper
     ui-ace(ng-model='sassInput' ng-change='compile()')
 
-  select(ng-model='selectedStyle' ng-change='compile()' ng-options='style for style in outputStyles')
-
-  button(ng-click='compile()') Go
-
-.right
   h3 Output
 
   .editor-wrapper
     ui-ace(ng-model='css' readonly)
+
+control-panel
 

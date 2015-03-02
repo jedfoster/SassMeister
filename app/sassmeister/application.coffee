@@ -2,29 +2,38 @@
 
 require 'angular'
 require 'angular-ui-router'
-require '../ace/ace'
+require './index'
+require './gist'
+require './compiler'
+require './ace'
+require './control-panel'
 
-debounce = require '../lib/debounce'
+debounce = require './lib/debounce'
 
-angular.module('SassMeister.index', [
+angular.module('SassMeister', [
   'ui.router'
+  'SassMeister.gist'
+  'SassMeister.index'
+  'SassMeister.compiler'
   'SassMeister.ace'
+  'SassMeister.controlPanel'
 ])
 
-.config ($stateProvider, $locationProvider) ->
+.config ($stateProvider, $urlRouterProvider, $locationProvider) ->
   $locationProvider.html5Mode true
 
-  template = require './index.jade'
+  $urlRouterProvider.otherwise '/'
+
+  template = require './application.jade'
 
   $stateProvider
-    .state(
-      name: 'index'
-      url: '/'
+    .state('application',
+      abstract: true
       template: template
-      controller: 'IndexController'
+      controller: 'ApplicationController'
     )
 
-.controller 'IndexController', ($scope, Compiler) ->
+.controller 'ApplicationController', ($scope, Compiler) ->
   $scope.outputStyles = [
     'nested'
     'compressed'
