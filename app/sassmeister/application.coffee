@@ -34,6 +34,7 @@ angular.module('SassMeister', [
         data: ->
           sass: ''
           css: ''
+          outputStyle: 'nested'
     )
 
 .controller 'ApplicationController', ($scope, data, Compiler) ->
@@ -45,7 +46,7 @@ angular.module('SassMeister', [
     'compressed'
   ]
 
-  $scope.selectedStyle = 'nested'
+  $scope.selectedStyle = data.outputStyle
 
   $scope.compile = debounce( ->
       Compiler.compile {

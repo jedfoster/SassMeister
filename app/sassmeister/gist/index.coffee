@@ -23,14 +23,19 @@ angular.module('SassMeister.gist', [
       template: template
       controller: 'ApplicationController'
       resolve:
-        data: (Gist, $stateParams) ->
+        data: (Gist, $stateParams, data) ->
           # `$resource` returns a `Resource` object, not a `Promise` like `$http`does.
           # But `Resource` has an equivalent property: `$promise`
+
+          # This shows how you could include resolved data from the parent state.
+          # Meh. Not sure how I feel about this. Or even how useful this is.
+          _data = data
 
           Gist.get({ id: $stateParams.id })
             .$promise
             .then (data) ->
               sass: data.gist.sass
               css: data.gist.css
+              outputStyle: _data.outputStyle
     )
 
