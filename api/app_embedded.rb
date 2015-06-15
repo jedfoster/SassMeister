@@ -21,7 +21,7 @@ class SassMeisterEmbeddedApp < Sinatra::Base
   set :partial_template_engine, :erb
   set :protection, except: :frame_options
 
-  config_file 'config/config.yml'
+  config_file '../config/config.yml'
 
   use SassMeister::ApiRoutes
 

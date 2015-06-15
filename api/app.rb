@@ -20,7 +20,7 @@ class SassMeisterApp < Sinatra::Base
 
   set :partial_template_engine, :erb
 
-  config_file 'config/config.yml'
+  config_file '../config/config.yml'
 
   use Chairman::Routes
   use SassMeister::ApiRoutes

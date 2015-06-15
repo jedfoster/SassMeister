@@ -4,10 +4,10 @@ require 'rack/contrib'
 require 'rack-cache'
 require 'dalli'
 require 'memcachier'
-require './lib/rack/static_cache'
+require './api/lib/rack/static_cache'
 
-require './sassmeister'
-require './sassmeister_embedded'
+require './api/app'
+require './api/app_embedded'
 
 
 # Gzip responses

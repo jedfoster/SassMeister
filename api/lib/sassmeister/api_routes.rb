@@ -6,7 +6,7 @@ module SassMeister
   class ApiRoutes < Sinatra::Base
     register Sinatra::ConfigFile
 
-    config_file '../../config/api.yml'
+    config_file '../../../config/api.yml'
 
     env_endpoints = {
       'lib' => ENV['LIBSASS_ENDPOINT'],
