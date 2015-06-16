@@ -1,5 +1,5 @@
 var dest = './public';
-var src = './app';
+var src = './client';
 
 module.exports = {
   sass: {
