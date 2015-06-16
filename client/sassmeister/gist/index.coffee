@@ -24,7 +24,7 @@ angular.module 'SassMeister.gist', [
       controller: 'ApplicationController'
       resolve:
         data: (Gist, $stateParams, data) ->
-          # `$resource` returns a `Resource` object, not a `Promise` like `$http`does.
+          # `$resource` returns a `Resource` object, not a `Promise` like `$http` does.
           # But `Resource` has an equivalent property: `$promise`
 
           # This shows how you could include resolved data from the parent state.
