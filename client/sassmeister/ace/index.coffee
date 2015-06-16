@@ -57,15 +57,14 @@ theme = () ->
   themes[Math.floor(Math.random() * themes.length)]
 
 
-angular.module('SassMeister.ace', [
+angular.module 'SassMeister.ace', [
   'ui.ace'
-])
+]
 
-.constant('uiAceConfig',
+.constant 'uiAceConfig',
   ace:
     onLoad: aceLoaded
     onChange: ->
       # no-op
     theme: theme()
-)
 

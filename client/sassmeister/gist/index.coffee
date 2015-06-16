@@ -4,10 +4,10 @@ require 'angular'
 require 'angular-ui-router'
 require 'angular-resource'
 
-angular.module('SassMeister.gist', [
+angular.module 'SassMeister.gist', [
   'ngResource'
   'ui.router'
-])
+]
 
 .factory 'Gist', ($resource) ->
   $resource 'http://gist.drft.io/gists/:id.json'
@@ -18,7 +18,7 @@ angular.module('SassMeister.gist', [
   template = require '../_application.jade'
 
   $stateProvider
-    .state('application.gist',
+    .state 'application.gist',
       url: '^/gist/:id'
       template: template
       controller: 'ApplicationController'
@@ -31,11 +31,10 @@ angular.module('SassMeister.gist', [
           # Meh. Not sure how I feel about this. Or even how useful this is.
           _data = data
 
-          Gist.get({ id: $stateParams.id })
+          Gist.get { id: $stateParams.id }
             .$promise
             .then (data) ->
               sass: data.gist.sass
               css: data.gist.css
               outputStyle: _data.outputStyle
-    )
 

@@ -10,14 +10,14 @@ require './control-panel'
 
 debounce = require './lib/debounce'
 
-angular.module('SassMeister', [
+angular.module 'SassMeister', [
   'ui.router'
   'SassMeister.gist'
   'SassMeister.index'
   'SassMeister.compiler'
   'SassMeister.ace'
   'SassMeister.controlPanel'
-])
+]
 
 .config ($stateProvider, $urlRouterProvider, $locationProvider) ->
   $locationProvider.html5Mode true
@@ -25,7 +25,7 @@ angular.module('SassMeister', [
   $urlRouterProvider.otherwise '/'
 
   $stateProvider
-    .state('application',
+    .state 'application',
       abstract: true
       url: '/'
       template: '<ui-view/>'
@@ -35,7 +35,6 @@ angular.module('SassMeister', [
           sass: ''
           css: ''
           outputStyle: 'nested'
-    )
 
 .controller 'ApplicationController', ($scope, data, Compiler) ->
   $scope.sass = data.sass
@@ -48,14 +47,14 @@ angular.module('SassMeister', [
 
   $scope.selectedStyle = data.outputStyle
 
-  $scope.compile = debounce( ->
-      Compiler.compile {
-        input: $scope.sassInput
-        compiler: '3.4'
-        syntax: 'SCSS'
-        original_syntax: 'SCSS'
-        output_style: $scope.selectedStyle
-      }, (data) ->
-        $scope.css = data.css
-    , 500 ) # Production uses 750
+  $scope.compile = debounce ->
+    Compiler.compile {
+      input: $scope.sassInput
+      compiler: 'lib'
+      syntax: 'SCSS'
+      original_syntax: 'SCSS'
+      output_style: $scope.selectedStyle
+    }, (data) ->
+      $scope.css = data.css
+  , 500 # Production uses 750
 

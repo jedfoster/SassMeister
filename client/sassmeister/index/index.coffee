@@ -3,9 +3,9 @@
 require 'angular'
 require 'angular-ui-router'
 
-angular.module('SassMeister.index', [
+angular.module 'SassMeister.index', [
   'ui.router'
-])
+]
 
 .config ($stateProvider, $urlRouterProvider, $locationProvider) ->
   $locationProvider.html5Mode true
@@ -13,8 +13,7 @@ angular.module('SassMeister.index', [
   template = require '../_application.jade'
 
   $stateProvider
-    .state('application.index',
+    .state 'application.index',
       url: '^/'
       template: template
-    )
 
