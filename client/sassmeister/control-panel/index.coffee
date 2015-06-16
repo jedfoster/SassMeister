@@ -2,7 +2,7 @@
 
 require 'angular'
 
-template = require './control-panel.jade'
+template = require './_control-panel.jade'
 
 angular.module('SassMeister.controlPanel', [])
 
