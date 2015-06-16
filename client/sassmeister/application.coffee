@@ -49,8 +49,8 @@ angular.module 'SassMeister', [
 
   $scope.compile = debounce ->
     Compiler.compile {
-      input: $scope.sassInput
-      compiler: 'lib'
+      input: $scope.sass
+      compiler: '3.4'
       syntax: 'SCSS'
       original_syntax: 'SCSS'
       output_style: $scope.selectedStyle
