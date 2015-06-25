@@ -56,6 +56,17 @@ module SassMeister
 
       @api.body
     end
+
+
+    get '/app/compilers' do
+      content_type 'application/json'
+
+      cache_control :public, max_age: 2592000 # 30 days, in seconds
+    
+      compilers = SassMeister::Redis.new 'compilers'
+
+      compilers.value.to_json
+    end
   end
 end
 
