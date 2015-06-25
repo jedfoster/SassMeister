@@ -2,12 +2,12 @@ section
   h3 Input
 
   .editor-wrapper(ng-controller="AceController")
-    ui-ace(ng-model='sass' ng-change='compile()' ui-ace='{onLoad: aceLoaded}')
+    ui-ace(ng-model='app.sass' ng-change='compile()' ui-ace='{onLoad: aceLoaded}')
 
   h3 Output
 
   .editor-wrapper(ng-controller="AceController")
-    ui-ace(ng-model='css' ui-ace='{onLoad: aceLoaded}' readonly)
+    ui-ace(ng-model='app.css' ui-ace='{onLoad: aceLoaded, mode: \'css\'}' readonly)
 
 control-panel
 

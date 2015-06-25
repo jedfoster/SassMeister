@@ -1,12 +1,13 @@
 module.exports =
   storageDefaults:
-    sass: ''
-    css: ''
-    outputStyle: 'expanded'
-    compiler: '3.4'
-    syntax: 'SCSS'
-    originalSyntax: 'SCSS'
-    dependencies: {}
+    app:
+      sass: ''
+      css: ''
+      outputStyle: 'expanded'
+      compiler: '3.4'
+      syntax: 'scss'
+      originalSyntax: 'scss'
+      dependencies: {}
 
     preferences:
       theme: 'tomorrow'

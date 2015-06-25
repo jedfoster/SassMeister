@@ -39,24 +39,19 @@ angular.module 'SassMeister', [
           $localStorage.$default config.storageDefaults
 
 .controller 'ApplicationController', ($scope, $localStorage, data, Compiler) ->
-  $scope.sass = data.sass
-  $scope.css = data.css
-  $scope.outputStyle = data.outputStyle
-  $scope.compiler = data.compiler
-  $scope.syntax = data.syntax
-  $scope.originalSyntax = data.originalSyntax
-  $scope.selectedTheme = data.preferences.theme
+  $scope.app = data.app
+  $scope.preferences = data.preferences
 
   $scope.themes = config.themes()
 
   $scope.compile = debounce ->
     Compiler.compile {
-      input: $scope.sass
-      compiler: '3.4'
-      syntax: 'SCSS'
-      original_syntax: 'SCSS'
-      output_style: $scope.outputStyle
+      input: $scope.app.sass
+      compiler: $scope.app.compiler
+      syntax: $scope.app.syntax
+      original_syntax: $scope.app.originalSyntax
+      output_style: $scope.app.outputStyle
     }, (data) ->
-      $scope.css = data.css
+      $scope.app.css = data.css
   , 500 # Production uses 750
 

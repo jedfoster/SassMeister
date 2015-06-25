@@ -40,7 +40,7 @@ angular.module 'SassMeister.ace', [
     # Options
     # _editor.setReadOnly true
     
-    _editor.setKeyboardHandler 'ace/keyboard/vim'
+    # _editor.setKeyboardHandler 'ace/keyboard/vim'
     
     # Events
     _editor.on 'changeSession', ->
@@ -49,10 +49,29 @@ angular.module 'SassMeister.ace', [
     _session.on 'change', ->
       # no-op
     
-    _editor.setTheme "ace/theme/#{$scope.selectedTheme}"
+    _editor.getSession().setTabSize(2)
+    _editor.getSession().setUseSoftTabs(true)
+  
+    # _editor.setTheme "ace/theme/#{$scope.selectedTheme}"
+    #
 
-  $scope.$watch 'selectedTheme', (newValue, oldValue) ->
-    $scope.editor.setTheme "ace/theme/#{newValue}"
+  $scope.$watch 'preferences.theme', (value) ->
+    $scope.editor.setTheme "ace/theme/#{value}"
+
+  $scope.$watch 'preferences.vim', (value) ->
+    if value
+      $scope.editor.setKeyboardHandler 'ace/keyboard/vim'
+    else
+      $scope.editor.setKeyboardHandler null
+
+  $scope.$watch 'preferences.emmet', (value) ->
+    $scope.editor.setOption 'enableEmmet', value
+
+  $scope.$watch 'preferences.scrollPastEnd', (value) ->
+    $scope.editor.setOption 'scrollPastEnd', value
+
+  $scope.$watch 'app.syntax', (value) ->
+    $scope.editor.getSession().setMode("ace/mode/#{value}")
 
 ]
 
