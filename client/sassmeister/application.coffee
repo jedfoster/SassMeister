@@ -1,7 +1,10 @@
 'use strict'
 
+config = require './config'
+
 require 'angular'
 require 'angular-ui-router'
+require 'ngStorage'
 require './index'
 require './gist'
 require './compiler'
@@ -12,6 +15,7 @@ debounce = require './lib/debounce'
 
 angular.module 'SassMeister', [
   'ui.router'
+  'ngStorage'
   'SassMeister.gist'
   'SassMeister.index'
   'SassMeister.compiler'
@@ -31,21 +35,19 @@ angular.module 'SassMeister', [
       template: '<ui-view/>'
       controller: 'ApplicationController'
       resolve:
-        data: ->
-          sass: ''
-          css: ''
-          outputStyle: 'nested'
+        data: ($localStorage) ->
+          $localStorage.$default config.storageDefaults
 
-.controller 'ApplicationController', ($scope, data, Compiler) ->
+.controller 'ApplicationController', ($scope, $localStorage, data, Compiler) ->
   $scope.sass = data.sass
   $scope.css = data.css
+  $scope.outputStyle = data.outputStyle
+  $scope.compiler = data.compiler
+  $scope.syntax = data.syntax
+  $scope.originalSyntax = data.originalSyntax
+  $scope.selectedTheme = data.preferences.theme
 
-  $scope.outputStyles = [
-    'nested'
-    'compressed'
-  ]
-
-  $scope.selectedStyle = data.outputStyle
+  $scope.themes = config.themes()
 
   $scope.compile = debounce ->
     Compiler.compile {
@@ -53,7 +55,7 @@ angular.module 'SassMeister', [
       compiler: '3.4'
       syntax: 'SCSS'
       original_syntax: 'SCSS'
-      output_style: $scope.selectedStyle
+      output_style: $scope.outputStyle
     }, (data) ->
       $scope.css = data.css
   , 500 # Production uses 750

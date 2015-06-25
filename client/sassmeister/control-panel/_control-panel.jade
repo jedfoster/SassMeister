@@ -13,10 +13,10 @@ div
       h3.syntax Syntax
 
       fieldset.syntax-toggle-group(data-event-name='SassSyntax')
-        input#syntax-scss(type='radio' name='syntax' value='scss')
+        input#syntax-scss(type='radio' name='syntax' value='scss' ng-model='selectedStyle' ng-change='compile()')
         label(for='syntax-scss' data-toggle-input='sass') SCSS
 
-        input#syntax-sass(type='radio' name='syntax' value='sass')
+        input#syntax-sass(type='radio' name='syntax' value='sass' ng-model='selectedStyle' ng-change='compile()')
         label(for='syntax-sass' data-toggle-input='sass') Sass
 
         span
@@ -30,24 +30,20 @@ div
     fieldset
       h2 CSS
 
-      select(ng-model='selectedStyle' ng-change='compile()' ng-options='style for style in outputStyles')
-
       fieldset.output-toggle-group(data-event-name='CSSOutput')
-        input#expanded-output(type='radio' name='output-style' value='expanded')
+        input#expanded-output(type='radio' name='output-style' value='expanded' ng-model='outputStyle' ng-change='compile()')
         label(for='expanded-output' data-toggle-input='css') expanded
 
-        input#nested-output(type='radio' name='output-style' value='nested')
+        input#nested-output(type='radio' name='output-style' value='nested' ng-model='outputStyle' ng-change='compile()')
         label(for='nested-output' data-toggle-input='css') nested
 
-        input#compact-output(type='radio' name='output-style' value='compact')
+        input#compact-output(type='radio' name='output-style' value='compact' ng-model='outputStyle' ng-change='compile()')
         label(for='compact-output' data-toggle-input='css') compact
 
-        input#compressed-output(type='radio' name='output-style' value='compressed')
+        input#compressed-output(type='radio' name='output-style' value='compressed' ng-model='outputStyle' ng-change='compile()')
         label(for='compressed-output' data-toggle-input='css') compressed
 
         span
-
-        p.libsass-output-note Note: LibSass currently only supports <code>nested</code> and <code>compressed</code> output. See <a href="https://github.com/hcatlin/libsass/issues/233">this issue</a> for details.
 
     fieldset
       h2 HTML
@@ -76,16 +72,7 @@ div
       fieldset
         h3.theme Theme
         p
-          select.fancy_dropdown(name='theme')
-            option(value='tomorrow') Tomorrow
-            option(value='dawn') Dawn
-            option(value='github') GitHub
-            option(value='kuroir') Kuroir
-            option(value='solarized-light') Solarized Light
-            option(value='merbivore-soft') Merbivore Soft
-            option(value='monokai') Monokai
-            option(value='solarized-dark') Solarized Dark
-            option(value='tomorrow-night-eighties') Tomorrow Night Eighties
+          select(ng-model='selectedTheme' ng-options='theme as name for (theme, name) in themes')
         
         p
           input#enable-emmet(type='checkbox' name='emmet' value='true')
