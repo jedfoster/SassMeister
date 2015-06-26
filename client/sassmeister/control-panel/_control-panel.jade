@@ -8,7 +8,7 @@ div
       fieldset(data-event-name='SassVersion')
         h3.version Compiler
 
-        //- include ./_compiler-menu.jade
+        select(ng-model='app.compiler' ng-options='compiler.value as compiler.option for compiler in compilers')
 
       h3.syntax Syntax
 
@@ -22,8 +22,8 @@ div
         span
 
       div#extension_list
-        h3.selected Extensions 
-          i (Inserted at cursor)
+        h3.selected Extensions
+          i  (Inserted at cursor)
 
         ol
 
@@ -73,15 +73,15 @@ div
         h3.theme Theme
         p
           select(ng-model='preferences.theme' ng-options='theme as name for (theme, name) in themes')
-        
+
         p
           input#enable-emmet(type='checkbox' name='emmet' value='true' ng-model='preferences.emmet')
           label(for='enable-emmet') Enable Emmet support
-        
+
         p
           input#enable-vim(type='checkbox' name='vim' value='true' ng-model='preferences.vim')
           label(for='enable-vim') Use Vim keybindings
-        
+
         p
           input#enable-scrollPastEnd(type='checkbox' name='scrollPastEnd' value='true' ng-model='preferences.scrollPastEnd')
           label(for='enable-scrollPastEnd') Scroll Past End

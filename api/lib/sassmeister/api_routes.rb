@@ -62,10 +62,10 @@ module SassMeister
       content_type 'application/json'
 
       cache_control :public, max_age: 2592000 # 30 days, in seconds
-    
+
       compilers = SassMeister::Redis.new 'compilers'
 
-      compilers.value.to_json
+      {compilers: Hash[compilers.value.sort_by{|k, v| k}.reverse]}.to_json
     end
   end
 end
