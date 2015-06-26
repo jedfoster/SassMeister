@@ -21,7 +21,7 @@ angular.module 'SassMeister.gist', [
     .state 'application.gist',
       url: '^/gist/:id'
       template: template
-      controller: 'ApplicationController'
+      # controller: 'ApplicationController'
       resolve:
         data: (Gist, $stateParams, data) ->
           # `$resource` returns a `Resource` object, not a `Promise` like `$http` does.

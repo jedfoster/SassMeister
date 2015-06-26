@@ -16,5 +16,5 @@ angular.module 'SassMeister.index', [
     .state 'application.index',
       url: '^/'
       template: template
-      controller: 'ApplicationController'
+      # controller: 'ApplicationController'
 
