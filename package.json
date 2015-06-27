@@ -61,7 +61,7 @@
     "angular-resource": "^1.3.13",
     "angular-ui-ace": "git+ssh://git@github.com:angular-ui/ui-ace.git",
     "angular-ui-router": "^0.2.13",
-    "brace": "^0.5.1",
+    "brace": "git+ssh://git@github.com:jedfoster/brace.git",
     "del": "^1.2.0",
     "ngstorage": "^0.3.4"
   }
