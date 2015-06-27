@@ -28,6 +28,4 @@ angular.module 'SassMeister.controlPanel', ['ngResource']
               option: "#{compiler.engine} #{compiler.sass}"
             }
         )
-
-        console.log scope.compilers
 ]

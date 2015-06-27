@@ -1,6 +1,7 @@
 config = require '../config'
 
 ace = require 'brace'
+
 require 'brace/mode/css'
 require 'brace/mode/sass'
 require 'brace/mode/scss'
@@ -11,13 +12,11 @@ require 'brace/mode/markdown'
 require 'brace/mode/textile'
 require 'brace/ext/emmet'
 require 'brace/keybinding/vim'
-
 require 'brace/theme/dawn'
 require 'brace/theme/github'
 require 'brace/theme/kuroir'
 require 'brace/theme/solarized_light'
 require 'brace/theme/tomorrow'
-
 require 'brace/theme/merbivore_soft'
 require 'brace/theme/monokai'
 require 'brace/theme/solarized_dark'
@@ -41,13 +40,13 @@ angular.module 'SassMeister.ace', [
     # Events
     # _editor.on 'changeSession', ->
       # no-op
-      
+
     # _session.on 'change', ->
       # no-op
-    
-    _session.setTabSize(2)
-    _session.setUseSoftTabs(true)
-  
+
+    _session.setTabSize 2
+    _session.setUseSoftTabs true
+
   $scope.$watch 'preferences.theme', (value) ->
     $scope.editor.setTheme "ace/theme/#{value}"
 
@@ -64,8 +63,6 @@ angular.module 'SassMeister.ace', [
     if value and not window.emmet
       angularLoad.loadScript 'http://nightwing.github.io/emmet-core/emmet.js'
         .then ->
-          # Script loaded succesfully.
-          # We can now start using the functions from someplugin.js
           setEmmet value
 
     else
@@ -77,7 +74,7 @@ angular.module 'SassMeister.ace', [
     $scope.editor.setOption 'scrollPastEnd', value
 
   $scope.$watch 'app.syntax', (value) ->
-    $scope.editor.getSession().setMode("ace/mode/#{value}")
+    $scope.editor.getSession().setMode "ace/mode/#{value}"
 
 ]
 
