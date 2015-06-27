@@ -4,28 +4,23 @@ require 'angular'
 
 template = require './_control-panel.jade'
 
-angular.module 'SassMeister.controlPanel', ['ngResource']
+angular.module 'SassMeister.controlPanel', ['SassMeister.compiler']
 
-.factory 'Compilers', ($resource) ->
-  $resource '/app/compilers'
-
-.directive 'controlPanel', ['Compilers', (Compilers) ->
+.directive 'controlPanel', ['Compiler', (Compiler) ->
   restrict: 'E'
   template: template
   link: (scope, element, attrs) ->
-    Compilers.get()
-      .$promise
-      .then (data) ->
-        scope.compilers = (
-          keys = Object.keys(data.compilers)
+    Compiler.compilers {}, (data) ->
+      scope.compilers = (
+        keys = Object.keys(data.compilers)
 
-          for key in keys
-            compiler = data.compilers[key]
-            compiler.engine = 'Sass' if compiler.engine.match /Ruby/
-            
-            {
-              value: key
-              option: "#{compiler.engine} #{compiler.sass}"
-            }
-        )
+        for key in keys
+          compiler = data.compilers[key]
+          compiler.engine = 'Sass' if compiler.engine.match /Ruby/
+          
+          {
+            value: key
+            option: "#{compiler.engine} #{compiler.sass}"
+          }
+      )
 ]
