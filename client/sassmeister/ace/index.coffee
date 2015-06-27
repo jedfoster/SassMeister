@@ -43,6 +43,8 @@ angular.module 'SassMeister.ace', [
 
     # _session.on 'change', ->
       # no-op
+    
+    _editor.$blockScrolling = Infinity
 
     _session.setTabSize 2
     _session.setUseSoftTabs true
