@@ -34,7 +34,7 @@ module SassMeister
     get '/app/:compiler/extensions' do
       @api.extensions
 
-      @api.body
+      {extensions: JSON.parse(@api.body)}.to_json
     end
 
 

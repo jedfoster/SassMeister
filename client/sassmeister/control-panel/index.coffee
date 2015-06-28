@@ -17,10 +17,20 @@ angular.module 'SassMeister.controlPanel', ['SassMeister.compiler']
         for key in keys
           compiler = data.compilers[key]
           compiler.engine = 'Sass' if compiler.engine.match /Ruby/
-          
+
           {
             value: key
             option: "#{compiler.engine} #{compiler.sass}"
           }
       )
+
+    scope.log = (val) ->
+      console.log val
+
+    getExtensions = ->
+      Compiler.extensions {compiler: scope.app.compiler}, (data) ->
+        scope.extensions = data.extensions
+
+    scope.$watch 'app.compiler', ->
+      do getExtensions
 ]

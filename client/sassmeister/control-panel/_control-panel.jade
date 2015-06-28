@@ -26,6 +26,11 @@ div
           i  (Inserted at cursor)
 
         ol
+          //- Per http://www.alexkras.com/11-tips-to-improve-angularjs-performance/
+          //- `::` is one-time binding
+          li(ng-repeat='(name, extension) in extensions')
+            a(href='#' data-import='{{::extension.import}}' ng-click='log(extension.import)') {{::name}}
+            | &nbsp;&nbsp;(v{{::extension.version}})
 
     fieldset
       h2 CSS
