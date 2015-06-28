@@ -11,8 +11,6 @@ require './compiler'
 require './ace'
 require './control-panel'
 
-debounce = require './lib/debounce'
-
 angular.module 'SassMeister', [
   'ui.router'
   'ngStorage'
@@ -54,7 +52,7 @@ angular.module 'SassMeister', [
   $scope.preferences = data.preferences
   $scope.themes = config.themes()
 
-  $scope.compile = debounce ->
+  $scope.compile = ->
     Compiler.compile {
       input: $scope.app.sass
       compiler: $scope.app.compiler
@@ -63,5 +61,4 @@ angular.module 'SassMeister', [
       output_style: $scope.app.outputStyle
     }, (data) ->
       $scope.app.css = data.css
-  , 500 # Production uses 750
 
