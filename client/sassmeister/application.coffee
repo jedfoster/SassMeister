@@ -51,6 +51,7 @@ angular.module 'SassMeister', [
   $scope.app = data.app
   $scope.preferences = data.preferences
   $scope.themes = config.themes()
+  $scope.editors = {}
 
   $scope.compile = ->
     Compiler.compile {
@@ -61,4 +62,10 @@ angular.module 'SassMeister', [
       output_style: $scope.app.outputStyle
     }, (data) ->
       $scope.app.css = data.css
+
+  $scope.insertImport = (imports) ->
+    eol = (if $scope.app.syntax == 'scss' then ';' else '') + '\n'
+
+    for _import in imports
+      $scope.editors.sass.insert "@import \"#{_import}\"#{eol}"
 

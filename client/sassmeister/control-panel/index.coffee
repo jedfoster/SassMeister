@@ -24,9 +24,6 @@ angular.module 'SassMeister.controlPanel', ['SassMeister.compiler']
           }
       )
 
-    scope.log = (val) ->
-      console.log val
-
     getExtensions = ->
       Compiler.extensions {compiler: scope.app.compiler}, (data) ->
         scope.extensions = data.extensions

@@ -26,28 +26,35 @@ require 'angular-ui-ace/src/ui-ace'
 
 require 'angular-load'
 
+aceLoaded = (editor) ->
+  session = editor.getSession()
+
+  # Events
+  # editor.on 'changeSession', ->
+    # no-op
+
+  # session.on 'change', ->
+    # no-op
+  
+  editor.$blockScrolling = Infinity
+
+  session.setTabSize 2
+  session.setUseSoftTabs true
+
+
 angular.module 'SassMeister.ace', [
   'ui.ace'
   'angularLoad'
 ]
 
 .controller 'AceController', [ '$scope', 'angularLoad', ($scope, angularLoad) ->
-  $scope.aceLoaded = (_editor) ->
-    $scope.editor = _editor
+  $scope.aceLoadedSass = (editor) ->
+    aceLoaded editor
+    $scope.editor = $scope.editors.sass = editor
 
-    _session = _editor.getSession()
-
-    # Events
-    # _editor.on 'changeSession', ->
-      # no-op
-
-    # _session.on 'change', ->
-      # no-op
-    
-    _editor.$blockScrolling = Infinity
-
-    _session.setTabSize 2
-    _session.setUseSoftTabs true
+  $scope.aceLoadedCSS = (editor) ->
+    aceLoaded editor
+    $scope.editor = editor
 
   $scope.$watch 'preferences.theme', (value) ->
     $scope.editor.setTheme "ace/theme/#{value}"
