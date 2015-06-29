@@ -110,7 +110,6 @@ GEM
     rack (1.5.2)
     rack-cache (1.2)
       rack (>= 0.4)
-    rack-env (0.1.3)
     rack-protection (1.5.3)
       rack
     rack-test (0.6.2)
@@ -166,6 +165,7 @@ DEPENDENCIES
   chairman
   closure-compiler
   compass (= 1.0.0.alpha.18)
+  dotenv
   execjs
   fakeredis
   faraday
@@ -175,7 +175,6 @@ DEPENDENCIES
   pry-remote
   rack-cache
   rack-contrib!
-  rack-env
   rack-test
   rake
   redis

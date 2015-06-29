@@ -13,6 +13,11 @@ require 'array'
 require 'assets'
 require 'sassmeister/api_routes'
 
+if ENV['RACK_ENV']
+  require 'dotenv'
+  Dotenv.load
+end
+
 class SassMeisterApp < Sinatra::Base
   register Sinatra::RespondWith
   register Sinatra::Partial
@@ -116,7 +121,7 @@ class SassMeisterApp < Sinatra::Base
   end
 
 
-  get %r{/app/gist(?:/[\w-]*)*/([\d\w]+)} do
+  get %r{/api/gist(?:/[\w-]*)*/([\d\w]+)} do
     id = params[:captures].first
 
     begin
@@ -192,12 +197,12 @@ class SassMeisterApp < Sinatra::Base
 
     respond_to do |wants|
       wants.html { erb :index }
-      wants.json { {gist: @gist, gist_output: @gist_output}.to_json }
+      wants.json { response.data.to_json }
     end
   end
 
 
-  post '/app/gist/create' do
+  post '/api/gist/create' do
     inputs = params[:inputs]
     outputs = params[:outputs]
 
@@ -254,7 +259,7 @@ class SassMeisterApp < Sinatra::Base
   end
 
 
-  post %r{/app/gist(?:/[\w-]*)*/([\d\w]+)/edit} do
+  post %r{/api/gist(?:/[\w-]*)*/([\d\w]+)/edit} do
     id = params[:captures].shift
 
     inputs = params[:inputs]
@@ -333,7 +338,7 @@ class SassMeisterApp < Sinatra::Base
     }.to_json.to_s if data
   end
 
-  post %r{/app/gist(?:/[\w-]*)*/([\d\w]+)/fork} do
+  post %r{/api/gist(?:/[\w-]*)*/([\d\w]+)/fork} do
     id = params[:captures].shift
 
     data = @github.fork_gist(id)
