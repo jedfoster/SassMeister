@@ -65,21 +65,21 @@ class SassMeisterApp < Sinatra::Base
       response.set_cookie('github_id', {
         value: @user.login,
         expires: (Time.now + SassMeisterApp::SESSION_DURATION),
-        # domain: SassMeisterApp::COOKIE_DOMAIN,
+        domain: SassMeisterApp::COOKIE_DOMAIN,
         path: '/'
       })
 
       response.set_cookie('avatar_url', {
         value: @user.avatar_url,
         expires: (Time.now + SassMeisterApp::SESSION_DURATION),
-        # domain: SassMeisterApp::COOKIE_DOMAIN,
+        domain: SassMeisterApp::COOKIE_DOMAIN,
         path: '/'
       })
 
       response.set_cookie('gh', {
         value: session[:github_token],
         expires: (Time.now + SassMeisterApp::SESSION_DURATION),
-        # domain: SassMeisterApp::COOKIE_DOMAIN,
+        domain: SassMeisterApp::COOKIE_DOMAIN,
         path: '/'
       })
 
@@ -128,85 +128,85 @@ class SassMeisterApp < Sinatra::Base
   end
 
 
-  get %r{/api/gist(?:/[\w-]*)*/([\d\w]+)} do
-    id = params[:captures].first
+  # get %r{/api/gist(?:/[\w-]*)*/([\d\w]+)} do
+  #   id = params[:captures].first
 
-    begin
-      response = @github.gist(id)
+  #   begin
+  #     response = @github.gist(id)
 
-      raise Octokit::NotFound unless response.message.nil?
+  #     raise Octokit::NotFound unless response.message.nil?
 
-      last_modified response.updated_at.httpdate
+  #     last_modified response.updated_at.httpdate
 
-      # For now, we only return the first .sass or .scss file we find.
-      file = response.files["#{response.files._fields.grep(/.+\.(scss|sass)/i)[0]}"]
+  #     # For now, we only return the first .sass or .scss file we find.
+  #     file = response.files["#{response.files._fields.grep(/.+\.(scss|sass)/i)[0]}"]
 
-      if( ! file)
-        syntax = filename = owner = ''
-        sass = "// Sorry, I couldn't find any valid Sass in that Gist."
+  #     if( ! file)
+  #       syntax = filename = owner = ''
+  #       sass = "// Sorry, I couldn't find any valid Sass in that Gist."
 
-      else
-        sass = file.content
-        filename = file.filename
-        owner = ((response.respond_to?(:user) && response.user) ? response.user.login : nil)
+  #     else
+  #       sass = file.content
+  #       filename = file.filename
+  #       owner = ((response.respond_to?(:user) && response.user) ? response.user.login : nil)
 
-        syntax = file.filename.slice(-4, 4)
-      end
+  #       syntax = file.filename.slice(-4, 4)
+  #     end
 
-      html_file = response.files["#{response.files._fields.grep(/.+\.(haml|textile|markdown|md|html)/)[0]}"]
+  #     html_file = response.files["#{response.files._fields.grep(/.+\.(haml|textile|markdown|md|html)/)[0]}"]
 
-      if(html_file)
-        html = html_file.content
-        html_filename = html_file.filename
+  #     if(html_file)
+  #       html = html_file.content
+  #       html_filename = html_file.filename
 
-        html_syntax = html_file.filename.split('.').pop
-        html_syntax = 'markdown' if html_syntax == 'md'
+  #       html_syntax = html_file.filename.split('.').pop
+  #       html_syntax = 'markdown' if html_syntax == 'md'
 
-        html_syntax.capitalize!
-      end
+  #       html_syntax.capitalize!
+  #     end
 
-      if css_file = response.files["#{response.files._fields.grep(/.+-output\.css/)[0]}"]
-        css_file = css_file.content.to_s
-      end
+  #     if css_file = response.files["#{response.files._fields.grep(/.+-output\.css/)[0]}"]
+  #       css_file = css_file.content.to_s
+  #     end
 
-      if rendered_file = response.files["#{response.files._fields.grep(/.+-rendered\.html/)[0]}"]
-        rendered_file = response.files["#{response.files._fields.grep(/.+-rendered\.html/)[0]}"].content.to_s
-      end
+  #     if rendered_file = response.files["#{response.files._fields.grep(/.+-rendered\.html/)[0]}"]
+  #       rendered_file = response.files["#{response.files._fields.grep(/.+-rendered\.html/)[0]}"].content.to_s
+  #     end
 
-    rescue Octokit::NotFound => e
-      @id = id
-      status 404
+  #   rescue Octokit::NotFound => e
+  #     @id = id
+  #     status 404
 
-      return
-    end
+  #     return
+  #   end
 
-    @gist = {
-      gist_id: id,
-      owner: owner,
-      sass_filename: filename,
-      html_filename: (html_filename || ''),
-      sass: {
-        input: sass,
-        syntax: syntax,
-        original_syntax: syntax,
-        dependencies: get_frontmatter_dependencies(sass)
-      },
-      html: {
-        input: (html || '').gsub('</script>', '<\/script>'),
-        syntax: (html_syntax || '').gsub('</script>', '<\/script>')
-      }
-    }
+  #   @gist = {
+  #     gist_id: id,
+  #     owner: owner,
+  #     sass_filename: filename,
+  #     html_filename: (html_filename || ''),
+  #     sass: {
+  #       input: sass,
+  #       syntax: syntax,
+  #       original_syntax: syntax,
+  #       dependencies: get_frontmatter_dependencies(sass)
+  #     },
+  #     html: {
+  #       input: (html || '').gsub('</script>', '<\/script>'),
+  #       syntax: (html_syntax || '').gsub('</script>', '<\/script>')
+  #     }
+  #   }
 
-    @gist_output = {
-      css: (css_file || ''),
-      html: (rendered_file || '').gsub('</script>', '<\/script>')
-    }
+  #   @gist_output = {
+  #     css: (css_file || ''),
+  #     html: (rendered_file || '').gsub('</script>', '<\/script>')
+  #   }
 
-    respond_to do |wants|
-      wants.html { erb :index }
-      wants.json { response.data.to_json }
-    end
-  end
+  #   respond_to do |wants|
+  #     wants.html { erb :index }
+  #     wants.json { response.data.to_json }
+  #   end
+  # end
 
 
   post '/api/gist/create' do
