@@ -48,9 +48,9 @@ angular.module 'SassMeister', [
           _data.preferences = angular.extend config.storageDefaults.preferences, _data.preferences
 
           _data
-  $scope.app = data.app
 
 .controller 'ApplicationController', ($scope, $localStorage, $cookies, data, Compiler) ->
+  $scope.app = config.storageDefaults.app
   $scope.preferences = data.preferences
   $scope.themes = config.themes()
   $scope.editors = {}
