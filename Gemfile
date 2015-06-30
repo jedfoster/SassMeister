@@ -14,14 +14,7 @@ gem 'sawyer'
 gem 'thor'
 
 group :assets do
-  gem 'execjs'
   gem 'rake'
-  gem 'sass'
-  gem 'compass', "1.0.0.alpha.18"
-  gem 'ffi', "= 1.9.0"
-  gem 'stipe'
-  gem 'jammit'
-  gem 'closure-compiler'
 end
 
 group :development, :test do
