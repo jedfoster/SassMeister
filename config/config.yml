@@ -5,7 +5,7 @@ development: &default_settings
   sandbox_domain: 'sandbox.sassmeister.dev'
   assets_host: '/'
   cache_max_age: 0
-  cookie_domain: 'localhost:9292'
+  cookie_domain: ''
   cookie_secret: 'dev'
 
 test:

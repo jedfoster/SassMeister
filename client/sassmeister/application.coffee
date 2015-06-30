@@ -11,6 +11,7 @@ require './gist'
 require './compiler'
 require './ace'
 require './control-panel'
+require './site-header'
 
 angular.module 'SassMeister', [
   'ui.router'
@@ -20,6 +21,7 @@ angular.module 'SassMeister', [
   'SassMeister.compiler'
   'SassMeister.ace'
   'SassMeister.controlPanel'
+  'SassMeister.siteHeader'
   'ngCookies'
 ]
 
@@ -48,12 +50,16 @@ angular.module 'SassMeister', [
           _data.preferences = angular.extend config.storageDefaults.preferences, _data.preferences
 
           _data
+    .state 'application.logout',
+      url: 'logout'
 
-.controller 'ApplicationController', ($scope, $localStorage, $cookies, data, Compiler) ->
+.controller 'ApplicationController', ($scope, $localStorage, $cookies, $window, data, Compiler) ->
   $scope.app = config.storageDefaults.app
   $scope.preferences = data.preferences
   $scope.themes = config.themes()
   $scope.editors = {}
+  $scope.githubId = $cookies.get 'github_id'
+  $scope.avatarUrl = $cookies.get 'avatar_url'
 
   $scope.compile = ->
     Compiler.compile {
@@ -70,4 +76,5 @@ angular.module 'SassMeister', [
 
     for _import in imports
       $scope.editors.sass.insert "@import \"#{_import}\"#{eol}"
+
 

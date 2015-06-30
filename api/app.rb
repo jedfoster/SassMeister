@@ -87,7 +87,7 @@ class SassMeisterApp < Sinatra::Base
     end
 
     after '/logout' do
-      ['github_id', 'avatar_url'].each do |cookie|
+      ['github_id', 'avatar_url', 'gh'].each do |cookie|
         response.delete_cookie cookie, {domain: SassMeisterApp::COOKIE_DOMAIN, path: '/'}
       end
 
