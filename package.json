@@ -64,7 +64,7 @@
     "angular-ui-router": "^0.2.13",
     "brace": "git+ssh://git@github.com:jedfoster/brace.git",
     "del": "^1.2.0",
-    "github-api": "^0.10.6",
+    "github-api": "git+ssh://git@github.com:jedfoster/github.git",
     "ngstorage": "^0.3.4",
     "underscore": "^1.8.3"
   }
