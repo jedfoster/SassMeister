@@ -65,3 +65,6 @@ angular.module 'SassMeister.gist', [
       $scope.app.html = data.files[fileName].content
       $scope.app.htmlSyntax = data.files[fileName].language.toLowerCase()
 
+  if !$scope.app.sass
+    $scope.app.sass = "// Sorry, I couldn't find any valid Sass in that Gist."
+    
