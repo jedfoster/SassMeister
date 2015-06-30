@@ -48,6 +48,7 @@ angular.module 'SassMeister.gist', [
   sassRegEx = /.+\.(scss|sass)/i
   cssRegEx = /.+-output\.css/i
   htmlRegEx = /.+\.(haml|textile|markdown|md|html)/i
+  frontmatterRegEx = /^\/\/ ([\w\s]+?) \(v([A-z0-9\.]+?)\)\s*$/mgi
 
   files = Object.keys data.files
 
@@ -67,4 +68,14 @@ angular.module 'SassMeister.gist', [
 
   if !$scope.app.sass
     $scope.app.sass = "// Sorry, I couldn't find any valid Sass in that Gist."
-    
+
+  while frontmatter = frontmatterRegEx.exec $scope.app.sass
+    [x,name, version] = frontmatter
+    $scope.app.dependencies[name] = version
+
+  if $scope.app.dependencies.libsass
+    $scope.app.compiler = 'lib'
+  else if $scope.app.dependencies.Sass
+    $scope.app.compiler = $scope.app.dependencies.Sass.substr(0, 3)
+  
+
