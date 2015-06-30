@@ -1,11 +1,11 @@
 development: &default_settings
   app_version: '2.0.1'
   session_duration: 7776000 # 90 days, in seconds
-  app_domain: 'sassmeister.dev'
+  app_domain: 'localhost:9292'
   sandbox_domain: 'sandbox.sassmeister.dev'
   assets_host: '/'
   cache_max_age: 0
-  cookie_domain: '.sassmeister.dev'
+  cookie_domain: 'localhost:9292'
   cookie_secret: 'dev'
 
 test:

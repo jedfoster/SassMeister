@@ -3,10 +3,12 @@
 require 'angular'
 require 'angular-ui-router'
 require 'angular-resource'
+require 'angular-cookies'
 
 angular.module 'SassMeister.gist', [
   'ngResource'
   'ui.router'
+  'ngCookies'
 ]
 
 .factory 'Gist', ($resource) ->

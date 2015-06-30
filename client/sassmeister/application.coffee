@@ -4,6 +4,7 @@ config = require './config'
 
 require 'angular'
 require 'angular-ui-router'
+require 'angular-cookies'
 require 'ngStorage'
 require './index'
 require './gist'
@@ -19,6 +20,7 @@ angular.module 'SassMeister', [
   'SassMeister.compiler'
   'SassMeister.ace'
   'SassMeister.controlPanel'
+  'ngCookies'
 ]
 
 .config ($stateProvider, $urlRouterProvider, $locationProvider) ->
@@ -42,13 +44,13 @@ angular.module 'SassMeister', [
           # And, `merge(defaults, data)`—while it respects keys—breaks the automagic localStorage linkage.
           #
           # So. Brute-force it with `extend`. Blech.
-          _data.app = angular.extend config.storageDefaults.app, _data.app
+          # _data.app = angular.extend config.storageDefaults.app, _data.app
           _data.preferences = angular.extend config.storageDefaults.preferences, _data.preferences
 
           _data
-
-.controller 'ApplicationController', ($scope, $localStorage, data, Compiler) ->
   $scope.app = data.app
+
+.controller 'ApplicationController', ($scope, $localStorage, $cookies, data, Compiler) ->
   $scope.preferences = data.preferences
   $scope.themes = config.themes()
   $scope.editors = {}
