@@ -12,6 +12,7 @@ require './compiler'
 require './ace'
 require './control-panel'
 require './site-header'
+require './cloud-menu'
 
 angular.module 'SassMeister', [
   'ui.router'
@@ -22,6 +23,7 @@ angular.module 'SassMeister', [
   'SassMeister.ace'
   'SassMeister.controlPanel'
   'SassMeister.siteHeader'
+  'SassMeister.cloudMenu'
   'ngCookies'
 ]
 
@@ -60,6 +62,11 @@ angular.module 'SassMeister', [
   $scope.editors = {}
   $scope.githubId = $cookies.get 'github_id'
   $scope.avatarUrl = $cookies.get 'avatar_url'
+
+  # Set default values for commonly evaluated values
+  $scope.gist = false
+  $scope.canEditGist = ->
+    false
 
   $scope.compile = ->
     Compiler.compile {

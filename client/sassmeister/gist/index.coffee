@@ -43,8 +43,25 @@ angular.module 'SassMeister.gist', [
           getGist($stateParams.id)
             .then (gist) ->
               gist.read()
-            
+
 .controller 'GistController', ($scope, data) ->
+  console.log data
+
+  $scope.gist =
+    created_at: data.created_at
+    description: data.description
+    files: data.files
+    html_url: data.html_url
+    id: data.id
+    updated_at: data.updated_at
+    owner:
+      avatar_url: data.owner.avatar_url
+      id: data.owner.id
+      login: data.owner.login
+
+  $scope.canEditGist = ->
+    $scope.gist.owner.login == $scope.githubId
+
   sassRegEx = /.+\.(scss|sass)/i
   cssRegEx = /.+-output\.css/i
   htmlRegEx = /.+\.(haml|textile|markdown|md|html)/i
