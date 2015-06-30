@@ -1,8 +1,9 @@
 module.exports =
   storageDefaults:
     app:
-      sass: ''
-      css: ''
+      sass: false
+      css: false
+      html: false
       outputStyle: 'expanded'
       compiler: '3.4'
       syntax: 'scss'
