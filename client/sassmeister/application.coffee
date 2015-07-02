@@ -81,8 +81,14 @@ angular.module 'SassMeister', [
 
   $scope.insertImport = (imports) ->
     eol = (if $scope.app.syntax == 'scss' then ';' else '') + '\n'
+    collection = []
 
     for _import in imports
-      $scope.editors.sass.insert "@import \"#{_import}\"#{eol}"
+      collection.push "@import \"#{_import}\"#{eol}"
 
+    $scope.editors.sass.insert collection.join ''
+
+    $scope.app.sass = $scope.editors.sass.getValue()
+
+    do $scope.compile
 
