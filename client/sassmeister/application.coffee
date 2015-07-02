@@ -76,6 +76,7 @@ angular.module 'SassMeister', [
       original_syntax: $scope.app.originalSyntax
       output_style: $scope.app.outputStyle
     }, (data) ->
+      $scope.app.dependencies = data.dependencies
       $scope.app.css = data.css
 
   $scope.insertImport = (imports) ->
