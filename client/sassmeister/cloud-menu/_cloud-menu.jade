@@ -11,7 +11,7 @@ ul#cloud_actions
       span Save Gist
 
   li(ng-if='showForkGist()')
-    a#fork-gist.fork-gist(data-action='create')
+    a#fork-gist.fork-gist(data-action='create' ng-click='forkGist()')
       span Fork Gist
 
   li(ng-if='showLoginToSaveGists()')

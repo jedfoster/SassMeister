@@ -76,3 +76,8 @@ angular.module 'SassMeister.gist', [
     $scope.app.compiler = $scope.app.dependencies.Sass.substr(0, 3)
   
 
+  $scope.forkGist = ->
+    $githubGist($stateParams.id)
+      .then (gist) ->
+        gist.fork()
+
