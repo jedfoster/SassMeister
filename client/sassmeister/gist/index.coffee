@@ -2,15 +2,12 @@
 
 require 'angular'
 require 'angular-ui-router'
-require 'angular-cookies'
 require 'underscore'
 require '../../github-adapter'
 
-Github = require 'github-api'
 
 angular.module 'SassMeister.gist', [
   'ui.router'
-  'ngCookies'
   'github-adapter'
 ]
 
@@ -25,28 +22,11 @@ angular.module 'SassMeister.gist', [
       template: template
       controller: 'GistController'
       resolve:
-        data: ($githubGist, $githubUser, $stateParams, $cookies, $q) ->
-          # This shows how you could include resolved data from the parent state.
-          # Meh. Not sure how I feel about this. Or even how useful this is.
-          # _data = data
+        data: ($githubGist, $stateParams, $q) ->
+          $githubGist($stateParams.id).then (gist) ->
+            gist.read()
 
-          github = new Github
-            token: $cookies.get 'gh'
-            auth: 'oauth'
-
-          getUser = ->
-            $q.when($githubUser(github.getUser()))
-
-          getGist = (id) ->
-            $q.when($githubGist(github.getGist(id)))
-
-          getGist($stateParams.id)
-            .then (gist) ->
-              gist.read()
-
-.controller 'GistController', ($scope, data) ->
-  console.log data
-
+.controller 'GistController', ($scope, $githubGist, $stateParams, data) ->
   $scope.gist =
     created_at: data.created_at
     description: data.description

@@ -1,5 +1,10 @@
+require 'angular-cookies'
+
+Github = require 'github-api'
+
 angular.module 'github-adapter', [
   'ng'
+  'ngCookies'
 ]
 
 .factory '$githubUser', [
@@ -101,8 +106,15 @@ angular.module 'github-adapter', [
 
 .factory '$githubGist', [
   '$q'
-  ($q) ->
-    (gist) ->
+  '$cookies'
+  ($q, $cookies) ->
+    (gistId) ->
+      github = new Github
+        token: $cookies.get 'gh'
+        auth: 'oauth'
+
+      gist = github.getGist(gistId)
+
       gistPromiseAdapter =
         create: (options) ->
           deferred = $q.defer()
@@ -149,6 +161,6 @@ angular.module 'github-adapter', [
               deferred.resolve gist
             return
           deferred.promise
-      gistPromiseAdapter
+      $q.when(gistPromiseAdapter)
 ]
 
