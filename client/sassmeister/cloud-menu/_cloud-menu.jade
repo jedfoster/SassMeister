@@ -3,7 +3,7 @@
 ul#cloud_actions
 
   li(ng-if='showUpdateGist()')
-    a#save-gist.edit-gist(data-action='edit')
+    a#save-gist.edit-gist(data-action='edit' ng-click='updateGist()')
       span Update Gist
 
   li(ng-if='showSaveGist()')
