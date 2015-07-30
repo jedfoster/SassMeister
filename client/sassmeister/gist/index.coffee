@@ -81,12 +81,18 @@ angular.module 'SassMeister.gist', [
 
   $scope.updateGist = ->
     console.log 'updating gist...'
-    
+
     $sassMeisterGist.update $stateParams.id, $scope, (gist) ->
       console.log gist
 
 
+
   $scope.forkGist = ->
-    $sassMeisterGist.fork $stateParams.id, (gist) ->
-      console.log gist
+    if $scope.canEditGist()
+      $sassMeisterGist.create $scope, (gist) ->
+        console.log gist
+
+    else
+      $sassMeisterGist.fork $stateParams.id, (gist) ->
+        console.log gist
 
