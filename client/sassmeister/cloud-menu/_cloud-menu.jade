@@ -3,21 +3,21 @@
 ul#cloud_actions
 
   li(ng-if='showUpdateGist()')
-    a#save-gist.edit-gist(data-action='edit' ng-click='updateGist()')
+    a(ng-click='updateGist()')
       span Update Gist
 
   li(ng-if='showSaveGist()')
-    a#save-gist.create-gist(data-action='create')
+    a(ng-click='createGist()')
       span Save Gist
 
   li(ng-if='showForkGist()')
-    a#fork-gist.fork-gist(data-action='create' ng-click='forkGist()')
+    a(ng-click='forkGist()')
       span Fork Gist
 
   li(ng-if='showLoginToSaveGists()')
     a.github(href='/authorize' ng-click='login()')
       span Log in with your GitHub account to save gists
-  
+
   li(ng-if='showViewOnGitHub()')
     a#gist-link.github(ng-href='https://gist.github.com/{{gist.id}}')
       span View on GitHub
