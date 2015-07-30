@@ -161,6 +161,7 @@ angular.module 'github-adapter', [
               deferred.resolve gist
             return
           deferred.promise
-      $q.when(gistPromiseAdapter)
+      # $q.when()
+      gistPromiseAdapter
 ]
 

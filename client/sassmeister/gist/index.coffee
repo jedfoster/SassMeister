@@ -41,8 +41,7 @@ angular.module 'SassMeister.gist', [
       controller: 'GistController'
       resolve:
         data: ($githubGist, $stateParams, $q) ->
-          $githubGist($stateParams.id).then (gist) ->
-            gist.read()
+          $githubGist($stateParams.id).read()
 
 .controller 'GistController', ($scope, $githubGist, $stateParams, data) ->
   $scope.gist =
@@ -151,12 +150,8 @@ angular.module 'SassMeister.gist', [
     content =
       files: files
 
-    $githubGist($stateParams.id)
-      .then (gist) ->
-        gist.update content
+    $githubGist($stateParams.id).update content
 
   $scope.forkGist = ->
-    $githubGist($stateParams.id)
-      .then (gist) ->
-        gist.fork()
+    $githubGist($stateParams.id).fork()
 
