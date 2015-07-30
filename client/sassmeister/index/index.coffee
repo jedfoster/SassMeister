@@ -5,10 +5,12 @@ config = require '../config'
 require 'angular'
 require 'angular-ui-router'
 require 'ngStorage'
+require '../../github-adapter'
 
 angular.module 'SassMeister.index', [
   'ui.router'
   'ngStorage'
+  'github-adapter'
 ]
 
 .config ($stateProvider, $urlRouterProvider, $locationProvider) ->
@@ -36,6 +38,13 @@ angular.module 'SassMeister.index', [
 
           _data
 
-.controller 'IndexController', ($scope, $localStorage, data) ->
+.controller 'IndexController', ($scope, $sassMeisterGist, $localStorage, data) ->
   $scope.app = data.app
+
+  $scope.createGist = ->
+    console.log 'saving gist...'
+    
+    $sassMeisterGist.create $scope, (gist) ->
+      console.log gist
+
 

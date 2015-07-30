@@ -6,24 +6,6 @@ require 'underscore'
 require '../../github-adapter'
 
 
-buildFrontmatter = (dependencies) ->
-  frontmatter = [ '// ----' ]
-
-  if dependencies.libsass
-    frontmatter.push "// libsass (v#{dependencies.libsass})"
-
-  else
-    frontmatter.push "// Sass (v#{dependencies.Sass})"
-    frontmatter.push "// Compass (v#{dependencies.Compass})"
-
-  for name, version of dependencies
-    frontmatter.push "// #{name} (v#{version})" unless name.match /(libsass|Sass|Compass)/
-
-  frontmatter.push '// ----'
-
-  frontmatter.join "\n"
-
-
 angular.module 'SassMeister.gist', [
   'ui.router'
   'github-adapter'
@@ -43,7 +25,7 @@ angular.module 'SassMeister.gist', [
         data: ($githubGist, $stateParams, $q) ->
           $githubGist($stateParams.id).read()
 
-.controller 'GistController', ($scope, $githubGist, $stateParams, data) ->
+.controller 'GistController', ($scope, $sassMeisterGist, $githubGist, $stateParams, data) ->
   $scope.gist =
     created_at: data.created_at
     description: data.description
@@ -95,63 +77,16 @@ angular.module 'SassMeister.gist', [
   else if $scope.app.dependencies.Sass
     $scope.app.compiler = $scope.app.dependencies.Sass.substr(0, 3)
 
+
+
   $scope.updateGist = ->
-    content = $scope.gist
-    files = {}
-    sass = $scope.app.sass
+    console.log 'updating gist...'
+    
+    $sassMeisterGist.update $stateParams.id, $scope, (gist) ->
+      console.log gist
 
-    # Remove old frontmatter
-    sass = sass.replace(/(^\/\/ [\-]{3,4}\n(?:\/\/ .+\n)*\/\/ [\-]{3,4}\s*)*/, '')
-
-    # Build and prepend new frontmatter
-    $scope.app.sass = "#{buildFrontmatter $scope.app.dependencies}\n\n#{sass}"
-
-    unless $scope.sassFileName.substr(-4, 4) == $scope.app.syntax
-      # Sass syntax has changed, so need to "rename" the file
-
-      # First, delete contents of old file
-      files[$scope.sassFileName] =
-        content: null
-
-      # Set name of new file, contents will be set later
-      $scope.sassFileName = "#{$scope.sassFileName.substr 0, $scope.sassFileName.length - 4}#{$scope.app.syntax}"
-
-    # Set contents of Sass and CSS files
-    files[$scope.sassFileName] =
-      content: $scope.app.sass
-
-    files[$scope.cssFileName] =
-      content: $scope.app.css
-
-    # if $scope.app.html
-    #   if !$scope.htmlFileName
-    #     $scope.htmlFileName = "SassMeister-input-HTML.#{$scope.app.htmlSyntax}"
-
-    #   else
-    #     filename = $scope.htmlFileName.split '.'
-    #     ext = filename.pop()
-
-    #     if ext != $scope.app.htmlSyntax
-    #       # HTML syntax has changed, so need to "rename" the file
-
-    #       # First, delete contents of old file
-    #       files[$scope.htmlFileName] =
-    #         content: null
-
-    #       # Set name of new file, contents will be set later
-    #       $scope.htmlFileName = "#{filename.join '.'}.#{$scope.app.htmlSyntax}"
-
-    #   files[$scope.htmlFileName] =
-    #     content: $scope.app.html
-
-    #   files[$scope.renderedHtmlFileName] =
-    #     content: $scope.app.renderedHtml
-
-    content =
-      files: files
-
-    $githubGist($stateParams.id).update content
 
   $scope.forkGist = ->
-    $githubGist($stateParams.id).fork()
+    $sassMeisterGist.fork $stateParams.id, (gist) ->
+      console.log gist
 
