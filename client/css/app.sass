@@ -12,8 +12,10 @@
     margin: 0 5px
 
 
-
-
+%link
+  color: #00e
+  cursor: pointer
+  text-decoration: underline
 
 
 fieldset
@@ -39,3 +41,8 @@ ui-ace
 
 control-panel
   font-size: 0.6em
+
+
+a, [ng-click]
+  @extend %link
+
