@@ -19,13 +19,19 @@ angular.module 'SassMeister.gist', [
   $stateProvider
     .state 'application.gist',
       url: '^/gist/:id'
+      params:
+        gist: false
       template: template
       controller: 'GistController'
       resolve:
         data: ($githubGist, $stateParams, $q) ->
-          $githubGist($stateParams.id).read()
+          if $stateParams.gist
+            return $stateParams.gist
 
-.controller 'GistController', ($scope, $sassMeisterGist, $githubGist, $stateParams, data) ->
+          else
+            return $githubGist($stateParams.id).read()
+
+.controller 'GistController', ($scope, $sassMeisterGist, $githubGist, $state, $stateParams, data) ->
   $scope.gist =
     created_at: data.created_at
     description: data.description
@@ -50,17 +56,17 @@ angular.module 'SassMeister.gist', [
 
   files.forEach (fileName) ->
     # For now, we only return the first .sass or .scss file we find.
-    if !$scope.app.sass and fileName.match sassRegEx
+    if fileName.match sassRegEx
       $scope.app.sass = data.files[fileName].content
       $scope.app.syntax = data.files[fileName].language.toLowerCase()
       $scope.app.originalSyntax = $scope.app.syntax
       $scope.sassFileName = fileName
 
-    if !$scope.app.css and fileName.match cssRegEx
+    if fileName.match cssRegEx
       $scope.app.css = data.files[fileName].content
       $scope.cssFileName = fileName
 
-    if !$scope.app.html and fileName.match htmlRegEx
+    if fileName.match htmlRegEx
       $scope.app.html = data.files[fileName].content
       $scope.app.htmlSyntax = data.files[fileName].language.toLowerCase()
       $scope.htmlFileName = fileName
@@ -69,7 +75,7 @@ angular.module 'SassMeister.gist', [
     $scope.app.sass = "// Sorry, I couldn't find any valid Sass in that Gist."
 
   while frontmatter = frontmatterRegEx.exec $scope.app.sass
-    [x,name, version] = frontmatter
+    [x, name, version] = frontmatter
     $scope.app.dependencies[name] = version
 
   if $scope.app.dependencies.libsass
@@ -90,7 +96,9 @@ angular.module 'SassMeister.gist', [
   $scope.forkGist = ->
     if $scope.canEditGist()
       $sassMeisterGist.create $scope, (gist) ->
-        console.log gist
+        $state.go '^.gist',
+          id: gist.id
+          gist: gist
 
     else
       $sassMeisterGist.fork $stateParams.id, (gist) ->

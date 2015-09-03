@@ -4,6 +4,8 @@ Github = require 'github-api'
 
 
 buildFrontmatter = (dependencies) ->
+  return '' if Object.keys(dependencies).length == 0
+
   frontmatter = [ '// ----' ]
 
   if dependencies.libsass
@@ -18,7 +20,7 @@ buildFrontmatter = (dependencies) ->
 
   frontmatter.push '// ----'
 
-  frontmatter.join "\n"
+  "#{frontmatter.join "\n"}\n\n"
 
 
 angular.module 'github-adapter', [
@@ -194,8 +196,11 @@ angular.module 'github-adapter', [
       files = {}
       sass = scope.app.sass
 
+      # Remove old frontmatter
+      sass = sass.replace(/(^\/\/ [\-]{3,4}\n(?:\/\/ .+\n)*\/\/ [\-]{3,4}\s*)*/, '')
+
       # Build and prepend frontmatter
-      sass = "#{buildFrontmatter scope.app.dependencies}\n\n#{sass}"
+      sass = "#{buildFrontmatter scope.app.dependencies}#{sass}"
 
       files["SassMeister-input.#{scope.app.syntax}"] =
         content: sass
@@ -225,7 +230,7 @@ angular.module 'github-adapter', [
       sass = sass.replace(/(^\/\/ [\-]{3,4}\n(?:\/\/ .+\n)*\/\/ [\-]{3,4}\s*)*/, '')
 
       # Build and prepend new frontmatter
-      scope.app.sass = "#{buildFrontmatter scope.app.dependencies}\n\n#{sass}"
+      sass = "#{buildFrontmatter scope.app.dependencies}#{sass}"
 
       unless scope.sassFileName.substr(-4, 4) == scope.app.syntax
         # Sass syntax has changed, so need to "rename" the file
@@ -239,7 +244,7 @@ angular.module 'github-adapter', [
 
       # Set contents of Sass and CSS files
       files[scope.sassFileName] =
-        content: scope.app.sass
+        content: sass
 
       files[scope.cssFileName] =
         content: scope.app.css
