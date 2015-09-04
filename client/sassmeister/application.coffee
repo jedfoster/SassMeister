@@ -79,6 +79,17 @@ angular.module 'SassMeister', [
       $scope.app.dependencies = data.dependencies
       $scope.app.css = data.css
 
+  $scope.convert = ->
+    Compiler.convert {
+      input: $scope.app.sass
+      compiler: $scope.app.compiler
+      original_syntax: $scope.app.originalSyntax
+      syntax: $scope.app.syntax
+    }, (data) ->
+      $scope.app.sass = data.css
+      $scope.app.originalSyntax = $scope.app.syntax
+
+
   $scope.insertImport = (imports) ->
     eol = (if $scope.app.syntax == 'scss' then ';' else '') + '\n'
     collection = []

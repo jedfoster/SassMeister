@@ -16,6 +16,10 @@ angular.module 'SassMeister.compiler', [
       method: 'POST'
       params:
         action: 'compile'
+    'convert':
+      method: 'POST'
+      params:
+        action: 'convert'
     'extensions':
       method: 'GET'
       params:

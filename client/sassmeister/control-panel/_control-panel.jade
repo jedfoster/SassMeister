@@ -13,10 +13,10 @@ div
       h3.syntax Syntax
 
       fieldset.syntax-toggle-group(data-event-name='SassSyntax')
-        input#syntax-scss(type='radio' name='syntax' value='scss' ng-model='app.syntax' ng-change='compile()')
+        input#syntax-scss(type='radio' name='syntax' value='scss' ng-model='app.syntax' ng-change='convert()')
         label(for='syntax-scss' data-toggle-input='sass') SCSS
 
-        input#syntax-sass(type='radio' name='syntax' value='sass' ng-model='app.syntax' ng-change='compile()')
+        input#syntax-sass(type='radio' name='syntax' value='sass' ng-model='app.syntax' ng-change='convert()')
         label(for='syntax-sass' data-toggle-input='sass') Sass
 
         span
