@@ -5,7 +5,6 @@ require 'angular-ui-router'
 require 'underscore'
 require '../../github-adapter'
 
-
 angular.module 'SassMeister.gist', [
   'ui.router'
   'github-adapter'
@@ -84,13 +83,11 @@ angular.module 'SassMeister.gist', [
     $scope.app.compiler = $scope.app.dependencies.Sass.substr(0, 3)
 
 
-
   $scope.updateGist = ->
     console.log 'updating gist...'
 
     $sassMeisterGist.update $stateParams.id, $scope, (gist) ->
       console.log gist
-
 
 
   $scope.forkGist = ->
@@ -102,5 +99,14 @@ angular.module 'SassMeister.gist', [
 
     else
       $sassMeisterGist.fork $stateParams.id, (gist) ->
-        console.log gist
+        # The GH /fork API does not return content, so we need to the Sass, CSS
+        # and HTML content manually. This prevents the app from making another
+        # request to the API.
+        gist.files[$scope.sassFileName].content = $scope.app.sass
+        gist.files[$scope.cssFileName].content = $scope.app.css
+        gist.files[$scope.htmlFileName].content = $scope.app.html
+
+        $state.go '^.gist',
+          id: gist.id
+          gist: gist
 
