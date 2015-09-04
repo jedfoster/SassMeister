@@ -26,7 +26,7 @@ require 'angular-ui-ace/src/ui-ace'
 
 require 'angular-load'
 
-aceLoaded = (editor) ->
+aceLoaded = (editor, scope) ->
   session = editor.getSession()
 
   # Events
@@ -35,35 +35,33 @@ aceLoaded = (editor) ->
 
   # session.on 'change', ->
     # no-op
-  
+
   editor.$blockScrolling = Infinity
 
   session.setTabSize 2
   session.setUseSoftTabs true
 
+  scope.$watch 'preferences.theme', (value) ->
+    editor.setTheme "ace/theme/#{value}"
+
+  scope.$watch 'preferences.vim', (value) ->
+    if value
+      editor.setKeyboardHandler 'ace/keyboard/vim'
+    else
+      editor.setKeyboardHandler null
+
+  scope.$watch 'preferences.scrollPastEnd', (value) ->
+    editor.setOption 'scrollPastEnd', value
 
 angular.module 'SassMeister.ace', [
   'ui.ace'
   'angularLoad'
 ]
 
-.controller 'AceController', [ '$scope', 'angularLoad', ($scope, angularLoad) ->
-  $scope.aceLoadedSass = (editor) ->
-    aceLoaded editor
+.controller 'AceSassController', [ '$scope', 'angularLoad', ($scope, angularLoad) ->
+  $scope.aceLoaded = (editor) ->
+    aceLoaded editor, $scope
     $scope.editor = $scope.editors.sass = editor
-
-  $scope.aceLoadedCSS = (editor) ->
-    aceLoaded editor
-    $scope.editor = editor
-
-  $scope.$watch 'preferences.theme', (value) ->
-    $scope.editor.setTheme "ace/theme/#{value}"
-
-  $scope.$watch 'preferences.vim', (value) ->
-    if value
-      $scope.editor.setKeyboardHandler 'ace/keyboard/vim'
-    else
-      $scope.editor.setKeyboardHandler null
 
   $scope.$watch 'preferences.emmet', (value) ->
     setEmmet = (value) ->
@@ -79,12 +77,13 @@ angular.module 'SassMeister.ace', [
 
     return
 
-  $scope.$watch 'preferences.scrollPastEnd', (value) ->
-    $scope.editor.setOption 'scrollPastEnd', value
-
   $scope.$watch 'app.syntax', (value) ->
     $scope.editor.getSession().setMode "ace/mode/#{value}"
-
 ]
 
+.controller 'AceCssController', [ '$scope', 'angularLoad', ($scope, angularLoad) ->
+  $scope.aceLoaded = (editor) ->
+    aceLoaded editor, $scope
+    $scope.editor = editor
+]
 
