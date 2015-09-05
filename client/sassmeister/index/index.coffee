@@ -38,13 +38,12 @@ angular.module 'SassMeister.index', [
 
           _data
 
-.controller 'IndexController', ($scope, $sassMeisterGist, $localStorage, data) ->
+.controller 'IndexController', ($scope, $sassMeisterGist, $localStorage, $state, data) ->
   $scope.app = data.app
 
   $scope.createGist = ->
-    console.log 'saving gist...'
-    
     $sassMeisterGist.create $scope, (gist) ->
-      console.log gist
-
+      $state.go '^.gist',
+        id: gist.id
+        gist: gist
 
