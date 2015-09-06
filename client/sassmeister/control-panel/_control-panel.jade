@@ -13,10 +13,10 @@ div
       h3.syntax Syntax
 
       fieldset.syntax-toggle-group(data-event-name='SassSyntax')
-        input#syntax-scss(type='radio' name='syntax' value='scss' ng-model='app.syntax' ng-change='convert()')
+        input#syntax-scss(type='radio' name='syntax' value='scss' ng-model='app.syntax' ng-change='convert(app)')
         label(for='syntax-scss' data-toggle-input='sass') SCSS
 
-        input#syntax-sass(type='radio' name='syntax' value='sass' ng-model='app.syntax' ng-change='convert()')
+        input#syntax-sass(type='radio' name='syntax' value='sass' ng-model='app.syntax' ng-change='convert(app)')
         label(for='syntax-sass' data-toggle-input='sass') Sass
 
         span
@@ -29,7 +29,7 @@ div
           //- Per http://www.alexkras.com/11-tips-to-improve-angularjs-performance/
           //- `::` is one-time binding
           li(ng-repeat='(name, extension) in extensions')
-            a(href='#' data-import='{{::extension.import}}' ng-click='insertImport(extension.import)') {{::name}}
+            a(href='#' data-import='{{::extension.import}}' ng-click='insertImport(extension.import, app)') {{::name}}
             | &nbsp;&nbsp;(v{{::extension.version}})
 
     fieldset

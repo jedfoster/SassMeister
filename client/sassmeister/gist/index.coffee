@@ -31,6 +31,9 @@ angular.module 'SassMeister.gist', [
             return $githubGist($stateParams.id).read()
 
 .controller 'GistController', ($scope, $sassMeisterGist, $githubGist, $state, $stateParams, data) ->
+  $scope.app =
+    dependencies: {}
+
   $scope.gist =
     created_at: data.created_at
     description: data.description

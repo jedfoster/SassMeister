@@ -5,7 +5,7 @@ section
 
   .editor-wrapper(ng-controller="AceSassController")
     //- Production debounces with 750
-    ui-ace(ng-model='app.sass' ng-model-options='{ debounce: 500 }' ng-change='compile()' ui-ace='{onLoad: aceLoaded}')
+    ui-ace(ng-model='app.sass' ng-model-options='{ debounce: 500 }' ng-change='compile(app)' ui-ace='{onLoad: aceLoaded}')
 
   h3 Output
 

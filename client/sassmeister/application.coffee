@@ -67,29 +67,29 @@ angular.module 'SassMeister', [
   $scope.canEditGist = ->
     false
 
-  $scope.compile = ->
+  $scope.compile = (app)->
     Compiler.compile {
-      input: $scope.app.sass
-      compiler: $scope.app.compiler
-      syntax: $scope.app.syntax
-      original_syntax: $scope.app.originalSyntax
-      output_style: $scope.app.outputStyle
+      input: app.sass
+      compiler: app.compiler
+      syntax: app.syntax
+      original_syntax: app.originalSyntax
+      output_style: app.outputStyle
     }, (data) ->
-      $scope.app.dependencies = data.dependencies
-      $scope.app.css = data.css
+      app.dependencies = data.dependencies
+      app.css = data.css
 
-  $scope.convert = ->
+  $scope.convert = (app) ->
     Compiler.convert {
-      input: $scope.app.sass
-      compiler: $scope.app.compiler
-      original_syntax: $scope.app.originalSyntax
-      syntax: $scope.app.syntax
+      input: app.sass
+      compiler: app.compiler
+      original_syntax: app.originalSyntax
+      syntax: app.syntax
     }, (data) ->
-      $scope.app.sass = data.css
-      $scope.app.originalSyntax = $scope.app.syntax
+      app.sass = data.css
+      app.originalSyntax = app.syntax
 
-  $scope.insertImport = (imports) ->
-    eol = (if $scope.app.syntax == 'scss' then ';' else '') + '\n'
+  $scope.insertImport = (imports, app) ->
+    eol = (if app.syntax == 'scss' then ';' else '') + '\n'
     collection = []
 
     for _import in imports
@@ -97,7 +97,7 @@ angular.module 'SassMeister', [
 
     $scope.editors.sass.insert collection.join ''
 
-    $scope.app.sass = $scope.editors.sass.getValue()
+    app.sass = $scope.editors.sass.getValue()
 
     do $scope.compile
 
