@@ -13,6 +13,7 @@ require './ace'
 require './control-panel'
 require './site-header'
 require './cloud-menu'
+require '../history'
 
 angular.module 'SassMeister', [
   'ui.router'
@@ -26,6 +27,9 @@ angular.module 'SassMeister', [
   'SassMeister.cloudMenu'
   'ngCookies'
 ]
+
+.service 'stateHistoryService', ['$sessionStorage', StateHistoryService]
+.service 'stateLocationService', StateLocationService
 
 .config ($stateProvider, $urlRouterProvider, $locationProvider) ->
   $locationProvider.html5Mode true
@@ -100,4 +104,11 @@ angular.module 'SassMeister', [
     app.sass = $scope.editors.sass.getValue()
 
     do $scope.compile
+
+# .run ($rootScope, stateLocationService) ->
+#   $rootScope.$on '$stateChangeSuccess', (event, toState, toParams) ->
+#     stateLocationService.stateChange()
+
+#   $rootScope.$on '$locationChangeSuccess', ->
+#     stateLocationService.locationChange()
 
