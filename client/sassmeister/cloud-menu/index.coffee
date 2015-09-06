@@ -28,5 +28,6 @@ angular.module 'SassMeister.cloudMenu', []
       $state.go 'application.index',
         reset: true
       ,
+        # Force a "reload" of state (does NOT perform a browser reload)
         reload: true
 
