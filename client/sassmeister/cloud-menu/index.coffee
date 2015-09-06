@@ -9,7 +9,7 @@ angular.module 'SassMeister.cloudMenu', []
 .directive 'cloudMenu', ->
   restrict: 'E'
   template: template
-  controller: ($scope) ->
+  controller: ($scope, $state) ->
     $scope.showUpdateGist = ->
       $scope.loggedIn() and $scope.gist and $scope.canEditGist()
 
@@ -23,4 +23,10 @@ angular.module 'SassMeister.cloudMenu', []
 
     $scope.showViewOnGitHub = ->
       !!$scope.gist
+
+    $scope.reset = ->
+      $state.go 'application.index',
+        reset: true
+      ,
+        reload: true
 

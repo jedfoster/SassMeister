@@ -21,10 +21,15 @@ angular.module 'SassMeister.index', [
   $stateProvider
     .state 'application.index',
       url: '^/'
+      params:
+        reset: false
       template: template
       controller: 'IndexController'
       resolve:
-        data: ($localStorage) ->
+        data: ($localStorage, $stateParams) ->
+          if $stateParams.reset
+            $localStorage.app = config.storageDefaults().app
+
           _data = $localStorage.$default config.storageDefaults()
 
           # ngStorage's `$default` doesn't do a deep merge, so we need to apply the merge manually.
@@ -38,7 +43,7 @@ angular.module 'SassMeister.index', [
           _data
 
 .controller 'IndexController', ($scope, $sassMeisterGist, $localStorage, $state, data) ->
-  $scope.app = data.app
+  $scope.$parent.app = data.app
 
   $scope.createGist = ->
     $sassMeisterGist.create $scope, (gist) ->
