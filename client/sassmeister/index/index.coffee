@@ -25,7 +25,7 @@ angular.module 'SassMeister.index', [
       controller: 'IndexController'
       resolve:
         data: ($localStorage) ->
-          _data = $localStorage.$default config.storageDefaults
+          _data = $localStorage.$default config.storageDefaults()
 
           # ngStorage's `$default` doesn't do a deep merge, so we need to apply the merge manually.
           # This ensures that new props added to the defaults are available to the app.
@@ -33,7 +33,7 @@ angular.module 'SassMeister.index', [
           # And, `merge(defaults, data)`—while it respects keys—breaks the automagic localStorage linkage.
 
           # So. Brute-force it with `extend`. Blech.
-          _data.app = angular.extend config.storageDefaults.app, _data.app
+          _data.app = angular.extend config.storageDefaults().app, _data.app
 
           _data
 

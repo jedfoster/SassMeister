@@ -1,20 +1,22 @@
 module.exports =
-  storageDefaults:
-    app:
-      sass: ''
-      css: ''
-      html: ''
-      outputStyle: 'expanded'
-      compiler: '3.4'
-      syntax: 'scss'
-      originalSyntax: 'scss'
-      dependencies: {}
+  storageDefaults: ->
+    return {
+      app:
+        sass: ''
+        css: ''
+        html: ''
+        outputStyle: 'expanded'
+        compiler: '3.4'
+        syntax: 'scss'
+        originalSyntax: 'scss'
+        dependencies: {}
 
-    preferences:
-      theme: 'tomorrow'
-      emmet: false
-      vim: false
-      scrollPastEnd: false
+      preferences:
+        theme: 'tomorrow'
+        emmet: false
+        vim: false
+        scrollPastEnd: false
+    }
 
   _themes: [
     'dawn'

@@ -40,7 +40,7 @@ angular.module 'SassMeister', [
       controller: 'ApplicationController'
       resolve:
         data: ($localStorage) ->
-          _data = $localStorage.$default config.storageDefaults
+          _data = $localStorage.$default config.storageDefaults()
 
           # ngStorage's `$default` doesn't do a deep merge, so we need to apply the merge manually.
           # This ensures that new props added to the defaults are available to the app.
@@ -48,14 +48,14 @@ angular.module 'SassMeister', [
           # And, `merge(defaults, data)`—while it respects keys—breaks the automagic localStorage linkage.
 
           # So. Brute-force it with `extend`. Blech.
-          _data.preferences = angular.extend config.storageDefaults.preferences, _data.preferences
+          _data.preferences = angular.extend config.storageDefaults().preferences, _data.preferences
 
           _data
     .state 'application.logout',
       url: 'logout'
 
 .controller 'ApplicationController', ($scope, $localStorage, $cookies, $window, data, Compiler) ->
-  $scope.app = config.storageDefaults.app
+  $scope.app = config.storageDefaults().app
   $scope.preferences = data.preferences
   $scope.themes = config.themes()
   $scope.editors = {}
