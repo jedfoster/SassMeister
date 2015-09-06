@@ -46,9 +46,8 @@ angular.module 'SassMeister', [
           # This ensures that new props added to the defaults are available to the app.
           # But... Turns out that `angular.merge` will over write existing keys, so `merge(data, defaults)` would erase any user values.
           # And, `merge(defaults, data)`—while it respects keys—breaks the automagic localStorage linkage.
-          #
+
           # So. Brute-force it with `extend`. Blech.
-          # _data.app = angular.extend config.storageDefaults.app, _data.app
           _data.preferences = angular.extend config.storageDefaults.preferences, _data.preferences
 
           _data
@@ -88,7 +87,6 @@ angular.module 'SassMeister', [
     }, (data) ->
       $scope.app.sass = data.css
       $scope.app.originalSyntax = $scope.app.syntax
-
 
   $scope.insertImport = (imports) ->
     eol = (if $scope.app.syntax == 'scss' then ';' else '') + '\n'
