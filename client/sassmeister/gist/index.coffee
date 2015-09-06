@@ -110,3 +110,6 @@ angular.module 'SassMeister.gist', [
           id: gist.id
           gist: gist
 
+  $scope.embedCode = ->
+    "<p class=\"sassmeister\" data-gist-id=\"#{$scope.gist.id}\" data-height=\"480\" data-theme=\"#{$scope.preferences.theme}\"><a href=\"http://#{document.domain}/gist/#{$scope.gist.id}\">Play with this gist on SassMeister.</a></p><script src=\"http://cdn.#{document.domain}/js/embed.js\" async></script>"
+
