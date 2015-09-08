@@ -54,7 +54,9 @@ angular.module 'SassMeister', [
     .state 'application.logout',
       url: 'logout'
 
-.controller 'ApplicationController', ($scope, $localStorage, $cookies, $window, data, Compiler) ->
+.controller 'ApplicationController', ($scope, $rootScope, $state, $localStorage, $cookies, $window, data, Compiler) ->
+  $rootScope.$state = $state
+
   $scope.app = config.storageDefaults().app
   $scope.preferences = data.preferences
   $scope.themes = config.themes()

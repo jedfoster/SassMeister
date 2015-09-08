@@ -15,7 +15,7 @@ html.no-js(ng-app='SassMeister')
     link(rel='stylesheet' href='/css/app.css')
     //- script(src='/js/modernizr.js')
 
-  body(class=bodyClass)
+  body(class='{{$state.current.controller}}')
     //- block header
     //-   include ./_header.jade
 
