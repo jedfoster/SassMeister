@@ -27,7 +27,7 @@ class SassMeisterApp < Sinatra::Base
 
   config_file '../config/config.yml'
 
-  use Chairman::Routes
+  # use Chairman::Routes
   use SassMeister::ApiRoutes
 
   helpers SassMeister::Helpers
@@ -47,85 +47,85 @@ class SassMeisterApp < Sinatra::Base
     require 'newrelic_rpm'
   end
 
-  # implement redirects
-  class Chairman::Routes
-    configure do
-      helpers do
-        use Rack::Session::Cookie, key: SassMeisterApp::APP_DOMAIN,
-                                   domain: SassMeisterApp::COOKIE_DOMAIN,
-                                   path: '/',
-                                   expire_after: SassMeisterApp::SESSION_DURATION,
-                                   secret: SassMeisterApp::COOKIE_SECRET
-       end
-    end
+  # # implement redirects
+  # class Chairman::Routes
+  #   configure do
+  #     helpers do
+  #       use Rack::Session::Cookie, key: SassMeisterApp::APP_DOMAIN,
+  #                                  domain: SassMeisterApp::COOKIE_DOMAIN,
+  #                                  path: '/',
+  #                                  expire_after: SassMeisterApp::SESSION_DURATION,
+  #                                  secret: SassMeisterApp::COOKIE_SECRET
+  #      end
+  #   end
 
-    after '/authorize/return' do
-      session[:version] == SassMeisterApp::APP_VERSION
+  #   after '/authorize/return' do
+  #     session[:version] == SassMeisterApp::APP_VERSION
       
-      response.set_cookie('github_id', {
-        value: @user.login,
-        expires: (Time.now + SassMeisterApp::SESSION_DURATION),
-        domain: SassMeisterApp::COOKIE_DOMAIN,
-        path: '/'
-      })
+  #     response.set_cookie('github_id', {
+  #       value: @user.login,
+  #       expires: (Time.now + SassMeisterApp::SESSION_DURATION),
+  #       domain: SassMeisterApp::COOKIE_DOMAIN,
+  #       path: '/'
+  #     })
 
-      response.set_cookie('avatar_url', {
-        value: @user.avatar_url,
-        expires: (Time.now + SassMeisterApp::SESSION_DURATION),
-        domain: SassMeisterApp::COOKIE_DOMAIN,
-        path: '/'
-      })
+  #     response.set_cookie('avatar_url', {
+  #       value: @user.avatar_url,
+  #       expires: (Time.now + SassMeisterApp::SESSION_DURATION),
+  #       domain: SassMeisterApp::COOKIE_DOMAIN,
+  #       path: '/'
+  #     })
 
-      response.set_cookie('gh', {
-        value: session[:github_token],
-        expires: (Time.now + SassMeisterApp::SESSION_DURATION),
-        domain: SassMeisterApp::COOKIE_DOMAIN,
-        path: '/'
-      })
+  #     response.set_cookie('gh', {
+  #       value: session[:github_token],
+  #       expires: (Time.now + SassMeisterApp::SESSION_DURATION),
+  #       domain: SassMeisterApp::COOKIE_DOMAIN,
+  #       path: '/'
+  #     })
 
-      redirect to '/'
-    end
+  #     redirect to '/'
+  #   end
 
-    after '/logout' do
-      ['github_id', 'avatar_url', 'gh'].each do |cookie|
-        response.delete_cookie cookie, {domain: SassMeisterApp::COOKIE_DOMAIN, path: '/'}
-      end
+  #   after '/logout' do
+  #     ['github_id', 'avatar_url', 'gh'].each do |cookie|
+  #       response.delete_cookie cookie, {domain: SassMeisterApp::COOKIE_DOMAIN, path: '/'}
+  #     end
 
-      redirect to '/'
-    end
-  end
+  #     redirect to '/'
+  #   end
+  # end
 
 
-  before do
-    @github = Chairman.session(session[:github_token])
-    @gist = nil
-    @body_class = 'app'
+  # before do
+  #   @github = Chairman.session(session[:github_token])
+  #   @gist = nil
+  #   @body_class = 'app'
 
-    params[:syntax].downcase! unless params[:syntax].nil?
-    params[:original_syntax].downcase! unless params[:original_syntax].nil?
+  #   params[:syntax].downcase! unless params[:syntax].nil?
+  #   params[:original_syntax].downcase! unless params[:original_syntax].nil?
 
-    headers 'Access-Control-Allow-Origin' => origin if origin
+  #   headers 'Access-Control-Allow-Origin' => origin if origin
 
-    if request.get?
-      cache_control :public, max_age: CACHE_MAX_AGE
+  #   if request.get?
+  #     cache_control :public, max_age: CACHE_MAX_AGE
 
-      last_modified app_last_modified.httpdate unless request.path.include? 'gist'
-    end
-  end
+  #     last_modified app_last_modified.httpdate unless request.path.include? 'gist'
+  #   end
+  # end
 
-  before /^(?!\/(authorize))/ do
-    if session[:version].nil? || session[:version] != APP_VERSION
-      session[:github_token] = nil
-      session[:github_id] = nil
-      @force_invalidate = true
-      session[:version] = APP_VERSION
+  # before /^(?!\/(authorize))/ do
+  #   if session[:version].nil? || session[:version] != APP_VERSION
+  #     session[:github_token] = nil
+  #     session[:github_id] = nil
+  #     @force_invalidate = true
+  #     session[:version] = APP_VERSION
 
-      # Delete the user info cookies, too
-      ['github_id', 'avatar_url'].each do |cookie|
-        response.delete_cookie cookie, {domain: SassMeisterApp::COOKIE_DOMAIN, path: '/'}
-      end
-    end
-  end
+  #     # Delete the user info cookies, too
+  #     ['github_id', 'avatar_url'].each do |cookie|
+  #       response.delete_cookie cookie, {domain: SassMeisterApp::COOKIE_DOMAIN, path: '/'}
+  #     end
+  #   end
+  # end
 
 
   # get %r{/api/gist(?:/[\w-]*)*/([\d\w]+)} do
@@ -355,17 +355,17 @@ class SassMeisterApp < Sinatra::Base
   #   { id: data.id }.to_json.to_s
   # end
 
-  get '/' do
+  get '/*' do
     File.read 'public/index.html'
   end
 
-  get %r{/gist(?:/[\w-]*)*/([\d\w]+)} do
-    File.read 'public/index.html'
-  end
+  # get %r{/gist(?:/[\w-]*)*/([\d\w]+)} do
+  #   File.read 'public/index.html'
+  # end
 
-  get %r{about|thankyou} do
-    File.read 'public/index.html'
-  end
+  # get %r{about|thankyou} do
+  #   File.read 'public/index.html'
+  # end
 
 
   run! if app_file == $0
