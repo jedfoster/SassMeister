@@ -13,6 +13,7 @@ require './ace'
 require './control-panel'
 require './site-header'
 require './cloud-menu'
+require './about'
 
 angular.module 'SassMeister', [
   'ui.router'
@@ -24,6 +25,7 @@ angular.module 'SassMeister', [
   'SassMeister.controlPanel'
   'SassMeister.siteHeader'
   'SassMeister.cloudMenu'
+  'SassMeister.about'
   'ngCookies'
 ]
 
