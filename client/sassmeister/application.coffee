@@ -14,6 +14,7 @@ require './control-panel'
 require './site-header'
 require './cloud-menu'
 require './about'
+require './404'
 
 angular.module 'SassMeister', [
   'ui.router'
@@ -26,13 +27,19 @@ angular.module 'SassMeister', [
   'SassMeister.siteHeader'
   'SassMeister.cloudMenu'
   'SassMeister.about'
+  'SassMeister.404'
   'ngCookies'
 ]
 
 .config ($stateProvider, $urlRouterProvider, $locationProvider) ->
   $locationProvider.html5Mode true
 
-  $urlRouterProvider.otherwise '/'
+  $urlRouterProvider.otherwise ($injector, $location) ->
+    $injector
+      .get('$state')
+      .go 'application.404', null, location: false
+    
+    do $location.path
 
   $stateProvider
     .state 'application',
@@ -53,6 +60,7 @@ angular.module 'SassMeister', [
           _data.preferences = angular.extend config.storageDefaults().preferences, _data.preferences
 
           _data
+
     .state 'application.logout',
       url: 'logout'
 
