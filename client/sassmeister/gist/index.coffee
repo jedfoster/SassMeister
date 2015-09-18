@@ -2,7 +2,6 @@
 
 require 'angular'
 require 'angular-ui-router'
-require 'underscore'
 require '../../github-adapter'
 
 angular.module 'SassMeister.gist', [
