@@ -80,3 +80,15 @@ angular.module 'SassMeister.ace', [
     $scope.editor = editor
 ]
 
+.controller 'AceHtmlController', [ '$scope', ($scope) ->
+  $scope.aceLoaded = (editor) ->
+    aceLoaded editor, $scope
+    $scope.editor = $scope.editors.html = editor
+
+    # Disable DOCTYPE validation
+    # http://stackoverflow.com/questions/12886857/how-can-i-disable-the-syntax-checker-in-ace-editor
+    $scope.editor.getSession().setUseWorker(false)
+
+  loadEmmet $scope
+
+]
