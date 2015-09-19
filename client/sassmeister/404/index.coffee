@@ -21,6 +21,7 @@ angular.module 'SassMeister.404', [
 
     .state 'application.404.gist',
       parent: 'application.404'
+      controller: '404Controller'
 
 .controller '404Controller', ($scope, $state, $stateParams) ->
   $scope.resource = if $state.current.name == 'application.404.gist' then 'gist' else 'page'
