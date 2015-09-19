@@ -9,6 +9,7 @@ module.exports =
         compiler: '3.4'
         syntax: 'scss'
         originalSyntax: 'scss'
+        htmlSyntax: 'html'
         dependencies: {}
 
       preferences:

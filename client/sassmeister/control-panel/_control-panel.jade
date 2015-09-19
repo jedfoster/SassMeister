@@ -54,16 +54,16 @@ div
       h2 HTML
 
       fieldset.html-toggle-group(data-event-name='HTMLSyntax')
-        input#html-html(type='radio' name='html-syntax' value='HTML')
+        input#html-html(type='radio' name='html-syntax' value='html' ng-model='app.htmlSyntax')
         label(for='html-html' data-toggle-input='html') HTML
 
-        input#html-haml(type='radio' name='html-syntax' value='Haml')
+        input#html-haml(type='radio' name='html-syntax' value='haml' ng-model='app.htmlSyntax')
         label(for='html-haml' data-toggle-input='html') Haml
 
-        input#html-mkdn(type='radio' name='html-syntax' value='Markdown')
+        input#html-mkdn(type='radio' name='html-syntax' value='markdown' ng-model='app.htmlSyntax')
         label(for='html-mkdn' data-toggle-input='html') Markdown
 
-        input#html-jade(type='radio' name='html-syntax' value='Jade')
+        input#html-jade(type='radio' name='html-syntax' value='jade' ng-model='app.htmlSyntax')
         label(for='html-jade' data-toggle-input='html') Jade
 
         span
