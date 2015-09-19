@@ -6,6 +6,7 @@ require 'angular'
 require 'angular-ui-router'
 require 'angular-cookies'
 require 'ngStorage'
+require 'angular-load'
 require './index'
 require './gist'
 require './compiler'
@@ -19,6 +20,7 @@ require './404'
 angular.module 'SassMeister', [
   'ui.router'
   'ngStorage'
+  'angularLoad'
   'SassMeister.gist'
   'SassMeister.index'
   'SassMeister.compiler'
@@ -64,7 +66,7 @@ angular.module 'SassMeister', [
     .state 'application.logout',
       url: 'logout'
 
-.controller 'ApplicationController', ($scope, $rootScope, $state, $localStorage, $cookies, $window, data, Compiler) ->
+.controller 'ApplicationController', ($scope, $rootScope, $state, $localStorage, $cookies, $window, data, Compiler, angularLoad) ->
   $rootScope.$state = $state
 
   $scope.app = config.storageDefaults().app
@@ -112,4 +114,14 @@ angular.module 'SassMeister', [
     app.sass = $scope.editors.sass.getValue()
 
     do $scope.compile
+
+  $scope.$watch 'preferences.emmet', (value) ->
+    if value and not window.emmet
+      angularLoad.loadScript 'http://nightwing.github.io/emmet-core/emmet.js'
+        .then ->
+          $scope.emmet = value
+
+    else
+      $scope.emmet = value
+    
 

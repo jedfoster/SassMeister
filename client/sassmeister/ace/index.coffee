@@ -24,7 +24,6 @@ require 'brace/theme/tomorrow_night_eighties'
 
 require 'angular-ui-ace/src/ui-ace'
 
-require 'angular-load'
 
 aceLoaded = (editor, scope) ->
   session = editor.getSession()
@@ -53,35 +52,29 @@ aceLoaded = (editor, scope) ->
   scope.$watch 'preferences.scrollPastEnd', (value) ->
     editor.setOption 'scrollPastEnd', value
 
+loadEmmet = (scope) ->
+  scope.$watch 'emmet', (value) ->
+    scope.editor.setOption 'enableEmmet', value
+
+    return
+
+
 angular.module 'SassMeister.ace', [
   'ui.ace'
-  'angularLoad'
 ]
 
-.controller 'AceSassController', [ '$scope', 'angularLoad', ($scope, angularLoad) ->
+.controller 'AceSassController', [ '$scope', ($scope) ->
   $scope.aceLoaded = (editor) ->
     aceLoaded editor, $scope
     $scope.editor = $scope.editors.sass = editor
 
-  $scope.$watch 'preferences.emmet', (value) ->
-    setEmmet = (value) ->
-      $scope.editor.setOption 'enableEmmet', value
-
-    if value and not window.emmet
-      angularLoad.loadScript 'http://nightwing.github.io/emmet-core/emmet.js'
-        .then ->
-          setEmmet value
-
-    else
-      setEmmet value
-
-    return
+  loadEmmet $scope
 
   $scope.$watch 'app.syntax', (value) ->
     $scope.editor.getSession().setMode "ace/mode/#{value}"
 ]
 
-.controller 'AceCssController', [ '$scope', 'angularLoad', ($scope, angularLoad) ->
+.controller 'AceCssController', [ '$scope', ($scope) ->
   $scope.aceLoaded = (editor) ->
     aceLoaded editor, $scope
     $scope.editor = editor
