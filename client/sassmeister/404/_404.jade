@@ -1,15 +1,26 @@
 article
   h1
     code
-      span.variable $page
+      span.variable ${{resource}}
       | : 
       span.string "404"
       | ; 
       span.comment // <span class='frowny'>:(</span>
 
-  p Oops, that page wasn't found.
+  p Oops, that {{resource}} wasn't found.
 
-  p
-    a(ui-sref="/") Back to the app
-    | .
+  div(ng-switch='resource')
+    div(ng-switch-when='gist')
+      p Check your gist ID and try again. Or, start a 
+        a(ui-sref='/') new gist
+        | .
+        
+      p
+        input(type='text' ng-model='id')
+        button(ng-click='goToGist(id)') GO!
+
+    div(ng-switch-default)
+      p
+        a(ui-sref='/') Back to the app
+        | .
 

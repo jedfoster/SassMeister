@@ -22,12 +22,16 @@ angular.module 'SassMeister.gist', [
       template: template
       controller: 'GistController'
       resolve:
-        data: ($githubGist, $stateParams, $q) ->
+        data: ($githubGist, $stateParams, $q, $state) ->
           if $stateParams.gist
             return $stateParams.gist
 
           else
-            return $githubGist($stateParams.id).read()
+            fail = ->
+              $state.go 'application.404.gist', { id: $stateParams.id }, { location: false }
+
+            $githubGist($stateParams.id).read().then null, fail
+
 
 .controller 'GistController', ($scope, $sassMeisterGist, $githubGist, $state, $stateParams, data) ->
   $scope.app =

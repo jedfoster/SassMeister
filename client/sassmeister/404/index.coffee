@@ -15,4 +15,17 @@ angular.module 'SassMeister.404', [
   $stateProvider
     .state 'application.404',
       template: template
+      params:
+        id: null
+      controller: '404Controller'
+
+    .state 'application.404.gist',
+      parent: 'application.404'
+
+.controller '404Controller', ($scope, $state, $stateParams) ->
+  $scope.resource = if $state.current.name == 'application.404.gist' then 'gist' else 'page'
+  $scope.id = $stateParams.id if $stateParams.id
+  $scope.goToGist = (id) ->
+    $state.go 'application.gist', id: id
+
 
