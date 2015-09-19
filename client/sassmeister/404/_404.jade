@@ -12,7 +12,7 @@ article
   div(ng-switch='resource')
     div(ng-switch-when='gist')
       p Check your gist ID and try again. Or, start a 
-        a(ui-sref='/') new gist
+        a(ui-sref='^.index') new gist
         | .
         
       p
@@ -21,6 +21,6 @@ article
 
     div(ng-switch-default)
       p
-        a(ui-sref='/') Back to the app
+        a(ui-sref='^.index') Back to the app
         | .
 
