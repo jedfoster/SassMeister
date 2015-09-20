@@ -132,6 +132,12 @@ angular.module 'SassMeister', [
   $scope.renderHtml = (app) ->
     Sandbox.render app
 
+  $scope.$on '$viewContentLoaded', ->
+    if $scope.renderedHTML
+      Sandbox.update $scope.app.css, $scope.app.renderedHTML
+    else
+      Sandbox.render $scope.app
+
   $scope.$watch 'preferences.emmet', (value) ->
     if value and not window.emmet
       angularLoad.loadScript 'http://nightwing.github.io/emmet-core/emmet.js'

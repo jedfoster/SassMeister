@@ -41,6 +41,7 @@ angular.module 'SassMeister.sandbox', [
         syntax: 'haml'
       }
       .$promise.then (data) ->
+        app.renderedHTML = data.html
         updateIframe app.css, data.html
 
     markdown: (app) ->
@@ -49,6 +50,7 @@ angular.module 'SassMeister.sandbox', [
         syntax: 'markdown'
       }
       .$promise.then (data) ->
+        app.renderedHTML = data.html
         updateIframe app.css, data.html
 
     textile: (app) ->
@@ -57,11 +59,13 @@ angular.module 'SassMeister.sandbox', [
         syntax: 'textile'
       }
       .$promise.then (data) ->
+        app.renderedHTML = data.html
         updateIframe app.css, data.html
 
     jade: (app) ->
       renderJade = ->
         html = window.jade.render(app.html, {pretty: true})
+        app.renderedHTML = html
         updateIframe app.css, html
 
       unless window.jade
@@ -74,6 +78,8 @@ angular.module 'SassMeister.sandbox', [
 
     render: (app) ->
       @[app.htmlSyntax] app
+    
+    update: updateIframe
 
     reset: ->
       updateIframe null, null, true
