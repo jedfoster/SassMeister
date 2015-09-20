@@ -16,19 +16,7 @@ require './site-header'
 require './cloud-menu'
 require './about'
 require './404'
-
-renderHtml = (app) ->
-  if app
-    newContent =
-      css: app.css
-      html: app.html
-  else
-    newContent =
-      reset: true
-
-  document.getElementById('rendered-html')
-    .contentWindow
-    .postMessage(JSON.stringify(newContent), '*')
+require './sandbox'
 
 angular.module 'SassMeister', [
   'ui.router'
@@ -44,6 +32,7 @@ angular.module 'SassMeister', [
   'SassMeister.about'
   'SassMeister.404'
   'ngCookies'
+  'SassMeister.sandbox'
 ]
 
 .config ($stateProvider, $urlRouterProvider, $locationProvider, $sceDelegateProvider) ->
@@ -55,6 +44,14 @@ angular.module 'SassMeister', [
       .go 'application.404', null, location: false
 
     do $location.path
+
+
+  $sceDelegateProvider.resourceUrlWhitelist [
+    # Allow same origin resource loads.
+   'self',
+   # Allow loading from another domain. Notice the difference between * and **.
+   "#{config.sandbox}/**"
+  ]
 
   $stateProvider
     .state 'application',
@@ -79,14 +76,14 @@ angular.module 'SassMeister', [
     .state 'application.logout',
       url: 'logout'
 
-.controller 'ApplicationController', ($scope, $rootScope, $state, $localStorage, $sce, $cookies, $window, data, Compiler, angularLoad) ->
+.controller 'ApplicationController', ($scope, $rootScope, $state, $localStorage, $sce, $cookies, $window, data, Compiler, angularLoad, Sandbox) ->
   $rootScope.$state = $state
 
   $scope.app = config.storageDefaults().app
   $scope.preferences = data.preferences
   $scope.themes = config.themes()
   $scope.editors = {}
-  $scope.sandbox =  $sce.trustAsResourceUrl config.sandbox
+  $scope.sandbox =  config.sandbox
   $scope.githubId = $cookies.get 'github_id'
   $scope.avatarUrl = $cookies.get 'avatar_url'
 
@@ -132,7 +129,8 @@ angular.module 'SassMeister', [
 
     do $scope.compile
 
-  $scope.renderHtml = renderHtml
+  $scope.renderHtml = (app) ->
+    Sandbox.render app
 
   $scope.$watch 'preferences.emmet', (value) ->
     if value and not window.emmet

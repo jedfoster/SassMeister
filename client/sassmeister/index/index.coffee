@@ -6,11 +6,13 @@ require 'angular'
 require 'angular-ui-router'
 require 'ngStorage'
 require '../../github-adapter'
+require '../sandbox'
 
 angular.module 'SassMeister.index', [
   'ui.router'
   'ngStorage'
   'github-adapter'
+  'SassMeister.sandbox'
 ]
 
 .config ($stateProvider, $urlRouterProvider, $locationProvider) ->
@@ -26,9 +28,10 @@ angular.module 'SassMeister.index', [
       template: template
       controller: 'IndexController'
       resolve:
-        data: ($localStorage, $stateParams) ->
+        data: ($localStorage, $stateParams, Sandbox) ->
           if $stateParams.reset
             $localStorage.app = config.storageDefaults().app
+            do Sandbox.reset
 
           _data = $localStorage.$default config.storageDefaults()
 
