@@ -17,6 +17,8 @@ module.exports =
         emmet: false
         vim: false
         scrollPastEnd: false
+        autoprefixer: false
+        autoprefixerBrowsers: '> 1%, last 2 versions'
     }
 
   _themes: [

@@ -89,6 +89,17 @@ angular.module 'SassMeister', [
   $scope.canEditGist = ->
     false
 
+  $scope.autoprefixerBrowsers = ->
+    browsers = $scope.preferences.autoprefixerBrowsers
+
+    browsers = browsers.split(',').map (x) ->
+      x.trim()
+        
+    if browsers.length > 0
+      return browsers
+
+    return ['> 1%', 'last 2 versions']
+
   $scope.compile = (app)->
     Compiler.compile {
       input: app.sass
@@ -100,7 +111,7 @@ angular.module 'SassMeister', [
       app.dependencies = data.dependencies
 
       if $scope.autoprefixer and window.autoprefixer
-        app.css = window.autoprefixer.process(data.css, browsers: ['> 1%', 'last 2 versions']).css
+        app.css = window.autoprefixer.process(data.css, browsers: $scope.autoprefixerBrowsers()).css
       else
         app.css = data.css
 

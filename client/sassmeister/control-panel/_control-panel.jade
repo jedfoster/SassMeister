@@ -53,8 +53,13 @@ div
       fieldset
         p
           input#enable-autoprefixer(type='checkbox' name='autoprefixer' value='true' ng-model='preferences.autoprefixer')
-          label(for='enable-autoprefixer') Autoprefixer 
-          a(href='https://github.com/postcss/autoprefixer' target='_blank') ?
+          label(for='enable-autoprefixer') Autoprefixer
+          a(href='https://github.com/postcss/autoprefixer' target='_blank') (?)
+
+          span(ng-if='autoprefixer')
+            label(for='autoprefixer-browsers') Browsers:
+            input#autoprefixer-browsers(name='autoprefixerBrowsers' placeholder='Example: > 1%, last 2 versions' ng-model='preferences.autoprefixerBrowsers' ng-model-options='{ debounce: 500 }' ng-change='compile(app)')
+            a(href='https://github.com/ai/browserslist#queries' target='_blank') (?) 
 
 
     fieldset
