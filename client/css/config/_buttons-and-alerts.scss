@@ -1,0 +1,69 @@
+$info-alert: (
+  color:            $purple-1,
+  border-color:     $purple-2,
+  background-color: $purple-3
+) !default;
+$notice-alert: (
+  color:            $yellow-1,
+  border-color:     $yellow-2,
+  background-color: $yellow-3
+) !default;
+$error-alert: (
+  color:            $red-1,
+  border-color:     $red-2,
+  background-color: $red-3
+) !default;
+$success-alert: (
+  color:            $green-1,
+  border-color:     $green-2,
+  background-color: $green-3
+) !default;
+
+
+$normal-buttons: (
+  normal: (
+    color:            $text-color,
+    border-color:     $gray-2,
+    background-color: $gray-3
+  ),
+  hover: (
+    color:            $blue-1,
+    border-color:     $blue-2,
+    background-color: $blue-3
+  ),
+  active: (
+    color:            $white,
+    border-color:     $blue-1,
+    background-color: $blue-1
+  )
+) !default;
+
+$error-buttons: (
+  normal: (
+    color:            $red-1,
+    border-color:     $gray-2,
+    background-color: $gray-3
+  ),
+  hover: $error-alert,
+  active: (
+    color:            $white,
+    border-color:     $red-1,
+    background-color: $red-1
+  )
+
+) !default;
+
+$success-buttons: (
+  normal: (
+    color:            $green-1,
+    border-color:     $gray-2,
+    background-color: $gray-3
+  ),
+  hover: $success-alert,
+  active: (
+    color:            $white,
+    border-color:     $green-1,
+    background-color: $green-1
+  )
+
+) !default;

@@ -1,0 +1,50 @@
+$gutter: $grid-gutter / $grid-max-width * 100%
+
+@function grid-unit-width($numerator, $denominator, $gutter: $gutter)
+  $gutters: $gutter * ($denominator - 1)
+  $spanned-gutters: ($numerator - 1) * $gutter
+  $column-width: (100 - $gutters) / $denominator
+
+  @return $column-width * $numerator + $spanned-gutters
+
+
+@mixin grid-unit
+  margin-right: $gutter
+  float: left
+
+  &:last-child
+    margin-right: 0
+
+
+%grid-container
+  @extend %clearfix
+
+%grid-unit
+  @include grid-unit
+
+
+%one-half
+  @extend %grid-unit
+
+  width: grid-unit-width(1, 2)
+
+%one-third
+  @extend %grid-unit
+
+  width: grid-unit-width(1, 3)
+
+%two-thirds
+  @extend %grid-unit
+
+  width: grid-unit-width(2, 3)
+
+%one-quarter
+  @extend %grid-unit
+
+  width: grid-unit-width(1, 4)
+
+%three-quarters
+  @extend %grid-unit
+
+  width: grid-unit-width(3, 4)
+

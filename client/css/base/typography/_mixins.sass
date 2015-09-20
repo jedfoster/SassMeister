@@ -1,0 +1,13 @@
+@mixin heading($size, $font-family, $color, $weight)
+  font-size: em($size)
+  line-height: baseline($size)
+  color: $color
+  font-weight: $weight
+  font-family: $font-family
+
+
+@mixin text($size)
+  font-size: em($size)
+  line-height: baseline($size)
+  margin-bottom: baseline-margin($size)
+

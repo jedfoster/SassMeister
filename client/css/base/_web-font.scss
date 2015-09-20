@@ -1,0 +1,15 @@
+$web-font-path: '/fonts' !default;
+
+@mixin font-face($font-family, $font-file, $font-style: 'normal', $font-weight: 'normal') {
+  @font-face {
+    font-family: $font-family;
+    src:url("#{$web-font-path}/#{$font-file}.eot");
+    src:url("#{$web-font-path}/#{$font-file}.eot?#iefix") format('embedded-opentype'),
+      url("#{$web-font-path}/#{$font-file}.woff") format('woff'),
+      url("#{$web-font-path}/#{$font-file}.ttf") format('truetype'),
+      url("#{$web-font-path}/#{$font-file}.svg") format('svg');
+    font-style: $font-style;
+    font-weight: $font-weight;
+  }
+}
+

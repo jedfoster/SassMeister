@@ -1,0 +1,26 @@
+$include-normalize: false !default
+$include-elements: false !default
+
+
+@import 'web-font'
+
+
+@each $font-family, $font-file in $web-fonts
+  @include font-face($font-family, $font-file)
+
+
+@if $include-normalize
+  @import 'normalize'
+
+
+@import 'utilities'
+@import 'typography/index'
+@import 'forms'
+@import 'grid'
+@import 'buttons'
+@import 'alerts'
+
+
+@if $include-elements
+  @import 'elements'
+

@@ -1,0 +1,29 @@
+@mixin button($button-map: $normal-buttons)
+  $normal: map-get($button-map, 'normal')
+  $hover:  map-get($button-map, 'hover')
+  $active: map-get($button-map, 'active')
+
+  @include map-to-properties($normal)
+
+  @if $hover
+    &:hover
+      @include map-to-properties($hover)
+
+  @if $active
+    &:active
+      @include map-to-properties($active)
+
+      text-shadow: 1px 1px 0 transparentize($black, 0.4);
+
+%button
+  display: inline-block
+  margin: 0 0.5em 1.1em 0;
+  padding: 0.55em 0.5em 0.25em;
+  font-size: 100%;
+  line-height: 1
+  text-decoration: none;
+  text-shadow: 1px 1px 0 transparentize($white, 0.2);
+  border: 1px solid
+  cursor: pointer
+  outline: 0
+
