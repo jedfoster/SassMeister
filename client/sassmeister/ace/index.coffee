@@ -77,6 +77,10 @@ angular.module 'SassMeister.ace', [
   $scope.aceLoaded = (editor) ->
     aceLoaded editor, $scope
     $scope.editor = editor
+
+    # Disable prefix validation
+    # http://stackoverflow.com/questions/12886857/how-can-i-disable-the-syntax-checker-in-ace-editor
+    $scope.editor.getSession().setUseWorker(false)
 ]
 
 .controller 'AceHtmlController', [ '$scope', ($scope) ->

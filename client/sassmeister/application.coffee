@@ -98,7 +98,11 @@ angular.module 'SassMeister', [
       output_style: app.outputStyle
     }, (data) ->
       app.dependencies = data.dependencies
-      app.css = data.css
+
+      if $scope.autoprefixer and window.autoprefixer
+        app.css = window.autoprefixer.process(data.css, browsers: ['> 1%', 'last 2 versions']).css
+      else
+        app.css = data.css
 
       if app.html
         $scope.renderHtml app
@@ -137,4 +141,16 @@ angular.module 'SassMeister', [
 
     else
       $scope.emmet = value
+
+  $scope.$watch 'preferences.autoprefixer', (value) ->
+    $scope.autoprefixer = value
+
+    if value and not window.autoprefixer
+      angularLoad.loadScript 'https://cdn.rawgit.com/ai/autoprefixer-rails/6.0.3/vendor/autoprefixer.js'
+        .then ->
+          $scope.compile $scope.app
+
+    else
+      $scope.compile $scope.app
+
 
