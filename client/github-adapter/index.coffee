@@ -1,3 +1,6 @@
+'use strict'
+
+require 'angular'
 require 'angular-cookies'
 
 Github = require 'github-api'
