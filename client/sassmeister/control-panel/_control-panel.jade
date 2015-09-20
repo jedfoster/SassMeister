@@ -36,16 +36,16 @@ div
       h2 CSS
 
       fieldset.output-toggle-group(data-event-name='CSSOutput')
-        input#expanded-output(type='radio' name='output-style' value='expanded' ng-model='app.outputStyle' ng-change='compile()')
+        input#expanded-output(type='radio' name='output-style' value='expanded' ng-model='app.outputStyle' ng-change='compile(app)')
         label(for='expanded-output' data-toggle-input='css') expanded
 
-        input#nested-output(type='radio' name='output-style' value='nested' ng-model='app.outputStyle' ng-change='compile()')
+        input#nested-output(type='radio' name='output-style' value='nested' ng-model='app.outputStyle' ng-change='compile(app)')
         label(for='nested-output' data-toggle-input='css') nested
 
-        input#compact-output(type='radio' name='output-style' value='compact' ng-model='app.outputStyle' ng-change='compile()')
+        input#compact-output(type='radio' name='output-style' value='compact' ng-model='app.outputStyle' ng-change='compile(app)')
         label(for='compact-output' data-toggle-input='css') compact
 
-        input#compressed-output(type='radio' name='output-style' value='compressed' ng-model='app.outputStyle' ng-change='compile()')
+        input#compressed-output(type='radio' name='output-style' value='compressed' ng-model='app.outputStyle' ng-change='compile(app)')
         label(for='compressed-output' data-toggle-input='css') compressed
 
         span
