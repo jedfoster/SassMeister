@@ -64,25 +64,24 @@ angular.module 'SassMeister.gist', [
 
   files.forEach (fileName) ->
     # For now, we only return the first .sass or .scss file we find.
-    if fileName.match sassRegEx
+    if fileName.match(sassRegEx) and !$scope.sassFileName
       $scope.app.sass = data.files[fileName].content
       $scope.app.syntax = data.files[fileName].language.toLowerCase()
       $scope.app.originalSyntax = $scope.app.syntax
       $scope.sassFileName = fileName
 
-    if fileName.match cssRegEx
+    if fileName.match(cssRegEx) and !$scope.cssFileName
       $scope.app.css = data.files[fileName].content
       $scope.cssFileName = fileName
 
-    if fileName.match htmlRegEx
+    if fileName.match(htmlRegEx) and !$scope.htmlFileName
       $scope.app.html = data.files[fileName].content
       $scope.app.htmlSyntax = data.files[fileName].language.toLowerCase()
       $scope.htmlFileName = fileName
 
-    if fileName.match renderedHTMLRegEx
+    if fileName.match(renderedHTMLRegEx) and !$scope.renderedHTMLFileName
       $scope.app.renderedHTML = data.files[fileName].content
       $scope.renderedHTMLFileName = fileName
-
 
   if !$scope.app.sass
     $scope.app.sass = "// Sorry, I couldn't find any valid Sass in that Gist."
