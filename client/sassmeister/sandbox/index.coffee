@@ -45,13 +45,24 @@ angular.module 'SassMeister.sandbox', [
         updateIframe app.css, data.html
 
     markdown: (app) ->
-      sandboxServer.save {
-        input: app.html
-        syntax: 'markdown'
-      }
-      .$promise.then (data) ->
-        app.renderedHTML = data.html
-        updateIframe app.css, data.html
+      renderMarkdown = ->
+        app.renderedHTML = window.marked app.html
+        updateIframe app.css, app.renderedHTML
+
+      unless window.marked
+        angularLoad.loadScript 'https://cdn.rawgit.com/chjj/marked/v0.3.5/marked.min.js'
+          .then ->
+            # See https://github.com/chjj/marked#options-1 for config options, but I think the defaults should be good.
+
+            # marked.setOption
+            #   gfm: true
+            #   tables: true
+            #   ...
+
+            do renderMarkdown
+
+      else
+        do renderMarkdown
 
     textile: (app) ->
       sandboxServer.save {
@@ -64,9 +75,8 @@ angular.module 'SassMeister.sandbox', [
 
     jade: (app) ->
       renderJade = ->
-        html = window.jade.render(app.html, {pretty: true})
-        app.renderedHTML = html
-        updateIframe app.css, html
+        app.renderedHTML = window.jade.render(app.html, {pretty: true})
+        updateIframe app.css, app.renderedHTML
 
       unless window.jade
         angularLoad.loadScript 'https://cdn.rawgit.com/jadejs/jade/1.11.0/jade.js'
