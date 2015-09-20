@@ -8,7 +8,7 @@ section
     ui-ace(ng-model='app.html' ng-model-options='{ debounce: 500 }' ng-change='renderHtml(app)' ui-ace='{onLoad: aceLoaded}')
 
 
-  h3 Input
+  h3 {{app.displayCompiler}}
 
   .editor-wrapper(ng-controller='AceSassController')
     //- Production debounces with 750

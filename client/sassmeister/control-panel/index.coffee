@@ -17,10 +17,13 @@ angular.module 'SassMeister.controlPanel', ['SassMeister.compiler']
         for key in keys
           compiler = data.compilers[key]
           compiler.engine = 'Sass' if compiler.engine.match /Ruby/
+          option = "#{compiler.engine} v#{compiler.sass}"
+
+          scope.app.displayCompiler = option if key == scope.app.compiler
 
           {
             value: key
-            option: "#{compiler.engine} #{compiler.sass}"
+            option: option
           }
       )
 
