@@ -78,10 +78,21 @@ angular.module 'SassMeister.sandbox', [
 
     render: (app) ->
       @[app.htmlSyntax] app
-    
+
     update: updateIframe
 
     reset: ->
       updateIframe null, null, true
+
+    onReady: (app) ->
+      # When the sandbox iFrame loads it will post a message back to the parent (the main app frame.)
+      # $scope.on('viewContentLoaded') fires when the _parent_ view has loaded, but _before_ the iFrame is ready and setTimeout is dumb.
+      # So, we'll let the iFrame _tell_ us when it's ready.
+      window.onmessage = (event) =>
+        if event.origin == config.sandbox
+          if app.renderedHTML
+            @update app.css, app.renderedHTML
+          else
+            @render app
 ]
 

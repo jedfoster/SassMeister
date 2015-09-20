@@ -45,12 +45,9 @@ angular.module 'SassMeister', [
 
     do $location.path
 
-
   $sceDelegateProvider.resourceUrlWhitelist [
-    # Allow same origin resource loads.
-   'self',
-   # Allow loading from another domain. Notice the difference between * and **.
-   "#{config.sandbox}/**"
+    'self',
+    "#{config.sandbox}/**"
   ]
 
   $stateProvider
@@ -131,12 +128,6 @@ angular.module 'SassMeister', [
 
   $scope.renderHtml = (app) ->
     Sandbox.render app
-
-  $scope.$on '$viewContentLoaded', ->
-    if $scope.renderedHTML
-      Sandbox.update $scope.app.css, $scope.app.renderedHTML
-    else
-      Sandbox.render $scope.app
 
   $scope.$watch 'preferences.emmet', (value) ->
     if value and not window.emmet

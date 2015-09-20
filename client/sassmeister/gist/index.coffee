@@ -3,10 +3,12 @@
 require 'angular'
 require 'angular-ui-router'
 require '../../github-adapter'
+require '../sandbox'
 
 angular.module 'SassMeister.gist', [
   'ui.router'
   'github-adapter'
+  'SassMeister.sandbox'
 ]
 
 .config ($stateProvider, $urlRouterProvider, $locationProvider) ->
@@ -33,7 +35,7 @@ angular.module 'SassMeister.gist', [
             $githubGist($stateParams.id).read().then null, fail
 
 
-.controller 'GistController', ($scope, $sassMeisterGist, $githubGist, $state, $stateParams, data) ->
+.controller 'GistController', ($scope, $sassMeisterGist, $githubGist, $state, $stateParams, Sandbox, data) ->
   $scope.app =
     dependencies: {}
 
@@ -55,6 +57,7 @@ angular.module 'SassMeister.gist', [
   sassRegEx = /.+\.(scss|sass)/i
   cssRegEx = /.+-output\.css/i
   htmlRegEx = /.+\.(haml|textile|markdown|md|html)/i
+  renderedHTMLRegEx = /.+-rendered\.html/i
   frontmatterRegEx = /^\/\/ ([\w\s]+?) \(v([A-z0-9\.]+?)\)\s*$/mgi
 
   files = Object.keys data.files
@@ -76,6 +79,11 @@ angular.module 'SassMeister.gist', [
       $scope.app.htmlSyntax = data.files[fileName].language.toLowerCase()
       $scope.htmlFileName = fileName
 
+    if fileName.match renderedHTMLRegEx
+      $scope.app.renderedHTML = data.files[fileName].content
+      $scope.renderedHTMLFileName = fileName
+
+
   if !$scope.app.sass
     $scope.app.sass = "// Sorry, I couldn't find any valid Sass in that Gist."
 
@@ -88,6 +96,7 @@ angular.module 'SassMeister.gist', [
   else if $scope.app.dependencies.Sass
     $scope.app.compiler = $scope.app.dependencies.Sass.substr(0, 3)
 
+  Sandbox.onReady $scope.app
 
   $scope.updateGist = ->
     $sassMeisterGist.update $stateParams.id, $scope, (gist) ->
@@ -108,6 +117,7 @@ angular.module 'SassMeister.gist', [
         gist.files[$scope.sassFileName].content = $scope.app.sass
         gist.files[$scope.cssFileName].content = $scope.app.css
         gist.files[$scope.htmlFileName].content = $scope.app.html
+        gist.files[$scope.renderedHTMLFileName].content = $scope.app.renderedHTML
 
         $state.go '^.gist',
           id: gist.id

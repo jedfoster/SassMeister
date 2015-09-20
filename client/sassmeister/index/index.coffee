@@ -45,7 +45,7 @@ angular.module 'SassMeister.index', [
 
           _data
 
-.controller 'IndexController', ($scope, $sassMeisterGist, $localStorage, $state, data) ->
+.controller 'IndexController', ($scope, $sassMeisterGist, $localStorage, $state, data, Sandbox) ->
   $scope.$parent.app = data.app
 
   $scope.createGist = ->
@@ -53,4 +53,6 @@ angular.module 'SassMeister.index', [
       $state.go '^.gist',
         id: gist.id
         gist: gist
+
+  Sandbox.onReady $scope.app
 
