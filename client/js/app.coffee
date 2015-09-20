@@ -1,4 +1,4 @@
 'use strict'
 
-require '../sassmeister/application'
+require '../sassmeister'
 
