@@ -17,6 +17,19 @@ require './cloud-menu'
 require './about'
 require './404'
 
+renderHtml = (app) ->
+  if app
+    newContent =
+      css: app.css
+      html: app.html
+  else
+    newContent =
+      reset: true
+
+  document.getElementById('rendered-html')
+    .contentWindow
+    .postMessage(JSON.stringify(newContent), '*')
+
 angular.module 'SassMeister', [
   'ui.router'
   'ngStorage'
@@ -33,14 +46,14 @@ angular.module 'SassMeister', [
   'ngCookies'
 ]
 
-.config ($stateProvider, $urlRouterProvider, $locationProvider) ->
+.config ($stateProvider, $urlRouterProvider, $locationProvider, $sceDelegateProvider) ->
   $locationProvider.html5Mode true
 
   $urlRouterProvider.otherwise ($injector, $location) ->
     $injector
       .get('$state')
       .go 'application.404', null, location: false
-    
+
     do $location.path
 
   $stateProvider
@@ -66,13 +79,14 @@ angular.module 'SassMeister', [
     .state 'application.logout',
       url: 'logout'
 
-.controller 'ApplicationController', ($scope, $rootScope, $state, $localStorage, $cookies, $window, data, Compiler, angularLoad) ->
+.controller 'ApplicationController', ($scope, $rootScope, $state, $localStorage, $sce, $cookies, $window, data, Compiler, angularLoad) ->
   $rootScope.$state = $state
 
   $scope.app = config.storageDefaults().app
   $scope.preferences = data.preferences
   $scope.themes = config.themes()
   $scope.editors = {}
+  $scope.sandbox =  $sce.trustAsResourceUrl config.sandbox
   $scope.githubId = $cookies.get 'github_id'
   $scope.avatarUrl = $cookies.get 'avatar_url'
 
@@ -91,6 +105,9 @@ angular.module 'SassMeister', [
     }, (data) ->
       app.dependencies = data.dependencies
       app.css = data.css
+
+      if app.html
+        $scope.renderHtml app
 
   $scope.convert = (app) ->
     Compiler.convert {
@@ -115,6 +132,8 @@ angular.module 'SassMeister', [
 
     do $scope.compile
 
+  $scope.renderHtml = renderHtml
+
   $scope.$watch 'preferences.emmet', (value) ->
     if value and not window.emmet
       angularLoad.loadScript 'http://nightwing.github.io/emmet-core/emmet.js'
@@ -123,5 +142,4 @@ angular.module 'SassMeister', [
 
     else
       $scope.emmet = value
-    
 

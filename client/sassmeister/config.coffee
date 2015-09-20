@@ -45,3 +45,6 @@ module.exports =
     'compact'
     'compressed'
   ]
+
+  sandbox: 'http://sandbox.sassmeister.dev'
+

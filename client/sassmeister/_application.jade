@@ -5,7 +5,7 @@ section
 
   .editor-wrapper(ng-controller='AceHtmlController')
     //- Production debounces with 750
-    ui-ace(ng-model='app.html' ng-model-options='{ debounce: 500 }' ui-ace='{onLoad: aceLoaded}')
+    ui-ace(ng-model='app.html' ng-model-options='{ debounce: 500 }' ng-change='renderHtml(app)' ui-ace='{onLoad: aceLoaded}')
 
 
   h3 Input
@@ -18,6 +18,8 @@ section
 
   .editor-wrapper(ng-controller='AceCssController')
     ui-ace(ng-model='app.css' ui-ace='{onLoad: aceLoaded, mode: \'css\'}' readonly)
+
+  iframe#rendered-html(sandbox='allow-scripts allow-same-origin' ng-src='{{sandbox}}')
 
 control-panel
 
