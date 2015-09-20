@@ -1,6 +1,6 @@
 'use strict'
 
-config = require '../config'
+config = require './config'
 
 require 'angular'
 require 'angular-resource'

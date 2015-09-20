@@ -7,15 +7,18 @@ require 'angular-ui-router'
 require 'angular-cookies'
 require 'ngStorage'
 require 'angular-load'
-require './index'
-require './gist'
+
+require './states/index'
+require './states/gist'
+require './states/about'
+require './states/404'
+
+require './components/control-panel'
+require './components/site-header'
+require './components/cloud-menu'
+
 require './compiler'
 require './ace'
-require './control-panel'
-require './site-header'
-require './cloud-menu'
-require './about'
-require './404'
 require './sandbox'
 
 angular.module 'SassMeister', [

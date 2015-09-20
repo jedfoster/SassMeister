@@ -1,12 +1,12 @@
 'use strict'
 
-config = require '../config'
+config = require '../../config'
 
 require 'angular'
 require 'angular-ui-router'
 require 'ngStorage'
-require '../../github-adapter'
-require '../sandbox'
+require '../../../github-adapter'
+require '../../sandbox'
 
 angular.module 'SassMeister.index', [
   'ui.router'
@@ -18,7 +18,7 @@ angular.module 'SassMeister.index', [
 .config ($stateProvider, $urlRouterProvider, $locationProvider) ->
   $locationProvider.html5Mode true
 
-  template = require '../_application.jade'
+  template = require '../../_application.jade'
 
   $stateProvider
     .state 'application.index',

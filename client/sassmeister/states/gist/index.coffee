@@ -2,8 +2,8 @@
 
 require 'angular'
 require 'angular-ui-router'
-require '../../github-adapter'
-require '../sandbox'
+require '../../../github-adapter'
+require '../../sandbox'
 
 angular.module 'SassMeister.gist', [
   'ui.router'
@@ -14,7 +14,7 @@ angular.module 'SassMeister.gist', [
 .config ($stateProvider, $urlRouterProvider, $locationProvider) ->
   $locationProvider.html5Mode true
 
-  template = require '../_application.jade'
+  template = require '../../_application.jade'
 
   $stateProvider
     .state 'application.gist',
