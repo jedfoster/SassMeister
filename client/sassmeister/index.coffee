@@ -114,7 +114,11 @@ angular.module 'SassMeister', [
       app.dependencies = data.dependencies
 
       if $scope.autoprefixer and window.autoprefixer
-        app.css = window.autoprefixer.process(data.css, browsers: $scope.autoprefixerBrowsers()).css
+        try
+          app.css = window.autoprefixer.process(data.css, browsers: $scope.autoprefixerBrowsers()).css
+        catch e
+          app.css = data.css
+          console.warn e
       else
         app.css = data.css
 

@@ -10,7 +10,9 @@ gulp.task('sass', function () {
     .pipe(sourcemaps.init())
     .pipe(sass(config.settings))
     .on('error', handleErrors)
-    .pipe(sourcemaps.write())
+
     .pipe(autoprefixer({ browsers: ['last 2 version'] }))
+
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest(config.dest));
 });

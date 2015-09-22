@@ -1,29 +1,43 @@
-//- span.cloud-icon
-//-   span.alt Save
+svg.cloud-icon
+  title Save
+  use(xlink:href='/img/icons.svg#cloud')
+
 ul#cloud_actions
 
   li(ng-if='showUpdateGist()')
     a(ng-click='updateGist()')
+      svg.cloud-up-icon
+        use(xlink:href='/img/icons.svg#cloud-up')
       span Update Gist
 
   li(ng-if='showSaveGist()')
     a(ng-click='createGist()')
+      svg.cloud-up-icon
+        use(xlink:href='/img/icons.svg#cloud-up')
       span Save Gist
 
   li(ng-if='showForkGist()')
     a(ng-click='forkGist()')
+      svg.fork-icon
+        use(xlink:href='/img/icons.svg#fork')
       span Fork Gist
 
   li(ng-if='showLoginToSaveGists()')
     a.github(href='/authorize' ng-click='login()')
+      svg.github-icon
+        use(xlink:href='/img/icons.svg#github')
       span Log in with your GitHub account to save gists
 
   li(ng-if='showViewOnGitHub()')
     a#gist-link.github(ng-href='https://gist.github.com/{{gist.id}}')
+      svg.github-icon
+        use(xlink:href='/img/icons.svg#github')
       span View on GitHub
 
 
   li
     a#reset.reset-icon(ng-click='reset()')
+      svg
+        use(xlink:href='/img/icons.svg#reset')
       span Reset
 

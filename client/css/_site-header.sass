@@ -1,36 +1,35 @@
+
+
+
+
 site-header
-  display: block
   position: relative
   height: $site-header-height
   border-bottom: 1px solid darken($alpha_color, 10%)
   background: $alpha_color_charlie
   color: $white
+  text-shadow: 0 0 0.25em darken($alpha_color, 10%)
   font-weight: 200
   a
-    cursor: pointer
+    @extend %header-button
     &:hover
       span
         text-decoration: underline
-
-  svg
-    vertical-align: middle
-    display: inline-block
-    fill: $white
-    width: em(28)
-    height: em(28)
-
+    &.show
+      background: scale-color($alpha_color, $lightness: 45%, $saturation: -25%)
   .logo
-    @extend %header-button
-
+    @extend %icon-font
     margin-left: 1em
     float: left
-
-    svg
-      width: em(130.5)
-      height: em(48)
-
+    &:before
+      content: "\e001"
+      font-size: 7.5em
+      line-height: 0.01
+      @media #{$mobile}
+        font-size: 5.5em
     &:hover
       background: transparent
+      text-shadow: 0 0 0.25em darken($alpha_color, 10%)
       @media #{$desktop}
         &:after
           +tooltip
@@ -41,27 +40,22 @@ site-header
             display: none
     @media #{$mobile}
       left: 0.33333em
-  
   nav
     list-style: none
     text-align: right
     float: right
     position: relative
-
+    > a
+      @extend %nav-block
     > div
       @extend %nav-block
       @extend %header-button
       @extend %sub-menu-dropdown
-
-    > a
-      @extend %nav-block
-
-
     .bookmark-icon
       @media #{$tablet}
         display: none
     img
-      border_radius: $border-radius
+      border-radius: $border-radius
       display: block
       margin: em(10) 0
     #account_actions
@@ -70,12 +64,6 @@ site-header
         width: auto
         min-width: em(220)
         max-width: em(360)
-  ul
-    svg
-      display: inline
-      margin-right: 0.25em
-      width: em(26)
-      height: em(26)
 
 .tagline
   display: block
@@ -85,12 +73,17 @@ site-header
   @media screen and (max-width: 920px)
     display: none
 
-.github, .bookmark, #open-controls
+.github, .bookmark-icon, site-header .control-icon
   &:hover
     &:after
       @extend %tooltip
       @media #{$mobile}
         display: none
+
+#cloud_actions
+  width: em(200)
+  .github
+    line-height: 1.33334
 
 #share_actions ul
   width: em(380)
@@ -106,13 +99,13 @@ site-header
     outline: none
     -webkit-appearance: none
     resize: none
-    color: $black
-    font-size: .7em
-    line-height: 1
 
-svg.cloud-icon, svg.share-icon
-  width: em(36)
-  height: em(36)
+.share-widget
+  display: inline-block
+  float: right
+
+#twitter-widget-0
+  width: 80px !important
 
 #toggle_css, #toggle_html
   @media #{$tablet}

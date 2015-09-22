@@ -3,11 +3,16 @@ var src = './client';
 
 module.exports = {
   sass: {
-    src: src + '/css/**/*.{sass,scss}',
-    dest: dest + '/css/',
+    src: src + '/**/*.{sass,scss}',
+    dest: dest,
     settings: {
       indentedSyntax: true, // Enable .sass syntax!
-      imagePath: 'images' // Used by the image-url helper
+      imagePath: 'images', // Used by the image-url helper
+      // sourceMapRoot: src,
+      includePaths: [
+        src,
+        src + '/sassmeister'
+      ]
     }
   },
   markup: {

@@ -42,5 +42,12 @@ html.no-js(ng-app='SassMeister')
       //-   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       //- })();% end %
 
+      if(/Trident\/[567]\b/.test(navigator.userAgent) || (navigator.userAgent.match(/AppleWebKit\/(\d+)/) || [])[1] < 537) {
+        var imported = document.createElement('script');
+        imported.src = 'http://cdn.rawgit.com/jonathantneal/svg4everybody/v2.0.0/dist/svg4everybody.min.js';
+        document.head.appendChild(imported);
+      }
+
+
     script(src='/js/app.js')
 

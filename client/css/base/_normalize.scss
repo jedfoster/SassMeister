@@ -35,6 +35,8 @@ body {
   line-height: $line-height-base;
   color: $text-color;
   text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* HTML5 display definitions
@@ -49,12 +51,11 @@ body {
 
 article,
 aside,
-details,
-figcaption,
-figure,
+// details,
+// figcaption,
+// figure,
 footer,
 header,
-hgroup,
 main,
 menu,
 nav,
@@ -68,13 +69,13 @@ summary {
  * 2. Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera.
  */
 
-audio,
-canvas,
-progress,
-video {
-  display: inline-block; /* 1 */
-  vertical-align: baseline; /* 2 */
-}
+// audio,
+// canvas,
+// progress,
+// video {
+//   display: inline-block; /* 1 */
+//   vertical-align: baseline; /* 2 */
+// }
 
 /**
  * Prevent modern browsers from displaying `audio` without controls.
@@ -181,21 +182,21 @@ small {
  * Prevent `sub` and `sup` affecting `line-height` in all browsers.
  */
 
-sub,
-sup {
-  font-size: 75%;
-  line-height: 0;
-  position: relative;
-  vertical-align: baseline;
-}
+// sub,
+// sup {
+//   font-size: 75%;
+//   line-height: 0;
+//   position: relative;
+//   vertical-align: baseline;
+// }
 
-sup {
-  top: -0.5em;
-}
+// sup {
+//   top: -0.5em;
+// }
 
-sub {
-  bottom: -0.25em;
-}
+// sub {
+//   bottom: -0.25em;
+// }
 
 /* Embedded content
    ========================================================================== */
@@ -223,9 +224,9 @@ svg:not(:root) {
  * Address margin not present in IE 8/9 and Safari.
  */
 
-figure {
-  margin: 1em 40px;
-}
+// figure {
+//   margin: 1em 40px;
+// }
 
 /**
  * Address differences between Firefox and other browsers.
@@ -249,13 +250,13 @@ pre {
  * Address odd `em`-unit font size rendering in all browsers.
  */
 
-code,
-kbd,
-pre,
-samp {
-  font-family: monospace, monospace;
-  font-size: 1em;
-}
+// code,
+// kbd,
+// pre,
+// samp {
+//   font-family: monospace, monospace;
+//   font-size: 1em;
+// }
 
 /* Forms
    ========================================================================== */
@@ -449,3 +450,7 @@ th {
   padding: 0;
 }
 
+::selection {
+  background: $selection-color;
+  color: inherit;
+}

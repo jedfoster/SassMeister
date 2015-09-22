@@ -1,6 +1,107 @@
+$include-normalize: true
+
+
+$gray-1: #333
+
+
+$alpha-primary: rgb(215, 88, 147);
+
+// Old SM brand pink: #E24A8D ( rgb(226, 74, 141) )
+// Sass brand pink: #c69 ( rgb(204, 102, 153) )
+// Average: rgb(215, 88, 147)
+
+// Official Sass Colors
+
+// Brand Colors
+
+// $hopbush #c69
+// $bouquet #b37399
+// $venus #998099
+// $patina #699
+// $nebula #d2e1dd
+// $white #fff
+// $dawn-pink #f2ece4
+// $wafer #e1d7d2
+// $iron #dadbdf
+// $regent-grey #808c99
+// $pale-sky #6b717f
+// $midnight-blue #036
+
+// Usage
+
+// $color-shadow	rgba($black, .125)
+// $color-primary	$hopbush
+// $color-accent	$patina
+// $color-background	$white
+// $color-background-shade	$iron
+// $color-background-invert	$hopbush
+// $color-text	darken($pale-sky, 15)
+// $color-text-weak	$regent-grey
+// $color-text-strong	$midnight-blue
+// $color-text-heading	$regent-grey
+// $color-text-invert	rgba($color-background, .75)
+// $color-text-strong-invert	$color-background
+// $color-text-link	$color-primary
+// $color-text-link-visited	$bouquet
+// $color-text-link-hover	$midnight-blue
+// $color-border	$iron
+
+
+
+$alpha_color_charlie: scale-color($alpha-primary, $lightness: 20%)
+$alpha_color_delta:   scale-color($alpha-primary, $lightness: 30%)
+
+// .embedded .editor-header
+$alpha_color_fox:     scale-color($alpha-primary, $lightness: 50%)
+
+
+$alpha_color_hotel:   scale-color($alpha-primary, $lightness: 70%)
+
+$delta_gray: scale-color($gray-1, $lightness: 30%)
+
+
+
+// Color aliases
+$alpha_color: $alpha-primary
+$alpha_gray: $gray-1
+
+
+
+
+
+$selection-color: $alpha_color_hotel
+
+
+
+
+
+
+
+
+
 @import index
 
-@import typography
+
+
+$monospace-font-family: #{'SourceCodePro', monospace}
+
+
+
+
+
+
+
+
+$site-header-height: 3.33333em
+
+
+$mobile:              "screen and (max-width: 30em)"; // Target 480px
+$tablet:              "screen and (max-width: 48em)"; // Target 768px
+$desktop:             "screen and (min-width: 48em)";
+
+
+
+@import scratch
 
 
 
@@ -34,7 +135,7 @@ control-panel
   font-size: 0.6em
 
 a, [ng-click]
-  @extend %link
+  color: inherit
 
 #extension_list //, .control-container > fieldset:last-of-type
   display: none
@@ -47,4 +148,9 @@ a, [ng-click]
   height: 1em
   float: right
 
+
+
+@import 'components/site-header/index'
+@import 'components/cloud-menu/index'
+// @import 'site-header'
 

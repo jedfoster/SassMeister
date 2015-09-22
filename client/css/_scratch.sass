@@ -1,0 +1,86 @@
+=sub-menu
+  position: absolute
+  z-index: 9999
+  top: $site-header-height
+  right: 0
+  width: em(200)
+  padding: 0.5em
+  line-height: 1.5em
+  font-family: $primary_font_family
+  text-shadow: 0 0 0 transparent
+  text-align: center
+  color: $white
+  background: transparentize(scale-color($alpha_color, $lightness: -80%), 0.2)
+  border-bottom-left-radius: em(3)
+  border-bottom-right-radius: em(3)
+
+%sub-menu
+  +sub-menu
+
+
+
+%sub-menu-dropdown
+  ul
+    @extend %sub-menu
+    display: none
+  &:hover
+    ul
+      display: block
+  li
+    width: 100%
+    display: block
+    text-align: left
+    padding: em(8)
+    &:before
+      font-size: 0.75em
+      margin-right: 0.5em
+  a
+    text-shadow: none
+    line-height: 1
+    &:hover
+      color: white
+      background: transparent
+      text-shadow: none
+      &:after
+        display: none
+
+
+
+// The mixin is intended only to be used where a placeholder cannot, such as inside a media query.
+=tooltip
+  +sub-menu
+  content: attr(title)
+
+%tooltip
+  @extend %sub-menu
+  content: attr(title)
+
+
+
+
+
+%header-button
+  cursor: pointer
+  color: $white
+  line-height: em(60)
+  // text-shadow: 0 0 0.25em darken($alpha_color, 10%)
+  &:hover
+    background: scale-color($alpha_color, $lightness: -50%)
+    // text-shadow: 0 0 0.25em $white
+
+%nav-block
+  display: block
+  float: left
+  padding: 0 em(15)
+  height: $site-header-height
+  line-height: $site-header-height
+  position: relative
+  min-width: 3.5em
+  text-align: center
+  border-left: 1px solid darken($alpha_color, 5%)
+  box-shadow: inset 1px 0px 0px 0px transparentize(white, 0.8)
+
+  @media #{$mobile}
+    padding-right: em(12)
+    min-width: 3em
+

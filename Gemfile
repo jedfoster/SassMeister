@@ -22,6 +22,7 @@ group :development, :test do
   gem 's3_website', :github => 'jedfoster/s3_website', :branch => '1.x'
   gem 'rack-test'
   gem 'dotenv'
+  gem 'nokogiri'
 end
 
 group :test do

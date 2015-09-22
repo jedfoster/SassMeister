@@ -133,6 +133,7 @@ DEPENDENCIES
   fakeredis
   faraday
   newrelic_rpm
+  nokogiri
   pry-remote
   rack-cache
   rack-contrib!
