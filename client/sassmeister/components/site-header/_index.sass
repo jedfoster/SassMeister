@@ -2,8 +2,7 @@ site-header
   display: block
   position: relative
   height: $site-header-height
-  border-bottom: 1px solid darken($alpha_color, 10%)
-  background: $alpha_color_charlie
+  background: $alpha_color
   color: $white
   font-weight: 200
   a
@@ -61,7 +60,7 @@ site-header
       @media #{$tablet}
         display: none
     img
-      border_radius: $border-radius
+      border-radius: $border-radius
       display: block
       margin: em(10) 0
     #account_actions
@@ -91,6 +90,37 @@ site-header
       @extend %tooltip
       @media #{$mobile}
         display: none
+
+#open-controls
+  ul
+    display: block !important
+    width: 15em
+    line-height: 1
+    text-align: left
+
+  h2
+    font-size: 1em
+  h3
+    font-size: 1em
+    display: inline
+
+    + fieldset
+      display: inline
+
+  fieldset
+    border: 0
+    border-bottom: 1px solid scale-color($alpha_color, $lightness: -80%)
+
+    fieldset
+      padding: 0
+      
+      border: 0
+
+  #extension_list ol
+    height: 9em
+    overflow: auto
+    background: $white
+    color: $gray-1
 
 #share_actions ul
   width: em(380)
