@@ -92,6 +92,11 @@ site-header
         display: none
 
 #open-controls
+
+  $checkmark-icon: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMTQiIGhlaWdodD0iMTQiIHZpZXdCb3g9IjAgMCAzMiAzMiI+CTxwYXRoIGZpbGw9IiM3MDcwNzAiIGQ9Ik04LjU2NCAyNi45MDRjLTIuODQ5LTIuOS02LjY2Ny02LjY5My04LjIyMS04LjI4Ny0wLjM2NS0wLjMzLTAuMzYzLTEuMDU2LTAuMjI2LTEuNDA2IDAuMTEzLTAuMjkxIDMuNDktMy42MzEgMy43OTQtMy43ODYgMC4yODQtMC4xNDUgMC43OTEtMC4yMzggMS4yODUgMC4wNjEgMC4xNDQgMC4wODcgMy42NDkgMy42MTMgNS41MjMgNS40NzcgMC44MDEgMC40OTIgMS4yMzEgMC4xNjMgMS41NjctMC4wODMgNy4wMTItNy4wMjEgMTQuMTcxLTE0LjIwMSAxNC40MzItMTQuNDA0IDAuMjU4LTAuMjAxIDAuNzIzLTAuNDE3IDEuNDIzLTAuMTQ3IDAuNDIzIDAuMzY3IDIuMzg1IDIuMzA4IDMuNTk1IDMuNTQgMC4zMDkgMC4yNzkgMC4zMTcgMS4xMjItMC4wMjUgMS41NDctMC45OTcgMS4wNTAtMTQuODQ5IDE0LjkwNS0xNy41NTMgMTcuNTc1LTEuNDkgMS4xMzQtNC4xNTkgMS4wNDAtNS41OTQtMC4wODh6Ii8+PC9zdmc+);
+
+  $checkmark-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="#fff" d="M8.564 26.904c-2.849-2.9-6.667-6.693-8.221-8.287-0.365-0.33-0.363-1.056-0.226-1.406 0.113-0.291 3.49-3.631 3.794-3.786 0.284-0.145 0.791-0.238 1.285 0.061 0.144 0.087 3.649 3.613 5.523 5.477 0.801 0.492 1.231 0.163 1.567-0.083 7.012-7.021 14.171-14.201 14.432-14.404 0.258-0.201 0.723-0.417 1.423-0.147 0.423 0.367 2.385 2.308 3.595 3.54 0.309 0.279 0.317 1.122-0.025 1.547-0.997 1.050-14.849 14.905-17.553 17.575-1.49 1.134-4.159 1.040-5.594-0.088z"/></svg>')
+
   ul
     display: block !important
     width: 15em
@@ -99,13 +104,45 @@ site-header
     text-align: left
 
   h2
-    font-size: 1em
+    display: none
   h3
     font-size: 1em
     display: inline
 
     + fieldset
       display: inline
+
+  input
+    background: transparent
+    border: 0
+
+    // border: 1px solid #aaa
+    height: 2em
+    width: 2em
+    display: inline-block
+    -webkit-appearance: none
+    // background: linear-gradient(to bottom, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eeeeee 100%)
+    outline: none
+
+    &:after
+      content: ' '
+      padding: 0
+      line-height: 2
+      display: block
+      width: 100%
+      height: 100%
+
+    &:checked:after
+      background: $checkmark-icon
+      background-repeat: no-repeat
+      background-position: 50% 50%
+
+  label
+    display: inline-block
+
+
+    // <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="14" height="14" viewBox="0 0 32 32">	<path fill="#707070" d="M8.564 26.904c-2.849-2.9-6.667-6.693-8.221-8.287-0.365-0.33-0.363-1.056-0.226-1.406 0.113-0.291 3.49-3.631 3.794-3.786 0.284-0.145 0.791-0.238 1.285 0.061 0.144 0.087 3.649 3.613 5.523 5.477 0.801 0.492 1.231 0.163 1.567-0.083 7.012-7.021 14.171-14.201 14.432-14.404 0.258-0.201 0.723-0.417 1.423-0.147 0.423 0.367 2.385 2.308 3.595 3.54 0.309 0.279 0.317 1.122-0.025 1.547-0.997 1.050-14.849 14.905-17.553 17.575-1.49 1.134-4.159 1.040-5.594-0.088z"/></svg>
+    // <svg viewBox="0 0 32 32" id="checkmark"><title>checkmark</title><path d="M8.564 26.904c-2.849-2.9-6.667-6.693-8.221-8.287-0.365-0.33-0.363-1.056-0.226-1.406 0.113-0.291 3.49-3.631 3.794-3.786 0.284-0.145 0.791-0.238 1.285 0.061 0.144 0.087 3.649 3.613 5.523 5.477 0.801 0.492 1.231 0.163 1.567-0.083 7.012-7.021 14.171-14.201 14.432-14.404 0.258-0.201 0.723-0.417 1.423-0.147 0.423 0.367 2.385 2.308 3.595 3.54 0.309 0.279 0.317 1.122-0.025 1.547-0.997 1.050-14.849 14.905-17.553 17.575-1.49 1.134-4.159 1.040-5.594-0.088z"/></svg>
 
   fieldset
     border: 0
