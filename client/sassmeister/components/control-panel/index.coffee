@@ -14,6 +14,9 @@ angular.module 'SassMeister.controlPanel', ['SassMeister.compiler']
       scope.compilers = (
         keys = Object.keys(data.compilers)
 
+        if keys.indexOf(scope.app.compiler) == -1
+          scope.app.compiler = keys[0]
+
         for key in keys
           compiler = data.compilers[key]
           compiler.engine = 'Sass' if compiler.engine.match /Ruby/
