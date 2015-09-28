@@ -41,7 +41,7 @@ task 'warm:cache' do
   
   # Pre-populate to ensure we have _something_
   compilers = SassMeister::Redis.new 'compilers'
-  compilers.set_defaults '{"3.2":{"sass":"3.2","engine":"Ruby"},"3.3":{"sass":"3.3","engine":"Ruby"},"3.4":{"sass":"3.4","engine":"Ruby"},"lib":{"sass":"3","engine":"LibSass"}}'
+  compilers.set_defaults '{"3.4":{"sass":"3.4","engine":"Ruby"},"lib":{"sass":"3","engine":"LibSass"}}'
 
   extensions = SassMeister::Redis.new 'extensions'
   extensions.set_defaults '{"Ark":{"homepage":"https://github.com/drewbolles/ark"},"Bitters":{"homepage":"https://github.com/jedfoster/bitters-compass"},
