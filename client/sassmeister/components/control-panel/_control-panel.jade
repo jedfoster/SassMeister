@@ -1,104 +1,96 @@
-div
-  a.control-icon
+fieldset(data-event-name='SassVersion')
+  label(ng-repeat="compiler in compilers")
+    input(type='radio' name='compiler' ng-model='app.compiler' ng-value='compiler.value')
+    | {{compiler.option}}
 
-  div.control-container
-    fieldset
-      h2 Sass
+fieldset.syntax-toggle-group(data-event-name='SassSyntax')
+  label
+    input#syntax-scss(type='radio' name='syntax' value='scss' ng-model='app.syntax' ng-change='convert(app)')
+    | SCSS
 
-      fieldset(data-event-name='SassVersion')
-        h3.version Compiler
-
-        select(ng-model='app.compiler' ng-options='compiler.value as compiler.option for compiler in compilers')
-
-      h3.syntax Syntax
-
-      fieldset.syntax-toggle-group(data-event-name='SassSyntax')
-        input#syntax-scss(type='radio' name='syntax' value='scss' ng-model='app.syntax' ng-change='convert(app)')
-        label(for='syntax-scss' data-toggle-input='sass') SCSS
-
-        input#syntax-sass(type='radio' name='syntax' value='sass' ng-model='app.syntax' ng-change='convert(app)')
-        label(for='syntax-sass' data-toggle-input='sass') Sass
-
-        span
-
-      div#extension_list
-        h3.selected Extensions
-          i  (Inserted at cursor)
-
-        ol
-          //- Per http://www.alexkras.com/11-tips-to-improve-angularjs-performance/
-          //- `::` is one-time binding
-          li(ng-repeat='(name, extension) in extensions')
-            a(href='#' data-import='{{::extension.import}}' ng-click='insertImport(extension.import, app)') {{::name}}
-            | &nbsp;&nbsp;(v{{::extension.version}})
-
-    fieldset
-      h2 CSS
-
-      fieldset.output-toggle-group(data-event-name='CSSOutput')
-        input#expanded-output(type='radio' name='output-style' value='expanded' ng-model='app.outputStyle' ng-change='compile(app)')
-        label(for='expanded-output' data-toggle-input='css') expanded
-
-        input#nested-output(type='radio' name='output-style' value='nested' ng-model='app.outputStyle' ng-change='compile(app)')
-        label(for='nested-output' data-toggle-input='css') nested
-
-        input#compact-output(type='radio' name='output-style' value='compact' ng-model='app.outputStyle' ng-change='compile(app)')
-        label(for='compact-output' data-toggle-input='css') compact
-
-        input#compressed-output(type='radio' name='output-style' value='compressed' ng-model='app.outputStyle' ng-change='compile(app)')
-        label(for='compressed-output' data-toggle-input='css') compressed
-
-        span
-
-      fieldset
-        p
-          input#enable-autoprefixer(type='checkbox' name='autoprefixer' value='true' ng-model='preferences.autoprefixer')
-          label(for='enable-autoprefixer') Autoprefixer
-          a(href='https://github.com/postcss/autoprefixer' target='_blank') (?)
-
-          span(ng-if='autoprefixer')
-            label(for='autoprefixer-browsers') Browsers:
-            input#autoprefixer-browsers(name='autoprefixerBrowsers' placeholder='Example: > 1%, last 2 versions' ng-model='preferences.autoprefixerBrowsers' ng-model-options='{ debounce: 500 }' ng-change='compile(app)')
-            a(href='https://github.com/ai/browserslist#queries' target='_blank') (?) 
+  label
+    input#syntax-sass(type='radio' name='syntax' value='sass' ng-model='app.syntax' ng-change='convert(app)')
+    | Sass
 
 
-    fieldset
-      h2 HTML
+div#extension_list
+  p selected Extensions
 
-      fieldset.html-toggle-group(data-event-name='HTMLSyntax')
-        input#html-html(type='radio' name='html-syntax' value='html' ng-model='app.htmlSyntax' ng-change='renderHtml(app)')
-        label(for='html-html' data-toggle-input='html') HTML
+  ol
+    //- Per http://www.alexkras.com/11-tips-to-improve-angularjs-performance/
+    //- `::` is one-time binding
+    li(ng-repeat='(name, extension) in extensions')
+      a(href='#' data-import='{{::extension.import}}' ng-click='insertImport(extension.import, app)') {{::name}}
+      | &nbsp;&nbsp;(v{{::extension.version}})
 
-        input#html-haml(type='radio' name='html-syntax' value='haml' ng-model='app.htmlSyntax' ng-change='renderHtml(app)')
-        label(for='html-haml' data-toggle-input='html') Haml
 
-        input#html-mkdn(type='radio' name='html-syntax' value='markdown' ng-model='app.htmlSyntax' ng-change='renderHtml(app)')
-        label(for='html-mkdn' data-toggle-input='html') Markdown
+fieldset.output-toggle-group(data-event-name='CSSOutput')
+  label
+    input#expanded-output(type='radio' name='output-style' value='expanded' ng-model='app.outputStyle' ng-change='compile(app)')
+    | expanded
 
-        input#html-jade(type='radio' name='html-syntax' value='jade' ng-model='app.htmlSyntax' ng-change='renderHtml(app)')
-        label(for='html-jade' data-toggle-input='html') Jade
+  label
+    input#nested-output(type='radio' name='output-style' value='nested' ng-model='app.outputStyle' ng-change='compile(app)')
+    | nested
 
-        span
+  label
+    input#compact-output(type='radio' name='output-style' value='compact' ng-model='app.outputStyle' ng-change='compile(app)')
+    | compact
 
-    fieldset
-      h2 Editor
+  label
+    input#compressed-output(type='radio' name='output-style' value='compressed' ng-model='app.outputStyle' ng-change='compile(app)')
+    | compressed
 
-      fieldset
-        h3.theme Theme
-        p
-          select(ng-model='preferences.theme' ng-options='theme as name for (theme, name) in themes')
 
-        p
-          input#enable-emmet(type='checkbox' name='emmet' value='true' ng-model='preferences.emmet')
-          label(for='enable-emmet') Enable Emmet support
+fieldset
+  p
+    label
+      input#enable-autoprefixer(type='checkbox' name='autoprefixer' value='true' ng-model='preferences.autoprefixer')
+      | Autoprefixer
+    //- a(href='https://github.com/postcss/autoprefixer' target='_blank') (?)
 
-        p
-          input#enable-vim(type='checkbox' name='vim' value='true' ng-model='preferences.vim')
-          label(for='enable-vim') Use Vim keybindings
+  span.ap-browsers(ng-if='autoprefixer')
+    label
+      | Browsers:
+      input#autoprefixer-browsers(name='autoprefixerBrowsers' placeholder='Example: > 1%, last 2 versions' ng-model='preferences.autoprefixerBrowsers' ng-model-options='{ debounce: 500 }' ng-change='compile(app)')
+    //- a(href='https://github.com/ai/browserslist#queries' target='_blank') (?) 
 
-        p
-          input#enable-scrollPastEnd(type='checkbox' name='scrollPastEnd' value='true' ng-model='preferences.scrollPastEnd')
-          label(for='enable-scrollPastEnd') Scroll Past End
 
-div#control-column-bg
+fieldset.html-toggle-group(data-event-name='HTMLSyntax')
+  label
+    input#html-html(type='radio' name='html-syntax' value='html' ng-model='app.htmlSyntax' ng-change='renderHtml(app)')
+    | HTML
+
+  label
+    input#html-haml(type='radio' name='html-syntax' value='haml' ng-model='app.htmlSyntax' ng-change='renderHtml(app)')
+    | Haml
+
+  label
+    input#html-mkdn(type='radio' name='html-syntax' value='markdown' ng-model='app.htmlSyntax' ng-change='renderHtml(app)')
+    | Markdown
+
+  label
+    input#html-jade(type='radio' name='html-syntax' value='jade' ng-model='app.htmlSyntax' ng-change='renderHtml(app)')
+    | Jade
+
+
+
+fieldset
+  p
+    select(ng-model='preferences.theme' ng-options='theme as name for (theme, name) in themes')
+
+  p
+    label
+      input#enable-emmet(type='checkbox' name='emmet' value='true' ng-model='preferences.emmet')
+      | Enable Emmet support
+
+  p
+    label
+      input#enable-vim(type='checkbox' name='vim' value='true' ng-model='preferences.vim')
+      | Use Vim keybindings
+
+  p
+    label
+      input#enable-scrollPastEnd(type='checkbox' name='scrollPastEnd' value='true' ng-model='preferences.scrollPastEnd')
+      | Scroll Past End
 

@@ -92,7 +92,7 @@ $monospace-font-family: #{'SourceCodePro', monospace}
 
 
 
-$site-header-height: 3.33333em
+$site-header-height: 2em
 
 
 $mobile:              "screen and (max-width: 30em)"; // Target 480px
@@ -111,13 +111,13 @@ $desktop:             "screen and (min-width: 48em)";
   cursor: pointer
   text-decoration: underline
 
-fieldset
-  border: 1px solid #ddd
-  padding: 0.57em
-  margin-bottom: 1em
+// fieldset
+//   border: 1px solid #ddd
+//   padding: 0.57em
+//   margin-bottom: 1em
 
-  fieldset
-    border: 1px solid #eee
+//   fieldset
+//     border: 1px solid #eee
 
 .editor-wrapper, iframe
   position: relative
@@ -132,7 +132,7 @@ ui-ace
   bottom: 0
 
 control-panel
-  font-size: 0.6em
+  font-size: 0.75em
 
 a, [ng-click]
   color: inherit
@@ -152,5 +152,6 @@ a, [ng-click]
 
 @import 'components/site-header/index'
 @import 'components/cloud-menu/index'
+@import 'components/control-panel/index'
 // @import 'site-header'
 
