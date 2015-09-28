@@ -38,6 +38,7 @@ angular.module 'SassMeister.gist', [
 .controller 'GistController', ($scope, $sassMeisterGist, $githubGist, $state, $stateParams, Sandbox, data) ->
   $scope.app =
     dependencies: {}
+  $scope.app.outputStyle = 'expanded'
 
   $scope.gist =
     created_at: data.created_at
