@@ -10,9 +10,7 @@ module SassMeister
 
     env_endpoints = {
       'lib' => ENV['LIBSASS_ENDPOINT'],
-      '3.4' => ENV['SASS_34_ENDPOINT'],
-      '3.3' => ENV['SASS_33_ENDPOINT'],
-      '3.2' => ENV['SASS_32_ENDPOINT']
+      '3.4' => ENV['SASS_34_ENDPOINT']
     }
 
     COMPILER_ENDPOINTS = settings.api[:endpoints].merge(env_endpoints) {|k, yml, env| env.nil? ? yml : env}
@@ -46,7 +44,7 @@ module SassMeister
 
 
     post '/app/:compiler/convert' do
-      @api = SassMeister::Client.new(COMPILER_ENDPOINTS['3.3']) if params[:compiler] == 'lib'
+      @api = SassMeister::Client.new(COMPILER_ENDPOINTS['3.4']) if params[:compiler] == 'lib'
 
       @api.convert params
 
