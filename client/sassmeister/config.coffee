@@ -36,7 +36,7 @@ module.exports =
   themes: ->
     themes = {}
     for theme in @_themes
-      themes[theme] = theme.replace('_', ' ').split(' ').map( (i) ->
+      themes[theme] = theme.replace(/_/g, ' ').split(' ').map( (i) ->
         i[0].toUpperCase() + i.substring(1)
       ).join ' '
     themes
