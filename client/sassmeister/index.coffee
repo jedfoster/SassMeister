@@ -171,4 +171,3 @@ angular.module 'SassMeister', [
     else
       $scope.compile $scope.app
 
-

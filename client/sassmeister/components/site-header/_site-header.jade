@@ -1,147 +1,47 @@
 a.logo(ui-sref='{{logoHref()}}' title='The sassiest way to play with Sass, Compass, &amp; LibSass!')
   svg
-    title SassMeister: The sassiest way to play with Sass, Compass, &amp; LibSass!
+    title SassMeister: The sassiest way to play with Sass, Compass, & LibSass!
     use(xlink:href='/img/icons.svg#sassmeister')
 
-nav
-  cloud-menu
+nav.menu-bar
+  cloud-menu.menu-bar-item
 
-  div
+  div.view-menu.menu-bar-item
     span View
-    ul
-      li
-        a
-          span.alt CSS
-      li
-        a
-          span.alt HTML
+    ul.menu-list
+      li.menu-list-item.checkable
+        label
+          input(type='checkbox' name='css' value='true')
+          | CSS
 
+      li.menu-list-item.checkable
+        label
+          input(type='checkbox' name='html' value='true')
+          | HTML
 
-  div#share_actions(ng-if='gist')
+  div.menu-bar-item(ng-if='gist')
     span Share
-    ul
-      li
+    ul.menu-list
+      li.menu-list-item
         label Embed code:
           textarea(onclick='this.focus();this.select();' readonly ng-readonly='true' ng-bind='embedCode()')
 
-  div#open-controls
+  div.menu-bar-item
     span Options
+    control-panel.menu-list
 
-    
-    ul
-      control-panel
+  a.menu-bar-item(href='/authorize' ng-click='login()' title='Login with Github' ng-if='loggedOut()')
+    span Login with Github
 
-    // ul
-    //   li
-
-    //     p Compiler: 
-    //       select(ng-model='app.compiler' ng-options='compiler.value as compiler.option for compiler in compilers')
-
-    //     p Syntax
-    //       select
-    //         option(value='scss') SCSS
-    //         option(value='sass') Sass
-
-    //     div#extension_list
-    //       h5.selected Extensions
-    //         i  (Inserted at cursor)
-
-    //       ol
-    //         //- Per http://www.alexkras.com/11-tips-to-improve-angularjs-performance/
-    //         //- `::` is one-time binding
-    //         li(ng-repeat='(name, extension) in extensions')
-    //           a(href='#' data-import='{{::extension.import}}' ng-click='insertImport(extension.import, app)') {{::name}}
-    //           | &nbsp;&nbsp;(v{{::extension.version}})
-
-    //   li
-    //     p CSS
-
-    //       select
-    //         option expanded
-    //         option nested
-    //         option compact
-    //         option compressed
-
-    //     p
-    //       input#enable-autoprefixer(type='checkbox' name='autoprefixer' value='true' ng-model='preferences.autoprefixer')
-    //       label(for='enable-autoprefixer') Autoprefixer
-    //       a(href='https://github.com/postcss/autoprefixer' target='_blank') (?)
-    //     p
-    //       span(ng-if='autoprefixer')
-    //         label(for='autoprefixer-browsers') Browsers:
-    //         input#autoprefixer-browsers(name='autoprefixerBrowsers' placeholder='Example: > 1%, last 2 versions' ng-model='preferences.autoprefixerBrowsers' ng-model-options='{ debounce: 500 }' ng-change='compile(app)')
-    //         a(href='https://github.com/ai/browserslist#queries' target='_blank') (?) 
-
-
-    //   li
-    //     p HTML
-    //       select
-    //         option HTML
-    //         option Haml
-    //         option Markdown
-    //         option Jade
-
-    //   li
-    //     p Theme
-    //       select(ng-model='preferences.theme' ng-options='theme as name for (theme, name) in themes')
-
-    //     p
-    //       input#enable-emmet(type='checkbox' name='emmet' value='true' ng-model='preferences.emmet')
-    //       label(for='enable-emmet') Enable Emmet support
-
-    //     p
-    //       input#enable-vim(type='checkbox' name='vim' value='true' ng-model='preferences.vim')
-    //       label(for='enable-vim') Use Vim keybindings
-
-    //     p
-    //       input#enable-scrollPastEnd(type='checkbox' name='scrollPastEnd' value='true' ng-model='preferences.scrollPastEnd')
-    //       label(for='enable-scrollPastEnd') Scroll Past End
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  a.github(href='/authorize' ng-click='login()' title='Login with Github' ng-if='loggedOut()')
-    span.alt Login with Github
-
-  div(ng-if='loggedIn()')
+  div.menu-bar-item(ng-if='loggedIn()')
     span
       img(ng-src='{{avatarUrl}}')
 
-    ul#account_actions
-      li
-        // svg.checkmark-icon
-        //   use(xlink:href='/img/icons.svg#checkmark')
+    ul.menu-list
+      li.menu-list-item
         | Hello, {{githubId}}!
 
-      li
+      li.menu-list-item
         a(href='/logout' ng-click='logout()')
-          // svg.power-icon
-          //   use(xlink:href='/img/icons.svg#power')
           span Logout
 

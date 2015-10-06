@@ -95,13 +95,13 @@ $monospace-font-family: #{'SourceCodePro', monospace}
 $site-header-height: 2em
 
 
-$mobile:              "screen and (max-width: 30em)"; // Target 480px
+$mobile:              "screen and (max-width: 36em)"; // Target 560px
+$min-mobile:          "screen and (min-width: 36em)"; // Target 560px
 $tablet:              "screen and (max-width: 48em)"; // Target 768px
 $desktop:             "screen and (min-width: 48em)";
 
 
 
-@import scratch
 
 
 
@@ -132,7 +132,7 @@ ui-ace
   bottom: 0
 
 control-panel
-  font-size: 0.75em
+  // font-size: 0.75em
 
 a, [ng-click]
   color: inherit
@@ -150,8 +150,18 @@ a, [ng-click]
 
 
 
-@import 'components/site-header/index'
-@import 'components/cloud-menu/index'
-@import 'components/control-panel/index'
-// @import 'site-header'
+$flyout-icon: url('data:image/svg+xml;utf8,<svg viewBox="0 0 31 34" xmlns="http://www.w3.org/2000/svg"><path fill="#fff" d="M0 0v33.7l30.5-17L0 0"/></svg>')
+
+
+$checkmark-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 41 34"><path fill="#fff" d="M35 0L13.2 21.8l-7.4-7.3L0 20.3l13.2 13L40.8 6 35 0"/></svg>')
+
+$control-panel-width: 15em
+
+$menu-background: transparentize(scale-color($alpha_color, $lightness: -80%), 0.2)
+
+@import scratch
+
+// @import 'components/site-header/index'
+// @import 'components/cloud-menu/index'
+// @import 'components/control-panel/index'
 

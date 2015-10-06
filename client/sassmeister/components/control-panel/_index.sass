@@ -2,16 +2,15 @@ $checkmark-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000
 
 $control-panel-width: 15em
 
-
 #open-controls
-  ul
+  > ul
     display: block !important
     width: $control-panel-width
     padding: 0
 
 control-panel
   display: block
-  
+
   line-height: 1.5
   text-align: left
 
@@ -49,6 +48,10 @@ control-panel
 
   label
     display: block
+    padding: 0 0.5em
+
+    &:hover
+      background: scale-color($alpha_color, $lightness: 20%)
 
   .ap-browsers
     label
@@ -69,33 +72,35 @@ control-panel
 
 
   fieldset, #extension_list
-    padding: 1em 0.5em
+    // padding: 1em 0.5em
     // margin-bottom: 0.5em
     border: 0
     border-bottom: 1px solid scale-color($alpha_color, $lightness: -80%)
+    padding: 0 0 1em
+    margin: 1em 0
 
     fieldset
       padding: 0
       border: 0
 
-  #extension_list
-    // background: #0ff
+#extension_list
+  // background: #0ff
 
-    p
-      padding-left: 1.25em
+  p
+    padding-left: 1.25em
 
+  ol
+    display: none
+
+    height: 9em
+    overflow: auto
+    background: transparentize(scale-color($alpha_color, $lightness: -80%), 0.2)
+    // color: $gray-1
+    position: absolute
+    right: ($control-panel-width + 1em) * -1
+    margin-top: -2.75em
+
+  &:hover
     ol
-      display: none
-
-      height: 9em
-      overflow: auto
-      background: transparentize(scale-color($alpha_color, $lightness: -80%), 0.2)
-      // color: $gray-1
-      position: absolute
-      right: ($control-panel-width + 1em) * -1
-      margin-top: -1.5em
-
-    &:hover
-      ol
-        display: block
+      display: block
 
