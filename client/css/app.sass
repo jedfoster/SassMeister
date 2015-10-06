@@ -47,7 +47,6 @@ $alpha-primary: rgb(215, 88, 147);
 // $color-border	$iron
 
 
-
 $alpha_color_charlie: scale-color($alpha-primary, $lightness: 20%)
 $alpha_color_delta:   scale-color($alpha-primary, $lightness: 30%)
 
@@ -60,36 +59,15 @@ $alpha_color_hotel:   scale-color($alpha-primary, $lightness: 70%)
 $delta_gray: scale-color($gray-1, $lightness: 30%)
 
 
-
 // Color aliases
 $alpha_color: $alpha-primary
 $alpha_gray: $gray-1
 
 
-
-
-
 $selection-color: $alpha_color_hotel
 
 
-
-
-
-
-
-
-
-@import index
-
-
-
 $monospace-font-family: #{'SourceCodePro', monospace}
-
-
-
-
-
-
 
 
 $site-header-height: 2em
@@ -101,7 +79,18 @@ $tablet:              "screen and (max-width: 48em)"; // Target 768px
 $desktop:             "screen and (min-width: 48em)";
 
 
+$flyout-icon: url('data:image/svg+xml;utf8,<svg viewBox="0 0 31 34" xmlns="http://www.w3.org/2000/svg"><path fill="#fff" d="M0 0v33.7l30.5-17L0 0"/></svg>')
 
+
+$checkmark-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 41 34"><path fill="#fff" d="M35 0L13.2 21.8l-7.4-7.3L0 20.3l13.2 13L40.8 6 35 0"/></svg>')
+
+$control-panel-width: 15em
+
+$menu-background: transparentize(scale-color($alpha_color, $lightness: -80%), 0.2)
+
+
+
+@import index
 
 
 
@@ -110,14 +99,6 @@ $desktop:             "screen and (min-width: 48em)";
   color: #00e
   cursor: pointer
   text-decoration: underline
-
-// fieldset
-//   border: 1px solid #ddd
-//   padding: 0.57em
-//   margin-bottom: 1em
-
-//   fieldset
-//     border: 1px solid #eee
 
 .editor-wrapper, iframe
   position: relative
@@ -150,18 +131,5 @@ a, [ng-click]
 
 
 
-$flyout-icon: url('data:image/svg+xml;utf8,<svg viewBox="0 0 31 34" xmlns="http://www.w3.org/2000/svg"><path fill="#fff" d="M0 0v33.7l30.5-17L0 0"/></svg>')
-
-
-$checkmark-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 41 34"><path fill="#fff" d="M35 0L13.2 21.8l-7.4-7.3L0 20.3l13.2 13L40.8 6 35 0"/></svg>')
-
-$control-panel-width: 15em
-
-$menu-background: transparentize(scale-color($alpha_color, $lightness: -80%), 0.2)
-
 @import scratch
-
-// @import 'components/site-header/index'
-// @import 'components/cloud-menu/index'
-// @import 'components/control-panel/index'
 

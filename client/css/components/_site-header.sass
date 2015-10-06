@@ -1,0 +1,35 @@
+site-header
+  position: relative
+  height: $site-header-height
+  background: $alpha_color
+  color: $white
+  font-weight: 200
+  display: flex
+  align-items: center
+
+  .logo
+    margin: 0 1em
+
+    svg
+      vertical-align: middle
+      display: block
+      fill: $white
+      width: ($site-header-height * 2.71875) * 0.75
+      height: $site-header-height * 0.75
+
+    &:hover
+      background: transparent
+      @media #{$desktop}
+        &:after
+          @include tooltip
+          right: initial
+          left: 0
+          width: em(260)
+          padding: 0.25em
+          @media #{$mobile}
+            display: none
+
+    @media #{$mobile}
+      left: 0.33333em
+
+
