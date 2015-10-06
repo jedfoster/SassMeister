@@ -7,7 +7,7 @@ ul.menu-list-section(data-event-name='SassVersion')
 ul.menu-list-section(data-event-name='SassSyntax')
   li.menu-list-item.checkable
     label
-      input#syntax-scss(type='radio' name='syntax' value='scss' ng-model='app.syntax' ng-change='convert(app)')
+      input(type='radio' name='syntax' value='scss' ng-model='app.syntax' ng-change='convert(app)')
       | SCSS
 
   li.menu-list-item.checkable
@@ -33,32 +33,32 @@ ul.menu-list-section(data-event-name='SassSyntax')
     ul.menu-sub-list
       li.menu-list-item.checkable
         label
-          input#expanded-output(type='radio' name='output-style' value='expanded' ng-model='app.outputStyle' ng-change='compile(app)')
+          input(type='radio' name='output-style' value='expanded' ng-model='app.outputStyle' ng-change='compile(app)')
           | expanded
       li.menu-list-item.checkable
         label
-          input#nested-output(type='radio' name='output-style' value='nested' ng-model='app.outputStyle' ng-change='compile(app)')
+          input(type='radio' name='output-style' value='nested' ng-model='app.outputStyle' ng-change='compile(app)')
           | nested
       li.menu-list-item.checkable
         label
-          input#compact-output(type='radio' name='output-style' value='compact' ng-model='app.outputStyle' ng-change='compile(app)')
+          input(type='radio' name='output-style' value='compact' ng-model='app.outputStyle' ng-change='compile(app)')
           | compact
       li.menu-list-item.checkable
         label
-          input#compressed-output(type='radio' name='output-style' value='compressed' ng-model='app.outputStyle' ng-change='compile(app)')
+          input(type='radio' name='output-style' value='compressed' ng-model='app.outputStyle' ng-change='compile(app)')
           | compressed
 
 
 .menu-list-section
   label.menu-list-item.checkable
-    input#enable-autoprefixer(type='checkbox' name='autoprefixer' value='true' ng-model='preferences.autoprefixer')
+    input(type='checkbox' name='autoprefixer' value='true' ng-model='preferences.autoprefixer')
     | Autoprefixer
   //- a(href='https://github.com/postcss/autoprefixer' target='_blank') (?)
 
   span.menu-list-item(ng-if='autoprefixer')
     label
       | Browsers
-  //-     input#autoprefixer-browsers(name='autoprefixerBrowsers' placeholder='Example: > 1%, last 2 versions' ng-model='preferences.autoprefixerBrowsers' ng-model-options='{ debounce: 500 }' ng-change='compile(app)')
+  //-     input(name='autoprefixerBrowsers' placeholder='Example: > 1%, last 2 versions' ng-model='preferences.autoprefixerBrowsers' ng-model-options='{ debounce: 500 }' ng-change='compile(app)')
     //- a(href='https://github.com/ai/browserslist#queries' target='_blank') (?) 
 
 
@@ -68,22 +68,22 @@ ul.menu-list-section(data-event-name='SassSyntax')
     ul.menu-sub-list
       li.menu-list-item.checkable
         label
-          input#html-html(type='radio' name='html-syntax' value='html' ng-model='app.htmlSyntax' ng-change='renderHtml(app)')
+          input(type='radio' name='html-syntax' value='html' ng-model='app.htmlSyntax' ng-change='renderHtml(app)')
           | HTML
 
       li.menu-list-item.checkable
         label
-          input#html-haml(type='radio' name='html-syntax' value='haml' ng-model='app.htmlSyntax' ng-change='renderHtml(app)')
+          input(type='radio' name='html-syntax' value='haml' ng-model='app.htmlSyntax' ng-change='renderHtml(app)')
           | Haml
 
       li.menu-list-item.checkable
         label
-          input#html-mkdn(type='radio' name='html-syntax' value='markdown' ng-model='app.htmlSyntax' ng-change='renderHtml(app)')
+          input(type='radio' name='html-syntax' value='markdown' ng-model='app.htmlSyntax' ng-change='renderHtml(app)')
           | Markdown
 
       li.menu-list-item.checkable
         label
-          input#html-jade(type='radio' name='html-syntax' value='jade' ng-model='app.htmlSyntax' ng-change='renderHtml(app)')
+          input(type='radio' name='html-syntax' value='jade' ng-model='app.htmlSyntax' ng-change='renderHtml(app)')
           | Jade
 
 .menu-list-section
@@ -96,14 +96,14 @@ ul.menu-list-section(data-event-name='SassSyntax')
         | {{name}}
 
   label.menu-list-item.checkable
-    input#enable-emmet(type='checkbox' name='emmet' value='true' ng-model='preferences.emmet')
+    input(type='checkbox' name='emmet' value='true' ng-model='preferences.emmet')
     | Emmet
 
   label.menu-list-item.checkable
-    input#enable-vim(type='checkbox' name='vim' value='true' ng-model='preferences.vim')
+    input(type='checkbox' name='vim' value='true' ng-model='preferences.vim')
     | Vim Key Bindings
 
   label.menu-list-item.checkable
-    input#enable-scrollPastEnd(type='checkbox' name='scrollPastEnd' value='true' ng-model='preferences.scrollPastEnd')
+    input(type='checkbox' name='scrollPastEnd' value='true' ng-model='preferences.scrollPastEnd')
     | Scroll Past End
 

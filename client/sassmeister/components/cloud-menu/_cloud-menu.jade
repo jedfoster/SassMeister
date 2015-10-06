@@ -13,14 +13,14 @@ ul.menu-list
       span Fork Gist
 
   li.menu-list-item(ng-if='showLoginToSaveGists()')
-    a.github(href='/authorize' ng-click='login()')
+    a(href='/authorize' ng-click='login()')
       span Log in with your GitHub account to save gists
 
   li.menu-list-item(ng-if='showViewOnGitHub()')
-    a#gist-link.github(ng-href='https://gist.github.com/{{gist.id}}')
+    a(ng-href='https://gist.github.com/{{gist.id}}')
       span View on GitHub
 
   li.menu-list-item
-    a#reset.reset-icon(ng-click='reset()')
+    a(ng-click='reset()')
       span Reset
 
