@@ -63,6 +63,7 @@ $delta_gray: scale-color($gray-1, $lightness: 30%)
 $alpha_color: $alpha-primary
 $alpha_gray: $gray-1
 
+$golf-gray: scale-color($alpha_gray, $lightness: 60%)
 
 $selection-color: $alpha_color_hotel
 
@@ -99,10 +100,12 @@ $menu-background: transparentize(scale-color($alpha_color, $lightness: -80%), 0.
   cursor: pointer
   text-decoration: underline
 
-.editor-wrapper, iframe
-  position: relative
-  height: 9em
-  width: 95%
+// .editor-wrapper, iframe
+//   position: relative
+//   height: 9em
+
+iframe
+  border: 0
 
 ui-ace
   position: absolute !important

@@ -1,1 +1,89 @@
+main
+  width: 100%
+  height: calc(100vh - #{$site-header-height})
+
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+
+  > *
+    flex: 1
+    &.resizable
+      flex: 0 0 50%
+    
+.editors
+  display: flex
+  flex-direction: row
+  flex-wrap: nowrap
+  overflow: hidden
+
+  > *
+    position: relative
+    flex: 1
+    min-width: 2em
+    &.resizable
+      flex: 0 0 33%
+
+main
+  &.vertical
+    flex-direction: row
+      
+    .editors
+      flex-direction: column
+
+      > *
+        min-height: 2em
+
+
+.resizable
+  position: relative
+
+.rg-right, .rg-bottom, .rg-top, .rg-left
+  position: absolute
+  z-index: 10
+  display: block
+  user-select: none
+
+.rg-right, .rg-left
+  cursor: ew-resize
+  height: 100%
+  right: 0
+  top: 0
+  width: 0.66667em
+  border-right: 1px solid $golf-gray
+
+.rg-bottom, .rg-top
+  cursor: ns-resize
+  width: 100%
+  bottom: 0
+  left: 0
+  margin-top: 0.66667em
+  height: 0.66667em
+  background-color: #f8f8f8
+  border-top: 1px solid $golf-gray
+  padding-bottom: 0.66667em
+
+.rg-top
+  top: 0
+  bottom: initial
+  margin-top: 0
+
+.rg-left
+  left: 0
+  right: initial
+  background-color: #f8f8f8
+  border-left: 1px solid $golf-gray
+  border-right: 0
+
+#sandbox-container
+  // background: #987
+
+#resizable-mask
+  position: absolute
+  z-index: 2
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+  // background-color: #958
 

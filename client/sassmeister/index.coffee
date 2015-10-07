@@ -7,6 +7,7 @@ require 'angular-ui-router'
 require 'angular-cookies'
 require 'ngStorage'
 require 'angular-load'
+require 'angular-resizable'
 
 require './states/index'
 require './states/gist'
@@ -25,6 +26,7 @@ angular.module 'SassMeister', [
   'ui.router'
   'ngStorage'
   'angularLoad'
+  'angularResizable'
   'SassMeister.gist'
   'SassMeister.index'
   'SassMeister.compiler'
@@ -170,4 +172,20 @@ angular.module 'SassMeister', [
 
     else
       $scope.compile $scope.app
+
+  # $scope.app.orientation = 'vertical'
+
+  $scope.$on 'angular-resizable.resizeStart', (e, info) ->
+    console.log 'STARTED ', info, e
+
+    if info.id == 'sandbox-container'
+      mask = document.getElementById 'resizable-mask'
+      mask.hidden = false
+
+  $scope.$on 'angular-resizable.resizeEnd', (e, info) ->
+    console.log 'ENDED ', info, e
+
+    if info.id == 'sandbox-container'
+      mask = document.getElementById 'resizable-mask'
+      mask.hidden = true
 

@@ -19,6 +19,19 @@ nav.menu-bar
           input(type='checkbox' name='html' value='true')
           | HTML
 
+      li.menu-list-section
+        span Orientation
+        ul
+          li.menu-list-item.checkable
+            label
+              input(type='radio' name='orientation' value='horizontal' ng-model='preferences.orientation')
+              | Horizontal
+
+          li.menu-list-item.checkable
+            label
+              input(type='radio' name='orientation' value='vertical' ng-model='preferences.orientation')
+              | Vertical
+
   div.menu-bar-item(ng-if='gist')
     span Share
     ul.menu-list

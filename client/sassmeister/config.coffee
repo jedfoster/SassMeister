@@ -19,6 +19,7 @@ module.exports =
         scrollPastEnd: false
         autoprefixer: false
         autoprefixerBrowsers: '> 1%, last 2 versions'
+        orientation: 'horizontal'
     }
 
   _themes: [

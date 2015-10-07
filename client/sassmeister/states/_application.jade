@@ -1,26 +1,29 @@
 site-header
 
-section
-  h3 HTML
+main(class='{{preferences.orientation}}')
+  .editors
+    resizable(r-directions='[(preferences.orientation === \'vertical\' ? \'bottom\' : \'right\')]' r-flex="true")
+      h3 {{app.displayCompiler}} {{orientation}}
 
-  .editor-wrapper(ng-controller='AceHtmlController')
-    //- Production debounces with 750
-    ui-ace(ng-model='app.html' ng-model-options='{ debounce: 500 }' ng-change='renderHtml(app)' ui-ace='{onLoad: aceLoaded}')
+      .editor-wrapper(ng-controller='AceSassController')
+        ui-ace(ng-model='app.sass' ng-model-options='{ debounce: 750 }' ng-change='compile(app)' ui-ace='{onLoad: aceLoaded}')
+
+    resizable(r-directions='[(preferences.orientation === \'vertical\' ? \'bottom\' : \'right\')]' r-flex="true")
+      h3 Output
+        span.autoprefixer(ng-if='preferences.autoprefixer')
+
+      .editor-wrapper(ng-controller='AceCssController')
+        ui-ace(ng-model='app.css' ui-ace='{onLoad: aceLoaded, mode: \'css\'}' readonly)
+
+    div
+      h3 HTML
+
+      .editor-wrapper(ng-controller='AceHtmlController')
+        ui-ace(ng-model='app.html' ng-model-options='{ debounce: 750 }' ng-change='renderHtml(app)' ui-ace='{onLoad: aceLoaded}')
 
 
-  h3 {{app.displayCompiler}}
+  resizable#sandbox-container(r-directions='[(preferences.orientation === \'vertical\' ? \'left\' : \'top\')]' r-flex="true")
+    iframe#sandbox(sandbox='allow-scripts allow-same-origin' ng-src='{{sandbox}}')
 
-  .editor-wrapper(ng-controller='AceSassController')
-    //- Production debounces with 750
-    ui-ace(ng-model='app.sass' ng-model-options='{ debounce: 500 }' ng-change='compile(app)' ui-ace='{onLoad: aceLoaded}')
-
-  h3 Output
-    span.autoprefixer(ng-if='preferences.autoprefixer')
-
-
-  .editor-wrapper(ng-controller='AceCssController')
-    ui-ace(ng-model='app.css' ui-ace='{onLoad: aceLoaded, mode: \'css\'}' readonly)
-
-  iframe#rendered-html(sandbox='allow-scripts allow-same-origin' ng-src='{{sandbox}}')
-
+    #resizable-mask(hidden)
 

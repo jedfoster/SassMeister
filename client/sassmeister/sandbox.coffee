@@ -28,7 +28,7 @@ angular.module 'SassMeister.sandbox', [
           css: css
           html: html
 
-      document.getElementById('rendered-html')
+      document.getElementById('sandbox')
         .contentWindow
         .postMessage(JSON.stringify(newContent), '*')
 

@@ -1,10 +1,14 @@
 ul.menu-list-section(data-event-name='SassVersion')
+  span Compiler
+
   li.menu-list-item.checkable(ng-repeat="compiler in compilers")
     label
       input(type='radio' name='compiler' ng-model='app.compiler' ng-value='compiler.value')
       | {{compiler.option}}
 
 ul.menu-list-section(data-event-name='SassSyntax')
+  span Syntax
+
   li.menu-list-item.checkable
     label
       input(type='radio' name='syntax' value='scss' ng-model='app.syntax' ng-change='convert(app)')
@@ -57,7 +61,7 @@ ul.menu-list-section(data-event-name='SassSyntax')
 
   span.menu-list-item(ng-if='autoprefixer')
     label
-      | Browsers
+      | Browsers...
   //-     input(name='autoprefixerBrowsers' placeholder='Example: > 1%, last 2 versions' ng-model='preferences.autoprefixerBrowsers' ng-model-options='{ debounce: 500 }' ng-change='compile(app)')
     //- a(href='https://github.com/ai/browserslist#queries' target='_blank') (?) 
 
