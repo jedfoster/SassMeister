@@ -21,6 +21,7 @@ main
     position: relative
     flex: 1
     min-width: 2em
+
     &.resizable
       flex: 0 0 33%
 
@@ -30,11 +31,11 @@ main
       
     .editors
       flex-direction: column
+      height: calc(100vh - #{$site-header-height})
 
       > *
         min-height: 2em
-
-
+        
 .resizable
   position: relative
 

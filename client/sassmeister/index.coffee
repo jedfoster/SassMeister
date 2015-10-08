@@ -7,7 +7,7 @@ require 'angular-ui-router'
 require 'angular-cookies'
 require 'ngStorage'
 require 'angular-load'
-require 'angular-resizable'
+require '../angular-resizable'
 
 require './states/index'
 require './states/gist'
@@ -83,6 +83,7 @@ angular.module 'SassMeister', [
 
   $scope.app = config.storageDefaults().app
   $scope.preferences = data.preferences
+  $rootScope.orientation = $scope.preferences.orientation
   $scope.themes = config.themes()
   $scope.editors = {}
   $scope.sandbox =  config.sandbox
@@ -173,7 +174,17 @@ angular.module 'SassMeister', [
     else
       $scope.compile $scope.app
 
-  # $scope.app.orientation = 'vertical'
+  # $scope.$watch 'preferences.orientation', () ->
+  #   content = angular.element('resizable')
+  #   scope = content.scope()
+  #   $compile(content.contents())(scope)
+
+  # orientation = $scope.preferences.orientation
+  $scope.editorOrientation = () ->
+    if $scope.preferences.orientation == 'vertical' then 'bottom' else 'right'
+
+  $scope.sandboxOrientation = () ->
+    if $scope.preferences.orientation == 'vertical' then 'left' else 'top'
 
   $scope.$on 'angular-resizable.resizeStart', (e, info) ->
     console.log 'STARTED ', info, e
