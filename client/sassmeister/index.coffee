@@ -100,7 +100,7 @@ angular.module 'SassMeister', [
 
     browsers = browsers.split(',').map (x) ->
       x.trim()
-        
+
     if browsers.length > 0
       return browsers
 
