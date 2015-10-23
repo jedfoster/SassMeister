@@ -186,17 +186,17 @@ angular.module 'SassMeister', [
   $scope.sandboxOrientation = () ->
     if $scope.preferences.orientation == 'vertical' then 'left' else 'top'
 
-  $scope.$on 'angular-resizable.resizeStart', (e, info) ->
-    console.log 'STARTED ', info, e
+  onResizableResize = (e, info) ->
 
-    if info.id == 'sandbox-container'
+    if e.name == 'angular-resizable.resizeEnd'
+     $scope.preferences[info.id] =
+       width: info.width
+       height: info.height
+
+    if info.id == 'sandboxResizable'
       mask = document.getElementById 'resizable-mask'
-      mask.hidden = false
+      mask.hidden = ! mask.hidden
 
-  $scope.$on 'angular-resizable.resizeEnd', (e, info) ->
-    console.log 'ENDED ', info, e
-
-    if info.id == 'sandbox-container'
-      mask = document.getElementById 'resizable-mask'
-      mask.hidden = true
+  $scope.$on 'angular-resizable.resizeStart', onResizableResize
+  $scope.$on 'angular-resizable.resizeEnd', onResizableResize
 
