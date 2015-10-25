@@ -11,12 +11,12 @@ nav.menu-bar
     ul.menu-list
       li.menu-list-item.checkable
         label
-          input(type='checkbox' name='css' value='true')
+          input(type='checkbox' name='css' value='true' ng-model='preferences.cssVisible' ng-change='resetSizes()')
           | CSS
 
       li.menu-list-item.checkable
         label
-          input(type='checkbox' name='html' value='true')
+          input(type='checkbox' name='html' value='true' ng-model='preferences.htmlVisible' ng-change='resetSizes()')
           | HTML
 
       li.menu-list-section
@@ -24,12 +24,12 @@ nav.menu-bar
         ul
           li.menu-list-item.checkable
             label
-              input(type='radio' name='orientation' value='horizontal' ng-model='preferences.orientation')
+              input(type='radio' name='orientation' value='horizontal' ng-model='preferences.orientation' ng-change='resetSizes()')
               | Horizontal
 
           li.menu-list-item.checkable
             label
-              input(type='radio' name='orientation' value='vertical' ng-model='preferences.orientation')
+              input(type='radio' name='orientation' value='vertical' ng-model='preferences.orientation' ng-change='resetSizes()')
               | Vertical
 
   div.menu-bar-item(ng-if='gist')

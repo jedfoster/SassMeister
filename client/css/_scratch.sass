@@ -17,13 +17,25 @@ main
   flex-wrap: nowrap
   overflow: hidden
 
+  #cssResizable
+    flex: 1
+
+
   > *
     position: relative
     flex: 1
     min-width: 2em
 
     &.resizable
+      flex: 0 0 50%
+
+  &.html
+    #cssResizable
       flex: 0 0 33%
+
+    > *
+      &.resizable
+        flex: 0 0 33%
 
 main
   &.vertical

@@ -1,28 +1,28 @@
 site-header
 
 main(class='{{preferences.orientation}}')
-  .editors
+  .editors(ng-class='{html: preferences.htmlVisible}')
     resizable#sassResizable(r-directions='{{editorOrientation()}}' r-flex='true' r-width='preferences.sassResizable.width' r-height='preferences.sassResizable.height')
       h3 {{app.displayCompiler}} {{orientation}}
 
       .editor-wrapper(ng-controller='AceSassController')
         ui-ace(ng-model='app.sass' ng-model-options='{ debounce: 750 }' ng-change='compile(app)' ui-ace='{onLoad: aceLoaded}')
 
-    resizable#cssResizable(r-directions='{{editorOrientation()}}' r-flex='true' r-width='preferences.cssResizable.width' r-height='preferences.cssResizable.height')
+    resizable#cssResizable(r-directions='{{preferences.htmlVisible ? editorOrientation() : null }}' r-flex='true' r-width='preferences.cssResizable.width' r-height='preferences.cssResizable.height' ng-show='preferences.cssVisible')
       h3 Output
         span.autoprefixer(ng-if='preferences.autoprefixer')
 
       .editor-wrapper(ng-controller='AceCssController')
         ui-ace(ng-model='app.css' ui-ace='{onLoad: aceLoaded, mode: \'css\'}' readonly)
 
-    div
+    div(ng-show='preferences.htmlVisible')
       h3 HTML
 
       .editor-wrapper(ng-controller='AceHtmlController')
         ui-ace(ng-model='app.html' ng-model-options='{ debounce: 750 }' ng-change='renderHtml(app)' ui-ace='{onLoad: aceLoaded}')
 
 
-  resizable#sandboxResizable(r-directions='{{sandboxOrientation()}}' r-flex='true' r-width='preferences.sandboxResizable.width' r-height='preferences.sandboxResizable.height')
+  resizable#sandboxResizable(r-directions='{{sandboxOrientation()}}' r-flex='true' r-width='preferences.sandboxResizable.width' r-height='preferences.sandboxResizable.height' ng-show='preferences.htmlVisible')
     iframe#sandbox(sandbox='allow-scripts allow-same-origin' ng-src='{{sandbox}}')
 
     #resizable-mask(hidden)

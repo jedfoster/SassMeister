@@ -20,10 +20,11 @@ module.exports =
         autoprefixer: false
         autoprefixerBrowsers: '> 1%, last 2 versions'
         orientation: 'horizontal'
-        sassResizable: {width: 100, height: 100}
+        sassResizable: null
         cssResizable: null
         sandboxResizable: null
-          
+        cssVisible: true
+        htmlVisible: false
     }
 
   _themes: [

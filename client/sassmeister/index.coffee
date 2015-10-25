@@ -174,10 +174,10 @@ angular.module 'SassMeister', [
     else
       $scope.compile $scope.app
 
-  # $scope.$watch 'preferences.orientation', () ->
-  #   content = angular.element('resizable')
-  #   scope = content.scope()
-  #   $compile(content.contents())(scope)
+  $scope.resetSizes = ->
+    $scope.preferences.sassResizable = {width: null, height: null}
+    $scope.preferences.cssResizable = {width: null, height: null}
+    $scope.preferences.sandboxResizable = {width: null, height: null}
 
   # orientation = $scope.preferences.orientation
   $scope.editorOrientation = () ->
@@ -187,7 +187,6 @@ angular.module 'SassMeister', [
     if $scope.preferences.orientation == 'vertical' then 'left' else 'top'
 
   onResizableResize = (e, info) ->
-
     if e.name == 'angular-resizable.resizeEnd'
      $scope.preferences[info.id] =
        width: info.width
