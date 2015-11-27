@@ -59,9 +59,7 @@ ul.menu-list-section(data-event-name='SassSyntax')
     | Autoprefixer
   //- a(href='https://github.com/postcss/autoprefixer' target='_blank') (?)
 
-  span.menu-list-item(ng-if='autoprefixer')
-    label
-      | Browsers...
+  a.menu-list-item(ng-if='autoprefixer' ng-click='makeToast()') Browsers...
   //-     input(name='autoprefixerBrowsers' placeholder='Example: > 1%, last 2 versions' ng-model='preferences.autoprefixerBrowsers' ng-model-options='{ debounce: 500 }' ng-change='compile(app)')
     //- a(href='https://github.com/ai/browserslist#queries' target='_blank') (?) 
 

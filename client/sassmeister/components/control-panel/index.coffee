@@ -1,12 +1,24 @@
 'use strict'
 
 require 'angular'
+require 'ng-toast'
+require 'angular-sanitize'
 
 template = require './_control-panel.jade'
 
-angular.module 'SassMeister.controlPanel', ['SassMeister.compiler']
+angular.module 'SassMeister.controlPanel', [
+  'SassMeister.compiler'
+  'ngToast'
+]
 
-.directive 'controlPanel', ['Compiler', (Compiler) ->
+.config ['ngToastProvider', (ngToastProvider) ->
+  ngToastProvider.configure
+    animation: 'fade'
+    horizontalPosition: 'center'
+    maxNumber: 1
+]
+
+.directive 'controlPanel', ['Compiler', '$sce', 'ngToast', (Compiler, $sce, ngToast) ->
   restrict: 'E'
   template: template
   link: (scope, element, attrs) ->
@@ -36,4 +48,19 @@ angular.module 'SassMeister.controlPanel', ['SassMeister.compiler']
 
     scope.$watch 'app.compiler', ->
       do getExtensions
+
+    scope.foo = 'bar'
+
+    scope.makeToast = ->
+      ngToast.create
+        className: 'info modal'
+        compileContent: scope
+        dismissButton: true
+        dismissOnClick : false
+        dismissButtonHtml : '<button type="button">Done</button>'
+        dismissOnTimeout: false
+        content: $sce.trustAsHtml('<input type="text" ng-model="preferences.autoprefixerBrowsers" />')
+
+      console.log('Making toast...', scope.preferences)
 ]
+

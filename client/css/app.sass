@@ -1,10 +1,13 @@
 $include-normalize: true
+$include-elements: true
 
 
 $gray-1: #333
 
 
-$alpha-primary: rgb(215, 88, 147);
+$alpha-primary: rgb(215, 88, 147)
+$bravo-primary:   #92e24a        // green
+$delta-primary:   #4abbe2        // blue
 
 // Old SM brand pink: #E24A8D ( rgb(226, 74, 141) )
 // Sass brand pink: #c69 ( rgb(204, 102, 153) )
@@ -56,11 +59,21 @@ $alpha_color_fox:     scale-color($alpha-primary, $lightness: 50%)
 
 $alpha_color_hotel:   scale-color($alpha-primary, $lightness: 70%)
 
+$bravo_color_bravo:   scale-color($bravo-primary, $lightness: 10%)
+$bravo_color_india:   scale-color($bravo-primary, $lightness: 80%)
+
+$delta_color_bravo:   scale-color($delta-primary, $lightness: 10%)
+$delta_color_india:   scale-color($delta-primary, $lightness: 80%)
+
+
+
 $delta_gray: scale-color($gray-1, $lightness: 30%)
 
 
 // Color aliases
 $alpha_color: $alpha-primary
+$bravo_color: $bravo-primary
+$delta_color: $delta-primary
 $alpha_gray: $gray-1
 
 $golf-gray: scale-color($alpha_gray, $lightness: 60%)

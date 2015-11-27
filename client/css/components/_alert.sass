@@ -1,0 +1,101 @@
+.alert
+  padding: 15px
+  margin-bottom: 20px
+  border: 1px solid transparent
+  border-radius: 4px
+  border-top-right-radius: 0
+  border-top-left-radius: 0
+
+  h4
+    margin-top: 0
+    color: inherit
+
+  .alert-link
+    font-weight: bold
+
+  > p,
+  > ul
+    margin-bottom: 0
+
+  > p + p
+    margin-top: 5px
+
+.alert-dismissable,
+.alert-dismissible
+  padding-right: 35px
+
+.alert-dismissable .close,
+.alert-dismissible .close
+  position: relative
+  top: -2px
+  right: -21px
+  color: inherit
+
+
+
+
+.alert-success
+  color: darken($bravo_color, 20%)
+  background-color: $bravo_color_india
+  border-color: $bravo_color_bravo
+
+  .alert-link
+    color: darken($bravo_color, 20%)
+    text-decoration: underline
+
+.alert-info
+  // color: $delta_color
+  background-color: $delta_color_india
+  border-color: $delta_color_bravo
+  border: 0
+
+  .alert-link
+    // color: #245269
+
+.alert-warning
+  color: #c09853
+  background-color: #fcf8e3
+  border-color: #fbeed5
+
+  .alert-link
+    // color: #66512c
+
+.alert-danger
+  color: #b94a48
+  background-color: #f2dede
+  border-color: #eed3d7
+
+  .alert-link
+    // color: #843534
+
+.modal
+  &:before
+    display: block
+    content: ''
+    position: fixed
+    top: 0
+    bottom: 0
+    left: 0
+    width: 100%
+    background: rgba(100,100,100, 0.5)
+    padding-top: 2em
+    z-index: -1
+
+.close
+  float: right
+  font-size: 21px
+  font-weight: bold
+  line-height: 1
+  color: #000000
+  text-shadow: 0 1px 0 #ffffff
+  opacity: 0.8
+  filter: alpha(opacity = 20)
+
+.close:hover,
+.close:focus
+  color: #000000
+  text-decoration: none
+  cursor: pointer
+  opacity: 0.5
+  filter: alpha(opacity = 50)
+  
