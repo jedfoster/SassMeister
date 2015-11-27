@@ -35,7 +35,7 @@ angular.module 'SassMeister.gist', [
             $githubGist($stateParams.id).read().then null, fail
 
 
-.controller 'GistController', ($scope, $sassMeisterGist, $githubGist, $state, $stateParams, Sandbox, data) ->
+.controller 'GistController', ($scope, $sassMeisterGist, $githubGist, $state, $stateParams, Sandbox, data, ngToast, $sce) ->
   $scope.app =
     dependencies: {}
   $scope.app.outputStyle = 'expanded'
@@ -123,6 +123,18 @@ angular.module 'SassMeister.gist', [
           id: gist.id
           gist: gist
 
+    $scope.successToast()
+
   $scope.embedCode = ->
     "<p class=\"sassmeister\" data-gist-id=\"#{$scope.gist.id}\" data-height=\"480\" data-theme=\"#{$scope.preferences.theme}\"><a href=\"http://#{document.domain}/gist/#{$scope.gist.id}\">Play with this gist on SassMeister.</a></p><script src=\"http://cdn.#{document.domain}/js/embed.js\" async></script>"
+
+  $scope.successToast = ->
+    ngToast.create
+      className: 'success'
+      # compileContent: scope
+      # dismissButton: true
+      dismissOnClick : true
+      # dismissButtonHtml : '<button type="button">Done</button>'
+      dismissOnTimeout: true
+      content: $sce.trustAsHtml('Saved')
 
