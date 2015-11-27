@@ -16,9 +16,6 @@ html.no-js(ng-app='SassMeister')
     //- script(src='/js/modernizr.js')
 
   body(class='{{$state.current.controller}}')
-    //- block header
-    //-   include ./_header.jade
-
     block content
       ui-view
 
