@@ -30,8 +30,12 @@ module SassMeister
     end
 
     def get
-      value = RedisConnection.connect.get @key
-      @value = value ? (JSON.parse(value, symbolize_names: true) rescue value) : {}
+      begin
+        value = RedisConnection.connect.get @key
+        @value = value ? (JSON.parse(value, symbolize_names: true) rescue value) : {}
+      rescue
+        @value = false
+      end     
     end
 
     def set(value = @value)
@@ -43,6 +47,8 @@ module SassMeister
     end
 
     def set_defaults(defaults)
+      return unless @value
+
       if defaults.is_a? String
         defaults = JSON.parse(defaults, symbolize_names: true) rescue defaults
       end

@@ -41,7 +41,7 @@ task 'warm:cache' do
   
   # Pre-populate to ensure we have _something_
   compilers = SassMeister::Redis.new 'compilers'
-  compilers.set_defaults '{"3.4":{"sass":"3.4","engine":"Ruby"},"lib":{"sass":"3","engine":"LibSass"}}'
+  compilers.set_defaults '{"3.4":{"sass":"3.4","engine":"Ruby"},"lib":{"sass":"3","engine":"LibSass"}}' if compilers
 
   extensions = SassMeister::Redis.new 'extensions'
   extensions.set_defaults '{"Ark":{"homepage":"https://github.com/drewbolles/ark"},"Bitters":{"homepage":"https://github.com/jedfoster/bitters-compass"},
@@ -76,14 +76,14 @@ task 'warm:cache' do
 "SassyMatrix":{"homepage":"https://github.com/HugoGiraudel/SassyMatrix/"},"SassySort":{"homepage":"https://github.com/HugoGiraudel/SassySort/"},
 "SassyStrings":{"homepage":"https://github.com/HugoGiraudel/SassyStrings"},"Singularity Quick Spanner":{"homepage":"https://github.com/lolmaus/singularity-quick-spanner"},
 "Sunglass":{"homepage":"https://github.com/devatrox/Sunglass"},"Typecsset":{"homepage":"https://github.com/csswizardry/typecsset"},
-"Typesettings":{"homepage":"https://github.com/ianrose/typesettings"},"UtilityBelt":{"homepage":"https://github.com/dmtintner/UtilityBelt"}}'
+"Typesettings":{"homepage":"https://github.com/ianrose/typesettings"},"UtilityBelt":{"homepage":"https://github.com/dmtintner/UtilityBelt"}}' if extensions
 
   unless app.helpers.build_compiler_menu
-    utilities.say_status('error', 'Could not build compiler menu', :red)
+    utilities.say_status('warning', 'Could not build compiler menu', :yellow)
   end
 
   unless app.helpers.build_extension_info_list
-    utilities.say_status('error', 'Could not build extension info list', :red)
+    utilities.say_status('warning', 'Could not build extension info list', :yellow)
   end
 end
 
