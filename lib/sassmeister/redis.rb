@@ -5,7 +5,7 @@ module SassMeister
   class RedisConnection
     def self.connect
       @connection ||= begin
-        uri = ::URI.parse(ENV["REDISCLOUD_URL"] || 'redis://localhost:6379')
+        uri = ::URI.parse(ENV["REDISCLOUD_URL"] || ENV['REDIS_URL'] || 'redis://localhost:6379')
         ::Redis.new(host: uri.host, port: uri.port, password: uri.password)
       end
     end
@@ -20,6 +20,8 @@ module SassMeister
     end
 
     def merge!(incoming)
+      return unless @value
+
       if incoming.is_a? String
         incoming = JSON.parse(incoming, symbolize_names: true) rescue incoming
       end
@@ -35,7 +37,7 @@ module SassMeister
         @value = value ? (JSON.parse(value, symbolize_names: true) rescue value) : {}
       rescue
         @value = false
-      end     
+      end
     end
 
     def set(value = @value)
