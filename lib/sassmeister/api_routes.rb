@@ -10,7 +10,8 @@ module SassMeister
 
     env_endpoints = {
       'lib' => ENV['LIBSASS_ENDPOINT'],
-      '3.4' => ENV['SASS_34_ENDPOINT']
+      '3.4' => ENV['SASS_34_ENDPOINT'],
+      '4.0' => ENV['SASS_40_ENDPOINT']
     }
 
     COMPILER_ENDPOINTS = settings.api[:endpoints].merge(env_endpoints) {|k, yml, env| env.nil? ? yml : env}

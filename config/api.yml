@@ -8,6 +8,7 @@ api:
     endpoints:
       lib: 'http://lib.sassmeister.dev'
       '3.4': 'http://sass34.sassmeister.dev'
+      '4.0': 'http://sass4-0alpha.sassmeister.dev'
 
   test:
     <<: *default_settings
@@ -16,4 +17,5 @@ api:
     endpoints:
       lib: 'http://libsass.api.sassmeister.com'
       '3.4': 'http://sassmeister-34.herokuapp.com'
+      '4.0': 'http://sassmeister-34.herokuapp.com'
 
