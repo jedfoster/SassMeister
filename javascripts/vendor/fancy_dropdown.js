@@ -64,7 +64,7 @@
       this.$el.children( 'option' ).each( function() {
 
         var $this = $( this ),
-          val = isNaN( $this.attr( 'value' ) ) ? $this.attr( 'value' ) : Number( $this.attr( 'value' ) ) ,
+          val = $this.attr( 'value' ),
           classes = $this.attr( 'class' ),
           selected = ($this.prop('selected') || $this.attr( 'selected' )),
           label = $this.text();
