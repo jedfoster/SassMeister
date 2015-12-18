@@ -24,6 +24,11 @@ if ENV['RACK_ENV'] == 'production'
       password: ENV['MEMCACHIER_PASSWORD']
     }
     use Rack::Cache, verbose: true, metastore: cache, entitystore: cache
+
+  elsif memcached_server = ENV['MEMCACHED_URL']
+    cache = Dalli::Client.new memcached_server
+
+    use Rack::Cache, verbose: true, metastore: cache, entitystore: cache
   end
 
   run Rack::URLMap.new({
