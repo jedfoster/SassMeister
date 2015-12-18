@@ -22,10 +22,9 @@ module SassMeister
         frontmatter = "// ----\n// libsass (v#{dependencies.delete('libsass')})\n// ----"
 
       else
-        frontmatter = "// ----\n// Sass (sass-version)\n// Compass (compass-version)\n// ----"
+        frontmatter = "// ----\n// Sass (sass-version)\n// ----"
 
         frontmatter.gsub!(/sass-version/, "v#{dependencies.delete('Sass')}")
-        frontmatter.gsub!(/compass-version/, "v#{dependencies.delete('Compass')}")
       end
 
       dependencies.each {|name, version| frontmatter.gsub!(/\/\/ ----\Z/, "// #{name} (v#{version})\n// ----") }
