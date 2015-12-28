@@ -8,6 +8,7 @@ require 'angular-cookies'
 require 'ngStorage'
 require 'angular-load'
 require '../angular-resizable'
+require 'angular-sanitize'
 
 require './states/index'
 require './states/gist'
@@ -38,6 +39,13 @@ angular.module 'SassMeister', [
   'SassMeister.404'
   'ngCookies'
   'SassMeister.sandbox'
+  'ngToast'
+]
+
+.config ['ngToastProvider', (ngToastProvider) ->
+  ngToastProvider.configure
+    animation: 'fade'
+    maxNumber: 1
 ]
 
 .config ($stateProvider, $urlRouterProvider, $locationProvider, $sceDelegateProvider) ->
@@ -78,7 +86,7 @@ angular.module 'SassMeister', [
     .state 'application.logout',
       url: 'logout'
 
-.controller 'ApplicationController', ($scope, $rootScope, $state, $localStorage, $sce, $cookies, $window, data, Compiler, angularLoad, Sandbox) ->
+.controller 'ApplicationController', ($scope, $rootScope, $state, $localStorage, $sce, $cookies, $window, data, Compiler, angularLoad, Sandbox, ngToast) ->
   $rootScope.$state = $state
 
   $scope.app = config.storageDefaults().app
@@ -198,4 +206,13 @@ angular.module 'SassMeister', [
 
   $scope.$on 'angular-resizable.resizeStart', onResizableResize
   $scope.$on 'angular-resizable.resizeEnd', onResizableResize
+
+  $scope.notify = (gistId, messageText) ->
+    ngToast.create
+      className: 'success'
+      dismissButton: true
+      dismissOnClick : true
+      dismissButtonHtml : '&times;'
+      dismissOnTimeout: true
+      content: $sce.trustAsHtml('<a href="https://gist.github.com/' + gistId + '" target="_blank">Your Gist</a> ' + messageText + '.')
 

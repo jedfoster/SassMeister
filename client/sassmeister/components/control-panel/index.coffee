@@ -11,13 +11,6 @@ angular.module 'SassMeister.controlPanel', [
   'ngToast'
 ]
 
-.config ['ngToastProvider', (ngToastProvider) ->
-  ngToastProvider.configure
-    animation: 'fade'
-    horizontalPosition: 'center'
-    maxNumber: 1
-]
-
 .directive 'controlPanel', ['Compiler', '$sce', 'ngToast', (Compiler, $sce, ngToast) ->
   restrict: 'E'
   template: template
@@ -51,16 +44,14 @@ angular.module 'SassMeister.controlPanel', [
 
     scope.foo = 'bar'
 
-    scope.makeToast = ->
+    scope.autoprefixerBrowsers = ->
       ngToast.create
-        className: 'info modal'
+        className: 'info modal autoprefixer-browsers'
         compileContent: scope
         dismissButton: true
         dismissOnClick : false
         dismissButtonHtml : '<button type="button">Done</button>'
         dismissOnTimeout: false
-        content: $sce.trustAsHtml('<input type="text" ng-model="preferences.autoprefixerBrowsers" />')
-
-      console.log('Making toast...', scope.preferences)
+        content: $sce.trustAsHtml('<input name="autoprefixerBrowsers" placeholder="Example: > 1%, last 2 versions" ng-model="preferences.autoprefixerBrowsers" ng-model-options="{ debounce: 500 }" ng-change="compile(app)"> <a href="https://github.com/ai/browserslist#queries" target="_blank">(?)</a>')
 ]
 

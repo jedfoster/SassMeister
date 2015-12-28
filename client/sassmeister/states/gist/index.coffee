@@ -100,11 +100,13 @@ angular.module 'SassMeister.gist', [
 
   $scope.updateGist = ->
     $sassMeisterGist.update $stateParams.id, $scope, (gist) ->
-      # no-op
+      $scope.notify gist.id, 'has been updated'
 
   $scope.forkGist = ->
     if $scope.canEditGist()
       $sassMeisterGist.create $scope, (gist) ->
+        $scope.notify gist.id, 'has been forked'
+
         $state.go '^.gist',
           id: gist.id
           gist: gist
@@ -119,22 +121,13 @@ angular.module 'SassMeister.gist', [
         gist.files[$scope.htmlFileName].content = $scope.app.html
         gist.files[$scope.renderedHTMLFileName].content = $scope.app.renderedHTML
 
+        $scope.notify gist.id, 'has been forked'
+
         $state.go '^.gist',
           id: gist.id
           gist: gist
 
-    $scope.successToast()
 
   $scope.embedCode = ->
     "<p class=\"sassmeister\" data-gist-id=\"#{$scope.gist.id}\" data-height=\"480\" data-theme=\"#{$scope.preferences.theme}\"><a href=\"http://#{document.domain}/gist/#{$scope.gist.id}\">Play with this gist on SassMeister.</a></p><script src=\"http://cdn.#{document.domain}/js/embed.js\" async></script>"
-
-  $scope.successToast = ->
-    ngToast.create
-      className: 'success'
-      # compileContent: scope
-      # dismissButton: true
-      dismissOnClick : true
-      # dismissButtonHtml : '<button type="button">Done</button>'
-      dismissOnTimeout: true
-      content: $sce.trustAsHtml('Saved')
 

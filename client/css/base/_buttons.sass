@@ -4,6 +4,7 @@
   $active: map-get($button-map, 'active')
 
   @include map-to-properties($normal)
+  @extend %button
 
   @if $hover
     &:hover
@@ -13,17 +14,18 @@
     &:active
       @include map-to-properties($active)
 
-      text-shadow: 1px 1px 0 transparentize($black, 0.4);
+      text-shadow: 1px 1px 0 transparentize($black, 0.4)
 
 %button
   display: inline-block
-  margin: 0 0.5em 1.1em 0;
-  padding: 0.55em 0.5em 0.25em;
-  font-size: 100%;
+  margin: 0 0.5em 1.1em 0
+  padding: 0.2em 0.5em
+  font-size: 100%
   line-height: 1
-  text-decoration: none;
-  text-shadow: 1px 1px 0 transparentize($white, 0.2);
+  text-decoration: none
+  text-shadow: 1px 1px 0 transparentize($white, 0.2)
   border: 1px solid
   cursor: pointer
   outline: 0
+  border-radius: 0.25em
 

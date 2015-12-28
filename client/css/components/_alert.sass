@@ -2,9 +2,12 @@
   padding: 15px
   margin-bottom: 20px
   border: 1px solid transparent
-  border-radius: 4px
+  border-radius: 0.25em
   border-top-right-radius: 0
   border-top-left-radius: 0
+  width: em(400)
+  position: absolute
+  right: 0
 
   h4
     margin-top: 0
@@ -12,6 +15,9 @@
 
   .alert-link
     font-weight: bold
+
+  a
+    text-decoration: underline
 
   > p,
   > ul
@@ -27,8 +33,6 @@
 .alert-dismissable .close,
 .alert-dismissible .close
   position: relative
-  top: -2px
-  right: -21px
   color: inherit
 
 
@@ -42,6 +46,13 @@
   .alert-link
     color: darken($bravo_color, 20%)
     text-decoration: underline
+
+  button.close
+    border: 0
+    background: transparent
+    top: 0
+    right: 0
+    position: absolute
 
 .alert-info
   // color: $delta_color
@@ -69,6 +80,10 @@
     // color: #843534
 
 .modal
+  position: relative
+  right: initial
+  margin: 0 auto
+
   &:before
     display: block
     content: ''
@@ -83,10 +98,6 @@
 
 .close
   float: right
-  font-size: 21px
-  font-weight: bold
-  line-height: 1
-  color: #000000
   text-shadow: 0 1px 0 #ffffff
   opacity: 0.8
   filter: alpha(opacity = 20)

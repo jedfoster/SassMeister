@@ -50,6 +50,8 @@ angular.module 'SassMeister.index', [
 
   $scope.createGist = ->
     $sassMeisterGist.create $scope, (gist) ->
+      $scope.notify gist.id, 'is ready'
+
       $state.go '^.gist',
         id: gist.id
         gist: gist

@@ -19,9 +19,6 @@ $ngt-transition-timing-function: ease
       top: 0
       bottom: auto
 
-    &.#{$ngt-module}--center
-      .#{$ngt-module}__list
-        position: static
 
   &.#{$ngt-module}--bottom
     top: auto
@@ -37,13 +34,6 @@ $ngt-transition-timing-function: ease
         .alert
           pointer-events: auto
 
-  &.#{$ngt-module}--right
-    .#{$ngt-module}__list
-      left: auto
-      right: 0
-      margin-right: $ngt-spacing
-    .#{$ngt-module}__message
-      text-align: right
 
   // &.#{$ngt-module}--left
   //   .#{$ngt-module}__list
@@ -67,8 +57,6 @@ $ngt-transition-timing-function: ease
     display: block
     width: 100%
     text-align: center
-    .alert
-      display: inline-block
 
 
   .#{$ngt-module}__message__count
