@@ -31,10 +31,12 @@ angular.module('angularResizable', [])
 
                 // register watchers on width and height attributes if they are set
                 scope.$watch('rWidth', function(value){
-                  element[0].style[scope.rFlex ? flexBasis : 'width'] = value ? value + 'px' : (scope.rWidth ? scope.rWidth  + 'px' : null);
+                  value = value && value.indexOf('%') === -1 ? percentX(value) : value;
+                  element[0].style[scope.rFlex ? flexBasis : 'width'] = value ? value : (scope.rWidth ? percentX(scope.rWidth) : null);
                 });
                 scope.$watch('rHeight', function(value){
-                  element[0].style[scope.rFlex ? flexBasis : 'height'] = value ? value + 'px' : (scope.rWidth ? scope.rWidth  + 'px' : null);
+                  value = value && value.indexOf('%') === -1 ? percentY(value) : value;
+                  element[0].style[scope.rFlex ? flexBasis : 'height'] = value ? value : (scope.rWidth ? percentY(scope.rWidth) : null);
                 });
 
                 element.addClass('resizable');
@@ -45,6 +47,8 @@ angular.module('angularResizable', [])
                     dir = scope.rDirections,
                     vx = scope.rCenteredX ? 2 : 1, // if centered double velocity
                     vy = scope.rCenteredY ? 2 : 1, // if centered double velocity
+                    viewportX,
+                    viewportY,
                     inner = scope.rGrabber ? scope.rGrabber : '<span></span>',
                     start,
                     dragDir,
@@ -52,33 +56,49 @@ angular.module('angularResizable', [])
                     info = {};
 
                 var updateInfo = function(e) {
+                    viewportX = document.documentElement.clientWidth;
+                    viewportY = document.documentElement.clientHeight;
                     info.width = false; info.height = false;
+                    var w = element[0].style[scope.rFlex ? flexBasis : 'width'], 
+                        x = element[0].style[scope.rFlex ? flexBasis : 'height'];
                     if(axis === 'x')
-                        info.width = parseInt(element[0].style[scope.rFlex ? flexBasis : 'width']);
+                        info.width = x.indexOf('%') === -1 ? percentX(x) : x;
                     else
-                        info.height = parseInt(element[0].style[scope.rFlex ? flexBasis : 'height']);
+                        info.height = y.indexOf('%') === -1 ? percentY(y) : y;
                     info.id = element[0].id;
                     info.evt = e;
                 };
 
+                var percentX = function(value) {
+                  return (value / (viewportX * .01)) + '%';
+                };
+
+                var percentY = function(value) {
+                  return (value / (viewportY * .01)) + '%';
+                };
+
                 var dragging = function(e) {
-                    var prop, offset = axis === 'x' ? start - e.clientX : start - e.clientY;
+                    var prop, value, offset = axis === 'x' ? start - e.clientX : start - e.clientY;
                     switch(dragDir) {
                         case 'top':
                             prop = scope.rFlex ? flexBasis : 'height';
-                            element[0].style[prop] = h + (offset * vy) + 'px';
+                            value = h + (offset * vy);
+                            element[0].style[prop] = percentY(value);
                             break;
                         case 'bottom':
                             prop = scope.rFlex ? flexBasis : 'height';
-                            element[0].style[prop] = h - (offset * vy) + 'px';
+                            value = h - (offset * vy);
+                            element[0].style[prop] = percentY(value);
                             break;
                         case 'right':
                             prop = scope.rFlex ? flexBasis : 'width';
-                            element[0].style[prop] = w - (offset * vx) + 'px';
+                            value = w - (offset * vx);
+                            element[0].style[prop] = percentX(value);
                             break;
                         case 'left':
                             prop = scope.rFlex ? flexBasis : 'width';
-                            element[0].style[prop] = w + (offset * vx) + 'px';
+                            value = w + (offset * vx);
+                            element[0].style[prop] = percentX(value);
                             break;
                     }
                     updateInfo(e);
