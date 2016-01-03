@@ -66,9 +66,7 @@ $delta_color_bravo:   scale-color($delta-primary, $lightness: 10%)
 $delta_color_india:   scale-color($delta-primary, $lightness: 80%)
 
 
-
 $delta_gray: scale-color($gray-1, $lightness: 30%)
-
 
 // Color aliases
 $alpha_color: $alpha-primary
@@ -80,21 +78,16 @@ $golf-gray: scale-color($alpha_gray, $lightness: 60%)
 
 $selection-color: $alpha_color_hotel
 
-
 $monospace-font-family: #{'SourceCodePro', monospace}
 
-
 $site-header-height: 2em
-
 
 $mobile:              "screen and (max-width: 36em)"; // Target 560px
 $min-mobile:          "screen and (min-width: 36em)"; // Target 560px
 $tablet:              "screen and (max-width: 48em)"; // Target 768px
 $desktop:             "screen and (min-width: 48em)";
 
-
 $flyout-icon: url('data:image/svg+xml;utf8,<svg viewBox="0 0 31 34" xmlns="http://www.w3.org/2000/svg"><path fill="#fff" d="M0 0v33.7l30.5-17L0 0"/></svg>')
-
 
 $checkmark-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 41 34"><path fill="#fff" d="M35 0L13.2 21.8l-7.4-7.3L0 20.3l13.2 13L40.8 6 35 0"/></svg>')
 
@@ -102,20 +95,12 @@ $control-panel-width: 15em
 
 $menu-background: transparentize(scale-color($alpha_color, $lightness: -80%), 0.2)
 
-
-
 @import index
-
-
 
 %link
   color: #00e
   cursor: pointer
   text-decoration: underline
-
-// .editor-wrapper, iframe
-//   position: relative
-//   height: 9em
 
 iframe
   border: 0
@@ -136,9 +121,10 @@ a, [ng-click]
   display: inline-block
   width: 1.5em
   height: 1em
-  float: right
+  align-self: center
 
-
+  site-header &
+    margin-right: 0.25em
 
 @import scratch
 
