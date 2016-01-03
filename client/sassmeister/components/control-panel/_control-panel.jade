@@ -56,7 +56,9 @@ ul.menu-list-section(data-event-name='SassSyntax')
 .menu-list-section
   label.menu-list-item.checkable
     input(type='checkbox' name='autoprefixer' value='true' ng-model='preferences.autoprefixer')
+    span.autoprefixer
     | Autoprefixer
+
 
   a.menu-list-item(ng-if='autoprefixer' ng-click='autoprefixerBrowsers()') Browsers...
 
