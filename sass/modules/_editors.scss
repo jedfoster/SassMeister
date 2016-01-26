@@ -56,7 +56,7 @@
   .touch & {
     .ace_scroller {
       -webkit-overflow-scrolling: touch !important;
-      overflow-y: scroll !important;
+      // overflow-y: scroll !important;
     }
   }
 }
