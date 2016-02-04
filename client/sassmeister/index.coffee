@@ -124,9 +124,9 @@ angular.module 'SassMeister', [
     }, (data) ->
       app.dependencies = data.dependencies
 
-      if $scope.autoprefixer and window.autoprefixer
+      if $scope.autoprefixer and $window.autoprefixer
         try
-          app.css = window.autoprefixer.process(data.css, browsers: $scope.autoprefixerBrowsers()).css
+          app.css = $window.autoprefixer.process(data.css, browsers: $scope.autoprefixerBrowsers()).css
         catch e
           app.css = data.css
           console.warn e
@@ -163,7 +163,7 @@ angular.module 'SassMeister', [
     Sandbox.render app
 
   $scope.$watch 'preferences.emmet', (value) ->
-    if value and not window.emmet
+    if value and not $window.emmet
       angularLoad.loadScript 'http://nightwing.github.io/emmet-core/emmet.js'
         .then ->
           $scope.emmet = value
@@ -174,7 +174,7 @@ angular.module 'SassMeister', [
   $scope.$watch 'preferences.autoprefixer', (value) ->
     $scope.autoprefixer = value
 
-    if value and not window.autoprefixer
+    if value and not $window.autoprefixer
       angularLoad.loadScript 'https://cdn.rawgit.com/ai/autoprefixer-rails/6.0.3/vendor/autoprefixer.js'
         .then ->
           $scope.compile $scope.app
@@ -187,7 +187,6 @@ angular.module 'SassMeister', [
     $scope.preferences.cssResizable = {width: null, height: null}
     $scope.preferences.sandboxResizable = {width: null, height: null}
 
-  # orientation = $scope.preferences.orientation
   $scope.editorOrientation = () ->
     if $scope.preferences.orientation == 'vertical' then 'bottom' else 'right'
 
@@ -215,4 +214,25 @@ angular.module 'SassMeister', [
       dismissButtonHtml : '&times;'
       dismissOnTimeout: true
       content: $sce.trustAsHtml('<a href="https://gist.github.com/' + gistId + '" target="_blank">Your Gist</a> ' + messageText + '.')
+
+  $scope.tabView = false
+
+  windowResize = ->
+    if document.documentElement.clientWidth <= 768
+      $scope.tabView = $scope.tabView || 'sass'
+      $rootScope.orientation = 'single-column'
+
+    else
+      $scope.tabView = false
+      $rootScope.orientation = $scope.preferences.orientation
+
+    $scope.$applyAsync()
+    $rootScope.$applyAsync()
+
+  do windowResize
+
+  $window.onresize = windowResize
+
+  $scope.setTab = (tab) ->
+    $scope.tabView = tab
 

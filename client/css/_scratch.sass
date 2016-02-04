@@ -10,7 +10,11 @@ main
     flex: 1
     &.resizable
       flex: 0 0 50%
-    
+
+iframe
+  width: 100%
+  height: 100%
+
 .editors
   display: flex
   flex-direction: row
@@ -19,7 +23,6 @@ main
 
   #cssResizable
     flex: 1
-
 
   > *
     position: relative
@@ -37,17 +40,27 @@ main
       &.resizable
         flex: 0 0 33%
 
+  @media #{$tablet}
+    flex-direction: column
+    align-items: stretch
+
+    > *
+      &, &.resizable
+        flex: 1 0 100% !important
+
 main
   &.vertical
     flex-direction: row
-      
     .editors
       flex-direction: column
       height: calc(100vh - #{$site-header-height})
 
       > *
         min-height: 2em
-        
+
+  @media #{$tablet}
+    flex-direction: column
+
 .resizable
   position: relative
 
@@ -56,6 +69,9 @@ main
   z-index: 10
   display: block
   user-select: none
+
+  @media #{$tablet}
+    display: none
 
 .rg-right, .rg-left
   cursor: ew-resize
@@ -100,16 +116,57 @@ main
   text-align: left
   padding-right: 15px
 
-.editor-header
+%editor-header
+  border-bottom: 1px solid $golf-gray
   background: $gray-2
   color: scale-color($gray-1, $lightness: 30%)
-  border-bottom: 1px solid $golf-gray
   font-size: 1em
-  font-weight: 200
-  padding: 0 0.5em
-  margin: 0
   display: flex
+  
+  h2
+    font-size: inherit
+    margin: 0
+
+.editor-header
+  @extend %editor-header
+
+  padding: 0 0.5em
   justify-content: space-between
+
+  @media #{$tablet}
+    display: none
+
+.mobile-tabs
+  @extend %editor-header
+
+  flex: 0 1 1.5em
+  justify-content: flex-start
+  max-height: 1.5em
+  display: none
+
+  @media #{$tablet}
+    display: flex
+
+  @media #{$mobile}
+    font-size: 0.875em
+
+  h2
+    padding: 0 0.75em
+
+    &.current
+      background: scale-color($gray-1, $lightness: 30%)
+      color: $white
 
 .editor-wrapper ui-ace
   margin-top: 2.3em
+
+  @media #{$tablet}
+    margin-top: 0
+
+#sandboxResizable
+  @media #{$tablet}
+    position: absolute
+    width: 100%
+
+    .rg-top
+      display: none

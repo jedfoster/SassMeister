@@ -50,6 +50,10 @@ aceLoaded = (editor, scope) ->
 
   scope.$watch 'preferences.scrollPastEnd', (value) ->
     editor.setOption 'scrollPastEnd', value
+    
+  scope.$watch 'tabView', ->
+    editor.resize true
+
 
 loadEmmet = (scope) ->
   scope.$watch 'emmet', (value) ->
@@ -66,6 +70,7 @@ angular.module 'SassMeister.ace', [
   $scope.aceLoaded = (editor) ->
     aceLoaded editor, $scope
     $scope.editor = $scope.editors.sass = editor
+
 
   loadEmmet $scope
 
