@@ -1,5 +1,5 @@
 source 'http://rubygems.org'
-ruby '2.0.0'
+ruby '2.2.3'
 
 gem 'rack-contrib', :git => 'git://github.com/rack/rack-contrib.git'
 gem 'sinatra'
