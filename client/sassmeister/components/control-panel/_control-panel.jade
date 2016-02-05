@@ -93,8 +93,9 @@ ul.menu-list-section(data-event-name='SassSyntax')
 
     ul.menu-sub-list
       li.menu-list-item.checkable(ng-repeat="(theme, name) in themes")
-        input(type='radio' name='theme' ng-model='preferences.theme' ng-value='theme')
-        | {{name}}
+        label
+          input(type='radio' name='theme' ng-model='preferences.theme' ng-value='theme')
+          | {{name}}
 
   label.menu-list-item.checkable
     input(type='checkbox' name='emmet' value='true' ng-model='preferences.emmet')
