@@ -10,6 +10,7 @@ module SassMeister
 
     env_endpoints = {
       'lib' => ENV['LIBSASS_ENDPOINT'],
+      '3.3' => ENV['SASS_33_ENDPOINT'],
       '3.4' => ENV['SASS_34_ENDPOINT'],
       '4.0' => ENV['SASS_40_ENDPOINT']
     }

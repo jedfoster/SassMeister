@@ -7,6 +7,7 @@ api:
   development: &default_settings
     endpoints:
       lib: 'http://lib.sassmeister.dev'
+      '3.3': 'http://sass33.sassmeister.dev'
       '3.4': 'http://sass34.sassmeister.dev'
       '4.0': 'http://sass4-0alpha.sassmeister.dev'
 
@@ -16,6 +17,7 @@ api:
   production:
     endpoints:
       lib: 'http://libsass.api.sassmeister.com'
+      '3.3': 'http://sassmeister-33.herokuapp.com'
       '3.4': 'http://sassmeister-34.herokuapp.com'
-      '4.0': 'http://sassmeister-34.herokuapp.com'
+      '4.0': 'http://sassmeister40alpha.herokuapp.com'
 
