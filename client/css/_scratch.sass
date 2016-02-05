@@ -122,7 +122,7 @@ main
   color: scale-color($gray-1, $lightness: 30%)
   font-size: 1em
   display: flex
-  
+
   h2
     font-size: inherit
     margin: 0
@@ -170,3 +170,37 @@ main
 
     .rg-top
       display: none
+
+
+@keyframes pulse
+  50%
+    transform: scale(1.2, 1.2)
+
+.loading-state
+  position: absolute
+  top: 0
+  bottom: 0
+  left: 0
+  width: 100%
+  display: flex
+  justify-content: center
+  align-items: center
+
+.loader
+  animation: pulse 0.8s 30
+  text-align: center
+  order: 0
+  flex: 0 1 auto
+  align-self: auto
+
+  svg
+    vertical-align: middle
+    display: block
+    fill: $alpha_color
+    width: (3em * 2.71875)
+    height: 3em
+
+    @media #{$min-mobile}
+      width: (7vw * 2.71875)
+      height: 7vw
+

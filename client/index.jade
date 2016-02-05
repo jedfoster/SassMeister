@@ -18,6 +18,13 @@ html.no-js(ng-app='SassMeister')
   body(class='{{$state.current.controller}}')
     block content
       ui-view
+        .loading-state
+          .loader
+            svg
+              title SassMeister: The sassiest way to play with Sass, Compass, & LibSass!
+              use(xlink:href='/img/icons.svg#sassmeister')
+
+            | Loading...
 
     block footer
       //- include ./_footer.jade
