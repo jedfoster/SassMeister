@@ -16,7 +16,7 @@ module.exports =
         theme: 'tomorrow'
         emmet: false
         vim: false
-        scrollPastEnd: false
+        scrollPastEnd: true
         autoprefixer: false
         autoprefixerBrowsers: '> 1%, last 2 versions'
         orientation: 'horizontal'
