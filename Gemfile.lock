@@ -14,14 +14,6 @@ GIT
       thor (= 0.18.1)
       zopfli (~> 0.0.3)
 
-GIT
-  remote: git://github.com/rack/rack-contrib.git
-  revision: ea0c82dc3a6353542b7fe0cbd262c43378e28b31
-  specs:
-    rack-contrib (0.0.0.1.ENOGVB)
-      git-version-bump (~> 0.15)
-      rack (~> 1.4)
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -114,6 +106,9 @@ GEM
     rack (1.6.4)
     rack-cache (1.6.0)
       rack (>= 0.4)
+    rack-contrib (1.4.0)
+      git-version-bump (~> 0.15)
+      rack (~> 1.4)
     rack-env (0.1.3)
     rack-protection (1.5.3)
       rack
@@ -177,7 +172,7 @@ DEPENDENCIES
   newrelic_rpm
   pry-remote
   rack-cache
-  rack-contrib!
+  rack-contrib
   rack-env
   rack-test
   rake

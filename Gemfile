@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 ruby '2.2.3'
 
-gem 'rack-contrib', :git => 'git://github.com/rack/rack-contrib.git'
+gem 'rack-contrib'
 gem 'sinatra'
 gem 'sinatra-partial'
 gem 'sinatra-contrib'
