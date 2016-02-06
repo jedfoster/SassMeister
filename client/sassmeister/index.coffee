@@ -18,6 +18,7 @@ require './states/404'
 require './components/control-panel'
 require './components/site-header'
 require './components/cloud-menu'
+require './components/carbon-ad'
 
 require './compiler'
 require './ace'
@@ -40,6 +41,7 @@ angular.module 'SassMeister', [
   'ngCookies'
   'SassMeister.sandbox'
   'ngToast'
+  'SassMeister.carbonAd'
 ]
 
 .config ['ngToastProvider', (ngToastProvider) ->

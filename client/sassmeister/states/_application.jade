@@ -33,9 +33,14 @@ main(ng-class='orientation')
 
     #resizable-mask(hidden)
 
-  header.gist(ng-if='gist')
-    h1 Gist created by 
+  footer
+    p(ng-if='gist') Gist created by 
       a(ng-href='gist.owner.html_url') {{gist.owner.login}}
+
+    p
+      a(href='/about' ui-sref='application.about') About SassMeister
+
+  carbon-ad
 
 toast
 
