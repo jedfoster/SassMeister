@@ -21,6 +21,9 @@ iframe
   flex-wrap: nowrap
   overflow: hidden
 
+  .GistController &
+    margin-bottom: 1.5em
+
   #cssResizable
     flex: 1
 
@@ -36,6 +39,9 @@ iframe
     #cssResizable
       flex: 0 0 33%
 
+    .GistController &
+      margin-bottom: 0
+
     > *
       &.resizable
         flex: 0 0 33%
@@ -43,6 +49,9 @@ iframe
   @media #{$tablet}
     flex-direction: column
     align-items: stretch
+
+    .GistController &
+      margin-bottom: 1.5em !important
 
     > *
       &, &.resizable
@@ -164,6 +173,9 @@ main
     margin-top: 0
 
 #sandboxResizable
+  .GistController &
+    margin-bottom: 1.5em
+
   @media #{$tablet}
     position: absolute
     width: 100%

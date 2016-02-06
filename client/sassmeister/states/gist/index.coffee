@@ -51,6 +51,7 @@ angular.module 'SassMeister.gist', [
       avatar_url: data.owner.avatar_url
       id: data.owner.id
       login: data.owner.login
+      html_url: data.owner.html_url
 
   $scope.canEditGist = ->
     $scope.gist.owner.login == $scope.githubId
