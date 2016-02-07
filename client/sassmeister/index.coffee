@@ -9,6 +9,7 @@ require 'ngStorage'
 require 'angular-load'
 require '../angular-resizable'
 require 'angular-sanitize'
+require 'angular-hotkeys'
 
 require './states/index'
 require './states/gist'
@@ -42,6 +43,7 @@ angular.module 'SassMeister', [
   'SassMeister.sandbox'
   'ngToast'
   'SassMeister.carbonAd'
+  'cfp.hotkeys'
 ]
 
 .config ['ngToastProvider', (ngToastProvider) ->
@@ -50,7 +52,7 @@ angular.module 'SassMeister', [
     maxNumber: 1
 ]
 
-.config ($stateProvider, $urlRouterProvider, $locationProvider, $sceDelegateProvider) ->
+.config ($stateProvider, $urlRouterProvider, $locationProvider, $sceDelegateProvider, hotkeysProvider) ->
   $locationProvider.html5Mode true
 
   $urlRouterProvider.otherwise ($injector, $location) ->
@@ -88,7 +90,9 @@ angular.module 'SassMeister', [
     .state 'application.logout',
       url: 'logout'
 
-.controller 'ApplicationController', ($scope, $rootScope, $state, $localStorage, $sce, $cookies, $window, data, Compiler, angularLoad, Sandbox, ngToast) ->
+  hotkeysProvider.includeCheatSheet = false
+
+.controller 'ApplicationController', ($scope, $rootScope, $state, $localStorage, $sce, $cookies, $window, data, Compiler, angularLoad, Sandbox, ngToast, hotkeys) ->
   $rootScope.$state = $state
 
   $scope.app = config.storageDefaults().app

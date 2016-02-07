@@ -2,6 +2,7 @@
 
 require 'angular'
 require 'angular-ui-router'
+
 require '../../../github-adapter'
 require '../../sandbox'
 
@@ -99,11 +100,17 @@ angular.module 'SassMeister.gist', [
 
   Sandbox.onReady $scope.app
 
-  $scope.updateGist = ->
+  $scope.updateGist = (event) ->
+    if event.preventDefault
+      event.preventDefault()
+
     $sassMeisterGist.update $stateParams.id, $scope, (gist) ->
       $scope.notify gist.id, 'has been updated'
 
-  $scope.forkGist = ->
+  $scope.forkGist = (event) ->
+    if event.preventDefault
+      event.preventDefault()
+
     if $scope.canEditGist()
       $sassMeisterGist.create $scope, (gist) ->
         $scope.notify gist.id, 'has been forked'

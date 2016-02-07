@@ -48,7 +48,10 @@ angular.module 'SassMeister.index', [
 .controller 'IndexController', ($scope, $sassMeisterGist, $localStorage, $state, data, Sandbox) ->
   $scope.$parent.app = data.app
 
-  $scope.createGist = ->
+  $scope.createGist = (event) ->
+    if event.preventDefault
+      event.preventDefault()
+
     $sassMeisterGist.create $scope, (gist) ->
       $scope.notify gist.id, 'is ready'
 

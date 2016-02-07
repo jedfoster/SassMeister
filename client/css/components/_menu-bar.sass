@@ -40,6 +40,12 @@
   margin: 0.25em 0
   white-space: nowrap
 
+  > a
+    display: flex
+    align-items: center
+    justify-content: space-between
+    
+
   &, label
     cursor: pointer
 
@@ -126,4 +132,8 @@
 .view-menu
   @media #{$mobile}
     display: none
+
+.hotkey
+  font-size: 0.75em
+  opacity: 0.66
 

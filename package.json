@@ -51,6 +51,7 @@
   "dependencies": {
     "angular": "^1.4.1",
     "angular-cookies": "^1.4.1",
+    "angular-hotkeys": "^1.6.0",
     "angular-load": "^0.2.0",
     "angular-resizable": "git+ssh://git@github.com:Reklino/angular-resizable.git",
     "angular-resource": "^1.3.13",
