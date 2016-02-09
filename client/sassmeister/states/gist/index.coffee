@@ -36,7 +36,7 @@ angular.module 'SassMeister.gist', [
             $githubGist($stateParams.id).read().then null, fail
 
 
-.controller 'GistController', ($scope, $sassMeisterGist, $githubGist, $state, $stateParams, Sandbox, data, ngToast, $sce) ->
+.controller 'GistController', ($scope, $rootScope, $sassMeisterGist, $githubGist, $state, $stateParams, Sandbox, data, ngToast, $sce) ->
   $scope.app =
     dependencies: {}
   $scope.app.outputStyle = 'expanded'
@@ -54,8 +54,7 @@ angular.module 'SassMeister.gist', [
       login: data.owner.login
       html_url: data.owner.html_url
 
-  $scope.canEditGist = ->
-    $scope.gist.owner.login == $scope.githubId
+  $rootScope._canEditGist = $scope.gist.owner.login == $scope.githubId
 
   sassRegEx = /.+\.(scss|sass)/i
   cssRegEx = /.+-output\.css/i

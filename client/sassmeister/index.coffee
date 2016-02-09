@@ -94,6 +94,7 @@ angular.module 'SassMeister', [
 
 .controller 'ApplicationController', ($scope, $rootScope, $state, $localStorage, $sce, $cookies, $window, data, Compiler, angularLoad, Sandbox, ngToast, hotkeys) ->
   $rootScope.$state = $state
+  $rootScope._canEditGist = false
 
   $scope.app = config.storageDefaults().app
   $scope.preferences = data.preferences
@@ -107,7 +108,7 @@ angular.module 'SassMeister', [
   # Set default values for commonly evaluated values
   $scope.gist = false
   $scope.canEditGist = ->
-    false
+    $rootScope._canEditGist
 
   $scope.autoprefixerBrowsers = ->
     browsers = $scope.preferences.autoprefixerBrowsers
@@ -246,7 +247,7 @@ angular.module 'SassMeister', [
     if event and event.preventDefault
       event.preventDefault()
 
-    $scope.$broadcast 'command-s'
+    $scope.$broadcast 'command-s' if $scope.canEditGist()
 
   $scope.shiftCommandS = (event) ->
     if event and event.preventDefault
