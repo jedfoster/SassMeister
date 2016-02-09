@@ -239,8 +239,7 @@ angular.module 'github-adapter', [
         # Sass syntax has changed, so need to "rename" the file
 
         # First, delete contents of old file
-        files[scope.sassFileName] =
-          content: null
+        files[scope.sassFileName] = null
 
         # Set name of new file, contents will be set later
         scope.sassFileName = "#{scope.sassFileName.substr 0, scope.sassFileName.length - 4}#{scope.app.syntax}"
@@ -264,8 +263,7 @@ angular.module 'github-adapter', [
             # HTML syntax has changed, so need to "rename" the file
 
             # First, delete contents of old file
-            files[scope.htmlFileName] =
-              content: null
+            files[scope.htmlFileName] = null
 
             # Set name of new file, contents will be set later
             scope.htmlFileName = "#{filename.join '.'}.#{scope.app.htmlSyntax}"
@@ -273,7 +271,7 @@ angular.module 'github-adapter', [
         files[scope.htmlFileName] =
           content: scope.app.html
 
-        files[scope.renderedHtmlFileName] =
+        files[scope.renderedHTMLFileName] =
           content: scope.app.renderedHTML
 
       content =
