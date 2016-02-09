@@ -102,5 +102,5 @@ angular.module 'SassMeister.ace', [
   loadEmmet $scope
 
   $scope.$watch 'app.htmlSyntax', (value) ->
-    $scope.editor.getSession().setMode "ace/mode/#{value}"
+    $scope.editor.getSession().setMode "ace/mode/#{value}" if value
 ]

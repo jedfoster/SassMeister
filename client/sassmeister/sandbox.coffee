@@ -87,7 +87,7 @@ angular.module 'SassMeister.sandbox', [
         do renderJade
 
     render: (app) ->
-      @[app.htmlSyntax] app
+      @[app.htmlSyntax] app if app.htmlSyntax
 
     update: updateIframe
 
