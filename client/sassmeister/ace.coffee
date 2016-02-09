@@ -35,6 +35,8 @@ aceLoaded = (editor, scope) ->
     # no-op
 
   editor.$blockScrolling = Infinity
+  editor.commands.bindKeys({"Command-S": scope.commandS})
+  editor.commands.bindKeys({"Shift-Command-S": scope.shiftCommandS})
 
   session.setTabSize 2
   session.setUseSoftTabs true

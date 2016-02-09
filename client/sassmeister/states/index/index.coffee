@@ -49,7 +49,7 @@ angular.module 'SassMeister.index', [
   $scope.$parent.app = data.app
 
   $scope.createGist = (event) ->
-    if event.preventDefault
+    if event and event.preventDefault
       event.preventDefault()
 
     $sassMeisterGist.create $scope, (gist) ->
@@ -58,6 +58,8 @@ angular.module 'SassMeister.index', [
       $state.go '^.gist',
         id: gist.id
         gist: gist
+
+  $scope.$on 'command-s', $scope.createGist
 
   Sandbox.onReady $scope.app
 

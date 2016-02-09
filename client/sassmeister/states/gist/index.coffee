@@ -101,14 +101,14 @@ angular.module 'SassMeister.gist', [
   Sandbox.onReady $scope.app
 
   $scope.updateGist = (event) ->
-    if event.preventDefault
+    if event and event.preventDefault
       event.preventDefault()
 
     $sassMeisterGist.update $stateParams.id, $scope, (gist) ->
       $scope.notify gist.id, 'has been updated'
 
   $scope.forkGist = (event) ->
-    if event.preventDefault
+    if event and event.preventDefault
       event.preventDefault()
 
     if $scope.canEditGist()
@@ -135,6 +135,8 @@ angular.module 'SassMeister.gist', [
           id: gist.id
           gist: gist
 
+  $scope.$on 'command-s', $scope.updateGist
+  $scope.$on 'shift-command-s', $scope.forkGist
 
   $scope.embedCode = ->
     "<p class=\"sassmeister\" data-gist-id=\"#{$scope.gist.id}\" data-height=\"480\" data-theme=\"#{$scope.preferences.theme}\"><a href=\"http://#{document.domain}/gist/#{$scope.gist.id}\">Play with this gist on SassMeister.</a></p><script src=\"http://cdn.#{document.domain}/js/embed.js\" async></script>"

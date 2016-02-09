@@ -242,3 +242,23 @@ angular.module 'SassMeister', [
   $scope.setTab = (tab) ->
     $scope.tabView = tab
 
+  $scope.commandS = (event) ->
+    if event and event.preventDefault
+      event.preventDefault()
+
+    $scope.$broadcast 'command-s'
+
+  $scope.shiftCommandS = (event) ->
+    if event and event.preventDefault
+      event.preventDefault()
+
+    $scope.$broadcast 'shift-command-s'
+
+  hotkeys.add
+    combo: 'mod+s'
+    callback: $scope.commandS
+
+  hotkeys.add
+    combo: 'shift+mod+s'
+    callback: $scope.shiftCommandS
+

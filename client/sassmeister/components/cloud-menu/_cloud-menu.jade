@@ -1,17 +1,17 @@
 span File
 ul.menu-list
   li.menu-list-item(ng-if='showUpdateGist()')
-    a(ng-click='updateGist()' hotkey='{"mod+s": updateGist}')
+    a(ng-click='updateGist()')
       span Update Gist
       span.hotkey &#8984;S
 
   li.menu-list-item(ng-if='showSaveGist()')
-    a(ng-click='createGist()' hotkey='{"mod+s": createGist}')
+    a(ng-click='createGist()')
       span Save Gist
       span.hotkey &#8984;S
 
   li.menu-list-item(ng-if='showForkGist()')
-    a(ng-click='forkGist()' hotkey='{"shift+mod+s": forkGist}')
+    a(ng-click='forkGist()')
       span Fork Gist
       span.hotkey &#8679;&#8984;S
 
