@@ -85,6 +85,10 @@ angular.module 'SassMeister.gist', [
       $scope.app.renderedHTML = data.files[fileName].content
       $scope.renderedHTMLFileName = fileName
 
+    if fileName == 'browserslist'
+      $scope.preferences.autoprefixer = true
+      $scope.preferences.autoprefixerBrowsers = data.files[fileName].content.split("\n").join(', ')
+
   if !$scope.app.sass
     $scope.app.sass = "// Sorry, I couldn't find any valid Sass in that Gist."
 
@@ -127,6 +131,9 @@ angular.module 'SassMeister.gist', [
         gist.files[$scope.cssFileName].content = $scope.app.css if gist.files[$scope.cssFileName]
         gist.files[$scope.htmlFileName].content = $scope.app.html if gist.files[$scope.htmlFileName]
         gist.files[$scope.renderedHTMLFileName].content = $scope.app.renderedHTML if gist.files[$scope.renderedHTMLFileName]
+        
+        if gist.files['browserslist'] $scope.preferences.autoprefixer and $scope.preferences.autoprefixerBrowsers
+          gist.files['browserslist'].content = $scope.preferences.autoprefixerBrowsers.split(', ').join("\n")
 
         $scope.notify gist.id, 'has been forked'
 
