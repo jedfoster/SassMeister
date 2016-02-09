@@ -66,22 +66,22 @@ angular.module 'SassMeister.gist', [
 
   files.forEach (fileName) ->
     # For now, we only return the first .sass or .scss file we find.
-    if fileName.match(sassRegEx) and !$scope.sassFileName
+    if fileName.match(sassRegEx) and not $scope.sassFileName
       $scope.app.sass = data.files[fileName].content
       $scope.app.syntax = data.files[fileName].language.toLowerCase()
       $scope.app.originalSyntax = $scope.app.syntax
       $scope.sassFileName = fileName
 
-    if fileName.match(cssRegEx) and !$scope.cssFileName
+    if fileName.match(cssRegEx) and not $scope.cssFileName
       $scope.app.css = data.files[fileName].content
       $scope.cssFileName = fileName
 
-    if fileName.match(htmlRegEx) and !$scope.htmlFileName
+    if fileName.match(htmlRegEx) and not $scope.htmlFileName
       $scope.app.html = data.files[fileName].content
       $scope.app.htmlSyntax = data.files[fileName].language.toLowerCase()
       $scope.htmlFileName = fileName
 
-    if fileName.match(renderedHTMLRegEx) and !$scope.renderedHTMLFileName
+    if fileName.match(renderedHTMLRegEx) and not $scope.renderedHTMLFileName
       $scope.app.renderedHTML = data.files[fileName].content
       $scope.renderedHTMLFileName = fileName
 
@@ -120,13 +120,13 @@ angular.module 'SassMeister.gist', [
 
     else
       $sassMeisterGist.fork $stateParams.id, (gist) ->
-        # The GH /fork API does not return content, so we need to the Sass, CSS
-        # and HTML content manually. This prevents the app from making another
-        # request to the API.
-        gist.files[$scope.sassFileName].content = $scope.app.sass
-        gist.files[$scope.cssFileName].content = $scope.app.css
-        gist.files[$scope.htmlFileName].content = $scope.app.html
-        gist.files[$scope.renderedHTMLFileName].content = $scope.app.renderedHTML
+        # The GH /fork API does not return content, so we need to copy the
+        # Sass, CSS and HTML content manually. This prevents the app from
+        # making another request to the API.
+        gist.files[$scope.sassFileName].content = $scope.app.sass if gist.files[$scope.sassFileName]
+        gist.files[$scope.cssFileName].content = $scope.app.css if gist.files[$scope.cssFileName]
+        gist.files[$scope.htmlFileName].content = $scope.app.html if gist.files[$scope.htmlFileName]
+        gist.files[$scope.renderedHTMLFileName].content = $scope.app.renderedHTML if gist.files[$scope.renderedHTMLFileName]
 
         $scope.notify gist.id, 'has been forked'
 
