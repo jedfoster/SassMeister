@@ -1,9 +1,9 @@
-a.logo(ui-sref='{{logoHref()}}' title='The sassiest way to play with Sass, Compass, &amp; LibSass!')
+a.logo(ui-sref='{{logoHref()}}' title='The sassiest way to play with Sass, Compass, & LibSass!')
   svg
     title SassMeister: The sassiest way to play with Sass, Compass, & LibSass!
     use(xlink:href='/img/icons.svg#sassmeister')
 
-nav.menu-bar
+nav.menu-bar(ng-if='showMenuBar()')
   cloud-menu.menu-bar-item
 
   div.view-menu.menu-bar-item

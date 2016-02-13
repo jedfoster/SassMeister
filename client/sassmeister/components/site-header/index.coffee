@@ -10,6 +10,9 @@ angular.module 'SassMeister.siteHeader', []
   restrict: 'E'
   template: template
   controller: ($scope, $state, $window) ->
+    $scope.showMenuBar = ->
+      not $state.includes('application.404') and not $state.includes('application.about')
+
     $scope.loggedOut = ->
       !$scope.githubId
 
