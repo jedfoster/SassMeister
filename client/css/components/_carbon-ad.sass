@@ -1,14 +1,23 @@
 carbon-ad
   position: fixed
-  bottom: 1.5em
+  bottom: 0
   right: 0
-  max-width: 360px
+  max-width: 328px
   z-index: 20
+
+  @media #{$tablet}
+    bottom: 1.5em
+  
+  @media #{$mobile}
+    display: none
+
+  
+    
 
 #carbonads
   display: block
   overflow: hidden
-  padding: 0.75em
+  padding: 0.5em
   line-height: 1.25
   font-size: 0.8em
   background: $gray-3
