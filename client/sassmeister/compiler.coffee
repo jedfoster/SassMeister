@@ -10,7 +10,6 @@ angular.module 'SassMeister.compiler', [
 .factory 'Compiler', ($resource) ->
   $resource 'app/:compiler/:action', {
       compiler: '@compiler'
-      action: '@action'
     },
     'compile':
       method: 'POST'
