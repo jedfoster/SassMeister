@@ -122,6 +122,8 @@ angular.module 'SassMeister', [
     return ['> 1%', 'last 2 versions']
 
   $scope.compile = (app)->
+    return if $state.includes('application.404') or $state.includes('application.about')
+
     Compiler.compile {
       input: app.sass
       compiler: app.compiler
