@@ -67,6 +67,17 @@ module SassMeister
 
       {compilers: Hash[compilers.value.sort_by{|k, v| k}.reverse]}.to_json
     end
+
+
+    get '/app/extensions' do
+      content_type 'application/json'
+
+      cache_control :public, max_age: 2592000 # 30 days, in seconds
+
+      extensions = SassMeister::Redis.new 'extensions'
+
+      {extensions: Hash[extensions.value.sort]}.to_json
+    end
   end
 end
 
