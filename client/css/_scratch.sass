@@ -234,5 +234,107 @@ footer
     font-size: 0.66em
 
   a
-    color: $alpha-primary
+    color: $link-color
+
+
+
+
+article
+  padding: 0 1em
+  max-width: 42em
+  margin: 1.5em auto
+  padding-bottom: 3em
+
+  @media #{$mobile}
+    padding-bottom: 4.5em
+
+  a
+    color: $link-color
+
+  h1, h2
+    font-weight: 100
+    font-size: 1.66667em
+
+  code
+    color: $gray-2
+    font-size: 2em
+
+    @media #{$tablet}
+      font-size: 1.5em
+
+    @media #{$mobile}
+      font-size: 1em
+
+    .variable
+      color: #c82829
+
+    .string
+      color: #718c00
+
+    .comment
+      color: #8e908c
+      white-space: nowrap
+
+    .frowny
+
+  ol
+    list-style: none
+    column-count: 3
+
+    @media #{$mobile}
+      column-count: 2
+
+  aside
+    border: 1px solid $blue-2
+    background-color: $blue-3
+    padding: 0.5em 1em
+    float: left
+    width: 100%
+    clear: both
+    margin-bottom: 1.5em
+
+    border-radius: em(3)
+
+    > h1
+      float: right
+      width: 75%
+
+      @media screen and (max-width: 380px)
+        width: 100%
+        clear: both
+
+    > p
+      color: inherit
+
+    p
+      float: left
+      width: 75%
+      color: $delta_gray
+
+      @media #{$mobile}
+        width: 100%
+        clear: both
+
+  .support
+    h1
+      font-size: 2em
+      color: $text-color
+      margin: 0
+
+    p
+      font-size: 1.25em
+      margin-bottom: 0.5em
+
+    img
+      float: right
+      width: 40%
+      max-width: 120px
+      display: inline-block
+      padding-top: 0.5em
+      padding-right: 1em
+      padding-left: 0
+      border-radius: em(3)
+
+      @media screen and (max-width: 380px)
+        width: 100%
 

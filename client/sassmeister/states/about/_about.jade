@@ -2,30 +2,38 @@ site-header
 
 body
   article
-    aside#support
+    aside.support
       a(href='http://devswag.com/products/sassmeister-stickers-4')
         h1 Support SassMeister: buy a sticker!
+        img(src='/img/sassmeister-detail-v02_medium.jpg')
+        p Buy a 4-pack of stickers on DevSwag.com today and help support this project.
       p
-        | Or,
+        | Or, 
         a(href='https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ELKSDTCSVYM3Y') contribute directly
         | . Any amount helps. Thanks!
 
     h1 The sassiest way to play with Sass, Compass, &amp; LibSass
 
     p
-      | SassMeister is a playground for
+      | SassMeister is a playground for 
       a(href='http://sass-lang.com') Sass
-      | ,
+      | , 
       a(href='http://compass-style.org/') Compass
-      | , and
+      | , and 
       a(href='http://libsass.org/') LibSass
-      | . Add some Sass and SassMeister will show you the rendered CSS. SassMeister supports both
+      | . Add some Sass and SassMeister will show you the rendered CSS. SassMeister supports both 
       a(href='http://thesassway.com/articles/sass-vs-scss-which-syntax-is-better') Sass and SCSS syntaxes
-      | , all
+      | , all 
       a(href='http://sass-lang.com/docs/yardoc/file.SASS_REFERENCE.html#output_style') output styles
-      | , and an ever-expanding list of Compass extensions and Sass libraries.
+      | , and an ever-expanding list of Sass libraries.
 
     h2 Current extensions
+
+    ol
+      //- Per http://www.alexkras.com/11-tips-to-improve-angularjs-performance/
+      //- `::` is one-time binding
+      li(ng-repeat='(name, extension) in extensions')
+        a(href='{{extension.homepage}}') {{::name}}
 
     p
       i
@@ -34,29 +42,27 @@ body
     h2 Pitch in, help out
 
     p
-      | If you find SassMeister useful please consider making a small
+      | If you find SassMeister useful please consider making a small 
       a(href='https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ELKSDTCSVYM3Y') monetary show of support
-      | . Or,
+      | . Or, 
       a(href='http://devswag.com/products/sassmeister-stickers-4') buy SassMeister stickers on DevSwag.com
       |  and a portion of the proceeds will go to this project. Any amount helps.
 
     p
-      | The source code for the app is on
+      | The source code for the app is on 
       a(href='https://github.com/jedfoster/SassMeister/issues') GitHub
-      |  and pull requests are always welcome. Is there a Compass extension or Sass library you&apos;d like to see included?
+      |  and pull requests are always welcome. Is there a Compass extension or Sass library you&apos;d like to see included? 
       a(href='https://github.com/jedfoster/SassMeister/issues') Let us know
       | .
 
     h2 Colophon
 
     p
-      | SassMeister is a project of
+      | SassMeister is a project of 
       a(href='http://jedfoster.com/') Jed Foster
-      |  and
+      |  and 
       a(href='http://www.dalesande.com') Dale Sande
-      | . A
-      a(href='http://www.meetup.com/SASSlang/') Seattle Sass Meetup
-      |  presentation by
-      a(href='https://peepcode.com') PeepCode Screencasts
+      | . A Seattle Sass Meetup presentation by 
+      a(href='https://twitter.com/topfunky') Geoffrey Grosenbach
       |  inspired the name.
 

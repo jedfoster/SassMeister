@@ -7,7 +7,7 @@ angular.module 'SassMeister.about', [
   'ui.router'
 ]
 
-.config ($stateProvider, $urlRouterProvider, $locationProvider) ->
+.config ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) ->
   $locationProvider.html5Mode true
 
   template = require './_about.jade'
@@ -18,7 +18,10 @@ angular.module 'SassMeister.about', [
       template: template
       controller: 'AboutController'
       resolve:
-        data: () ->
+        data: ($state, $http, Compiler) ->
+          $http({method: 'GET', url: '/app/extensions'}).then (data) ->
+            data.data
 
 .controller 'AboutController', ($scope, $state, data) ->
+  $scope.extensions = data.extensions
 
