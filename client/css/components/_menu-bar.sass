@@ -68,9 +68,21 @@
     padding-left: 0.25em
 
   &.has-sub-menu
-    @media #{$min-mobile}
-      span
+    padding-left: 0
+
+    > span 
+      padding-left: 1.25em
+      opacity: 0.66
+      cursor: text
+
+    @media #{$min-sub-menu}
+      padding: 0 1.25em
+
+      > span
+        padding-left: initial
         padding-right: 1.5em
+        opacity: initial
+        cursor: pointer
 
         &:after
           content: ''
@@ -85,7 +97,7 @@
     &:hover
       background: transparent
 
-      @media #{$min-mobile}
+      @media #{$min-sub-menu}
         .menu-sub-list
           display: block
 
@@ -113,10 +125,11 @@
 
 .menu-sub-list
   background: transparent
-  max-height: 25vh
+  max-height: 14vh
   overflow: auto
+  margin-bottom: 0
 
-  @media #{$min-mobile}
+  @media #{$min-sub-menu}
     display: none
     position: absolute
     min-width: 10em
