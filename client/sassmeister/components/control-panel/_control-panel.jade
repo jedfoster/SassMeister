@@ -27,8 +27,9 @@ ul.menu-list-section(data-event-name='SassSyntax')
       //- Per http://www.alexkras.com/11-tips-to-improve-angularjs-performance/
       //- `::` is one-time binding
       li.menu-list-item(ng-repeat='(name, extension) in extensions')
-        a(href='#' data-import='{{::extension.import}}' ng-click='insertImport(extension.import, app)') {{::name}}
-        | &nbsp;&nbsp;(v{{::extension.version}})
+        a(href='#' data-import='{{::extension.import}}' ng-click='insertImport(extension.import, app)') 
+          span {{::name}}
+          span (v{{::extension.version}})
 
 
 .menu-list-section(data-event-name='CSSOutput')

@@ -42,8 +42,6 @@ angular.module 'SassMeister.controlPanel', [
     scope.$watch 'app.compiler', ->
       do getExtensions
 
-    scope.foo = 'bar'
-
     scope.autoprefixerBrowsers = ->
       ngToast.create
         className: 'info modal autoprefixer-browsers'

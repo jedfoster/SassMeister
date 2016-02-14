@@ -46,11 +46,11 @@ nav.menu-bar(ng-if='showMenuBar()')
   a.menu-bar-item(href='/authorize' ng-click='login()' title='Login with Github' ng-if='loggedOut()')
     span Login with Github
 
-  div.menu-bar-item(ng-if='loggedIn()')
+  div.menu-bar-item.auth-menu(ng-if='loggedIn()')
     span
       img(ng-src='{{avatarUrl}}')
 
-    ul.menu-list
+    ul.menu-list(ng-class='rightEdge(".auth-menu .menu-list")')
       li.menu-list-item
         | Hello, {{githubId}}!
 
