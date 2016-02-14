@@ -12,6 +12,10 @@ html.no-js(ng-app='SassMeister')
 
     base(href='/')
 
+    block globalJS
+      script.
+        window.SassMeister = {};
+
     link(rel='stylesheet' href='/css/app.css')
     //- script(src='/js/modernizr.js')
 

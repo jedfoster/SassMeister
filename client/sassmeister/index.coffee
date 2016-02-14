@@ -95,6 +95,7 @@ angular.module 'SassMeister', [
 .controller 'ApplicationController', ($scope, $rootScope, $state, $localStorage, $sce, $cookies, $window, data, Compiler, angularLoad, Sandbox, ngToast, hotkeys) ->
   $rootScope.$state = $state
   $rootScope._canEditGist = false
+  $rootScope.isEmbedded = !!window.SassMeister.isEmbedded
 
   $scope.app = config.storageDefaults().app
   $scope.preferences = data.preferences
@@ -122,7 +123,7 @@ angular.module 'SassMeister', [
     return ['> 1%', 'last 2 versions']
 
   $scope.compile = (app)->
-    return if $state.includes('application.404') or $state.includes('application.about')
+    return if $state.includes('application.404') or $state.includes('application.about') or $state.includes('application.embedded') or $rootScope.isEmbedded
 
     Compiler.compile {
       input: app.sass
@@ -265,3 +266,7 @@ angular.module 'SassMeister', [
     combo: 'shift+mod+s'
     callback: $scope.shiftCommandS
 
+  $scope.showSiteHeader = not window.SassMeister.isEmbedded
+    # true
+    # # not window.SassMeister.isEmbedded
+    # false

@@ -1,15 +1,15 @@
-site-header
+site-header(ng-if='!isEmbedded')
 
-main(ng-class='orientation')
+main(ng-class='[orientation, {embedded: isEmbedded}]')
   .mobile-tabs
-    h2(ng-click='setTab(\'sass\')' ng-class='{current: tabView === \'sass\'}') {{app.displayCompiler}}
+    h2(ng-click='setTab(\'sass\')' ng-class='{current: tabView === \'sass\'}') {{app.displayCompiler || 'Sass'}}
     h2(ng-click='setTab(\'css\')' ng-class='{current: tabView === \'css\'}') CSS
-    h2(ng-click='setTab(\'html\')' ng-class='{current: tabView === \'html\'}') HTML
-    h2(ng-click='setTab(\'result\')' ng-class='{current: tabView === \'result\'}') Result
+    h2(ng-click='setTab(\'html\')' ng-class='{current: tabView === \'html\'}' ng-if='app.html') HTML
+    h2(ng-click='setTab(\'result\')' ng-class='{current: tabView === \'result\'}' ng-if='app.html') Result
 
   .editors(ng-class='{html: preferences.htmlVisible}' ng-show='tabView !== \'result\'')
     resizable#sassResizable(r-directions='{{editorOrientation()}}' r-flex='true' r-width='preferences.sassResizable.width' r-height='preferences.sassResizable.height' ng-show='!tabView || tabView === \'sass\'')
-      h2.editor-header {{app.displayCompiler}}
+      h2.editor-header {{app.displayCompiler || 'Sass'}}
 
       .editor-wrapper(ng-controller='AceSassController')
         ui-ace(ng-model='app.sass' ng-model-options='{ debounce: 750 }' ng-change='compile(app)' ui-ace='{onLoad: aceLoaded}')
@@ -34,11 +34,19 @@ main(ng-class='orientation')
     #resizable-mask(hidden)
 
   footer
-    p(ng-if='gist') Gist created by 
+    p(ng-if='gist') Gist by 
       a(ng-href='gist.owner.html_url') {{gist.owner.login}}
 
-    p
+    p(ng-if='!isEmbedded')
       a(href='/about' ui-sref='application.about') About SassMeister
+
+
+    p(ng-if='isEmbedded')
+      a.logo(href='http://sassmeister.com/gist/{{gist.id}}')
+        span.cta Play with this on 
+        svg
+          title SassMeister: The sassiest way to play with Sass, Compass, & LibSass!
+          use(xlink:href='/img/icons.svg#sassmeister')
 
   carbon-ad
 
