@@ -61,7 +61,7 @@ class SassMeisterApp < Sinatra::Base
 
     after '/authorize/return' do
       session[:version] == SassMeisterApp::APP_VERSION
-      
+
       response.set_cookie('github_id', {
         value: @user.login,
         expires: (Time.now + SassMeisterApp::SESSION_DURATION),

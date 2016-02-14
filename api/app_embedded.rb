@@ -50,21 +50,12 @@ class SassMeisterEmbeddedApp < Sinatra::Base
   end
 
 
-  not_found do
-    @body_class = 'oops-404'
-
-    return erb :'404' unless @id
-
-    return erb :'gist-404', locals: {id: @id}
-  end
-
-
   get '/' do
     redirect "http://#{APP_DOMAIN}"
   end
 
 
-  get %r{/gist(?:/[\w]*)*/([\d\w]+)} do
+  get %r{/gists(?:/[\w]*)*/([\d\w]+)} do
     id = params[:captures].first
 
     begin
@@ -74,41 +65,6 @@ class SassMeisterEmbeddedApp < Sinatra::Base
 
       last_modified response.updated_at.httpdate
 
-      # For now, we only return the first .sass or .scss file we find.
-      file = response.files["#{response.files._fields.grep(/.+\.(scss|sass)/i)[0]}"]
-
-      if( ! file)
-        syntax = filename = owner = ''
-        sass = '// Sorry, I couldn\'t find any valid Sass in that Gist.'
-
-      else
-        sass = file.content
-        filename = file.filename
-        owner = (response.respond_to?(:user) ? response.user.login : nil)
-
-        syntax = file.filename.slice(-4, 4)
-      end
-
-      html_file = response.files["#{response.files._fields.grep(/.+\.(haml|textile|markdown|md|html)/)[0]}"]
-
-      if(html_file)
-        html = html_file.content
-        html_filename = html_file.filename
-
-        html_syntax = html_file.filename.split('.').pop
-        html_syntax = 'markdown' if html_syntax == 'md'
-
-        html_syntax.capitalize!
-      end
-
-      if css_file = response.files["#{response.files._fields.grep(/.+-output\.css/)[0]}"]
-        css_file = css_file.content.to_s
-      end
-
-      if rendered_file = response.files["#{response.files._fields.grep(/.+-rendered\.html/)[0]}"]
-        rendered_file = response.files["#{response.files._fields.grep(/.+-rendered\.html/)[0]}"].content.to_s
-      end
-
     rescue Octokit::NotFound => e
       @id = id
       status 404
@@ -116,34 +72,14 @@ class SassMeisterEmbeddedApp < Sinatra::Base
       return
     end
 
-    @gist = {
-      gist_id: id,
-      owner: owner,
-      sass_filename: filename,
-      html_filename: (html_filename || ''),
-      sass: {
-        input: sass,
-        syntax: syntax,
-        original_syntax: syntax,
-        dependencies: get_frontmatter_dependencies(sass)
-      },
-      html: {
-        input: (html || '').gsub('</script>', '<\/script>'),
-        syntax: (html_syntax || '').gsub('</script>', '<\/script>')
-      }
-    }
+    response = response.to_attrs
 
-    @gist_output = {
-      css: (css_file || ''),
-      html: (rendered_file || '').gsub('</script>', '<\/script>')
-    }
+    response.delete(:history)
+    response.to_json
+  end
 
-    @body_class = 'embedded'
-
-    respond_to do |wants|
-      wants.html { erb :index }
-      wants.json { {gist: @gist, gist_output: @gist_output}.to_json }
-    end
+  get '/*' do
+    File.read 'public/embed.html'
   end
 
   run! if app_file == $0
