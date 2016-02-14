@@ -23,6 +23,7 @@ require 'brace/theme/tomorrow_night_eighties'
 
 require 'angular-ui-ace/src/ui-ace'
 
+themeParam = require('../js/hash-param')('theme')
 
 aceLoaded = (editor, scope) ->
   session = editor.getSession()
@@ -41,8 +42,12 @@ aceLoaded = (editor, scope) ->
   session.setTabSize 2
   session.setUseSoftTabs true
 
-  scope.$watch 'preferences.theme', (value) ->
-    editor.setTheme "ace/theme/#{value}"
+  if themeParam
+    editor.setTheme "ace/theme/#{themeParam}"
+
+  else
+    scope.$watch 'preferences.theme', (value) ->
+      editor.setTheme "ace/theme/#{value}"
 
   scope.$watch 'preferences.vim', (value) ->
     if value
@@ -52,7 +57,7 @@ aceLoaded = (editor, scope) ->
 
   scope.$watch 'preferences.scrollPastEnd', (value) ->
     editor.setOption 'scrollPastEnd', value
-    
+
   scope.$watch 'tabView', ->
     editor.resize true
 
@@ -72,7 +77,6 @@ angular.module 'SassMeister.ace', [
   $scope.aceLoaded = (editor) ->
     aceLoaded editor, $scope
     $scope.editor = $scope.editors.sass = editor
-
 
   loadEmmet $scope
 
