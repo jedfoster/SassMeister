@@ -49,10 +49,10 @@ angular.module 'SassMeister.gist', [
     id: data.id
     updated_at: data.updated_at
     owner:
-      avatar_url: data.owner.avatar_url
-      id: data.owner.id
-      login: data.owner.login
-      html_url: data.owner.html_url
+      avatar_url: data.owner and data.owner.avatar_url
+      id: data.owner and data.owner.id
+      login: data.owner and data.owner.login
+      html_url: data.owner and data.owner.html_url
 
   $rootScope._canEditGist = $scope.gist.owner.login == $scope.githubId
 
@@ -76,14 +76,14 @@ angular.module 'SassMeister.gist', [
       $scope.app.css = data.files[fileName].content
       $scope.cssFileName = fileName
 
+    if fileName.match(renderedHTMLRegEx) and not $scope.renderedHTMLFileName
+      $scope.app.renderedHTML = data.files[fileName].content
+      $scope.renderedHTMLFileName = fileName
+
     if fileName.match(htmlRegEx) and not $scope.htmlFileName
       $scope.app.html = data.files[fileName].content
       $scope.app.htmlSyntax = data.files[fileName].language.toLowerCase()
       $scope.htmlFileName = fileName
-
-    if fileName.match(renderedHTMLRegEx) and not $scope.renderedHTMLFileName
-      $scope.app.renderedHTML = data.files[fileName].content
-      $scope.renderedHTMLFileName = fileName
 
     if fileName == 'browserslist'
       $scope.preferences.autoprefixer = true
