@@ -4,15 +4,16 @@ require 'rack/contrib'
 require 'rack-cache'
 require 'dalli'
 require 'memcachier'
-require './api/lib/rack/static_cache'
+require 'dotenv'
 
+require './api/lib/rack/static_cache'
 require './api/app'
 require './api/app_embedded'
-
 
 # Gzip responses
 use Rack::Deflater
 
+Dotenv.load
 
 if ENV['RACK_ENV'] == 'production'
   # Set Cache-Control and ETag headers

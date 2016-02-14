@@ -9,11 +9,6 @@ require 'yaml'
 require 'sassmeister/helpers'
 require 'sassmeister/api_routes'
 
-if ENV['RACK_ENV']
-  require 'dotenv'
-  Dotenv.load
-end
-
 class SassMeisterApp < Sinatra::Base
   register Sinatra::RespondWith
   register Sinatra::ConfigFile
