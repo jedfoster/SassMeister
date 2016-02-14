@@ -1,5 +1,6 @@
 require 'sinatra/base'
 require 'sinatra/config_file'
+require 'chairman'
 require 'sassmeister/client'
 
 module SassMeister
@@ -20,14 +21,49 @@ module SassMeister
     set :protection, except: :frame_options
 
     before '/app/:compiler/*' do
-      return erb :'404' unless COMPILER_ENDPOINTS.include? params[:compiler]
+      pass if params[:compiler] == 'gists'
+
+      return status 404 unless COMPILER_ENDPOINTS.include? params[:compiler]
 
       @api = SassMeister::Client.new COMPILER_ENDPOINTS[params[:compiler]]
     end
 
 
     after '/app/:compiler/*' do
-      headers @api.headers
+      headers @api.headers if @api
+    end
+
+
+    get '/app/gists/:id' do |id|
+      Chairman.config ENV['GITHUB_ID'], ENV['GITHUB_SECRET'], ['gist']
+
+      @github = Chairman.session(session[:github_token])
+
+      begin
+        response = @github.gist id
+
+        raise Octokit::NotFound unless response.message.nil?
+
+        headers({
+            'content-type' => @github.last_response.headers['content-type'],
+            'x-ratelimit-limit' => @github.last_response.headers['x-ratelimit-limit'],
+            'x-ratelimit-remaining' => @github.last_response.headers['x-ratelimit-remaining'],
+            'x-ratelimit-reset' => @github.last_response.headers['x-ratelimit-reset'],
+            'last-modified' => @github.last_response.headers['last-modified'],
+            'x-github-media-type' => @github.last_response.headers['x-github-media-type']
+          })
+
+      rescue Octokit::NotFound => e
+        @id = id
+        status 404
+
+        return
+      end
+
+      response = response.to_attrs
+
+      response.delete(:history)
+      response.to_json
     end
 
 

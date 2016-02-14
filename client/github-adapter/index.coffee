@@ -136,7 +136,7 @@ angular.module 'github-adapter', [
       github = new Github
         token: $cookies.get 'gh'
         auth: 'oauth'
-        apiUrl: if !!window.SassMeister.isEmbedded then 'http://local-embed.sassmeister.com:9292' else null
+        apiUrl: if !!window.SassMeister.isEmbedded then 'http://local-embed.sassmeister.com:9292/app' else null
 
       gist = github.getGist(gistId)
 
