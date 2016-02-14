@@ -50,11 +50,13 @@
   margin: 0.25em 0
   white-space: nowrap
 
+  &, &:hover, a, a:hover
+    color: $white
+
   > a
     display: flex
     align-items: center
     justify-content: space-between
-    
 
   &, label
     cursor: pointer
@@ -109,7 +111,6 @@
       background-repeat: no-repeat
       background-position: 50% 50%
 
-
 .menu-sub-list
   background: transparent
   max-height: 25vh
@@ -136,7 +137,7 @@
     margin-top: 0
 
   > span
-    margin-left: 0.3em
+    margin-left: 1.25em
     opacity: 0.66
 
 .view-menu
