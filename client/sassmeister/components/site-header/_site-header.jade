@@ -35,9 +35,9 @@ nav.menu-bar(ng-if='showMenuBar()')
   div.menu-bar-item(ng-if='gist')
     span Share
     ul.menu-list
-      li.menu-list-item
-        label Embed code:
-          textarea(onclick='this.focus();this.select();' readonly ng-readonly='true' ng-bind='embedCode()')
+      li.menu-list-section
+        span Embed code:
+        textarea(onclick='this.focus();this.select();' readonly ng-readonly='true' ng-bind='embedCode()')
 
   div.menu-bar-item
     span Options

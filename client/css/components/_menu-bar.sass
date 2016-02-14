@@ -16,6 +16,7 @@
 
   .menu-list
     display: none
+    list-style: none
 
   > span
     vertical-align: middle
@@ -28,6 +29,15 @@
     display: inline
     height: $site-header-height * 0.75
     vertical-align: middle
+
+  textarea
+    width: 24em
+    height: 12em
+    color: $text-color
+    font-size: 0.575em
+    font-family: $monospace-font-family
+    margin: 1em
+    outline: none
 
 .menu-list
   @include sub-menu
@@ -99,6 +109,7 @@
       background-repeat: no-repeat
       background-position: 50% 50%
 
+
 .menu-sub-list
   background: transparent
   max-height: 25vh
@@ -127,7 +138,6 @@
   > span
     margin-left: 0.3em
     opacity: 0.66
-
 
 .view-menu
   @media #{$mobile}
