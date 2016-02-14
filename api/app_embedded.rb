@@ -1,24 +1,18 @@
 $LOAD_PATH.unshift(File.join(File.dirname(File.realpath(__FILE__)), 'lib'))
 
 require 'sinatra/base'
-require 'sinatra/partial'
 require 'sinatra/config_file'
 require 'sinatra/respond_with'
 require 'chairman'
 require 'json'
 require 'yaml'
 require 'sassmeister/helpers'
-require 'object'
-require 'array'
-require 'assets'
 require 'sassmeister/api_routes'
 
 class SassMeisterEmbeddedApp < Sinatra::Base
   register Sinatra::RespondWith
-  register Sinatra::Partial
   register Sinatra::ConfigFile
 
-  set :partial_template_engine, :erb
   set :protection, except: :frame_options
 
   config_file '../config/config.yml'
@@ -26,13 +20,10 @@ class SassMeisterEmbeddedApp < Sinatra::Base
   use SassMeister::ApiRoutes
 
   helpers SassMeister::Helpers
-  helpers Assets
 
   APP_DOMAIN = settings.app_domain
   SANDBOX_DOMAIN = settings.sandbox_domain
   CACHE_MAX_AGE = settings.cache_max_age
-  # Assets::HOST = settings.assets_host
-  Assets::HOST = settings.assets_host unless defined? Assets::HOST
 
   COOKIE_DOMAIN = settings.cookie_domain
   APP_VERSION = settings.app_version

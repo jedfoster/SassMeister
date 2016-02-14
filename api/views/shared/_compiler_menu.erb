@@ -1,6 +1,0 @@
-<select name="version" class="fancy_dropdown">
-<% compilers.keys.sort.reverse.each do |key| %>
-  <option value="<%= key %>"><%='LibSass ' if key == :lib %><%= compilers[key][:sass] %></option>
-<% end %>
-</select>
-
