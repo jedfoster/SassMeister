@@ -8,7 +8,7 @@ angular.module 'SassMeister.compiler', [
 ]
 
 .factory 'Compiler', ($resource) ->
-  $resource 'app/:compiler/:action', {
+  $resource '/app/:compiler/:action', {
       compiler: '@compiler'
     },
     'compile':
