@@ -13,3 +13,4 @@ config/*.txt
 config/asset-manifest.yml
 s3_website.yml
 node_modules/
+config/config.json

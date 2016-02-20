@@ -38,6 +38,7 @@
     "gulp-sourcemaps": "^1.5.2",
     "gulp-uglify": "^1.1.0",
     "gulp-util": "^3.0.3",
+    "gulp-yaml": "^1.0.1",
     "hbsfy": "^2.2.1",
     "jade": "^1.9.2",
     "jadeify": "^4.1.0",
