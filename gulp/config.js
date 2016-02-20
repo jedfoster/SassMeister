@@ -22,22 +22,6 @@ module.exports = {
     src: [src + '/**/*.jade', '!' + src + '/**/_*.jade'],
     dest: dest
   },
-  browserify: {
-    // A separate bundle will be generated for each
-    // bundle config in the list below
-    bundleConfigs: [{
-      entries: src + '/js/app.coffee',
-      dest: dest + '/js/',
-      outputName: 'app.js',
-      // Additional file extentions to make optional
-      extensions: ['.coffee', '.hbs']
-      // list of modules to make require-able externally
-      // require: ['jquery', 'underscore']
-
-      // list of externally available modules to exclude from the bundle
-      // external: ['jquery', 'underscore']
-    }]
-  },
   webpack: {
     entry: {
       app: src + '/js/app.coffee',
