@@ -54,6 +54,8 @@ angular.module 'SassMeister.index', [
     if event and event.preventDefault
       event.preventDefault()
 
+    $window.ga('send', 'event', 'Gist', 'Create')
+
     $sassMeisterGist.create $scope, (gist) ->
       $scope.notify gist.id, 'is ready'
 

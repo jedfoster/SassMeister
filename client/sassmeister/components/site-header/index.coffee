@@ -45,7 +45,7 @@ angular.module 'SassMeister.siteHeader', []
         elements.push el
 
       targetEl = elements.slice(-1)[0]
-      
+
       if targetEl.getBoundingClientRect().right >= document.body.getBoundingClientRect().width - 10
         className = 'right'
 

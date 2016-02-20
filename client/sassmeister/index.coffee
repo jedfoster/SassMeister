@@ -162,6 +162,7 @@ angular.module 'SassMeister', [
 
     for _import in imports
       collection.push "@import \"#{_import}\"#{eol}"
+      $window.ga('send', 'event', 'UI', 'SassExtensions', _import)
 
     $scope.editors.sass.insert collection.join ''
 
@@ -173,6 +174,8 @@ angular.module 'SassMeister', [
     Sandbox.render app
 
   $scope.$watch 'preferences.emmet', (value) ->
+    $window.ga('send', 'event', 'UI', 'Emmet', "#{value}")
+    
     if value and not $window.emmet
       angularLoad.loadScript 'http://nightwing.github.io/emmet-core/emmet.js'
         .then ->
@@ -184,6 +187,8 @@ angular.module 'SassMeister', [
   $scope.$watch 'preferences.autoprefixer', (value) ->
     $scope.autoprefixer = value
 
+    $window.ga('send', 'event', 'UI', 'SetAutoprefixer', "#{value}")
+    
     if value and not $window.autoprefixer
       angularLoad.loadScript 'https://cdn.rawgit.com/ai/autoprefixer-rails/6.0.3/vendor/autoprefixer.js'
         .then ->
@@ -267,6 +272,50 @@ angular.module 'SassMeister', [
     callback: $scope.shiftCommandS
 
   $scope.showSiteHeader = not window.SassMeister.isEmbedded
-    # true
-    # # not window.SassMeister.isEmbedded
-    # false
+
+
+  $scope.$watch 'app.compiler', (n, o) ->
+    $window.ga('send', 'event', 'UI', 'SassVersion', "v#{n}") unless n == o
+
+  $scope.$watch 'preferences.orientation', (n, o) ->
+    $window.ga('send', 'event', 'UI', 'Orientation', n) unless n == o
+
+  $scope.$watch 'app.syntax', (n, o) ->
+    $window.ga('send', 'event', 'UI', 'SassSyntax', n) unless n == o
+
+  $scope.$watch 'app.outputStyle', (n, o) ->
+    $window.ga('send', 'event', 'UI', 'CSSOutput', n) unless n == o
+
+  $scope.$watch 'app.htmlSyntax', (n, o) ->
+    $window.ga('send', 'event', 'UI', 'HTMLSyntax', n) unless n == o
+
+  $scope.$watch 'preferences.cssVisible', (n, o) ->
+    $window.ga('send', 'event', 'UI', 'ToggleCSS', n) unless n == o
+
+  $scope.$watch 'preferences.htmlVisible', (n, o) ->
+    $window.ga('send', 'event', 'UI', 'ToggleHTML', n) unless n == o
+
+  $scope.$watch 'preferences.theme', (n, o) ->
+    $window.ga('send', 'event', 'UI', 'SetTheme', n) unless n == o
+
+  $scope.$watch 'preferences.emmet', (n, o) ->
+    $window.ga('send', 'event', 'UI', 'SetEmmet', "#{n}") unless n == o
+
+  $scope.$watch 'preferences.vim', (n, o) ->
+    $window.ga('send', 'event', 'UI', 'SetVim', "#{n}") unless n == o
+
+  $scope.$watch 'preferences.scrollPastEnd', (n, o) ->
+    $window.ga('send', 'event', 'UI', 'SetScrollPastEnd', "#{n}") unless n == o
+
+  $scope.$watch 'preferences.autoprefixerBrowsers', (n, o) ->
+    $window.ga('send', 'event', 'UI', 'SetAutoprefixerBrowsers', "#{n}") unless n == o
+
+
+.run ['$rootScope', '$location', '$window', ($rootScope, $location, $window) ->
+  $window.ga('create', 'UA-35407426-1', 'auto')
+
+  # track pageview on state change
+  $rootScope.$on '$stateChangeSuccess', (event) ->
+    $window.ga 'send', 'pageview', $location.path()
+]
+

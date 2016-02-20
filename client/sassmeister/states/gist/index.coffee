@@ -107,6 +107,8 @@ angular.module 'SassMeister.gist', [
     if event and event.preventDefault
       event.preventDefault()
 
+    $window.ga('send', 'event', 'Gist', 'Update')
+
     $sassMeisterGist.update $stateParams.id, $scope, (gist) ->
       $scope.notify gist.id, 'has been updated'
 
@@ -115,6 +117,8 @@ angular.module 'SassMeister.gist', [
       event.preventDefault()
 
     if $scope.canEditGist()
+      $window.ga('send', 'event', 'Gist', 'Fork', 'User\'s Own')
+
       $sassMeisterGist.create $scope, (gist) ->
         $scope.notify gist.id, 'has been forked'
 
@@ -123,6 +127,8 @@ angular.module 'SassMeister.gist', [
           gist: gist
 
     else
+      $window.ga('send', 'event', 'Gist', 'Fork', 'Someone Else\'s')
+
       $sassMeisterGist.fork $stateParams.id, (gist) ->
         # The GH /fork API does not return content, so we need to copy the
         # Sass, CSS and HTML content manually. This prevents the app from

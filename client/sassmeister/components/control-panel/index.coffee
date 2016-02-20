@@ -11,7 +11,7 @@ angular.module 'SassMeister.controlPanel', [
   'ngToast'
 ]
 
-.directive 'controlPanel', ['Compiler', '$sce', 'ngToast', (Compiler, $sce, ngToast) ->
+.directive 'controlPanel', ['Compiler', '$sce', 'ngToast', '$window', (Compiler, $sce, ngToast, $window) ->
   restrict: 'E'
   template: template
   link: (scope, element, attrs) ->
