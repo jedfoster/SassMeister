@@ -16,7 +16,7 @@ html.no-js(ng-app='SassMeister')
       script.
         window.SassMeister = {};
 
-    link(rel='stylesheet' href='/css/app.css')
+    link(rel='stylesheet' href='{%& asset_domain %}/css/app.css')
 
   body(class='{{$state.current.controller}}')
     block content
@@ -49,5 +49,5 @@ html.no-js(ng-app='SassMeister')
         document.head.appendChild(imported);
       }
 
-    script(src='/js/app.js')
+    script(src='{%& asset_domain %}/js/app.js')
 

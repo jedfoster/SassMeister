@@ -54,5 +54,5 @@ module.exports =
     'compressed'
   ]
 
-  sandbox: 'http://sandbox.sassmeister.dev'
+  sandbox: '{%& sandbox_domain %}'
 

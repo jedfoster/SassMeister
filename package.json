@@ -26,6 +26,7 @@
     "gulp-filesize": "0.0.6",
     "gulp-jade": "^1.0.0",
     "gulp-minify-css": "^0.4.6",
+    "gulp-mustache": "^2.2.0",
     "gulp-notify": "^1.4.2",
     "gulp-rename": "^1.2.0",
     "gulp-sass": "^2.0.4",

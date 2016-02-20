@@ -6,7 +6,7 @@ SmGistEmbed =
     until t is -1
       data = @extractData(elements[t])
       if data['gist-id']
-        url = "http://local-embed.sassmeister.com:9292/gist/#{data["gist-id"]}#"
+        url = "{%& embed_domain %}/gist/#{data["gist-id"]}#"
         url = "#{url}theme=#{data['theme']}," if data['theme']
         url = "#{url}font-size=#{data['font-size']}," if data['font-size']
         iframe = "<iframe src=\"#{url}\" class=\"sassmeister-gist\" id=\"sm-gist-#{data['gist-id']}\" scrolling=\"no\" frameborder=\"0\" allowTransparency=\"true\" height=\"#{data['height']}\" style=\"width: 100%; overflow: hidden;\"></iframe>"

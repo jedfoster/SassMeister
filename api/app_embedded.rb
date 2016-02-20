@@ -4,7 +4,7 @@ class SassMeisterEmbeddedApp < SassMeisterApp
   set :protection, except: :frame_options
 
   get '/' do
-    redirect "http://#{APP_DOMAIN}"
+    redirect APP_DOMAIN
   end
 
   get '/*' do

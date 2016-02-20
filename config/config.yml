@@ -1,19 +1,23 @@
 development: &default_settings
   app_version: '2.0.1'
   session_duration: 7776000 # 90 days, in seconds
-  app_domain: 'localhost:9292'
-  sandbox_domain: 'sandbox.sassmeister.dev'
   cache_max_age: 0
   cookie_domain: ''
   cookie_secret: 'dev'
+  app_domain: 'http://local.sassmeister.com:9292'
+  embed_domain: 'http://local-embed.sassmeister.com:9292'
+  sandbox_domain: 'http://sandbox.sassmeister.dev'
+  asset_domain: ''
 
 test:
   <<: *default_settings
 
 production:
   <<: *default_settings
-  app_domain: 'sassmeister.com'
-  sandbox_domain: 'sandbox.sassmeister.com'
   cache_max_age: 300 # 5 minutes
   cookie_domain: '.sassmeister.com'
+  app_domain: 'http://sassmeister.com'
+  embed_domain: 'http://embed.sassmeister.com'
+  sandbox_domain: 'http://sandbox.sassmeister.com'
+  asset_domain: 'http://cdn.sassmeister.com'
 

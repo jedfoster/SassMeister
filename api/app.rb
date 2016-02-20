@@ -37,7 +37,7 @@ class SassMeisterApp < Sinatra::Base
   class Chairman::Routes
     configure do
       helpers do
-        use Rack::Session::Cookie, key: SassMeisterApp::APP_DOMAIN,
+        use Rack::Session::Cookie, key: SassMeisterApp::COOKIE_DOMAIN,
                                    domain: SassMeisterApp::COOKIE_DOMAIN,
                                    path: '/',
                                    expire_after: SassMeisterApp::SESSION_DURATION,

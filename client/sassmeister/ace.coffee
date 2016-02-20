@@ -108,3 +108,4 @@ angular.module 'SassMeister.ace', [
   $scope.$watch 'app.htmlSyntax', (value) ->
     $scope.editor.getSession().setMode "ace/mode/#{value}" if value
 ]
+
