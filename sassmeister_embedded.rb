@@ -84,7 +84,8 @@ class SassMeisterEmbeddedApp < Sinatra::Base
       else
         sass = file.content
         filename = file.filename
-        owner = (response.respond_to?(:user) ? response.user.login : nil)
+
+        owner = ((response.respond_to?(:user) && response.user) ? response.user.login : nil)
 
         syntax = file.filename.slice(-4, 4)
       end
