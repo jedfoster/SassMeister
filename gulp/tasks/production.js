@@ -2,6 +2,7 @@ var gulp = require('gulp');
 
 // Run this to compress all the things!
 gulp.task('production', function(){
-  // This runs only if the karma tests pass
+  process.env.NODE_ENV = 'production'; 
   gulp.start(['markup', 'minifyCss', 'uglifyJs'])
 });
+
