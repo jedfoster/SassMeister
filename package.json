@@ -16,15 +16,9 @@
     "url": "https://github.com/jedfoster/SassMeister/issues"
   },
   "homepage": "https://github.com/jedfoster/SassMeister",
-  "browserify": {
-    "transform": [
-      "coffeeify",
-      "jadeify"
-    ]
-  },
   "devDependencies": {
-    "browserify": "^9.0.3",
-    "coffeeify": "^1.0.0",
+    "coffee-loader": "^0.7.2",
+    "del": "^1.2.0",
     "gulp": "^3.8.11",
     "gulp-autoprefixer": "^2.1.0",
     "gulp-changed": "^1.1.1",
@@ -41,14 +35,15 @@
     "gulp-yaml": "^1.0.1",
     "hbsfy": "^2.2.1",
     "jade": "^1.9.2",
-    "jadeify": "^4.1.0",
+    "jade-loader": "^0.8.0",
     "lodash": "^3.3.0",
     "marked": "^0.3.3",
     "mocha": "^2.2.1",
     "pretty-hrtime": "^1.0.0",
     "require-dir": "^0.1.0",
+    "vinyl-named": "^1.1.0",
     "vinyl-source-stream": "^1.0.0",
-    "watchify": "^2.4.0"
+    "webpack-stream": "^3.1.0"
   },
   "dependencies": {
     "angular": "^1.4.1",
@@ -61,7 +56,6 @@
     "angular-ui-ace": "git+ssh://git@github.com:angular-ui/ui-ace.git",
     "angular-ui-router": "^0.2.13",
     "brace": "git+ssh://git@github.com:jedfoster/brace.git",
-    "del": "^1.2.0",
     "github-api": "git+ssh://git@github.com:jedfoster/github.git",
     "ng-toast": "^1.5.6",
     "ngstorage": "^0.3.4",

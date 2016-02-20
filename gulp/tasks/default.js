@@ -1,4 +1,4 @@
 var gulp = require('gulp');
 
-gulp.task('default', ['embed', 'sass', 'markup', 'watch']);
+gulp.task('default', ['sass', 'markup', 'webpack', 'watch']);
 

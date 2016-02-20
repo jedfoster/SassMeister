@@ -2,6 +2,9 @@ var dest = './public';
 var src = './client';
 
 module.exports = {
+  javascript: {
+    src: src + '/**/*.{js,coffee}'
+  },
   sass: {
     src: src + '/**/*.{sass,scss}',
     dest: dest,
@@ -34,6 +37,26 @@ module.exports = {
       // list of externally available modules to exclude from the bundle
       // external: ['jquery', 'underscore']
     }]
+  },
+  webpack: {
+    entry: {
+      app: src + '/js/app.coffee',
+      embed: src + '/js/embed.coffee'
+    },
+    output: {
+      path: __dirname + '/../public/js/',
+      filename: '[name].js'
+    },
+    module: {
+      loaders: [
+        { test: /\.jade$/, loader: "jade" },
+        { test: /\.json$/, loader: 'json' },
+        { test: /\.coffee$/, loader: "coffee" }
+      ]
+    },
+    resolve: {
+      extensions: ['', '.js', '.json', '.coffee']
+    }
   },
   embed: {
     src: [src + '/js/embed.coffee'],
