@@ -8,8 +8,8 @@ gulp.task('markup', ['yaml'], function() {
   var data = require('../../config/config.json')[env];
 
   return gulp.src(config.src)
-    .pipe(mustache(data, {tags: ['{%', '%}']}))
     .pipe(jade())
+    .pipe(mustache(data, {tags: ['{%', '%}']}))
     .pipe(gulp.dest(config.dest));
 });
 
