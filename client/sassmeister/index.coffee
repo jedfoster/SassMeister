@@ -175,7 +175,7 @@ angular.module 'SassMeister', [
 
   $scope.$watch 'preferences.emmet', (value) ->
     $window.ga('send', 'event', 'UI', 'Emmet', "#{value}")
-    
+
     if value and not $window.emmet
       angularLoad.loadScript 'http://nightwing.github.io/emmet-core/emmet.js'
         .then ->
@@ -188,7 +188,7 @@ angular.module 'SassMeister', [
     $scope.autoprefixer = value
 
     $window.ga('send', 'event', 'UI', 'SetAutoprefixer', "#{value}")
-    
+
     if value and not $window.autoprefixer
       angularLoad.loadScript 'https://cdn.rawgit.com/ai/autoprefixer-rails/6.0.3/vendor/autoprefixer.js'
         .then ->
@@ -201,6 +201,7 @@ angular.module 'SassMeister', [
     $scope.preferences.sassResizable = {width: null, height: null}
     $scope.preferences.cssResizable = {width: null, height: null}
     $scope.preferences.sandboxResizable = {width: null, height: null}
+    do windowResize
 
   $scope.editorOrientation = () ->
     if $scope.preferences.orientation == 'vertical' then 'bottom' else 'right'

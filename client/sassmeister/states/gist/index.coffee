@@ -137,7 +137,7 @@ angular.module 'SassMeister.gist', [
         gist.files[$scope.cssFileName].content = $scope.app.css if gist.files[$scope.cssFileName]
         gist.files[$scope.htmlFileName].content = $scope.app.html if gist.files[$scope.htmlFileName]
         gist.files[$scope.renderedHTMLFileName].content = $scope.app.renderedHTML if gist.files[$scope.renderedHTMLFileName]
-        
+
         if gist.files['browserslist'] $scope.preferences.autoprefixer and $scope.preferences.autoprefixerBrowsers
           gist.files['browserslist'].content = $scope.preferences.autoprefixerBrowsers.split(', ').join("\n")
 

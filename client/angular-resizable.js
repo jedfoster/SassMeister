@@ -59,7 +59,7 @@ angular.module('angularResizable', [])
                     viewportX = document.documentElement.clientWidth;
                     viewportY = document.documentElement.clientHeight;
                     info.width = false; info.height = false;
-                    var w = element[0].style[scope.rFlex ? flexBasis : 'width'], 
+                    var y = element[0].style[scope.rFlex ? flexBasis : 'width'], 
                         x = element[0].style[scope.rFlex ? flexBasis : 'height'];
                     if(axis === 'x')
                         info.width = x.indexOf('%') === -1 ? percentX(x) : x;
