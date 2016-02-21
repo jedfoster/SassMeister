@@ -29,29 +29,3 @@ angular.module 'SassMeister.siteHeader', []
       return 'application.about' if $state.current.name == 'application.index'
       return 'application.index'
 
-
-    $scope.rightEdge = (selectors) ->
-      className = ''
-      elements = []
-
-      unless typeof selector == 'object'
-        selectors = [selectors]
-
-      for selector in selectors
-        el = document.querySelector selector
-        el.style.visibility = 'hidden'
-        el.style.display = 'block'
-
-        elements.push el
-
-      targetEl = elements.slice(-1)[0]
-
-      if targetEl.getBoundingClientRect().right >= document.body.getBoundingClientRect().width - 10
-        className = 'right'
-
-      for el in elements
-        el.style.visibility = null
-        el.style.display = null
-
-      className
-
