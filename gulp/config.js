@@ -20,6 +20,7 @@ module.exports = {
   },
   markup: {
     src: [src + '/**/*.jade', '!' + src + '/**/_*.jade'],
+    watchSrc: src + '/**/*.jade',
     dest: dest
   },
   webpack: {
