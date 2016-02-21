@@ -64,6 +64,8 @@ aceLoaded = (editor, scope) ->
   scope.$watch 'tabView', ->
     editor.resize true
 
+  scope.$watch 'hasTouch', ->
+    editor.resize true
 
 loadEmmet = (scope) ->
   scope.$watch 'emmet', (value) ->

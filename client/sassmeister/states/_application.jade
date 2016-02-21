@@ -1,6 +1,6 @@
 site-header(ng-if='!isEmbedded')
 
-main(ng-class='[orientation, {embedded: isEmbedded}]')
+main(ng-class='[orientation, {embedded: isEmbedded, touch: hasTouch}]')
   .mobile-tabs
     h2(ng-click='setTab(\'sass\')' ng-class='{current: tabView === \'sass\'}') {{app.displayCompiler || 'Sass'}}
     h2(ng-click='setTab(\'css\')' ng-class='{current: tabView === \'css\'}') CSS

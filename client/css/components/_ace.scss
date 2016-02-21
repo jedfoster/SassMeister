@@ -3,6 +3,21 @@
   font-size: 0.75em;
 }
 
+&.touch {
+  resizable {
+    overflow-y: scroll;
+  }
+
+  .editor-wrapper {
+    position: relative;
+    height: 10000px;
+
+    ui-ace {
+      margin-top: 0;
+    }
+  }
+}
+
 @import "themes/dawn";
 @import "themes/github";
 @import "themes/kuroir";

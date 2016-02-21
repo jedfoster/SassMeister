@@ -107,6 +107,13 @@ angular.module 'SassMeister', [
   $scope.avatarUrl = $cookies.get 'avatar_url'
   $scope.showCompiling = false
   $scope.compileTime = false
+  $scope.hasTouch = false
+
+  setHasTouch = () ->
+    $scope.hasTouch = true
+    $window.removeEventListener('touchstart', setHasTouch)
+
+  $window.addEventListener('touchstart', setHasTouch, false)
 
   # Set default values for commonly evaluated values
   $scope.gist = false
