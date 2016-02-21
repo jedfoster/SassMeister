@@ -39,6 +39,9 @@ aceLoaded = (editor, scope) ->
   editor.commands.bindKeys({"Command-S": scope.commandS})
   editor.commands.bindKeys({"Shift-Command-S": scope.shiftCommandS})
 
+  # Disable ACE's searchbox feature
+  editor.commands.bindKeys({"Command-F": false})
+
   session.setTabSize 2
   session.setUseSoftTabs true
 
