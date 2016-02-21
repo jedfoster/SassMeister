@@ -16,6 +16,12 @@ main(ng-class='[orientation, {embedded: isEmbedded}]')
 
     resizable#cssResizable(r-directions='{{preferences.htmlVisible ? editorOrientation() : null }}' r-flex='true' r-width='preferences.cssResizable.width' r-height='preferences.cssResizable.height' ng-show='(!tabView && preferences.cssVisible) || (tabView === \'css\')')
       h2.editor-header CSS
+        span#sass-compiling(ng-if='showCompiling && !compileTime')
+          span.timer
+          | Compiling
+
+        span#compile-time(ng-if='compileTime' ng-class='{fade: compileTime}') Compiled in {{compileTime}}s
+
         span.autoprefixer(ng-if='preferences.autoprefixer')
 
       .editor-wrapper(ng-controller='AceCssController')

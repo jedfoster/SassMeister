@@ -105,6 +105,8 @@ angular.module 'SassMeister', [
   $scope.sandbox =  config.sandbox
   $scope.githubId = $cookies.get 'github_id'
   $scope.avatarUrl = $cookies.get 'avatar_url'
+  $scope.showCompiling = false
+  $scope.compileTime = false
 
   # Set default values for commonly evaluated values
   $scope.gist = false
@@ -125,6 +127,9 @@ angular.module 'SassMeister', [
   $scope.compile = (app)->
     return if $state.includes('application.404') or $state.includes('application.about') or $state.includes('application.embedded') or $rootScope.isEmbedded
 
+    $scope.compileTime = false
+    $scope.showCompiling = true
+
     Compiler.compile {
       input: app.sass
       compiler: app.compiler
@@ -142,6 +147,13 @@ angular.module 'SassMeister', [
           console.warn e
       else
         app.css = data.css
+
+      $scope.showCompiling = false
+      $scope.compileTime = data.time
+
+      setTimeout( ->
+        $scope.compileTime = false
+      , 10750)
 
       if app.html
         $scope.renderHtml app

@@ -371,3 +371,61 @@ article
       @media screen and (max-width: 380px)
         width: 100%
 
+
+$timer-size: 21px
+$timer-speed: 1000ms
+$timer-color: #888
+$timer-border-width: 2px
+
+// Modified from http://css-spinners.com/#/spinner/timer/
+@keyframes timer
+  0%
+    transform: rotate(0deg)
+
+  100%
+    transform: rotate(360deg)
+
+/* :not(:required) hides this rule from IE9 and below
+.timer:not(:required)
+  border-radius: 50%
+  border: $timer-border-width solid $timer-color
+  display: inline-block
+  overflow: hidden
+  position: relative
+  text-indent: -9999px
+  width: $timer-size
+  height: $timer-size
+  top: 0.2em
+  margin-right: 0.5em
+
+  &::before, &::after
+    animation: timer $timer-speed infinite linear
+    transform-origin: ($timer-size / 16) ($timer-size / 16)
+    border-radius: $timer-size / 16
+    background: $timer-color
+    content: ''
+    display: block
+    position: absolute
+    width: $timer-size / 9
+    height: 2 * $timer-size / 5
+    left: $timer-size / 2 - $timer-size / 16 - $timer-border-width
+    top: $timer-size / 2 - $timer-size / 16 - $timer-border-width
+
+  &::after
+    animation: timer (12 * $timer-speed) infinite linear
+    height: $timer-size / 3
+
+
+#sass-compiling
+  position: relative
+  margin-left: 0.25em
+  z-index: 1
+
+#compile-time
+  opacity: 1
+
+#compile-time.fade
+  opacity: 0
+  transition: opacity 0.5s ease-in-out
+  transition-delay: 10s !important
+
