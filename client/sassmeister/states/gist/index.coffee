@@ -36,7 +36,7 @@ angular.module 'SassMeister.gist', [
             $githubGist($stateParams.id).read().then null, fail
 
 
-.controller 'GistController', ($scope, $rootScope, $sassMeisterGist, $githubGist, $state, $stateParams, Sandbox, data, ngToast, $sce) ->
+.controller 'GistController', ($scope, $rootScope, $sassMeisterGist, $githubGist, $state, $stateParams, Sandbox, data, ngToast, $sce, $window) ->
   $scope.app =
     dependencies: {}
   $scope.app.outputStyle = 'expanded'
