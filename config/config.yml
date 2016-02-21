@@ -2,7 +2,7 @@ development: &default_settings
   app_version: '2.0.1'
   session_duration: 7776000 # 90 days, in seconds
   cache_max_age: 0
-  cookie_domain: ''
+  cookie_domain: 'local.sassmeister.com'
   cookie_secret: 'dev'
   app_domain: 'http://local.sassmeister.com:9292'
   embed_domain: 'http://local-embed.sassmeister.com:9292'

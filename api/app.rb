@@ -8,6 +8,9 @@ require 'json'
 require 'yaml'
 require 'sassmeister/helpers'
 require 'sassmeister/api_routes'
+require 'dotenv'
+
+Dotenv.load
 
 class SassMeisterApp < Sinatra::Base
   register Sinatra::RespondWith
@@ -32,7 +35,6 @@ class SassMeisterApp < Sinatra::Base
   configure :production do
     require 'newrelic_rpm'
   end
-
   # implement redirects
   class Chairman::Routes
     configure do
