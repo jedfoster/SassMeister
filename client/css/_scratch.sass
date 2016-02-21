@@ -132,11 +132,13 @@ main
   text-align: left
   padding-right: 15px
 
+$editor-header-size: 0.875em
+
 %editor-header
   border-bottom: 1px solid $golf-gray
   background: $gray-2
   color: scale-color($gray-1, $lightness: 30%)
-  font-size: 1em
+  font-size: $editor-header-size
   display: flex
   margin: 0
 
@@ -146,7 +148,7 @@ main
     cursor: pointer
 
   .embedded &
-    font-size: 1em
+    font-size: $editor-header-size
     background: $alpha_color_fox
 
 .editor-header
@@ -180,7 +182,7 @@ main
       color: $white
 
 .editor-wrapper ui-ace
-  margin-top: 2.1em
+  margin-top: $editor-header-size + 1em
 
   @media #{$tablet}
     margin-top: 0
@@ -372,10 +374,11 @@ article
         width: 100%
 
 
-$timer-size: 21px
+$timer-size: 16px
 $timer-speed: 1000ms
 $timer-color: #888
 $timer-border-width: 2px
+$timer-factor: 16
 
 // Modified from http://css-spinners.com/#/spinner/timer/
 @keyframes timer
@@ -395,21 +398,21 @@ $timer-border-width: 2px
   text-indent: -9999px
   width: $timer-size
   height: $timer-size
-  top: 0.2em
+  top: 0.25em
   margin-right: 0.5em
 
   &::before, &::after
     animation: timer $timer-speed infinite linear
-    transform-origin: ($timer-size / 16) ($timer-size / 16)
-    border-radius: $timer-size / 16
+    transform-origin: ($timer-size / $timer-factor) ($timer-size / $timer-factor)
+    border-radius: $timer-size / $timer-factor
     background: $timer-color
     content: ''
     display: block
     position: absolute
     width: $timer-size / 9
-    height: 2 * $timer-size / 5
-    left: $timer-size / 2 - $timer-size / 16 - $timer-border-width
-    top: $timer-size / 2 - $timer-size / 16 - $timer-border-width
+    height: 2 * $timer-size / 5.5
+    left: $timer-size / 2 - $timer-size / $timer-factor - $timer-border-width
+    top: $timer-size / 2 - $timer-size / $timer-factor - $timer-border-width
 
   &::after
     animation: timer (12 * $timer-speed) infinite linear
