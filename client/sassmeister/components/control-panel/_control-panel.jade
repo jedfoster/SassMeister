@@ -1,0 +1,112 @@
+ul.menu-list-section(data-event-name='SassVersion')
+  span Compiler
+
+  li.menu-list-item.checkable(ng-repeat="compiler in compilers")
+    label
+      input(type='radio' name='compiler' ng-model='app.compiler' ng-value='compiler.value')
+      | {{compiler.option}}
+
+ul.menu-list-section(data-event-name='SassSyntax')
+  span Syntax
+
+  li.menu-list-item.checkable
+    label
+      input(type='radio' name='syntax' value='scss' ng-model='app.syntax' ng-change='convert(app)')
+      | SCSS
+
+  li.menu-list-item.checkable
+    label
+      input(type='radio' name='syntax' value='sass' ng-model='app.syntax' ng-change='convert(app)')
+      | Sass
+
+.menu-list-section
+  .menu-list-item.has-sub-menu
+    span Extensions
+
+    ol.menu-sub-list
+      //- Per http://www.alexkras.com/11-tips-to-improve-angularjs-performance/
+      //- `::` is one-time binding
+      li.menu-list-item(ng-repeat='(name, extension) in extensions')
+        a(href='#' data-import='{{::extension.import}}' ng-click='insertImport(extension.import, app)') 
+          span {{::name}}
+          span (v{{::extension.version}})
+
+
+.menu-list-section(data-event-name='CSSOutput')
+  .menu-list-item.has-sub-menu
+    span CSS Output
+    ul.menu-sub-list
+      li.menu-list-item.checkable
+        label
+          input(type='radio' name='output-style' value='expanded' ng-model='app.outputStyle' ng-change='compile(app)')
+          | expanded
+      li.menu-list-item.checkable
+        label
+          input(type='radio' name='output-style' value='nested' ng-model='app.outputStyle' ng-change='compile(app)')
+          | nested
+      li.menu-list-item.checkable
+        label
+          input(type='radio' name='output-style' value='compact' ng-model='app.outputStyle' ng-change='compile(app)')
+          | compact
+      li.menu-list-item.checkable
+        label
+          input(type='radio' name='output-style' value='compressed' ng-model='app.outputStyle' ng-change='compile(app)')
+          | compressed
+
+
+.menu-list-section
+  label.menu-list-item.checkable
+    input(type='checkbox' name='autoprefixer' value='true' ng-model='preferences.autoprefixer')
+    span.autoprefixer
+    | Autoprefixer
+
+
+  a.menu-list-item(ng-if='autoprefixer' ng-click='autoprefixerBrowsers()') Browsers...
+
+
+.menu-list-section(data-event-name='HTMLSyntax')
+  .menu-list-item.has-sub-menu
+    span HTML Syntax
+    ul.menu-sub-list
+      li.menu-list-item.checkable
+        label
+          input(type='radio' name='html-syntax' value='html' ng-model='app.htmlSyntax' ng-change='renderHtml(app)')
+          | HTML
+
+      li.menu-list-item.checkable
+        label
+          input(type='radio' name='html-syntax' value='haml' ng-model='app.htmlSyntax' ng-change='renderHtml(app)')
+          | Haml
+
+      li.menu-list-item.checkable
+        label
+          input(type='radio' name='html-syntax' value='markdown' ng-model='app.htmlSyntax' ng-change='renderHtml(app)')
+          | Markdown
+
+      li.menu-list-item.checkable
+        label
+          input(type='radio' name='html-syntax' value='jade' ng-model='app.htmlSyntax' ng-change='renderHtml(app)')
+          | Jade
+
+.menu-list-section
+  .menu-list-item.has-sub-menu
+    span Theme
+
+    ul.menu-sub-list
+      li.menu-list-item.checkable(ng-repeat="(theme, name) in themes")
+        label
+          input(type='radio' name='theme' ng-model='preferences.theme' ng-value='theme')
+          | {{name}}
+
+  label.menu-list-item.checkable
+    input(type='checkbox' name='emmet' value='true' ng-model='preferences.emmet')
+    | Emmet
+
+  label.menu-list-item.checkable
+    input(type='checkbox' name='vim' value='true' ng-model='preferences.vim')
+    | Vim Key Bindings
+
+  label.menu-list-item.checkable
+    input(type='checkbox' name='scrollPastEnd' value='true' ng-model='preferences.scrollPastEnd')
+    | Scroll Past End
+

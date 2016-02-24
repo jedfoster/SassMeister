@@ -4,19 +4,20 @@ require 'rack/contrib'
 require 'rack-cache'
 require 'dalli'
 require 'memcachier'
-require './lib/rack/static_cache'
+require 'dotenv'
 
-require './sassmeister'
-require './sassmeister_embedded'
-
+require './api/lib/rack/static_cache'
+require './api/app'
+require './api/app_embedded'
 
 # Gzip responses
 use Rack::Deflater
 
+Dotenv.load
 
 if ENV['RACK_ENV'] == 'production'
   # Set Cache-Control and ETag headers
-  use Rack::StaticCache, urls: ['/js', '/css', '/fonts', '/favicon.ico'], root: 'public', duration: 90
+  use Rack::StaticCache, urls: ['/js', '/img', '/css', '/fonts', '/favicon.ico'], root: 'public', duration: 90
 
   if memcachier_servers = ENV['MEMCACHIER_SERVERS']
     cache = Dalli::Client.new memcachier_servers.split(','), {
@@ -34,23 +35,19 @@ if ENV['RACK_ENV'] == 'production'
   run Rack::URLMap.new({
     'http://embed.sassmeister.com/' => SassMeisterEmbeddedApp,
     '/' => SassMeisterApp
-  }) 
+  })
 
 else
-  map "/js" do
-    run Rack::File.new("javascripts")
-  end
-
-  require 'rack/env'
-  use Rack::Env
+  use Rack::Static, urls: ['/js', '/img', '/css', '/fonts', '/favicon.ico'], root: 'public'
 
   use Rack::Cache,
     verbose: true,
     metastore:   'memcached://localhost:11211',
     entitystore: 'memcached://localhost:11211'
-  
+
   run Rack::URLMap.new({
     'http://embed.sassmeister.dev/' => SassMeisterEmbeddedApp,
+    'http://local-embed.sassmeister.com/' => SassMeisterEmbeddedApp,
     '/' => SassMeisterApp
   })
 

@@ -1,0 +1,14 @@
+@mixin sub-menu
+  position: absolute
+  z-index: 9999
+  top: $site-header-height
+  left: 0
+  color: $white
+  background: $menu-background
+  border-bottom-left-radius: em(3)
+  border-bottom-right-radius: em(3)
+
+  &.right
+    left: initial
+    right: 0
+

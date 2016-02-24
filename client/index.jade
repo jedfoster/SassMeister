@@ -1,0 +1,41 @@
+doctype html
+html.no-js(ng-app='SassMeister')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible' content='IE=edge,chrome=1')
+
+    title SassMeister | The Sass Playground!
+
+    meta(name='description' content='SassMeister is a playground for Sass. Add some Sass and SassMeister will show you the rendered CSS.')
+    meta(name='author' lang='en' content='Jed Foster and Dale Sande')
+    meta(name="viewport" content='width=device-width, initial-scale=1.0, minimum-scale=0.5 maximum-scale=1.0')
+
+    base(href='/')
+
+    block globalJS
+      script.
+        window.SassMeister = {};
+
+    link(rel='stylesheet' href='{%& asset_domain %}/css/app.css')
+
+  body(class='{{$state.current.controller}}')
+    block content
+      ui-view
+        .loading-state
+          .loader
+            svg
+              title SassMeister: The sassiest way to play with Sass, Compass, & LibSass!
+              use(xlink:href='/img/icons.svg#sassmeister')
+
+            | Loading...
+
+    script.
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      (function(){if(/Trident\/[567]\b/.test(navigator.userAgent)||(navigator.userAgent.match(/AppleWebKit\/(\d+)/)||[])[1]<537){var s = document.createElement('script');s.src = 'http://cdn.rawgit.com/jonathantneal/svg4everybody/v2.0.0/dist/svg4everybody.min.js';document.head.appendChild(s);}})();
+
+    script(src='{%& asset_domain %}/js/app.js')
+

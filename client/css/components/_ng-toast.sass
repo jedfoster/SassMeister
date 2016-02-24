@@ -1,0 +1,65 @@
+$ngt-module: 'ng-toast'
+$ngt-spacing: 20px
+$ngt-transition-duration: 0.3s
+$ngt-transition-timing-function: ease
+
+// Base style
+.#{$ngt-module}
+  position: fixed
+  z-index: 1080
+  width: 100%
+  height: 0
+  margin-top: $site-header-height
+  text-align: center
+
+  &.#{$ngt-module}--top
+    top: 0
+    bottom: auto
+    .#{$ngt-module}__list
+      top: 0
+      bottom: auto
+
+
+  &.#{$ngt-module}--bottom
+    top: auto
+    bottom: 0
+    .#{$ngt-module}__list
+      top: auto
+      bottom: 0
+
+    &.#{$ngt-module}--center
+      .#{$ngt-module}__list
+        pointer-events: none
+      .#{$ngt-module}__message
+        .alert
+          pointer-events: auto
+
+
+  // &.#{$ngt-module}--left
+  //   .#{$ngt-module}__list
+  //     right: auto
+  //     left: 0
+  //     margin-left: $ngt-spacing
+
+  //   .#{$ngt-module}__message
+  //     text-align: left
+
+  .#{$ngt-module}__list
+    display: inline-block
+    position: absolute
+    right: 0
+    left: 0
+    margin: 0 auto
+    padding: 0
+    list-style: none
+
+  .#{$ngt-module}__message
+    display: block
+    width: 100%
+    text-align: center
+
+
+  .#{$ngt-module}__message__count
+    display: inline-block
+    margin: 0 ($ngt-spacing / 4 * 3) 0 ($ngt-spacing / 4)
+

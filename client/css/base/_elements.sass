@@ -1,0 +1,82 @@
+h1
+  @extend %heading-1
+
+h2
+  @extend %heading-2
+
+h3
+  @extend %heading-3
+
+h4
+  @extend %heading-4
+
+h5
+  @extend %heading-5
+
+h6
+  @extend %heading-6
+
+p
+  @extend %standard-text
+  font-weight: $font-weight-light
+
+a
+  color: $link-color
+  cursor: pointer
+
+  &:hover
+    color: $link-color
+    text-decoration: underline
+
+code, pre
+  font-family: $monospace-font-family
+
+select
+  @extend %form-element-select
+
+//input[type='datetime'],
+//input[type='datetime-local'],
+//input[type='date'],
+//input[type='month'],
+//input[type='time'],
+//input[type='week'],
+//input[type='url'],
+//input[type='search'],
+//input[type='color']
+
+input[type='text'],
+input[type='password'],
+input[type='email'],
+input[type='tel'],
+input[type='number']
+  @extend %form-element
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button
+  -webkit-appearance: none
+  margin: 0
+
+button, a.button
+  @include button
+
+hr
+  @extend %horizontal-rule
+
+ul, ol, table
+  @extend %standard-text
+
+table
+  width: 100%
+
+tbody tr:nth-child(odd)
+  @extend %zebra
+
+img
+  max-width: 100%
+
+svg
+  width: 100%
+  height: 100%
+
+
+

@@ -6,9 +6,11 @@
 .pow*
 public/js/*
 public/css/*
+public/*.html
 tmp
 log
 config/*.txt
 config/asset-manifest.yml
 s3_website.yml
-javascripts/compiled/*
+node_modules/
+config/config.json

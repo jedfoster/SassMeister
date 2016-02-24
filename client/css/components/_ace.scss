@@ -1,0 +1,29 @@
+.ace_editor {
+  font-family: $monospace-font-family !important;
+  font-size: 0.75em;
+}
+
+&.touch {
+  resizable {
+    overflow-y: scroll;
+  }
+
+  .editor-wrapper {
+    position: relative;
+    height: 10000px;
+
+    ui-ace {
+      margin-top: 0;
+    }
+  }
+}
+
+@import "themes/dawn";
+@import "themes/github";
+@import "themes/kuroir";
+@import "themes/solarized-light";
+@import "themes/tomorrow";
+@import "themes/merbivore-soft";
+@import "themes/monokai";
+@import "themes/solarized-dark";
+@import "themes/tomorrow-night-eighties";

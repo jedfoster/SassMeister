@@ -1,0 +1,15 @@
+@mixin alert($alert-map: $info-alert)
+  @extend %alert
+
+  @each $property, $value in $alert-map
+    #{$property}: $value
+
+  a
+    color: mix(map-get($alert-map, 'color'), $blue-1, 65%)
+    text-decoration: underline
+
+%alert
+  padding: 0.7em 0.75em
+  margin-bottom: 1.475em
+  border: 1px solid
+

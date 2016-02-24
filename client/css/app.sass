@@ -1,0 +1,132 @@
+$include-normalize: true
+$include-elements: true
+
+
+$gray-1: #333
+
+
+$alpha-primary: rgb(215, 88, 147)
+$bravo-primary:   #92e24a        // green
+$delta-primary:   #4abbe2        // blue
+
+// Old SM brand pink: #E24A8D ( rgb(226, 74, 141) )
+// Sass brand pink: #c69 ( rgb(204, 102, 153) )
+// Average: rgb(215, 88, 147)
+
+// Official Sass Colors
+
+// Brand Colors
+
+// $hopbush #c69
+// $bouquet #b37399
+// $venus #998099
+// $patina #699
+// $nebula #d2e1dd
+// $white #fff
+// $dawn-pink #f2ece4
+// $wafer #e1d7d2
+// $iron #dadbdf
+// $regent-grey #808c99
+// $pale-sky #6b717f
+// $midnight-blue #036
+
+// Usage
+
+// $color-shadow	rgba($black, .125)
+// $color-primary	$hopbush
+// $color-accent	$patina
+// $color-background	$white
+// $color-background-shade	$iron
+// $color-background-invert	$hopbush
+// $color-text	darken($pale-sky, 15)
+// $color-text-weak	$regent-grey
+// $color-text-strong	$midnight-blue
+// $color-text-heading	$regent-grey
+// $color-text-invert	rgba($color-background, .75)
+// $color-text-strong-invert	$color-background
+// $color-text-link	$color-primary
+// $color-text-link-visited	$bouquet
+// $color-text-link-hover	$midnight-blue
+// $color-border	$iron
+
+
+$alpha_color_charlie: scale-color($alpha-primary, $lightness: 20%)
+$alpha_color_delta:   scale-color($alpha-primary, $lightness: 30%)
+
+// .embedded .editor-header
+$alpha_color_fox:     scale-color($alpha-primary, $lightness: 45%)
+
+
+$alpha_color_hotel:   scale-color($alpha-primary, $lightness: 70%)
+
+$bravo_color_bravo:   scale-color($bravo-primary, $lightness: 10%)
+$bravo_color_india:   scale-color($bravo-primary, $lightness: 80%)
+
+$delta_color_bravo:   scale-color($delta-primary, $lightness: 10%)
+$delta_color_india:   scale-color($delta-primary, $lightness: 80%)
+
+
+$delta_gray: scale-color($gray-1, $lightness: 30%)
+
+// Color aliases
+$alpha_color: $alpha-primary
+$bravo_color: $bravo-primary
+$delta_color: $delta-primary
+$alpha_gray: $gray-1
+
+$golf-gray: scale-color($alpha_gray, $lightness: 60%)
+
+$link-color: $alpha-primary
+$selection-color: $alpha_color_hotel
+
+$monospace-font-family: #{'Source Code Pro', monospace}
+
+$site-header-height: 2em
+
+$mobile:              "screen and (max-width: 30em)"; // Target 576px
+$min-mobile:          "screen and (min-width: 30em)"; // Target 576px
+$min-sub-menu:        "screen and (min-width: 40em)"; // Target 576px
+$tablet:              "screen and (max-width: 48em)"; // Target 768px
+$desktop:             "screen and (min-width: 48em)";
+
+$flyout-icon: url('data:image/svg+xml;utf8,<svg viewBox="0 0 31 34" xmlns="http://www.w3.org/2000/svg"><path fill="#fff" d="M0 0v33.7l30.5-17L0 0"/></svg>')
+
+$checkmark-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 41 34"><path fill="#fff" d="M35 0L13.2 21.8l-7.4-7.3L0 20.3l13.2 13L40.8 6 35 0"/></svg>')
+
+$control-panel-width: 15em
+
+$menu-background: transparentize(scale-color($alpha_color, $lightness: -80%), 0.2)
+
+@import index
+
+%link
+  color: #00e
+  cursor: pointer
+  text-decoration: underline
+
+iframe
+  border: 0
+
+ui-ace
+  position: absolute !important
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+
+a, [ng-click]
+  color: inherit
+
+.autoprefixer
+  background: url('https://cdn.rawgit.com/postcss/autoprefixer/6.0.3/logo.svg') 50% 50% no-repeat
+  background-size: contain
+  display: inline-block
+  width: 1.5em
+  height: 1em
+  align-self: center
+
+  site-header &
+    margin-right: 0.25em
+
+@import scratch
+

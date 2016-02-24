@@ -1,7 +1,7 @@
 api:
 
   # These defaults can be overridden with the following environment variables:
-  #   ENV['LIBSASS_ENDPOINT'] 
+  #   ENV['LIBSASS_ENDPOINT']
   #   ENV['SASS_34_ENDPOINT']
 
   development: &default_settings

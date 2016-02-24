@@ -1,0 +1,48 @@
+carbon-ad
+  position: fixed
+  bottom: 0
+  right: 0
+  max-width: 328px
+  z-index: 20
+
+  @media #{$tablet}
+    bottom: 1.5em
+
+  @media #{$mobile}
+    display: none
+
+#carbonads
+  display: block
+  overflow: hidden
+  padding: 0.5em
+  line-height: 1.25
+  font-size: 14px
+  background: $gray-3
+  border: 1px solid $gray-2
+  border-bottom: 0
+  border-right: 0
+
+  span
+    display: block
+    overflow: hidden
+
+.carbon-text
+  display: block
+  float: left
+  max-width: 50%
+  text-align: left
+  color: scale-color($gray-1, $lightness: 30%)
+
+.carbon-img
+  float: left
+  margin-right: 12px
+  width: 130px
+  height: 100px
+
+.carbon-poweredby
+  display: block
+  float: left
+  margin: -1.2em 0 0 142px
+  font-size: 10px
+  color: scale-color($gray-1, $lightness: 30%)
+

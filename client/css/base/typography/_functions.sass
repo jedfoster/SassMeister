@@ -1,0 +1,15 @@
+@function em($target, $context: $font-size-base)
+  @return $target / $context * 1em
+
+
+// Baseline height calculations
+// line-height: baseline($size);
+@function baseline($current-font-size)
+  @return $line-height-base / $current-font-size * ceil($current-font-size / $line-height-base) * $line-height-base
+
+
+// Baseline margin calculations
+// margin-bottom: baseline-margin($size);
+@function baseline-margin($current-font-size)
+  @return em($font-size-base, $current-font-size) * $line-height-base
+

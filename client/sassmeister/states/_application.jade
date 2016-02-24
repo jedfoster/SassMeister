@@ -1,0 +1,60 @@
+site-header(ng-if='!isEmbedded')
+
+main(ng-class='[orientation, {embedded: isEmbedded, touch: hasTouch}]')
+  .mobile-tabs
+    h2(ng-click='setTab(\'sass\')' ng-class='{current: tabView === \'sass\'}') {{app.displayCompiler || 'Sass'}}
+    h2(ng-click='setTab(\'css\')' ng-class='{current: tabView === \'css\'}') CSS
+    h2(ng-click='setTab(\'html\')' ng-class='{current: tabView === \'html\'}' ng-if='app.html') HTML
+    h2(ng-click='setTab(\'result\')' ng-class='{current: tabView === \'result\'}' ng-if='app.html') Result
+
+  .editors(ng-class='{html: preferences.htmlVisible}' ng-show='tabView !== \'result\'')
+    resizable#sassResizable(r-directions='{{editorOrientation()}}' r-flex='true' r-width='preferences.sassResizable.width' r-height='preferences.sassResizable.height' ng-show='!tabView || tabView === \'sass\'')
+      h2.editor-header {{app.displayCompiler || 'Sass'}}
+
+      .editor-wrapper(ng-controller='AceSassController')
+        ui-ace(ng-model='app.sass' ng-model-options='{ debounce: 750 }' ng-change='compile(app)' ui-ace='{onLoad: aceLoaded}')
+
+    resizable#cssResizable(r-directions='{{preferences.htmlVisible ? editorOrientation() : null }}' r-flex='true' r-width='preferences.cssResizable.width' r-height='preferences.cssResizable.height' ng-show='(!tabView && preferences.cssVisible) || (tabView === \'css\')')
+      h2.editor-header CSS
+        span#sass-compiling(ng-if='showCompiling && !compileTime')
+          span.timer
+          | Compiling
+
+        span#compile-time(ng-if='compileTime' ng-class='{fade: compileTime}') Compiled in {{compileTime}}s
+
+        span.autoprefixer(ng-if='preferences.autoprefixer')
+
+      .editor-wrapper(ng-controller='AceCssController')
+        ui-ace(ng-model='app.css' ui-ace='{onLoad: aceLoaded, mode: \'css\'}' readonly)
+
+    div(ng-show='(!tabView && preferences.htmlVisible) || (tabView === \'html\')')
+      h2.editor-header HTML
+
+      .editor-wrapper(ng-controller='AceHtmlController')
+        ui-ace(ng-model='app.html' ng-model-options='{ debounce: 750 }' ng-change='renderHtml(app)' ui-ace='{onLoad: aceLoaded}')
+
+
+  resizable#sandboxResizable(r-directions='{{sandboxOrientation()}}' r-flex='true' r-width='preferences.sandboxResizable.width' r-height='preferences.sandboxResizable.height' ng-show='(!tabView && preferences.htmlVisible) || (tabView === \'result\')')
+    iframe#sandbox(sandbox='allow-scripts allow-same-origin' ng-src='{{sandbox}}')
+
+    #resizable-mask(hidden)
+
+  footer
+    p(ng-if='gist') Gist by 
+      a(ng-href='gist.owner.html_url') {{gist.owner.login}}
+
+    p(ng-if='!isEmbedded')
+      a(href='/about' ui-sref='application.about') About SassMeister
+
+
+    p(ng-if='isEmbedded')
+      a.logo(href='http://sassmeister.com/gist/{{gist.id}}')
+        span.cta Play with this on 
+        svg
+          title SassMeister: The sassiest way to play with Sass, Compass, & LibSass!
+          use(xlink:href='/img/icons.svg#sassmeister')
+
+  carbon-ad
+
+toast
+

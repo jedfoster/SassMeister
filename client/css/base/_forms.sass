@@ -1,0 +1,29 @@
+%form-element
+  width: 100%
+  line-height: em(36)
+  padding: 0 em(11)
+  background: $form-element-background
+  border: 1px solid $form-element-border
+  -moz-border-radius: $border-radius
+  -webkit-border-radius: $border-radius
+  border-radius: $border-radius
+  color: $form-element-color
+  -webkit-appearance: none
+  -moz-appearance: none
+  appearance: none
+
+  &:hover,
+  &:focus
+    border: 1px solid $form-element-active-border
+    color: $form-element-active-color
+
+
+%form-element-select
+  @extend %form-element
+
+  text-overflow: ''
+
+  // @-moz-document url-prefix() // For the future, sass2scss can't handle this.
+  line-height: initial
+  padding: em(8) em(11)
+

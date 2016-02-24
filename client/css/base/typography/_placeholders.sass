@@ -1,0 +1,41 @@
+%heading-1
+  @include text($heading-1)
+
+  font-weight: $heading-font-weight
+  font-family: $heading-font-family
+
+%heading-2
+  @extend %heading-1
+  @include text($heading-2)
+
+%heading-3
+  @extend %heading-1
+  @include text($heading-3)
+
+%heading-4
+  @extend %heading-1
+  @include text($heading-4)
+
+%heading-5
+  @extend %heading-1
+  @include text($heading-5)
+
+%heading-6
+  @extend %heading-1
+  @include text($heading-6)
+
+%standard-text
+  @include text($font-size-base)
+
+%horizontal-rule
+  @extend %clearfix
+
+  height: em($font-size-base * $line-height-base)
+  margin: 0
+  border: 0
+  border-top: 1px solid $border-color
+
+%zebra
+  background: $gray-3
+  background: transparentize($gray-2, 0.7)
+

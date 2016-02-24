@@ -1,0 +1,434 @@
+main
+  width: 100%
+  height: calc(100vh - #{$site-header-height})
+
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+
+  > *
+    flex: 1
+    &.resizable
+      flex: 0 0 50%
+
+iframe
+  width: 100%
+  height: 100%
+
+.editors
+  display: flex
+  flex-direction: row
+  flex-wrap: nowrap
+  overflow: hidden
+
+  .GistController &
+    margin-bottom: 1.25em
+
+  #cssResizable
+    flex: 1
+
+  > *
+    position: relative
+    flex: 1
+    min-width: 2em
+
+    &.resizable
+      flex: 0 0 50%
+
+  &.html
+    #cssResizable
+      flex: 0 0 33%
+
+    .GistController &
+      margin-bottom: 0
+
+    > *
+      &.resizable
+        flex: 0 0 33%
+
+  @media #{$tablet}
+    flex-direction: column
+    align-items: stretch
+
+    .GistController &
+      margin-bottom: 1.25em !important
+
+    > *
+      &, &.resizable
+        flex: 1 0 100% !important
+
+  .GistController .embedded &
+    margin-bottom: -0.15em !important
+
+main
+  &.vertical
+    flex-direction: row
+    .editors
+      flex-direction: column
+      height: calc(100vh - #{$site-header-height})
+
+      > *
+        min-height: 2em
+
+  @media #{$tablet}
+    flex-direction: column
+
+.resizable
+  position: relative
+
+.rg-right, .rg-bottom, .rg-top, .rg-left
+  position: absolute
+  z-index: 10
+  display: block
+  user-select: none
+
+  @media #{$tablet}
+    display: none
+
+.rg-right, .rg-left
+  cursor: ew-resize
+  height: 100%
+  right: 0
+  top: 0
+  width: 0.66667em
+  border-right: 1px solid $golf-gray
+
+.rg-bottom, .rg-top
+  cursor: ns-resize
+  width: 100%
+  bottom: 0
+  left: 0
+  margin-top: 0.66667em
+  height: 0.66667em
+  background-color: #f8f8f8
+  border-top: 1px solid $golf-gray
+  padding-bottom: 0.66667em
+
+  .vertical &
+    height: 0
+    padding-bottom: 0
+
+.rg-top
+  top: 0
+  bottom: initial
+  margin-top: 0
+
+.rg-left
+  left: 0
+  right: initial
+  background-color: #f8f8f8
+  border-left: 1px solid $golf-gray
+  border-right: 0
+
+#resizable-mask
+  position: absolute
+  z-index: 2
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+
+.autoprefixer-browsers
+  text-align: left
+  padding-right: 15px
+
+$editor-header-size: 0.875em
+
+%editor-header
+  border-bottom: 1px solid $golf-gray
+  background: $gray-2
+  color: scale-color($gray-1, $lightness: 30%)
+  font-size: $editor-header-size
+  display: flex
+  margin: 0
+
+  h2
+    font-size: inherit
+    margin: 0
+    cursor: pointer
+
+  .embedded &
+    font-size: $editor-header-size
+    background: $alpha_color_fox
+
+.editor-header
+  @extend %editor-header
+
+  padding: 0 0.5em
+  justify-content: space-between
+
+  @media #{$tablet}
+    display: none
+
+.mobile-tabs
+  @extend %editor-header
+
+  flex: 0 1 1.5em
+  justify-content: flex-start
+  max-height: 1.5em
+  display: none
+
+  @media #{$tablet}
+    display: flex
+
+  @media #{$mobile}
+    font-size: 0.875em
+
+  h2
+    padding: 0 0.75em
+
+    &.current
+      background: scale-color($gray-1, $lightness: 30%)
+      color: $white
+
+.editor-wrapper ui-ace
+  margin-top: $editor-header-size + 1em
+
+  @media #{$tablet}
+    margin-top: 0
+
+#sandboxResizable
+  .GistController &
+    margin-bottom: 1.25em
+
+  @media #{$tablet}
+    position: absolute
+    width: 100%
+
+    .rg-top
+      display: none
+
+
+@keyframes pulse
+  50%
+    transform: scale(1.2, 1.2)
+
+.loading-state
+  position: absolute
+  top: 0
+  bottom: 0
+  left: 0
+  width: 100%
+  display: flex
+  justify-content: center
+  align-items: center
+
+.loader
+  animation: pulse 0.8s 30
+  text-align: center
+  order: 0
+  flex: 0 1 auto
+  align-self: auto
+
+  svg
+    vertical-align: middle
+    display: block
+    fill: $alpha_color
+    width: (3em * 2.71875)
+    height: 3em
+
+    @media #{$min-mobile}
+      width: (7vw * 2.71875)
+      height: 7vw
+
+footer
+  $footer-text-gray: scale-color($gray-1, $lightness: 30%)
+
+  border-top: 1px solid $gray-2
+  background: $gray-3
+  color: $footer-text-gray
+  display: flex
+  padding: 0 0.5em
+  align-items: center
+  position: fixed
+  z-index: 10
+  bottom: 0
+  width: 100%
+  height: 1.5em
+
+  @media #{$tablet}
+    justify-content: space-between
+
+  p
+    margin: 0 2.5em 0 0
+    font-size: 0.66em
+
+    @media #{$tablet}
+      margin-right: 0
+
+  a
+    color: $link-color
+
+  .logo
+    color: $footer-text-gray
+
+    svg
+      margin: 0 0em 0 0.25em
+      vertical-align: middle
+      display: inline-block
+      fill: $link-color
+      width: ($site-header-height * 2.71875) * 0.75
+      height: $site-header-height * 0.75
+
+  .embedded &
+    font-size: 1.2em
+
+
+article
+  padding: 0 1em
+  max-width: 42em
+  margin: 1.5em auto
+  padding-bottom: 3em
+
+  @media #{$mobile}
+    padding-bottom: 4.5em
+
+  a
+    color: $link-color
+
+  h1, h2
+    font-weight: 100
+    font-size: 1.66667em
+
+  code
+    color: $gray-2
+    font-size: 2em
+
+    @media #{$tablet}
+      font-size: 1.5em
+
+    @media #{$mobile}
+      font-size: 1em
+
+    .variable
+      color: #c82829
+
+    .string
+      color: #718c00
+
+    .comment
+      color: #8e908c
+      white-space: nowrap
+
+    .frowny
+
+  ol
+    list-style: none
+    column-count: 3
+
+    @media #{$mobile}
+      column-count: 2
+
+  aside
+    border: 1px solid $blue-2
+    background-color: $blue-3
+    padding: 0.5em 1em
+    float: left
+    width: 100%
+    clear: both
+    margin-bottom: 1.5em
+
+    border-radius: em(3)
+
+    > h1
+      float: right
+      width: 75%
+
+      @media screen and (max-width: 380px)
+        width: 100%
+        clear: both
+
+    > p
+      color: inherit
+
+    p
+      float: left
+      width: 75%
+      color: $delta_gray
+
+      @media #{$mobile}
+        width: 100%
+        clear: both
+
+  .support
+    h1
+      font-size: 2em
+      color: $text-color
+      margin: 0
+
+    p
+      font-size: 1.25em
+      margin-bottom: 0.5em
+
+    img
+      float: right
+      width: 40%
+      max-width: 120px
+      display: inline-block
+      padding-top: 0.5em
+      padding-right: 1em
+      padding-left: 0
+      border-radius: em(3)
+
+      @media screen and (max-width: 380px)
+        width: 100%
+
+
+$timer-size: 16px
+$timer-speed: 1000ms
+$timer-color: #888
+$timer-border-width: 2px
+$timer-factor: 16
+
+// Modified from http://css-spinners.com/#/spinner/timer/
+@keyframes timer
+  0%
+    transform: rotate(0deg)
+
+  100%
+    transform: rotate(360deg)
+
+/* :not(:required) hides this rule from IE9 and below
+.timer:not(:required)
+  border-radius: 50%
+  border: $timer-border-width solid $timer-color
+  display: inline-block
+  overflow: hidden
+  position: relative
+  text-indent: -9999px
+  width: $timer-size
+  height: $timer-size
+  top: 0.25em
+  margin-right: 0.5em
+
+  &::before, &::after
+    animation: timer $timer-speed infinite linear
+    transform-origin: ($timer-size / $timer-factor) ($timer-size / $timer-factor)
+    border-radius: $timer-size / $timer-factor
+    background: $timer-color
+    content: ''
+    display: block
+    position: absolute
+    width: $timer-size / 9
+    height: 2 * $timer-size / 5.5
+    left: $timer-size / 2 - $timer-size / $timer-factor - $timer-border-width
+    top: $timer-size / 2 - $timer-size / $timer-factor - $timer-border-width
+
+  &::after
+    animation: timer (12 * $timer-speed) infinite linear
+    height: $timer-size / 3
+
+
+#sass-compiling
+  position: relative
+  margin-left: 0.25em
+  z-index: 1
+
+#compile-time
+  opacity: 1
+
+#compile-time.fade
+  opacity: 0
+  transition: opacity 0.5s ease-in-out
+  transition-delay: 10s !important
+
