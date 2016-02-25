@@ -8,9 +8,11 @@ require 'json'
 require 'yaml'
 require 'sassmeister/helpers'
 require 'sassmeister/api_routes'
-require 'dotenv'
 
-Dotenv.load
+if ENV['RACK_ENV'] == 'development'
+  require 'dotenv'
+  Dotenv.load
+end
 
 class SassMeisterApp < Sinatra::Base
   register Sinatra::RespondWith
