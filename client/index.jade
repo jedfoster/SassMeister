@@ -16,7 +16,7 @@ html.no-js(ng-app='SassMeister')
       script.
         window.SassMeister = {};
 
-    link(rel='stylesheet' href='{%& asset_domain %}/css/app.css')
+    link(rel='stylesheet' href='{%& asset_domain %}/css/app{%& asset_suffix %}.css')
 
   body(class='{{$state.current.controller}}')
     block content
@@ -37,5 +37,5 @@ html.no-js(ng-app='SassMeister')
 
       (function(){if(/Trident\/[567]\b/.test(navigator.userAgent)||(navigator.userAgent.match(/AppleWebKit\/(\d+)/)||[])[1]<537){var s = document.createElement('script');s.src = 'http://cdn.rawgit.com/jonathantneal/svg4everybody/v2.0.0/dist/svg4everybody.min.js';document.head.appendChild(s);}})();
 
-    script(src='{%& asset_domain %}/js/app.js')
+    script(src='{%& asset_domain %}/js/app{%& asset_suffix %}.js')
 

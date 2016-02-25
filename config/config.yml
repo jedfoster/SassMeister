@@ -8,6 +8,7 @@ development: &default_settings
   embed_domain: 'http://local-embed.sassmeister.com:9292'
   sandbox_domain: 'http://sandbox.sassmeister.dev'
   asset_domain: ''
+  asset_suffix: ''
 
 test:
   <<: *default_settings
@@ -20,4 +21,5 @@ production:
   embed_domain: 'http://embed.sassmeister.com'
   sandbox_domain: 'http://sandbox.sassmeister.com'
   asset_domain: 'http://cdn.sassmeister.com'
+  asset_suffix: '.min'
 
