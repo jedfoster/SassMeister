@@ -11,8 +11,9 @@ angular.module 'SassMeister.sandbox', [
   'angularLoad'
 ]
 
-.factory 'sandboxServer', ($resource) ->
-    $resource config.sandbox, {}
+.factory 'sandboxServer', ['$resource', ($resource) ->
+  $resource config.sandbox, {}
+]
 
 .factory 'Sandbox', [
   'sandboxServer'

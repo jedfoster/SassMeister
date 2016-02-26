@@ -12,7 +12,7 @@ angular.module 'SassMeister.embedded', [
   'SassMeister.sandbox'
 ]
 
-.config ($stateProvider, $urlRouterProvider, $locationProvider) ->
+.config ['$stateProvider', '$urlRouterProvider', '$locationProvider', ($stateProvider, $urlRouterProvider, $locationProvider) ->
   $locationProvider.html5Mode true
 
   template = require '../_application.jade'
@@ -25,7 +25,7 @@ angular.module 'SassMeister.embedded', [
       template: template
       controller: 'EmbeddedController'
       resolve:
-        data: ($githubGist, $stateParams, $q, $state) ->
+        data: ['$githubGist', '$stateParams', '$q', '$state', ($githubGist, $stateParams, $q, $state) ->
           if $stateParams.gist
             return $stateParams.gist
 
@@ -34,9 +34,10 @@ angular.module 'SassMeister.embedded', [
               $state.go 'application.404.gist', { id: $stateParams.id }, { location: false }
 
             $githubGist($stateParams.id).read().then null, fail
+        ]
+]
 
-
-.controller 'EmbeddedController', ($scope, $rootScope, $sassMeisterGist, $githubGist, $state, $stateParams, Sandbox, data, ngToast, $sce) ->
+.controller 'EmbeddedController', ['$scope', '$rootScope', '$sassMeisterGist', '$githubGist', '$state', '$stateParams', 'Sandbox', 'data', 'ngToast', '$sce', ($scope, $rootScope, $sassMeisterGist, $githubGist, $state, $stateParams, Sandbox, data, ngToast, $sce) ->
   $scope.app =
     dependencies: {}
   $scope.app.outputStyle = 'expanded'
@@ -102,4 +103,5 @@ angular.module 'SassMeister.embedded', [
     $scope.app.compiler = $scope.app.dependencies.Sass.substr(0, 3)
 
   Sandbox.onReady $scope.app
+]
 

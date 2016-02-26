@@ -7,7 +7,7 @@ angular.module 'SassMeister.404', [
   'ui.router'
 ]
 
-.config ($stateProvider, $urlRouterProvider, $locationProvider) ->
+.config ['$stateProvider', '$urlRouterProvider', '$locationProvider', ($stateProvider, $urlRouterProvider, $locationProvider) ->
   $locationProvider.html5Mode true
 
   template = require './_404.jade'
@@ -22,11 +22,12 @@ angular.module 'SassMeister.404', [
     .state 'application.404.gist',
       parent: 'application.404'
       controller: '404Controller'
+]
 
-.controller '404Controller', ($scope, $state, $stateParams) ->
+.controller '404Controller', ['$scope', '$state', '$stateParams', ($scope, $state, $stateParams) ->
   $scope.resource = if $state.current.name == 'application.404.gist' then 'gist' else 'page'
   $scope.id = $stateParams.id if $stateParams.id
   $scope.goToGist = (id) ->
     $state.go 'application.gist', id: id
-
+]
 

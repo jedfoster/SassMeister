@@ -9,7 +9,7 @@ angular.module 'SassMeister.siteHeader', []
 .directive 'siteHeader', ->
   restrict: 'E'
   template: template
-  controller: ($scope, $state, $window) ->
+  controller: ['$scope', '$state', '$window', ($scope, $state, $window) ->
     $scope.showMenuBar = ->
       not $state.includes('application.404') and not $state.includes('application.about')
 
@@ -28,4 +28,5 @@ angular.module 'SassMeister.siteHeader', []
     $scope.logoHref = ->
       return 'application.about' if $state.current.name == 'application.index'
       return 'application.index'
+  ]
 

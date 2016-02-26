@@ -7,7 +7,7 @@ angular.module 'SassMeister.compiler', [
   'ngResource'
 ]
 
-.factory 'Compiler', ($resource) ->
+.factory 'Compiler', ['$resource', ($resource) ->
   $resource '/app/:compiler/:action', {
       compiler: '@compiler'
     },
@@ -27,4 +27,5 @@ angular.module 'SassMeister.compiler', [
       method: 'GET'
       params:
         action: 'compilers'
+]
 

@@ -9,7 +9,7 @@ angular.module 'SassMeister.cloudMenu', []
 .directive 'cloudMenu', ->
   restrict: 'E'
   template: template
-  controller: ($scope, $state) ->
+  controller: ['$scope', '$state', ($scope, $state) ->
     $scope.showUpdateGist = ->
       $scope.loggedIn() and $scope.gist and $scope.canEditGist()
 
@@ -30,4 +30,5 @@ angular.module 'SassMeister.cloudMenu', []
       ,
         # Force a "reload" of state (does NOT perform a browser reload)
         reload: true
+  ]
 

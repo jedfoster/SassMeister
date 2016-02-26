@@ -52,7 +52,7 @@ angular.module 'SassMeister', [
     maxNumber: 1
 ]
 
-.config ($stateProvider, $urlRouterProvider, $locationProvider, $sceDelegateProvider, hotkeysProvider) ->
+.config ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$sceDelegateProvider', 'hotkeysProvider', ($stateProvider, $urlRouterProvider, $locationProvider, $sceDelegateProvider, hotkeysProvider) ->
   $locationProvider.html5Mode true
 
   $urlRouterProvider.otherwise ($injector, $location) ->
@@ -74,7 +74,7 @@ angular.module 'SassMeister', [
       template: '<ui-view/>'
       controller: 'ApplicationController'
       resolve:
-        data: ($localStorage) ->
+        data: ['$localStorage', ($localStorage) ->
           _data = $localStorage.$default config.storageDefaults()
 
           # ngStorage's `$default` doesn't do a deep merge, so we need to apply the merge manually.
@@ -86,13 +86,15 @@ angular.module 'SassMeister', [
           _data.preferences = angular.extend config.storageDefaults().preferences, _data.preferences
 
           _data
+        ]
 
     .state 'application.logout',
       url: 'logout'
 
   hotkeysProvider.includeCheatSheet = false
+]
 
-.controller 'ApplicationController', ($scope, $rootScope, $state, $localStorage, $sce, $cookies, $window, data, Compiler, angularLoad, Sandbox, ngToast, hotkeys) ->
+.controller 'ApplicationController', ['$scope', '$rootScope', '$state', '$localStorage', '$sce', '$cookies', '$window', 'data', 'Compiler', 'angularLoad', 'Sandbox', 'ngToast', 'hotkeys', ($scope, $rootScope, $state, $localStorage, $sce, $cookies, $window, data, Compiler, angularLoad, Sandbox, ngToast, hotkeys) ->
   $rootScope.$state = $state
   $rootScope._canEditGist = false
   $rootScope.isEmbedded = !!window.SassMeister.isEmbedded
@@ -329,7 +331,7 @@ angular.module 'SassMeister', [
 
   $scope.$watch 'preferences.autoprefixerBrowsers', (n, o) ->
     $window.ga('send', 'event', 'UI', 'SetAutoprefixerBrowsers', "#{n}") unless n == o
-
+]
 
 .run ['$rootScope', '$location', '$window', ($rootScope, $location, $window) ->
   $window.ga('create', 'UA-35407426-1', 'auto')

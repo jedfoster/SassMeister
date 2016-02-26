@@ -12,7 +12,7 @@ angular.module 'SassMeister.gist', [
   'SassMeister.sandbox'
 ]
 
-.config ($stateProvider, $urlRouterProvider, $locationProvider) ->
+.config ['$stateProvider', '$urlRouterProvider', '$locationProvider', ($stateProvider, $urlRouterProvider, $locationProvider) ->
   $locationProvider.html5Mode true
 
   template = require '../_application.jade'
@@ -25,7 +25,7 @@ angular.module 'SassMeister.gist', [
       template: template
       controller: 'GistController'
       resolve:
-        data: ($githubGist, $stateParams, $q, $state) ->
+        data: ['$githubGist', '$stateParams', '$q', '$state', ($githubGist, $stateParams, $q, $state) ->
           if $stateParams.gist
             return $stateParams.gist
 
@@ -34,9 +34,11 @@ angular.module 'SassMeister.gist', [
               $state.go 'application.404.gist', { id: $stateParams.id }, { location: false }
 
             $githubGist($stateParams.id).read().then null, fail
+        ]
+]
 
 
-.controller 'GistController', ($scope, $rootScope, $sassMeisterGist, $githubGist, $state, $stateParams, Sandbox, data, ngToast, $sce, $window) ->
+.controller 'GistController', ['$scope', '$rootScope', '$sassMeisterGist', '$githubGist', '$state', '$stateParams', 'Sandbox', 'data', 'ngToast', '$sce', '$window', ($scope, $rootScope, $sassMeisterGist, $githubGist, $state, $stateParams, Sandbox, data, ngToast, $sce, $window) ->
   $scope.app =
     dependencies: {}
   $scope.app.outputStyle = 'expanded'
@@ -152,4 +154,6 @@ angular.module 'SassMeister.gist', [
 
   $scope.embedCode = ->
     "<p class=\"sassmeister\" data-gist-id=\"#{$scope.gist.id}\" data-height=\"480\" data-theme=\"#{$scope.preferences.theme}\"><a href=\"{%& app_domain %}/gist/#{$scope.gist.id}\">Play with this gist on SassMeister.</a></p><script src=\"{%& asset_domain %}/js/embed.js\" async></script>"
+
+]
 

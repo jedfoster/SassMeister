@@ -15,7 +15,7 @@ angular.module 'SassMeister.index', [
   'SassMeister.sandbox'
 ]
 
-.config ($stateProvider, $urlRouterProvider, $locationProvider) ->
+.config ['$stateProvider', '$urlRouterProvider', '$locationProvider', ($stateProvider, $urlRouterProvider, $locationProvider) ->
   $locationProvider.html5Mode true
 
   template = require '../_application.jade'
@@ -28,7 +28,7 @@ angular.module 'SassMeister.index', [
       template: template
       controller: 'IndexController'
       resolve:
-        data: ($localStorage, $stateParams, Sandbox) ->
+        data: ['$localStorage', '$stateParams', 'Sandbox', ($localStorage, $stateParams, Sandbox) ->
           if $stateParams.reset
             $localStorage.app = config.storageDefaults().app
             do Sandbox.reset
@@ -44,8 +44,10 @@ angular.module 'SassMeister.index', [
           _data.app = angular.extend config.storageDefaults().app, _data.app
 
           _data
+        ]
+]
 
-.controller 'IndexController', ($scope, $rootScope, $sassMeisterGist, $localStorage, $state, data, Sandbox) ->
+.controller 'IndexController', ['$scope', '$rootScope', '$sassMeisterGist', '$localStorage', '$state', 'data', 'Sandbox', ($scope, $rootScope, $sassMeisterGist, $localStorage, $state, data, Sandbox) ->
   $scope.$parent.app = data.app
 
   $rootScope._canEditGist = false
@@ -66,4 +68,5 @@ angular.module 'SassMeister.index', [
   $scope.$on 'command-s', $scope.createGist
 
   Sandbox.onReady $scope.app
+]
 
