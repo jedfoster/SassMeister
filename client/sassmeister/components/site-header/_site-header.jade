@@ -43,7 +43,7 @@ nav.menu-bar(ng-if='showMenuBar()')
     span Options
     control-panel.menu-list
 
-  a.menu-bar-item(href='/authorize' ng-click='login()' title='Login with Github' ng-if='loggedOut()')
+  a.menu-bar-item(ng-click='login()' title='Login with Github' ng-if='loggedOut()')
     span Login with Github
 
   div.menu-bar-item.auth-menu(ng-if='loggedIn()')
@@ -55,6 +55,6 @@ nav.menu-bar(ng-if='showMenuBar()')
         | Hello, {{githubId}}!
 
       li.menu-list-item
-        a(href='/logout' ng-click='logout()')
+        a(ng-click='logout()')
           span Logout
 
