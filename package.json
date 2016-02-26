@@ -4,7 +4,8 @@
   "description": "Become a Sass master with SassMeister, the Sass playground.",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/karma/bin/karma start"
+    "test": "./node_modules/karma/bin/karma start",
+    "postinstall": "./node_modules/gulp/bin/gulp.js production"
   },
   "repository": {
     "type": "git",
