@@ -4,7 +4,7 @@ config = require '../../config'
 
 require 'angular'
 require 'angular-ui-router'
-require 'ngStorage'
+require 'ngstorage'
 require '../../../github-adapter'
 require '../../sandbox'
 
