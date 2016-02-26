@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Become a Sass master with SassMeister, the Sass playground.",
   "main": "index.js",
+  "engines": {
+    "node": "^5.2.0",
+    "npm": "^3.3.12"
+  },
   "scripts": {
     "test": "./node_modules/karma/bin/karma start",
     "postinstall": "./node_modules/gulp/bin/gulp.js production"
