@@ -17,8 +17,8 @@ gulp.task('markup', function() {
   }
 
   return gulp.src(config.src)
-    .pipe(mustache(data, {tags: ['{%', '%}']}))
     .pipe(jade())
+    .pipe(mustache(data, {tags: ['{%', '%}']}))
     .pipe(replace(replacements))
     .pipe(gulp.dest(config.dest));
 });
