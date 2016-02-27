@@ -15,10 +15,11 @@ gulp.task('jade', function() {
 gulp.task('markup', ['jade'], function() {
   var env = process.env.NODE_ENV || 'development',
       data = yaml.safeLoad(fs.readFileSync(__dirname + '/../../config/config.yml', 'utf8'))[env],
-      manifest = JSON.parse(fs.readFileSync(config.dest + '/rev-manifest.json', 'utf8')),
+      manifest = {},
       replacements = [];
   
   if (env != 'development') {
+    manifest = JSON.parse(fs.readFileSync(config.dest + '/rev-manifest.json', 'utf8'));
     replacements = Object.keys(manifest).map(function (key) {return [key, manifest[key]]});
   }
 
