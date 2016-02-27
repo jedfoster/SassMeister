@@ -7,6 +7,7 @@ task 'svg:sprite' do
   @svg = @doc.add_child Nokogiri::XML::Node.new "svg", @doc
 
   @svg['xmlns'] = 'http://www.w3.org/2000/svg'
+  @svg['hidden'] = true
 
   Dir.glob('svg/*.svg').each do |file|
     node = Nokogiri::XML(File.open(file)).css('svg').first
