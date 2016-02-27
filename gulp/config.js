@@ -54,7 +54,12 @@ module.exports = {
     cssSrc: dest + '/css/*.css',
     jsSrc: dest + '/js/*.js',
     delSrc: [dest + '/js/*', dest + '/css/*'],
-    dest: dest
+    dest: dest,
+    cdn: {
+      headers: {
+        'Cache-Control': 'max-age=315360000, no-transform, public'
+      }
+    }
   }
 };
 
