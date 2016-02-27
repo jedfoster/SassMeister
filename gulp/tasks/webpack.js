@@ -14,9 +14,9 @@ gulp.task('webpack', function(callback) {
   var data = yaml.safeLoad(fs.readFileSync(__dirname + '/../../config/config.yml', 'utf8'))[env];
 
   return gulp.src(entries)
-  .pipe(named())
-  .pipe(webpack(config))
-  .pipe(mustache(data, {tags: ['{%', '%}']}))
-  .pipe(gulp.dest(config.output.path));
+    .pipe(named())
+    .pipe(webpack(config))
+    .pipe(mustache(data, {tags: ['{%', '%}']}))
+    .pipe(gulp.dest(config.output.path));
 });
 

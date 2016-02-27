@@ -2,13 +2,8 @@ var gulp    = require('gulp');
 var config  = require('../config').production;
 var size    = require('gulp-filesize');
 var uglify  = require('gulp-uglify');
-var del     = require('del');
 var rename    = require('gulp-rename');
 var runSequence = require('run-sequence');
-
-gulp.task('_clean', function (cb) {
-  del(config.jsSrc, cb);
-});
 
 gulp.task('_uglify', function() {
   return gulp.src(config.jsSrc)
@@ -18,7 +13,7 @@ gulp.task('_uglify', function() {
     .pipe(size());
 });
 
-gulp.task('uglifyJs', function() {
-  runSequence('_clean', 'webpack', '_uglify');
+gulp.task('uglifyJs', function(callback) {
+  return runSequence('webpack', '_uglify', callback);
 });
 
