@@ -43,13 +43,6 @@ module.exports = {
       extensions: ['', '.js', '.json', '.coffee']
     }
   },
-  embed: {
-    src: [src + '/js/embed.coffee'],
-    dest: dest + '/js',
-    settings: {
-      bare: false
-    }
-  },  
   production: {
     cssSrc: dest + '/css/*.css',
     jsSrc: dest + '/js/*.js',
