@@ -3,7 +3,6 @@ ruby '2.2.3'
 
 gem 'rack-contrib'
 gem 'sinatra'
-gem 'sinatra-partial'
 gem 'sinatra-contrib'
 gem 'unicorn'
 gem 'chairman', '~> 0.2'
