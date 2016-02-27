@@ -20,6 +20,6 @@ gulp.task('clean', function (cb) {
 // Run this to compress all the things!
 gulp.task('production', function(callback){
   process.env.NODE_ENV = 'production'; 
-  runSequence('clean', 'minifyCss', 'uglifyJs', 'hashify', 'markup', callback);
+  runSequence('clean', 'minifyCss', 'uglifyJs', 'embed', 'hashify', 'markup', callback);
 });
 
