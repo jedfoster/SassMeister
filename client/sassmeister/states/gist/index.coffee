@@ -19,7 +19,7 @@ angular.module 'SassMeister.gist', [
 
   $stateProvider
     .state 'application.gist',
-      url: '^/gist/:id'
+      url: '^/gist/{user:(?:[^/].*/)?}{id:.*}'
       params:
         gist: false
       template: template
