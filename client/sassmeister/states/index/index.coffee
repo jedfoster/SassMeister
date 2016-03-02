@@ -47,7 +47,7 @@ angular.module 'SassMeister.index', [
         ]
 ]
 
-.controller 'IndexController', ['$scope', '$rootScope', '$sassMeisterGist', '$localStorage', '$state', 'data', 'Sandbox', ($scope, $rootScope, $sassMeisterGist, $localStorage, $state, data, Sandbox) ->
+.controller 'IndexController', ['$scope', '$rootScope', '$sassMeisterGist', '$localStorage', '$state', 'data', 'Sandbox', '$window', ($scope, $rootScope, $sassMeisterGist, $localStorage, $state, data, Sandbox, $window) ->
   $scope.$parent.app = data.app
 
   $rootScope._canEditGist = false
