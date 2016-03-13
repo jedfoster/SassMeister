@@ -34,6 +34,7 @@ angular.module 'SassMeister.sandbox', [
         .postMessage(JSON.stringify(newContent), '*')
 
     html: (app) ->
+      app.renderedHTML = app.html
       updateIframe app.css, app.html
 
     haml: (app) ->
