@@ -1,7 +1,7 @@
 a.logo(ui-sref='{{logoHref()}}' title='The sassiest way to play with Sass, Compass, & LibSass!')
   svg
     title SassMeister: The sassiest way to play with Sass, Compass, & LibSass!
-    use(xlink:href='#sassmeister')
+    use(xlink:href='{{logoUrl() + "#sassmeister"}}')
 
 nav.menu-bar(ng-if='showMenuBar()')
   cloud-menu.menu-bar-item
