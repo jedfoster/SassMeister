@@ -5,7 +5,7 @@ development: &default_settings
   cookie_domain: 'local.sassmeister.com'
   cookie_secret: 'dev'
   app_domain: 'http://local.sassmeister.com:9292'
-  embed_domain: 'http://local-embed.sassmeister.com:9292'
+  embed_domain: 'http://embed-local.sassmeister.com:9292'
   sandbox_domain: 'http://sandbox.sassmeister.dev'
   asset_domain: ''
   asset_suffix: ''

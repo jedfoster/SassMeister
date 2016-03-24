@@ -14,7 +14,7 @@ html.no-js(ng-app='SassMeister')
 
     block globalJS
       script.
-        window.SassMeister = {};
+        window.SassMeister = { isEmbedded: window.location.hostname.startsWith('embed') };
 
     link(rel='stylesheet' href='{%& asset_domain %}/css/app{%& asset_suffix %}.css')
 

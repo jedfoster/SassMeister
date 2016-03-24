@@ -44,7 +44,7 @@ else
 
   run Rack::URLMap.new({
     'http://embed.sassmeister.dev/' => SassMeisterEmbeddedApp,
-    'http://local-embed.sassmeister.com/' => SassMeisterEmbeddedApp,
+    'http://embed-local.sassmeister.com/' => SassMeisterEmbeddedApp,
     '/' => SassMeisterApp
   })
 

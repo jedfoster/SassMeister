@@ -8,7 +8,7 @@ class SassMeisterEmbeddedApp < SassMeisterApp
   end
 
   get '/*' do
-    File.read 'public/embed.html'
+    File.read 'public/index.html'
   end
 
   run! if app_file == $0
