@@ -25,9 +25,6 @@ angular.module 'SassMeister.siteHeader', []
     $scope.logout = ->
       $window.location.href = '/logout'
 
-    $scope.logoUrl = ->
-      $window.location.pathname
-
     $scope.logoHref = ->
       return 'application.about' if $state.current.name == 'application.index'
       return 'application.index'

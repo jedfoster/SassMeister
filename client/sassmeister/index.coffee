@@ -295,6 +295,8 @@ angular.module 'SassMeister', [
 
   $scope.showSiteHeader = not window.SassMeister.isEmbedded
 
+  $scope.logoUrl = ->
+    $window.location.pathname
 
   $scope.$watch 'app.compiler', (n, o) ->
     $window.ga('send', 'event', 'UI', 'SassVersion', "v#{n}") unless n == o

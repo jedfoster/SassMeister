@@ -27,14 +27,16 @@ html.no-js(ng-app='SassMeister')
           .loader
             svg
               title SassMeister: The sassiest way to play with Sass, Compass, & LibSass!
-              use(xlink:href='#sassmeister')
+              // OMFG! Just so much :facepalm: here.
+              use(xlink:href='' data-xlink-href='#sassmeister')
 
             | Loading...
             script.
               // This is **astoundingly** stupid. Chrome 49+ seems to only respect _absolute_ SVG <use> fragments.
               // I have to prepend the current location pathname to the `xlink:href` attribute.
               // So much :facepalm:
-              (function(){var n='http://www.w3.org/1999/xlink',a=document.querySelector('svg use'),b=a.getAttributeNS(n,'href');a.setAttributeNS(n,'href',window.location.pathname+b);})();
+              // Have to use `location.href` because of the root redirect on the embed subdomain--that dumb can't be blamed on SVG.
+              (function(){var n='http://www.w3.org/1999/xlink',a=document.querySelector('svg use'),b=a.getAttribute('data-xlink-href');a.setAttributeNS(n,'href',window.location.pathname+b);})();
 
     script.
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
