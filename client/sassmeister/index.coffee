@@ -133,7 +133,7 @@ angular.module 'SassMeister', [
 
     return ['> 1%', 'last 2 versions']
 
-  $scope.compile = (app)->
+  $scope.compile = (app) ->
     return if $state.includes('application.404') or $state.includes('application.about') or $state.includes('application.embedded') or $rootScope.isEmbedded
 
     $scope.compileTime = false
@@ -193,6 +193,9 @@ angular.module 'SassMeister', [
 
   $scope.renderHtml = (app) ->
     Sandbox.render app
+
+  $scope.$watch 'app.compiler', ->
+    $scope.compile $scope.app
 
   $scope.$watch 'preferences.emmet', (value) ->
     $window.ga('send', 'event', 'UI', 'Emmet', "#{value}")

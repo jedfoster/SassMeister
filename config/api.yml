@@ -7,8 +7,8 @@ api:
   development: &default_settings
     endpoints:
       lib: 'http://lib.sassmeister.dev'
-      '3.3': 'http://sass33.sassmeister.dev'
-      '3.4': 'http://sass34.sassmeister.dev'
+      '3.3': 'http://sass3-3.sassmeister.dev'
+      '3.4': 'http://sass3-4.sassmeister.dev'
       '4.0': 'http://sass4-0alpha.sassmeister.dev'
 
   test:
