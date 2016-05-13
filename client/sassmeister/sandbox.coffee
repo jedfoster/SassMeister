@@ -81,7 +81,7 @@ angular.module 'SassMeister.sandbox', [
         updateIframe app.css, app.renderedHTML
 
       unless window.jade
-        angularLoad.loadScript 'https://cdn.rawgit.com/jadejs/jade/1.11.0/jade.js'
+        angularLoad.loadScript 'https://cdn.rawgit.com/pugjs/pug/1.11.0/jade.js'
           .then ->
             do renderJade
 
