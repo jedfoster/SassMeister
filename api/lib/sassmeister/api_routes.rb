@@ -1,28 +1,23 @@
 require 'sinatra/base'
-require 'sinatra/config_file'
 require 'chairman'
+require 'json'
 require 'sassmeister/client'
+
+if ENV['RACK_ENV'] == 'development'
+  require 'dotenv'
+  Dotenv.load
+end
 
 module SassMeister
   class ApiRoutes < Sinatra::Base
-    register Sinatra::ConfigFile
-
-    config_file '../../../config/api.yml'
-
-    env_endpoints = {
-      'lib' => ENV['LIBSASS_ENDPOINT'],
-      '3.4' => ENV['SASS_34_ENDPOINT'],
-      '3.3' => ENV['SASS_33_ENDPOINT'],
-      '3.2' => ENV['SASS_32_ENDPOINT']
-    }
-
-    COMPILER_ENDPOINTS = settings.api[:endpoints].merge(env_endpoints) {|k, yml, env| env.nil? ? yml : env}
+    COMPILER_ENDPOINTS = JSON.parse ENV['COMPILER_ENDPOINTS']
 
     set :protection, except: :frame_options
 
     before '/app/:compiler/*' do
       pass if params[:compiler] == 'gists'
 
+      headers 'access-control-allow-origin' => '*'
       return status 404 unless COMPILER_ENDPOINTS.include? params[:compiler]
 
       @api = SassMeister::Client.new COMPILER_ENDPOINTS[params[:compiler]]
@@ -97,6 +92,7 @@ module SassMeister
     get '/app/compilers' do
       content_type 'application/json'
 
+      headers 'access-control-allow-origin' => '*'
       cache_control :public, max_age: 2592000 # 30 days, in seconds
 
       compilers = SassMeister::Redis.new 'compilers'
