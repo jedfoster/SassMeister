@@ -20,6 +20,6 @@ production:
   app_domain: 'http://sassmeister.com'
   embed_domain: 'http://embed.sassmeister.com'
   sandbox_domain: 'http://sandbox.sassmeister.com'
-  asset_domain: 'http://cdn.sassmeister.com'
+  asset_domain: 'https://cdn.sassmeister.com'
   asset_suffix: '.min'
 
