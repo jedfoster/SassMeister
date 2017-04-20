@@ -1,5 +1,5 @@
-$include-normalize: false !default
-$include-elements: false !default
+// $include-normalize: false !default
+// $include-elements: false !default
 
 
 @import 'web-font'
@@ -9,8 +9,8 @@ $include-elements: false !default
   @include font-face($font-family, $font-file)
 
 
-@if $include-normalize
-  @import 'normalize'
+// @if $include-normalize
+@import 'normalize'
 
 
 @import 'utilities'
@@ -21,6 +21,6 @@ $include-elements: false !default
 @import 'alerts'
 
 
-@if $include-elements
-  @import 'elements'
+// @if $include-elements
+@import 'elements'
 
