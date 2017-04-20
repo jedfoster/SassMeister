@@ -25,7 +25,7 @@
     "mocha": "^2.2.1"
   },
   "dependencies": {
-    "angular": "^1.4.1",
+    "angular": "^1.6.3",
     "angular-cookies": "^1.4.1",
     "angular-hotkeys": "^1.6.0",
     "angular-load": "^0.2.0",
@@ -33,7 +33,7 @@
     "angular-resource": "^1.3.13",
     "angular-sanitize": "^1.4.7",
     "angular-ui-ace": "https://github.com/angular-ui/ui-ace.git",
-    "angular-ui-router": "^0.2.13",
+    "angular-ui-router": "^0.4.2",
     "brace": "https://github.com/jedfoster/brace.git",
     "coffee-loader": "^0.7.2",
     "coffee-script": "^1.10.0",
