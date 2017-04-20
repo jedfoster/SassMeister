@@ -19,7 +19,7 @@ production:
   cookie_domain: '.sassmeister.com'
   app_domain: 'https://www.sassmeister.com'
   embed_domain: 'https://embed.sassmeister.com'
-  sandbox_domain: 'http://sandbox.sassmeister.com'
+  sandbox_domain: 'https://sandbox.sassmeister.com'
   asset_domain: 'https://cdn.sassmeister.com'
   asset_suffix: '.min'
 
