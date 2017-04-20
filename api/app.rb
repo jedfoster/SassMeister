@@ -91,6 +91,10 @@ class SassMeisterApp < Sinatra::Base
     @gist = nil
     @body_class = 'app'
 
+    if !request.secure? && ENV['RACK_ENV'] == 'production'
+      redirect APP_DOMAIN
+    end
+
     params[:syntax].downcase! unless params[:syntax].nil?
     params[:original_syntax].downcase! unless params[:original_syntax].nil?
 

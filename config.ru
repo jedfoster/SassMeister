@@ -31,6 +31,7 @@ if ENV['RACK_ENV'] == 'production'
 
   run Rack::URLMap.new({
     'http://embed.sassmeister.com/' => SassMeisterEmbeddedApp,
+    'https://embed.sassmeister.com/' => SassMeisterEmbeddedApp,
     '/' => SassMeisterApp
   })
 
