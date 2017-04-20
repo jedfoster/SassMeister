@@ -6,6 +6,7 @@ var config  = require('../config').production
 
 gulp.task('cdn', function(callback) {
   if(! (process.env.AWS_ACCESS_KEY_ID && process.env.AWS_SECRET_ACCESS_KEY && process.env.AWS_S3_BUCKET && process.env.AWS_CLOUDFRONT_DISTRIBUTION_ID) ) {
+    console.error('No AWS credentials found.');
     return callback();
   }
 
