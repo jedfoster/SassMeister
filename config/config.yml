@@ -17,8 +17,8 @@ production:
   <<: *default_settings
   cache_max_age: 300 # 5 minutes
   cookie_domain: '.sassmeister.com'
-  app_domain: 'http://sassmeister.com'
-  embed_domain: 'http://embed.sassmeister.com'
+  app_domain: 'https://sassmeister.com'
+  embed_domain: 'https://embed.sassmeister.com'
   sandbox_domain: 'http://sandbox.sassmeister.com'
   asset_domain: 'https://cdn.sassmeister.com'
   asset_suffix: '.min'
