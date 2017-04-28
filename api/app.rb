@@ -92,7 +92,7 @@ class SassMeisterApp < Sinatra::Base
     @body_class = 'app'
 
     if !request.secure? && ENV['RACK_ENV'] == 'production'
-      redirect APP_DOMAIN
+      redirect request.url.gsub /^http:/, 'https:'
     end
 
     params[:syntax].downcase! unless params[:syntax].nil?
