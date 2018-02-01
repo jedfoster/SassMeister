@@ -201,7 +201,7 @@ angular.module 'SassMeister', [
     $window.ga('send', 'event', 'UI', 'Emmet', "#{value}")
 
     if value and not $window.emmet
-      angularLoad.loadScript 'http://nightwing.github.io/emmet-core/emmet.js'
+      angularLoad.loadScript 'https://nightwing.github.io/emmet-core/emmet.js'
         .then ->
           $scope.emmet = value
 
